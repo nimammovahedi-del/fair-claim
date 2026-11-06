@@ -1,0 +1,480 @@
+{
+  "state": "California",
+  "abbr": "CA",
+  "court_name": "Small claims division of the Superior Court (CCP 116.210)",
+  "citation": "Cal. Code Civ. Proc. §§ 116.110–116.950 (Small Claims Act)",
+  "self_help_url": "https://selfhelp.courts.ca.gov/small-claims-california",
+  "date_checked": "2026-11-05",
+
+  "limits": {
+    "limit_individual": 12500,
+    "limit_individual_text": "A natural person (including a sole proprietor) may sue for up to $12,500, except as limited by CCP 116.220(c) (guarantors) and 116.231(a) (two-per-year rule).",
+    "limit_individual_citation": "CCP 116.221",
+    "limit_individual_source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.221",
+    "limit_business": 6250,
+    "limit_business_text": "Any plaintiff other than a natural person (corporation, LLC, partnership, public entity, etc.) is limited to $6,250 for recovery of money (also $6,250 for delinquent unsecured personal property taxes, Civ. Code 1861.5/1861.10 writs of possession, and attorney-client fee arbitration matters).",
+    "limit_business_citation": "CCP 116.220(a)(1)-(4)",
+    "limit_business_source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.220",
+    "form_confirmation": "SC-100 (Rev. Jan. 1, 2026) page 5: 'Individuals, including natural persons and sole proprietors, may claim up to $12,500. Corporations, partnerships, public entities, and other businesses are limited to claims of $6,250.' https://www.courts.ca.gov/documents/sc100.pdf",
+    "current_limits_effective": "2024-01-01",
+    "current_limits_enacted_by": "SB 71 (Umberg), Stats. 2023, ch. 861, §§ 5–6, effective January 1, 2024. Bill digest: prior natural-person limit was $10,000; SB 71 raised it to $12,500 and raised other small claims amounts. Also raised the limited civil case ceiling to $35,000.",
+    "current_limits_enacted_by_source": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202320240SB71",
+    "prior_limit_individual": 10000,
+    "prior_limit_business": 5000,
+    "two_claims_over_2500_rule": {
+      "rule": "No person may file more than two small claims actions in which the amount demanded exceeds $2,500 anywhere in California in any calendar year. A plaintiff demanding more than $2,500 must declare under penalty of perjury that they have not exceeded this (SC-100 item 10).",
+      "threshold": 2500,
+      "max_filings_per_calendar_year": 2,
+      "exception": "Does not apply to claims up to $5,000 filed by a city, county, school district, or other local public entity; local public entities may not file small claims over $5,000, and their case is transferred out if the defendant says they have a lawyer.",
+      "citation": "CCP 116.231",
+      "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.231"
+    },
+    "special_limits": [
+      {
+        "type": "Natural person suing the Registrar of the Contractors State License Board as guarantor",
+        "limit": 12500,
+        "text": "The CCP 116.221 limit ($12,500) applies.",
+        "citation": "CCP 116.220(c)(1)",
+        "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.220"
+      },
+      {
+        "type": "Any action against a guarantor that does NOT charge a fee for its guarantor/surety services",
+        "limit": 3125,
+        "citation": "CCP 116.220(c)(2)",
+        "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.220"
+      },
+      {
+        "type": "Natural person suing a guarantor/surety that charges a fee (e.g., a bonding/surety company)",
+        "limit": 8125,
+        "citation": "CCP 116.220(c)(3)",
+        "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.220"
+      },
+      {
+        "type": "Entity (not a natural person) suing a fee-charging guarantor/surety, or suing the CSLB Registrar as guarantor",
+        "limit": 5000,
+        "citation": "CCP 116.220(c)(4)",
+        "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.220"
+      },
+      {
+        "type": "Suing a principal together with its guarantor/surety",
+        "limit": null,
+        "text": "A reasonable attempt must be made to serve the principal; if the principal is not served, the case is transferred to the court of appropriate jurisdiction. A defendant guarantor gets one automatic postponement of at least 30 days on written request.",
+        "citation": "CCP 116.340(h); CCP 116.570(a)(4)(B)",
+        "source": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=3."
+      },
+      {
+        "type": "Local public entity as plaintiff",
+        "limit": 5000,
+        "citation": "CCP 116.231(d)",
+        "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.231"
+      },
+      {
+        "type": "COVID-19 rental debt (unpaid rent and costs incurred before Sept. 30, 2021 due to COVID-19)",
+        "limit": 12500,
+        "text": "California Courts self-help: as of 10/1/2025, a landlord cannot sue in small claims court for unpaid COVID-19 rental debt above $12,500 (the earlier temporary rule let landlords bring COVID-19 rental debt to small claims regardless of amount). CCP 116.223 no longer displays on leginfo as of 2026-11-05, consistent with that temporary provision having expired.",
+        "citation": "former CCP 116.223 (expired); see self-help page",
+        "source": "https://selfhelp.courts.ca.gov/what-you-need-figure-out-you-start-case"
+      },
+      {
+        "type": "Equitable relief",
+        "limit": null,
+        "text": "Court may grant rescission, restitution, reformation, specific performance, and conditional judgments in money cases; injunctions only when a statute expressly authorizes small claims to do so.",
+        "citation": "CCP 116.220(a)(5), (b)",
+        "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.220"
+      },
+      {
+        "type": "Song-Beverly Consumer Warranty Act / vehicle ('lemon law') claims",
+        "limit": null,
+        "text": "No separate Song-Beverly or vehicle-specific dollar limit appears in current CCP 116.210–116.270 (Article 2 lists sections 116.210, .220, .221, .222, .225, .230, .231, .232, .240, .250, .260, .270 only). Such claims appear to be subject to the ordinary $12,500 / $6,250 limits. See unverified.",
+        "citation": "CCP 116.220, 116.221",
+        "source": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=2."
+      }
+    ],
+    "waiving_excess": "A plaintiff whose claim is over the limit may waive the excess and sue in small claims; the waiver is not operative until judgment (CCP 116.220(d)). SC-100-INFO: you may 'give up your right to the amount over the limit.'",
+    "waiving_excess_source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.220",
+    "who_can_sue_notes": "Must be 18 or older (or have a guardian ad litem appointed); must generally be the original owner of the claim (assignees cannot sue in small claims, with two technical exceptions); corporations and other entities appear through a regular employee, officer, or director not employed solely to appear in small claims (file SC-109). Source: SC-100-INFO (Rev. Jan. 1, 2024) and CCP 116.540.",
+    "who_can_sue_sources": [
+      "https://www.courts.ca.gov/documents/sc100info.pdf",
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.540"
+    ],
+    "out_of_state_contract_forum_clauses": "A consumer contract clause (entered/renewed on or after Jan. 1, 2003) requiring suit outside California for a claim otherwise within small claims jurisdiction is void (CCP 116.225).",
+    "out_of_state_contract_forum_clauses_source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.225"
+  },
+
+  "recent_changes": [
+    {
+      "date": "2024-01-01",
+      "change": "Limits raised to $12,500 (natural persons) and $6,250 (others); guarantor limits now $3,125 / $8,125 / $5,000 (SB 71, Stats. 2023, ch. 861).",
+      "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.220"
+    },
+    {
+      "date": "2026-01-01",
+      "change": "Fee waiver income threshold raised to 200% of federal poverty guidelines (was 125%); Gov. Code 68632(b) amended by SB 54 (Stats. 2025, ch. 646). FW-001 revised March 1, 2026 with the new table; veterans' service-connected disability compensation is excluded from income.",
+      "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=68632"
+    },
+    {
+      "date": "2025-10-01",
+      "change": "Special small claims treatment of COVID-19 rental debt (no dollar cap) ended; COVID rental debt over $12,500 can no longer be brought in small claims.",
+      "source": "https://selfhelp.courts.ca.gov/small-claims-california"
+    },
+    {
+      "date": "2026-01-01",
+      "change": "Civil Code 1950.5 (security deposits) amended by AB 414 (Stats. 2025, ch. 340): rules on electronic return of deposits and itemized statements by email/mail; photo requirements from AB 2801 (move-out photos from April 1, 2025; move-in photos for tenancies beginning on or after July 1, 2025).",
+      "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.5"
+    },
+    {
+      "date": "2026-07-01",
+      "change": "Automatic bank-account exemption (CCP 704.220) adjusted to $2,325 per judgment debtor (annual July 1 adjustment).",
+      "source": "https://www.courts.ca.gov/documents/ej156.pdf"
+    }
+  ],
+
+  "fees": {
+    "filing_fee_min": 30,
+    "filing_fee_max": 100,
+    "filing_fee_tiers": [
+      { "applies_to": "Claim of $1,500 or less (filer has filed 12 or fewer small claims in CA in previous 12 months)", "fee": 30, "citation": "CCP 116.230(b)(1)" },
+      { "applies_to": "Claim over $1,500 up to $5,000 (12 or fewer filings in previous 12 months)", "fee": 50, "citation": "CCP 116.230(b)(2)" },
+      { "applies_to": "Claim over $5,000 (up to $12,500; natural persons only above $6,250) (12 or fewer filings in previous 12 months)", "fee": 75, "citation": "CCP 116.230(b)(3)" },
+      { "applies_to": "Any claim, if the filer has filed more than 12 other small claims in California within the previous 12 months ('frequent filer')", "fee": 100, "citation": "CCP 116.230(c)" }
+    ],
+    "frequent_filer_note": "Filer must declare whether they filed more than 12 other small claims in CA in the last 12 months (CCP 116.230(e); SC-100 item 9). The extra amount a frequent filer pays above the normal tier is not recoverable as costs (CCP 116.610(g)(2)).",
+    "amendment_fees": [
+      { "change": "From $1,500-or-less tier to $1,500–$5,000 tier", "fee": 20, "citation": "CCP 116.230(d)(1)" },
+      { "change": "From $1,500–$5,000 tier to over-$5,000 tier", "fee": 25, "citation": "CCP 116.230(d)(2)" },
+      { "change": "From $1,500-or-less tier to over-$5,000 tier", "fee": 45, "citation": "CCP 116.230(d)(3)" }
+    ],
+    "filing_fee_sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.230",
+      "https://courts.ca.gov/system/files/file/statewide-civil-fee-schedule-eff-01012026.pdf",
+      "https://selfhelp.courts.ca.gov/file-your-plaintiffs-claim"
+    ],
+    "county_variation": "Small claims fees on the Statewide Civil Fee Schedule (eff. Jan. 1, 2026) are not marked with the asterisk used for Riverside/San Bernardino/San Francisco courthouse-construction surcharges, so they are uniform statewide.",
+    "service_by_clerk_certified_mail": 15,
+    "service_by_clerk_certified_mail_text": "$15 per defendant to whom the clerk mails the claim (CCP 116.232). Self-help notes clerk mail service is offered in some courts and 'often doesn't work' for individuals.",
+    "service_by_clerk_sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.232",
+      "https://selfhelp.courts.ca.gov/small-claims/start-case/serve"
+    ],
+    "sheriff_service_fee": 50,
+    "sheriff_service_fee_text": "Statutory sheriff/marshal fee for serving process is $50 (Gov. Code 26721 and 26720.9, as amended by SB 564 eff. Jan. 1, 2024). Self-help pages describe sheriff fees as varying ('usually around' $40–$50 for various services).",
+    "sheriff_service_fee_sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=26720.9",
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=26721"
+    ],
+    "other_step_fees": [
+      { "step": "Request to postpone hearing (after defendant timely served)", "fee": 10, "citation": "CCP 116.570(d); Fee Schedule item 90", "note": "Self-help: no fee for a first request to find an interpreter.", "source": "https://selfhelp.courts.ca.gov/small-claims/change-court-date" },
+      { "step": "Motion to vacate judgment", "fee": 20, "citation": "CCP 116.745; Fee Schedule item 92", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.745" },
+      { "step": "Notice of appeal (SC-140)", "fee": 75, "citation": "CCP 116.760; Fee Schedule item 91", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.760" },
+      { "step": "Writ petition re small claims act (appellate division)", "fee": 75, "citation": "CCP 116.798(a)(4)", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.798" },
+      { "step": "Debtor pays judgment to the court (SC-145)", "fee": 20, "citation": "CCP 116.860(h); Fee Schedule item 93", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.860" },
+      { "step": "Application for order of examination of judgment debtor (SC-134 / EJ-125)", "fee": 60, "citation": "Gov. Code 70617(a)(6), CCP 116.820; Fee Schedule item 94", "source": "https://courts.ca.gov/system/files/file/statewide-civil-fee-schedule-eff-01012026.pdf" },
+      { "step": "Writ of execution (EJ-130)", "fee": 40, "citation": "Gov. Code 70626(a)(1); Fee Schedule item 95", "source": "https://courts.ca.gov/system/files/file/statewide-civil-fee-schedule-eff-01012026.pdf" },
+      { "step": "Abstract of judgment (EJ-001), court fee (county recorder charges separately)", "fee": 40, "citation": "Gov. Code 70626(a)(2); Fee Schedule item 96", "source": "https://courts.ca.gov/system/files/file/statewide-civil-fee-schedule-eff-01012026.pdf" },
+      { "step": "Renewal of judgment", "fee": 45, "citation": "Gov. Code 70626(b)(4); Fee Schedule item 70", "source": "https://courts.ca.gov/system/files/file/statewide-civil-fee-schedule-eff-01012026.pdf" },
+      { "step": "Sheriff/levying officer fee for wage garnishment (earnings withholding order)", "fee": 45, "citation": "Gov. Code 26750(a)", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=26750" },
+      { "step": "Sheriff levy on bank account or other property (serving/executing process)", "fee": 50, "citation": "Gov. Code 26721, 26720.9", "note": "Self-help says the bank-levy fee is 'usually around $50.00'.", "source": "https://selfhelp.courts.ca.gov/collect-money-bank-account" },
+      { "step": "Keeper levy (keeper placed in business)", "fee": 175, "fee_text": "$175 per 8-hour period (max $350 per 24 hours per keeper) plus $50/day custody after first day", "citation": "Gov. Code 26726", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=26726" }
+    ],
+    "costs_recoverable": "Prevailing party is entitled to costs, including the cost of serving the defendant (CCP 116.610(g)), and to costs of enforcing the judgment and accrued interest (CCP 116.820(c)); post-judgment costs claimed on MC-012.",
+    "costs_recoverable_sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.610",
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.820"
+    ]
+  },
+
+  "lawyers": {
+    "lawyers_allowed": "no",
+    "rule": "No attorney may take part in conducting or defending a small claims action, except an attorney suing/defending for themselves, an all-attorney partnership, or an all-attorney professional corporation. Attorneys may advise parties before/after filing, testify to facts, represent a party on appeal to superior court, and represent a party in enforcing a judgment.",
+    "citation": "CCP 116.530",
+    "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.530",
+    "free_advisor": "Each county must provide free small claims advisor assistance (CCP 116.260, 116.940).",
+    "free_advisor_source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.260"
+  },
+
+  "appeal": {
+    "appeal_who": "defendant_only",
+    "rule": "The plaintiff has no right to appeal the judgment on the plaintiff's own claim. The defendant may appeal the judgment on the plaintiff's claim, and a plaintiff may appeal a judgment on a defendant's claim (counterclaim). A defendant's insurer may appeal if the judgment exceeds $2,500 and the insurer stipulates coverage. A defendant who did not appear cannot appeal but may move to vacate.",
+    "citation": "CCP 116.710",
+    "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.710",
+    "appeal_deadline_days": 30,
+    "deadline_text": "Notice of appeal (SC-140) must be filed within 30 days after the clerk delivers or mails the notice of entry of judgment (SC-130/SC-200); late notices are ineffective for any purpose.",
+    "deadline_citation": "CCP 116.750(b)",
+    "deadline_source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.750",
+    "fee": 75,
+    "nature": "New hearing (trial de novo) in superior court before a different judicial officer; informal, no discovery, no jury; attorneys may participate; covers the claims of all parties. Superior court judgment after appeal is final and not appealable.",
+    "nature_citation": "CCP 116.770, 116.780(a)",
+    "nature_source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.770",
+    "fees_on_appeal": "For good cause the court may award up to $150 attorney fees and up to $150 lost earnings/travel (CCP 116.780(c)); for a bad-faith appeal intended to harass or delay, up to $1,000 attorney fees and up to $1,000 lost earnings/travel (CCP 116.790).",
+    "fees_on_appeal_source": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=7.",
+    "dismissal": "Appeal may be dismissed if appellant does not appear or it is not heard within one year (CCP 116.795).",
+    "enforcement_during_appeal": "Enforcement is automatically suspended without bond until the appeal time expires, and while an appeal is pending (CCP 116.810)."
+  },
+
+  "motion_to_vacate": {
+    "plaintiff_who_missed_hearing": { "deadline_days": 30, "text": "File within 30 days after clerk mailed notice of entry of judgment; good cause required.", "citation": "CCP 116.720" },
+    "defendant_who_missed_hearing": { "deadline_days": 30, "text": "File SC-135 within 30 days after clerk mailed notice of entry of judgment; if denied, defendant may appeal the denial within 10 days after notice of denial is mailed/delivered.", "citation": "CCP 116.730" },
+    "defendant_not_properly_served": { "deadline_days": 180, "text": "File within 180 days after the defendant discovered or should have discovered the judgment; court may suspend enforcement pending the motion.", "citation": "CCP 116.740" },
+    "clerical_error_or_wrong_legal_basis": { "deadline_days": 30, "text": "One motion per party, within 30 days after notice of entry of judgment is mailed; court may act on its own at any time.", "citation": "CCP 116.725" },
+    "fee": 20,
+    "fee_citation": "CCP 116.745",
+    "form": "SC-135",
+    "source": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=7."
+  },
+
+  "pre_filing_demand": {
+    "rule": "The claim form must include a statement that the plaintiff, where possible, has demanded payment (and, where applicable, possession of property) and that the defendant failed or refused. SC-100 item 4: 'You must ask the defendant (in person, in writing, or by phone) to pay you before you sue.' If not, the plaintiff must explain why not.",
+    "citation": "CCP 116.320(b)(3)-(4); SC-100 item 4",
+    "sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.320",
+      "https://www.courts.ca.gov/documents/sc100.pdf",
+      "https://selfhelp.courts.ca.gov/ask-money"
+    ],
+    "written_required": false,
+    "notes": "Statute says 'where possible'; a written demand letter is not strictly required (in person or by phone also counts per SC-100), but written demands create evidence. Claims against public entities require a separate government claim first (see statutes_of_limitations.government_claims)."
+  },
+
+  "filing_and_hearing": {
+    "how_to_file": "File SC-100 under oath with the clerk in person, by mail, by fax if authorized, or electronically where the court allows (CCP 116.320(a)). No formal pleadings and no pretrial discovery (CCP 116.310).",
+    "hearing_scheduling": "Clerk sets the hearing no earlier than 20 days and no more than 70 days from the order (CCP 116.330(a)). Self-help: typical time to trial about 1–2 months.",
+    "e_filing": "some_courts",
+    "e_filing_notes": "Self-help: 'Some courts accept online filing'; check the local court website.",
+    "sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.330",
+      "https://selfhelp.courts.ca.gov/file-your-plaintiffs-claim",
+      "https://selfhelp.courts.ca.gov/small-claims-california"
+    ],
+    "default_requires_proof": "If the defendant fails to appear, the court still requires the plaintiff to present evidence proving the claim (CCP 116.520(b)).",
+    "default_requires_proof_source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.520"
+  },
+
+  "service": {
+    "methods": [
+      "Clerk mails claim by any mail with return receipt (certified mail; $15 per defendant)",
+      "Personal delivery by any adult 18+ who is not a party (process server, friend, relative) or by sheriff/marshal",
+      "Substituted service under CCP 415.20(a)/(b) (leave with competent adult 18+ at home or person in charge at business, then mail a copy) without first attempting personal service; complete 10 days after mailing"
+    ],
+    "plaintiff_cannot_serve_self": true,
+    "citation": "CCP 116.340(a); CCP 415.20",
+    "deadline_in_county_days": 15,
+    "deadline_out_of_county_days": 20,
+    "deadline_text": "Service must be completed at least 15 days before the hearing if the defendant resides in the county where the case is filed, or at least 20 days before if the defendant resides outside that county (CCP 116.340(b)). Because substituted service is complete 10 days after mailing, self-help advises starting it at least 10 days before those deadlines (25/30 days).",
+    "proof_of_service_deadline_days": 5,
+    "proof_of_service_text": "Proof of service (SC-104) must be filed at least 5 days before the hearing (CCP 116.340(c)).",
+    "service_complete": "Complete on the date the defendant signs the mail return receipt, on the date of personal service, or as provided in CCP 415.20 for substituted service (CCP 116.340(d)).",
+    "within_california_only": "Service must be made within California, except (f) out-of-state owners of California real property for claims about that property and (g) nonresident motorists in California accidents via DMV (Veh. Code 17450–17461) (CCP 116.340(e)-(g)).",
+    "late_service": "If service is not timely and the defendant has not appeared or asked to postpone, the court must postpone the hearing at least 15 days (CCP 116.570(b)).",
+    "sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.340",
+      "https://www.courts.ca.gov/documents/sc100info.pdf",
+      "https://selfhelp.courts.ca.gov/small-claims/start-case/serve"
+    ]
+  },
+
+  "defendants_claim": {
+    "form": "SC-120",
+    "limit": "Same as plaintiff limits ($12,500 natural person / $6,250 others, guarantor limits, two-per-year rule); need not relate to plaintiff's claim (CCP 116.360(a)).",
+    "service_deadline_days": 5,
+    "service_deadline_text": "Defendant must serve the defendant's claim on the plaintiff at least 5 days before the hearing, or at least 1 day before if the defendant was served 10 days or less before the hearing (CCP 116.360(c)).",
+    "over_limit_related_claim": "If the defendant's related claim exceeds the small claims limit, the defendant may file in a court of competent jurisdiction and ask the small claims court to transfer the case, at or before the hearing (CCP 116.390). No transfer fee (Fee Schedule item 89).",
+    "sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.360",
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.390"
+    ]
+  },
+
+  "postponement": {
+    "form": "SC-150 (order on SC-152)",
+    "deadline_text": "Written request for good cause, filed at least 10 days before the hearing unless the court finds good cause for later; copy mailed/delivered to other parties the same day (CCP 116.570(a)).",
+    "fee": 10,
+    "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.570"
+  },
+
+  "judgment_basics": {
+    "enforcement_stay": "Enforcement (including recording an abstract) is automatically suspended until the time to appeal expires (30 days after notice of entry of judgment), and during any appeal (CCP 116.810). SC-130 item 12: 'Enforcement of the judgment is automatically postponed for 30 days or, if an appeal is filed, until the appeal is decided.'",
+    "statement_of_assets": "Unless the judgment is paid, the debtor must complete and deliver SC-133 to the creditor within 30 days after notice of entry of judgment is mailed (CCP 116.830(b)).",
+    "installments": "Court may order payment in installments at judgment or later on motion (CCP 116.620; SC-220/SC-221).",
+    "interest_rate_general": 10,
+    "interest_rate_reduced": 5,
+    "interest_text": "10% per year on unpaid principal; 5% for judgments entered/renewed on or after Jan. 1, 2023 against a natural person on medical-expense claims under $200,000 or personal-debt claims under $50,000 (CCP 685.010).",
+    "judgment_life_years": 10,
+    "judgment_life_text": "Enforceable for 10 years from entry (CCP 683.020); renewable before expiration (CCP 683.110 et seq.); medical/personal-debt judgments under the thresholds can be renewed only once.",
+    "satisfaction": "Creditor must file Acknowledgment of Satisfaction (SC-290, or EJ-100 if an abstract was recorded) immediately on full payment; failure within 14 days of written demand exposes creditor to damages plus $50 (CCP 116.850).",
+    "sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=8.",
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=685.010",
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=683.020",
+      "https://www.courts.ca.gov/documents/sc130.pdf"
+    ],
+    "see_also": "research/collection/collection-research.md"
+  },
+
+  "fee_waiver": {
+    "fee_waiver_form": "FW-001 Request to Waive Court Fees (Rev. March 1, 2026); order on FW-003; info sheet FW-001-INFO",
+    "fee_waiver_form_url": "https://www.courts.ca.gov/documents/fw001.pdf",
+    "fee_waiver_threshold": "Automatic eligibility if (a) receiving SSI/SSP, CalWORKs or Tribal TANF, SNAP/CalFresh/CFAP, County Relief/General Relief/General Assistance, CAPI, IHSS, Medi-Cal, WIC, or unemployment compensation; or (b) gross monthly household income is 200% or less of the federal poverty guidelines (veterans' service-connected disability compensation excluded); or (c) court finds the applicant cannot pay without using money needed for the common necessaries of life (partial waivers/payment plans possible).",
+    "poverty_guideline_percent": 200,
+    "poverty_guideline_percent_previous": 125,
+    "threshold_effective": "2026-01-01 (Gov. Code 68632 as amended by SB 54, Stats. 2025, ch. 646)",
+    "citation": "Gov. Code 68632",
+    "income_table_fw001_monthly": {
+      "household_1": 2660.00,
+      "household_2": 3606.67,
+      "household_3": 4553.33,
+      "household_4": 5500.00,
+      "household_5": 6446.67,
+      "household_6": 7393.33,
+      "each_additional_person": 946.67,
+      "source_note": "FW-001 (Rev. March 1, 2026) item 5b table; Judicial Council publishes this annually under Gov. Code 68632(b)(2)."
+    },
+    "covers": "Filing fees, sheriff's fee to give notice (service), certification/copies, etc. (FW-001-INFO).",
+    "sources": [
+      "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=68632",
+      "https://www.courts.ca.gov/documents/fw001.pdf",
+      "https://www.courts.ca.gov/documents/fw001info.pdf"
+    ]
+  },
+
+  "forms": [
+    { "form": "SC-100", "title": "Plaintiff's Claim and ORDER to Go to Small Claims Court", "purpose": "The claim that starts the case; includes demand question, venue, two-per-year and frequent-filer declarations.", "step": "file", "revision": "Rev. January 1, 2026", "url": "https://www.courts.ca.gov/documents/sc100.pdf" },
+    { "form": "SC-100A", "title": "Other Plaintiffs or Defendants (Attachment to Plaintiff's Claim and ORDER to Go to Small Claims Court)", "purpose": "Lists additional plaintiffs or defendants beyond the two on SC-100.", "step": "file", "revision": "Revised January 1, 2017", "url": "https://www.courts.ca.gov/documents/sc100a.pdf" },
+    { "form": "SC-100-INFO", "title": "Information for the Plaintiff (Small Claims)", "purpose": "Plain-language rules: limits, who can sue, venue, service, defendant's claim, help.", "step": "file", "revision": "Rev. January 1, 2024", "url": "https://www.courts.ca.gov/documents/sc100info.pdf" },
+    { "form": "SC-101", "title": "Attorney Fee Dispute (After Arbitration) (Attachment to Plaintiff's Claim)", "purpose": "Attachment when the claim is an attorney-client fee dispute after arbitration.", "step": "file", "revision": "Revised January 1, 2024", "url": "https://www.courts.ca.gov/documents/sc101.pdf" },
+    { "form": "SC-103", "title": "Fictitious Business Name (Small Claims)", "purpose": "Attachment when a plaintiff or defendant does business under a fictitious (DBA) name.", "step": "file", "revision": "Rev. January 1, 2026", "url": "https://www.courts.ca.gov/documents/sc103.pdf" },
+    { "form": "SC-104", "title": "Proof of Service (Small Claims)", "purpose": "Server's sworn proof that the claim was served; file at least 5 days before trial.", "step": "serve", "revision": "Revised January 1, 2009", "url": "https://www.courts.ca.gov/documents/sc104.pdf" },
+    { "form": "SC-104A", "title": "Proof of Mailing (Substituted Service) (Small Claims)", "purpose": "Attachment to SC-104 proving the follow-up mailing required for substituted service.", "step": "serve", "revision": "Revised January 1, 2006", "url": "https://www.courts.ca.gov/documents/sc104a.pdf" },
+    { "form": "SC-104B", "title": "What Is \"Proof of Service\"? (Small Claims)", "purpose": "Instructions on who can serve and how.", "step": "serve", "revision": "Rev. January 1, 2026", "url": "https://www.courts.ca.gov/documents/sc104b.pdf" },
+    { "form": "SC-104C", "title": "How to Serve a Business or Public Entity (Small Claims)", "purpose": "Who to serve for corporations, LLCs, partnerships, associations, and public entities.", "step": "serve", "revision": "Revised July 1, 2025", "url": "https://www.courts.ca.gov/documents/sc104c.pdf" },
+    { "form": "SC-105", "title": "Request for Court Order and Answer (Small Claims)", "purpose": "Ask the court for an order before or after trial (e.g., amend name, correct judgment); other side may answer.", "step": "hearing", "revision": "Revised July 1, 2025", "url": "https://www.courts.ca.gov/documents/sc105.pdf" },
+    { "form": "SC-107", "title": "Small Claims Subpoena and Declaration", "purpose": "Order a witness to appear or documents to be produced (also usable for debtor exam records).", "step": "hearing", "revision": "Rev. January 1, 2000", "url": "https://www.courts.ca.gov/documents/sc107.pdf" },
+    { "form": "SC-109", "title": "Authorization to Appear (Small Claims)", "purpose": "Declaration by someone appearing for a business, entity, or other party (CCP 116.540).", "step": "hearing", "revision": "Rev. January 1, 2026", "url": "https://www.courts.ca.gov/documents/sc109.pdf" },
+    { "form": "SC-112A", "title": "Proof of Service by Mail (Small Claims)", "purpose": "Proof that a document (e.g., postponement request, SC-105) was mailed to the other side.", "step": "serve", "revision": "Rev. July 1, 2025", "url": "https://www.courts.ca.gov/documents/sc112a.pdf" },
+    { "form": "SC-120", "title": "Defendant's Claim and ORDER to Go to Small Claims Court (Small Claims)", "purpose": "Defendant sues the plaintiff back in the same case.", "step": "file", "revision": "Revised July 1, 2025", "url": "https://www.courts.ca.gov/documents/sc120.pdf" },
+    { "form": "SC-150", "title": "Request to Postpone Trial (Small Claims)", "purpose": "Ask for a new trial date (at least 10 days before trial; $10 fee if defendant timely served).", "step": "hearing", "revision": "Rev. July 1, 2025", "url": "https://www.courts.ca.gov/documents/sc150.pdf" },
+    { "form": "SC-152", "title": "Order on Request to Postpone Trial (Small Claims)", "purpose": "Court's decision on a postponement request.", "step": "hearing", "revision": "Rev. July 1, 2025", "url": "https://www.courts.ca.gov/documents/sc152.pdf" },
+    { "form": "CIV-110", "title": "Request for Dismissal", "purpose": "Dismiss the case (e.g., after settlement before trial).", "step": "hearing", "revision": "Rev. January 1, 2025", "url": "https://www.courts.ca.gov/documents/civ110.pdf" },
+    { "form": "SC-130", "title": "Notice of Entry of Judgment (Small Claims)", "purpose": "The judgment notice; back page explains appeal, vacate, and collection; includes satisfaction acknowledgment.", "step": "collect", "revision": "Rev. January 1, 2025", "url": "https://www.courts.ca.gov/documents/sc130.pdf" },
+    { "form": "SC-200", "title": "Notice of Entry of Judgment (Small Claims)", "purpose": "Alternative-format judgment notice (courts use SC-130 or SC-200).", "step": "collect", "revision": "Rev. January 1, 2025", "url": "https://www.courts.ca.gov/documents/sc200.pdf" },
+    { "form": "SC-132", "title": "Attorney-Client Fee Dispute (Attachment to Notice of Entry of Judgment) (Small Claims)", "purpose": "Judgment attachment for attorney fee dispute cases.", "step": "collect", "revision": "Rev. July 1, 2010", "url": "https://www.courts.ca.gov/documents/sc132.pdf" },
+    { "form": "SC-133", "title": "Judgment Debtor's Statement of Assets (Small Claims)", "purpose": "Debtor must complete and mail to the creditor (not file) within 30 days of notice of entry of judgment unless paid.", "step": "collect", "revision": "Rev. January 1, 2011", "url": "https://www.courts.ca.gov/documents/sc133.pdf" },
+    { "form": "SC-134", "title": "Application and Order to Produce Statement of Assets and to Appear for Examination (Small Claims)", "purpose": "Creditor asks court to order debtor to bring SC-133 and answer questions (debtor's exam); serve at least 30 days before exam.", "step": "collect", "revision": "Rev. Jan. 1, 2025", "url": "https://www.courts.ca.gov/documents/sc134.pdf" },
+    { "form": "SC-135", "title": "Notice of Motion to Vacate Judgment and Declaration (Small Claims)", "purpose": "Party who missed the trial (or was not properly served) asks to cancel the judgment.", "step": "collect", "revision": "Rev. January 1, 2007", "url": "https://www.courts.ca.gov/documents/sc135.pdf" },
+    { "form": "SC-136", "title": "Application and Order to Produce Financial Statement or Appear for Examination—Consumer Debt (Small Claims)", "purpose": "Used instead of SC-134 when the judgment is marked as concerning consumer debt.", "step": "collect", "revision": "Rev. January 1, 2026", "url": "https://www.courts.ca.gov/documents/sc136.pdf" },
+    { "form": "SC-140", "title": "Notice of Appeal (Small Claims)", "purpose": "Defendant (or plaintiff on a defendant's claim) appeals within 30 days; $75 fee.", "step": "collect", "revision": "Rev. January 1, 2007", "url": "https://www.courts.ca.gov/documents/sc140.pdf" },
+    { "form": "SC-145", "title": "Request to Pay Judgment to Court (Small Claims)", "purpose": "Debtor pays the judgment through the court ($20 fee) instead of directly to the creditor.", "step": "collect", "revision": "Rev. January 1, 2007", "url": "https://www.courts.ca.gov/documents/sc145.pdf" },
+    { "form": "SC-220", "title": "Request to Make Payments (Small Claims)", "purpose": "Debtor asks the court for an installment payment plan.", "step": "collect", "revision": "Rev. January 1, 2024", "url": "https://www.courts.ca.gov/documents/sc220.pdf" },
+    { "form": "SC-221", "title": "Response to Request to Make Payments (Small Claims)", "purpose": "Creditor responds to an SC-220 request (self-help: within 10 days).", "step": "collect", "revision": "Rev. July 1, 2013", "url": "https://www.courts.ca.gov/documents/sc221.pdf" },
+    { "form": "SC-290", "title": "Acknowledgment of Satisfaction of Judgment (Small Claims)", "purpose": "Creditor tells the court the judgment is paid (use EJ-100 if an abstract was recorded).", "step": "collect", "revision": "Rev. July 1, 2025", "url": "https://www.courts.ca.gov/documents/sc290.pdf" },
+    { "form": "EJ-100", "title": "Acknowledgment of Satisfaction of Judgment", "purpose": "Recordable satisfaction (needed to clear a recorded abstract/lien).", "step": "collect", "revision": "Rev. July 1, 2014", "url": "https://www.courts.ca.gov/documents/ej100.pdf" },
+    { "form": "EJ-001", "title": "Abstract of Judgment—Civil and Small Claims", "purpose": "Record with county recorder to create a lien on the debtor's real property; also used for out-of-county debtor exams.", "step": "collect", "revision": "Rev. July 1, 2014", "url": "https://www.courts.ca.gov/documents/ej001.pdf" },
+    { "form": "EJ-125", "title": "Application and Order for Appearance and Examination (AT-138/EJ-125)", "purpose": "Debtor's exam order when the debtor already provided SC-133, or for third-party exams.", "step": "collect", "revision": "Rev. Oct. 1, 2024", "url": "https://www.courts.ca.gov/documents/ej125.pdf" },
+    { "form": "EJ-130", "title": "Writ of Execution", "purpose": "Court order directing the sheriff/levying officer to levy on wages, bank accounts, and other property; $40; expires after 180 days.", "step": "collect", "revision": "Rev. July 1, 2026", "url": "https://www.courts.ca.gov/documents/ej130.pdf" },
+    { "form": "EJ-155", "title": "Exemptions From the Enforcement of Judgments", "purpose": "List of property exempt from collection.", "step": "collect", "revision": "Rev. September 1, 2021", "url": "https://www.courts.ca.gov/documents/ej155.pdf" },
+    { "form": "EJ-156", "title": "Current Dollar Amounts of Exemptions From Enforcement of Judgments", "purpose": "Current exemption dollar amounts (bank account $2,325 from July 1, 2026; vehicle $8,625; tools of trade $10,950, etc.).", "step": "collect", "revision": "Rev. July 20, 2026", "url": "https://www.courts.ca.gov/documents/ej156.pdf" },
+    { "form": "MC-012", "title": "Memorandum of Costs After Judgment, Acknowledgment of Credit, and Declaration of Accrued Interest", "purpose": "Add post-judgment costs and interest to the amount owed.", "step": "collect", "revision": "Rev. January 1, 2026", "url": "https://www.courts.ca.gov/documents/mc012.pdf" },
+    { "form": "WG-001", "title": "Application for Earnings Withholding Order (Wage Garnishment)", "purpose": "Creditor's application, given to the levying officer with the writ, to garnish wages.", "step": "collect", "revision": "Rev. January 1, 2012", "url": "https://www.courts.ca.gov/documents/wg001.pdf" },
+    { "form": "FW-001", "title": "Request to Waive Court Fees", "purpose": "Ask the court to waive filing, service, and other fees.", "step": "file", "revision": "Rev. March 1, 2026", "url": "https://www.courts.ca.gov/documents/fw001.pdf" },
+    { "form": "FW-001-INFO", "title": "Information Sheet on Waiver of Superior Court Fees and Costs", "purpose": "Explains eligibility and what fees can be waived.", "step": "file", "revision": "Rev. March 1, 2026", "url": "https://www.courts.ca.gov/documents/fw001info.pdf" },
+    { "form": "FW-003", "title": "Order on Court Fee Waiver (Superior Court)", "purpose": "Court's order granting or denying the fee waiver.", "step": "file", "revision": "Revised September 1, 2019", "url": "https://www.courts.ca.gov/documents/fw003.pdf" }
+  ],
+  "forms_note": "Titles and revision dates were read from the PDFs downloaded from the listed www.courts.ca.gov/documents/ URLs on 2026-11-05. Other forms referenced by official self-help pages but not opened: WG-002 (Earnings Withholding Order), WG-005, WG-008/009/010, WG-015/EJ-135 (Declaration of Address Verification, personal-debt judgments), SER-001/SER-001A (sheriff instructions), EJ-170/EJ-175 (opposing bank-levy exemption claims), MC-030 (Declaration). There is no official Judicial Council demand-letter form; see https://selfhelp.courts.ca.gov/ask-money.",
+
+  "statutes_of_limitations": [
+    { "claim_type": "written_contract", "years": 4, "accrual": "from breach", "citation": "CCP 337(a)", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=337" },
+    { "claim_type": "book_account_or_account_stated_in_writing", "years": 4, "accrual": "from date of last item (account stated with multiple items)", "citation": "CCP 337(b)", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=337" },
+    { "claim_type": "oral_contract", "years": 2, "accrual": "from breach", "citation": "CCP 339(1)", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=339" },
+    { "claim_type": "property_damage_personal_property", "years": 3, "accrual": "from injury/taking (e.g., car damage, taking or detaining goods)", "citation": "CCP 338(c)(1)", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=338" },
+    { "claim_type": "property_damage_real_property", "years": 3, "accrual": "from trespass/injury", "citation": "CCP 338(b)", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=338" },
+    { "claim_type": "personal_injury", "years": 2, "accrual": "from injury", "citation": "CCP 335.1", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=335.1" },
+    { "claim_type": "fraud_or_mistake", "years": 3, "accrual": "from discovery of the facts constituting the fraud or mistake", "citation": "CCP 338(d)", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=338" },
+    { "claim_type": "liability_created_by_statute", "years": 3, "accrual": "from accrual", "citation": "CCP 338(a)", "note": "Excludes penalties/forfeitures.", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=338" },
+    { "claim_type": "statutory_penalty_to_individual", "years": 1, "accrual": "from accrual", "citation": "CCP 340(a)", "note": "Applies unless the penalty statute sets its own period.", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=340" },
+    { "claim_type": "libel_slander", "years": 1, "accrual": "from publication", "citation": "CCP 340(c)", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=340" },
+    { "claim_type": "catch_all", "years": 4, "accrual": "from accrual", "citation": "CCP 343", "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=343" },
+    {
+      "claim_type": "security_deposit_landlord",
+      "years": null,
+      "accrual": "21 days after tenant vacates (when the deposit/itemization was due)",
+      "citation": "Civ. Code 1950.5; CCP 337(a), 338(a), 340(a)",
+      "note": "No limitations period is written into Civ. Code 1950.5. Plausible periods: 4 years if framed as breach of a written lease (CCP 337(a)); 3 years as a liability created by statute (CCP 338(a)); the bad-faith statutory damages (up to 2x deposit) might be argued to be a 'penalty' subject to 1 year (CCP 340(a)). Which applies is a legal question not settled by these statutes. Conservative deadline logic: tell users to file within 1 year of move-out to preserve the bad-faith penalty, and no later than 3 years for the deposit itself.",
+      "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.5"
+    },
+    {
+      "claim_type": "government_claims",
+      "years": null,
+      "text": "Before suing a California public entity, a written government claim must be presented within 6 months of accrual for death, personal injury, or damage to personal property/growing crops, and within 1 year for other causes (Gov. Code 911.2). After written rejection, suit must be filed within 6 months of the rejection notice; if no written notice is given, within 2 years of accrual (Gov. Code 945.6).",
+      "citation": "Gov. Code 911.2, 945.6",
+      "sources": [
+        "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=911.2",
+        "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=945.6"
+      ]
+    }
+  ],
+  "statutes_of_limitations_selfhelp_confirmation": "Self-help page confirms: written agreement 4 years, verbal agreement 2 years, personal injury 2 years, property damage 3 years. https://selfhelp.courts.ca.gov/what-you-need-figure-out-you-start-case",
+
+  "security_deposit": {
+    "citation": "Civ. Code 1950.5 (amended by AB 414, Stats. 2025, ch. 340, eff. Jan. 1, 2026)",
+    "source": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.5",
+    "return_deadline_days": 21,
+    "return_deadline_text": "No later than 21 calendar days after the tenant vacates, the landlord must furnish an itemized statement of deductions and return the remaining deposit (Civ. Code 1950.5(h)(1)).",
+    "documentation": "Itemized statement must include receipts/invoices (or time and hourly rate for landlord's own work) and, for repair/cleaning deductions, photographs; not required if repair/cleaning deductions total $125 or less or tenant validly waived, but tenant can request documents within 14 days of receiving the statement (1950.5(h)(2)-(5)). If work can't be completed within 21 days, landlord may deduct a good-faith estimate and must send documentation within 14 days of completion (1950.5(h)(3)).",
+    "photos": "Move-out photos required beginning April 1, 2025 (before and after repairs/cleaning); move-in photos required for tenancies beginning on or after July 1, 2025 (1950.5(g)).",
+    "allowed_deductions": "Unpaid rent; repair of damage beyond ordinary wear and tear; cleaning to return unit to move-in cleanliness; restoring/replacing personal property if lease allows (1950.5(b)); no claims for pre-existing damage or ordinary wear and tear (1950.5(e)).",
+    "initial_inspection": "Tenant can request a pre-move-out inspection (no earlier than 2 weeks before move-out) and an itemized statement of proposed deductions (1950.5(f)).",
+    "bad_faith_penalty": "Bad-faith retention may subject the landlord to statutory damages of up to twice the amount of the security, in addition to actual damages; court may award even if not specifically requested; landlord bears burden of proving reasonableness of deductions (1950.5(m)).",
+    "bad_faith_penalty_multiplier_max": 2,
+    "forfeiture_for_noncompliance": "A landlord who in bad faith fails to comply with subdivision (h) is not entitled to claim any amount of the security (1950.5(h)(7)).",
+    "deposit_cap": "Generally 1 month's rent (2 months for small landlords who are natural persons/LLCs of natural persons owning no more than 2 properties with no more than 4 units; not for service members) for security collected on or after July 1, 2024 (1950.5(c)).",
+    "nonrefundable_prohibited": "Leases may not call any security 'nonrefundable' (1950.5(n)).",
+    "small_claims_ok": "Deposit actions may be brought in small claims if actual plus statutory damages are within the CCP 116.220/116.221 limits (1950.5(o)).",
+    "proof_of_deposit": "May be proven by any credible evidence: canceled check, receipt, lease, statements, or declaration (1950.5(p)).",
+    "selfhelp_guide": "https://selfhelp.courts.ca.gov/guide-security-deposits-california"
+  },
+
+  "sources": [
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=2.", "what": "limits (116.220, 116.221, 116.231), filing fees (116.230), clerk mail fee (116.232), forum clauses (116.225), advisors (116.260)", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=3.", "what": "claim contents/demand (116.320), hearing scheduling (116.330), service (116.340), defendant's claim (116.360), venue (116.370), transfer (116.390)", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=5.", "what": "lawyers (116.530), representatives (116.540), postponement and $10 fee (116.570)", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=6.", "what": "judgment, costs, installment payments (116.610–116.630)", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=7.", "what": "appeal rights, deadlines, fee, de novo nature, motions to vacate and fee (116.710–116.798)", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=CCP&division=&title=1.&part=1.&chapter=5.5.&article=8.", "what": "enforcement stay, SC-133 duty, satisfaction, DMV suspension (116.810–116.880)", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202320240SB71", "what": "SB 71 (2023) raised limits effective 2024-01-01; prior $10,000 natural-person limit", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=68632", "what": "fee waiver eligibility, 200% FPG (SB 54, eff. 2026-01-01)", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.5", "what": "security deposit rules, 21-day deadline, 2x bad-faith damages, small claims", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=337", "what": "SOL written contract / book account", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=338", "what": "SOL property damage, fraud, statutory liability", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=339", "what": "SOL oral contract", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=335.1", "what": "SOL personal injury", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=340", "what": "SOL statutory penalties, libel/slander", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=343", "what": "SOL catch-all", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=911.2", "what": "government claim deadlines", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=945.6", "what": "deadline to sue public entity after claim rejection", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=685.010", "what": "judgment interest 10% / 5%", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=683.020", "what": "10-year judgment life", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=26720.9", "what": "sheriff service/levy fee $50", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=26750", "what": "sheriff wage garnishment fee $45", "type": "statute" },
+    { "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=26726", "what": "keeper fees", "type": "statute" },
+    { "url": "https://courts.ca.gov/system/files/file/statewide-civil-fee-schedule-eff-01012026.pdf", "what": "Statewide Civil Fee Schedule eff. 2026-01-01: small claims fees items 81–96, renewal $45", "type": "court_site" },
+    { "url": "https://selfhelp.courts.ca.gov/small-claims-california", "what": "limits overview, $30–$100 fees, COVID-19 rental debt rule", "type": "court_site" },
+    { "url": "https://selfhelp.courts.ca.gov/what-you-need-figure-out-you-start-case", "what": "limits, two-per-year rule, SOL summary, COVID rental debt", "type": "court_site" },
+    { "url": "https://selfhelp.courts.ca.gov/file-your-plaintiffs-claim", "what": "fee tiers, e-filing in some courts, filing by mail", "type": "court_site" },
+    { "url": "https://selfhelp.courts.ca.gov/small-claims/start-case/serve", "what": "service methods, $15 clerk mail fee, 15/20-day deadlines, proof 5 days before", "type": "court_site" },
+    { "url": "https://selfhelp.courts.ca.gov/small-claims/change-court-date", "what": "postponement procedure and $10 fee", "type": "court_site" },
+    { "url": "https://selfhelp.courts.ca.gov/appeal-challenge-judges-decision", "what": "who can appeal, 30 days, $75", "type": "court_site" },
+    { "url": "https://www.courts.ca.gov/documents/sc100.pdf", "what": "SC-100 (Rev. 2026-01-01): limits text, demand requirement, two-per-year and frequent-filer declarations", "type": "form" },
+    { "url": "https://www.courts.ca.gov/documents/sc100info.pdf", "what": "SC-100-INFO: who can sue, venue, service methods, defendant's claim timing, fee waiver", "type": "form" },
+    { "url": "https://www.courts.ca.gov/documents/sc130.pdf", "what": "SC-130: 30-day enforcement postponement, collection steps", "type": "form" },
+    { "url": "https://www.courts.ca.gov/documents/fw001.pdf", "what": "FW-001 (Rev. 2026-03-01) income table", "type": "form" },
+    { "url": "https://www.courts.ca.gov/documents/fw001info.pdf", "what": "FW-001-INFO: qualifying benefits, fees covered", "type": "form" },
+    { "url": "https://www.courts.ca.gov/documents/ej156.pdf", "what": "EJ-156 (Rev. 2026-07-20): exemption amounts incl. $2,325 bank exemption", "type": "form" }
+  ],
+
+  "unverified": [
+    "limits.prior_limit_business — the $5,000 pre-2024 entity limit is from memory/secondary knowledge; the SB 71 digest only states the prior $10,000 natural-person limit.",
+    "limits.special_limits[Song-Beverly / vehicle] — no Song-Beverly-specific small claims limit found in current statute; if the site wants to mention one, it needs a primary source.",
+    "limits.special_limits[COVID-19 rental debt] — exact repeal mechanism/date of former CCP 116.223 not confirmed on leginfo (section simply no longer displays); value relies on California Courts self-help pages.",
+    "statutes_of_limitations[security_deposit_landlord] — which limitations period applies (1, 3, or 4 years) is not stated in Civ. Code 1950.5; the conservative guidance is an inference, not a cited rule.",
+    "fees.sheriff_service_fee — statutory amount is $50 (Gov. Code 26720.9), but individual sheriffs/marshals may describe fees differently; self-help pages cite approximate figures ($40–$50)."
+  ],
+  "notes": "All values checked 2026-11-05 against leginfo.legislature.ca.gov, courts.ca.gov, and selfhelp.courts.ca.gov. Small claims fees are uniform statewide. The CA self-help wage garnishment page simplifies the cap to '20% of gross income'; the statute (CCP 706.050) uses disposable earnings and a minimum-wage formula — see collection memo. Fee waiver threshold changed from 125% to 200% FPG on 2026-01-01."
+}

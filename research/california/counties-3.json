@@ -1,0 +1,761 @@
+[
+  {
+    "county": "San Luis Obispo",
+    "court_name": "Superior Court of California, County of San Luis Obispo",
+    "small_claims_page_url": "https://slo.courts.ca.gov/self-help/small-claims",
+    "small_claims_locations": [
+      { "name": "San Luis Obispo Branch (Civil & Family Law Branch), Small Claims", "address": "1050 Monterey Street, Room 220, San Luis Obispo, CA 93408", "notes": "Phone (805) 706-3600 option 4; phone hours M-F 8:30 AM-12:00 PM; counter M-Th 8:30 AM-12:00 PM." },
+      { "name": "Paso Robles Branch, Small Claims", "address": "901 Park Street, Paso Robles, CA 93446", "notes": "Phone (805) 706-3600; counter hours Wed and Fri 8:30 AM-12:00 PM (location page)." }
+    ],
+    "self_help_center": {
+      "name": "Superior Court of San Luis Obispo Self-Help Center",
+      "address": null,
+      "phone": "(805) 706-3617",
+      "url": "https://slo.courts.ca.gov/self-help",
+      "notes": "Telephone appointments via calendly.com/self-help-center or by phone M-F 8:30 AM-4:30 PM. The Self-Help Center says it does NOT assist with small claims; it refers small claims users to the SLOLAF advisor. Street address not stated on the page."
+    },
+    "small_claims_advisor": {
+      "provider": "San Luis Obispo Legal Assistance Foundation (SLOLAF)",
+      "phone": "(805) 548-0678",
+      "url": "https://slo.courts.ca.gov/divisions/small-claims-advisor-services",
+      "email": "smallclaims@slolaf.org",
+      "format": "Appointments in person, by phone, email, or video (Calendly links for San Luis Obispo and Paso Robles). Office hours: Superior Court of San Luis Obispo Tue and Wed 9:00 AM-1:00 PM; Paso Robles Courthouse Thu 9:00 AM-1:00 PM. English and Spanish.",
+      "free": true,
+      "notes": "Advisor named on court page: Monica Anderson. SLOLAF page: https://www.slolaf.org/smallclaims (linked from court site, not separately checked)."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Odyssey eFileCA through an EFSP; small claims is among the civil case types (mandatory for attorneys since Jan 1, 2017; self-represented parties exempt but encouraged). Court also links Odyssey Guide & File (Tyler SRL) form-prep for small claims. No fax filing for civil.",
+    "remote_hearings": "unclear",
+    "remote_hearings_notes": "Court posts a ZoomGov link list by department (Civil Courtroom Dept 2, revised 01/02/2026) but no small-claims-specific remote policy was found.",
+    "local_notes": "Two filing/hearing locations (SLO and Paso Robles). Advisor is a nonprofit (SLOLAF), not the court self-help center.",
+    "sources": [
+      { "url": "https://slo.courts.ca.gov/self-help/small-claims", "what": "small_claims_locations, advisor provider, Guide & File", "type": "court_site" },
+      { "url": "https://slo.courts.ca.gov/divisions/small-claims-advisor-services", "what": "small_claims_advisor (phone, email, hours, format)", "type": "court_site" },
+      { "url": "https://slo.courts.ca.gov/general-information/location-contact-info", "what": "addresses, counter hours", "type": "court_site" },
+      { "url": "https://slo.courts.ca.gov/self-help", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://slo.courts.ca.gov/online-services/online-case-filing", "what": "e_filing", "type": "court_site" },
+      { "url": "https://drive.google.com/open?id=1dasAAcABoLnmC4YOOuREG_Y2eThjGVHz", "what": "remote_hearings (department Zoom list linked from court site)", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["remote_hearings", "self_help_center.address"],
+    "notes": ""
+  },
+  {
+    "county": "San Mateo",
+    "court_name": "Superior Court of California, County of San Mateo",
+    "small_claims_page_url": "https://sanmateo.courts.ca.gov/divisions/small-claims-division",
+    "small_claims_locations": [
+      { "name": "Southern Branch: Hall of Justice & Records (Small Claims Clerk's Office, Room A)", "address": "400 County Center, 1st Floor, Room A, Redwood City, CA 94063", "notes": "All San Mateo small claims filings go here. Clerk phone (650) 261-5100 option 6, M-F 8:30 AM-1:00 PM; office by appointment only. Night court for small claims: first Wednesday of each month at 5:30 PM in Redwood City." },
+      { "name": "Northern Branch", "address": "1050 Mission Road, South San Francisco, CA 94080", "notes": "Hearing schedule page: hearings held in South San Francisco Mon 1:30 PM, Tue 8:30 AM, Wed 1:30 PM, Fri 1:30 PM." }
+    ],
+    "self_help_center": {
+      "name": "Self-Help Center / Family Law Facilitator (SHC/FLF)",
+      "address": "Hall of Justice and Records, 400 County Center, 6th Floor, Redwood City, CA",
+      "phone": null,
+      "url": "https://sanmateo.courts.ca.gov/self-help/self-help-center-family-law-facilitator",
+      "notes": "Services mainly via LiveChat; asks people to use LiveChat before coming in. For small claims it refers people to the Small Claims Advisor."
+    },
+    "small_claims_advisor": {
+      "provider": "Court-listed advisor: Attorney Allen Capeloto",
+      "phone": null,
+      "url": "https://sanmateo.courts.ca.gov/divisions/small-claims/small-claims-advisor",
+      "email": null,
+      "format": "Sign up at calendly.com/allencapeloto; appointments open each Tuesday morning. Page also says '10 minute consultation with advisor, limited to first 12 people to arrive'. Written materials and alternatives to court.",
+      "free": true,
+      "notes": "Page does not give an advisor phone number, location, or whether sessions are in person or remote; the 'first 12 people to arrive' line suggests in-person sessions but conflicts with the Calendly sign-up. Court suggests first using the small claims recorded line (650) 261-5100 option 6."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Odyssey eFileCA via EFSP. All small claims documents (except parking appeals and listed hard-copy items such as abstracts, appeal documents) may be e-filed; mandatory for attorneys since June 1, 2020; self-represented parties may e-file. Small claims appeals (SC-140) are e-filed as 'New Case Filings'.",
+    "remote_hearings": "no",
+    "remote_hearings_notes": "Small claims calendars require in-person appearance; remote Zoom appearance available only for those with a hardship (Hardship Protocol and Zoom Appearance Protocol PDFs). Small claims mediation is held by Zoom.",
+    "local_notes": "Free small claims mediation program (remote via Zoom). Venue: all filings at Hall of Justice Room A, Redwood City.",
+    "sources": [
+      { "url": "https://sanmateo.courts.ca.gov/divisions/small-claims-division", "what": "locations, clerk contact, remote hearing policy, mediation", "type": "court_site" },
+      { "url": "https://sanmateo.courts.ca.gov/divisions/small-claims/hearing-schedules", "what": "hearing schedule, night court", "type": "court_site" },
+      { "url": "https://sanmateo.courts.ca.gov/divisions/small-claims/small-claims-advisor", "what": "small_claims_advisor", "type": "court_site" },
+      { "url": "https://sanmateo.courts.ca.gov/location/northern-branch-0", "what": "Northern Branch address", "type": "court_site" },
+      { "url": "https://sanmateo.courts.ca.gov/self-help/self-help-center-family-law-facilitator", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://sanmateo.courts.ca.gov/online-services/e-filing", "what": "e_filing", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["small_claims_advisor.phone", "small_claims_advisor.format"],
+    "notes": "Advisor format is ambiguous on the court page (Calendly sign-up vs. first 12 to arrive)."
+  },
+  {
+    "county": "Santa Barbara",
+    "court_name": "Superior Court of California, County of Santa Barbara",
+    "small_claims_page_url": "https://santabarbara.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Santa Barbara - Anacapa Division (Clerk's Office)", "address": "1100 Anacapa St., 2nd Floor, Santa Barbara, CA 93101", "notes": "Venue: South Santa Barbara County (Carpinteria to Gaviota). Phone (805) 882-4520; office 8:00 AM-3:00 PM, phone 9:00 AM-3:00 PM." },
+      { "name": "Santa Maria - Cook Division (Clerk's Office)", "address": "312 East Cook Street, Building E, Santa Maria, CA 93454 (mailing: 312-C East Cook Street, Santa Maria, CA 93454)", "notes": "Venue: Santa Maria, Orcutt, Guadalupe, Los Alamos, New Cuyama, Lompoc, Vandenberg, Hollister Ranch, Santa Ynez Valley. Phone (805) 614-6414. Lompoc and Solvang divisions stopped processing small claims 09/01/2013." }
+    ],
+    "self_help_center": {
+      "name": "Legal Resource Centers (LRC) of Santa Barbara County",
+      "address": null,
+      "phone": "Santa Barbara (805) 568-3303; Santa Maria (805) 691-2457; Lompoc (805) 568-3303",
+      "url": "https://santabarbara.courts.ca.gov/legal-resource-center",
+      "notes": "Operated by the Legal Aid Foundation of Santa Barbara County through a court grant; staffed by a licensed attorney; email LRCHelp@lafsbc.org. Santa Barbara and Santa Maria: Mon-Thu 9:00 AM-Noon & 1:30-3:00 PM, Fri 9:00 AM-Noon by appointment; Lompoc in person Wed only. Page says a minimum $25 donation will be requested. Street addresses not on page."
+    },
+    "small_claims_advisor": {
+      "provider": "Legal Aid Foundation of Santa Barbara County, through the Legal Resource Center",
+      "phone": "(805) 568-3303 (Santa Barbara LRC); (805) 691-2457 (Santa Maria LRC)",
+      "url": "https://santabarbara.courts.ca.gov/legal-resource-center",
+      "email": "LRCHelp@lafsbc.org",
+      "format": "In person, phone, and email at the Legal Resource Centers; hours as listed for the LRCs (phone and email until 4 PM).",
+      "free": true,
+      "notes": "Court small claims page: 'The Legal Aid Foundation provides Small Claims Advisor services through the Legal Resource Center.' The LRC page requests a minimum $25 donation for LRC services generally; whether that applies to statutory advisor help is not stated (advisor help must be free under CCP 116.940)."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Small claims can be prepared and e-filed through Odyssey Guide & File (https://california-efm.tylertech.cloud/srl); filing fee plus e-filing service fee, or fee waiver.",
+    "remote_hearings": "no",
+    "remote_hearings_notes": "Court's remote-appearance information sheet lists 'All Small Claims Hearings or Small Claims proceedings' as requiring personal appearance; a party may request Zoom with local form SC-2073 (Request to Appear by Zoom Videoconference and Order Thereon).",
+    "local_notes": "Free day-of-hearing mediation by Conflict Solutions Center volunteers (Santa Barbara 805-963-6765; Santa Maria 805-349-8943).",
+    "sources": [
+      { "url": "https://santabarbara.courts.ca.gov/divisions/small-claims", "what": "locations, venue, advisor provider, Guide & File, mediation", "type": "court_site" },
+      { "url": "https://santabarbara.courts.ca.gov/legal-resource-center", "what": "self_help_center, advisor contacts/hours", "type": "court_site" },
+      { "url": "https://santabarbara.courts.ca.gov/small-claims-self-help", "what": "LRC hours", "type": "court_site" },
+      { "url": "https://santabarbara.courts.ca.gov/location/santa-maria-cook-division", "what": "Cook Division address", "type": "court_site" },
+      { "url": "https://santabarbara.courts.ca.gov/system/files/general/information-remote-appearances.pdf", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["self_help_center.address"],
+    "notes": ""
+  },
+  {
+    "county": "Santa Clara",
+    "court_name": "Superior Court of California, County of Santa Clara",
+    "small_claims_page_url": "https://santaclara.courts.ca.gov/divisions/small-claims-division",
+    "small_claims_locations": [
+      { "name": "Downtown Superior Court (DTS)", "address": "191 North First Street, San Jose, CA 95113", "notes": "All small claims filed and heard here (Civil Local Rule 19, effective 2026); night court sessions as posted on the court website. Email sssclaimsinfo@scscourt.org." }
+    ],
+    "self_help_center": {
+      "name": "Self-Help Center / Family Law Facilitator's Office (SHC/FLFO)",
+      "address": "In person (emergencies only) at Restraining Order Help Center, 201 N. First Street, San Jose, CA 95113",
+      "phone": "408-882-2926",
+      "url": "https://santaclara.courts.ca.gov/self-help/self-help-centerflf-office",
+      "notes": "Phone Mon/Tue/Thu 8:30 AM-1:30 PM. Small claims is not on the SHC/FLFO 'we can help' list; small claims questions go to the Small Claims Advisor line. Page says LiveChat suspended effective Nov 23, 2026."
+    },
+    "small_claims_advisor": {
+      "provider": "Superior Court of Santa Clara County (advisor page is in the court's Self-Help section; operator not named)",
+      "phone": "(408) 882-2929",
+      "url": "https://santaclara.courts.ca.gov/self-help/self-help-topics/self-help-small-claims/small-claims-advisor",
+      "email": null,
+      "format": "Live phone hours every Tuesday 2:00-4:00 PM; or online webform and the advisor replies by email.",
+      "free": true,
+      "notes": "Only two hours of live phone time per week."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Court e-filing page: 'E-filing in Small Claims cases is available' (via EFSP).",
+    "remote_hearings": "unclear",
+    "remote_hearings_notes": "Court uses Microsoft Teams for remote hearings and lists Teams links by department; no small-claims-specific remote policy found. Remote hearings page says to appear in person for all calendars in Department 4 at 191 N. First St. (department's case type not stated).",
+    "local_notes": "Local form SC-8006 (Notice to Small Claims Litigants) must be served with the claim; local form SC-8016 optional order form. Limited interpreter availability may cause continuances.",
+    "sources": [
+      { "url": "https://santaclara.courts.ca.gov/divisions/small-claims-division", "what": "location, contact", "type": "court_site" },
+      { "url": "https://santaclara.courts.ca.gov/system/files/rules/civil.pdf", "what": "Civil Local Rule 19 (courthouse, night court, SC-8006)", "type": "court_rule" },
+      { "url": "https://santaclara.courts.ca.gov/location/downtown-superior-court-dts", "what": "DTS address", "type": "court_site" },
+      { "url": "https://santaclara.courts.ca.gov/self-help/self-help-topics/self-help-small-claims/small-claims-advisor", "what": "small_claims_advisor", "type": "court_site" },
+      { "url": "https://santaclara.courts.ca.gov/self-help/self-help-centerflf-office", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://santaclara.courts.ca.gov/forms-filing/e-filing", "what": "e_filing", "type": "court_site" },
+      { "url": "https://santaclara.courts.ca.gov/online-services/remote-hearings", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["remote_hearings", "small_claims_advisor.provider"],
+    "notes": ""
+  },
+  {
+    "county": "Santa Cruz",
+    "court_name": "Superior Court of California, County of Santa Cruz",
+    "small_claims_page_url": "https://www.santacruz.courts.ca.gov/divisions/small-claims-division",
+    "small_claims_locations": [
+      { "name": "Watsonville Courthouse, Small Claims Division", "address": "1 Second Street, Room 300, Watsonville, CA 95076", "notes": "All Santa Cruz County small claims are filed and heard here. Hearings Thursdays 1:00 and 1:30 PM (Department A). Clerk (831) 786-7200; filing 8:00 AM-3:00 PM M-F; phones 8:00 AM-1:00 PM." }
+    ],
+    "self_help_center": {
+      "name": "Self Help Center (includes Family Law Facilitator and Small Claims Advisor)",
+      "address": "1 Second Street, Room 301, Watsonville, CA 95076",
+      "phone": "831-786-7200 option 4 (messages; returned within 72 hours)",
+      "url": "https://www.santacruz.courts.ca.gov/self-help",
+      "notes": "Mon-Thu 8:30-11:30 AM and 1:00-3:00 PM, first come first served; email selfhelp.information@santacruzcourt.org."
+    },
+    "small_claims_advisor": {
+      "provider": "Superior Court of Santa Cruz County Small Claims Advisor Program (part of the court Self Help Center)",
+      "phone": "(831) 786-7370",
+      "url": "https://www.santacruz.courts.ca.gov/divisions/small-claims-division/small-claims-advisor-program",
+      "email": "selfhelp.information@santacruzcourt.org",
+      "format": "Phone messages any time (returned within 72 hours); in-person walk-in Mon-Thu 8:30-11:30 AM and 1:00-3:00 PM at 1 Second Street, Room 301, Watsonville; recorded small claims workshop (English and Spanish).",
+      "free": true,
+      "notes": ""
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "File at Home via Odyssey Guide & File, with e-filing (filing fee + e-file service fee, or fee waiver); also in person or by mail.",
+    "remote_hearings": "yes",
+    "remote_hearings_notes": "Parties may appear in person or by Zoom; must file form RA-010 to give notice. Zoom link for Department A on the small claims page. Public observation in person only.",
+    "local_notes": "Free small claims mediation through Conflict Resolution Center (831) 475-6117. Local Small Claims Filing Information sheet (SUPSC-001).",
+    "sources": [
+      { "url": "https://www.santacruz.courts.ca.gov/divisions/small-claims-division", "what": "location, hearing days, remote hearings, e-filing", "type": "court_site" },
+      { "url": "https://www.santacruz.courts.ca.gov/divisions/small-claims-division/small-claims-advisor-program", "what": "small_claims_advisor", "type": "court_site" },
+      { "url": "https://www.santacruz.courts.ca.gov/self-help", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://www.santacruz.courts.ca.gov/system/files/general/info-shc-flf-flyer-english_1.pdf", "what": "self_help_center address", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [],
+    "notes": "santacruz.courts.ca.gov without 'www' did not respond; use the www host."
+  },
+  {
+    "county": "Shasta",
+    "court_name": "Superior Court of California, County of Shasta",
+    "small_claims_page_url": "https://shasta.courts.ca.gov/divisions/small-claims-division",
+    "small_claims_locations": [
+      { "name": "Main Courthouse (Redding)", "address": "1515 Court Street, Redding, CA 96001", "notes": "Office 8:30 AM-4:00 PM; (530) 245-6789; SmallClaims@shasta.courts.ca.gov. Hearings set about 45 days after filing." }
+    ],
+    "self_help_center": {
+      "name": "Family Law Facilitator's Office / Self-Help Center",
+      "address": "1515 Court Street, Room 320, Redding, CA 96001",
+      "phone": "(530) 245-6900 (message phone only)",
+      "url": "https://shasta.courts.ca.gov/self-help/family-law-facilitators-office-self-help",
+      "notes": "Lists 'Small Claims: provide information, assistance with, and forms'. Walk-ins and phone/email per posted schedule; help also by Zoom. Email selfhelp@shasta.courts.ca.gov."
+    },
+    "small_claims_advisor": {
+      "provider": "Court has exempted itself from CCP 116.940(b) advisory services (Local Rule 5.20); provides only recorded phone message and information booklets. Shasta County's FAQ reportedly names Legal Services of Northern California (LSNC) as the county's small claims advisor.",
+      "phone": "LSNC Redding (530) 241-3565 / (800) 822-9687",
+      "url": "https://lsnc.net/node/55",
+      "email": null,
+      "format": "LSNC Redding office (1370 West Street, Redding, CA 96001), office hours Mon/Tue/Wed/Fri 9:00-11:45 AM & 1:00-4:45 PM, Thu 1:00-4:45 PM. Court Self-Help Center also gives small claims information.",
+      "free": true,
+      "notes": "Local Rule 5.20 (amended eff. Jan 1, 2016; in rules effective July 1, 2025): 'This court exempts itself from the small claims advisory service requirements set forth in Code of Civil Procedure § 116.940(b)...' The county FAQ page (shastacounty.gov/faqs/351) returned 403 to direct fetch; the LSNC role was seen only in a search snippet. LSNC's own office page does not mention small claims."
+    },
+    "e_filing": "unclear",
+    "e_filing_notes": "No e-filing service is listed on the court's Online Services page (only TurboCourt form preparation); local rules contain no civil e-filing rule.",
+    "remote_hearings": "unclear",
+    "remote_hearings_notes": "Court uses WebEx for remote appearances listed by department; small claims not mentioned.",
+    "local_notes": "Small claims advisory exemption under Local Rule 5.20.",
+    "sources": [
+      { "url": "https://shasta.courts.ca.gov/divisions/small-claims-division", "what": "location, contact", "type": "court_site" },
+      { "url": "https://shasta.courts.ca.gov/system/files/roc/roc.pdf", "what": "Local Rule 5.20 advisor exemption", "type": "court_rule" },
+      { "url": "https://shasta.courts.ca.gov/self-help/family-law-facilitators-office-self-help", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://shasta.courts.ca.gov/system/files/general/self-help-schedule.pdf", "what": "self-help hours/format", "type": "court_site" },
+      { "url": "https://www.shastacounty.gov/faqs/351", "what": "LSNC as small claims advisor (search snippet only; page blocked)", "type": "secondary" },
+      { "url": "https://lsnc.net/node/55", "what": "LSNC Redding phone/address/hours", "type": "secondary" },
+      { "url": "https://shasta.courts.ca.gov/online-services", "what": "e_filing (none listed)", "type": "court_site" },
+      { "url": "https://shasta.courts.ca.gov/online-services/remote-appearance-information", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["small_claims_advisor.provider", "small_claims_advisor.phone", "e_filing", "remote_hearings"],
+    "notes": "Under CCP 116.940(c), a court/county averaging 1,000 or fewer small claims filings a year may exempt itself (via local rule) but must still provide minimum advisory services."
+  },
+  {
+    "county": "Sierra",
+    "court_name": "Superior Court of California, County of Sierra",
+    "small_claims_page_url": "https://sierra.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Sierra County Superior Court (Downieville)", "address": "100 Courthouse Square, Downieville, CA 95936", "notes": "Clerk counter M-F 9:00 AM-12:00 PM and 1:00-4:00 PM; (530) 289-3698; superiorcourt@sierracourt.org. Small claims page shows ZIP 93230 (typo; location page shows 95936)." }
+    ],
+    "self_help_center": {
+      "name": "Sierra Superior Court self-help (SHARP-supported self-help computers; Self-Help Attorney/Family Law Facilitator by appointment)",
+      "address": "100 Courthouse Square, Second Floor, Downieville, CA 95936; also Family Resource Center, 315 Main Street, Loyalton, CA 96118",
+      "phone": "Court Clerk (530) 289-3698 to arrange Self-Help Attorney appointment; Loyalton computer reservations (530) 993-1110",
+      "url": "https://sierra.courts.ca.gov/self-help",
+      "notes": "Self-help computers include an interactive small claims program. Court also partners with the Nevada County Self-Help Center (201 Church Street, Nevada City; Truckee monthly)."
+    },
+    "small_claims_advisor": {
+      "provider": null,
+      "phone": null,
+      "url": null,
+      "email": null,
+      "format": null,
+      "free": true,
+      "notes": "No small claims advisor listed on the court's small claims or self-help pages, and the local rules (eff. July 1, 2026) contain no CCP 116.940 exemption rule. Nearest option shown: court clerk referral to the Self-Help Attorney, or the Nevada City Self-Help Center (civil matters)."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Local Rule 8.1: e-filing permitted in all case types by email to superiorcourt@sierracourt.org only (PDF, one case per email; before 4:00 PM deemed filed that day). Not through an EFSP.",
+    "remote_hearings": "no",
+    "remote_hearings_notes": "Local Rule 1.1(d): all parties and witnesses must be present at evidentiary hearings; remote appearance at an evidentiary hearing only with court permission on good cause (Request for Remote Appearance form SIE-0035). Court uses one recurring ZoomGov room.",
+    "local_notes": "Court small claims page still states a $10,000 limit (outdated).",
+    "sources": [
+      { "url": "https://sierra.courts.ca.gov/divisions/small-claims", "what": "location, clerk hours", "type": "court_site" },
+      { "url": "https://sierra.courts.ca.gov/location/sierra-county-superior-court", "what": "address, email", "type": "court_site" },
+      { "url": "https://sierra.courts.ca.gov/self-help", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://sierra.courts.ca.gov/system/files/local-rules/local_rules_eff_070126.pdf", "what": "e_filing (Rule 8.1), remote_hearings (Rule 1.1(d)), no advisor rule", "type": "court_rule" },
+      { "url": "https://sierra.courts.ca.gov/general-information/court-calendars-schedule/remote-zoom-hearings", "what": "Zoom info", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["small_claims_advisor"],
+    "notes": "Advisor program not found on any official page."
+  },
+  {
+    "county": "Siskiyou",
+    "court_name": "Superior Court of California, County of Siskiyou",
+    "small_claims_page_url": "https://siskiyou.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Siskiyou County Superior Court (Yreka)", "address": "411 Fourth Street, Yreka, CA 96097", "notes": "(530) 842-0411; phones 8 AM-noon & 1-4 PM. Local Rule 5.13: goal of disposition within 30 days (all defendants in county) or 60 days." }
+    ],
+    "self_help_center": {
+      "name": "Self-Help Center / Family Law Facilitator",
+      "address": "411 4th Street, Yreka, CA 96097",
+      "phone": null,
+      "url": "https://siskiyou.courts.ca.gov/self-help",
+      "notes": "Contact by mail or email facilitator@siskiyou.courts.ca.gov (Matthew Kane, Family Law Facilitator / Self Help Attorney). Page says the self-help center 'provides access to a Small Claims Advisor'."
+    },
+    "small_claims_advisor": {
+      "provider": "Siskiyou Superior Court Self-Help Center",
+      "phone": null,
+      "url": "https://siskiyou.courts.ca.gov/self-help",
+      "email": "facilitator@siskiyou.courts.ca.gov",
+      "format": "Not stated; contact via self-help center by mail or email.",
+      "free": true,
+      "notes": "No separate advisor phone, hours, or name listed."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Local Rule 2.23: e-filing is permissive in civil, probate, family law and small claims through an authorized EFSP; paper filings accepted at the counter; no email/fax filing.",
+    "remote_hearings": "yes",
+    "remote_hearings_notes": "Remote appearance page: a party may appear remotely at a small claims trial if approved by the judicial officer; must file RA-010 at least 10 court days before trial (RA-020 order). Local Rule 2.22.",
+    "local_notes": "",
+    "sources": [
+      { "url": "https://siskiyou.courts.ca.gov/divisions/small-claims", "what": "small claims page", "type": "court_site" },
+      { "url": "https://siskiyou.courts.ca.gov/location/siskiyou-county-superior-court", "what": "address, phone", "type": "court_site" },
+      { "url": "https://siskiyou.courts.ca.gov/self-help", "what": "self_help_center, advisor access", "type": "court_site" },
+      { "url": "https://siskiyou.courts.ca.gov/system/files/local-rules/2026-final-local-rules-court.pdf", "what": "e_filing (Rule 2.23), Rule 5.13, Rule 2.22", "type": "court_rule" },
+      { "url": "https://siskiyou.courts.ca.gov/remote-court-appearances", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["small_claims_advisor.phone", "small_claims_advisor.format"],
+    "notes": ""
+  },
+  {
+    "county": "Solano",
+    "court_name": "Superior Court of California, County of Solano",
+    "small_claims_page_url": "https://solano.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Hall of Justice, Courtroom 303", "address": "600 Union Ave, Fairfield, CA 94533", "notes": "Small claims calendar Monday-Wednesday 1:00 PM." },
+      { "name": "Old Solano Courthouse (Small Claims Clerk)", "address": "580 Texas St, Fairfield, CA 94533", "notes": "Filing location. Clerk (707) 207-7335; phone M-F 8:00 AM-12:00 PM, 1:00-3:00 PM; drop-in/appointment 8:00 AM-3:00 PM." }
+    ],
+    "self_help_center": {
+      "name": "Solano Legal Access Center / Family Law Facilitator's Office",
+      "address": "Fairfield Hall of Justice, Room 205, 600 Union Ave, Fairfield, CA 94533",
+      "phone": null,
+      "url": "https://solano.courts.ca.gov/divisions/family-law/family-law-facilitators-office",
+      "notes": "Walk-in Mon-Thu 8:30 AM-noon. Court's self-help page routes small claims help to the Small Claims division/advisor."
+    },
+    "small_claims_advisor": {
+      "provider": "Superior Court of Solano County (court-provided Small Claims Legal Advisor)",
+      "phone": "(707) 863-1643",
+      "url": "https://solano.courts.ca.gov/divisions/small-claims/small-claims-advisor",
+      "email": null,
+      "format": "Phone consultation only, Monday-Thursday 9:00 AM-2:00 PM. Fax (707) 436-2291. Office listed at Old Solano Courthouse, 580 Texas St, Fairfield.",
+      "free": true,
+      "notes": ""
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "E-filing accepted for all non-criminal case types including small claims via EFSP; mandatory for attorneys since Jan 2, 2025 (Local Rule 20); self-represented parties exempt but may e-file. Request to Pay Judgment to Court (small claims) cannot be e-filed.",
+    "remote_hearings": "unclear",
+    "remote_hearings_notes": "Civil remote appearance page lists ZoomGov links for Departments 3, 7, 8, 22; small claims Courtroom 303 not explicitly addressed.",
+    "local_notes": "",
+    "sources": [
+      { "url": "https://solano.courts.ca.gov/divisions/small-claims", "what": "locations, hours, advisor phone", "type": "court_site" },
+      { "url": "https://solano.courts.ca.gov/divisions/small-claims/small-claims-advisor", "what": "small_claims_advisor", "type": "court_site" },
+      { "url": "https://solano.courts.ca.gov/divisions/family-law/family-law-facilitators-office", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://solano.courts.ca.gov/online-services/electronic-filing-e-filing", "what": "e_filing", "type": "court_site" },
+      { "url": "https://solano.courts.ca.gov/divisions/civil-court/remote-appearance-civil-court", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["remote_hearings"],
+    "notes": ""
+  },
+  {
+    "county": "Sonoma",
+    "court_name": "Superior Court of California, County of Sonoma",
+    "small_claims_page_url": "https://sonoma.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Civil and Family Law Courthouse", "address": "3055 Cleveland Ave., Santa Rosa, CA 95403", "notes": "Civil/small claims clerk (707) 521-6610; office 8:00 AM-3:30 PM M-F; phone 8:00 AM-noon." }
+    ],
+    "self_help_center": {
+      "name": "Civil Self-Help Center (CSHC)",
+      "address": "Civil and Family Law Courthouse, 3055 Cleveland Avenue, Santa Rosa, CA 95403 (CSHC listed as a service at this building)",
+      "phone": "707-521-6534 (voicemail)",
+      "url": "https://sonoma.courts.ca.gov/self-help/civil-self-help-center-cshc",
+      "notes": "Walk-in Mon-Thu 8:30 AM-12:00 PM (ticket before 11:00 AM) for some matters; small claims help by appointment only. Email selfhelp@sonomacourt.org; replies generally within 72 hours."
+    },
+    "small_claims_advisor": {
+      "provider": "Superior Court of Sonoma County Civil Self-Help Center",
+      "phone": "707-521-6534",
+      "url": "https://sonoma.courts.ca.gov/self-help/civil-self-help-center-cshc",
+      "email": "selfhelp@sonomacourt.org",
+      "format": "By appointment (leave voicemail or email to schedule).",
+      "free": true,
+      "notes": "Small claims page: 'The Civil Self-Help Center provides small claims services to the public' and cites CCP 116.260 & 116.940. Legal Aid of Sonoma County also helps low-income people with small claims."
+    },
+    "e_filing": "unclear",
+    "e_filing_notes": "E-filing page (Local Rules 17.22 et seq.) covers 'All Civil Matters' for represented parties; small claims not named explicitly; self-represented parties exempt. Voluntary e-service via Sonoma County Bar Association providers.",
+    "remote_hearings": "yes",
+    "remote_hearings_notes": "Civil & Small Claims FAQ describes submitting exhibits before 'the Zoom hearing' under the Standing Order Re: Small Claims Trials (dated 2021) and a Virtual Appearance Guide. Whether Zoom is still the default for small claims trials is not stated.",
+    "local_notes": "Standing Order Re: Small Claims Trials; optional local form for exchange and submission of evidence.",
+    "sources": [
+      { "url": "https://sonoma.courts.ca.gov/divisions/small-claims", "what": "location, advisor via CSHC", "type": "court_site" },
+      { "url": "https://sonoma.courts.ca.gov/self-help/civil-self-help-center-cshc", "what": "self_help_center, advisor format", "type": "court_site" },
+      { "url": "https://sonoma.courts.ca.gov/location/civil-and-family-law-courthouse", "what": "address", "type": "court_site" },
+      { "url": "https://sonoma.courts.ca.gov/online-services/e-filing", "what": "e_filing", "type": "court_site" },
+      { "url": "https://sonoma.courts.ca.gov/divisions/civil/civil-small-claims-faq", "what": "remote_hearings", "type": "court_site" },
+      { "url": "https://sonoma.courts.ca.gov/system/files/standingorderresmallclaimstrials20210112.pdf", "what": "small claims standing order (scanned; not text-readable)", "type": "court_rule" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["remote_hearings", "e_filing"],
+    "notes": "Court FAQ page still mentions a $10,000 limit in one answer (outdated)."
+  },
+  {
+    "county": "Stanislaus",
+    "court_name": "Superior Court of California, County of Stanislaus",
+    "small_claims_page_url": "https://stanislaus.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Turlock Court (Small Claims & Unlawful Detainer), Department 19", "address": "300 Starr Avenue, Turlock, CA 95380", "notes": "Phone 209-530-3100; Turlock.Requests@stanct.org; M-F 8:15 AM-4:00 PM." }
+    ],
+    "self_help_center": {
+      "name": "Stanislaus Superior Court Self-Help Center",
+      "address": "800 11th Street, Room 220, Modesto, CA 95354",
+      "phone": "(209) 548-6237 (voicemail; calls returned Wednesdays)",
+      "url": "https://stanislaus.courts.ca.gov/self-help/self-help-center-info",
+      "notes": "Walk-in M-F 8:00 AM-12:00 PM & 1:00-4:00 PM; email Self.Help@StanCt.org. Lists small claims among services."
+    },
+    "small_claims_advisor": {
+      "provider": "Stanislaus County Small Claims Advisor (court program at the Self-Help Center)",
+      "phone": "(209) 530-3178",
+      "url": "https://stanislaus.courts.ca.gov/divisions/small-claims/advisory-service",
+      "email": "SmallClaims.Advisor@Stanct.org",
+      "format": "Phone messages returned Wednesdays 8:00 AM-3:30 PM; email replies in 3-4 business days; in person at Self-Help Center (Mon & Fri 8-12 & 1-4; Tue-Thu 1-4). English and Spanish.",
+      "free": true,
+      "notes": "Advisory page still refers to a small claims counter at 801 10th Street (City Towers), Modesto; the small claims division page lists Turlock as the court location."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Odyssey eFileCA via EFSP; small claims page says business claims can be filed electronically, by mail, or in person. Appeals cannot be e-filed.",
+    "remote_hearings": "yes",
+    "remote_hearings_notes": "Telephone (not video) appearances for small claims in Dept 19 may be requested by phone (209-530-3100, option 6 then 3); no fee. Not allowed for OEX, bench warrant returns, OSC hearings, or if an interpreter is needed.",
+    "local_notes": "Free small claims mediation (English and Spanish).",
+    "sources": [
+      { "url": "https://stanislaus.courts.ca.gov/divisions/small-claims", "what": "location, e-filing note", "type": "court_site" },
+      { "url": "https://stanislaus.courts.ca.gov/location/turlock-court-small-claims-ud", "what": "Turlock address, Dept 19", "type": "court_site" },
+      { "url": "https://stanislaus.courts.ca.gov/divisions/small-claims/advisory-service", "what": "small_claims_advisor", "type": "court_site" },
+      { "url": "https://stanislaus.courts.ca.gov/self-help/self-help-center-info", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://stanislaus.courts.ca.gov/forms-filing/e-filing", "what": "e_filing", "type": "court_site" },
+      { "url": "https://stanislaus.courts.ca.gov/online-services/remote-appearances", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [],
+    "notes": ""
+  },
+  {
+    "county": "Sutter",
+    "court_name": "Superior Court of California, County of Sutter",
+    "small_claims_page_url": "https://sutter.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Sutter County Superior Courthouse", "address": "1175 Civic Center Blvd, Yuba City, CA 95993", "notes": "Phone 530-822-3304." }
+    ],
+    "self_help_center": {
+      "name": "Sutter County Superior Court Self-Help Center",
+      "address": "1175 Civic Center Blvd, Yuba City, CA 95993",
+      "phone": "530-822-3305",
+      "url": "https://sutter.courts.ca.gov/self-help",
+      "notes": "In person and telephone M-F 8:30 AM-3:30 PM; clinics in person and remote; E-Help online contact form. Covers small claims."
+    },
+    "small_claims_advisor": {
+      "provider": "Sutter County Small Claims Advisor, located in the court Self-Help Center",
+      "phone": "530-822-3305 (Self-Help Center)",
+      "url": "https://sutter.courts.ca.gov/divisions/small-claims",
+      "email": null,
+      "format": "In person at the Self-Help Center; questions also by E-Help web form (https://sutter.courts.ca.gov/e-help-contact-form). Self-Help Center hours M-F 8:30 AM-3:30 PM.",
+      "free": true,
+      "notes": "Advisor phone not listed separately; Self-Help Center number used."
+    },
+    "e_filing": "no",
+    "e_filing_notes": "E-file FAQs: eFileCA case types are civil (complex, unlimited, limited), probate, family law, and criminal; 'Small Claims cases are exempt.' Odyssey Guide & File available for form preparation (print and file).",
+    "remote_hearings": "unclear",
+    "remote_hearings_notes": "General civil rule: remote appearances by LifeSize video with RA-010 filed 10 court days before an evidentiary hearing/trial; email remoteapp@suttercourts.com after authorization. Small claims not mentioned specifically.",
+    "local_notes": "Small claims page still states $10,000/$5,000 limits (outdated). Court cannot provide interpreters per page.",
+    "sources": [
+      { "url": "https://sutter.courts.ca.gov/divisions/small-claims", "what": "location, advisor location", "type": "court_site" },
+      { "url": "https://sutter.courts.ca.gov/self-help", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://sutter.courts.ca.gov/online-services/e-file/e-file-faqs", "what": "e_filing", "type": "court_site" },
+      { "url": "https://sutter.courts.ca.gov/remote-appearances", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["small_claims_advisor.phone", "remote_hearings"],
+    "notes": ""
+  },
+  {
+    "county": "Tehama",
+    "court_name": "Superior Court of California, County of Tehama",
+    "small_claims_page_url": "https://tehama.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Tehama County Superior Court", "address": "1740 Walnut Street, Red Bluff, CA 96080", "notes": "Filed in the Civil Division. Small claims calendar Tuesdays 1:30 PM, Department 4. Court phone (530) 527-3484." }
+    ],
+    "self_help_center": {
+      "name": "Self-Help Assistance & Referral Program (SHARP) / Family Law Facilitator",
+      "address": "1740 Walnut Street, Red Bluff, CA 96080",
+      "phone": "(530) 527-8649",
+      "url": "https://tehama.courts.ca.gov/self-help",
+      "notes": "Mon, Thu, Fri 8:30 AM-4:00 PM; workshops and appointments. Lists small claims (plaintiff and defendant)."
+    },
+    "small_claims_advisor": {
+      "provider": "Small Claims Advisor for Tehama County (operator not named on court page)",
+      "phone": "(530) 532-7004",
+      "url": "https://tehama.courts.ca.gov/divisions/small-claims",
+      "email": null,
+      "format": "At 1740 Walnut Street, Red Bluff; Monday, Tuesday, Thursday 9:00 AM-4:00 PM.",
+      "free": true,
+      "notes": "Note 530-532 prefix differs from court's 530-527 numbers; operator unnamed."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Odyssey eFileCA via EFSP for all case types except adoptions; $3.50 per-envelope court e-filing fee plus EFSP fees (waived with fee waiver). Court also links Guide & File.",
+    "remote_hearings": "no",
+    "remote_hearings_notes": "Civil/family/probate remote appearance table: Small Claims, Tuesdays 1:30 PM, Dept 4 - in person yes, remote 'Not available'.",
+    "local_notes": "Small claims page still states $10,000/$5,000 limits (outdated). Court does not provide interpreters for small claims per page.",
+    "sources": [
+      { "url": "https://tehama.courts.ca.gov/divisions/small-claims", "what": "advisor, filing division", "type": "court_site" },
+      { "url": "https://tehama.courts.ca.gov/location/tehama-county-superior-court", "what": "address", "type": "court_site" },
+      { "url": "https://tehama.courts.ca.gov/self-help", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://tehama.courts.ca.gov/online-services/e-file-ca", "what": "e_filing", "type": "court_site" },
+      { "url": "https://tehama.courts.ca.gov/divisions/civil-family-law/civil-family-and-probate-remote-appearance-information", "what": "remote_hearings, calendar day/dept", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["small_claims_advisor.provider"],
+    "notes": ""
+  },
+  {
+    "county": "Trinity",
+    "court_name": "Superior Court of California, County of Trinity",
+    "small_claims_page_url": "https://trinity.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Main Courthouse", "address": "11 Court Street, Weaverville, CA 96093", "notes": "(530) 623-1208; divisions open 8:00 AM-4:00 PM M-F." }
+    ],
+    "self_help_center": {
+      "name": "Access to Justice / Trinity Self-Help Center",
+      "address": "Main floor, 11 Court Street, Weaverville, CA 96093",
+      "phone": "(530) 623-1208",
+      "url": "https://trinity.courts.ca.gov/self-help",
+      "notes": "First come, first served; call Court Services for current hours. Helps with forms; small claims page links here for form help."
+    },
+    "small_claims_advisor": {
+      "provider": "None: court has exempted itself from CCP 116.940(b) advisory services (Local Rule 4.17)",
+      "phone": null,
+      "url": "https://trinity.courts.ca.gov/system/files/local_rules.pdf",
+      "email": null,
+      "format": "Court Self-Help Center (530) 623-1208 helps with forms; small claims packet on site.",
+      "free": true,
+      "notes": "Local Rule 4.17: 'This court exempts itself from the small claims advisory service requirements set forth in Code of Civil Procedure §116.940(b).' Rules document labeled 'Current Local Rules' bears effective date July 1, 2021. Statute still requires minimum advisory services from exempt courts."
+    },
+    "e_filing": "unclear",
+    "e_filing_notes": "No e-filing service listed on the court's Online Services or Forms & Filing pages.",
+    "remote_hearings": "yes",
+    "remote_hearings_notes": "Remote appearance page: 'Civil, Small Claims, Family Law, Probate' follow CRC 3.672 / CCP 367.75; Zoom appearance only on an approved request (RA-010/RA-015). Contact courtclerks@trinitycounty.org.",
+    "local_notes": "Small claims page still states $10,000 limit (outdated).",
+    "sources": [
+      { "url": "https://trinity.courts.ca.gov/divisions/small-claims", "what": "small claims page", "type": "court_site" },
+      { "url": "https://trinity.courts.ca.gov/location/main-courthouse", "what": "address", "type": "court_site" },
+      { "url": "https://trinity.courts.ca.gov/self-help", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://trinity.courts.ca.gov/system/files/local_rules.pdf", "what": "Local Rule 4.17 advisor exemption", "type": "court_rule" },
+      { "url": "https://trinity.courts.ca.gov/remote-appearance-information", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["e_filing"],
+    "notes": "Under CCP 116.940(c), a court averaging 1,000 or fewer small claims filings a year may exempt itself by local rule but must still provide minimum advisory services."
+  },
+  {
+    "county": "Tulare",
+    "court_name": "Superior Court of California, County of Tulare",
+    "small_claims_page_url": "https://tulare.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Visalia Division - Civil Legal Filings (County Civic Center)", "address": "221 S. Mooney Blvd., Room 201, Visalia, CA 93291", "notes": "Phone 559-730-5000." },
+      { "name": "South County Justice Center - Civil Legal Filings", "address": "300 E Olive Ave., Porterville, CA 93257", "notes": "Phone 559-782-3700." }
+    ],
+    "self_help_center": {
+      "name": "Self-Help Resource Center / Family Law Facilitator's Office",
+      "address": "Visalia: 221 S. Mooney Blvd., Room 203, Visalia, CA 93291; Porterville: South County Justice Center, 300 E. Olive Ave., Porterville, CA 93257",
+      "phone": "559-737-5500",
+      "url": "https://tulare.courts.ca.gov/self-help",
+      "notes": "Lobby/phone Mon-Thu 8:00 AM-4:00 PM, Fri 8:00 AM-12:00 PM; Virtual Public Counter Mon-Thu 1:30-4:00 PM. Email selfhelp@tulare.courts.ca.gov. Helps with small claims."
+    },
+    "small_claims_advisor": {
+      "provider": "Tulare County Superior Court Self-Help Resource Center",
+      "phone": "559-737-5500",
+      "url": "https://tulare.courts.ca.gov/divisions/small-claims",
+      "email": "selfhelp@tulare.courts.ca.gov",
+      "format": "Phone, email, in person at Visalia or Porterville, virtual counter.",
+      "free": true,
+      "notes": "Small claims page: 'Small Claims Advisor - For assistance with your small claims matter, please contact the Self-Help Resource Center.'"
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "eFiling case types: 'Civil - Includes general civil, small claims, probate...'.",
+    "remote_hearings": "no",
+    "remote_hearings_notes": "Request Remote Hearings page: 'Traffic and Small Claims cases are not holding remote hearings.'",
+    "local_notes": "Small claims page has internal errors (e.g., says no more than two cases 'for more than $12,500' per year; service deadlines listed as 10/15 days). Rely on statewide rules.",
+    "sources": [
+      { "url": "https://tulare.courts.ca.gov/divisions/small-claims", "what": "locations, advisor", "type": "court_site" },
+      { "url": "https://tulare.courts.ca.gov/self-help", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://tulare.courts.ca.gov/online-services/efiling/what-case-types-are-available-efile", "what": "e_filing", "type": "court_site" },
+      { "url": "https://tulare.courts.ca.gov/online-services/request-remote-hearings", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [],
+    "notes": "Locations listed are filing locations; page does not say which courtrooms hear small claims."
+  },
+  {
+    "county": "Tuolumne",
+    "court_name": "Superior Court of California, County of Tuolumne",
+    "small_claims_page_url": "https://tuolumne.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Justice Center Courthouse, First Floor", "address": "12855 Justice Center Drive, Sonora, CA 95370", "notes": "Phone (209) 533-5555. Free day-of-trial mediation offered." }
+    ],
+    "self_help_center": {
+      "name": "Tuolumne Superior Court Self-Help Center",
+      "address": "First floor, Justice Center Courthouse, 12855 Justice Center Drive, Sonora, CA 95370",
+      "phone": "(209) 533-6565",
+      "url": "https://tuolumne.courts.ca.gov/self-help",
+      "notes": "M-F 8:00 AM-12:00 PM and 1:00-3:00 PM. Family law and civil matters."
+    },
+    "small_claims_advisor": {
+      "provider": "Court Self-Help Center ('Our Small Claims Advisor' referenced on self-help page; operator not named)",
+      "phone": "(209) 533-6565 (Self-Help Center)",
+      "url": "https://tuolumne.courts.ca.gov/self-help",
+      "email": null,
+      "format": "Not stated; Self-Help Center walk-in hours as above.",
+      "free": true,
+      "notes": "No dedicated advisor phone or hours found; Self-Help Center number used. Local rules (eff. Aug 27, 2026) have no advisor/exemption rule."
+    },
+    "e_filing": "unclear",
+    "e_filing_notes": "No e-filing service found on the court site; court has a Fax Filing page.",
+    "remote_hearings": "unclear",
+    "remote_hearings_notes": "Zoom remote appearances by email request (legalprocessing@tuolumne.courts.ca.gov) for Depts 1-4; Dept 5 has a standing Zoom link. Small claims department not identified.",
+    "local_notes": "Court small claims pages still state $7,500 (individual) / $5,000 (business) limits - badly outdated.",
+    "sources": [
+      { "url": "https://tuolumne.courts.ca.gov/divisions/small-claims", "what": "location, mediation", "type": "court_site" },
+      { "url": "https://tuolumne.courts.ca.gov/self-help/self-help-small-claims", "what": "filing location", "type": "court_site" },
+      { "url": "https://tuolumne.courts.ca.gov/self-help", "what": "self_help_center, advisor reference", "type": "court_site" },
+      { "url": "https://tuolumne.courts.ca.gov/system/files/local-rules/local-rules-effective-aug-27-2026.pdf", "what": "no advisor rule found", "type": "court_rule" },
+      { "url": "https://tuolumne.courts.ca.gov/zoom", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["small_claims_advisor.provider", "small_claims_advisor.phone", "small_claims_advisor.format", "e_filing", "remote_hearings"],
+    "notes": ""
+  },
+  {
+    "county": "Ventura",
+    "court_name": "Superior Court of California, County of Ventura",
+    "small_claims_page_url": "https://ventura.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Hall of Justice (all small claims filings)", "address": "800 South Victoria Avenue, Ventura, CA 93009", "notes": "All small claims must be filed here regardless of hearing location; clerk M-F 8:00 AM-4:00 PM. No fax filing." },
+      { "name": "East County Courthouse (Courtroom S1)", "address": "3855-F Alamo Street, Simi Valley, CA 93063", "notes": "Hearings for claims arising in ZIPs 91301, 91302, 91304, 91307, 91360, 91361, 91362, 91377, 93020, 93021, 93062, 93063, 93064, 93065, 93093." },
+      { "name": "Juvenile Justice Center (Courtroom J6)", "address": "4353 E. Vineyard Avenue, Oxnard, CA 93036", "notes": "Hearings for claims arising in all other county ZIP codes." }
+    ],
+    "self_help_center": {
+      "name": "Civil Self-Help Center",
+      "address": "Ventura: 800 South Victoria Avenue, Room 106; Oxnard: 4353 E. Vineyard Avenue, Room 206",
+      "phone": null,
+      "url": "https://ventura.courts.ca.gov/self-help/civil-self-help-center",
+      "notes": "Does NOT assist with small claims cases. Phone/Zoom appointments via calendly.com/vcscreservations; email form."
+    },
+    "small_claims_advisor": {
+      "provider": "Ventura County District Attorney's Office (Small Claims Advisors)",
+      "phone": "(805) 654-5054 (Ventura); (805) 306-7930 (East County office)",
+      "url": "https://da.venturacounty.gov/category/faqs/consumer-related/",
+      "email": null,
+      "format": "Phone; Monday-Friday 8:00 AM-12:00 PM and 1:00-5:00 PM. Court says the DA's advisor is located in the courthouse in Ventura.",
+      "free": true,
+      "notes": "DA Consumer Mediation Unit also provides free day-of-hearing mediation at court."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Since Dec 9, 2024, documents eligible for e-filing in small claims may be filed through an approved EFSP. Small claims exhibits up to 10 pages may be emailed to SCtrials@ventura.courts.ca.gov.",
+    "remote_hearings": "yes",
+    "remote_hearings_notes": "Remote appearances page lists Zoom links for small claims courtrooms J6 (Oxnard) and S1 (Simi Valley) with the 'Information for Small Claims Parties' sheet (VSC-SC-001), which explains appearing remotely.",
+    "local_notes": "Debt-collection claims need a written calculation of the debt. Pre-filing mediation: Conflict Resolution Institute, 4475 Market Street, Suite C, Ventura, (805) 384-1313.",
+    "sources": [
+      { "url": "https://ventura.courts.ca.gov/divisions/small-claims", "what": "locations, ZIP split, advisor reference", "type": "court_site" },
+      { "url": "https://ventura.courts.ca.gov/location/hall-justice", "what": "address", "type": "court_site" },
+      { "url": "https://ventura.courts.ca.gov/location/east-county-courthouse", "what": "address", "type": "court_site" },
+      { "url": "https://ventura.courts.ca.gov/location/juvenile-justice-center", "what": "address", "type": "court_site" },
+      { "url": "https://da.venturacounty.gov/category/faqs/consumer-related/", "what": "small_claims_advisor phones/hours", "type": "county_site" },
+      { "url": "https://vcdistrictattorney.com/contact-us/", "what": "Small Claims 805-654-5054", "type": "county_site" },
+      { "url": "https://ventura.courts.ca.gov/self-help/civil-self-help-center", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://ventura.courts.ca.gov/online-services/efiling", "what": "e_filing", "type": "court_site" },
+      { "url": "https://ventura.courts.ca.gov/remote-appearances", "what": "remote_hearings", "type": "court_site" },
+      { "url": "https://ventura.courts.ca.gov/system/files/form/vsc-sc-001-small-claims-court-information.pdf", "what": "remote/exhibit instructions", "type": "form" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [],
+    "notes": ""
+  },
+  {
+    "county": "Yolo",
+    "court_name": "Superior Court of California, County of Yolo",
+    "small_claims_page_url": "https://yolo.courts.ca.gov/divisions/small-claims-division",
+    "small_claims_locations": [
+      { "name": "Yolo Superior Court, Small Claims Division", "address": "1000 Main Street, Woodland, CA 95695", "notes": "(530) 406-6704; 8:00 AM-4:00 PM M-F." }
+    ],
+    "self_help_center": {
+      "name": "Self-Help Center / Family Law Facilitator",
+      "address": "1000 Main Street, 2nd Floor, Woodland, CA 95695",
+      "phone": "(530) 406-6794 (contact block); telephone assistance (530) 406-6793 Mon/Wed/Fri",
+      "url": "https://yolo.courts.ca.gov/self-help",
+      "notes": "Walk-in Tue & Thu 8:30 AM-2:30 PM; live chat Mon/Wed/Fri; email form; appointments. Helps with small claims."
+    },
+    "small_claims_advisor": {
+      "provider": "Not named on court page",
+      "phone": "530-207-4233",
+      "url": "https://yolo.courts.ca.gov/divisions/small-claims-division",
+      "email": null,
+      "format": "Phone; hours not listed.",
+      "free": true,
+      "notes": "A Davis community wiki lists a different advisor number (530-752-4304) - secondary and possibly stale; court number recorded."
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Odyssey eFileCA via EFSP; Small Claims listed in the court's e-file case code table; pro pers exempt from mandatory e-filing but encouraged (File @ Home).",
+    "remote_hearings": "yes",
+    "remote_hearings_notes": "Local rule on video appearances: remote appearance authorized for all civil proceedings; evidentiary hearings and bench trials held remotely unless the court orders otherwise. Not small-claims-specific.",
+    "local_notes": "",
+    "sources": [
+      { "url": "https://yolo.courts.ca.gov/divisions/small-claims-division", "what": "location, advisor phone", "type": "court_site" },
+      { "url": "https://yolo.courts.ca.gov/self-help", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://yolo.courts.ca.gov/online-services/efile-court-documents", "what": "e_filing", "type": "court_site" },
+      { "url": "https://yolo.courts.ca.gov/online-services/efile-court-documents/case-code-description", "what": "small claims e-file case code", "type": "court_site" },
+      { "url": "https://yolo.courts.ca.gov/online-services/video-appearance/local-rules-video-appearances", "what": "remote_hearings", "type": "court_rule" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["small_claims_advisor.provider", "small_claims_advisor.format"],
+    "notes": ""
+  },
+  {
+    "county": "Yuba",
+    "court_name": "Superior Court of California, County of Yuba",
+    "small_claims_page_url": "https://yuba.courts.ca.gov/divisions/small-claims",
+    "small_claims_locations": [
+      { "name": "Yuba County Superior Court", "address": "215 Fifth Street, Suite 200, Marysville, CA 95901", "notes": "(530) 740-1800 ext. 3, ext. 1; fax (530) 740-1821; 8:30 AM-4:30 PM M-F." }
+    ],
+    "self_help_center": {
+      "name": "Self-Help Center (Self-Help Attorney / Family Law Facilitator)",
+      "address": "Yuba County Courthouse, 215 Fifth Street, Suite 318, Marysville, CA 95901",
+      "phone": "(530) 740-1850",
+      "url": "https://yuba.courts.ca.gov/self-help/self-help-center",
+      "notes": "8:30 AM-4:30 PM M-F; workshops mostly family law; public computer lab."
+    },
+    "small_claims_advisor": {
+      "provider": "Small Claims Advisor (operator not named on court page)",
+      "phone": "(530) 742-8289",
+      "url": "https://yuba.courts.ca.gov/self-help/self-help-resources",
+      "email": null,
+      "format": "Individual assistance at 725 D Street, Marysville, CA 95901; hours not listed.",
+      "free": true,
+      "notes": ""
+    },
+    "e_filing": "yes",
+    "e_filing_notes": "Odyssey eFileCA. Court e-file requirements (Local Rule ch. 9): since July 1, 2018 documents in civil cases 'complex, unlimited, limited, and small claims' must be e-filed (mandatory for represented parties; self-represented parties exempt under CCP 1010.6).",
+    "remote_hearings": "unclear",
+    "remote_hearings_notes": "Jan 2022 notice: civil matters may appear by Zoom using Judicial Council remote-appearance forms (CCP 367.75 / CRC 3.672). Small claims not mentioned specifically.",
+    "local_notes": "Small claims page still states $10,000/$5,000 limits (outdated).",
+    "sources": [
+      { "url": "https://yuba.courts.ca.gov/divisions/small-claims", "what": "location", "type": "court_site" },
+      { "url": "https://yuba.courts.ca.gov/self-help/self-help-resources", "what": "small_claims_advisor", "type": "court_site" },
+      { "url": "https://yuba.courts.ca.gov/self-help/self-help-center", "what": "self_help_center", "type": "court_site" },
+      { "url": "https://yuba.courts.ca.gov/system/files/efilerequirements.pdf", "what": "e_filing", "type": "court_rule" },
+      { "url": "https://yuba.courts.ca.gov/news/new-requirements-remote-appearances-civil-cases", "what": "remote_hearings", "type": "court_site" }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": ["small_claims_advisor.provider", "remote_hearings"],
+    "notes": ""
+  }
+]

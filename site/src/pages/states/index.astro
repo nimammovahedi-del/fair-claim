@@ -1,0 +1,52 @@
+---
+import Site from "../../layouts/Site.astro";
+import { states, money, feeRange, lawyersLabel, appealLabel, efileLabel, isUnverified } from "../../lib/data";
+const unv = (s: any, ...f: string[]) => isUnverified(s, ...f);
+---
+<Site title="Small claims rules by state" description="Limits, fees, lawyers and appeal rules for small claims court in all 50 states and DC, each with a source and date checked.">
+  <div class="narrow">
+    <p class="eyebrow">All 50 states + DC</p>
+    <h1>Small claims rules by state</h1>
+    <p class="lede">
+      Every number links to the law or the court's own site on the state's page, with the date we last checked it.
+      Where a state has more than one kind of court, the table shows the main small claims limit; the state page has
+      the details.
+    </p>
+  </div>
+
+  {states.length === 0 ? (
+    <div class="callout"><p>Research data hasn't been merged yet. Run <code>scripts/build_tables.py</code>.</p></div>
+  ) : (
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>State</th>
+            <th class="num">Limit (people)</th>
+            <th class="num">Limit (businesses)</th>
+            <th>Filing fee</th>
+            <th>Lawyers</th>
+            <th>Who can appeal</th>
+            <th>E-filing</th>
+            <th>Checked</th>
+          </tr>
+        </thead>
+        <tbody>
+          {states.map((s) => (
+            <tr>
+              <td><a href={`/states/${s.slug}/`}>{s.state}</a></td>
+              <td class="num">{money(s.limit_individual)} {unv(s, "limit_individual") && <span class="badge unverified" title="unverified">?</span>}</td>
+              <td class="num">{s.limit_business != null && s.limit_business !== s.limit_individual ? money(s.limit_business) : "same"} {unv(s, "limit_business") && <span class="badge unverified" title="unverified">?</span>}</td>
+              <td>{feeRange(s)} {unv(s, "filing_fee_min", "filing_fee_max") && <span class="badge unverified" title="unverified">?</span>}</td>
+              <td>{lawyersLabel[s.lawyers_allowed ?? ""] ?? s.lawyers_allowed ?? "—"}</td>
+              <td>{appealLabel[s.appeal_who ?? ""] ?? s.appeal_who ?? "—"}</td>
+              <td>{efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "—"}</td>
+              <td class="mono">{s.date_checked}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+  <p class="hint" style="margin-top:.8rem"><span class="badge unverified">?</span> = not yet confirmed against a primary source.</p>
+</Site>

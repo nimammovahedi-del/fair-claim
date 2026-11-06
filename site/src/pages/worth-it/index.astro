@@ -1,0 +1,251 @@
+---
+import Site from "../../layouts/Site.astro";
+import { states, caStatewide } from "../../lib/data";
+import { collectPresets } from "../../lib/odds";
+
+const caTiers = (caStatewide.fees?.filing_fee_tiers ?? [])
+  .filter((t: any) => !/more than 12/i.test(t.applies_to))
+  .map((t: any) => t.fee as number); // [≤1,500, ≤5,000, above]
+// Only what the calculator needs, embedded as JSON for the browser script.
+const calcStates = states.map((s) => ({
+  slug: s.slug,
+  name: s.state,
+  limitInd: s.limit_individual,
+  limitBiz: s.limit_business,
+  feeMin: s.filing_fee_min,
+  feeMax: s.filing_fee_max,
+  feeNotes: s.filing_fee_notes,
+  unverified: s.unverified.some((f) => /limit|fee/.test(f)),
+  checked: s.date_checked,
+  // Fee by claim amount, where we have a verified schedule (California so far).
+  feeTiers: s.slug === "ca" ? caTiers : null,
+}));
+---
+<Site title="Is it worth it?" description="Estimate what you can realistically get back from a small claims case.">
+  <div class="narrow">
+    <p class="eyebrow">Calculator</p>
+    <h1>Is it worth it?</h1>
+    <p class="lede">
+      Winning is only half the question. This puts your costs, your time, and the real chance of getting paid side by
+      side. Nothing you enter leaves this page.
+    </p>
+  </div>
+
+  <script type="application/json" id="calc-states" set:html={JSON.stringify(calcStates)} />
+
+  <div class="calc">
+    <form id="calc" onsubmit="return false">
+      <fieldset>
+        <legend>Your claim</legend>
+        <div class="form-grid">
+          <div class="field">
+            <label for="state">State</label>
+            <select id="state">
+              <option value="">Choose…</option>
+              {calcStates.map((s) => <option value={s.slug}>{s.name}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="who">You are suing as</label>
+            <select id="who">
+              <option value="ind">An individual</option>
+              <option value="biz">A business</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="amount">Amount you're owed ($)</label>
+            <input id="amount" type="number" min="0" step="1" value="2400" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <span class="label">Court limit</span>
+            <span id="limit-out" class="mono">—</span>
+            <span id="limit-note" class="hint"></span>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Money you'll spend</legend>
+        <div class="form-grid">
+          <div class="field">
+            <label for="fee">Filing fee ($) <span class="hint" id="fee-hint"></span></label>
+            <input id="fee" type="number" min="0" step="1" value="50" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="service">Serving the papers ($) <span class="hint">certified mail ≈ $15–30; process server ≈ $50–100</span></label>
+            <input id="service" type="number" min="0" step="1" value="40" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="other">Other costs ($) <span class="hint">parking, copies, collection fees</span></label>
+            <input id="other" type="number" min="0" step="1" value="0" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="recover">If you win, fees are added to what they owe</label>
+            <select id="recover">
+              <option value="yes">Yes (usual)</option>
+              <option value="no">No / not sure</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your time</legend>
+        <div class="form-grid">
+          <div class="field">
+            <label for="hours">Hours (prep, court, collecting)</label>
+            <input id="hours" type="number" min="0" step="1" value="12" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="rate">What an hour is worth to you ($)</label>
+            <input id="rate" type="number" min="0" step="1" value="0" inputmode="numeric" />
+            <span class="hint">Leave at 0 to ignore, or use your hourly pay if you'd lose work.</span>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>The odds — your honest guess</legend>
+        <div class="field">
+          <div class="range-row"><label for="win">Chance a judge rules for you</label><output id="win-out">75%</output></div>
+          <input id="win" type="range" min="0" max="100" step="5" value="75" />
+          <span class="hint">Strong paper trail (contract, photos, texts, receipts) → higher. Your word against theirs → lower.</span>
+        </div>
+        <div class="field" style="margin-top:1rem">
+          <div class="range-row"><label for="col">Chance you actually collect if you win</label><output id="col-out">45%</output></div>
+          <input id="col" type="range" min="0" max="100" step="5" value="45" />
+          <div class="presets">
+            {collectPresets.map((p) => (
+              <button type="button" class="chip" data-col={p.value}>{p.label}</button>
+            ))}
+          </div>
+          <span class="hint">These buttons are rough starting points, not research findings. <a href="/sources/#collecting">What the studies say →</a></span>
+        </div>
+      </fieldset>
+    </form>
+
+    <aside class="result" aria-live="polite">
+      <p class="eyebrow">Rough estimate</p>
+      <p class="verdict" id="verdict">—</p>
+      <table class="ledger">
+        <tbody>
+          <tr><td>You can claim</td><td id="r-claim">—</td></tr>
+          <tr><td>Expected back (after the odds)</td><td id="r-back">—</td></tr>
+          <tr><td>Money spent up front</td><td id="r-up">—</td></tr>
+          <tr><td>Your time</td><td id="r-time">—</td></tr>
+          <tr class="total"><td>Expected net</td><td id="r-net">—</td></tr>
+        </tbody>
+      </table>
+      <p id="r-break" class="hint"></p>
+      <div id="r-warn"></div>
+      <p class="hint">
+        This is arithmetic on your own guesses, not a prediction or legal advice. "Expected" means the average over
+        many cases like yours — any one case either pays or doesn't.
+      </p>
+    </aside>
+  </div>
+</Site>
+
+<script>
+  import { worthIt, fmt } from "../../lib/core/worth-it";
+
+  type S = {
+    slug: string; name: string; limitInd: number | null; limitBiz: number | null;
+    feeMin: number | null; feeMax: number | null; feeNotes: string | null; unverified: boolean; checked: string | null; feeTiers: number[] | null;
+  };
+  const data: S[] = JSON.parse(document.getElementById("calc-states")!.textContent || "[]");
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const num = (id: string) => Number(($(id) as HTMLInputElement).value) || 0;
+
+  function current(): S | undefined {
+    return data.find((d) => d.slug === ($("state") as HTMLSelectElement).value);
+  }
+
+  function onStateChange() {
+    const s = current();
+    if (s && s.feeMin != null) {
+      ($("fee") as HTMLInputElement).value = String(s.feeMax ?? s.feeMin);
+      $("fee-hint").textContent = s.feeMin === s.feeMax || s.feeMax == null ? `(${fmt(s.feeMin)} here)` : `(${fmt(s.feeMin)}–${fmt(s.feeMax)} here)`;
+    } else $("fee-hint").textContent = "";
+    tierFee(s);
+    update();
+  }
+
+  function tierFee(s: S | undefined) {
+    if (!s?.feeTiers || s.feeTiers.length < 3) return;
+    const a = num("amount");
+    const fee = a <= 1500 ? s.feeTiers[0] : a <= 5000 ? s.feeTiers[1] : s.feeTiers[2];
+    ($("fee") as HTMLInputElement).value = String(fee);
+    $("fee-hint").textContent = `(set by claim amount; $100 if you filed 12+ claims this year)`;
+  }
+
+  function update() {
+    const s = current();
+    const biz = ($("who") as HTMLSelectElement).value === "biz";
+    const limit = s ? (biz ? s.limitBiz ?? s.limitInd : s.limitInd) : null;
+    $("limit-out").textContent = s ? (limit != null ? fmt(limit) : "not verified yet") : "Choose a state";
+    $("limit-note").innerHTML = s
+      ? `${s.unverified ? '<span class="badge unverified">unverified</span> ' : ""}<a href="/states/${s.slug}/">${s.name} rules</a>${s.checked ? ` · checked ${s.checked}` : ""}`
+      : "";
+
+    const winP = num("win") / 100;
+    const colP = num("col") / 100;
+    $("win-out").textContent = `${num("win")}%`;
+    $("col-out").textContent = `${num("col")}%`;
+
+    const r = worthIt({
+      amountOwed: num("amount"),
+      limit: s ? limit : null,
+      filingFee: num("fee"),
+      serviceCost: num("service"),
+      otherCosts: num("other"),
+      chanceWin: winP,
+      chanceCollect: colP,
+      costsRecoverable: ($("recover") as HTMLSelectElement).value === "yes",
+      hours: num("hours"),
+      hourlyValue: num("rate"),
+    });
+
+    $("r-claim").textContent = fmt(r.claimable);
+    $("r-back").textContent = fmt(r.expectedBack);
+    $("r-up").textContent = `−${fmt(r.upfront)}`;
+    $("r-time").textContent = r.timeCost ? `−${fmt(r.timeCost)}` : "not counted";
+    $("r-net").textContent = (r.net < 0 ? "−" : "") + fmt(Math.abs(r.net));
+
+    const v = $("verdict");
+    const labels = { likely_worth_it: "Probably worth it", close_call: "A close call", likely_not_worth_it: "Probably not worth it" };
+    v.textContent = labels[r.verdict];
+    v.className = "verdict " + (r.verdict === "likely_worth_it" ? "good" : r.verdict === "likely_not_worth_it" ? "bad" : "");
+
+    $("r-break").textContent =
+      r.breakEvenCollect == null
+        ? ""
+        : r.breakEvenCollect > 1
+          ? "Even if you were sure to collect, the costs above would outweigh what you'd get back."
+          : `You break even if your chance of collecting is at least ${Math.ceil(r.breakEvenCollect * 100)}%.`;
+
+    const w = $("r-warn");
+    w.innerHTML = "";
+    if (!s) r.warnings = r.warnings.filter((x) => !x.startsWith("We don't have"));
+    for (const msg of r.warnings) {
+      const d = document.createElement("div");
+      d.className = "callout";
+      d.textContent = msg;
+      w.appendChild(d);
+    }
+  }
+
+  $("state").addEventListener("change", onStateChange);
+  document.querySelectorAll<HTMLButtonElement>(".chip[data-col]").forEach((b) =>
+    b.addEventListener("click", () => {
+      ($("col") as HTMLInputElement).value = String(Math.round(Number(b.dataset.col) * 100));
+      update();
+    }),
+  );
+  $("calc").addEventListener("input", update);
+  $("amount").addEventListener("input", () => { tierFee(current()); update(); });
+  // Pre-select from ?state=xx
+  const qs = new URLSearchParams(location.search).get("state");
+  if (qs && data.some((d) => d.slug === qs)) ($("state") as HTMLSelectElement).value = qs;
+  onStateChange();
+</script>

@@ -1,0 +1,889 @@
+[
+  {
+    "state": "Montana",
+    "abbr": "MT",
+    "court_name": "Small claims court (justice's court); counties may also create a small claims court within district court jurisdiction (MCA 3-12-102)",
+    "limit_individual": 7000,
+    "limit_business": 7000,
+    "limit_notes": "Money or specific personal property up to $7,000 excluding costs; the defendant must be serviceable in the county where filed. Interpleader actions up to $7,000. No party may file more than 10 claims per calendar year (except assigned claims under MCA 27-1-718, i.e. shoplifting/theft civil penalties). Only a party to the original transaction may sue. Counties may create a separate small claims court in district court (MCA Title 3, ch. 12), but it is rarely used.",
+    "recent_changes": null,
+    "filing_fee_min": 30,
+    "filing_fee_max": 30,
+    "filing_fee_notes": "Statute sets $20 from the plaintiff at filing and $10 from a defendant who appears and contests or counterclaims (MCA 25-35-608). Courts collect $30 in practice (Park County Justice Court lists $30, which matches the $20 statutory fee plus the $10 court technology surcharge). Park County also lists a $20 defendant appearance fee and a $30 counterclaim fee, so some fees vary by court. Service by sheriff/process server is extra.",
+    "who_can_sue": "Individuals, partnerships, corporations, unions, associations and other entities (not the state or its agencies). Only a party to the transaction that gave rise to the claim may file; assigned claims only under MCA 27-1-718. Max 10 claims per calendar year. Corporations may appear through a director, officer or employee; LLCs through a majority-interest member; partnerships through a partner or employee. Personal representatives, guardians and conservators may be parties.",
+    "lawyers_allowed": "limited",
+    "lawyers_notes": "A party may not be represented by an attorney unless all parties are represented by attorneys (MCA 25-35-505(2)). A defendant may remove the case to regular justice court (where lawyers and a jury are available) within 10 days of service.",
+    "appeal": "Either party may appeal to district court in the county where judgment was entered by filing written notice with the small claims court and serving the other party within 10 days after judgment. No trial de novo: review is limited to questions of law (MCA 25-35-803). Park County Justice Court describes the deadline as 10 business days and lists an appeal bond requirement.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 10,
+    "e_filing": "no",
+    "e_filing_notes": "No statewide e-filing for justice-court small claims found; filing is with the local justice court clerk. Not confirmed on an official page.",
+    "fee_waiver_form": "Affidavit of Inability to Pay / fee waiver application (pauper's affidavit) filed with the justice court; Park County links a 'Fee Waiver Application (Affidavit of Inability to Pay)'.",
+    "fee_waiver_threshold": "Judge's discretion: affidavit that the person cannot pay costs, supported by a financial statement (MCA 25-10-404); waived if represented by a free legal services provider.",
+    "service_methods": "Order and complaint served by a sheriff, constable or other process server using justice-court civil process methods (MCA 25-35-604); the plaintiff may not serve personally. The defendant must be served at least 5 days before the hearing.",
+    "self_help_url": "https://dojmt.gov/office-of-consumer-protection/small-claims-court/",
+    "citation": "Mont. Code Ann. §§ 25-35-501 to 25-35-807; §§ 3-12-101 et seq. (optional district court small claims courts)",
+    "sources": [
+      {
+        "url": "https://mca.legmt.gov/bills/mca/title_0250/chapter_0350/part_0050/section_0020/0250-0350-0050-0020.html",
+        "what": "limit_individual, limit_business, limit_notes ($7,000; last amended 2011)",
+        "type": "statute"
+      },
+      {
+        "url": "https://mca.legmt.gov/bills/mca/title_0250/chapter_0350/part_0050/section_0050/0250-0350-0050-0050.html",
+        "what": "who_can_sue, lawyers_allowed, 10-claim cap, assignees",
+        "type": "statute"
+      },
+      {
+        "url": "https://mca.legmt.gov/bills/mca/title_0250/chapter_0350/part_0080/section_0030/0250-0350-0080-0030.html",
+        "what": "appeal, appeal_deadline_days, appeal_who",
+        "type": "statute"
+      },
+      {
+        "url": "https://mca.legmt.gov/bills/mca/title_0250/chapter_0350/part_0060/section_0080/0250-0350-0060-0080.html",
+        "what": "filing fee ($20 plaintiff, $10 defendant), pauper's affidavit",
+        "type": "statute"
+      },
+      {
+        "url": "https://mca.legmt.gov/bills/mca/title_0250/chapter_0350/part_0060/section_0040/0250-0350-0060-0040.html",
+        "what": "service_methods",
+        "type": "statute"
+      },
+      {
+        "url": "https://mca.legmt.gov/bills/mca/title_0250/chapter_0100/part_0040/section_0040/0250-0100-0040-0040.html",
+        "what": "fee_waiver_threshold",
+        "type": "statute"
+      },
+      {
+        "url": "https://mca.legmt.gov/bills/mca/title_0030/chapter_0120/part_0010/section_0020/0030-0120-0010-0020.html",
+        "what": "court_name (optional district court small claims courts)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.parkcountymt.gov/Government-Departments/Justice-Court/Small-Claims/",
+        "what": "filing_fee_min/max ($30 in practice), appeal details, fee waiver form, service",
+        "type": "court_site"
+      },
+      {
+        "url": "https://dojmt.gov/wp-content/uploads/2025/02/Small-Claims-Court-Brochure_OCP-2.pdf",
+        "what": "self-help overview (limit, attorneys, appeal not a new trial)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "e_filing",
+      "filing_fee_min",
+      "filing_fee_max"
+    ],
+    "notes": "Filing fee: statute says $20; the $30 amount in practice comes from a county justice court page (Park County), and the extra $10 is the statewide court technology surcharge (MCA 3-1-317), which I did not open. Park County gives the appeal deadline as 10 business days; the statute just says 10 days. The DOJ consumer-protection page returned 403 to the fetch tool, but its 2025 brochure PDF was readable. The self-help URL is a state agency (DOJ Office of Consumer Protection) page, not a court page."
+  },
+  {
+    "state": "Nebraska",
+    "abbr": "NE",
+    "court_name": "Small Claims Court (division of the county court)",
+    "limit_individual": 7500,
+    "limit_business": 7500,
+    "limit_notes": "$7,500 excluding interest and costs, since July 1, 2025 (Neb. Rev. Stat. 25-2802(4)). Covers money, damages, personal property, and rescission of contracts for goods or services within the limit. No party may file more than 2 claims per calendar week or 10 per calendar year. Assigned claims are not allowed.",
+    "recent_changes": "LB 139 (2024) raised the limit to $6,000 for July 1, 2024 to June 30, 2025, then $7,500 from July 1, 2025 (the limit was $3,900 from July 1, 2020). Filing costs: the Judicial Branch fee schedule effective July 1, 2026 lists $58.00 total for a small claims filing.",
+    "filing_fee_min": 58,
+    "filing_fee_max": 58,
+    "filing_fee_notes": "$58.00 total per the Judicial Branch schedule effective 07-01-2026: small claims docket fee $4.25 + $2 + judges retirement $12 + automation $8 + education $1 + dispute resolution $0.75 + indigent defense $3 + data analysis $1 + state docket fee $16 + case management systems fee $10. Service is extra: certified mail, or a sheriff/constable deposit. Transfer to the regular civil docket costs $20 (paid by the defendant who transfers).",
+    "who_can_sue": "Individuals, partnerships, LLCs, corporations, unions, associations and other entities. Only a party to the original transaction may file; no assigned claims (so no collection agencies or debt buyers). Limit of 2 claims per week and 10 per year. Entities appear through an employee (corporation), a member, manager or employee (LLC), or a partner or employee (partnership). Personal representatives, guardians and conservators may be parties.",
+    "lawyers_allowed": "no",
+    "lawyers_notes": "No party may be represented by an attorney (Neb. Rev. Stat. 25-2803). A defendant may transfer the case to the regular county court civil docket at least 2 days before the hearing (paying the fee difference); after transfer, both sides may use lawyers and a jury may be requested.",
+    "appeal": "Either party may appeal to the district court within 30 days after entry of judgment. The district court reviews the county court record; no new evidence or witnesses. Requires the district court docket fee, a deposit for the transcript, and a $50 cost bond. A default judgment can instead be challenged in county court by a motion to set aside within 30 days.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 30,
+    "e_filing": "no",
+    "e_filing_notes": "The Judicial Branch small claims page says the claim may be filed in person or by mail. eFiling (JUSTICE system) is for attorneys, who cannot appear in small claims.",
+    "fee_waiver_form": "Affidavit and Application to Proceed Without Payment of Fees (In Forma Pauperis), DC 6:7.1 (instructions DC 6:7.1a), per nebraskajudicial.gov. Search results also show a newer 'Request to Proceed Without Payment of Court Fees' (DC 6:4.20.G1, new 5/2026) and a Financial Affidavit CC 6:1.",
+    "fee_waiver_threshold": "Judge's discretion based on inability to pay (in forma pauperis); no fixed income test found on the court pages reviewed.",
+    "service_methods": "Certified mail with proof of delivery (file form CC 4:5 with the receipt and return card); sheriff (or constable in Douglas and Lancaster counties); or a private process server under Neb. Rev. Stat. 25-507. Must serve within 180 days or the case is dismissed without prejudice.",
+    "self_help_url": "https://nebraskajudicial.gov/self-help/small-claims",
+    "citation": "Neb. Rev. Stat. §§ 25-2801 to 25-2807",
+    "sources": [
+      {
+        "url": "https://nebraskalegislature.gov/laws/statutes.php?statute=25-2802",
+        "what": "limit_individual, limit_business, recent_changes (LB 139)",
+        "type": "statute"
+      },
+      {
+        "url": "https://nebraskalegislature.gov/laws/statutes.php?statute=25-2803",
+        "what": "who_can_sue, lawyers_allowed, assignee bar, 2/week and 10/year caps",
+        "type": "statute"
+      },
+      {
+        "url": "https://nebraskajudicial.gov/self-help/small-claims",
+        "what": "limit ($7,500), lawyers not allowed",
+        "type": "court_site"
+      },
+      {
+        "url": "https://nebraskajudicial.gov/self-help/small-claims/filing-small-claims-case-nebraska",
+        "what": "service_methods, transfer to regular docket, filing method",
+        "type": "court_site"
+      },
+      {
+        "url": "https://nebraskajudicial.gov/administration/self-represented-litigant-resources/filing-small-claims-case",
+        "what": "fee_waiver_form (DC 6:7.1), service details, filing in person/by mail",
+        "type": "court_site"
+      },
+      {
+        "url": "https://nebraskajudicial.gov/self-help/appeals/appealing-or-setting-aside-county-court-civil-or-small-claims-judgment",
+        "what": "appeal, appeal_deadline_days, $50 bond",
+        "type": "court_site"
+      },
+      {
+        "url": "https://nebraskajudicial.gov/rules/administrative-policies-schedules/filing-fees-and-court-costs",
+        "what": "filing_fee_min/max ($58 effective 7/1/2026), transfer fee, appeal cost bond",
+        "type": "court_site"
+      },
+      {
+        "url": "https://nebraskajudicial.gov/e-services/efiling",
+        "what": "e_filing (attorney system)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "fee_waiver_form",
+      "fee_waiver_threshold"
+    ],
+    "notes": "Court pages name different fee-waiver forms: DC 6:7.1 on the self-represented litigant page, CC 6:1 Financial Affidavit in a search snippet, and a new DC 6:4.20.G1 (5/2026). Check which one county courts currently want. The fee total ($58) applies from 7/1/2026; I could not confirm the amount before that date."
+  },
+  {
+    "state": "Nevada",
+    "abbr": "NV",
+    "court_name": "Justice court (small claims)",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "Money only, up to $10,000 (NRS 73.010). Must be filed in the township where the defendant lives, works or does business (or where an injury occurred or an obligation was to be performed). Claims may not be split to fit under the limit; a plaintiff may waive the excess.",
+    "recent_changes": "Justice Court Rules of Civil Procedure 98-100 (small claims appeals) were amended effective October 29, 2024: the notice of appeal is now due within 7 calendar days from service of the judgment. Older sources say 5 days.",
+    "filing_fee_min": 46,
+    "filing_fee_max": 196,
+    "filing_fee_notes": "Statutory base fee by amount (NRS 4.060(1)(b)): $45 up to $1,000; $65 for $1,000-2,500; $85 for $2,500-5,000; $125 for $5,000-7,500; $175 for $7,500-10,000. Plus a mandatory $1 state fee (NRS 4.065) and optional county add-ons (NRS 4.063, 4.071, 4.073, 4.075). Las Vegas Justice Court totals: $66 / $86 / $106 / $146 / $196 (base + $21 add-ons). The minimum assumes a county with no optional add-ons. Service fees (constable, sheriff, process server) are extra.",
+    "who_can_sue": "Plaintiff must be 18+ (per North Las Vegas Justice Court). Corporations, partnerships, business trusts, estates, trusts, associations and other non-government entities may be represented by a director, officer or employee (NRS 73.012). No statutory bar on assignees found in NRS 73.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "No prohibition; most parties represent themselves. Attorney fees generally not recoverable (NRS 73.040), except a district court may award up to $15 on appeal (NRS 73.050).",
+    "appeal": "Either party may appeal to district court; notice of appeal is filed in justice court within 7 calendar days from service of the judgment (JCRCP 98). Requires an appeal bond: a judgment debtor posts the judgment plus interest, plus $100 for costs and $15 for attorney fees; a plaintiff appellant posts $100 + $15 (JCRCP 100). The district court reviews on the record (not a new trial) according to secondary sources; not confirmed in the rules.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 7,
+    "e_filing": "some_courts",
+    "e_filing_notes": "Some justice courts accept e-filing; not confirmed on an official page for small claims.",
+    "fee_waiver_form": "Application to proceed as an indigent litigant (in forma pauperis), on a form provided by the court (NRS 12.015); Nevada Self-Help Center fee waiver application and proposed order.",
+    "fee_waiver_threshold": "Court must grant if the person receives public assistance benefits, has household net income at or below 150% of federal poverty guidelines, has living expenses exceeding income, or shows other compelling reasons; or is a legal aid client (NRS 12.015). The sheriff serves without charge for approved applicants.",
+    "service_methods": "Plaintiff serves under JCRCP 4.2 (personal service by constable, sheriff, licensed process server, or any non-party adult 18+); the judge may order alternative service such as certified mail. Service at least 14 days before trial (JCRCP 91). North Las Vegas requires a demand letter by certified mail before filing.",
+    "self_help_url": "https://trialcourts.nvcourts.gov/Articles/Details/how-to-file-small-claims-case",
+    "citation": "Nev. Rev. Stat. ch. 73 (§§ 73.010-73.060); NRS 4.060 (fees); Justice Court Rules of Civil Procedure 88-100",
+    "sources": [
+      {
+        "url": "https://www.leg.state.nv.us/nrs/nrs-073.html",
+        "what": "limit_individual, limit_business, entity representation, attorney fees",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.leg.state.nv.us/nrs/nrs-004.html",
+        "what": "filing_fee_min/max (NRS 4.060 tiers and add-ons)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.leg.state.nv.us/nrs/nrs-012.html",
+        "what": "fee_waiver_threshold (NRS 12.015)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.leg.state.nv.us/CourtRules/JCRCP.html",
+        "what": "appeal (JCRCP 98-100, amended 10/29/2024), service (JCRCP 91), procedure (JCRCP 88-97)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://lasvegasjusticecourt.us/new_page/fees.php",
+        "what": "Las Vegas filing fee totals, appeal fees",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.clarkcountynv.gov/government/departments/justice_courts/jurisdictions/north_las_vegas/divisions/small_claims/",
+        "what": "age 18+, service methods, demand letter, limit",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "appeal",
+      "e_filing",
+      "self_help_url",
+      "filing_fee_min"
+    ],
+    "notes": "Fees vary by township and county because of optional add-ons; the $46 minimum is calculated, not published. The scope of district court review (on the record vs. new trial) isn't stated in JCRCP 98-100; secondary sources conflict, so mark the appeal scope for human review. The trialcourts.nvcourts.gov self-help article returned 403 to the fetch tool, so its content is unconfirmed."
+  },
+  {
+    "state": "New Hampshire",
+    "abbr": "NH",
+    "court_name": "Circuit Court, District Division (small claims)",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "Any claim not involving title to real estate, up to $10,000 excluding interest and costs (RSA 503:1). Over $1,500, the defendant may demand a jury trial (case moves to superior court). Claims over $5,000 require mediation before a hearing. Filing a claim over $10,000 waives the excess.",
+    "recent_changes": "A 2025 clerk memo to the Supreme Court Advisory Committee on Rules proposed lowering small claims fees (to $80 and $135) and the e-filing surcharge (to $10). Not confirmed as adopted.",
+    "filing_fee_min": 125,
+    "filing_fee_max": 180,
+    "filing_fee_notes": "Per Circuit Court District Division Rule 3.3 as shown in search excerpts: $105 entry fee for claims up to $5,000 and $160 for $5,001-$10,000, plus a mandatory $20 e-filing surcharge, so $125 / $180 in total (matches a court e-filing info sheet). A statutory mediation surcharge ($5 up to $5,000; $60 over $5,000, RSA 503:4) may already be included. Sheriff service is extra if mail notice fails.",
+    "who_can_sue": "Any person (RSA 503:1). Corporations, partnerships, LLCs and trusts may be represented by an officer, employee, partner, owner or trustee who presents sworn written authorization (RSA 503:11).",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Parties may use attorneys; an attorney must file an appearance and copy all opposing parties at least 7 days before the hearing (RSA 503:2-a).",
+    "appeal": "Either party may appeal to the NH Supreme Court at the time judgment is declared or within 30 days of the notice of judgment date (RSA 503:10). The judge's findings of fact are final; only questions of law can be raised (RSA 503:9). A party wanting a sound recording for appeal must request it at least 5 business days before trial.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 30,
+    "e_filing": "yes_statewide",
+    "e_filing_notes": "Small claims must be filed electronically unless an exemption is granted (Rule 4.1). Self-represented filers use the court's e-filing portal (TurboCourt per search excerpt); attorneys use File & Serve.",
+    "fee_waiver_form": "Motion to waive filing fee (Circuit Court form)",
+    "fee_waiver_threshold": "Per the Rule 4.1 excerpt, the small claims filing fee is not waived except on facts showing extraordinary circumstances.",
+    "service_methods": "By statute the court mails notice of the claim to the defendant by first-class mail. If it comes back undelivered, the plaintiff must arrange service (e.g. sheriff) as in other civil actions (RSA 503:6).",
+    "self_help_url": "https://www.courts.nh.gov/our-courts/circuit-court/district-division/small-claims",
+    "citation": "N.H. Rev. Stat. Ann. ch. 503 (RSA 503:1-503:13); N.H. Cir. Ct. Dist. Div. R. 3.3 (fees), 4.1 et seq. (small claims)",
+    "sources": [
+      {
+        "url": "https://gc.nh.gov/rsa/html/LI/503/503-mrg.htm",
+        "what": "limit_individual, limit_business, jury/mediation thresholds, attorneys, appeal, service, corporate representation, mediation surcharge",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.courts.nh.gov/rules-circuit-court-state-new-hampshire-district-division/civil-rules-exceptions-noted-below/rule-1",
+        "what": "filing fees (Rule 3.3), seen only in search excerpts; page returned 403",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.courts.nh.gov/rules-circuit-court-state-new-hampshire-district-division/small-claims-actions/rule-41-filing-small",
+        "what": "mandatory e-filing, fee waiver standard (search excerpt; page returned 403)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.courts.nh.gov/sites/g/files/ehbemt471/files/documents/2021-07/scefilinginfo.pdf",
+        "what": "$125 / $180 totals (search excerpt; page returned 403)",
+        "type": "form"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "filing_fee_min",
+      "filing_fee_max",
+      "e_filing",
+      "fee_waiver_form",
+      "fee_waiver_threshold",
+      "recent_changes"
+    ],
+    "notes": "courts.nh.gov blocks automated fetching (403), so fees, the e-filing requirement and the fee waiver standard come from official-domain search excerpts only. Secondary sites give conflicting fees ($90/$145, $105/$160). A 2025 rules memo proposed lower fees, and it's unclear whether that was adopted. A human should check the current Rule 3.3 fee schedule in a browser."
+  },
+  {
+    "state": "New Jersey",
+    "abbr": "NJ",
+    "court_name": "Small Claims Section of the Special Civil Part, Superior Court, Law Division",
+    "limit_individual": 5000,
+    "limit_business": 5000,
+    "limit_notes": "Money claims up to $5,000. Residential security-deposit return cases are also capped at $5,000 in small claims, so the deposit limit is no longer higher than the general limit (see recent_changes). Larger claims up to $20,000 go to the regular Special Civil Part. Excluded: professional malpractice, child support or alimony, wills and inheritance, and anything other than money.",
+    "recent_changes": "Effective July 1, 2022, the NJ Supreme Court raised the small claims limit from $3,000 to $5,000 and the Special Civil Part limit from $15,000 to $20,000. Before that, security-deposit cases had a higher $5,000 small claims limit (since 2004); now both are $5,000.",
+    "filing_fee_min": 35,
+    "filing_fee_max": 35,
+    "filing_fee_notes": "$35 for one defendant plus $5 per additional defendant. Mail service costs $10 per defendant (certified + regular mail). Personal service by a court officer costs extra (the court lists it as a reservice fee plus a service-of-process fee).",
+    "who_can_sue": "Plaintiffs must be 18+ (a parent or guardian files for a minor). Business entities may sue: an officer, trustee, director, agent or employee may present or defend a claim of $5,000 or less; above $5,000 a corporation, partnership or LLC needs an attorney. Per a secondary summary of R. 6:11, lay representation covers only claims originating with the business, not assigned claims.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Lawyers are allowed but not required; most people file and present without one.",
+    "appeal": "Either party may appeal to the Appellate Division of Superior Court within 45 days of the judgment: $250 filing fee with the notice of appeal plus a $300 deposit within 30 days. Review is on the record, not a new trial.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 45,
+    "e_filing": "yes_statewide",
+    "e_filing_notes": "Self-represented litigants can upload filings and pay fees by card through the Judiciary Electronic Document Submission (JEDS) system; evidence can go through Electronic Evidence Submission. Attorneys use eCourts.",
+    "fee_waiver_form": "How to File for a Fee Waiver - All Courts (CN 11208), https://www.njcourts.gov/self-help/fee-waiver",
+    "fee_waiver_threshold": "Income at or below 150% of the federal poverty level and liquid assets of $2,500 or less (per the Judiciary small claims page).",
+    "service_methods": "The court mails the summons and complaint by certified and regular mail. Personal service by a court officer is available for a fee. The plaintiff must provide a correct address.",
+    "self_help_url": "https://www.njcourts.gov/self-help/small-claims-court",
+    "citation": "N.J. Court Rules R. 6:1-2(a)(2) (cognizability), R. 6:11 (business representation), Part VI generally; R. 2:4-1 (appeal time)",
+    "sources": [
+      {
+        "url": "https://www.njcourts.gov/self-help/small-claims-court",
+        "what": "limit, security-deposit limit, exclusions, fees, service, age 18+, lawyers, appeal (45 days), JEDS, fee waiver threshold and form",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.njcourts.gov/sites/default/files/forms/11112_courtfees.pdf",
+        "what": "filing fee $35 + $5 per additional defendant (Judiciary fee schedule rev. 08/2026, seen in search excerpt)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.njcourts.gov/faq/who-may-file-a-complaint-special-civil",
+        "what": "business representation by officer/employee for claims of $5,000 or less",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.njcourts.gov/sites/default/files/forms/11482_small_claims_faq.pdf",
+        "what": "Small Claims FAQ (rev. 05/2025): $5,000 limit",
+        "type": "court_site"
+      },
+      {
+        "url": "https://beckerlawyers.com/new-jersey-client-alert-special-civil-part-jurisdictional-limit-increased-to-20k-effective-july-1/",
+        "what": "recent_changes (lead only: July 1, 2022 limit increase)",
+        "type": "secondary"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "recent_changes",
+      "who_can_sue"
+    ],
+    "notes": "The lead said security-deposit cases have a higher limit. That was true before July 1, 2022, but the Judiciary page now gives $5,000 for both. The 2022 change date comes from law firm alerts and search excerpts; I didn't open the Supreme Court's own notice. I couldn't fetch the R. 6:11 text from an official site; business representation is backed by the official FAQ and a secondary summary of the rule."
+  },
+  {
+    "state": "New Mexico",
+    "abbr": "NM",
+    "court_name": "Magistrate Court (civil); in Bernalillo County, Bernalillo County Metropolitan Court (Civil Division). No court is formally named 'small claims'.",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "Magistrate courts and the Bernalillo County Metropolitan Court hear civil claims up to $10,000 (NMSA 35-3-3; 34-8A-3). Excluded from magistrate court: domestic relations, libel/slander, malicious prosecution, title to land, injunctions and extraordinary writs. Venue: plaintiff or defendant lives in the county, or the events happened there. Jury trials (6-person) are available in magistrate court.",
+    "recent_changes": "Rule 1-072 NMRA (appeals from magistrate and metropolitan courts in trial de novo cases) was amended by Supreme Court order of October 31, 2025.",
+    "filing_fee_min": 77,
+    "filing_fee_max": 77,
+    "filing_fee_notes": "$77 to file a civil complaint in magistrate court (court pamphlet and Fifth District fee page) and in Metropolitan Court. Jury: $25 fee + $75 deposit (magistrate). Service by sheriff or process server is extra.",
+    "who_can_sue": "A person 18+ (or a parent, guardian, next friend, trustee or executor), or a business entity. The court pamphlet warns a corporation or LLC 'may be required by law to hire an attorney'.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Lawyers are allowed but not required. Entities may need a lawyer (see who_can_sue).",
+    "appeal": "Magistrate court: either party may appeal to district court by filing a notice of appeal in district court within 15 days after the judgment is filed; the case is tried de novo (new trial) under Rule 1-072 NMRA and NMSA 35-13-2. Metropolitan Court: the same 15-day deadline and Rule 1-072 apply to de novo cases, but most non-landlord-tenant civil cases there are reviewed on the record, because Metro Court is a court of record (NMSA 34-8A-6). District court appeal fee is about $132.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 15,
+    "e_filing": "some_courts",
+    "e_filing_notes": "Not confirmed for self-represented filers. Metro Court's page says new civil cases are filed in person at Customer Service.",
+    "fee_waiver_form": "Application for free process (Form 4-222 NMRA)",
+    "fee_waiver_threshold": "Court finding of indigency (free process); specific income test not confirmed.",
+    "service_methods": "The plaintiff may not serve personally. Service by the sheriff, a private process server, or any non-party adult 18+. Mail service with an acknowledgment form is allowed; if no acknowledgment comes back within 23 days, personal service is required. Substitute service on a household member 15+ or posting is allowed per the rules. The defendant must be served in New Mexico.",
+    "self_help_url": "https://metro.nmcourts.gov/self-representation/self-help-center/",
+    "citation": "NMSA 1978 §§ 35-3-3 (magistrate jurisdiction), 34-8A-3 (Metropolitan Court), 35-13-1 to 35-13-2 and 34-8A-6 (appeals); Rules 2-101 et seq. NMRA (magistrate civil), Rule 1-072 NMRA",
+    "sources": [
+      {
+        "url": "https://nmcourts.gov/wp-content/uploads/sites/22/2023/11/How-to-File-a-Civil-Lawsuit-7_10_2023.pdf",
+        "what": "limit ($10,000), exclusions, venue, fee ($77), jury fees, parties, service methods (Dona Ana Magistrate Court pamphlet rev. 07/2023)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://fifthdistrict.nmcourts.gov/about-this-district/fees-costs-filing/",
+        "what": "magistrate civil filing fee $77",
+        "type": "court_site"
+      },
+      {
+        "url": "https://metro.nmcourts.gov/civil/",
+        "what": "Metro Court civil limit $10,000",
+        "type": "court_site"
+      },
+      {
+        "url": "https://metro.nmcourts.gov/about-this-court/fees-costs-filing/",
+        "what": "Metro Court $77 filing fee, in-person filing",
+        "type": "court_site"
+      },
+      {
+        "url": "https://supremecourt.nmcourts.gov/wp-content/uploads/sites/2/2025/10/Rule-1-072-NMRA.pdf",
+        "what": "appeal: 15 days, trial de novo procedure (amended Oct 31, 2025)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://thirddistrict.nmcourts.gov/wp-content/uploads/sites/22/2023/11/Civil-Appeal-in-District-Court-from-Magistrate-Court-Judgment-10-13-23.pdf",
+        "what": "appeal fee $132, Form 4-222 fee waiver (seen in search excerpt)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "fee_waiver_form",
+      "fee_waiver_threshold",
+      "e_filing",
+      "appeal",
+      "who_can_sue"
+    ],
+    "notes": "No 'small claims court' by name: magistrate courts fill that role statewide, and Metro Court does in Bernalillo County. Couldn't open NMSA text (Justia 403; NMOneSource not tried successfully), so statute citations come from court pages and search excerpts. Metro Court civil appeals (on record vs. de novo, and district court vs. Court of Appeals) need a human check against current NMSA 34-8A-6 and Rules 1-073/1-074. The fee-waiver form number comes from a search excerpt of a district court appeal guide."
+  },
+  {
+    "state": "New York",
+    "abbr": "NY",
+    "court_name": "Small Claims Part of NYC Civil Court, City Courts, District Courts (Nassau, Suffolk) and Town/Village Justice Courts; Commercial Claims Part for businesses",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "Limits depend on the court: NYC Civil Court small claims, up to $10,000 (NYC Civil Ct. Act 1801); City Courts outside NYC, $5,000 (UCCA 1801); District Courts in Nassau and western Suffolk, $5,000 (UDCA 1801); Town and Village Justice Courts, $3,000 (UJCA 1801). Corporations, partnerships, associations and assignees cannot sue in the small claims part (they can be sued there); insurers are excluded (CCA 1809). Businesses use the Commercial Claims Part instead. Its limit equals that court's small claims limit ($10,000 in NYC, $5,000 in city and district courts). It requires a principal office in NY and allows at most 5 commercial claims per calendar month (CCA 1801-A, 1803-A). No commercial claims part in town and village courts; per the court guide, none in Eastern Suffolk. limit_individual and limit_business show the NYC figures.",
+    "recent_changes": null,
+    "filing_fee_min": 10,
+    "filing_fee_max": 25,
+    "filing_fee_notes": "NYC Civil Court and City Courts: $15 for claims up to $1,000, $20 above $1,000 (CCA/UCCA 1803). Town and Village Courts: $10 up to $1,000, $15 above (UJCA 1803). Commercial claims: $25 plus mailing costs (CCA 1803-A). Counterclaim: $5 plus mailing. Fee includes clerk's mail service.",
+    "who_can_sue": "Individuals, including the self-employed suing in their own name. Corporations, partnerships, associations, assignees and insurers may NOT start small claims, except municipal and public benefit corporations and school districts (CCA 1809). Businesses with a principal office in NY use commercial claims (max 5 per month; consumer-transaction claims need a demand letter 10-180 days before filing and a sworn certification). A corporation defending a claim may appear through an attorney or an authorized officer, director or employee. Minors sue through a parent or guardian.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Attorneys are allowed but not required.",
+    "appeal": "Either party may appeal, but only on the ground that substantial justice was not done between the parties under substantive law (CCA 1807; the claimant otherwise waives appeal). Time to appeal is 30 days after service of the judgment with notice of entry (CPLR 5513(a)). Appeals go to the Appellate Term (NYC, and the 2nd Department generally) or to County Court (city and town courts elsewhere). Judgments of arbitrators chosen instead of a judge cannot be appealed.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 30,
+    "e_filing": "some_courts",
+    "e_filing_notes": "Not confirmed. Secondary sources conflict on whether NYC small claims can be filed online; nycourts.gov blocked automated fetching.",
+    "fee_waiver_form": "Poor person application under CPLR Article 11 (Affidavit in Support of Application to Proceed as a Poor Person)",
+    "fee_waiver_threshold": "Judge's discretion (CPLR 1101: unable to pay costs).",
+    "service_methods": "No summons is required: the clerk mails notice to the defendant by both first-class and certified mail (return receipt). If the first-class mailing isn't returned within 21 days, notice is presumed received (CCA/UCCA/UJCA 1803). If notice fails, personal service by a non-party adult or process server may be needed.",
+    "self_help_url": "https://www.nycourts.gov/help/small-claims",
+    "citation": "NYC Civil Ct. Act §§ 1801-1815 and Art. 18-A (§§ 1801-A-1814-A); Uniform City Ct. Act art. 18/18-A; Uniform District Ct. Act art. 18/18-A; Uniform Justice Ct. Act art. 18; CPLR 5513",
+    "sources": [
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CCA/1801",
+        "what": "NYC limit $10,000",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/UCT/1801",
+        "what": "City Court limit $5,000",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/UDC/1801",
+        "what": "District Court limit $5,000",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/UJC/1801",
+        "what": "Town/Village limit $3,000",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CCA/1801-A",
+        "what": "commercial claims definition, limit tied to small claims limit, NY principal office",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CCA/1803-A",
+        "what": "commercial claims fee $25, 5 per month cap, demand letter, notice",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CCA/1803",
+        "what": "NYC fees $15/$20, mail service by clerk",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/UJC/1803",
+        "what": "Town/Village fees $10/$15, mail service",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CCA/1809",
+        "what": "corporations, partnerships, assignees, insurers barred as plaintiffs; corporate defendant representation",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CCA/1807",
+        "what": "appeal limited to substantial justice",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CVP/5513",
+        "what": "30-day appeal deadline",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nycourts.gov/town-and-village-justice-courts/town-and-village-courts-frequently-asked-questions-faqs",
+        "what": "Town/Village limit and fees, no commercial claims there (search excerpt)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "e_filing",
+      "fee_waiver_form",
+      "appeal"
+    ],
+    "notes": "nycourts.gov (including the 2026-08 small claims guide PDF) returned 403, so everything here rests on the statutes on nysenate.gov. Appeal-court routing (Appellate Term vs. County Court) is from general knowledge of NY court structure and wasn't checked against a page. UCCA 1801 shows a revision dated 2024-01-05 and CCA 1801 one dated 2023-07-07; the limits shown are current, but I didn't confirm what those revisions changed."
+  },
+  {
+    "state": "North Carolina",
+    "abbr": "NC",
+    "court_name": "Small claims court (District Court, cases heard by a magistrate)",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "Up to $10,000 (G.S. 7A-210, limit set in 2013). Relief must be money, recovery of specific personal property, or summary ejectment (eviction). The plaintiff must request assignment to a magistrate, and the case is filed in the county where a defendant resides.",
+    "recent_changes": null,
+    "filing_fee_min": 96,
+    "filing_fee_max": 96,
+    "filing_fee_notes": "$96 total for a case assigned to a magistrate (G.S. 7A-305(a)): $80 General Court of Justice fee + $12 facilities fee + $4 court technology fee. Sheriff service is $30 per defendant (G.S. 7A-311); certified mail costs postage. Counterclaims pay the same costs (7A-305(a5)).",
+    "who_can_sue": "Individuals and businesses may sue. Not confirmed: whether corporations or LLCs may appear through a non-attorney officer or employee in small claims.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Parties may use attorneys; not required.",
+    "appeal": "Either party may appeal for a trial de novo before a district court judge or jury (G.S. 7A-228). Notice may be given orally in open court, or in writing to the clerk within 10 days after judgment. Appeal costs must be paid within 20 days (10 days for summary ejectment) or the appeal is dismissed. Indigent appeal is available by affidavit within 10 days.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 10,
+    "e_filing": "some_courts",
+    "e_filing_notes": "North Carolina's eCourts (File & Serve) system has been rolling out county by county; not confirmed for small claims self-filers.",
+    "fee_waiver_form": "Petition to Proceed as an Indigent (AOC-G-106)",
+    "fee_waiver_threshold": "The clerk must grant on affidavit if the person receives SNAP (food and nutrition benefits), Work First, or SSI, or is represented by legal services. A judge or clerk may also grant it to others unable to advance costs (G.S. 1-110).",
+    "service_methods": "Personal delivery or substitute service at the dwelling (usually by sheriff); registered or certified mail, signature confirmation, or designated delivery service; acceptance of service (G.S. 7A-217).",
+    "self_help_url": "https://www.nccourts.gov/help-topics/lawsuits-and-small-claims/small-claims",
+    "citation": "N.C. Gen. Stat. §§ 7A-210 to 7A-232; § 7A-305 (costs); § 7A-311 (service fees); § 1-110 (indigency)",
+    "sources": [
+      {
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_7A/GS_7A-210.html",
+        "what": "limit_individual, limit_business, case types",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_7A/GS_7A-211.html",
+        "what": "assignment to magistrate",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_7A/GS_7A-213.html",
+        "what": "filing and venue",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_7A/GS_7A-217.html",
+        "what": "service_methods",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_7A/GS_7A-228.html",
+        "what": "appeal, appeal_deadline_days, indigent appeal",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_7A/GS_7A-305.html",
+        "what": "filing fee components ($96)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_7A/GS_7A-311.html",
+        "what": "sheriff service fee $30",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_1/GS_1-110.html",
+        "what": "fee_waiver_threshold",
+        "type": "statute"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "who_can_sue",
+      "e_filing",
+      "fee_waiver_form",
+      "self_help_url"
+    ],
+    "notes": "nccourts.gov returned 403, so the self-help page, eCourts status and form number AOC-G-106 weren't checked against official pages. The $96 is the sum of statutory components; it doesn't include possible local add-ons. Whether a business can appear without a lawyer in small claims needs a human check: G.S. 84-5 alone doesn't create an exception."
+  },
+  {
+    "state": "North Dakota",
+    "abbr": "ND",
+    "court_name": "Small claims court (district court judges or appointed referees)",
+    "limit_individual": 15000,
+    "limit_business": 15000,
+    "limit_notes": "Money claims, tenant mobile-home-park damages under 47-10-28(9), or cancellation of an agreement for fraud or misrepresentation, up to $15,000 (N.D.C.C. 27-08.1-01). Counterclaims are also capped at $15,000. Venue rules depend on the defendant type. Except for certain claims, the defendant may move the case to the small claims court of the defendant's home county. No jury trials.",
+    "recent_changes": null,
+    "filing_fee_min": 20,
+    "filing_fee_max": 20,
+    "filing_fee_notes": "$20 for filing a small claims action (N.D.C.C. 27-05.2-03(1)(e)). Section 27-08.1-03 still cross-references the old subdivision (c), which is a drafting mismatch. Service costs (certified mail or process server) are extra. A defendant who removes the case to district court pays the regular civil filing fee.",
+    "who_can_sue": "Any person, including businesses. Assigned claims may not be filed (so no collection agencies or debt buyers) (27-08.1-01(3)).",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Parties 'may appear without counsel' (27-08.1-03); attorneys are not prohibited. If a defendant removes the case to district court and the plaintiff wins, the court must award the plaintiff attorney's fees.",
+    "appeal": "No appeal. By choosing small claims, the plaintiff waives appeal. The defendant waives appeal on receiving the order for appearance unless the defendant removes the case to district court, within 20 days of service, before the hearing (27-08.1-04). The court's page says small claims decisions are final.",
+    "appeal_who": "none",
+    "appeal_deadline_days": null,
+    "e_filing": "some_courts",
+    "e_filing_notes": "Filed with the clerk of district court. Whether self-represented small claims filers can e-file wasn't confirmed.",
+    "fee_waiver_form": "Filing Fee Waiver Request (ND Courts self-help forms)",
+    "fee_waiver_threshold": null,
+    "service_methods": "The plaintiff serves the claim affidavit and forms by a non-party adult (personal service) or by certified mail with restricted delivery, anywhere in the state (27-08.1-02). The defendant has 20 days to request a hearing or remove the case to district court, or a default may be entered.",
+    "self_help_url": "https://www.ndcourts.gov/legal-self-help/small-claims",
+    "citation": "N.D. Cent. Code ch. 27-08.1; § 27-05.2-03(1)(e) (fee); N.D. R. Ct. 10.2",
+    "sources": [
+      {
+        "url": "https://ndlegis.gov/cencode/t27c08-1.pdf",
+        "what": "limit, venue, assignee bar, service, attorneys, no appeal/removal, no jury",
+        "type": "statute"
+      },
+      {
+        "url": "https://ndlegis.gov/cencode/t27c05-2.pdf",
+        "what": "filing fee $20",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ndcourts.gov/legal-self-help/small-claims",
+        "what": "limit $15,000, process, no appeal, fee waiver request, Rule 10.2",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "e_filing",
+      "fee_waiver_threshold",
+      "fee_waiver_form"
+    ],
+    "notes": "Removal: once served, the defendant has 20 days to elect removal to district court (form 3 on the court page). There is no appeal from a small claims judgment."
+  },
+  {
+    "state": "Ohio",
+    "abbr": "OH",
+    "court_name": "Small claims division of municipal and county courts",
+    "limit_individual": 6000,
+    "limit_business": 6000,
+    "limit_notes": "Recovery of money or taxes up to $6,000 excluding interest and costs (R.C. 1925.02(A)(1)). Excluded: libel, slander, replevin, malicious prosecution, abuse of process, punitive damages, and claims by an assignee or agent (with exceptions for tax claims and certain holders of retail installment contracts). Counterclaims over $6,000 move the case to the regular docket.",
+    "recent_changes": "R.C. 1925.02 amended by S.B. 237 (135th G.A.), effective April 9, 2025, adjusting the assignee exceptions for holders of security agreements and retail installment contracts. The $6,000 limit is unchanged since H.B. 387 (2016).",
+    "filing_fee_min": null,
+    "filing_fee_max": null,
+    "filing_fee_notes": "Each court sets its own fee (R.C. 1925.04). Examples: Sandusky Municipal Court $105 (one or two defendants, +$10 each additional), personal service $35. Franklin County Municipal Court announced a $6 small claims cost increase in June 2026; bailiff service $25 per defendant. Certified mail service is usually included or billed by the clerk.",
+    "who_can_sue": "Individuals and businesses. Assignees and agents generally cannot sue (no collection agencies). A corporation may sue through an attorney, or through a bona fide officer or salaried employee on claims where it was the original party. Non-attorney corporate representatives may not cross-examine or argue (R.C. 1925.17).",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Attorneys may appear for any party. Non-attorney corporate representatives are limited (see who_can_sue).",
+    "appeal": "Cases are usually heard by a magistrate. Either party may file written objections to the magistrate's decision within 14 days (Civ.R. 53); the judge then enters judgment. Appeal from the final judgment goes to the court of appeals within 30 days (App.R. 4), on the record.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 14,
+    "e_filing": "some_courts",
+    "e_filing_notes": "Varies by municipal or county court; not confirmed statewide.",
+    "fee_waiver_form": "Poverty affidavit / affidavit of indigency (form varies by court)",
+    "fee_waiver_threshold": "Judge's discretion; varies by court.",
+    "service_methods": "Notice served under the Civil Rules (R.C. 1925.05), usually by certified mail from the clerk. If that fails: personal service by bailiff or sheriff, or ordinary mail after certified mail is refused or unclaimed. Published service cannot be used (R.C. 1925.02(A)(3)).",
+    "self_help_url": "https://municipalcourt.franklincountyohio.gov/smallclaims",
+    "citation": "Ohio Rev. Code ch. 1925 (§§ 1925.01-1925.18); Ohio Civ.R. 53; App.R. 4",
+    "sources": [
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-1925.02",
+        "what": "limit, exclusions, assignee bar, recent_changes (S.B. 237 eff. 4/9/2025)",
+        "type": "statute"
+      },
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-1925.04",
+        "what": "filing fee set by court, commencement",
+        "type": "statute"
+      },
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-1925.05",
+        "what": "service_methods",
+        "type": "statute"
+      },
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-1925.17",
+        "what": "corporate representation, lawyers",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.sanduskymunicipalcourt.org/smClaims.php",
+        "what": "example fee $105, service by certified mail, personal service $35, objections",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.fcmcclerk.com/documents/announcements/Court and Clerk Press Release increase in cost of civil filings June 2026.pdf",
+        "what": "Franklin County small claims cost increase June 2026 (search excerpt)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "filing_fee_min",
+      "filing_fee_max",
+      "appeal",
+      "appeal_deadline_days",
+      "e_filing",
+      "fee_waiver_form",
+      "fee_waiver_threshold",
+      "self_help_url"
+    ],
+    "notes": "There is no statewide filing fee; a per-court fee table would be needed. The 14-day objection and 30-day appeal deadlines come from court pages and search excerpts (Civ.R. 53 / App.R. 4); the rule text wasn't fetched. appeal_deadline_days shows the 14-day objection step. No statewide official small claims self-help page was confirmed, so the URL points to Franklin County Municipal Court as an example."
+  },
+  {
+    "state": "Oklahoma",
+    "abbr": "OK",
+    "court_name": "Small claims docket of the District Court",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "Money claims (contract or tort, including subrogation; not libel or slander), replevin of property, and interpleader up to $10,000 excluding attorney fees and costs (12 O.S. 1751(A)). No claims by collection agencies, collection agents or assignees (narrow exception for health care providers suing insurers). No claims by incarcerated plaintiffs, or against government agencies about incarceration or supervision. The affidavit must include a jury-trial waiver statement.",
+    "recent_changes": "HB 1611 (2024, c. 108), effective Nov. 1, 2024, lets corporations, LLCs, partnerships, trusts and other entities appear through an officer, member, manager, partner, trustee or regular full-time employee. HB 1129 (2025), which would have raised the small claims fee, failed in the House on March 12, 2025. The current AOC fee schedule is effective Nov. 1, 2025.",
+    "filing_fee_min": 45,
+    "filing_fee_max": 150,
+    "filing_fee_notes": "Affidavit fee: $45 for claims of $5,000 or less; $150 for $5,000-$10,000 (12 O.S. 1764; AOC schedule effective 11/1/2025). Add-ons push the actual total higher: an Oklahoma County docket shows $45 + $7 dispute mediation + $6 law library = $58. Plus mailing ($10 per person, or actual cost) or sheriff service ($50 per person). Transfer to another docket: $50.",
+    "who_can_sue": "Individuals and entities, but not collection agencies or assignees. Since Nov. 1, 2024, entities may appear through an officer, member, manager, partner, trustee or regular full-time employee (12 O.S. 1751(G)). Incarcerated persons may not sue.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Attorneys may appear. In uncontested cases attorney fees are capped at 10% of the judgment (up to 25% on application) (12 O.S. 1751(C)).",
+    "appeal": "Appeals go to the Oklahoma Supreme Court in the same manner as other civil appeals (12 O.S. 1763), i.e. on the record by petition in error, generally within 30 days of the filed judgment.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 30,
+    "e_filing": "some_courts",
+    "e_filing_notes": "OSCN e-filing operates in selected courts under the Oklahoma Rules for E-Filing in Selected Courts; not confirmed for self-represented small claims filers.",
+    "fee_waiver_form": "Pauper's affidavit (in forma pauperis), with a judge's order determining poverty",
+    "fee_waiver_threshold": "Judge's determination of poverty.",
+    "service_methods": "By default, the clerk mails the affidavit and order by certified mail, restricted to the addressee, return receipt. If it comes back undelivered, the sheriff serves. Or the plaintiff may elect service under 12 O.S. 2004(C) (sheriff or licensed process server) (12 O.S. 1755).",
+    "self_help_url": "https://www.oklahomacounty.org/elected-offices/court-clerk",
+    "citation": "Okla. Stat. tit. 12, §§ 1751-1773 (Small Claims Procedure Act); tit. 28, §§ 152, 152.1 (fees)",
+    "sources": [
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=438809",
+        "what": "limit, collection agency/assignee bar, entity representation (HB 1611 eff. 11/1/2024), attorney fee caps",
+        "type": "statute"
+      },
+      {
+        "url": "https://oklegislature.gov/cf_pdf/2023-24 ENR/hB/HB1611 ENR.PDF",
+        "what": "recent_changes (enrolled text of HB 1611)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=94812",
+        "what": "appeal to Supreme Court (12 O.S. 1763)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=94804",
+        "what": "service_methods (12 O.S. 1755)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.oscn.net/datafiles/SCaD/2025/SCaD2025-0077.pdf",
+        "what": "filing fees $45/$150, mailing, sheriff, transfer fee; schedule effective 11/1/2025",
+        "type": "court_site"
+      },
+      {
+        "url": "https://oscn.net/dockets/GetCaseInformation.aspx?db=oklahoma&number=SC-2026-912&cmid=4520492",
+        "what": "example of actual costs charged ($45 + $7 + $6), seen in search excerpt",
+        "type": "court_site"
+      },
+      {
+        "url": "https://oklegislature.gov/BillInfo.aspx?Bill=HB1129&Session=2500",
+        "what": "HB 1129 fee increase failed 2025",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.oklahomacounty.org/elected-offices/court-clerk",
+        "what": "self-help forms and instructions (Oklahoma County)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "appeal_deadline_days",
+      "e_filing",
+      "fee_waiver_form",
+      "fee_waiver_threshold",
+      "self_help_url"
+    ],
+    "notes": "12 O.S. 1763 doesn't state a deadline; the 30 days comes from the general civil appeal rule (12 O.S. 990A / Sup. Ct. R. 1.21), which I didn't fetch. No statewide small claims self-help page was found; the URL is the Oklahoma County Court Clerk."
+  },
+  {
+    "state": "Oregon",
+    "abbr": "OR",
+    "court_name": "Small claims department of the circuit court (some justice courts also hear small claims)",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "Claims for money, damages, specific personal property, or a penalty or forfeiture up to $10,000. Claims of $750 or less MUST be filed in small claims (with exceptions, e.g. statutory attorney-fee claims). Class actions are not allowed, nor are suits by one adult in custody against another (ORS 46.405). Where a justice court operates in the same city under an intergovernmental agreement, small claims may be handled by the justice court instead.",
+    "recent_changes": null,
+    "filing_fee_min": 57,
+    "filing_fee_max": 102,
+    "filing_fee_notes": "$57 for claims of $2,500 or less; $102 for claims over $2,500 (ORS 46.570). A defendant demanding a hearing pays the same fee. Sheriff service is $45 (ORS 21.300); certified mail costs postage.",
+    "who_can_sue": "Individuals and entities. Non-natural persons and public bodies may appear without an attorney (ORS 46.415(5)). Assignees may sue to the same extent as in other state courts (ORS 46.415(6)). One spouse may appear for both with consent.",
+    "lawyers_allowed": "limited",
+    "lawyers_notes": "No attorney (or anyone other than the parties) may appear for a party without the judge's consent (ORS 46.415(4)). If the claim is over $750, the defendant may demand a jury trial; the case then moves to the regular circuit court, where lawyers may appear.",
+    "appeal": "No appeal: a small claims judgment is conclusive (ORS 46.485(4)). A defendant who wants a jury trial (claims over $750) must demand it within 30 days of service, instead of a small claims hearing. A default judgment may be set aside for good cause within 60 days.",
+    "appeal_who": "none",
+    "appeal_deadline_days": null,
+    "e_filing": "yes_statewide",
+    "e_filing_notes": "OJD eFile is available in all circuit courts, including to self-represented litigants (individual accounts). OJD Guide & File prepares small claims forms. Fee waiver or deferral applications cannot be e-filed. Not confirmed that small claims are excluded under UTCR 21.070(3).",
+    "fee_waiver_form": "Application for fee waiver or deferral (OJD form); filed in person, not through eFile",
+    "fee_waiver_threshold": "Court may waive (no fee) or defer (pay later) filing fees for a party who cannot pay. Sheriff service fees are not waived or deferred per one county guide.",
+    "service_methods": "At the plaintiff's option: certified mail ('Deliver to Addressee Only', return receipt requested) mailed by the plaintiff, or service as for a circuit court summons (sheriff, or any competent non-party adult). If certified mail fails, personal or other summons-type service is required (ORS 46.445).",
+    "self_help_url": "https://www.courts.oregon.gov/help/pages/default.aspx",
+    "citation": "Or. Rev. Stat. §§ 46.405-46.570; ORS 21.300 (sheriff fees); ORS ch. 55 (justice court small claims)",
+    "sources": [
+      {
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors046.html",
+        "what": "limit, mandatory under $750, attorneys, entities, assignees, service, jury demand, no appeal, fees ($57/$102)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors021.html",
+        "what": "sheriff service fee $45",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.courts.oregon.gov/courts/multnomah/go/pages/smallclaims.aspx",
+        "what": "limit, lawyers need judge's permission, judgments final, fee waiver/deferral",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.courts.oregon.gov/services/online/pages/efile.aspx",
+        "what": "e_filing (self-represented accounts, circuit courts)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.courts.oregon.gov/services/online/pages/iforms.aspx",
+        "what": "Guide & File small claims forms; fee waivers not via eFile (search excerpt)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "fee_waiver_form",
+      "fee_waiver_threshold"
+    ],
+    "notes": "The lead said Oregon might bar lawyers: confirmed. Lawyers need the judge's consent, but businesses are not restricted and may appear without a lawyer. Assignees (including collection agencies) may sue in small claims. Neither party can appeal."
+  },
+  {
+    "state": "Pennsylvania",
+    "abbr": "PA",
+    "court_name": "Magisterial District Courts (civil actions); in Philadelphia, Philadelphia Municipal Court, Civil Division (small claims)",
+    "limit_individual": 12000,
+    "limit_business": 12000,
+    "limit_notes": "Magisterial district judges hear civil claims up to $12,000 excluding interest and costs (42 Pa.C.S. 1515(a)(3)). Philadelphia Municipal Court small claims also go up to $12,000 (42 Pa.C.S. 1123(a)(4)). Pennsylvania has no separate 'small claims court' outside Philadelphia: MDJ civil actions serve that role.",
+    "recent_changes": "MDJ civil filing costs rise every Jan. 1 with CPI under Act 54 of 2024 (42 Pa.C.S. 1725.1(f)). The calendar-2026 costs are $68.50 / $91.00 / $114.00 / $171.00, up from $67 / $89 / $111.50 / $167 in 2025.",
+    "filing_fee_min": 68.5,
+    "filing_fee_max": 171,
+    "filing_fee_notes": "Magisterial district courts, calendar 2026 (42 Pa.C.S. 1725.1(a)): $68.50 for claims of $500 or less; $91.00 for $500-$2,000; $114.00 for $2,000-$4,000; $171.00 for $4,001-$12,000. Postage, certified mail and constable or sheriff service are extra. Philadelphia Municipal Court: $94.75 (up to $2,000) or $116.75 ($2,000.01-$12,000) with one Philadelphia defendant served by the court; $67.75 / $89.75 without court service; plus $45 per service outside Philadelphia.",
+    "who_can_sue": "Individuals and businesses. In Philadelphia, a non-lawyer representative must file an Appointment of Authorized Representative form. Business representation by non-attorneys before MDJs (Pa.R.Civ.P.M.D.J. 207) was not confirmed on an official page.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Parties may use lawyers; not required. In Philadelphia, a lawyer needn't file the authorized-representative form.",
+    "appeal": "Either party may appeal to the Court of Common Pleas within 30 days of the judgment by filing a notice of appeal with the county prothonotary and paying its fees. The case gets a new trial (de novo). Philadelphia Municipal Court judgments are also appealed to Common Pleas (Notice of Appeal form).",
+    "appeal_who": "both",
+    "appeal_deadline_days": 30,
+    "e_filing": "some_courts",
+    "e_filing_notes": "PACFile (UJS portal) offers e-filing for some court levels; whether MDJ civil complaints can be filed online by the public wasn't confirmed. Philadelphia Municipal Court says civil e-filing is 'not available at this time'; new small claims are filed in person (appointments preferred).",
+    "fee_waiver_form": "Petition to proceed in forma pauperis (Pa.R.Civ.P.M.D.J. 206); Philadelphia Municipal Court 'Petition to Proceed In Forma Pauperis' form",
+    "fee_waiver_threshold": "A party 'without financial resources to pay the costs of litigation' may proceed in forma pauperis on petition and affidavit; the MDJ rules within 5 days. Automatic if a free legal services attorney certifies (Pa.R.Civ.P.M.D.J. 206).",
+    "service_methods": "MDJ: service by certified or registered mail sent by the court, or personal service by a sheriff or constable (costs paid by the plaintiff). Philadelphia: court service ($27 per Philadelphia address) or out-of-county sheriff ($45).",
+    "self_help_url": "https://www.courts.phila.gov/municipal/civil/",
+    "citation": "42 Pa.C.S. §§ 1515(a)(3), 1123(a)(4), 1725.1; Pa. R. Civ. P. for Magisterial District Judges 201-1013; Phila. M.C.R. Civ. P.",
+    "sources": [
+      {
+        "url": "https://www.pacourts.us/assets/opinions/Supreme/out/644%20JADattachment.pdf",
+        "what": "2026 MDJ civil costs (42 Pa.C.S. 1725.1), Act 54 of 2024 CPI adjustment",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.pacourts.us/Storage/media/pdfs/20241031/163220-2025costtable-forcommunications.pdf",
+        "what": "2025 MDJ cost table (prior-year comparison)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.pacourts.us/Storage/media/pdfs/20260421/194249-minor2of2023-ruletext.pdf",
+        "what": "fee_waiver_threshold (Rule 206 text)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.courts.phila.gov/municipal/civil/",
+        "what": "Philadelphia $12,000 limit, IFP form, appeal form, authorized representative, e-filing unavailable",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.courts.phila.gov/pdf/municipal/resources/small-claims/filings-fees.pdf",
+        "what": "Philadelphia Municipal Court filing fees",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.lyco.org/Portals/1/Courts/Documents/How%20To%20File%20A%20Civil%20Complaint%20With%20A%20Magisterial%20Judge%20Self%20Help%20Kit_092025.pdf",
+        "what": "MDJ $12,000 jurisdiction, appeal to Common Pleas (county court self-help kit, search excerpt)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "limit_individual",
+      "appeal",
+      "appeal_deadline_days",
+      "who_can_sue",
+      "service_methods",
+      "e_filing",
+      "self_help_url"
+    ],
+    "notes": "PA legislature sites (legis.state.pa.us, palegis.us) returned 403, so I couldn't read 42 Pa.C.S. 1515 and 1123. The $12,000 limit is consistent across the 2026 cost regulation (top tier $4,001-$12,000), the Philadelphia Municipal Court site, and a county self-help kit. The appeal rule (Pa.R.Civ.P.M.D.J. 1002) text wasn't fetched; 30 days de novo comes from county court materials. The self-help URL is Philadelphia-only; I found no statewide MDJ small claims self-help page."
+  }
+]

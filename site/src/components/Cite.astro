@@ -1,0 +1,31 @@
+---
+// Shows where a fact comes from and when it was checked, plus an "unverified" flag.
+interface Source {
+  url: string;
+  what?: string;
+  type?: string;
+}
+interface Props {
+  sources?: Source[];
+  checked?: string;
+  unverified?: boolean;
+  label?: string;
+}
+const { sources = [], checked, unverified = false, label } = Astro.props;
+const shown = sources.slice(0, 3);
+function host(u: string) {
+  try {
+    return new URL(u).hostname.replace(/^www\./, "");
+  } catch {
+    return u;
+  }
+}
+---
+<span class="cite">
+  {unverified ? <span class="badge unverified" title="Not yet confirmed against the law or the court's own site">unverified</span> : null}
+  {label ? <span>{label}</span> : null}
+  {shown.map((s) => (
+    <a href={s.url} rel="noopener" title={s.what ?? ""}>{host(s.url)}</a>
+  ))}
+  {checked ? <span>checked {checked}</span> : null}
+</span>

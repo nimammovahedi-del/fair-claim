@@ -1,0 +1,104 @@
+---
+import Site from "../../layouts/Site.astro";
+
+const directions = [
+  {
+    key: "counter",
+    name: "A · Counter",
+    tagline: "The clerk's counter: plain, official, impossible to mistrust.",
+    inspirations: [
+      "GOV.UK Design System (black header, yellow focus ring, big bold type, one idea per page)",
+      "U.S. Web Design System and its Public Sans typeface",
+      "California Judicial Council forms like SC-100: numbered boxed items, tight rules",
+    ],
+    feel: "Light, high-contrast, square corners, one civic blue, green action buttons. Numbered steps in solid black squares. Feels like the court's own self-help site done well.",
+    risk: "Can read as 'government website' — trustworthy, but less memorable.",
+    colors: ["#0b0c0c", "#ffffff", "#1d4f91", "#00703c", "#ffdd00", "#f3f4f5"],
+    fonts: "Public Sans (headings and body) · IBM Plex Mono (citations)",
+    sample: { bg: "#ffffff", ink: "#0b0c0c", accent: "#1d4f91", font: "'Public Sans', sans-serif", weight: 800 },
+  },
+  {
+    key: "docket",
+    name: "B · Docket",
+    tagline: "A court docket sheet as a calm dark console.",
+    inspirations: [
+      "PACER docket sheets and courthouse calendar boards (case numbers, dates, status in tight columns)",
+      "Bloomberg Terminal and Linear's dark UI (dense but quiet)",
+      "Your own Congress tracker's monitoring-console style",
+    ],
+    feel: "Dark slate, amber for warnings and key numbers, monospace for every figure, citation and date. Numbers line up in ledgers. Best for the 50-state table and the calculator.",
+    risk: "Dark, data-heavy screens can feel intimidating to someone stressed about a landlord dispute.",
+    colors: ["#0e1215", "#151b20", "#e6e9ec", "#e3b341", "#8fc1ff", "#5cc98b"],
+    fonts: "IBM Plex Sans (body) · IBM Plex Mono (numbers, citations)",
+    sample: { bg: "#0e1215", ink: "#e6e9ec", accent: "#e3b341", font: "'IBM Plex Sans', sans-serif", weight: 600 },
+  },
+  {
+    key: "pamphlet",
+    name: "C · Pamphlet",
+    tagline: "A well-made printed guide from the public library.",
+    inspirations: [
+      "Nolo's classic paperback 'Everybody's Guide to Small Claims Court' and public-library legal pamphlets",
+      "ProPublica and The Marshall Project explainers (serif text, generous margins, sidenote sources)",
+      "Stripe Press book design (warm paper, oxblood accent, big italic numerals)",
+    ],
+    feel: "Cream paper, warm ink, serif type, oxblood accent, large italic step numbers. Reads like a calm, human guide; citations sit quietly beside the text.",
+    risk: "Less 'official' at a glance; dense tables need extra care in a serif.",
+    colors: ["#f5efe3", "#221c15", "#8e2b1d", "#e8a33d", "#3f6b32", "#ede5d4"],
+    fonts: "Source Serif 4 (headings and body) · IBM Plex Mono (citations)",
+    sample: { bg: "#f5efe3", ink: "#221c15", accent: "#8e2b1d", font: "'Source Serif 4', serif", weight: 600 },
+  },
+];
+---
+<Site title="Design directions" description="Three visual directions for Fair Claim.">
+  <div class="narrow">
+    <p class="eyebrow">For Nima</p>
+    <h1>Three design directions</h1>
+    <p class="lede">
+      All three use the same pages and structure — only the look changes. Use the <strong>Design</strong> menu at the
+      top right to see any page of this prototype in each direction. Motion is the same in all three: short fades and
+      color changes only, no bounce or overshoot.
+    </p>
+  </div>
+
+  {directions.map((d) => (
+    <section style="margin-top:2.5rem">
+      <h2>{d.name}</h2>
+      <p class="lede" style="font-size:1.1rem">{d.tagline}</p>
+      <div
+        style={`background:${d.sample.bg};color:${d.sample.ink};border:1px solid var(--rule);padding:1.4rem 1.5rem;margin:1rem 0;font-family:${d.sample.font}`}
+      >
+        <div style={`font-weight:${d.sample.weight};font-size:1.7rem;line-height:1.15;margin-bottom:.4rem`}>
+          Your landlord kept your deposit.
+        </div>
+        <div style="opacity:.85">California limit for individuals</div>
+        <div style={`font-weight:${d.sample.weight};font-size:2.4rem;color:${d.sample.accent}`}>$12,500</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:.75rem;opacity:.7">Cal. Code Civ. Proc. § 116.221 · checked 2026-11-05</div>
+      </div>
+      <div style="display:flex;gap:.4rem;margin:.6rem 0 1rem">
+        {d.colors.map((c) => (
+          <span title={c} style={`width:2.2rem;height:2.2rem;background:${c};border:1px solid var(--rule);display:inline-block`}></span>
+        ))}
+      </div>
+      <div class="narrow">
+        <p><strong>Feel:</strong> {d.feel}</p>
+        <p><strong>Type:</strong> {d.fonts}</p>
+        <p><strong>Inspired by:</strong></p>
+        <ul>{d.inspirations.map((i) => <li>{i}</li>)}</ul>
+        <p><strong>Watch out for:</strong> {d.risk}</p>
+        <button class="btn secondary" type="button" data-try={d.key}>Try {d.name} on this site</button>
+      </div>
+    </section>
+  ))}
+
+  <script is:inline>
+    document.querySelectorAll("[data-try]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.documentElement.dataset.direction = b.dataset.try;
+        var sel = document.getElementById("direction-select");
+        if (sel) sel.value = b.dataset.try;
+        try { localStorage.setItem("fc-direction", b.dataset.try); } catch (e) {}
+        window.scrollTo({ top: 0 });
+      });
+    });
+  </script>
+</Site>

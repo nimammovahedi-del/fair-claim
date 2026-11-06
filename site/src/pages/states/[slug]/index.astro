@@ -1,0 +1,122 @@
+---
+import Site from "../../../layouts/Site.astro";
+import CaliforniaDetail from "../../../components/CaliforniaDetail.astro";
+import { states, counties, money, feeRange, lawyersLabel, appealLabel, efileLabel, type StateRow } from "../../../lib/data";
+import { steps } from "../../../lib/steps";
+
+export function getStaticPaths() {
+  return states.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+const { s } = Astro.props as { s: StateRow };
+const u = (...f: string[]) => f.some((x) => s.unverified.includes(x));
+const isCA = s.slug === "ca";
+
+const facts: { label: string; big?: string; text?: string | null; fields: string[] }[] = [
+  {
+    label: "Limit for individuals",
+    big: money(s.limit_individual),
+    text: s.limit_notes,
+    fields: ["limit_individual", "limit_notes"],
+  },
+  {
+    label: "Limit for businesses",
+    big: s.limit_business == null ? "—" : s.limit_business === s.limit_individual ? "Same" : money(s.limit_business),
+    fields: ["limit_business"],
+  },
+  { label: "Filing fee", big: feeRange(s), text: s.filing_fee_notes, fields: ["filing_fee_min", "filing_fee_max", "filing_fee_notes"] },
+  { label: "Who can sue", text: s.who_can_sue, fields: ["who_can_sue"] },
+  {
+    label: "Lawyers",
+    big: lawyersLabel[s.lawyers_allowed ?? ""] ?? s.lawyers_allowed ?? "—",
+    text: s.lawyers_notes,
+    fields: ["lawyers_allowed", "lawyers_notes"],
+  },
+  {
+    label: "Appeals",
+    big: appealLabel[s.appeal_who ?? ""] ?? s.appeal_who ?? "—",
+    text: [s.appeal, s.appeal_deadline_days ? `Deadline: ${s.appeal_deadline_days} days.` : null].filter(Boolean).join(" "),
+    fields: ["appeal", "appeal_who", "appeal_deadline_days"],
+  },
+  { label: "Serving the papers", text: s.service_methods, fields: ["service_methods"] },
+  {
+    label: "Filing online",
+    big: efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "—",
+    text: s.e_filing_notes,
+    fields: ["e_filing", "e_filing_notes"],
+  },
+  {
+    label: "Fee waiver",
+    text: [s.fee_waiver_form, s.fee_waiver_threshold].filter(Boolean).join(" — "),
+    fields: ["fee_waiver_form", "fee_waiver_threshold"],
+  },
+];
+---
+<Site title={`Small claims court in ${s.state}`} description={`${s.state} small claims limit, fees, appeal rules and forms — cited and dated.`}>
+  <p class="breadcrumbs"><a href="/states/">States</a> / {s.state}</p>
+  <div class="two-col">
+    <div>
+      <p class="eyebrow">{s.court_name}</p>
+      <h1>Small claims court in {s.state}</h1>
+      <p class="cite">
+        <span>{s.citation}</span>
+        {s.date_checked && <span>· checked {s.date_checked}</span>}
+      </p>
+
+      {s.recent_changes && (
+        <div class="callout"><p><strong>Recent change:</strong> {s.recent_changes}</p></div>
+      )}
+
+      <dl class="facts">
+        {facts.map((f) => (
+          <div class="fact">
+            <dt>{f.label}{u(...f.fields) && <> <span class="badge unverified">unverified</span></>}</dt>
+            <dd>
+              {f.big && <div class="big">{f.big}</div>}
+              {f.text && <div class="value">{f.text}</div>}
+              {!f.big && !f.text && <div class="value">—</div>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      {s.notes && (
+        <>
+          <h2>Good to know</h2>
+          <p>{s.notes}</p>
+        </>
+      )}
+
+      {isCA && <CaliforniaDetail />}
+
+      <h2>Sources</h2>
+      <ul class="aside">
+        {s.sources.map((src) => (
+          <li>
+            <a href={src.url} rel="noopener">{src.url}</a>
+            {src.type && <span class="cite"> · {src.type}</span>}
+            {src.what && <div class="hint">{src.what}</div>}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <aside class="aside">
+      <div class="card">
+        <h2>Your next steps</h2>
+        <ol>
+          {steps.map((st) => <li><a href={`/steps/#${st.slug}`}>{st.title}</a></li>)}
+        </ol>
+        <p><a class="btn" href={`/worth-it/?state=${s.slug}`}>Is it worth it?</a></p>
+        {s.self_help_url && <p><a href={s.self_help_url} rel="noopener">Official {s.state} small claims self-help →</a></p>}
+      </div>
+      {isCA && (
+        <div class="card" style="margin-top:1rem">
+          <h2>California by county</h2>
+          <p>Courthouses, self-help centers and the free small claims advisor for each county.</p>
+          <p><a href="/states/ca/counties/">All 58 counties →</a></p>
+          {counties.length > 0 && <p class="hint">e.g. <a href="/states/ca/counties/alameda/">Alameda</a> · <a href="/states/ca/counties/los-angeles/">Los Angeles</a></p>}
+        </div>
+      )}
+    </aside>
+  </div>
+</Site>

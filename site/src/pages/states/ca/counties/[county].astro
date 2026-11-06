@@ -1,0 +1,86 @@
+---
+import Site from "../../../../layouts/Site.astro";
+import { counties, type CountyRow } from "../../../../lib/data";
+
+export function getStaticPaths() {
+  return counties.map((c) => ({ params: { county: c.slug }, props: { c } }));
+}
+const { c } = Astro.props as { c: CountyRow };
+const u = (prefix: string) => c.unverified.some((f) => f === prefix || f.startsWith(prefix + "."));
+const adv = c.small_claims_advisor;
+const shc = c.self_help_center;
+---
+<Site title={`Small claims in ${c.county} County, California`} description={`Where to file small claims in ${c.county} County, plus the free small claims advisor and self-help center.`}>
+  <p class="breadcrumbs"><a href="/states/">States</a> / <a href="/states/ca/">California</a> / <a href="/states/ca/counties/">Counties</a> / {c.county}</p>
+  <div class="two-col">
+    <div>
+      <p class="eyebrow">{c.court_name}</p>
+      <h1>Small claims in {c.county} County</h1>
+      <p class="cite">checked {c.date_checked}</p>
+
+      <h2>Free help: small claims advisor {u("small_claims_advisor") && <span class="badge unverified">unverified</span>}</h2>
+      {adv ? (
+        <div class="card">
+          <p><strong>{adv.provider}</strong>{adv.free !== false && " — free"}</p>
+          {adv.format && <p>{adv.format}</p>}
+          <p>
+            {adv.phone && (
+              /^\D*\d{3}\D*\d{3}\D*\d{4}\D*$/.test(adv.phone)
+                ? <>Phone: <a href={`tel:${adv.phone.replace(/[^0-9]/g, "")}`}>{adv.phone}</a><br /></>
+                : <>Phone: {adv.phone}<br /></>
+            )}
+            {adv.email && <>Email: <a href={`mailto:${adv.email}`}>{adv.email}</a><br /></>}
+            {adv.url && <a href={adv.url} rel="noopener">Advisor website →</a>}
+          </p>
+          {adv.notes && <p class="hint">{adv.notes}</p>}
+        </div>
+      ) : <p>Not found yet.</p>}
+
+      <h2>Where small claims cases are heard {u("small_claims_locations") && <span class="badge unverified">unverified</span>}</h2>
+      {c.small_claims_locations.length ? (
+        <div>
+          {c.small_claims_locations.map((l) => (
+            <div class="loc">
+              <strong>{l.name}</strong><br />
+              <span>{l.address}</span>
+              {l.notes && <div class="hint">{l.notes}</div>}
+            </div>
+          ))}
+        </div>
+      ) : <p>Not found yet.</p>}
+
+      <dl class="facts">
+        <div class="fact"><dt>File online {u("e_filing") && <span class="badge unverified">unverified</span>}</dt><dd>{c.e_filing ?? "—"}{c.e_filing_notes && <div class="hint">{c.e_filing_notes}</div>}</dd></div>
+        <div class="fact"><dt>Remote hearings {u("remote_hearings") && <span class="badge unverified">unverified</span>}</dt><dd>{c.remote_hearings ?? "—"}</dd></div>
+        {c.local_notes && <div class="fact"><dt>Local details</dt><dd>{c.local_notes}</dd></div>}
+      </dl>
+      {c.notes && <p class="hint">{c.notes}</p>}
+
+      <h2>Sources</h2>
+      <ul>
+        {c.sources.map((s) => <li><a href={s.url} rel="noopener">{s.url}</a>{s.what && <div class="hint">{s.what}</div>}</li>)}
+      </ul>
+    </div>
+    <aside class="aside">
+      <div class="card">
+        <h2>Self-help center {u("self_help_center") && <span class="badge unverified">unverified</span>}</h2>
+        {shc ? (
+          <>
+            <p><strong>{shc.name}</strong></p>
+            {shc.address && <p>{shc.address}</p>}
+            {shc.phone && <p>{shc.phone}</p>}
+            {shc.url && <p><a href={shc.url} rel="noopener">Website →</a></p>}
+            {shc.notes && <p class="hint">{shc.notes}</p>}
+          </>
+        ) : <p>Not found yet.</p>}
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <h2>Statewide rules</h2>
+        <p>Limits, fees, forms and appeal rules are the same in every California county.</p>
+        <p><a href="/states/ca/">California rules →</a></p>
+        {c.small_claims_page_url && <p><a href={c.small_claims_page_url} rel="noopener">{c.county} court's small claims page →</a></p>}
+        <p><a class="btn" href="/demand-letter/">Start with a demand letter</a></p>
+      </div>
+    </aside>
+  </div>
+</Site>

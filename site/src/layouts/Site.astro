@@ -1,0 +1,93 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = "Should you sue in small claims court? Cited, dated rules for every state, the honest odds of getting paid, and a free demand-letter tool." } = Astro.props;
+const path = Astro.url.pathname;
+const nav = [
+  { href: "/steps/", label: "The 5 steps" },
+  { href: "/worth-it/", label: "Is it worth it?" },
+  { href: "/demand-letter/", label: "Demand letter" },
+  { href: "/states/", label: "States" },
+  { href: "/sources/", label: "How we check" },
+];
+---
+<!doctype html>
+<html lang="en" data-direction="counter">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === "Fair Claim" ? title : `${title} · Fair Claim`}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600;700&family=Public+Sans:wght@400;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap"
+    />
+    <script is:inline>
+      try {
+        var d = localStorage.getItem("fc-direction");
+        if (d === "docket" || d === "pamphlet" || d === "counter") document.documentElement.dataset.direction = d;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div class="proto-banner no-print">
+      <div class="wrap">
+        Prototype for review — not published. Legal information, not legal advice. Facts marked
+        <span class="badge unverified">unverified</span> still need a primary-source check.
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="wordmark" href="/"><span class="mark" aria-hidden="true"></span>Fair Claim</a>
+        <nav class="nav" aria-label="Main">
+          {nav.map((n) => (
+            <a href={n.href} aria-current={path.startsWith(n.href) ? "page" : undefined}>{n.label}</a>
+          ))}
+        </nav>
+        <label class="direction-switch no-print">
+          <span>Design</span>
+          <select id="direction-select" aria-label="Design direction (prototype only)">
+            <option value="counter">A · Counter</option>
+            <option value="docket">B · Docket</option>
+            <option value="pamphlet">C · Pamphlet</option>
+          </select>
+        </label>
+      </div>
+    </header>
+    <main>
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          <strong>Fair Claim gives legal information, not legal advice.</strong> Court rules change, and every case is
+          different. Each fact on this site links to the law or the court's own website and shows when we last checked
+          it. If something here doesn't match what your court tells you, the court is right — and please tell us.
+        </p>
+        <p>Free, no ads, no tracking. Nothing you type into our tools is stored or sent anywhere.</p>
+      </div>
+    </footer>
+    <script is:inline>
+      (function () {
+        var sel = document.getElementById("direction-select");
+        if (!sel) return;
+        sel.value = document.documentElement.dataset.direction || "counter";
+        sel.addEventListener("change", function () {
+          document.documentElement.dataset.direction = sel.value;
+          try {
+            localStorage.setItem("fc-direction", sel.value);
+          } catch (e) {}
+        });
+      })();
+    </script>
+  </body>
+</html>

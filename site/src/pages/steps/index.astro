@@ -1,0 +1,34 @@
+---
+import Site from "../../layouts/Site.astro";
+import { steps } from "../../lib/steps";
+---
+<Site title="The five steps" description="How small claims court works, from demand letter to collecting your money.">
+  <div class="narrow">
+    <p class="eyebrow">How small claims works</p>
+    <h1>The five steps</h1>
+    <p class="lede">
+      This is the general path in every state. The details — limits, fees, forms, deadlines — change from state to
+      state, so each step points you to your state's page for the cited rules.
+    </p>
+  </div>
+
+  <ol class="steps">
+    {steps.map((s) => (
+      <li id={s.slug}>
+        <div class="step-num" aria-hidden="true">{s.n}</div>
+        <div class="narrow">
+          <h2><span class="sr-only">Step {s.n}: </span>{s.title}</h2>
+          <div class="step-meta">{s.time} · {s.cost}</div>
+          {s.body.map((p) => <p>{p}</p>)}
+          <h3>Do this</h3>
+          <ul>{s.doThis.map((d) => <li>{d}</li>)}</ul>
+          <h3>Common mistakes</h3>
+          <ul>{s.mistakes.map((d) => <li>{d}</li>)}</ul>
+          {s.slug === "demand" && <p><a class="btn" href="/demand-letter/">Write your demand letter</a></p>}
+          {s.slug === "file" && <p><a href="/states/">Find your state's limit, fee and form →</a></p>}
+          {s.slug === "collect" && <p><a href="/worth-it/">Check whether it's worth it before you file →</a></p>}
+        </div>
+      </li>
+    ))}
+  </ol>
+</Site>

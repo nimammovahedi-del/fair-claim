@@ -1,0 +1,123 @@
+---
+// California-only detail on the CA state page: fee tiers, key deadlines, forms by step,
+// and a "last day to sue" estimator built on the reusable deadline logic.
+import { caStatewide as ca, money } from "../lib/data";
+
+const tiers = ca.fees?.filing_fee_tiers ?? [];
+const forms = (ca.forms ?? []) as { form: string; title: string; purpose: string; step: string; url: string }[];
+const stepOrder = ["demand", "file", "serve", "hearing", "collect"];
+const stepNames: Record<string, string> = {
+  demand: "Before you file",
+  file: "Filing",
+  serve: "Serving",
+  hearing: "Hearing",
+  collect: "After judgment & collecting",
+};
+const byStep = stepOrder
+  .map((s) => ({ step: s, forms: forms.filter((f) => f.step === s) }))
+  .filter((g) => g.forms.length);
+const other = forms.filter((f) => !stepOrder.includes(f.step));
+if (other.length) byStep.push({ step: "other", forms: other });
+
+const sols = (ca.statutes_of_limitations ?? []).filter((r: any) => r.years || r.days) as {
+  claim_type: string;
+  years?: number;
+  days?: number;
+  accrual?: string;
+  citation: string;
+  source: string;
+}[];
+const svc = ca.service ?? {};
+const ap = ca.appeal ?? {};
+const jb = ca.judgment_basics ?? {};
+const nice = (s: string) => s.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+---
+<section>
+  <h2>California filing fees</h2>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Your claim</th><th class="num">Fee</th><th>Law</th></tr></thead>
+      <tbody>
+        {tiers.map((t: any) => (
+          <tr><td>{t.applies_to}</td><td class="num">{money(t.fee)}</td><td class="mono">{t.citation}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  {ca.fees?.service_by_clerk_certified_mail != null && (
+    <p class="hint">Clerk service by certified mail: {money(ca.fees.service_by_clerk_certified_mail)} per defendant (CCP 116.232). Fees can be waived with form FW-001.</p>
+  )}
+
+  <h2>Deadlines that trip people up</h2>
+  <dl class="facts">
+    <div class="fact"><dt>Serve the papers</dt><dd>At least <strong>{svc.deadline_in_county_days} days</strong> before the hearing if the defendant lives in the county, <strong>{svc.deadline_out_of_county_days} days</strong> if outside it. You can't serve them yourself. <span class="cite">{svc.citation}</span></dd></div>
+    <div class="fact"><dt>File proof of service</dt><dd>At least <strong>{svc.proof_of_service_deadline_days} days</strong> before the hearing (form SC-104). <span class="cite">CCP 116.340(c)</span></dd></div>
+    <div class="fact"><dt>Appeal</dt><dd>Only the defendant can appeal the plaintiff's claim, within <strong>{ap.appeal_deadline_days} days</strong> of the notice of judgment. The appeal is a brand-new hearing. <span class="cite">{ap.citation}; {ap.deadline_citation}</span></dd></div>
+    <div class="fact"><dt>Collecting</dt><dd>You must wait out the 30-day appeal period. Unless they pay, the loser must send you a Statement of Assets (SC-133) within 30 days. Judgments earn {jb.interest_rate_general}% interest a year (5% for some consumer debts) and last {jb.judgment_life_years} years, renewable. <span class="cite">CCP 116.810, 116.830, 685.010, 683.020</span></dd></div>
+  </dl>
+
+  <h2>Last day to sue — rough estimate</h2>
+  <p>Every claim has a deadline (a "statute of limitations"). Pick your type of claim and the date it happened.</p>
+  <script type="application/json" id="sol-data" set:html={JSON.stringify(sols)} />
+  <div class="card">
+    <div class="form-grid">
+      <div class="field">
+        <label for="sol-type">Type of claim</label>
+        <select id="sol-type">
+          {sols.map((s, i) => <option value={i}>{nice(s.claim_type)} — {s.years ? `${s.years} yr` : `${s.days} days`}</option>)}
+        </select>
+      </div>
+      <div class="field">
+        <label for="sol-date">Date it happened (breach, damage, injury)</label>
+        <input id="sol-date" type="date" />
+      </div>
+    </div>
+    <p id="sol-out" aria-live="polite" style="margin-top:1rem"></p>
+    <p class="hint">Only an estimate. Special rules can make the deadline earlier (claims against a government agency need a government claim first, often within 6 months) or later (some deadlines pause or start when you discover the problem). If you're close, file sooner.</p>
+  </div>
+
+  <h2>California forms, by step</h2>
+  {byStep.map((g) => (
+    <>
+      <h3>{stepNames[g.step] ?? "Other"}</h3>
+      <ul>
+        {g.forms.map((f) => (
+          <li><a href={f.url} rel="noopener"><strong>{f.form}</strong></a> — {f.title}. <span class="hint">{f.purpose}</span></li>
+        ))}
+      </ul>
+    </>
+  ))}
+</section>
+
+<script>
+  import { limitationDeadline, describeDeadline, formatLongDate, todayISO } from "../lib/core/deadlines";
+  const sols = JSON.parse(document.getElementById("sol-data")!.textContent || "[]");
+  const type = document.getElementById("sol-type") as HTMLSelectElement;
+  const date = document.getElementById("sol-date") as HTMLInputElement;
+  const out = document.getElementById("sol-out")!;
+  function run() {
+    const r = sols[Number(type.value)];
+    if (!r || !date.value) {
+      out.textContent = "";
+      return;
+    }
+    const d = limitationDeadline(date.value, { label: r.claim_type, years: r.years, days: r.days, citation: r.citation });
+    const info = describeDeadline(d, todayISO(), 60);
+    const when = formatLongDate(d);
+    const msg =
+      info.status === "passed"
+        ? `The usual deadline was ${when} — ${Math.abs(info.daysLeft)} days ago. Check whether an exception applies before giving up.`
+        : info.status === "today"
+          ? `The usual deadline is today, ${when}.`
+          : `About ${when} — ${info.daysLeft} days from today.${info.status === "soon" ? " That's soon." : ""}`;
+    out.innerHTML = "";
+    const strong = document.createElement("strong");
+    strong.textContent = msg;
+    const cite = document.createElement("span");
+    cite.className = "cite";
+    cite.innerHTML = ` <a href="${r.source}">${r.citation}</a>`;
+    out.append(strong, cite);
+  }
+  type.addEventListener("change", run);
+  date.addEventListener("input", run);
+</script>

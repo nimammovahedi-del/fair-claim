@@ -1,0 +1,35 @@
+---
+import Site from "../../../../layouts/Site.astro";
+import { counties } from "../../../../lib/data";
+---
+<Site title="California small claims by county" description="Courthouses, self-help centers and free small claims advisors for all 58 California counties.">
+  <p class="breadcrumbs"><a href="/states/">States</a> / <a href="/states/ca/">California</a> / Counties</p>
+  <div class="narrow">
+    <h1>California small claims, county by county</h1>
+    <p class="lede">
+      The rules and fees are the same statewide. What changes by county is where you go, who can help you for free,
+      and whether you can file or appear online. Courts must offer free small claims advisor help; a few very small
+      courts (1,000 or fewer small claims filings a year) may opt out of a full program but still have to provide basic
+      help (Cal. Code Civ. Proc. § 116.940(c)).
+    </p>
+  </div>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>County</th><th>Small claims courthouses</th><th>Free advisor</th><th>E-filing</th><th>Remote hearings</th><th>Checked</th></tr>
+      </thead>
+      <tbody>
+        {counties.map((c) => (
+          <tr>
+            <td><a href={`/states/ca/counties/${c.slug}/`}>{c.county}</a></td>
+            <td class="num">{c.small_claims_locations.length || "—"}</td>
+            <td>{c.small_claims_advisor?.provider ?? "—"} {c.unverified.some((f) => f.startsWith("small_claims_advisor")) && <span class="badge unverified" title="unverified">?</span>}</td>
+            <td>{c.e_filing ?? "—"}</td>
+            <td>{c.remote_hearings ?? "—"}</td>
+            <td class="mono">{c.date_checked}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Site>

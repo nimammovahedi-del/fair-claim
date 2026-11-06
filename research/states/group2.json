@@ -1,0 +1,833 @@
+[
+  {
+    "state": "Illinois",
+    "abbr": "IL",
+    "court_name": "Small claims (circuit court, any county); Cook County also has a Pro Se Small Claims branch",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "Ill. S. Ct. Rule 281: tort or contract claims for money up to $10,000, exclusive of interest and costs (limit set in 2006; tax-collection cases removed from small claims effective Jan. 1, 2022). Cook County's Pro Se Small Claims Court (First Municipal District) is a separate branch for claims up to $3,000 where the plaintiff must file without a lawyer.",
+    "recent_changes": "Rule 286 (appearance and trial) amended Oct. 16, 2026, effective Jan. 1, 2027: small claims no longer have to be tried on the first appearance date; informal-hearing procedure clarified. Appearance fees for small claims defendants eliminated effective Oct. 1, 2025 (amended M.R. 29741; 705 ILCS 105/27.1b now says no fee may be charged for a small claims defendant's appearance). The $10,000 limit is unchanged.",
+    "filing_fee_min": null,
+    "filing_fee_max": 362,
+    "filing_fee_notes": "Fees are set county by county within statutory caps (705 ILCS 105/27.1b). Under Supreme Court order M.R. 29741, small claims of $2,500 or less are on Schedule 3 (cap $94 outside Cook County, $270 in Cook) and small claims over $2,500 are on Schedule 2 (cap $266 outside Cook, $362 in Cook). Certified-mail service by the clerk costs $2 plus postage per defendant (Rule 284); sheriff or process-server fees are extra. No appearance fee for defendants since Oct. 1, 2025.",
+    "who_can_sue": "Individuals and businesses. A corporation may not appear as plaintiff (claimant), assignee, subrogee or counterclaimant unless represented by a lawyer (Rule 282(b)); a corporate defendant may defend through an officer, director, manager or supervisor. No statewide bar on assignees or collection agencies, but corporate assignees need counsel. In Cook County's Pro Se branch the plaintiff must be self-represented.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Lawyers allowed (and required for corporate plaintiffs/assignees). Exception: in Cook County's Pro Se Small Claims branch (claims up to $3,000) attorneys cannot file for plaintiffs; if the defendant appears with a lawyer the plaintiff may then hire one.",
+    "appeal": "Either party may appeal to the Illinois Appellate Court, on the record (not a new trial). Notice of appeal is due within 30 days after the final judgment, or 30 days after a ruling on a timely post-trial motion (Rule 303).",
+    "appeal_who": "both",
+    "appeal_deadline_days": 30,
+    "e_filing": "yes_statewide",
+    "e_filing_notes": "E-filing through Odyssey eFileIL is required in civil cases statewide (Rule 9); self-represented people can get an exemption (no internet access, disability, etc.) using the Certification for Exemption from E-Filing. eFileIL itself charges no e-filing fee; some other providers do.",
+    "fee_waiver_form": "Application for Waiver of Court Fees (statewide standardized circuit-court form), ilcourts.info/forms",
+    "fee_waiver_threshold": "Court decides under 735 ILCS 5/5-105 based on public benefits received, income and expenses; the court can waive all fees, 25%-75% of fees, or none. (Statutory income tiers not re-checked from the statute this round.)",
+    "service_methods": "Certified or registered mail, restricted delivery, sent by the clerk at plaintiff's request ($2 + postage per defendant) unless local rule says otherwise (Rule 284); sheriff; special process server as allowed by the Code of Civil Procedure.",
+    "self_help_url": "https://www.ilcourthelp.gov/",
+    "citation": "Ill. S. Ct. Rules 281-288; Rule 303 (appeals); Rule 9 (e-filing); 705 ILCS 105/27.1b (fees); 735 ILCS 5/5-105 (fee waivers)",
+    "sources": [
+      {
+        "url": "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/7e33f8da-3efb-48b2-8c20-1257037e97ec/Rule%20281.pdf",
+        "what": "limit_individual, limit_business, limit_notes",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/0b9c3467-f08d-4fe4-a69a-31ea7052e0df/Rule%20282.pdf",
+        "what": "who_can_sue, lawyers_notes (corporate plaintiffs/assignees need counsel)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/4263eadc-0108-4bbc-a04d-ef48a321a609/Rule%20284.pdf",
+        "what": "service_methods, filing_fee_notes (mail service fee)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/d17fcd44-6ee6-4fbd-b912-067499ae7e9f/Rule%20286.pdf",
+        "what": "recent_changes (Rule 286 amendment eff. Jan. 1, 2027)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/d7ab6199-0e6f-49bc-8a11-017ec66815b6/Rule%20303.pdf",
+        "what": "appeal, appeal_deadline_days",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/bb0930f6-0537-40b4-af32-34540d526e8d/M.R.%2029741%20-%20ln%20re:%20Civil%20Assessment%20Schedules%20-%20Amended.pdf",
+        "what": "filing_fee_notes (small claims fee schedule assignments)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://ilga.gov/Documents/legislation/ilcs/documents/070501050K27.1b.htm",
+        "what": "filing_fee_max, filing_fee_notes (schedule caps; no appearance fee for small claims defendants)",
+        "type": "statute"
+      },
+      {
+        "url": "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/c754f944-60f6-466e-bf62-8751a0dab143/Supreme%20Court%20Eliminates%20Fees%20in%20Minor%20Guardianship%20and%20Small%20Claims%20Cases.pdf",
+        "what": "recent_changes (appearance fee eliminated eff. Oct. 1, 2025)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/aeaa0685-7d85-47e4-b113-7492ee0de256/FW-CIV%20Instructions.pdf",
+        "what": "fee_waiver_form, fee_waiver_threshold (partial waivers), e_filing_notes (exemptions)",
+        "type": "form"
+      },
+      {
+        "url": "https://www.cookcountycourtil.gov/district/first-municipal-district-chicago/pro-se-small-claims-court",
+        "what": "limit_notes, lawyers_notes (Cook County Pro Se branch, $3,000)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "filing_fee_min",
+      "fee_waiver_threshold",
+      "self_help_url"
+    ],
+    "notes": "Actual filing fees differ by county (each county board sets its fee under the caps); no single statewide amount. The Cook County Pro Se branch details came from a search summary of the Cook County court page, not a full read. ilcourthelp.gov (Illinois Court Help, run by the judiciary) blocked automated fetching, so the URL was not opened."
+  },
+  {
+    "state": "Indiana",
+    "abbr": "IN",
+    "court_name": "Small claims docket of circuit or superior court; in Marion County, the nine township Marion County Small Claims Courts",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "Small claims jurisdiction is $10,000 since July 1, 2021 (HEA 1110, P.L. 125-2021). The lead that Marion County's township small claims courts have a different limit appears out of date: they were at $8,000 (since 2015), and HEA 1110 reportedly raised IC 33-34-3-2 to $10,000 as well. Small Claims Rules apply in all courts including the Marion County Small Claims Courts.",
+    "recent_changes": "HEA 1110 (P.L. 125-2021), effective July 1, 2021, set the small claims limit at $10,000. 2025 SB 327 (Marion County small claims jurisdiction, venue and fees) passed the Senate but its final fate is unclear; some fee provisions may have been enacted through another bill (reported as P.L. 224-2025). 2026 SB 125 (Marion County small claims jurisdiction) was in committee as of Dec. 2025.",
+    "filing_fee_min": 87,
+    "filing_fee_max": 97,
+    "filing_fee_notes": "Example (Clark County clerk): $97 paper filing, $87 e-filed, plus $10 for each additional defendant on paper filings; sheriff service $28 extra. Fee is built from statutory pieces (IC 33-37-4-6: $35 small claims costs fee + $10 service fee per defendant + other statewide fees), so most counties charge about the same. Marion County township courts charge differently (Warren Township lists $89 to file + $15 service).",
+    "who_can_sue": "Individuals and businesses. Any assigned or purchased claim, or debt acquired by a third party, can only be presented by that third party through a lawyer (Small Claims Rule 8(C)). Corporations, LLCs, partnerships, sole proprietorships and trusts may appear through a designated full-time employee (with a filed certificate and resolution), but by doing so waive any amount above the small claims limit.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Lawyers allowed; required for debt buyers/assignees. Businesses may instead use a designated full-time employee under Small Claims Rule 8(C).",
+    "appeal": "Either party may appeal to the Indiana Court of Appeals within 30 days of the judgment (regular appeal on the record, not a new trial).",
+    "appeal_who": "both",
+    "appeal_deadline_days": 30,
+    "e_filing": "yes_statewide",
+    "e_filing_notes": "Indiana E-Filing System (efile.incourts.gov); township small claims courts link to it for new claims. Clark County charges $10 less for e-filed small claims.",
+    "fee_waiver_form": "Verified motion to proceed without payment of fees / affidavit of indigency (county forms; Indiana Legal Help packet)",
+    "fee_waiver_threshold": "Judge's discretion on indigency (IC 33-37-3-2); no fixed statewide income test found.",
+    "service_methods": "Certified mail with return receipt; personal delivery; leaving a copy at the defendant's home (plus first-class mail); or any method in Trial Rules 4.1-4.16 (Small Claims Rule 3). In Marion County, township constables serve in person or by certified mail.",
+    "self_help_url": "https://www.in.gov/courts/selfservice/",
+    "citation": "IC 33-29-2-4, 33-28-3-4 (small claims dockets); IC 33-34 (Marion County Small Claims Courts); IC 33-37-4-6 (fees); Indiana Small Claims Rules 1-16",
+    "sources": [
+      {
+        "url": "https://legislativeupdate.courts.in.gov/2021/05/14/small-claims-court-procedures-3",
+        "what": "limit_individual, recent_changes (HEA 1110, P.L. 125, eff. July 1, 2021)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://rules.incourts.gov/pdf/PDF%20-%20Small%20Claims/small-claims.pdf",
+        "what": "who_can_sue, lawyers_notes, service_methods, limit_notes (rules apply in Marion County courts)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://secure.in.gov/counties/shelby/courts/superior-court-2/small-claims/",
+        "what": "limit_individual ($10,000), appeal_deadline_days",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.in.gov/townships/center49/small-claims-court/about-the-court/",
+        "what": "appeal (Court of Appeals, 30 days), e_filing (Marion township court)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://secure.in.gov/counties/clarkcountyclerkofcourts/filing-fees-and-costs",
+        "what": "filing_fee_min, filing_fee_max, filing_fee_notes",
+        "type": "court_site"
+      },
+      {
+        "url": "https://legislativeupdate.courts.in.gov/2025/02/14/marion-county-small-claims-court-jurisdiction-venue-and-fees-2",
+        "what": "recent_changes (2025 SB 327)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://times.courts.in.gov/2016/12/15/reforms-to-the-marion-county-small-claims-courts/",
+        "what": "limit_notes (Marion County limit was $8,000 from July 1, 2015)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "limit_notes",
+      "filing_fee_notes",
+      "fee_waiver_form",
+      "fee_waiver_threshold",
+      "e_filing"
+    ],
+    "notes": "Marion County $10,000: the Indiana Code site (iga.in.gov) could not be read by our tools, and the HEA 1110 enrolled text was only seen through a search summary saying Section 4 changed IC 33-34-3-2 from $8,000 to $10,000. The court's own summary says 'a small claims court has jurisdiction over claims that do not exceed $10,000' without naming Marion County. Human should confirm IC 33-34-3-2 text. Marion County fee figures came from a township trustee page via search, not a full read."
+  },
+  {
+    "state": "Iowa",
+    "abbr": "IA",
+    "court_name": "Iowa District Court sitting in small claims",
+    "limit_individual": 6500,
+    "limit_business": 6500,
+    "limit_notes": "$6,500 or less, exclusive of interest and costs, for actions started on or after July 1, 2018 ($5,000 before). Same $6,500 cap applies to replevin, garnishment/execution motions and mobile-home abandonment actions; small claims court also hears evictions (forcible entry and detainer).",
+    "recent_changes": null,
+    "filing_fee_min": 95,
+    "filing_fee_max": 115,
+    "filing_fee_notes": "Statutory filing and docketing fee is $95 (Iowa Code 631.6); postage for the clerk mailing the original notice is $20, which is why the Judicial Branch self-help page says to pay $115. Personal service by a sheriff costs extra.",
+    "who_can_sue": "Individuals, partnerships, associations, corporations and other entities may sue; entities may appear through an officer or employee. Businesses that take assignments of accounts in the regular course of business may sue on them in their own name without a lawyer (Iowa Code 631.14(3)). No cap on number of filings found.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Any party may be represented by a lawyer, but none is required.",
+    "appeal": "Any party may appeal by telling the judge at the end of the hearing or filing a written notice within 20 days after judgment, and must pay the district court docket fee within those 20 days. The appeal is decided by a district judge (or a different judge) on the existing record, without new evidence unless the judge finds the record inadequate. Further review by the Iowa Supreme Court is discretionary.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 20,
+    "e_filing": "yes_statewide",
+    "e_filing_notes": "Electronic filing (Iowa eFile) is required unless the court gives permission to file on paper.",
+    "fee_waiver_form": "Application and Affidavit to Defer Payment of Costs (Iowa Code 610.1)",
+    "fee_waiver_threshold": "Court decides (may rule without a hearing) based on income, expenses and assets; Iowa's process is a deferral of costs rather than an outright waiver.",
+    "service_methods": "Certified mail, restricted delivery, return receipt, sent by the clerk at the plaintiff's election (Iowa Code 631.4; restricted delivery not used for business defendants), or personal service under the Rules of Civil Procedure (e.g., sheriff).",
+    "self_help_url": "https://www.iowacourts.gov/for-the-public/representing-yourself/small-claims",
+    "citation": "Iowa Code ch. 631 (small claims), esp. 631.1, 631.4, 631.6, 631.13, 631.14; Iowa Code 610.1 (deferral of costs)",
+    "sources": [
+      {
+        "url": "https://www.legis.iowa.gov/docs/code/631.pdf",
+        "what": "limit_individual, limit_notes, filing_fee_min, service_methods, appeal, who_can_sue, lawyers_notes",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.iowacourts.gov/for-the-public/representing-yourself/small-claims",
+        "what": "filing_fee_max ($115), e_filing, appeal, lawyers_notes",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.legis.iowa.gov/docs/code/2026/610.1.pdf",
+        "what": "fee_waiver_threshold (deferral)",
+        "type": "statute"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "fee_waiver_form",
+      "fee_waiver_threshold"
+    ],
+    "notes": "The $115 on the court page vs $95 in the statute is explained by the $20 statutory postage charge for clerk mailing (631.6(1)(c)); worth a human glance. The deferral form name came from a search summary of an older iowacourts.gov form, not a current read."
+  },
+  {
+    "state": "Kansas",
+    "abbr": "KS",
+    "court_name": "District court, small claims (Small Claims Procedure Act)",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "$10,000 exclusive of interest, costs and bad-check damages (K.S.A. 61-2703). Max 20 small claims per person in the same court per calendar year (K.S.A. 61-2704); filing over the cap gets the case dismissed with prejudice and is a Consumer Protection Act violation (61-2714).",
+    "recent_changes": "Limit raised from $4,000 to $10,000 effective July 1, 2024 (2024 HB 2604, L. 2024 ch. 22, amending K.S.A. 61-2703 and 61-2706).",
+    "filing_fee_min": 35,
+    "filing_fee_max": 69,
+    "filing_fee_notes": "Statutory docket fee is $35 for claims up to $500 and $55 above $500, the only costs required (K.S.A. 61-2704(b)); the statute let the Supreme Court add up to $12.50 through June 30, 2025. Johnson County's 2024 packet shows $49 (up to $500) and $69 ($500.01-$10,000), plus $15 sheriff service in Kansas. Current totals after the surcharge sunset not confirmed.",
+    "who_can_sue": "Individuals, partnerships, LLCs, corporations, organizations. Assigned claims, claims owed to someone else (unless filer is a full-time employee or officer of the creditor) and subrogated claims are NOT small claims (K.S.A. 61-2703), so collection agencies and debt buyers cannot use it. Max 20 filings per court per calendar year.",
+    "lawyers_allowed": "limited",
+    "lawyers_notes": "No party may be represented by a lawyer before judgment; entities appear through a full-time employee or officer who is not a lawyer (K.S.A. 61-2707). If a party's representative is or was a lawyer (or a lawyer represents himself), the other side may then use a lawyer and get a continuance (61-2714). Lawyers may handle appeals.",
+    "appeal": "Either party may appeal by filing a notice of appeal within 14 days after judgment; a different district judge hears the case de novo (new trial). No supersedeas bond needed; enforcement is stayed. If the appellee wins, the court must award the appellee reasonable attorney fees on appeal (K.S.A. 61-2709).",
+    "appeal_who": "both",
+    "appeal_deadline_days": 14,
+    "e_filing": null,
+    "e_filing_notes": "Not confirmed for self-represented small claims filers; Johnson County accepts filings by fax/in person and emails the packet for certified-mail service.",
+    "fee_waiver_form": "Poverty affidavit (K.S.A. 60-2001(b)); judge may also waive the small claims docket fee for good cause (K.S.A. 61-2704(b))",
+    "fee_waiver_threshold": "Judge's discretion",
+    "service_methods": "Sheriff (Johnson County: $15 for in-state defendants), court-appointed private process server, or certified-mail return-receipt delivery handled by the plaintiff.",
+    "self_help_url": "https://www.kscourts.gov/Public/Small-Claims",
+    "citation": "K.S.A. 61-2701 to 61-2714 (Small Claims Procedure Act)",
+    "sources": [
+      {
+        "url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_027_0003.html",
+        "what": "limit_individual, who_can_sue (assignee/subrogation exclusion), recent_changes (L. 2024 ch. 22)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_027_0004.html",
+        "what": "filing_fee_min, filing_fee_notes, limit_notes (20 claims per year)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_027_0007.html",
+        "what": "lawyers_allowed, lawyers_notes",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_027_0009.html",
+        "what": "appeal, appeal_deadline_days",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_027_0014.html",
+        "what": "lawyers_notes, limit_notes (penalty for exceeding claim cap)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.kslegislature.gov/li_2024/b2023_24/measures/hb2604/",
+        "what": "recent_changes (HB 2604, eff. July 1, 2024)",
+        "type": "statute"
+      },
+      {
+        "url": "https://courts.jocogov.org/forms/Small%20Claims/Small%20Claims%20New%20Case%20Packet%202024.PDF",
+        "what": "filing_fee_max, service_methods (Johnson County example)",
+        "type": "form"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "filing_fee_max",
+      "filing_fee_notes",
+      "e_filing",
+      "fee_waiver_form",
+      "service_methods"
+    ],
+    "notes": "kscourts.gov and the Kansas Judicial Council site blocked automated fetching, so the statewide self-help page was not read. Fees: statute vs Johnson County packet differ ($35/$55 vs $49/$69) because of surcharges/local fees; whether the $12.50 surcharge continued after June 30, 2025 is unconfirmed."
+  },
+  {
+    "state": "Kentucky",
+    "abbr": "KY",
+    "court_name": "Small Claims Division of District Court",
+    "limit_individual": 2500,
+    "limit_business": 2500,
+    "limit_notes": "$2,500 exclusive of interest and costs (KRS 24A.230). Max 25 claims per calendar year for an individual; businesses get 25 per established location in the district (KRS 24A.250); limits don't apply to city/county/urban-county governments. No libel/slander, malicious prosecution, abuse of process.",
+    "recent_changes": "Filing fee rule CR 3.03 amended by Supreme Court Order 2026-15 (entered May 14, 2026), effective July 1, 2026: small claims fee $38. 2024 HB 353 (raise limit to $5,000) did not pass.",
+    "filing_fee_min": 58,
+    "filing_fee_max": null,
+    "filing_fee_notes": "CR 3.03(1)(a): $38 for small claims, plus a $20 court technology fee and other required fees (KRS 453.060, KRS 27A.630, local facility/library fees), so at least $58. Certified mail service fee set by administrative order; sheriff service fee paid directly to the sheriff. No fee for a counterclaim of $2,500 or less.",
+    "who_can_sue": "Any person, business or corporation, EXCEPT: anyone in the business of lending money at interest, collection agencies or collection agents, and anyone with an assigned claim; no class actions. Filing cap of 25 per year (per location for businesses). Corporations/partnerships must appear through an officer, managerial employee or attorney.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Parties may represent themselves or hire a lawyer.",
+    "appeal": "Either party may appeal to Circuit Court by filing a notice of appeal (with fee) within 10 days after the judgment is entered (KRS 24A.340), then a statement of appeal within 30 days. Circuit judge reviews the record only (no new evidence).",
+    "appeal_who": "both",
+    "appeal_deadline_days": 10,
+    "e_filing": "yes_statewide",
+    "e_filing_notes": "Complaints and notices of appeal may be filed with the circuit clerk in person or through the KCOJ eFiling system (ehelp.kycourts.net).",
+    "fee_waiver_form": "Motion/affidavit to proceed in forma pauperis (KRS 453.190); official form number not confirmed",
+    "fee_waiver_threshold": "Court decides whether the person is a 'poor person' unable to pay without depriving themselves of necessities (KRS 453.190)",
+    "service_methods": "Certified mail, return receipt requested, sent by the circuit clerk (paid in advance), or personal service by the sheriff (fee paid to sheriff).",
+    "self_help_url": "https://www.kycourts.gov/Legal-Help/Pages/Self-Help-Portal.aspx",
+    "citation": "KRS 24A.200-24A.360 (esp. 24A.230 limit, 24A.240 parties, 24A.250 filing cap, 24A.340 appeal); CR 3.03 (fees)",
+    "sources": [
+      {
+        "url": "https://kycourts.gov/Legal-Help/Documents/P-6_Small_Claims_Handbook_25.pdf",
+        "what": "limit_individual, limit_notes, who_can_sue, service_methods, appeal, appeal_deadline_days, e_filing",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.kycourts.gov/Courts/Supreme-Court/Supreme%20Court%20Orders/202615.pdf",
+        "what": "filing_fee_min, filing_fee_notes, recent_changes",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://apps.legislature.ky.gov/record/24rs/hb353.html",
+        "what": "recent_changes (HB 353 2024 not enacted)",
+        "type": "statute"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "fee_waiver_form",
+      "fee_waiver_threshold",
+      "filing_fee_max"
+    ],
+    "notes": "Lead confirmed: $2,500 (KRS 24A.230) per the AOC/Attorney General handbook (2025 edition). The KRS text itself was not read on the legislature site (search could not locate the statute page IDs); facts rely on the official court handbook. The $38 fee is new as of July 1, 2026; earlier charts will show older amounts."
+  },
+  {
+    "state": "Louisiana",
+    "abbr": "LA",
+    "court_name": "Small claims divisions of city courts; justice of the peace courts (civil); parish courts in some parishes",
+    "limit_individual": 5000,
+    "limit_business": 5000,
+    "limit_notes": "City court small claims divisions: $5,000, exclusive of interest, costs, attorney fees and penalties; max 10 plaintiffs, no class actions; each court may set mass-filing limits by rule (La. R.S. 13:5202). City Court of East St. Tammany uses the justice-of-the-peace limit instead. Justice of the peace courts: concurrent with district court up to $5,000 (La. C.C.P. art. 4911). Limits for parish courts and other city-court divisions not researched.",
+    "recent_changes": "2026 bills to raise the justice of the peace limit (HB 1004 to $10,000; HB 1147 to $8,000 in small parishes) did not pass; art. 4911 history shows no amendment after 2008. R.S. 13:5202 last amended 2020 (Act 205).",
+    "filing_fee_min": null,
+    "filing_fee_max": null,
+    "filing_fee_notes": "City court small claims: statute sets $35 per defendant (R.S. 13:5205), plus any costs under R.S. 13:10.3 and up to $20 per extra service or subpoena; actual totals vary by court. Justice of the peace court fees vary by court.",
+    "who_can_sue": "No statewide bar on businesses, assignees or collection agencies found (courts may limit mass filings by local rule). Max 10 plaintiffs per action; no class actions.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "No prohibition found; an attorney is not required (e.g., East Baton Rouge JP courts).",
+    "appeal": "City court small claims division: a plaintiff who files there gives up the right to appeal; a defendant also gives up appeal unless they move, within the answer deadline, to transfer the case to the court's ordinary docket (R.S. 13:5209). Justice of the peace courts: either party may file for a new trial (de novo) in parish court or, if none, district court within 15 days of judgment (C.C.P. arts. 4924-4925); no further appeal after that.",
+    "appeal_who": "varies",
+    "appeal_deadline_days": 15,
+    "e_filing": "some_courts",
+    "e_filing_notes": "No statewide e-filing system for these courts found; JP courts may accept claims verbally or on paper.",
+    "fee_waiver_form": "Pauper affidavit under La. C.C.P. arts. 5181-5188",
+    "fee_waiver_threshold": "Court decides whether the party cannot pay costs because of poverty and lack of means (C.C.P. 5181 et seq.; R.S. 13:5205 allows waiver for indigent parties)",
+    "service_methods": "Citation served by the court's marshal or constable (JP courts: constable).",
+    "self_help_url": null,
+    "citation": "La. R.S. 13:5200-5212 (small claims divisions); La. C.C.P. arts. 4911, 4924, 4925 (justice of the peace courts); C.C.P. arts. 5181-5188 (paupers)",
+    "sources": [
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77961",
+        "what": "limit_individual, limit_notes (R.S. 13:5202)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77964",
+        "what": "filing_fee_notes, fee_waiver_threshold (R.S. 13:5205)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77969",
+        "what": "appeal (R.S. 13:5209 waiver of appeal)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=112118",
+        "what": "limit_notes (C.C.P. art. 4911 JP limit), recent_changes",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=112131",
+        "what": "appeal (C.C.P. art. 4924, de novo)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=112132",
+        "what": "appeal_deadline_days (C.C.P. art. 4925, 15 days)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.brla.gov/2118/Small-Claims",
+        "what": "lawyers_notes, service_methods (East Baton Rouge JP courts example)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "filing_fee_min",
+      "filing_fee_max",
+      "who_can_sue",
+      "lawyers_allowed",
+      "e_filing",
+      "service_methods",
+      "self_help_url"
+    ],
+    "notes": "Multiple court systems: city court small claims divisions (no appeal), JP courts (de novo appeal in 15 days), and parish courts (not researched). No statewide official small claims self-help page found. The 15-day appeal deadline is for JP courts only."
+  },
+  {
+    "state": "Maine",
+    "abbr": "ME",
+    "court_name": "Maine District Court (small claims)",
+    "limit_individual": 10000,
+    "limit_business": 10000,
+    "limit_notes": "$10,000 exclusive of interest and costs, for any plaintiff (14 M.R.S. §7482); no actions involving title to real estate; you cannot sue a city or town in small claims.",
+    "recent_changes": "Lead confirmed: P.L. 2025, c. 261 (LD 654, H.P. 422), signed June 11, 2025, raised the limit from $6,000 to $10,000; Sec. 2 says the Act takes effect January 1, 2026. Court fee schedule A.O. JB-05-26 revised effective March 9, 2026.",
+    "filing_fee_min": 70,
+    "filing_fee_max": 70,
+    "filing_fee_notes": "$70 to file a small claims action (includes a $15 mediation fee). Optional service arranged by the clerk is $15 per party; sheriff fees vary by county. Fee schedule notes a 2024 change removing a separate small claims fee for Title 32 debt collectors.",
+    "who_can_sue": "Anyone may sue, with a few exceptions (e.g., cities/towns cannot be sued in small claims). A corporation or other entity may be represented by an employee or other principal who is not a lawyer. Clerk-arranged service is only available to plaintiffs filing fewer than three small claims cases per month.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Parties may represent themselves or hire a lawyer.",
+    "appeal": "Either side may appeal to Superior Court within 30 days after judgment is entered. A losing plaintiff may appeal only on questions of law. A defendant may appeal on law and/or facts and may request a jury trial (jury fee).",
+    "appeal_who": "both",
+    "appeal_deadline_days": 30,
+    "e_filing": "some_courts",
+    "e_filing_notes": "eFiling is being rolled out by judicial region; Guide & File interview available where eFiling is live. Paper filing remains available if not required to eFile.",
+    "fee_waiver_form": "Application to Proceed Without Payment of Fees (CV-067) with Financial Affidavit (CV-191)",
+    "fee_waiver_threshold": "Judge's discretion based on financial affidavit",
+    "service_methods": "Restricted-delivery certified mail with return receipt (arranged by plaintiff); county sheriff; clerk-arranged first-class mail ($15/party, for plaintiffs filing fewer than 3 cases a month); or first-class mail with acknowledgment form the defendant must sign and return within 20 days.",
+    "self_help_url": "https://www.courts.maine.gov/help/small-claims/index.html",
+    "citation": "14 M.R.S. §§ 7481-7487; Maine Rules of Small Claims Procedure; A.O. JB-05-26 (fees)",
+    "sources": [
+      {
+        "url": "https://legislature.maine.gov/statutes/14/title14sec7482.html",
+        "what": "limit_individual, limit_notes",
+        "type": "statute"
+      },
+      {
+        "url": "https://legislature.maine.gov/legis/bills/getPDF.asp?paper=HP0422&item=3&snum=132",
+        "what": "recent_changes (P.L. 2025 c. 261, effective Jan. 1, 2026)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.courts.maine.gov/help/small-claims/index.html",
+        "what": "who_can_sue, lawyers_notes, appeal, e_filing, fee_waiver_form",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.courts.maine.gov/help/guides/sc-guide-2026.pdf",
+        "what": "service_methods, appeal, appeal_deadline_days, fee_waiver_form (CV-067, CV-191)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.courts.maine.gov/adminorders/jb-05-26.pdf",
+        "what": "filing_fee_min, filing_fee_max, filing_fee_notes",
+        "type": "court_rule"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "fee_waiver_threshold"
+    ],
+    "notes": ""
+  },
+  {
+    "state": "Maryland",
+    "abbr": "MD",
+    "court_name": "District Court of Maryland (small claims)",
+    "limit_individual": 5000,
+    "limit_business": 5000,
+    "limit_notes": "$5,000 or less, exclusive of interest, costs and (contract/statutory) attorney's fees; District Court has exclusive jurisdiction (Cts. & Jud. Proc. § 4-405). Money only, no discovery.",
+    "recent_changes": null,
+    "filing_fee_min": 44,
+    "filing_fee_max": 44,
+    "filing_fee_notes": "$44 for a new small claims complaint (contract, tort or medical debt), including a $6 records-improvement surcharge; counterclaim or cross-claim $18. Service: $20 per defendant if mailed by clerk (certified mail), $60 per defendant by sheriff/constable (DCA-109, rev. 03/2026). Max 20 civil filings per check.",
+    "who_can_sue": "Individuals and businesses. No statewide bar on assignees or collection agencies found.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "You may hire a lawyer at your own cost; not required.",
+    "appeal": "Either party may appeal to the circuit court; for amounts in controversy of $5,000 or less the appeal is tried de novo (new trial) (Cts. & Jud. Proc. § 12-401(f)). Deadline is 30 days after judgment (Md. Rule 7-104).",
+    "appeal_who": "both",
+    "appeal_deadline_days": 30,
+    "e_filing": "yes_statewide",
+    "e_filing_notes": "MDEC (Maryland Electronic Courts) e-filing; Guide & File interview for small and large claims.",
+    "fee_waiver_form": "Request for Waiver of Prepaid Costs (see mdcourts.gov/legalhelp/filingfeewaivers)",
+    "fee_waiver_threshold": "Judge decides (Md. Rule 1-325); no advance costs if represented by Legal Aid/JUDICARE or a recognized pro bono program.",
+    "service_methods": "Certified mail by the clerk ($20/defendant) or by the party, private process server, sheriff ($60/defendant), or constable (Baltimore County).",
+    "self_help_url": "https://www.mdcourts.gov/legalhelp/smallclaims",
+    "citation": "Md. Code, Cts. & Jud. Proc. §§ 4-405, 12-401; Md. Rules 3-701, 7-104, 1-325; District Court Admin. Reg. XIX (cost schedule)",
+    "sources": [
+      {
+        "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=4-405&enactments=false",
+        "what": "limit_individual, limit_notes",
+        "type": "statute"
+      },
+      {
+        "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=12-401&enactments=false",
+        "what": "appeal (de novo for $5,000 or less)",
+        "type": "statute"
+      },
+      {
+        "url": "https://mdcourts.gov/sites/default/files/court-forms/dca109blf.pdf",
+        "what": "filing_fee_min, filing_fee_max, filing_fee_notes, service_methods, fee_waiver_threshold (exceptions)",
+        "type": "form"
+      },
+      {
+        "url": "https://www.mdcourts.gov/legalhelp/smallclaims",
+        "what": "lawyers_notes, service_methods, appeal (retried in circuit court), e_filing_notes",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "appeal_deadline_days",
+      "e_filing",
+      "fee_waiver_form",
+      "fee_waiver_threshold",
+      "who_can_sue"
+    ],
+    "notes": "No pending bill to raise the $5,000 limit found. 30-day deadline is from Md. Rule 7-104 (not re-read this round)."
+  },
+  {
+    "state": "Massachusetts",
+    "abbr": "MA",
+    "court_name": "Small claims sessions of the District Court, Boston Municipal Court and Housing Court",
+    "limit_individual": 7000,
+    "limit_business": 7000,
+    "limit_notes": "$7,000 (G.L. c. 218, § 21). No dollar limit for property damage caused by a motor vehicle. Cities and towns may sue for unpaid personal property taxes in any amount; other city/town actions up to $15,000.",
+    "recent_changes": "H.1860 (2025-2026), to raise the limit to $20,000, was sent to a study order on March 26, 2026 (effectively dead). No change enacted.",
+    "filing_fee_min": 40,
+    "filing_fee_max": 150,
+    "filing_fee_notes": "Statutory entry fee (G.L. c. 218, § 22) plus a $10 surcharge (c. 262, § 4C): $40 for claims $500 or less, $50 for $500.01-$2,000, $100 for $2,000.01-$5,000, $150 over $5,000. Clerk mails notice by first-class mail.",
+    "who_can_sue": "Individuals and businesses. No statewide bar on assignees or collection agencies found in c. 218 §§ 21-23.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "No prohibition found in the statute.",
+    "appeal": "Only the defendant may appeal: within 10 days after receiving the magistrate's finding, file a claim for trial by a jury of six or a single justice, with an affidavit of good faith, $25 entry fee and $100 bond (bond waivable if defendant can't pay). The plaintiff waives the right to appeal by filing in small claims. The new trial treats the plaintiff's win below as prima facie evidence.",
+    "appeal_who": "defendant_only",
+    "appeal_deadline_days": 10,
+    "e_filing": null,
+    "e_filing_notes": "Not confirmed (mass.gov blocked automated fetching).",
+    "fee_waiver_form": "Affidavit of Indigency (G.L. c. 261, §§ 27A-27G)",
+    "fee_waiver_threshold": "Indigent if: receiving public assistance (e.g., TAFDC, EAEDC, SSI, MassHealth, veterans' benefits); or income after taxes at or below 125% of the poverty threshold; or unable to pay without depriving self/family of necessities (G.L. c. 261, § 27A).",
+    "service_methods": "Clerk sends notice by first-class mail (G.L. c. 218, § 22); if that fails, sheriff or constable service.",
+    "self_help_url": "https://www.mass.gov/guides/a-guide-to-small-claims-court",
+    "citation": "G.L. c. 218, §§ 21-25; Uniform Small Claims Rules; G.L. c. 261, §§ 27A-27G",
+    "sources": [
+      {
+        "url": "https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleI/Chapter218/Section21",
+        "what": "limit_individual, limit_notes",
+        "type": "statute"
+      },
+      {
+        "url": "https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleI/Chapter218/Section22",
+        "what": "filing_fee_notes (entry fees), service_methods (first-class mail)",
+        "type": "statute"
+      },
+      {
+        "url": "https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleI/Chapter218/Section23",
+        "what": "appeal, appeal_who, appeal_deadline_days",
+        "type": "statute"
+      },
+      {
+        "url": "https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleVI/Chapter261/Section27A",
+        "what": "fee_waiver_threshold",
+        "type": "statute"
+      },
+      {
+        "url": "https://malegislature.gov/Bills/194/H1860",
+        "what": "recent_changes (H.1860 status)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.mass.gov/info-details/housing-court-filing-fees",
+        "what": "filing_fee_min ($30 + $10 surcharge = $40)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "filing_fee_max",
+      "lawyers_allowed",
+      "who_can_sue",
+      "e_filing",
+      "service_methods",
+      "fee_waiver_threshold",
+      "self_help_url"
+    ],
+    "notes": "mass.gov blocked automated fetching, so the Trial Court's own small claims guide and fee table were not read. The malegislature.gov page for c. 218 § 22 shows two fee schedules (older $20/$30 and current $30/$40/$90/$140); totals above assume the current one plus $10 surcharge, which matches the $40 figure seen in a mass.gov search snippet. H.1860 status from bill trackers; c. 261 § 27A criteria from a search summary of the statute page."
+  },
+  {
+    "state": "Michigan",
+    "abbr": "MI",
+    "court_name": "Small Claims Division of District Court",
+    "limit_individual": 7000,
+    "limit_business": 7000,
+    "limit_notes": "Current limit $7,000 (since Jan. 1, 2024). MCL 600.8401's step schedule: $5,000 (Sept. 1, 2012), $5,500 (Jan. 1, 2015), $6,000 (Jan. 1, 2018), $6,500 (Jan. 1, 2021), $7,000 (Jan. 1, 2024); no further steps are scheduled. Money only. Max 5 claims per person per week in a district (20 for local governments).",
+    "recent_changes": "Last scheduled step to $7,000 took effect Jan. 1, 2024. No 2025-2026 bill to raise it found. SCAO overview form DC 84info revised 6/26.",
+    "filing_fee_min": 30,
+    "filing_fee_max": 70,
+    "filing_fee_notes": "$30 (claims up to $600), $50 ($600.01-$1,750), $70 (over $1,750) = statutory fee ($25/$45/$65, MCL 600.8420) plus $5 electronic filing system fee (MCL 600.1986). Plus postage/service costs.",
+    "who_can_sue": "Individuals; businesses through a proprietor, partner or full-time salaried employee with knowledge of the facts. Assignees of a claim and third-party beneficiaries may NOT file (MCL 600.8407(1)); collection agencies may not take part (MCL 600.8408(1)). Max 5 claims per week per district court district.",
+    "lawyers_allowed": "no",
+    "lawyers_notes": "Lawyers may not appear except on their own behalf (MCL 600.8408). Either party may remove the case to the general civil division before the hearing to use a lawyer and keep jury/appeal rights.",
+    "appeal": "No appeal from a district judge's small claims judgment. If a magistrate heard the case, either party may take a de novo appeal to a district judge within 7 days (MCL 600.8427).",
+    "appeal_who": "varies",
+    "appeal_deadline_days": 7,
+    "e_filing": "some_courts",
+    "e_filing_notes": "MiFILE e-filing in some courts; each court decides whether to allow in-person, mail or MiFILE filing.",
+    "fee_waiver_form": "Fee Waiver Request (MC 20), filed with the Small Claims Affidavit (DC 84)",
+    "fee_waiver_threshold": "Court decides under MCR 2.002 (receipt of means-tested public assistance or inability to pay); exact criteria not re-checked this round.",
+    "service_methods": "Clerk arranges service by certified mail; or a process server (personal service at regular summons fee and mileage).",
+    "self_help_url": "https://michiganlegalhelp.org/smallclaims",
+    "citation": "MCL 600.8401-600.8427 (esp. 8401, 8407, 8408, 8420, 8427); MCL 600.1986",
+    "sources": [
+      {
+        "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-600-8401",
+        "what": "limit_individual, limit_notes (schedule)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-600-8407",
+        "what": "who_can_sue (assignees barred, 5 claims/week)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-600-8408",
+        "what": "lawyers_allowed, who_can_sue (collection agencies barred)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-600-8427",
+        "what": "appeal, appeal_deadline_days",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-600-8420",
+        "what": "filing_fee_notes (statutory fee)",
+        "type": "statute"
+      },
+      {
+        "url": "https://legislature.mi.gov/documents/mcl/pdf/MCL-600-1986.pdf",
+        "what": "filing_fee_notes ($5 e-filing system fee)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.courts.michigan.gov/49f3ce/siteassets/forms/scao-approved/dc84info.pdf",
+        "what": "filing_fee_min, filing_fee_max, fee_waiver_form, service_methods, e_filing_notes, lawyers_notes",
+        "type": "form"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "fee_waiver_threshold",
+      "self_help_url"
+    ],
+    "notes": "self_help_url is Michigan Legal Help (statewide site the SCAO form itself points to), not a court domain. No standalone courts.michigan.gov small claims page was located."
+  },
+  {
+    "state": "Minnesota",
+    "abbr": "MN",
+    "court_name": "Conciliation Court (division of District Court)",
+    "limit_individual": 20000,
+    "limit_business": 20000,
+    "limit_notes": "$20,000 generally; $4,000 for claims involving a consumer credit transaction (claimant is the original seller or lender) (Minn. Stat. § 491A.01, subd. 3a).",
+    "recent_changes": "Limit raised from $15,000 to $20,000 by 2024 Minn. Laws ch. 123, art. 15, § 6 (no special effective date in the section, so the general Aug. 1, 2024 date applies). Gen. R. Prac. 512 and 521 amended effective July 1, 2026 (in-person appearance requirement removed).",
+    "filing_fee_min": 65,
+    "filing_fee_max": null,
+    "filing_fee_notes": "$65 filing fee (Minn. Stat. § 357.022) plus any county law library fee; charged to each plaintiff and each defendant when that party files its first paper. Removal to district court costs the regular civil filing fee.",
+    "who_can_sue": "Individuals and entities. Businesses may appear through an officer, manager, partner, or an authorized employee/commercial property manager with proof of authority. Consumer-credit claims capped at $4,000 and only by the original seller/lender.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "A party may be represented by a Minnesota lawyer, who may participate to the extent the judge finds helpful (Gen. R. Prac. 512).",
+    "appeal": "Any aggrieved party may 'remove' the case to district court for a new trial (de novo) within 21 days after the court administrator sent notice of judgment, by serving and filing a demand for removal, a good-faith affidavit and the removal fee; jury may be demanded. A removing party who doesn't prevail may owe the other side $50 extra costs (Minn. Stat. § 491A.02).",
+    "appeal_who": "both",
+    "appeal_deadline_days": 21,
+    "e_filing": "yes_statewide",
+    "e_filing_notes": "Minnesota eFile and eServe (eFS); not re-checked for self-represented conciliation filers this round.",
+    "fee_waiver_form": "In forma pauperis affidavit (Minn. Stat. § 563.01)",
+    "fee_waiver_threshold": "Presumed eligible if receiving public assistance, represented by legal services/volunteer attorney program, or annual income at or below 125% of poverty line; court may order partial payment otherwise.",
+    "service_methods": "Court administrator mails the summons by first-class mail; if the claim is over $2,500 the plaintiff must serve by certified mail, or by personal service as an alternative (Minn. Stat. § 491A.01, subd. 3a(c)).",
+    "self_help_url": "https://mncourts.gov/help-topics/conciliation-court",
+    "citation": "Minn. Stat. §§ 491A.01-491A.03, 357.022, 563.01; Minn. Gen. R. Prac. 501-525",
+    "sources": [
+      {
+        "url": "https://www.revisor.mn.gov/statutes/cite/491A.01",
+        "what": "limit_individual, limit_notes, service_methods",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.revisor.mn.gov/laws/2024/0/Session+Law/Chapter/123/",
+        "what": "recent_changes ($15,000 to $20,000)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.revisor.mn.gov/statutes/cite/491A.02",
+        "what": "who_can_sue (entity representation), appeal ($50 costs), filing_fee_notes",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.revisor.mn.gov/statutes/cite/357.022",
+        "what": "filing_fee_min",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.revisor.mn.gov/court_rules/gp/id/521/",
+        "what": "appeal, appeal_deadline_days",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.revisor.mn.gov/court_rules/gp/id/512/",
+        "what": "lawyers_notes, who_can_sue, recent_changes",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.revisor.mn.gov/statutes/cite/563.01",
+        "what": "fee_waiver_threshold",
+        "type": "statute"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "filing_fee_max",
+      "e_filing",
+      "fee_waiver_form"
+    ],
+    "notes": "mncourts.gov blocked automated fetching; Aug. 1, 2024 effective date inferred from the absence of a section-specific date in ch. 123."
+  },
+  {
+    "state": "Mississippi",
+    "abbr": "MS",
+    "court_name": "Justice Court",
+    "limit_individual": 3500,
+    "limit_business": 3500,
+    "limit_notes": "Justice court judges hear actions for debts, damages or personal property up to $3,500 (Miss. Code § 9-11-9). County courts have higher limits but are not small claims courts.",
+    "recent_changes": "Bills to raise the limit to $5,000 failed in 2025 and 2026 (e.g., 2026 HB 876 died in committee Feb. 3, 2026).",
+    "filing_fee_min": null,
+    "filing_fee_max": null,
+    "filing_fee_notes": "Statute sets a uniform civil fee of $25 plus $5 per extra defendant for service (Miss. Code § 25-7-25), but counties add state assessments, so actual totals vary; check the county justice court cost sheet.",
+    "who_can_sue": "No statewide bar on businesses, assignees or collection agencies found; consumer debt and landlord-tenant cases are the main civil caseload.",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Lawyers allowed; some courts (e.g., DeSoto County) have self-represented parties sign a waiver of counsel form.",
+    "appeal": "Either party may appeal to county court (or circuit court if no county court) for a new trial; statute requires demand and bond (double the judgment, at least $100) within 10 days after judgment, with a poverty affidavit option for defendants (Miss. Code § 11-51-85). Court rules (URCCC) say justice court appeals are tried de novo; DeSoto County's justice court says appeals may be filed within 30 days.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 10,
+    "e_filing": null,
+    "e_filing_notes": "Not confirmed.",
+    "fee_waiver_form": "Pauper's affidavit (form not confirmed)",
+    "fee_waiver_threshold": "Judge's discretion (poverty affidavit)",
+    "service_methods": "Court arranges service of the complaint/summons (constable or sheriff); details not confirmed.",
+    "self_help_url": "https://courts.ms.gov/trialcourts/justicecourt/justicecourt.php",
+    "citation": "Miss. Code §§ 9-11-9 (jurisdiction), 25-7-25 (fees), 11-51-85 (appeal); Uniform Rules of Procedure for Justice Court; URCCC 5",
+    "sources": [
+      {
+        "url": "https://billstatus.ls.state.ms.us/documents/2026/html/HB/0800-0899/HB0876IN.htm",
+        "what": "limit_individual (current § 9-11-9 text shown), filing_fee_notes (§ 25-7-25)",
+        "type": "statute"
+      },
+      {
+        "url": "https://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB0876.xml",
+        "what": "recent_changes (HB 876 died in committee)",
+        "type": "statute"
+      },
+      {
+        "url": "https://billstatus.ls.state.ms.us/documents/2023/html/HB/0800-0899/HB0870IN.htm",
+        "what": "appeal (current § 11-51-85 text: 10 days, bond, county court)",
+        "type": "statute"
+      },
+      {
+        "url": "https://desotocountyms.gov/m/faq?cat=16",
+        "what": "lawyers_notes, appeal (30-day statement)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "appeal_deadline_days",
+      "filing_fee_min",
+      "filing_fee_max",
+      "who_can_sue",
+      "e_filing",
+      "fee_waiver_form",
+      "fee_waiver_threshold",
+      "service_methods",
+      "self_help_url"
+    ],
+    "notes": "CONFLICT: Miss. Code § 11-51-85 says 10 days (2023 HB 870 to change it to 30 days died), but DeSoto County's justice court FAQ says 30 days, likely reflecting URCCC Rule 5 (30-day notice of appeal). Needs human check. courts.ms.gov returned server errors during this check, so the AOC justice court page and Rules of Justice Court PDF could not be read. Statute text taken from official bill texts on the legislature's site, which reproduce current law."
+  },
+  {
+    "state": "Missouri",
+    "abbr": "MO",
+    "court_name": "Small claims court (associate circuit division of circuit court)",
+    "limit_individual": 5000,
+    "limit_business": 5000,
+    "limit_notes": "$5,000 exclusive of interest or costs (RSMo 482.305). Max 12 other small claims filed in Missouri in the current calendar year; assignees barred (RSMo 482.330). Money only; no evictions.",
+    "recent_changes": null,
+    "filing_fee_min": null,
+    "filing_fee_max": null,
+    "filing_fee_notes": "Varies by county; filing fee plus certified-mail or sheriff/process-server cost. Examples seen in search results from county court pages: Jackson County $27 + service, Greene County $35.50, Webster County $38.50.",
+    "who_can_sue": "Any person or business owed money. Assignees (anyone who bought or acquired the claim) may not file, and no one may file after 12 other small claims that calendar year; plaintiff signs a statement certifying both (RSMo 482.330).",
+    "lawyers_allowed": "yes",
+    "lawyers_notes": "Parties may proceed without a lawyer or bring one. Filing an application for trial de novo has been held to be the practice of law (Palmore v. City of Pacific, 2013).",
+    "appeal": "Any party aggrieved by a final judgment (other than a consent judgment) may file an Application for Trial de Novo with the small claims clerk within 10 days after judgment; new trial before a circuit/associate circuit judge or jury (RSMo 482.365). Bond optional to stop collection.",
+    "appeal_who": "both",
+    "appeal_deadline_days": 10,
+    "e_filing": null,
+    "e_filing_notes": "Not confirmed for self-represented small claims filers.",
+    "fee_waiver_form": "Affidavit asking the judge to file without paying fees (in forma pauperis)",
+    "fee_waiver_threshold": "Judge's discretion; handbook says 'you must be very poor'.",
+    "service_methods": "Summons sent by certified mail (defendant must sign); if that fails, sheriff or special process server.",
+    "self_help_url": "https://www.courts.mo.gov/page.jsp?id=704",
+    "citation": "RSMo 482.300-482.365; Mo. Sup. Ct. Rule 152",
+    "sources": [
+      {
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=482.305",
+        "what": "limit_individual",
+        "type": "statute"
+      },
+      {
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=482.330",
+        "what": "who_can_sue, limit_notes (assignees barred, 12 claims/year)",
+        "type": "statute"
+      },
+      {
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=482.365",
+        "what": "appeal, appeal_deadline_days, lawyers_notes",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.courts.mo.gov/hosted/circuit13/forms/Civil/CIVIL_SmallClaimsCourtHandbook.pdf",
+        "what": "service_methods, fee_waiver_threshold, lawyers_notes, who_can_sue (Missouri Bar handbook rev. April 2021, hosted by 13th Circuit)",
+        "type": "court_site"
+      }
+    ],
+    "date_checked": "2026-11-05",
+    "unverified": [
+      "filing_fee_min",
+      "filing_fee_max",
+      "filing_fee_notes",
+      "e_filing",
+      "fee_waiver_form",
+      "self_help_url"
+    ],
+    "notes": "courts.mo.gov main pages blocked automated fetching; handbook is from 2021 (Missouri Bar, court-hosted). Statutory limits and appeal rules checked on revisor.mo.gov."
+  }
+]
