@@ -1,0 +1,16 @@
+---
+import Site from "../../layouts/Site.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import ChecklistDoc from "../../components/ChecklistDoc.astro";
+---
+<Site title="Checklists: general version" description="Printable small claims checklists for any state: before you decide, demand letter, filing, serving, the hearing and collecting.">
+  <Breadcrumb items={[{ href: "/checklists/", label: "Checklists" }, { label: "General version" }]} />
+  <div class="narrow checklist-page">
+    <p class="eyebrow no-print">Checklists</p>
+    <h1>Small claims checklists</h1>
+    <p class="lede">
+      General version for any state. <span class="no-print">For your state's limit, fees and deadlines, <a href="/checklists/">choose your state</a>.</span>
+    </p>
+    <ChecklistDoc />
+  </div>
+</Site>

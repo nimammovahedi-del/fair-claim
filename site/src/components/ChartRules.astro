@@ -1,0 +1,81 @@
+---
+// Who can appeal, and whether lawyers can take part: counts across the 50 states + DC.
+// Data: states.json appeal_who and lawyers_allowed (via lib/stats.ts).
+import ChartFrame from "./ChartFrame.astro";
+import { appealGroups, lawyerGroups, appealDeadlineStats, statesChecked, statesSource } from "../lib/stats";
+
+interface Props {
+  headingLevel?: 2 | 3 | 4;
+  id?: string;
+}
+const { headingLevel = 3, id = "chart-rules" } = Astro.props;
+const total = appealGroups.reduce((a, g) => a + g.count, 0);
+const both = appealGroups.find((g) => g.key === "both")!;
+const none = appealGroups.find((g) => g.key === "none")!;
+const lawyersYes = lawyerGroups.find((g) => g.key === "yes")!;
+const groups = [
+  { title: "Who can appeal", rows: appealGroups },
+  { title: "Can a lawyer represent you?", rows: lawyerGroups },
+];
+const shownU = [...appealGroups, ...lawyerGroups].some((g) => g.count <= 12 && g.states.some((s) => s.unverified));
+const anyU = [...appealGroups, ...lawyerGroups].some((g) => g.states.some((s) => s.unverified));
+---
+<ChartFrame
+  id={id}
+  headingLevel={headingLevel}
+  title={`Either side can appeal in ${both.count} of ${total} jurisdictions; in ${none.count}, the small claims decision is final`}
+  subtitle={`Appeal deadlines run from ${appealDeadlineStats.min} to ${appealDeadlineStats.max} days where there is one (middle value ${appealDeadlineStats.median} days). Lawyers can represent a party in ${lawyersYes.count} jurisdictions.`}
+  sources={[statesSource]}
+  checked={statesChecked}
+  unverified={anyU}
+  unverifiedText="Some states' appeal or lawyer rules aren't confirmed yet; they're marked in the table."
+>
+  <div class="chart-split">
+    {groups.map((grp) => (
+      <div>
+        <p class="chart-group-title">{grp.title}</p>
+        <div class="bars no-grid">
+          {grp.rows.map((g) => (
+            <div class="bar-group">
+              <div class="bar-row" aria-hidden="true" title={`${g.label}: ${g.count}`}>
+                <div class="bar-label">{g.label}</div>
+                <div class="bar-track"><div class="bar" style={`width:${(g.count / total) * 100}%`}></div></div>
+                <div class="bar-value">{g.count}</div>
+              </div>
+              {g.count <= 12 && (
+                <p class="state-list">
+                  <span class="sr-only">{g.label}: {g.count}. </span>
+                  {g.states.map((s, i) => (
+                    <><a href={`/states/${s.slug}/`}>{s.state}</a>{s.unverified ? "*" : ""}{i < g.states.length - 1 ? ", " : ""}</>
+                  ))}
+                </p>
+              )}
+              {g.count > 12 && <p class="sr-only">{g.label}: {g.count}.</p>}
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+  <Fragment slot="note">
+    <p>
+      Bars are out of {total} (50 states and DC).{shownU && " * = not yet confirmed."} “Depends on the court” means the answer changes
+      with the type of court or who heard the case. Where lawyers can't take part, you may still be able to get advice
+      beforehand: in California, for example, a lawyer can advise you but can't represent you at the hearing
+      (<a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.530" rel="noopener">CCP 116.530</a>).
+    </p>
+  </Fragment>
+  <table slot="table">
+    <caption class="sr-only">Appeal and lawyer rules: number of jurisdictions</caption>
+    <thead><tr><th scope="col">Rule</th><th scope="col" class="num">Jurisdictions</th><th scope="col">Which</th></tr></thead>
+    <tbody>
+      {[...appealGroups, ...lawyerGroups].map((g) => (
+        <tr>
+          <th scope="row">{g.label}</th>
+          <td class="num">{g.count}</td>
+          <td>{g.states.map((s) => s.abbr + (s.unverified ? "*" : "")).join(", ")}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</ChartFrame>

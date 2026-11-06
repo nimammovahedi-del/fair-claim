@@ -8,7 +8,7 @@ such as the government letter decoder in `~/Projects/letter-decoder`.
 | --- | --- |
 | `deadlines.ts` | Date math for legal deadlines: calendar/business days, years, weekend roll-forward, "days left", limitation-period estimate. Time-zone safe. |
 | `demand-letter.ts` | Builds a calm, factual demand letter from answers. Returns structured parts plus plain text. Stores and sends nothing. |
-| `worth-it.ts` | The "is it worth it?" expected-value math, with warnings (over the limit, low collection odds, costs too high). |
+| `worth-it.ts` | Cost-and-recovery math (expected value), with a neutral outcome label, always-shown caveats, warnings (over the limit, low collection odds, high costs) and input checks (`checkWorthItInput`, `parseAmount`). The old `verdict` field is kept for compatibility; display `outcomeLabel`. |
 
 Rules that keep them reusable:
 

@@ -193,3 +193,21 @@ breaking across pages. The letter prints as plain paper.
 - Mark unconfirmed facts with `.badge.unverified`, and put sources in `.cite`.
 - Use tokens, never raw hex values. If a new color is needed, add a token in both themes and check its contrast.
 - Keep the tone neutral. Nothing in the UI should nudge people toward suing.
+
+## Feature components (added 2026-11-06)
+
+Styles for these live in `site/src/styles/features.css`, which each component imports itself. They use the same
+tokens as `global.css`, so they work in both themes.
+
+| Component | What it is |
+| --- | --- |
+| `ChartFrame` | Wrapper for every chart: a title that states the takeaway, a source and checked date, an unverified tag, and an expandable data table |
+| `TileMapLimits` | US tile map (one square per state + DC) colored by small claims limit; each square links to the state page |
+| `ChartLimitChanges`, `ChartFees`, `ChartRules`, `ChartCollect`, `ChartPhilly` | Static HTML/SVG charts built from cited data; no chart library, no client JS |
+| `StatTile` | A big number with its source |
+| `Term` | Glossary word: a link to `/glossary/#slug` that also shows the definition on hover, keyboard focus or first tap (props documented in the file) |
+| `ChecklistDoc`, `ChecklistForms` | Printable per-state checklists (`/checklists/{slug}/`) |
+| `TableFilter` | Client-side filter box for the states and counties tables |
+| `UnverifiedNote` | Explains "unverified" once per page |
+
+Glossary data: `site/src/lib/glossary.ts`. Chart numbers: `site/src/lib/stats.ts` (derived from `src/data/*.json`) and `site/src/lib/odds.ts`.

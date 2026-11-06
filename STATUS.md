@@ -45,6 +45,26 @@ Light is the default; switch with **Display** in the header (Light / Dark / Syst
 - `/design/`: the design-system gallery, light and dark side by side
 - `/checklists/`, `/glossary/`, `/about/`: placeholders for now
 
+## Round 2 (2026-11-06): design, usability, features
+These changes were made at Nima's request. Three agents worked in order: design first, then the other two at once.
+- **Design:** an original system inspired by the French government's design system (DSFR). The DSFR itself can't be
+  used outside French government sites (its terms forbid it), so we copied none of its code, its Marianne font or its colors.
+  - Light theme is the default; the dark theme is a softer charcoal.
+  - A Display settings panel offers Light / Dark / System.
+  - Fonts are hosted on the site itself, so it makes no third-party requests.
+- **"Before you start" notice:** shown once per tool and remembered, on the cost calculator, the demand letter and the California
+  deadline estimator. The PDF and print versions carry a "general information, not legal advice" line.
+- **Messaging:** neutral, information-first. "Is it worth it?" became the "Small claims cost calculator", with
+  "What the numbers show" in place of a verdict. A "Before you decide" section on /steps/ covers options besides suing,
+  hidden costs and the risk of a counterclaim.
+- **Usability and accessibility:** an "In short" summary on state pages, filter boxes on the state and county tables, form checks with inline
+  errors, tables that stack on phones, a skip link, captions and scopes, and a 404 page.
+- **Charts, not visitor analytics** (the no-tracking promise stands): US limit map, limit changes, fee ranges,
+  appeal/lawyer rules, collection odds, and Philadelphia outcomes. They're on the home and About pages; each has a source, a date and a data table.
+- **Glossary:** 41 terms with tap-for-definition links on the steps and state pages.
+- **Checklists:** printable, one page per state, at /checklists/{state}/.
+- **Data fix:** California's state row now shows the 200% fee-waiver income test (it said 125%).
+
 ## Research findings that change the brief
 - **Rhode Island is $5,000**, not $2,500 (raised July 2021). Kentucky's $2,500 is now the lowest.
 - **Delaware and Tennessee: $25,000** confirmed. Tennessee's limit doesn't depend on county population.

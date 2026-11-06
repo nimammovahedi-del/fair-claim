@@ -1,0 +1,23 @@
+---
+// Explains the "unverified" badge once per page. Put it near the first badge (or at the top of a table).
+// <UnverifiedNote count={3} />  — count is optional; when 0 the note isn't shown.
+interface Props {
+  count?: number;
+  /** What the count refers to, e.g. "items on this page" or "states". */
+  of?: string;
+  compact?: boolean;
+}
+const { count, of = "items on this page", compact = false } = Astro.props;
+const show = count == null || count > 0;
+---
+{show && (
+  <div class:list={["callout", "warning", "unverified-note", { compact }]} role="note">
+    <p>
+      <span class="badge unverified">Unverified</span>
+      {count != null && count > 0 && <strong> {count} {of}.</strong>}
+      {" "}We found this information but haven't yet confirmed it in the law itself or on the court's own website.
+      Check it with the court before you rely on it.
+      {" "}<a href="/sources/#unverified">How we check facts</a>
+    </p>
+  </div>
+)}

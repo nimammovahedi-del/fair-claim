@@ -1,47 +1,58 @@
 ---
 import Site from "../../layouts/Site.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 import { odds } from "../../lib/odds";
 import { states, counties } from "../../lib/data";
 const unvStates = states.filter((s) => s.unverified.length).length;
 const unvCounties = counties.filter((c) => c.unverified.length).length;
 ---
-<Site title="How we check" description="Where Fair Claim's facts come from and how we keep them current.">
-  <div class="narrow">
+<Site title="How we check" description="Where Fair Claim's facts come from, what “unverified” means, and how we keep them current.">
+  <Breadcrumb items={[{ label: "How we check" }]} />
+  <div class="narrow prose">
     <p class="eyebrow">Methods</p>
     <h1>How we check</h1>
-    <p class="lede">Small claims rules are simple to state and easy to get wrong. Here's how we keep ours honest.</p>
+    <p class="lede">Small claims rules are simple to state and easy to get wrong. This is where our facts come from and how we mark the ones we haven't confirmed.</p>
 
-    <h2>Every fact has a source and a date</h2>
+    <h2 id="sources">Every fact has a source and a date</h2>
     <p>
       Each rule on this site comes from the law itself (a statute or court rule) or the court system's own website or
       forms. We link to it and show the date we last checked. We don't rely on other websites' state-by-state charts:
       many of them are out of date and contradict each other.
     </p>
+
+    <h2 id="unverified">What “unverified” means</h2>
     <p>
-      When we've only found a fact on a secondary source, or official sources disagree, we still show our best
-      reading but mark it <span class="badge unverified">unverified</span> until we confirm it.
+      Some facts carry an <span class="badge unverified">Unverified</span> label. It means we found the information,
+      but only on a secondary source, or official sources disagree, or an official site couldn't be reached. We show
+      our best reading so you know what to ask about, and we keep the label until we confirm it in the law or on the
+      court's own site.
     </p>
+    <p>If a fact you need is unverified, check it with the court clerk or a self-help center before you rely on it.</p>
     <p class="hint">
-      Right now: {states.length} states and DC loaded, {unvStates} with at least one unverified item;
+      Right now: {states.length} states and DC loaded, {unvStates} with at least one unverified item.
       {counties.length} California counties, {unvCounties} with at least one unverified item.
     </p>
 
-    <h2>How we keep it current</h2>
+    <h2 id="current">How we keep it current</h2>
     <p>
       Limits and fees change through new laws, usually effective January 1 or July 1. We re-check every state each
       year after legislative sessions end and before those dates, and we re-check any state as soon as we hear of a
-      change. If you spot an error, tell us and we'll fix it and note the date.
+      change. When we correct something, the “checked” date on that page changes too.
     </p>
 
-    <h2 id="collecting">What the research says about getting paid</h2>
+    <h2 id="collecting">What studies found about getting paid</h2>
+    <p>
+      Courts generally don't track whether winners get paid, so there's no national number. These are the studies and
+      surveys we found. They're old and local, so treat them as a rough picture, not a forecast for your case.
+    </p>
     {odds.items.length === 0 ? (
       <p>Being compiled.</p>
     ) : (
       <ul>
         {odds.items.map((e) => (
           <li>
-            <strong>{e.stat}</strong> — {e.text}{" "}
-            <span class="cite">{e.unverified && <span class="badge unverified">unverified</span>}<a href={e.url}>{e.sourceLabel}</a></span>
+            <strong>{e.stat}</strong>{/^[A-Z]/.test(e.text) ? ": " : " "}{e.text}{" "}
+            <span class="cite">{e.unverified && <span class="badge unverified">Unverified</span>}<a href={e.url} rel="noopener">{e.sourceLabel}</a></span>
           </li>
         ))}
       </ul>
@@ -50,8 +61,9 @@ const unvCounties = counties.filter((c) => c.unverified.length).length;
     <h2 id="not-advice">Information, not advice</h2>
     <p>
       Fair Claim explains how small claims court works in general and in your state. It can't tell you whether you'll
-      win, and it isn't a lawyer. For advice about your own case, California's free small claims advisors, your court's
-      self-help center, and local legal aid organizations can help.
+      win or whether to sue, and it isn't a lawyer. For help with your own case, your court's self-help center, a
+      small claims advisor (free in California), or a local legal aid organization can help.{" "}
+      <a href="/about/#not-advice">More about what Fair Claim can and can't do</a>
     </p>
   </div>
 </Site>

@@ -1,9 +1,24 @@
 ---
 import Site from "../../../layouts/Site.astro";
 import CaliforniaDetail from "../../../components/CaliforniaDetail.astro";
+import Term from "../../../components/Term.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
-import { states, counties, money, feeRange, lawyersLabel, appealLabel, efileLabel, type StateRow } from "../../../lib/data";
-import { steps } from "../../../lib/steps";
+import UnverifiedNote from "../../../components/UnverifiedNote.astro";
+import {
+  states,
+  counties,
+  money,
+  feeRange,
+  lawyersLabel,
+  appealLabel,
+  efileLabel,
+  lawyersSentence,
+  appealSentence,
+  sourceLinkText,
+  sourceTypeLabel,
+  humanizeFields,
+  type StateRow,
+} from "../../../lib/data";
 
 export function getStaticPaths() {
   return states.map((s) => ({ params: { slug: s.slug }, props: { s } }));
@@ -12,112 +27,213 @@ const { s } = Astro.props as { s: StateRow };
 const u = (...f: string[]) => f.some((x) => s.unverified.includes(x));
 const isCA = s.slug === "ca";
 
-const facts: { label: string; big?: string; text?: string | null; fields: string[] }[] = [
+// Plain-language summary at the top. Each line points at the cited detail below.
+const bizDiffers = s.limit_business != null && s.limit_business !== s.limit_individual;
+const fee = feeRange(s);
+const summary: { text: string; unverified: boolean }[] = [
   {
+    text:
+      s.limit_individual != null
+        ? `You can ask for up to ${money(s.limit_individual)}${bizDiffers ? `. A business can ask for up to ${money(s.limit_business)}` : ""}.`
+        : "We haven't confirmed the limit yet. Check with the court.",
+    unverified: u("limit_individual", "limit_business"),
+  },
+  {
+    text: fee === "—" ? "We haven't found the filing fee yet. Ask the court clerk." : `Filing costs ${fee}${fee.includes("–") ? ", depending on the claim or the court" : ""}.`,
+    unverified: u("filing_fee_min", "filing_fee_max"),
+  },
+  {
+    text: lawyersSentence[s.lawyers_allowed ?? ""] ?? "We haven't confirmed whether lawyers can take part.",
+    unverified: u("lawyers_allowed"),
+  },
+  {
+    text: s.appeal_who
+      ? `${appealSentence[s.appeal_who] ?? s.appeal_who}${
+          s.appeal_who !== "none" && s.appeal_deadline_days ? `, within ${s.appeal_deadline_days} days` : ""
+        }.`
+      : "We haven't confirmed the appeal rules yet.",
+    unverified: u("appeal_who", "appeal_deadline_days"),
+  },
+];
+
+// Fact labels that link to a plain-language glossary entry.
+const factTerms: Record<string, string> = {
+  fee: "filing-fee",
+  service: "service-of-process",
+  "fee-waiver": "fee-waiver",
+  limit: "small-claims-limit",
+  appeals: "appeal",
+};
+const facts: { id: string; label: string; big?: string; text?: string | null; fields: string[] }[] = [
+  {
+    id: "limit",
     label: "Limit for individuals",
     big: money(s.limit_individual),
     text: s.limit_notes,
     fields: ["limit_individual", "limit_notes"],
   },
   {
+    id: "limit-business",
     label: "Limit for businesses",
     big: s.limit_business == null ? "—" : s.limit_business === s.limit_individual ? "Same" : money(s.limit_business),
     fields: ["limit_business"],
   },
-  { label: "Filing fee", big: feeRange(s), text: s.filing_fee_notes, fields: ["filing_fee_min", "filing_fee_max", "filing_fee_notes"] },
-  { label: "Who can sue", text: s.who_can_sue, fields: ["who_can_sue"] },
+  { id: "fee", label: "Filing fee", big: fee, text: s.filing_fee_notes, fields: ["filing_fee_min", "filing_fee_max", "filing_fee_notes"] },
+  { id: "who", label: "Who can sue", text: s.who_can_sue, fields: ["who_can_sue"] },
   {
+    id: "lawyers",
     label: "Lawyers",
     big: lawyersLabel[s.lawyers_allowed ?? ""] ?? s.lawyers_allowed ?? "—",
     text: s.lawyers_notes,
     fields: ["lawyers_allowed", "lawyers_notes"],
   },
   {
+    id: "appeals",
     label: "Appeals",
     big: appealLabel[s.appeal_who ?? ""] ?? s.appeal_who ?? "—",
     text: [s.appeal, s.appeal_deadline_days ? `Deadline: ${s.appeal_deadline_days} days.` : null].filter(Boolean).join(" "),
     fields: ["appeal", "appeal_who", "appeal_deadline_days"],
   },
-  { label: "Serving the papers", text: s.service_methods, fields: ["service_methods"] },
+  { id: "service", label: "Serving the papers", text: s.service_methods, fields: ["service_methods"] },
   {
+    id: "online",
     label: "Filing online",
     big: efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "—",
     text: s.e_filing_notes,
     fields: ["e_filing", "e_filing_notes"],
   },
   {
+    id: "fee-waiver",
     label: "Fee waiver",
     text: [s.fee_waiver_form, s.fee_waiver_threshold].filter(Boolean).join(" — "),
     fields: ["fee_waiver_form", "fee_waiver_threshold"],
   },
 ];
+
+const onPage = [
+  { href: "#in-short", label: "In short" },
+  { href: "#details", label: "The details" },
+  ...(s.notes ? [{ href: "#good-to-know", label: "Good to know" }] : []),
+  ...(isCA
+    ? [
+        { href: "#ca-fees", label: "Filing fees" },
+        { href: "#ca-deadlines", label: "Deadlines" },
+        { href: "#ca-last-day", label: "Last day to sue" },
+        { href: "#ca-forms", label: "Forms by step" },
+      ]
+    : []),
+  { href: "#sources", label: "Sources" },
+];
 ---
-<Site title={`Small claims court in ${s.state}`} description={`${s.state} small claims limit, fees, appeal rules and forms — cited and dated.`}>
+<Site title={`Small claims court in ${s.state}`} description={`${s.state} small claims limit, filing fee, lawyer and appeal rules, in plain language, with sources and the date checked.`}>
   <Breadcrumb items={[{ href: "/states/", label: "States" }, { label: s.state }]} />
-  <div class="two-col">
-    <div>
-      <p class="eyebrow">{s.court_name}</p>
-      <h1>Small claims court in {s.state}</h1>
-      <p class="cite">
-        <span>{s.citation}</span>
-        {s.date_checked && <span>· checked {s.date_checked}</span>}
-      </p>
+  <div class="state-head narrow">
+    <p class="eyebrow">{s.court_name ?? "Small claims court"}</p>
+    <h1>Small claims court in {s.state}</h1>
+    <p class="cite">
+      <span>{s.citation}</span>
+      {s.date_checked && <span>checked {s.date_checked}</span>}
+    </p>
+  </div>
+
+  <div class="two-col state-layout">
+    <div class="state-main">
+      <section class="in-short" id="in-short" aria-labelledby="in-short-title">
+        <h2 id="in-short-title">In short</h2>
+        <ul class="summary-list">
+          {summary.map((line) => (
+            <li>
+              {line.text}
+              {line.unverified && <> <span class="badge unverified">Unverified</span></>}
+            </li>
+          ))}
+        </ul>
+        <p class="hint">The details below say where each rule comes from. If your court tells you something different, the court is right.</p>
+      </section>
 
       {s.recent_changes && (
-        <div class="callout info"><p><strong>Recent change:</strong> {s.recent_changes}</p></div>
+        <div class="callout info">
+          <p class="callout-title">Recent change{u("recent_changes") && <> <span class="badge unverified">Unverified</span></>}</p>
+          <p>{s.recent_changes}</p>
+        </div>
       )}
 
-      <dl class="facts">
-        {facts.map((f) => (
-          <div class="fact">
-            <dt>{f.label}{u(...f.fields) && <> <span class="badge unverified">unverified</span></>}</dt>
-            <dd>
-              {f.big && <div class="big">{f.big}</div>}
-              {f.text && <div class="value">{f.text}</div>}
-              {!f.big && !f.text && <div class="value">—</div>}
-            </dd>
-          </div>
-        ))}
-      </dl>
+      <UnverifiedNote count={s.unverified.length} of={s.unverified.length === 1 ? "item on this page is unverified" : "items on this page are unverified"} />
+
+      <section id="details" aria-labelledby="details-title">
+        <h2 id="details-title">The details</h2>
+        <dl class="facts">
+          {facts.map((f) => (
+            <div class="fact" id={`fact-${f.id}`}>
+              <dt>
+                {factTerms[f.id] ? <Term slug={factTerms[f.id]}>{f.label}</Term> : f.label}
+                {u(...f.fields) && <> <span class="badge unverified">Unverified</span></>}
+              </dt>
+              <dd>
+                {f.big && <div class="big">{f.big}</div>}
+                {f.text && <div class="value">{f.text}</div>}
+                {!f.big && !f.text && <div class="value">Not found yet.</div>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
 
       {s.notes && (
-        <>
-          <h2>Good to know</h2>
+        <section id="good-to-know" aria-labelledby="gtk-title">
+          <h2 id="gtk-title">Good to know</h2>
           <p>{s.notes}</p>
-        </>
+        </section>
       )}
 
       {isCA && <CaliforniaDetail />}
 
-      <h2>Sources</h2>
-      <ul class="aside">
-        {s.sources.map((src) => (
-          <li>
-            <a href={src.url} rel="noopener">{src.url}</a>
-            {src.type && <span class="cite"> · {src.type}</span>}
-            {src.what && <div class="hint">{src.what}</div>}
-          </li>
-        ))}
-      </ul>
+      <section id="sources" aria-labelledby="sources-title">
+        <h2 id="sources-title">Sources</h2>
+        <p class="hint">What we used for this page, checked {s.date_checked}. Laws and court sites change; the link is the place to confirm.</p>
+        <ul class="source-list">
+          {s.sources.map((src) => (
+            <li>
+              <a href={src.url} rel="noopener">{sourceLinkText(src.url)}</a>
+              {src.type && <span class="tag small">{sourceTypeLabel[src.type] ?? src.type}</span>}
+              {src.what && <div class="hint">Used for: {humanizeFields(src.what)}</div>}
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
 
-    <aside class="aside">
-      <div class="card">
-        <h2>Your next steps</h2>
-        <ol>
-          {steps.map((st) => <li><a href={`/steps/#${st.slug}`}>{st.title}</a></li>)}
-        </ol>
-        <p><a class="btn" href={`/worth-it/?state=${s.slug}`}>Is it worth it?</a></p>
-        {s.self_help_url && <p><a class="link-arrow" href={s.self_help_url} rel="noopener">Official {s.state} small claims self-help</a></p>}
-      </div>
-      {isCA && (
-        <div class="card">
-          <h2>California by county</h2>
-          <p>Courthouses, self-help centers and the free small claims advisor for each county.</p>
-          <p><a class="link-arrow" href="/states/ca/counties/">All 58 counties</a></p>
-          {counties.length > 0 && <p class="hint">e.g. <a href="/states/ca/counties/alameda/">Alameda</a> · <a href="/states/ca/counties/los-angeles/">Los Angeles</a></p>}
+    <aside class="aside state-aside" aria-label={`${s.state} quick links`}>
+      <nav class="card on-page" aria-labelledby="onpage-title">
+        <h2 id="onpage-title">On this page</h2>
+        <ul>{onPage.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </nav>
+      {s.self_help_url && (
+        <div class="card tinted">
+          <h2>Official help</h2>
+          <p>The {s.state} courts' own guide to small claims.{u("self_help_url") && <> <span class="badge unverified">Unverified</span></>}</p>
+          <p><a class="link-arrow" href={s.self_help_url} rel="noopener">{s.state} small claims self-help</a></p>
         </div>
       )}
+      {isCA && (
+        <div class="card tinted">
+          <h2>California by county</h2>
+          <p>Courthouses, self-help centers and the free small claims advisor in each county.</p>
+          <p><a class="link-arrow" href="/states/ca/counties/">All 58 counties</a></p>
+          {counties.length > 0 && <p class="hint">For example, <a href="/states/ca/counties/alameda/">Alameda</a> or <a href="/states/ca/counties/los-angeles/">Los Angeles</a></p>}
+        </div>
+      )}
+      <div class="card">
+        <h2>Guides and tools</h2>
+        <ul class="link-list">
+          <li><a href="/steps/#before-you-decide">Options besides going to court</a></li>
+          <li><a href="/steps/">How a small claims case works</a></li>
+          <li><a href={`/worth-it/?state=${s.slug}`}>Cost calculator for {s.state}</a></li>
+          <li><a href="/demand-letter/">Demand-letter tool</a></li>
+          <li><a href={`/checklists/${s.slug}/`}>Printable {s.state} checklists</a></li>
+          <li><a href="/glossary/">Glossary of court terms</a></li>
+        </ul>
+      </div>
     </aside>
   </div>
 </Site>

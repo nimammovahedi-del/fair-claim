@@ -1,36 +1,71 @@
 ---
 import Site from "../../../../layouts/Site.astro";
-import { counties } from "../../../../lib/data";
 import Breadcrumb from "../../../../components/Breadcrumb.astro";
+import TableFilter from "../../../../components/TableFilter.astro";
+import UnverifiedNote from "../../../../components/UnverifiedNote.astro";
+import { counties, yesNoLabel } from "../../../../lib/data";
+
+const uv = (c: (typeof counties)[number], prefix: string) => c.unverified.some((f) => f === prefix || f.startsWith(prefix + "."));
+const withUnverified = counties.filter((c) => c.unverified.length).length;
+const latest = counties.map((c) => c.date_checked).filter(Boolean).sort().at(-1);
 ---
-<Site title="California small claims by county" description="Courthouses, self-help centers and free small claims advisors for all 58 California counties.">
+<Site title="California small claims by county" description="Free small claims advisors, self-help centers, courthouses and online options for all 58 California counties.">
   <Breadcrumb items={[{ href: "/states/", label: "States" }, { href: "/states/ca/", label: "California" }, { label: "Counties" }]} />
   <div class="narrow">
+    <p class="eyebrow">California</p>
     <h1>California small claims, county by county</h1>
     <p class="lede">
-      The rules and fees are the same statewide. What changes by county is where you go, who can help you for free,
-      and whether you can file or appear online. Courts must offer free small claims advisor help; a few very small
-      courts (1,000 or fewer small claims filings a year) may opt out of a full program but still have to provide basic
-      help (Cal. Code Civ. Proc. § 116.940(c)).
+      The rules and fees are the same across California. What changes by county is who can help you for free, where
+      cases are heard, and whether you can file or appear online.
     </p>
+    <p>
+      Courts must offer free help from a small claims advisor. A few very small courts (1,000 or fewer small claims
+      filings a year) may opt out of a full program but still have to provide basic help.{" "}
+      <span class="cite">Cal. Code Civ. Proc. § 116.940(c)</span>
+    </p>
+    <p class="hint">Last checked {latest}. <a href="/states/ca/">Statewide California rules</a></p>
   </div>
+
+  <UnverifiedNote count={withUnverified} of="counties have at least one unverified detail" />
+  <TableFilter table="counties-table" label="Find a county" noun="counties" placeholder="County name, like Fresno" />
   <div class="table-scroll">
-    <table>
+    <table class="table-stack data-table" id="counties-table">
+      <caption>Free help and court access in {counties.length} California counties</caption>
       <thead>
-        <tr><th>County</th><th>Small claims courthouses</th><th>Free advisor</th><th>E-filing</th><th>Remote hearings</th><th>Checked</th></tr>
+        <tr>
+          <th scope="col">County</th>
+          <th scope="col">Free small claims advisor</th>
+          <th scope="col" class="num">Courthouses</th>
+          <th scope="col">File online</th>
+          <th scope="col">Remote hearings</th>
+          <th scope="col">Checked</th>
+        </tr>
       </thead>
       <tbody>
         {counties.map((c) => (
-          <tr>
-            <td><a href={`/states/ca/counties/${c.slug}/`}>{c.county}</a></td>
-            <td class="num">{c.small_claims_locations.length || "—"}</td>
-            <td>{c.small_claims_advisor?.provider ?? "—"} {c.unverified.some((f) => f.startsWith("small_claims_advisor")) && <span class="badge unverified" title="unverified">?</span>}</td>
-            <td>{c.e_filing ?? "—"}</td>
-            <td>{c.remote_hearings ?? "—"}</td>
-            <td class="mono">{c.date_checked}</td>
+          <tr data-filter={c.county.toLowerCase()}>
+            <th scope="row"><a href={`/states/ca/counties/${c.slug}/`}>{c.county}</a></th>
+            <td data-label="Free advisor">
+              {c.small_claims_advisor?.provider ?? "Not found yet"}
+              {uv(c, "small_claims_advisor") && <span class="badge unverified">Unverified</span>}
+            </td>
+            <td class="num" data-label="Courthouses">
+              {c.small_claims_locations.length || "—"}
+              {uv(c, "small_claims_locations") && <span class="badge unverified">Unverified</span>}
+            </td>
+            <td data-label="File online">
+              {yesNoLabel[c.e_filing ?? ""] ?? c.e_filing ?? "—"}
+              {uv(c, "e_filing") && <span class="badge unverified">Unverified</span>}
+            </td>
+            <td data-label="Remote hearings">
+              {yesNoLabel[c.remote_hearings ?? ""] ?? c.remote_hearings ?? "—"}
+              {uv(c, "remote_hearings") && <span class="badge unverified">Unverified</span>}
+            </td>
+            <td class="mono" data-label="Checked">{c.date_checked}</td>
           </tr>
         ))}
       </tbody>
     </table>
   </div>
+  <p class="callout" data-filter-empty="counties-table" hidden>No county matches that. Check the spelling, or clear the box to see all 58.</p>
 </Site>

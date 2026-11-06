@@ -1,16 +1,78 @@
 ---
-// PLACEHOLDER — to be built by the content agent. Uses the standard Site layout and design-system classes.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import "../../styles/features.css";
+import { states } from "../../lib/data";
+import { statesChecked } from "../../lib/stats";
+
+const lists = [
+  { id: "before", title: "Before you decide", text: "The limit, the deadline to sue, the costs, whether the other side could pay, and other routes." },
+  { id: "demand", title: "1. Ask for payment in writing", text: "The other side's legal name, the amount and a deadline, sent a way you can prove." },
+  { id: "file", title: "2. File the claim", text: "The right form and court, the exact name to sue, the fee or a fee waiver." },
+  { id: "serve", title: "3. Serve the papers", text: "Allowed methods, the deadline before the hearing, and the proof of service." },
+  { id: "hearing", title: "4. Go to the hearing", text: "Evidence in three copies, witnesses, a short summary, postponing, mediation." },
+  { id: "collect", title: "5. Collect what you won", text: "The appeal period, asking for payment, finding assets, collection tools and their fees." },
+];
 ---
-<Site title="Checklists" description="Printable checklists for each step of a small claims case.">
+<Site title="Checklists" description="Printable small claims checklists for each step, with your state's cited rules filled in.">
   <Breadcrumb items={[{ label: "Checklists" }]} />
   <div class="narrow">
     <p class="eyebrow">Checklists</p>
-    <h1>Checklists</h1>
-    <p class="lede">Short, printable lists of what to gather and do at each step of a small claims case.</p>
-    <div class="callout info">
-      <p>This page is being written. Until then, <a href="/steps/">the five steps</a> list what to do at each stage.</p>
+    <h1>Printable checklists</h1>
+    <p class="lede">
+      Short lists of what to gather and do before and during a small claims case. Pick your state to fill in its
+      limit, fees, service rules and appeal deadline, each with the date we checked it.
+    </p>
+
+    <form class="state-picker" action="/checklists/" method="get" data-checklist-picker>
+      <label class="sr-only" for="cl-state">Your state</label>
+      <select id="cl-state" name="s">
+        <option value="">Choose your state…</option>
+        {states.map((s) => <option value={s.slug}>{s.state}</option>)}
+      </select>
+      <button class="btn" type="submit">Open checklists</button>
+    </form>
+    <p class="hint">
+      Or use the <a href="/checklists/general/">general version</a>, which works anywhere. Rules checked {statesChecked}.
+    </p>
+
+    <h2>What's in them</h2>
+    <ul class="routes">
+      {lists.map((l) => (
+        <li><strong>{l.title}</strong><p>{l.text}</p></li>
+      ))}
+    </ul>
+    <p>
+      Tick boxes on screen or print them. Printing leaves out the site menus and puts a line at the foot of each list
+      saying when the rules were checked. Your ticks aren't saved or sent anywhere; they're gone when you close the page.
+    </p>
+    <div class="callout">
+      <p>
+        These lists are general information, not legal advice, and they don't cover every situation. Court rules
+        change: confirm deadlines and fees with your court before you rely on them.
+        <a href="/about/#not-advice">Where to get free advice</a>.
+      </p>
     </div>
+
+    <details class="accordion">
+      <summary>All states</summary>
+      <div class="accordion-body">
+        <ul class="state-links">
+          {states.map((s) => <li><a href={`/checklists/${s.slug}/`}>{s.state}</a></li>)}
+        </ul>
+      </div>
+    </details>
   </div>
 </Site>
+
+<script>
+  // Without JS the form can't route on a static site, so the "All states" list above is the fallback.
+  document.querySelectorAll<HTMLFormElement>("[data-checklist-picker]").forEach((f) => {
+    f.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const v = (f.elements.namedItem("s") as HTMLSelectElement).value;
+      if (v) location.href = `/checklists/${v}/`;
+      else (f.elements.namedItem("s") as HTMLSelectElement).focus();
+    });
+  });
+</script>

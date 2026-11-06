@@ -1,0 +1,321 @@
+---
+// Printable checklists: "Before you decide" plus one per step. With a `state`, each section adds that state's
+// cited rules (limit, fees, service, appeal, self-help link). California also gets form numbers and deadlines
+// from ca-statewide.json. Without a state, it's the general version.
+//
+// <ChecklistDoc />                 general
+// <ChecklistDoc state={row} />     a state (row from lib/data.ts `states`)
+//
+// Print: global.css hides the site header, nav and footer; features.css (section 10) adds the print layout.
+// Checkbox ticks are never stored or sent anywhere.
+import "../styles/features.css";
+import Term from "./Term.astro";
+import FormsList from "./ChecklistForms.astro";
+import { caStatewide, money, feeRange, lawyersLabel, appealLabel, efileLabel, type StateRow } from "../lib/data";
+import { denver, evidenceChecked } from "../lib/stats";
+import { steps } from "../lib/steps";
+
+interface Props {
+  state?: StateRow;
+}
+const { state: s } = Astro.props;
+const isCA = s?.abbr === "CA";
+const ca = caStatewide;
+const checked = s?.date_checked ?? evidenceChecked;
+const u = (...f: string[]) => !!s && f.some((x) => s.unverified?.includes(x));
+
+// California forms by step, read from ca-statewide.json (titles + official PDF links).
+const caFormIds: Record<string, string[]> = {
+  file: ["SC-100", "SC-100A", "SC-103", "FW-001"],
+  serve: ["SC-104", "SC-104A", "SC-104B", "SC-104C"],
+  hearing: ["SC-150", "SC-107", "SC-109"],
+  collect: ["SC-130", "SC-133", "SC-134", "EJ-130", "WG-001", "EJ-001", "SC-290", "SC-140"],
+};
+type Form = { form: string; title: string; url: string };
+const caForms = (step: string): Form[] =>
+  isCA
+    ? (caFormIds[step] ?? [])
+        .map((id) => (ca.forms as Form[]).find((f) => f.form === id))
+        .filter((f): f is Form => !!f)
+    : [];
+
+const stepBySlug = Object.fromEntries(steps.map((st) => [st.slug, st]));
+const footLine = `Fair Claim — general information, not legal advice. Rules checked ${checked}; confirm with your court.`;
+const where = s ? s.state : "your state";
+const leg = (law: string, sec: string) =>
+  `https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=${law}&sectionNum=${sec}`;
+
+const sections = [
+  { id: "before", n: "", title: "Before you decide" },
+  { id: "demand", n: "1", title: "Ask for payment in writing" },
+  { id: "file", n: "2", title: "File the claim" },
+  { id: "serve", n: "3", title: "Serve the papers" },
+  { id: "hearing", n: "4", title: "Go to the hearing" },
+  { id: "collect", n: "5", title: "Collect what you won" },
+];
+---
+<div class="checklist-doc" data-checklist-doc>
+  <div class="checklist-tools no-print">
+    <button class="btn" type="button" data-print data-js-only>Print or save as PDF</button>
+    <label class="choice" data-js-only><input type="checkbox" data-one-per-page /> Start each checklist on a new page when printing</label>
+  </div>
+
+  <nav class="no-print" aria-label="Checklists on this page">
+    <ul class="tags">
+      {sections.map((sec) => <li><a class="tag" href={`#${sec.id}`}>{sec.n ? `${sec.n}. ` : ""}{sec.title}</a></li>)}
+    </ul>
+  </nav>
+
+  <!-- Before you decide -->
+  <section class="checklist-section" id="before" aria-labelledby="h-before">
+    <h2 id="h-before">Before you decide</h2>
+    {s && (
+      <div class="checklist-rules">
+        <h3>{s.state} basics</h3>
+        <dl>
+          <dt>Limit {u("limit_individual", "limit_business") && <span class="badge unverified">unverified</span>}</dt>
+          <dd>
+            {money(s.limit_individual)} for individuals
+            {s.limit_business != null && s.limit_business !== s.limit_individual ? `; ${money(s.limit_business)} for businesses` : ""}.
+            {isCA && " No more than two claims over $2,500 in a calendar year, anywhere in California (CCP 116.231)."}
+          </dd>
+          <dt>Appeal {u("appeal", "appeal_who", "appeal_deadline_days") && <span class="badge unverified">unverified</span>}</dt>
+          <dd>
+            {appealLabel[s.appeal_who ?? ""] ?? "See state page"}
+            {s.appeal_deadline_days ? `; deadline ${s.appeal_deadline_days} days` : ""}.
+            {s.appeal_who === "none" && " The decision is final, for both sides."}
+          </dd>
+          <dt>Lawyers {u("lawyers_allowed") && <span class="badge unverified">unverified</span>}</dt>
+          <dd>{lawyersLabel[s.lawyers_allowed ?? ""] ?? "See state page"}.</dd>
+          <dt>Official help</dt>
+          <dd>
+            {s.self_help_url ? <a href={s.self_help_url} rel="noopener">{s.state} court self-help</a> : "See the state page"}
+            {u("self_help_url") && <> <span class="badge unverified">unverified</span></>}
+            {isCA && <> · <a href="/states/ca/counties/">free small claims advisor by county</a></>}
+          </dd>
+        </dl>
+        <p class="cite">
+          <span>{s.citation}</span><span>checked {checked}</span>
+          <a href={`/states/${s.slug}/`} class="no-print">all sources on the {s.state} page</a>
+        </p>
+      </div>
+    )}
+    <ul class="checklist">
+      <li><label class="choice"><input type="checkbox" /><span>Write down what happened, what you're owed, and exactly how you got the number (receipts, invoice, deposit minus fair deductions).</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Check the amount is within {s ? `${s.state}'s limit (${money(s.limit_individual)} for individuals)` : "your state's small claims limit"}. If it's more, you may have to give up the extra or use a different court.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Check the <Term slug="statute-of-limitations">deadline to sue</Term> for your kind of claim.{isCA && " In California, for example: 4 years for a written contract, 2 for an oral one, 3 for property damage (CCP 337, 339, 338)."}</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Ask whether the other side could actually pay: do they have a job, a business, a bank account or property? A <Term slug="judgment">judgment</Term> is not a payment. In a Denver study, {denver.collectedNothingPct}% of winners collected nothing.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Add up the costs: the <Term slug="filing-fee" />{s ? ` (${feeRange(s)} in ${s.state})` : ""}, serving the papers, time off work, and more fees to collect if they don't pay.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Consider other routes: a <Term slug="demand-letter" />, <Term slug="mediation" />, a complaint to a licensing board or consumer agency, or deciding it isn't worth pursuing.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Know what happens if you lose, and whether either side can <Term slug="appeal" />{s ? ` (in ${s.state}: ${(appealLabel[s.appeal_who ?? ""] ?? "see the state page").toLowerCase()})` : ""}.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Get free help if you want it: the court's <Term slug="self-help-center" />{isCA ? ", a free small claims advisor," : ""} or <Term slug="legal-aid" /> (LawHelp.org).</span></label></li>
+    </ul>
+    <p class="checklist-print-foot">{footLine}</p>
+  </section>
+
+  <!-- 1. Demand -->
+  <section class="checklist-section" id="demand" aria-labelledby="h-demand">
+    <h2 id="h-demand"><span class="n">Step 1</span>Ask for payment in writing</h2>
+    {isCA && (
+      <div class="checklist-rules">
+        <h3>California</h3>
+        <dl>
+          <dt>Asking first</dt>
+          <dd>
+            The claim form (SC-100) asks whether you asked the defendant to pay before suing, where that was possible.
+            In person or by phone counts; a letter leaves a record.
+          </dd>
+        </dl>
+        <p class="cite"><a href={leg("CCP", "116.320")} rel="noopener">CCP 116.320(b)</a><span>checked {checked}</span></p>
+      </div>
+    )}
+    <ul class="checklist">
+      <li><label class="choice"><input type="checkbox" /><span>Find the other side's correct legal name and address. For a business, check the state's business-entity search.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>State the amount, how you got it, and a specific deadline to pay (often 10 to 14 days).</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Keep it calm and factual. No threats of criminal charges or public shaming.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Send it in a way you can prove, such as certified mail, or email plus regular mail. Keep a copy.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Write down the date you sent it and any reply. If they offer part of the amount, consider it.</span></label></li>
+    </ul>
+    <p class="no-print"><a class="link-arrow" href="/demand-letter/">Write a demand letter</a> · <a href={`/steps/#${stepBySlug.demand?.slug ?? "demand"}`}>More on this step</a></p>
+    <p class="checklist-print-foot">{footLine}</p>
+  </section>
+
+  <!-- 2. File -->
+  <section class="checklist-section" id="file" aria-labelledby="h-file">
+    <h2 id="h-file"><span class="n">Step 2</span>File the claim</h2>
+    {s && (
+      <div class="checklist-rules">
+        <h3>{s.state}</h3>
+        <dl>
+          <dt>Court</dt>
+          <dd>{s.court_name ?? "See state page"}</dd>
+          <dt>Filing fee {u("filing_fee_min", "filing_fee_max", "filing_fee_notes") && <span class="badge unverified">unverified</span>}</dt>
+          <dd>{feeRange(s)}{s.filing_fee_notes ? `. ${s.filing_fee_notes}` : ""}</dd>
+          <dt>Fee waiver {u("fee_waiver_form", "fee_waiver_threshold") && <span class="badge unverified">unverified</span>}</dt>
+          <dd>
+            {isCA
+              ? `${ca.fee_waiver.fee_waiver_form}. You qualify with certain public benefits, household income at or below ${ca.fee_waiver.poverty_guideline_percent}% of the federal poverty guidelines (from ${String(ca.fee_waiver.threshold_effective).slice(0, 10)}), or if paying would leave you unable to meet basic needs.`
+              : s.fee_waiver_form ?? "Ask the clerk."}
+          </dd>
+          <dt>Filing online {u("e_filing", "e_filing_notes") && <span class="badge unverified">unverified</span>}</dt>
+          <dd>{efileLabel[s.e_filing ?? ""] ?? "See state page"}</dd>
+          {isCA && (
+            <>
+              <dt>Hearing date</dt>
+              <dd>The clerk sets it 20 to 70 days after you file (CCP 116.330(a)).</dd>
+            </>
+          )}
+        </dl>
+        <p class="cite">
+          {isCA && <><a href={leg("CCP", "116.230")} rel="noopener">CCP 116.230</a><a href={leg("GOV", "68632")} rel="noopener">Gov. Code 68632</a><a href={leg("CCP", "116.330")} rel="noopener">CCP 116.330</a></>}
+          <span>checked {checked}</span>
+        </p>
+      </div>
+    )}
+    {isCA && (
+      <div class="table-scroll"><table class="checklist-forms">
+        <caption>California filing fees (CCP 116.230)</caption>
+        <thead><tr><th scope="col">Claim amount</th><th scope="col" class="num">Fee</th></tr></thead>
+        <tbody>
+          {ca.fees.filing_fee_tiers.map((t: { applies_to: string; fee: number; citation: string }) => (
+            <tr><td style="font-family:inherit;white-space:normal">{t.applies_to}</td><td class="num">{money(t.fee)}</td></tr>
+          ))}
+        </tbody>
+      </table></div>
+    )}
+    <ul class="checklist">
+      <li><label class="choice"><input type="checkbox" /><span>Get {s ? `${s.state}'s` : "your state's"} small claims form from the court or its self-help site{isCA ? " (SC-100)" : ""}.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Pick the right court location (<Term slug="venue" />): usually where the other side lives or does business, or where the problem happened.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Use the other side's exact legal name. Suing the wrong name can leave you with a judgment you can't collect.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Pay the <Term slug="filing-fee" />, or ask for a <Term slug="fee-waiver" /> first if money is tight.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Keep copies of everything you file, and write down the hearing date and courtroom.</span></label></li>
+    </ul>
+    {caForms("file").length > 0 && <FormsList forms={caForms("file")} />}
+    <p class="checklist-print-foot">{footLine}</p>
+  </section>
+
+  <!-- 3. Serve -->
+  <section class="checklist-section" id="serve" aria-labelledby="h-serve">
+    <h2 id="h-serve"><span class="n">Step 3</span>Serve the papers</h2>
+    {s && (
+      <div class="checklist-rules">
+        <h3>{s.state}</h3>
+        <dl>
+          <dt>Allowed methods {u("service_methods") && <span class="badge unverified">unverified</span>}</dt>
+          <dd>{s.service_methods ?? "See the state page."}</dd>
+          {isCA && (
+            <>
+              <dt>Deadlines</dt>
+              <dd>
+                Served at least {ca.service.deadline_in_county_days} days before the hearing ({ca.service.deadline_out_of_county_days} if the
+                defendant lives outside the county). Proof of service (SC-104) filed at least {ca.service.proof_of_service_deadline_days} days
+                before. Substituted service is complete 10 days after mailing, so start earlier.
+              </dd>
+            </>
+          )}
+        </dl>
+        <p class="cite">
+          {isCA && <a href={leg("CCP", "116.340")} rel="noopener">CCP 116.340</a>}
+          <span>checked {checked}</span>
+        </p>
+      </div>
+    )}
+    <ul class="checklist">
+      <li><label class="choice"><input type="checkbox" /><span>Find out which ways of <Term slug="service-of-process">serving</Term> are allowed{s ? ` in ${s.state}` : " in your state"}, and whether you may do it yourself.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Get an address where the person or business can actually be found.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Arrange service early. There is a deadline before the hearing, and late service usually means a postponement.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Make sure the <Term slug="proof-of-service" /> is filled in and filed with the court before the hearing.</span></label></li>
+    </ul>
+    {caForms("serve").length > 0 && <FormsList forms={caForms("serve")} />}
+    <p class="checklist-print-foot">{footLine}</p>
+  </section>
+
+  <!-- 4. Hearing -->
+  <section class="checklist-section" id="hearing" aria-labelledby="h-hearing">
+    <h2 id="h-hearing"><span class="n">Step 4</span>Go to the hearing</h2>
+    {s && (
+      <div class="checklist-rules">
+        <h3>{s.state}</h3>
+        <dl>
+          <dt>Lawyers {u("lawyers_allowed", "lawyers_notes") && <span class="badge unverified">unverified</span>}</dt>
+          <dd>{lawyersLabel[s.lawyers_allowed ?? ""] ?? "See state page"}.{s.lawyers_notes ? ` ${s.lawyers_notes}` : ""}</dd>
+          {isCA && (
+            <>
+              <dt>Postponing</dt>
+              <dd>Ask in writing on SC-150 at least 10 days before the hearing; $10 fee once the defendant was served on time (CCP 116.570).</dd>
+              <dt>If they don't come</dt>
+              <dd>You still have to prove your claim with evidence (CCP 116.520(b)).</dd>
+            </>
+          )}
+        </dl>
+        <p class="cite">
+          {isCA && <><a href={leg("CCP", "116.570")} rel="noopener">CCP 116.570</a><a href={leg("CCP", "116.520")} rel="noopener">CCP 116.520</a></>}
+          <span>checked {checked}</span>
+        </p>
+      </div>
+    )}
+    <ul class="checklist">
+      <li><label class="choice"><input type="checkbox" /><span>Bring three copies of your evidence: contract, photos, messages, receipts, and a one-page timeline.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Ask witnesses to come, or find out whether the court accepts signed written statements.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Practise a two-minute summary: what was agreed, what happened, what you're owed and how you got the number.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Arrange time off. If you need an interpreter, ask the court well ahead.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>If you can't make the date, ask for a <Term slug="continuance">postponement</Term> in writing as early as you can.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Ask whether the court offers free <Term slug="mediation" /> that day.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Ask for your <Term slug="costs">court costs</Term> to be added to any judgment.</span></label></li>
+    </ul>
+    {caForms("hearing").length > 0 && <FormsList forms={caForms("hearing")} />}
+    <p class="checklist-print-foot">{footLine}</p>
+  </section>
+
+  <!-- 5. Collect -->
+  <section class="checklist-section" id="collect" aria-labelledby="h-collect">
+    <h2 id="h-collect"><span class="n">Step 5</span>Collect what you won</h2>
+    {s && (
+      <div class="checklist-rules">
+        <h3>{s.state}</h3>
+        <dl>
+          <dt>Appeal period {u("appeal", "appeal_who", "appeal_deadline_days") && <span class="badge unverified">unverified</span>}</dt>
+          <dd>
+            {appealLabel[s.appeal_who ?? ""] ?? "See state page"}
+            {s.appeal_deadline_days ? `; ${s.appeal_deadline_days} days` : ""}.
+            {isCA && " Collection is paused automatically for 30 days after the Notice of Entry of Judgment, or until an appeal is decided (CCP 116.810)."}
+          </dd>
+          {isCA && (
+            <>
+              <dt>Statement of assets</dt>
+              <dd>Unless they've paid, the debtor must send you SC-133 within 30 days after notice of the judgment is mailed (CCP 116.830).</dd>
+              <dt>Collection fees</dt>
+              <dd>Debtor's exam $60; writ of execution $40 (expires after 180 days); abstract of judgment $40 plus the recorder's fee; renewal $45. Most can be added to the judgment.</dd>
+              <dt>Protected money</dt>
+              <dd>$2,325 in the debtor's bank accounts is protected automatically (July 1, 2026). Wage garnishment is capped (CCP 706.050).</dd>
+              <dt>How long it lasts</dt>
+              <dd>10 years from entry, renewable before it runs out; interest 10% a year in most cases (CCP 683.020, 685.010).</dd>
+            </>
+          )}
+        </dl>
+        <p class="cite">
+          {isCA && <><a href={leg("CCP", "116.810")} rel="noopener">CCP 116.810</a><a href={leg("CCP", "116.830")} rel="noopener">CCP 116.830</a><a href="https://courts.ca.gov/system/files/file/statewide-civil-fee-schedule-eff-01012026.pdf" rel="noopener">Statewide Civil Fee Schedule</a><a href="https://www.courts.ca.gov/documents/ej156.pdf" rel="noopener">EJ-156</a></>}
+          <span>checked {checked}</span>
+        </p>
+      </div>
+    )}
+    <ul class="checklist">
+      <li><label class="choice"><input type="checkbox" /><span>Wait until the appeal period is over, then send a polite written request for payment with a copy of the <Term slug="judgment" />.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>If they don't pay, find out what they have: a <Term slug="debtors-examination" /> makes them answer questions under oath.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Learn the collection tools and their fees: <Term slug="writ-of-execution" />, <Term slug="wage-garnishment" />, <Term slug="bank-levy" />, and a <Term slug="lien" /> on property.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Remember that some money and property is protected (<Term slug="exemption">exemptions</Term>). Someone who is <Term slug="judgment-proof" /> may not be able to pay now.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Keep a record of every payment. Once you're paid in full, file a <Term slug="satisfaction-of-judgment" />.</span></label></li>
+      <li><label class="choice"><input type="checkbox" /><span>Note when the judgment expires, and renew it in time if it's still unpaid.</span></label></li>
+    </ul>
+    {caForms("collect").length > 0 && <FormsList forms={caForms("collect")} />}
+    <p class="checklist-print-foot">{footLine}</p>
+  </section>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-checklist-doc]").forEach((doc) => {
+    doc.querySelector("[data-print]")?.addEventListener("click", () => window.print());
+    const onePer = doc.querySelector<HTMLInputElement>("[data-one-per-page]");
+    onePer?.addEventListener("change", () => doc.classList.toggle("one-per-page", onePer.checked));
+  });
+</script>

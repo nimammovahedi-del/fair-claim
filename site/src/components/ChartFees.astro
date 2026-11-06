@@ -1,0 +1,86 @@
+---
+// Filing fees by state: lowest and highest fee, as a range plot sorted by the lowest fee.
+// Data: states.json filing_fee_min / filing_fee_max (via lib/stats.ts).
+import ChartFrame from "./ChartFrame.astro";
+import { feeRows, feeMissing, feeStats, feeWaiverStats, statesChecked, statesSource, usd } from "../lib/stats";
+
+interface Props {
+  headingLevel?: 2 | 3 | 4;
+  id?: string;
+}
+const { headingLevel = 3, id = "chart-fees" } = Astro.props;
+const top = 400;
+const ticks = [0, 100, 200, 300, 400];
+const x = (n: number) => (n / top) * 100;
+const label = (r: (typeof feeRows)[number]) =>
+  r.min != null && r.max != null
+    ? r.min === r.max
+      ? usd(r.min)
+      : `${usd(r.min)}–${usd(r.max)}`
+    : r.min != null
+      ? `from ${usd(r.min)}`
+      : `up to ${usd(r.max as number)}`;
+---
+<ChartFrame
+  id={id}
+  headingLevel={headingLevel}
+  title={`Filing fees: half of states start at ${usd(feeStats.medianLowest)} or less, but in ${feeStats.overOneFifty} states the top fee is over $150`}
+  subtitle={`Lowest and highest small claims filing fee in each of the ${feeStats.statesWithFigures} jurisdictions with figures, sorted by the lowest. Ranges depend on the claim amount, the court or the county. Serving the papers costs extra.`}
+  sources={[statesSource]}
+  checked={statesChecked}
+  unverified={feeStats.unverifiedCount > 0}
+  unverifiedText={`${feeStats.unverifiedCount} states' fee figures aren't confirmed yet; their ranges are drawn lighter.`}
+>
+  <ul class="legend" slot="legend">
+    <li><span class="swatch dot" aria-hidden="true"></span>Confirmed figure</li>
+    <li><span class="swatch dot soft" aria-hidden="true"></span>Not yet confirmed</li>
+  </ul>
+  <div aria-hidden="true">
+    <div class="bars dense">
+      {feeRows.map((r) => {
+        const lo = r.min ?? r.max!;
+        const hi = r.max ?? r.min!;
+        const soft = r.unverified ? " soft" : "";
+        return (
+          <div class="bar-row" title={`${r.state}: ${label(r)}${r.unverified ? " (unverified)" : ""}`}>
+            <div class="bar-label"><span class="full">{r.state}</span><span class="abbr">{r.abbr}</span></div>
+            <div class="bar-track">
+              {hi > lo && <span class={`range${soft}`} style={`left:${x(lo)}%;width:${x(hi) - x(lo)}%`}></span>}
+              {r.min != null && <span class={`range-dot${soft}`} style={`left:${x(r.min)}%`}></span>}
+              {r.max != null && r.max !== r.min && <span class={`range-dot${soft}`} style={`left:${x(r.max)}%`}></span>}
+            </div>
+            <div class="bar-value">{label(r)}</div>
+          </div>
+        );
+      })}
+    <div class="bar-axis">
+      <div class="bar-axis-ticks">{ticks.map((t) => <span style={`left:${x(t)}%`}>{usd(t)}</span>)}</div>
+    </div>
+    </div>
+  </div>
+  <p class="sr-only">The table below lists every state's filing fee range.</p>
+  <Fragment slot="note">
+    <p>
+      “From” means only the lowest fee is known; “up to” means only the highest. No statewide figure in our data
+      for {feeMissing.map((m, i) => (
+        <>
+          <a href={`/states/${m.slug}/`}>{m.state}</a>{i < feeMissing.length - 2 ? ", " : i === feeMissing.length - 2 ? " and " : ""}
+        </>
+      ))}, where fees are set locally or weren't found. Our research lists a fee-waiver form for people who can't afford
+      the fee in {feeWaiverStats.withForm} of {feeWaiverStats.total} jurisdictions ({feeWaiverStats.unconfirmed} of those not yet confirmed).
+    </p>
+  </Fragment>
+  <table slot="table">
+    <caption class="sr-only">Small claims filing fee range by state</caption>
+    <thead><tr><th scope="col">State</th><th scope="col" class="num">Lowest</th><th scope="col" class="num">Highest</th></tr></thead>
+    <tbody>
+      {feeRows.map((r) => (
+        <tr>
+          <th scope="row"><a href={`/states/${r.slug}/`}>{r.state}</a>{r.unverified && <span class="badge unverified">unverified</span>}</th>
+          <td class="num">{r.min == null ? "—" : usd(r.min)}</td>
+          <td class="num">{r.max == null ? "—" : usd(r.max)}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</ChartFrame>

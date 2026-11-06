@@ -117,3 +117,84 @@ export const appealLabel: Record<string, string> = {
   none: "No appeal",
   varies: "Varies",
 };
+
+// ------------------------------------------------------------------ Plain-language helpers
+
+/** Short sentences for the "In short" summary on state pages. Details stay in the cited fields. */
+export const lawyersSentence: Record<string, string> = {
+  yes: "Lawyers are allowed at the hearing.",
+  no: "Lawyers can't represent either side at the hearing.",
+  limited: "Lawyers are allowed only in some situations.",
+};
+
+export const appealSentence: Record<string, string> = {
+  both: "Either side can appeal",
+  defendant_only: "Generally, only the side being sued can appeal",
+  none: "There's no appeal from a small claims decision",
+  varies: "Who can appeal depends on the court",
+};
+
+export const yesNoLabel: Record<string, string> = {
+  yes: "Yes",
+  no: "No",
+  unclear: "Not clear",
+};
+
+export const sourceTypeLabel: Record<string, string> = {
+  statute: "Law",
+  court_rule: "Court rule",
+  court_site: "Court website",
+  county_site: "County website",
+  form: "Court form",
+  secondary: "Secondary source",
+};
+
+/** Readable link text for a source URL: "courts.ca.gov › sc100info.pdf". */
+export function sourceLinkText(url: string): string {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    const parts = u.pathname.split("/").filter(Boolean);
+    const last = parts.length ? decodeURIComponent(parts[parts.length - 1]) : "";
+    const tail = last.length > 40 ? last.slice(0, 38) + "…" : last;
+    return tail ? `${host} › ${tail}` : host;
+  } catch {
+    return url;
+  }
+}
+
+// Field names that appear in sources[].what, turned into words people use.
+const FIELD_WORDS: [RegExp, string][] = [
+  [/\blimit_individual\b/g, "limit for individuals"],
+  [/\blimit_business\b/g, "limit for businesses"],
+  [/\blimit_notes\b/g, "limit details"],
+  [/\brecent_changes\b/g, "recent changes"],
+  [/\bfiling_fee_min\b/g, "lowest filing fee"],
+  [/\bfiling_fee_max\b/g, "highest filing fee"],
+  [/\bfiling_fee_notes\b/g, "fee details"],
+  [/\bwho_can_sue\b/g, "who can sue"],
+  [/\blawyers_allowed\b/g, "lawyers"],
+  [/\blawyers_notes\b/g, "lawyer details"],
+  [/\bappeal_deadline_days\b/g, "appeal deadline"],
+  [/\bappeal_who\b/g, "who can appeal"],
+  [/\be_filing_notes\b/g, "online filing details"],
+  [/\be_filing\b/g, "online filing"],
+  [/\bfee_waiver_form\b/g, "fee waiver form"],
+  [/\bfee_waiver_threshold\b/g, "who qualifies for a fee waiver"],
+  [/\bservice_methods\b/g, "serving the papers"],
+  [/\bself_help_url\b/g, "self-help page"],
+  [/\bcourt_name\b/g, "court name"],
+  [/\bsmall_claims_locations\b/g, "courthouses"],
+  [/\bsmall_claims_advisor\b/g, "small claims advisor"],
+  [/\bself_help_center\b/g, "self-help center"],
+  [/\bremote_hearings\b/g, "remote hearings"],
+  [/\blocal_notes\b/g, "local details"],
+];
+
+/** "limit_individual, e_filing" → "limit for individuals, online filing". */
+export function humanizeFields(s: string | null | undefined): string {
+  if (!s) return "";
+  let out = s;
+  for (const [re, words] of FIELD_WORDS) out = out.replace(re, words);
+  return out.replace(/_/g, " ");
+}

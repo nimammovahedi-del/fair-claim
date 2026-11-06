@@ -334,7 +334,7 @@
   "e_filing": "some_courts",
   "e_filing_notes": "Some superior courts allow e-filing of small claims; filing by mail is available everywhere. The Judicial Council's free Guide & File interview prepares the forms.",
   "fee_waiver_form": "FW-001, Request to Waive Court Fees (Rev. March 1, 2026): https://www.courts.ca.gov/documents/fw001.pdf (info sheet FW-001-INFO)",
-  "fee_waiver_threshold": "Qualify if receiving listed public benefits (Medi-Cal, CalFresh/SNAP, SSI/SSP, CalWORKs, CAPI, WIC, unemployment, etc.), or gross household income below the table on FW-001 item 5b (125% of federal poverty guidelines under Gov. Code \u00a7 68632(b)), or cannot pay court fees and meet basic needs.",
+  "fee_waiver_threshold": "Qualify if receiving listed public benefits (Medi-Cal, CalFresh/SNAP, SSI/SSP, CalWORKs, CAPI, WIC, unemployment, etc.), or gross household income below the table on FW-001 item 5b (200% of federal poverty guidelines under Gov. Code \u00a7 68632(b), as amended by SB 54, effective Jan. 1, 2026; was 125%), or cannot pay court fees and meet basic needs.",
   "service_methods": "The plaintiff cannot serve. Personal service by anyone 18+ who is not a party (friend, relative, sheriff/marshal in some counties for a fee, or registered process server); substituted service at home or work plus mailing (complete 10 days after mailing); or certified mail by the court clerk ($15, only some courts). Must be served at least 15 days before trial (20 days if served outside the county).",
   "self_help_url": "https://selfhelp.courts.ca.gov/small-claims-california",
   "citation": "Cal. Code Civ. Proc. \u00a7\u00a7 116.110-116.950 (esp. \u00a7\u00a7 116.220, 116.221, 116.230, 116.231, 116.710); Gov. Code \u00a7\u00a7 68630-68641",
@@ -388,14 +388,18 @@
     "url": "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1827",
     "what": "recent_changes (AB 1827 held in committee Aug. 13, 2026)",
     "type": "secondary"
+   },
+   {
+    "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=68632",
+    "what": "fee_waiver_threshold: 200% FPG (SB 54, eff. 2026-01-01), per research/california/statewide.json",
+    "type": "statute"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "recent_changes",
-   "fee_waiver_threshold"
+   "recent_changes"
   ],
-  "notes": "Leads confirmed: $12,500 / $6,250 per Judicial Council forms and self-help site. The Legislature's statute site (leginfo.legislature.ca.gov) blocks automated access (Cloudflare challenge), so the statute text itself was not read; facts are from mandatory Judicial Council forms and the official self-help guide. recent_changes is listed as unverified because SB 71's date and AB 1827's status come from a legislative analysis lead and a secondary bill tracker. The 125% figure for fee waivers is from Gov. Code \u00a7 68632(b), which could not be fetched; the FW-001 income table itself was confirmed. Statewide rules only; county details are researched separately.",
+  "notes": "Leads confirmed: $12,500 / $6,250 per Judicial Council forms and self-help site. The Legislature's statute site (leginfo.legislature.ca.gov) blocks automated access (Cloudflare challenge), so the statute text itself was not read; facts are from mandatory Judicial Council forms and the official self-help guide. recent_changes is listed as unverified because SB 71's date and AB 1827's status come from a legislative analysis lead and a secondary bill tracker. The 125% figure for fee waivers is from Gov. Code \u00a7 68632(b), which could not be fetched; the FW-001 income table itself was confirmed. Statewide rules only; county details are researched separately. Fee-waiver threshold corrected 2026-11-06 from 125% to 200% to match the statute research (statewide.json).",
   "slug": "ca"
  },
  {

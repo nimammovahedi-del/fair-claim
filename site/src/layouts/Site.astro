@@ -14,8 +14,8 @@ const path = Astro.url.pathname;
 
 // Main navigation. An item is "current" when the page path starts with its href.
 const nav = [
-  { href: "/steps/", label: "The 5 steps" },
-  { href: "/worth-it/", label: "Is it worth it?" },
+  { href: "/steps/", label: "How it works" },
+  { href: "/worth-it/", label: "Cost calculator" },
   { href: "/demand-letter/", label: "Demand letter" },
   { href: "/states/", label: "States" },
   { href: "/checklists/", label: "Checklists" },
@@ -56,7 +56,7 @@ const isCurrent = (href: string) => path.startsWith(href);
     <div class="proto-banner no-print">
       <div class="wrap">
         Prototype for review, not published. Legal information, not legal advice. Facts marked
-        <span class="badge unverified">unverified</span> still need a primary-source check.
+        <span class="badge unverified">Unverified</span> still need checking against the law or the court's own site.
       </div>
     </div>
 
@@ -124,8 +124,9 @@ const isCurrent = (href: string) => path.startsWith(href);
         <div>
           <p class="footer-heading">Guide</p>
           <ul class="footer-links">
-            <li><a href="/steps/">The 5 steps</a></li>
-            <li><a href="/worth-it/">Is it worth it?</a></li>
+            <li><a href="/steps/">How small claims works</a></li>
+            <li><a href="/steps/#before-you-decide">Before you decide</a></li>
+            <li><a href="/worth-it/">Cost calculator</a></li>
             <li><a href="/demand-letter/">Demand letter</a></li>
             <li><a href="/checklists/">Checklists</a></li>
           </ul>

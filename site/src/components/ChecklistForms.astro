@@ -1,0 +1,24 @@
+---
+// Key California court forms for one checklist step: number, title and the official PDF link.
+// <ChecklistForms forms={[{ form: "SC-100", title: "…", url: "https://www.courts.ca.gov/documents/sc100.pdf" }]} />
+interface Form {
+  form: string;
+  title: string;
+  url: string;
+}
+interface Props {
+  forms: Form[];
+}
+const { forms } = Astro.props;
+---
+<div class="table-scroll">
+  <table class="checklist-forms">
+    <caption>California forms for this step</caption>
+    <thead><tr><th scope="col">Form</th><th scope="col">What it is</th></tr></thead>
+    <tbody>
+      {forms.map((f) => (
+        <tr><td><a href={f.url} rel="noopener">{f.form}</a></td><td>{f.title}</td></tr>
+      ))}
+    </tbody>
+  </table>
+</div>

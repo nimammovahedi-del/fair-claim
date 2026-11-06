@@ -1,0 +1,28 @@
+---
+// One headline number with a plain label and, optionally, its source.
+// <StatTile value="55%" label="of winners collected nothing" source={{ label, url }} checked="2026-11-05" unverified />
+// Put several inside <ul class="stat-tiles"> … </ul> (each renders as an <li>), or pass as="div" to use it alone.
+import "../styles/features.css";
+
+interface Props {
+  value: string;
+  label: string;
+  source?: { label: string; url: string };
+  checked?: string;
+  unverified?: boolean;
+  as?: "li" | "div";
+}
+const { value, label, source, checked, unverified = false, as = "li" } = Astro.props;
+const Tag = as;
+---
+<Tag class="stat-tile">
+  <p class="stat-tile-value">{value}</p>
+  <p class="stat-tile-label">{label}<slot /></p>
+  {(source || unverified) && (
+    <p class="cite">
+      {unverified && <span class="badge unverified">unverified</span>}
+      {source && <a href={source.url} rel="noopener">{source.label}</a>}
+      {checked && <span>checked {checked}</span>}
+    </p>
+  )}
+</Tag>

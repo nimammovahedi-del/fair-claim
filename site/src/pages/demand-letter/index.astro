@@ -1,21 +1,43 @@
 ---
+// Demand-letter tool. Framed as one option people often try first, not as "how to get paid".
+// Everything runs in the browser: nothing is stored or sent. Copy, print and PDF are blocked
+// until the required boxes are filled in, with an error summary that links to each box.
 import Site from "../../layouts/Site.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 import ToolNotice from "../../components/ToolNotice.astro";
-import { states } from "../../lib/data";
+import { states, caStatewide } from "../../lib/data";
 import { letterNotes } from "../../lib/letter-notes";
 
 // Short, neutral line printed at the bottom of the PDF and the printed letter.
 const PRINT_NOTE = "Prepared with Fair Claim's free letter tool (general information, not legal advice). Review before sending.";
 const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.court_name }));
+const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?: string[] } | undefined;
 ---
-<Site title="Demand letter" description="Write a calm, clear demand letter in your browser. Nothing is stored or sent.">
+<Site title="Demand letter" description="A demand letter is one option many people try before going to court. Write a calm, clear one in your browser. Nothing is stored or sent.">
+  <div class="no-print">
+    <Breadcrumb items={[{ label: "Demand letter" }]} />
+  </div>
   <div class="narrow page-head">
-    <p class="eyebrow">Step 1</p>
+    <p class="eyebrow">Letter tool</p>
     <h1>Write a demand letter</h1>
     <p class="lede">
-      Answer a few questions and get a letter you can print, save as a PDF, or copy. It runs entirely in your
-      browser: nothing you type is saved or sent to us, and it's gone when you close the page.
+      A demand letter is a written request for money you believe you're owed. Many people try one before going to
+      court, or instead of it. This tool turns your answers into a plain, calm letter you can print, save as a PDF or
+      copy.
     </p>
+    <ul class="key-points">
+      <li>Sending a letter doesn't commit you to suing. Some disputes end with a letter; some don't.</li>
+      <li>
+        Some states, including California, expect you to ask for payment before you file a small claims case.{" "}
+        {preFiling?.citation && (
+          <span class="cite">
+            {preFiling.sources?.[0] ? <a href={preFiling.sources[0]} rel="noopener">{preFiling.citation}</a> : preFiling.citation}
+          </span>
+        )}
+      </li>
+      <li>It runs entirely in your browser. Nothing you type is saved or sent to us, and it's gone when you close the page.</li>
+    </ul>
+    <p class="hint">Other options, like mediation or a complaint to a regulator, are on <a href="/steps/#before-you-decide">Before you decide</a>.</p>
   </div>
 
   <script type="application/json" id="letter-states" set:html={JSON.stringify(letterStates)} />
@@ -30,15 +52,23 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
       "Nothing you type is stored or sent anywhere. The PDF is made on your device, and everything is gone when you close the page.",
       "State-law notes are based on the sources we cite. Laws can change, so check them before you rely on them.",
       "You're responsible for the letter. Read it, edit anything that isn't exactly right, and make sure every fact, date and amount is accurate.",
-      "Keep it factual and calm. Don't add threats (for example, of criminal charges or public posts). The letter only says you may file in small claims court.",
+      "Keep it factual and calm. Don't add threats (for example, of criminal charges or public posts). The letter can say you may file in small claims court, and you can leave that out.",
       "If you're unsure, check with the court's self-help center, a free small claims advisor, or legal aid.",
     ]}
   />
 
   <div class="letter-wrap" id="letter-tool">
-    <form id="letter" class="no-print" onsubmit="return false" autocomplete="off">
+    <form id="letter" class="no-print letter-form" novalidate autocomplete="off" aria-labelledby="form-title">
+      <h2 class="sr-only" id="form-title">Your answers</h2>
+      <p class="hint">Boxes marked <span class="req">(required)</span> are needed before you can print, save or copy. <a class="jump-link" href="#preview-title">Skip to the preview</a></p>
+
+      <div class="callout error error-summary" id="error-summary" tabindex="-1" hidden aria-labelledby="error-summary-title">
+        <p class="callout-title" id="error-summary-title"></p>
+        <ul id="error-list"></ul>
+      </div>
+
       <fieldset>
-        <legend>What it's about</legend>
+        <legend><span class="legend-num" aria-hidden="true">1</span> What it's about</legend>
         <div class="form-grid">
           <div class="field">
             <label for="kind">Type of dispute</label>
@@ -52,102 +82,278 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
           </div>
           <div class="field">
             <label for="st">State</label>
-            <select id="st">
-              <option value="">Choose…</option>
+            <select id="st" aria-describedby="st-hint">
+              <option value="">Choose a state</option>
               {letterStates.map((s) => <option value={s.slug}>{s.name}</option>)}
             </select>
+            <span class="hint" id="st-hint">Optional. Adds cited state-law notes where we have them.</span>
           </div>
-          <div class="field">
-            <label for="amount">Amount ($)</label>
-            <input id="amount" type="number" min="0" step="0.01" value="" placeholder="1850" />
+          <div class="field" data-req>
+            <label for="amount">Amount <span class="req">(required)</span></label>
+            <div class="input-affix">
+              <span class="affix" aria-hidden="true">$</span>
+              <input id="amount" type="text" inputmode="decimal" placeholder="1,850.00" aria-required="true" aria-describedby="amount-hint" />
+            </div>
+            <span class="hint" id="amount-hint">The amount you're asking for, and no more than you can show.</span>
           </div>
           <div class="field">
             <label for="eventDate" id="eventDateLabel">Move-out date</label>
-            <input id="eventDate" type="date" />
+            <input id="eventDate" type="date" aria-describedby="eventDate-hint" />
+            <span class="hint" id="eventDate-hint">Optional.</span>
+          </div>
+          <div class="field full" data-req>
+            <label for="detail"><span id="detailLabel">Rental address</span> <span class="req">(required)</span></label>
+            <input id="detail" type="text" placeholder="123 Main St, Apt 4, Oakland, CA" aria-required="true" aria-describedby="detail-hint" />
+            <span class="hint" id="detail-hint">Goes in the subject line, so keep it short.</span>
           </div>
           <div class="field full">
-            <label for="detail" id="detailLabel">Rental address</label>
-            <input id="detail" type="text" placeholder="123 Main St, Apt 4, Oakland, CA" />
-          </div>
-          <div class="field full">
-            <label for="facts">What happened <span class="hint">Short, factual, in your own words. Dates and amounts help.</span></label>
-            <textarea id="facts" placeholder="I paid a $2,000 deposit when I moved in. I left the unit clean and returned the keys on June 30. I received $150 back with no itemized list of deductions."></textarea>
+            <label for="facts">What happened</label>
+            <textarea id="facts" aria-describedby="facts-hint" placeholder="I paid a $2,000 deposit when I moved in. I left the unit clean and returned the keys on June 30. I received $150 back with no itemized list of deductions."></textarea>
+            <span class="hint" id="facts-hint">Recommended. Short and factual, in your own words. Dates and amounts help.</span>
           </div>
         </div>
       </fieldset>
 
       <fieldset>
-        <legend>From (you)</legend>
+        <legend><span class="legend-num" aria-hidden="true">2</span> From you</legend>
         <div class="form-grid">
-          <div class="field full"><label for="sName">Your name</label><input id="sName" type="text" /></div>
-          <div class="field full"><label for="sAddr">Your mailing address <span class="hint">one line per row</span></label><textarea id="sAddr" style="min-height:4.5rem"></textarea></div>
-          <div class="field"><label for="sPhone">Phone (optional)</label><input id="sPhone" type="tel" /></div>
-          <div class="field"><label for="sEmail">Email (optional)</label><input id="sEmail" type="email" /></div>
+          <div class="field full" data-req>
+            <label for="sName">Your name <span class="req">(required)</span></label>
+            <input id="sName" type="text" autocomplete="name" aria-required="true" />
+          </div>
+          <div class="field full" data-req>
+            <label for="sAddr">Your mailing address <span class="req">(required)</span></label>
+            <textarea id="sAddr" class="short" autocomplete="street-address" aria-required="true" aria-describedby="sAddr-hint"></textarea>
+            <span class="hint" id="sAddr-hint">Street on the first line, then city, state and ZIP on the next.</span>
+          </div>
+          <div class="field">
+            <label for="sPhone">Phone</label>
+            <input id="sPhone" type="tel" autocomplete="tel" aria-describedby="sPhone-hint" />
+            <span class="hint" id="sPhone-hint">Optional.</span>
+          </div>
+          <div class="field">
+            <label for="sEmail">Email</label>
+            <input id="sEmail" type="email" autocomplete="email" aria-describedby="sEmail-hint" />
+            <span class="hint" id="sEmail-hint">Optional.</span>
+          </div>
         </div>
       </fieldset>
 
       <fieldset>
-        <legend>To</legend>
+        <legend><span class="legend-num" aria-hidden="true">3</span> To them</legend>
         <div class="form-grid">
-          <div class="field full"><label for="rName">Their name or business name</label><input id="rName" type="text" /><span class="hint">For a business, use its legal name (check your Secretary of State's business search).</span></div>
-          <div class="field full"><label for="rAddr">Their mailing address</label><textarea id="rAddr" style="min-height:4.5rem"></textarea></div>
+          <div class="field full" data-req>
+            <label for="rName">Their name or business name <span class="req">(required)</span></label>
+            <input id="rName" type="text" aria-required="true" aria-describedby="rName-hint" />
+            <span class="hint" id="rName-hint">For a business, use its legal name. Your Secretary of State's business search shows it.</span>
+          </div>
+          <div class="field full" data-req>
+            <label for="rAddr">Their mailing address <span class="req">(required)</span></label>
+            <textarea id="rAddr" class="short" aria-required="true" aria-describedby="rAddr-hint"></textarea>
+            <span class="hint" id="rAddr-hint">One line per row, like an envelope.</span>
+          </div>
         </div>
       </fieldset>
 
       <fieldset>
-        <legend>Deadline and payment</legend>
+        <legend><span class="legend-num" aria-hidden="true">4</span> Deadline and wording</legend>
         <div class="form-grid">
-          <div class="field"><label for="date">Date of letter</label><input id="date" type="date" /></div>
+          <div class="field" data-req>
+            <label for="date">Date of the letter <span class="req">(required)</span></label>
+            <input id="date" type="date" aria-required="true" />
+          </div>
           <div class="field">
             <label for="days">Days to respond</label>
-            <select id="days"><option>10</option><option selected>14</option><option>21</option><option>30</option></select>
+            <select id="days" aria-describedby="days-hint"><option>10</option><option selected>14</option><option>21</option><option>30</option></select>
+            <span class="hint" id="days-hint">10 to 14 days is common.</span>
           </div>
-          <div class="field full"><label for="pay">How they can pay (optional)</label><input id="pay" type="text" placeholder="check mailed to the address above, or Zelle to my phone number" /></div>
-          <div class="field full"><label for="court">Court to name (optional)</label><input id="court" type="text" placeholder="small claims court in Alameda County" /></div>
+          <div class="field full">
+            <label for="pay">How they can pay</label>
+            <input id="pay" type="text" placeholder="a check mailed to the address above" aria-describedby="pay-hint" />
+            <span class="hint" id="pay-hint">Optional.</span>
+          </div>
+          <div class="field full">
+            <fieldset class="choices">
+              <legend class="label">What the letter says</legend>
+              <label class="choice"><input type="checkbox" id="offer" checked /> <span>Offer to talk it over before the deadline</span></label>
+              <label class="choice"><input type="checkbox" id="mentionCourt" checked /> <span>Say I may file in small claims court if it isn't resolved</span></label>
+            </fieldset>
+          </div>
+          <div class="field full" id="court-field">
+            <label for="court">Court to name</label>
+            <input id="court" type="text" placeholder="small claims court in Alameda County" aria-describedby="court-hint" />
+            <span class="hint" id="court-hint">Optional. Leave blank to say “small claims court”.</span>
+          </div>
           <div class="field full" id="notes-field" hidden>
-            <span class="label">State law to mention</span>
-            <div id="notes-list"></div>
+            <fieldset class="choices">
+              <legend class="label">State law to mention</legend>
+              <p class="hint">Cited from the law. Untick any you don't want in the letter.</p>
+              <div id="notes-list"></div>
+            </fieldset>
           </div>
         </div>
       </fieldset>
     </form>
 
-    <div>
+    <section class="letter-side" aria-labelledby="preview-title">
+      <div class="preview-head no-print">
+        <h2 id="preview-title" tabindex="-1">Preview</h2>
+        <p class="hint">Updates as you type. Text in <mark class="ph">[brackets]</mark> still needs an answer.</p>
+      </div>
       <div class="actions no-print">
         <button class="btn" type="button" id="pdf">Download PDF</button>
         <button class="btn secondary" type="button" id="print">Print</button>
         <button class="btn secondary" type="button" id="copy">Copy text</button>
-        <button class="btn secondary" type="button" id="clear">Clear everything</button>
+        <button class="btn tertiary" type="button" id="clear">Clear everything</button>
       </div>
-      <p class="privacy no-print">Nothing is saved. The PDF is made on your device.</p>
-      <div class="paper" id="preview" aria-live="polite"></div>
+      <p class="sr-only" role="status" aria-live="polite" id="letter-status"></p>
+      <div class="paper" id="preview"></div>
       <p class="print-only print-note" id="print-note">{PRINT_NOTE}</p>
       <div class="callout info no-print">
-        <p><strong>Before you send it:</strong> read it over and change anything that isn't exactly right — it's your letter. Send it in a way you can prove (certified mail, or email plus regular mail) and keep a copy for court.</p>
+        <p class="callout-title">Before you send it</p>
+        <p>
+          Read it over and change anything that isn't exactly right. It's your letter. Send it in a way you can prove,
+          like certified mail, or email plus regular mail, and keep a copy.
+        </p>
       </div>
-    </div>
+      <p class="no-print"><a class="jump-link" href="#form-title">Back to your answers</a></p>
+    </section>
   </div>
 </Site>
 
 <script>
-  import { buildDemandLetter, type DisputeKind } from "../../lib/core/demand-letter";
+  import { buildDemandLetter, formatMoney, type DisputeKind } from "../../lib/core/demand-letter";
   import { todayISO } from "../../lib/core/deadlines";
+  import { parseAmount } from "../../lib/core/worth-it";
 
   type Note = { id: string; kinds: string[]; text: string; citation: string; url: string; unverified?: boolean };
   const notesByState: Record<string, Note[]> = JSON.parse(document.getElementById("letter-notes")!.textContent || "{}");
   const $ = <T extends HTMLElement = HTMLInputElement>(id: string) => document.getElementById(id) as unknown as T;
-  const val = (id: string) => ($(id) as unknown as HTMLInputElement).value;
+  const val = (id: string) => ($(id) as unknown as HTMLInputElement).value.trim();
   const lines = (id: string) => val(id).split("\n").map((l) => l.trim()).filter(Boolean);
+  const checked = (id: string) => ($(id) as HTMLInputElement).checked;
 
   const labels: Record<string, [string, string, string]> = {
     security_deposit: ["Move-out date", "Rental address", "123 Main St, Apt 4, Oakland, CA"],
     consumer_refund: ["Date you paid", "What you bought or hired them for", "kitchen remodel deposit (contract dated March 2)"],
     unpaid_invoice: ["Date payment was due", "Invoice number and work done", "Invoice #1042 for website design, delivered May 1"],
     property_damage: ["Date of the damage", "What was damaged and how", "my car's rear bumper, hit in the Safeway parking lot"],
-    other: ["Key date (optional)", "What this is about", "the loan of $800 I made on January 5"],
+    other: ["Key date", "What this is about", "the loan of $800 I made on January 5"],
   };
 
+  // Required boxes and the words used in error messages.
+  const required: { id: string; name: string; check?: (v: string) => string | null }[] = [
+    {
+      id: "amount",
+      name: "the amount",
+      check: (v) => {
+        const n = parseAmount(v);
+        if (n == null) return "Enter the amount you're asking for.";
+        if (Number.isNaN(n)) return "Enter the amount as a number, like 1,850.";
+        if (n <= 0) return "The amount needs to be more than $0.";
+        return null;
+      },
+    },
+    { id: "detail", name: "what it's about" },
+    { id: "sName", name: "your name" },
+    { id: "sAddr", name: "your mailing address" },
+    { id: "rName", name: "their name" },
+    { id: "rAddr", name: "their mailing address" },
+    { id: "date", name: "the date of the letter" },
+  ];
+  const optionalChecks: { id: string; check: (v: string) => string | null }[] = [
+    { id: "sEmail", check: (v) => (v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Check the email address, like name@example.com." : null) },
+    { id: "eventDate", check: (v) => (($("eventDate") as HTMLInputElement).validity.badInput ? "Enter a full date." : null) },
+  ];
+  const touched = new Set<string>();
+  const hintIds: Record<string, string> = {};
+  for (const id of [...required.map((r) => r.id), ...optionalChecks.map((o) => o.id)]) hintIds[id] = $(id).getAttribute("aria-describedby") || "";
+
   ($("date") as HTMLInputElement).value = todayISO();
+
+  function errors(): Map<string, string> {
+    const out = new Map<string, string>();
+    for (const r of required) {
+      const v = val(r.id);
+      const msg = r.check ? r.check(v) : v ? null : `Enter ${r.name}.`;
+      if (msg) out.set(r.id, msg);
+    }
+    for (const o of optionalChecks) {
+      const msg = o.check(val(o.id));
+      if (msg) out.set(o.id, msg);
+    }
+    return out;
+  }
+
+  function paintErrors(errs: Map<string, string>, all = false) {
+    for (const id of Object.keys(hintIds)) {
+      const el = $(id);
+      const field = el.closest<HTMLElement>(".field")!;
+      const msg = errs.get(id);
+      const show = msg && (all || touched.has(id));
+      const errId = `${id}-error`;
+      let p = document.getElementById(errId);
+      if (show) {
+        if (!p) {
+          p = document.createElement("p");
+          p.className = "error-text";
+          p.id = errId;
+          field.appendChild(p);
+        }
+        p.textContent = msg!;
+        field.classList.add("has-error");
+        el.setAttribute("aria-invalid", "true");
+        el.setAttribute("aria-describedby", `${errId} ${hintIds[id]}`.trim());
+      } else {
+        p?.remove();
+        field.classList.remove("has-error");
+        el.removeAttribute("aria-invalid");
+        if (hintIds[id]) el.setAttribute("aria-describedby", hintIds[id]);
+        else el.removeAttribute("aria-describedby");
+      }
+    }
+    // Keep an open error summary in step with the boxes.
+    const summary = $("error-summary") as HTMLElement;
+    if (!summary.hidden) fillSummary(errs);
+  }
+
+  function fillSummary(errs: Map<string, string>) {
+    const summary = $("error-summary") as HTMLElement;
+    if (!errs.size) {
+      summary.hidden = true;
+      return;
+    }
+    $("error-summary-title").textContent =
+      errs.size === 1 ? "1 box needs an answer before you can print, save or copy" : `${errs.size} boxes need an answer before you can print, save or copy`;
+    const list = $("error-list");
+    list.replaceChildren();
+    for (const [id, msg] of errs) {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = `#${id}`;
+      a.textContent = msg;
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        $(id).focus();
+      });
+      li.appendChild(a);
+      list.appendChild(li);
+    }
+    summary.hidden = false;
+  }
+
+  /** Run before print, PDF or copy. Returns true when the letter is ready. */
+  function ready(): boolean {
+    const errs = errors();
+    for (const id of errs.keys()) touched.add(id);
+    paintErrors(errs, true);
+    fillSummary(errs);
+    if (errs.size) {
+      ($("error-summary") as HTMLElement).focus();
+      return false;
+    }
+    return true;
+  }
 
   function selectedNotes(): string[] {
     return Array.from(document.querySelectorAll<HTMLInputElement>("#notes-list input:checked")).map((c) => c.value);
@@ -158,7 +364,7 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
     const kind = val("kind");
     const list = (notesByState[st] || []).filter((n) => n.kinds.includes(kind));
     const box = $("notes-list");
-    box.innerHTML = "";
+    box.replaceChildren();
     ($("notes-field") as HTMLElement).hidden = list.length === 0;
     for (const n of list) {
       const wrap = document.createElement("label");
@@ -168,27 +374,59 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
       cb.checked = true;
       cb.value = n.text;
       const span = document.createElement("span");
-      span.innerHTML = `${n.text} <span class="cite">${n.unverified ? '<span class="badge unverified">unverified</span> ' : ""}<a href="${n.url}">${n.citation}</a></span>`;
+      span.append(n.text, " ");
+      const cite = document.createElement("span");
+      cite.className = "cite";
+      if (n.unverified) {
+        const b = document.createElement("span");
+        b.className = "badge unverified";
+        b.textContent = "Unverified";
+        cite.append(b, " ");
+      }
+      const a = document.createElement("a");
+      a.href = n.url;
+      a.rel = "noopener";
+      a.textContent = n.citation;
+      cite.appendChild(a);
+      span.appendChild(cite);
       wrap.append(cb, span);
       box.appendChild(wrap);
     }
   }
 
-  function current() {
-    return buildDemandLetter({
+  /** Builds the letter. With `forPreview`, missing answers show as [bracketed] placeholders. */
+  function current(forPreview = false) {
+    const amount = parseAmount(val("amount"));
+    const amountOk = amount != null && !Number.isNaN(amount) && amount > 0;
+    const sAddr = lines("sAddr");
+    const rAddr = lines("rAddr");
+    const L = buildDemandLetter({
       kind: val("kind") as DisputeKind,
-      sender: { name: val("sName") || "[Your name]", addressLines: lines("sAddr"), phone: val("sPhone"), email: val("sEmail") },
-      recipient: { name: val("rName") || "[Their name]", addressLines: lines("rAddr") },
+      sender: {
+        name: val("sName") || "[Your name]",
+        addressLines: sAddr.length || !forPreview ? sAddr : ["[Your mailing address]"],
+        phone: val("sPhone"),
+        email: val("sEmail"),
+      },
+      recipient: { name: val("rName") || "[Their name]", addressLines: rAddr.length || !forPreview ? rAddr : ["[Their mailing address]"] },
       letterDate: val("date") || todayISO(),
-      amount: Number(val("amount")) || 0,
-      subjectDetail: val("detail") || "[details]",
+      amount: amountOk ? amount! : 0,
+      subjectDetail: val("detail") || "[what it's about]",
       eventDate: val("eventDate") || undefined,
       facts: val("facts"),
       responseDays: Number(val("days")) || 14,
       paymentMethods: val("pay"),
       courtPhrase: val("court"),
       legalNotes: selectedNotes(),
+      offerToDiscuss: checked("offer"),
+      mentionCourt: checked("mentionCourt"),
     });
+    if (forPreview && !amountOk) {
+      const zero = formatMoney(0);
+      const swap = (s: string) => s.split(zero).join("[amount]");
+      return { ...L, text: swap(L.text), paragraphs: L.paragraphs.map(swap), subject: swap(L.subject) };
+    }
+    return L;
   }
 
   function render() {
@@ -197,10 +435,30 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
     $("eventDateLabel").textContent = d;
     $("detailLabel").textContent = det;
     ($("detail") as HTMLInputElement).placeholder = ph;
-    $("preview").textContent = current().text;
+    ($("court-field") as HTMLElement).hidden = !checked("mentionCourt");
+
+    // Preview: plain text, with [placeholders] marked so they're easy to spot (the brackets carry the meaning too).
+    const text = current(true).text;
+    const out = $("preview");
+    out.replaceChildren();
+    for (const part of text.split(/(\[[^\]\n]+\])/)) {
+      if (/^\[[^\]]+\]$/.test(part)) {
+        const m = document.createElement("mark");
+        m.className = "ph";
+        m.textContent = part;
+        out.appendChild(m);
+      } else if (part) out.appendChild(document.createTextNode(part));
+    }
+  }
+
+  function status(msg: string) {
+    const s = $("letter-status");
+    s.textContent = "";
+    window.setTimeout(() => (s.textContent = msg), 50);
   }
 
   async function downloadPdf() {
+    if (!ready()) return;
     const { jsPDF } = await import("jspdf");
     const L = current();
     const doc = new jsPDF({ unit: "pt", format: "letter" });
@@ -242,28 +500,61 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
       doc.setTextColor(0);
     }
     doc.save("demand-letter.pdf");
+    status("PDF created. Check your downloads.");
   }
 
-  $("letter").addEventListener("input", render);
+  // Events
+  $("letter").addEventListener("input", (e) => {
+    const id = (e.target as HTMLElement).id;
+    if (touched.has(id)) paintErrors(errors());
+    render();
+  });
+  $("letter").addEventListener("change", render);
+  $("letter").addEventListener(
+    "blur",
+    (e) => {
+      const el = e.target as HTMLInputElement;
+      if (!(el.id in hintIds)) return;
+      // Tidy a typed amount: "1850" → "1,850.00".
+      if (el.id === "amount") {
+        const n = parseAmount(el.value);
+        if (n != null && !Number.isNaN(n) && n > 0) el.value = n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+      if (el.value.trim() || touched.has(el.id)) touched.add(el.id);
+      paintErrors(errors());
+    },
+    true,
+  );
+  $("letter").addEventListener("submit", (e) => e.preventDefault());
   $("st").addEventListener("change", () => { renderNotes(); render(); });
   $("kind").addEventListener("change", () => { renderNotes(); render(); });
-  $("notes-list").addEventListener("change", render);
   $("pdf").addEventListener("click", downloadPdf);
-  $("print").addEventListener("click", () => window.print());
+  $("print").addEventListener("click", () => {
+    if (ready()) window.print();
+  });
   $("copy").addEventListener("click", async () => {
+    if (!ready()) return;
+    const btn = $("copy");
     try {
       await navigator.clipboard.writeText(current().text);
-      $("copy").textContent = "Copied";
-      setTimeout(() => ($("copy").textContent = "Copy text"), 1500);
+      btn.textContent = "Copied";
+      status("Letter copied. Paste it into an email or a document.");
+      window.setTimeout(() => (btn.textContent = "Copy text"), 2000);
     } catch {
-      $("copy").textContent = "Copy failed — select the text instead";
+      status("Copying didn't work in this browser. Select the letter text and copy it instead.");
     }
   });
   $("clear").addEventListener("click", () => {
+    if (!window.confirm("Clear every answer? This can't be undone.")) return;
     ($("letter") as unknown as HTMLFormElement).reset();
     ($("date") as HTMLInputElement).value = todayISO();
+    touched.clear();
+    ($("error-summary") as HTMLElement).hidden = true;
+    paintErrors(new Map());
     renderNotes();
     render();
+    status("All answers cleared.");
+    $("kind").focus();
   });
   renderNotes();
   render();

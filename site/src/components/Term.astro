@@ -1,0 +1,122 @@
+---
+// <Term>: a glossary word inside running text.
+//
+// Usage:
+//   import Term from "../components/Term.astro";
+//   … a <Term slug="default-judgment">default judgment</Term> means …
+//   … the <Term slug="filing-fee" /> …            (no children: shows the glossary term in lower case)
+//
+// Props:
+//   slug   (required) An entry slug from src/lib/glossary.ts. An unknown slug fails the build.
+//   plain  (optional) true = render the word as plain text with no link or popover (e.g. inside a heading
+//          or a link, where nesting would be invalid).
+//
+// Behaviour:
+//   - Always a real link to /glossary/#slug, so it works with no JavaScript and is readable when printed.
+//   - With JavaScript, the definition appears in a small popover on mouse hover, on keyboard focus, and on the
+//     first tap on a touch screen (a second tap follows the link). Escape closes it; so does tapping elsewhere.
+//   - Screen readers hear the definition as the link's description (aria-describedby), with or without JS.
+//   - The popover only fades (opacity, 150ms); nothing moves. Reduced motion turns the fade off (global rule).
+import "../styles/features.css";
+import { getTerm } from "../lib/glossary";
+
+interface Props {
+  slug: string;
+  plain?: boolean;
+}
+const { slug, plain = false } = Astro.props;
+const entry = getTerm(slug);
+const tipId = `tip-${slug}-${Math.random().toString(36).slice(2, 8)}`;
+const fallback = entry.term.toLowerCase();
+---
+{plain ? (
+  <slot>{fallback}</slot>
+) : (
+  <span class="term" data-term><a class="term-link" href={`/glossary/#${slug}`} aria-describedby={tipId}><slot>{fallback}</slot></a><span class="term-tip" id={tipId} role="tooltip" hidden><span class="term-tip-name">{entry.term}</span>{entry.def}<span class="term-tip-more">Full entry in the glossary</span></span></span>
+)}
+
+<script>
+  // One controller for every <Term> on the page. Only one popover is open at a time.
+  type TermEl = HTMLElement & { _hideTimer?: number };
+  let open: TermEl | null = null;
+  let lastPointer = "mouse";
+
+  const tipOf = (t: TermEl) => t.querySelector<HTMLElement>(".term-tip")!;
+
+  function place(t: TermEl) {
+    const tip = tipOf(t);
+    tip.classList.remove("above");
+    tip.style.left = "0px";
+    const r = tip.getBoundingClientRect();
+    const margin = 8;
+    let shift = 0;
+    if (r.right > window.innerWidth - margin) shift = window.innerWidth - margin - r.right;
+    if (r.left + shift < margin) shift = margin - r.left;
+    tip.style.left = `${shift}px`;
+    if (r.bottom > window.innerHeight - margin && r.top - r.height > margin * 6) tip.classList.add("above");
+  }
+
+  function show(t: TermEl) {
+    if (open && open !== t) hide(open);
+    window.clearTimeout(t._hideTimer);
+    const tip = tipOf(t);
+    if (!tip.hidden) return;
+    tip.hidden = false;
+    place(t);
+    requestAnimationFrame(() => tip.classList.add("is-open"));
+    open = t;
+  }
+
+  function hide(t: TermEl) {
+    window.clearTimeout(t._hideTimer);
+    const tip = tipOf(t);
+    tip.classList.remove("is-open");
+    tip.hidden = true;
+    if (open === t) open = null;
+  }
+
+  function hideSoon(t: TermEl) {
+    window.clearTimeout(t._hideTimer);
+    t._hideTimer = window.setTimeout(() => {
+      // Stay open while the link has keyboard focus.
+      if (!t.contains(document.activeElement) || lastPointer !== "keyboard") hide(t);
+    }, 150);
+  }
+
+  document.querySelectorAll<TermEl>("[data-term]").forEach((t) => {
+    const link = t.querySelector<HTMLAnchorElement>(".term-link")!;
+    // Hover (mouse and pen only); the popover itself is part of the hover area, so it can be read and selected.
+    t.addEventListener("pointerenter", (e) => {
+      if (e.pointerType !== "touch") show(t);
+    });
+    t.addEventListener("pointerleave", (e) => {
+      if (e.pointerType !== "touch") hideSoon(t);
+    });
+    // Keyboard focus.
+    link.addEventListener("focus", () => {
+      if (lastPointer === "keyboard") show(t);
+    });
+    link.addEventListener("blur", () => hide(t));
+    // Touch: the first tap opens the definition; a second tap follows the link.
+    link.addEventListener("pointerdown", (e) => {
+      lastPointer = e.pointerType || "mouse";
+    });
+    link.addEventListener("click", (e) => {
+      if (lastPointer === "touch" && tipOf(t).hidden) {
+        e.preventDefault();
+        show(t);
+      }
+    });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Tab") lastPointer = "keyboard";
+    if (e.key === "Escape" && open) hide(open);
+  });
+  document.addEventListener("pointerdown", (e) => {
+    lastPointer = e.pointerType || "mouse";
+    if (open && !open.contains(e.target as Node)) hide(open);
+  });
+  window.addEventListener("scroll", () => open && place(open), { passive: true });
+  window.addEventListener("resize", () => open && place(open));
+</script>

@@ -1,887 +1,891 @@
 [
-  {
-    "state": "Alabama",
-    "abbr": "AL",
-    "court_name": "Small claims docket of the District Court",
-    "limit_individual": 6000,
-    "limit_business": 6000,
-    "limit_notes": "$6,000 exclusive of interest and costs (Ala. Code § 12-12-31(a)). Unlawful detainer (eviction) cases are not handled under the Small Claims Rules; they go on the regular district court docket (Ala. Sm. Cl. R. A). Attorney fees can only be awarded if the party has a licensed attorney (§ 12-12-31(c)). For claims over $1,500 the docket fee is the same as for regular (non-small-claims) district court cases (§ 12-12-31(f)).",
-    "recent_changes": null,
-    "filing_fee_min": 75.5,
-    "filing_fee_max": 248,
-    "filing_fee_notes": "Fees are tiered by claim amount (up to $1,500; $1,500.01-$3,000; $3,000.01-$6,000) and differ by county. Cherokee County: $75.50 / $149.50 / $238.50, plus $25 sheriff service per defendant, $10 per additional defendant. Russell County: $85 / $159 / $248, plus $15 sheriff service, $15 per additional defendant. Both list $50 per additional plaintiff (max $500). Certified mail postage is extra. Only two county fee tables were checked, so the statewide range may be wider.",
-    "who_can_sue": "Individuals aged 19 or older (Alabama age of majority, per county court pages), partnerships and corporations. Without a lawyer, a partnership must appear through a partner or employee and a corporation through an officer or full-time employee (§ 12-12-31(b)). An assignee of a claim, such as a debt buyer or collection agency, must use a licensed attorney, and non-attorneys may not file on behalf of the original owner (§ 12-12-31(d)). Lawyers whose licenses are revoked or suspended may not file (§ 12-12-31(e)).",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Parties may appear with or without an attorney (§ 12-12-31(b)). Attorney fees are recoverable only if the party is represented by a licensed attorney (§ 12-12-31(c)).",
-    "appeal": "Either party may appeal to circuit court by filing a notice of appeal with the district court clerk within 14 days of the judgment and posting a bond or cash for costs, or an approved affidavit of substantial hardship (Ala. Sm. Cl. R. M). The appeal is a new trial (trial de novo) in circuit court (Ala. Code § 12-12-71); jury only if demanded in the notice of appeal. Cherokee County lists a circuit court fee of $265.50 (non-jury) or $365.50 (jury).",
-    "appeal_who": "both",
-    "appeal_deadline_days": 14,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "AlaFile (efile.alacourt.gov) is statewide. Self-represented parties may register and file electronically but are not required to; the e-filing mandate does not cover pro se filings (AOC Administrative Policies and Procedures, 2026).",
-    "fee_waiver_form": "Form C-10-CIVIL, Affidavit of Substantial Hardship and Order (Request to Waive Filing Fees), Rev. 10/2026: https://eforms.alacourt.gov/media/na1j0cie/c-10-civil-affidavit-of-substantial-hardship-order-10-2026.pdf",
-    "fee_waiver_threshold": "Docket fee may be waived at filing and taxed as costs at the end of the case if paying would be a substantial hardship under the income guidelines in Ala. Code § 15-12-1(4)a-b: income at or below 125% of federal poverty guidelines, or 125-200% with a court finding of substantial hardship (§ 12-19-70(b)). If the court makes no written finding within 90 days, hardship is deemed granted (§ 12-19-70(c)).",
-    "service_methods": "Service follows the Alabama Rules of Civil Procedure (Ala. Sm. Cl. R. D). County clerks send the complaint to the sheriff for personal service by default; certified mail is used when the address is a P.O. box or out of state (plaintiff supplies envelope, green card and postage).",
-    "self_help_url": "https://eforms.alacourt.gov/small-claims/",
-    "citation": "Ala. Code §§ 12-12-31, 12-12-71, 12-19-70; Alabama Small Claims Rules A-N",
-    "sources": [
-      {
-        "url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-12-31",
-        "what": "limit_individual, limit_business, limit_notes, who_can_sue, lawyers_allowed (statute text via Legislature's code service)",
-        "type": "statute"
-      },
-      {
-        "url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-12-71",
-        "what": "appeal (trial de novo)",
-        "type": "statute"
-      },
-      {
-        "url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-19-70",
-        "what": "fee_waiver_threshold",
-        "type": "statute"
-      },
-      {
-        "url": "https://alison.legislature.state.al.us/code-of-alabama?section=15-12-1",
-        "what": "fee_waiver_threshold (125%/200% income guidelines)",
-        "type": "statute"
-      },
-      {
-        "url": "https://judicial.alabama.gov/docs/library/rules/smm.pdf",
-        "what": "appeal, appeal_deadline_days (Rule M)",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://judicial.alabama.gov/docs/library/rules/smd.pdf",
-        "what": "service_methods (Rule D)",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://judicial.alabama.gov/docs/library/rules/sma.pdf",
-        "what": "limit_notes (scope; unlawful detainer excluded)",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://cherokee.alacourt.gov/small-claims",
-        "what": "filing_fee_min, filing_fee_notes, who_can_sue (age 19), appeal fees, service_methods",
-        "type": "court_site"
-      },
-      {
-        "url": "https://russell.alacourt.gov/small-claims/",
-        "what": "filing_fee_max, filing_fee_notes, appeal (either party, 14 days), service_methods",
-        "type": "court_site"
-      },
-      {
-        "url": "https://efile.alacourt.gov/media/1118/administrative-policies-and-procedures-02-27-2026.pdf",
-        "what": "e_filing, e_filing_notes",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://eforms.alacourt.gov/media/na1j0cie/c-10-civil-affidavit-of-substantial-hardship-order-10-2026.pdf",
-        "what": "fee_waiver_form",
-        "type": "form"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "filing_fee_min",
-      "filing_fee_max"
-    ],
-    "notes": "Filing fees are not uniform statewide; the range comes from only two official county court pages (Cherokee, Russell). One county page (Lawrence) still shows the pre-2015 $3,000 limit; the statute says $6,000 (Act 2015-224). Some secondary sites list fees from $35 to $294; not used."
-  },
-  {
-    "state": "Alaska",
-    "abbr": "AK",
-    "court_name": "District Court, small claims procedure (heard by a district judge or magistrate judge)",
-    "limit_individual": 10000,
-    "limit_business": 10000,
-    "limit_notes": "$10,000 exclusive of costs, interest and attorney fees (AS 22.15.040(a)). The Dept. of Labor and Workforce Development may bring wage claims up to $20,000. Not available for real-property title or possession disputes, evictions, claims against the State of Alaska or the U.S., injunctions, or lien foreclosure (SC-95). Magistrate judges generally cannot hear cases where the defendant is served outside Alaska (AS 22.15.120(b)), so out-of-state defendants usually need a district judge. Any party may choose the formal civil procedure instead (district court formal cases go up to $100,000).",
-    "recent_changes": null,
-    "filing_fee_min": 50,
-    "filing_fee_max": 100,
-    "filing_fee_notes": "$50 if the claim is $2,500 or less; $100 if more than $2,500 (Alaska Admin. R. 9(c)(2)). No extra filing fee if the case is moved to the formal docket. Service costs (certified mail or process server) are extra.",
-    "who_can_sue": "Anyone 18 or older (under 18 only with a parent or guardian); partnerships, unincorporated associations, LLCs and corporations. A corporation or organization may be represented by an officer or employee authorized in writing (Dist. Ct. Civ. R. 15(a)). A party suing on an assigned claim (e.g., a collection agency) must be represented by a lawyer (Rule 15(c)). Powers of attorney cannot be used to represent someone else.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Any party may be represented by an attorney or legal intern (Dist. Ct. Civ. R. 15(b)); required for assigned claims. Attorney-fee awards in small claims are capped (handbook cites $1,000 under Dist. Ct. Civ. R. 20(c)).",
-    "appeal": "Either party may appeal to the superior court by filing a Notice of Appeal (form AP-100) within 30 days from the date the judgment is distributed. Appeal is on the record (audio recording, exhibits, file); no new trial or new evidence. Filing an appeal does not stop collection unless a bond is posted.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 30,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "TrueFiling is in use at all court locations and covers small claims. Self-represented litigants must use TrueFiling unless exempt (incarcerated, disability, no safe computer/internet/email access, can't get help, language barrier) per Administrative Bulletin 92. Public filing computers only in Anchorage, Fairbanks and Palmer. AK ODR (online dispute resolution pilot, launched Jan. 2024) offers free online negotiation/mediation for small claims.",
-    "fee_waiver_form": "TF-920, Request and Order for Exemption from Payment of Fees (9/25): https://public.courts.alaska.gov/web/forms/docs/tf-920.pdf",
-    "fee_waiver_threshold": "Judge's discretion based on a financial statement (Admin. R. 10). The clerk must accept the filing without the fee once the form is filed; if the court finds the person is not indigent, the fee must be paid within 30 days or the case may be dismissed. No fixed income test found.",
-    "service_methods": "Certified mail, restricted delivery to the addressee only, or a licensed private process server (peace officers/state troopers serve where no private process servers are available). The plaintiff cannot serve personally.",
-    "self_help_url": "https://courts.alaska.gov/shc/sc/index.htm",
-    "citation": "AS 22.15.040; Alaska District Court Civil Rules 8-22; Alaska Admin. Rules 9-10",
-    "sources": [
-      {
-        "url": "https://www.akleg.gov/basis/statutes.asp?media=print&secStart=22.15.040&secEnd=22.15.040",
-        "what": "limit_individual, limit_business, limit_notes",
-        "type": "statute"
-      },
-      {
-        "url": "https://courts.alaska.gov/rules/docs/adm.pdf",
-        "what": "filing_fee_min, filing_fee_max (Admin. R. 9(c)(2)), fee_waiver_threshold (Admin. R. 10)",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://public.courts.alaska.gov/web/forms/docs/sc-95.pdf",
-        "what": "limit_notes (exclusions), filing fees (SC-95, rev. 4/21)",
-        "type": "form"
-      },
-      {
-        "url": "https://public.courts.alaska.gov/web/forms/docs/sc-100.pdf",
-        "what": "who_can_sue, lawyers_notes, appeal, appeal_deadline_days, service_methods, Dist. Ct. Civ. R. 15 and 18 text (Alaska Small Claims Handbook SC-100, 8/21)",
-        "type": "form"
-      },
-      {
-        "url": "https://courts.alaska.gov/eFile/index.htm",
-        "what": "e_filing, e_filing_notes",
-        "type": "court_site"
-      },
-      {
-        "url": "https://courts.alaska.gov/media/docs/2024/pr-akodr.pdf",
-        "what": "e_filing_notes (AK ODR)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://public.courts.alaska.gov/web/forms/docs/tf-920.pdf",
-        "what": "fee_waiver_form",
-        "type": "form"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [],
-    "notes": "The SC-95 info sheet states small claims procedure can only be used if all parties agree to it; any party may elect formal rules. The court's small claims self-help page loads content by script and could not be read directly; facts above come from the handbook, forms and rules."
-  },
-  {
-    "state": "Arizona",
-    "abbr": "AZ",
-    "court_name": "Small Claims Division of the Justice Court (separate from regular Justice Court civil cases)",
-    "limit_individual": 5000,
-    "limit_business": 5000,
-    "limit_notes": "Small claims division: claims not exceeding $5,000 exclusive of interest and costs, including actions to rescind a contract or for equitable relief up to $5,000 (A.R.S. § 22-503(A)). Excluded: libel/slander, evictions, specific performance, class actions, prejudgment remedies, injunctions, claims against the state or local governments (§ 22-503(B)). Regular Justice Court civil cases go up to $10,000 (§ 22-201(B)); there lawyers, juries and appeals are available. Any party can move a small claims case to regular justice court by objecting at least 10 days before the hearing (§ 22-504). Claims cannot be split. The AZ Supreme Court self-service page says 'less than $5,000' while the statute says 'does not exceed $5,000'.",
-    "recent_changes": "SB 1022 (Laws 2025, ch. 94), signed May 2, 2025, raised the small claims limit from $3,500 to $5,000 by amending A.R.S. § 22-503. Effective on the 2025 general effective date, September 26, 2025.",
-    "filing_fee_min": 30,
-    "filing_fee_max": 58,
-    "filing_fee_notes": "Statewide base small claims filing fee is $30 (A.R.S. § 22-281 Class C, as increased by AO 2024-211 effective Dec. 28, 2024); answer $18; small claims service by mail $8. Courts may add local fees: Maricopa County Justice Courts charge $58 to file and $46 to answer. Fees in other counties were not surveyed.",
-    "who_can_sue": "Any natural person, corporation, partnership, association, marital community or other organization. Assignees and others not a real party to the original transaction may not sue (except a court-appointed personal representative) (§ 22-512(A)). Individuals represent themselves; corporations appear through a full-time officer or authorized employee; partnerships through an active general partner or authorized full-time employee (§ 22-512(B)).",
-    "lawyers_allowed": "limited",
-    "lawyers_notes": "Attorneys may not take part unless the parties agree in writing before the hearing to allow attorneys (§ 22-512(B)(7), (D)). After judgment, a party may hire a lawyer to collect (§ 22-512(E)).",
-    "appeal": "No appeal: the decision of the hearing officer or justice of the peace is final and binding on both parties (A.R.S. § 22-519). To keep the right to appeal (and to a lawyer or jury), a party must transfer the case to regular justice court at least 10 days before the hearing (§ 22-504). Only a motion to vacate judgment or change venue is allowed (§ 22-505).",
-    "appeal_who": "none",
-    "appeal_deadline_days": null,
-    "e_filing": "some_courts",
-    "e_filing_notes": "eFiling for justice court civil, eviction and small claims cases is live in all justice courts except Maricopa County justice courts and the Pima County Consolidated Justice Court (AZ Supreme Court page last updated March 31, 2026). Self-represented filers may, but need not, e-file (eFileAZ). Maricopa's site says eFiling is 'coming soon'.",
-    "fee_waiver_form": "Application for deferral or waiver of court fees (Arizona Supreme Court standard form, available from each justice court and through eFileAZ)",
-    "fee_waiver_threshold": "Deferral must be granted if the applicant receives TANF, SNAP (food stamps) or SSI, or has income insufficient for daily essentials; gross monthly income at or below 150% of federal poverty guidelines is evidence of this (A.R.S. § 12-302(C)). Full waiver if permanently unable to pay (§ 12-302(D)).",
-    "service_methods": "Plaintiff may serve by registered or certified mail (complete on delivery date on the return receipt); the clerk may serve by certified restricted mail (statutory $8 fee). If mail fails, personal service by a process server, constable/sheriff or other authorized officer, with an affidavit of service (A.R.S. § 22-513).",
-    "self_help_url": "https://www.azcourts.gov/selfservicecenter/Small-Claims",
-    "citation": "A.R.S. §§ 22-501 to 22-524 (esp. 22-503, 22-504, 22-512, 22-513, 22-519); A.R.S. §§ 22-201, 22-281, 12-302; Arizona Rules of Small Claims Procedure",
-    "sources": [
-      {
-        "url": "https://www.azleg.gov/ars/22/00503.htm",
-        "what": "limit_individual, limit_business, limit_notes",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.azleg.gov/legtext/57leg/1R/laws/0094.htm",
-        "what": "recent_changes (SB 1022, Laws 2025 ch. 94, approved May 2, 2025)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.azleg.gov/general-effective-dates/",
-        "what": "recent_changes (2025 general effective date 09-26-2025)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.azleg.gov/ars/22/00201.htm",
-        "what": "limit_notes (justice court $10,000)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.azleg.gov/ars/22/00504.htm",
-        "what": "limit_notes, appeal (transfer to preserve appeal)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.azleg.gov/ars/22/00512.htm",
-        "what": "who_can_sue, lawyers_allowed, lawyers_notes",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.azleg.gov/ars/22/00513.htm",
-        "what": "service_methods",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.azleg.gov/ars/22/00519.htm",
-        "what": "appeal, appeal_who",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.azleg.gov/ars/12/00302.htm",
-        "what": "fee_waiver_threshold",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.azcourts.gov/courtfilingfees/Justice-Court-Filing-Fees",
-        "what": "filing_fee_min, filing_fee_notes (base fees eff. Dec. 28, 2024)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.justicecourts.maricopa.gov/case-types/small-claims",
-        "what": "filing_fee_max (Maricopa $58), lawyers_notes, appeal",
-        "type": "court_site"
-      },
-      {
-        "url": "https://justicecourts.maricopa.gov/media/ga4b33br/howto-file-sc.pdf",
-        "what": "limit_notes, lawyers_notes, who_can_sue (Maricopa handout rev. 9/26/25)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.azcourts.gov/efilinginformation/eFiling-Availability/LJ",
-        "what": "e_filing, e_filing_notes",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.azcourts.gov/selfservicecenter/Small-Claims",
-        "what": "self_help_url, limit wording",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "filing_fee_max",
-      "fee_waiver_form"
-    ],
-    "notes": "Filing fee max is the highest observed (Maricopa County); local fees in other counties were not checked. The exact title/URL of the statewide fee deferral/waiver form was not confirmed. Several secondary sites and a Mohave County page still show the old $3,500 limit."
-  },
-  {
-    "state": "Arkansas",
-    "abbr": "AR",
-    "court_name": "Small claims division of District Court",
-    "limit_individual": 5000,
-    "limit_business": 5000,
-    "limit_notes": "Same amount-in-controversy jurisdiction as district court civil (Admin. Order 18 § 4): contract claims, recovery of personal property, and damage to personal property up to $5,000 excluding interest and costs (AO 18 § 3). Personal injury is not among the listed civil matters. State district courts (pilot courts) have $25,000 civil jurisdiction (AO 18 § 6), but the small claims division is tied to § 3 ($5,000). Most businesses are barred from filing (see who_can_sue).",
-    "recent_changes": null,
-    "filing_fee_min": 65,
-    "filing_fee_max": 65,
-    "filing_fee_notes": "Little Rock District Court charges $65 to file a small claim (civil $80) plus a $2.50 summons fee; service fees (certified mail, sheriff $50 in Pulaski County, or process server) are extra. A $20 electronic filing system fee applies to cases started through e-filing (AO 21). The Attorney General's guide says fees 'typically' range from $30 to $65.",
-    "who_can_sue": "Individuals. No action may be brought by a collection agency, collection agent, assignee of a claim, or any business engaged in lending money at interest (AO 18 § 4(b)). Corporations may sue only if organized in Arkansas with no more than three stockholders, or 85%+ of voting stock held by close relatives, or closely held corporations by unanimous shareholder vote; a corporation must be represented by an officer (AO 18 § 4(c)).",
-    "lawyers_allowed": "no",
-    "lawyers_notes": "No attorney or anyone other than the plaintiff and defendant may take part; if the judge finds an attorney representing a party, the case is immediately transferred to the civil docket (AO 18 § 4(a); Dist. Ct. R. 10(f)).",
-    "appeal": "Any party may appeal to circuit court for a new trial (de novo; Dist. Ct. R. 2(b), 10(e)(6)) by filing a certified copy of the district court docket sheet/record and the claim form with the circuit clerk within 30 days of the docket entry awarding judgment (Dist. Ct. R. 9(a)-(b)). No notice of appeal is required. A 40-day affidavit procedure applies if the district clerk fails to prepare the record.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 30,
-    "e_filing": "some_courts",
-    "e_filing_notes": "Each district court's judges decide whether to adopt the AOC electronic filing system (AO 21). Pro se parties may always file on paper. $20 e-filing system fee for starting a small claims case electronically.",
-    "fee_waiver_form": "Petition to proceed in forma pauperis (Ark. R. Civ. P. 72)",
-    "fee_waiver_threshold": "Judge's discretion under Ark. R. Civ. P. 72 (in forma pauperis)",
-    "service_methods": "Unless the plaintiff asks for the sheriff or another authorized person, the clerk serves the defendant by certified mail, return receipt requested, addressee only; service otherwise follows Ark. R. Civ. P. 4 (Dist. Ct. R. 10(a)(3)). Defendant has 30 days to answer.",
-    "self_help_url": "https://arkansasag.gov/divisions/public-protection/legal-resources/guide-to-small-claims-court/",
-    "citation": "Ark. Sup. Ct. Admin. Order No. 18 §§ 3-4; Ark. Dist. Ct. R. 2, 9, 10; Ark. Sup. Ct. Admin. Order No. 21",
-    "sources": [
-      {
-        "url": "https://opinions.arcourts.gov/ark/ao/en/16691/1/document.do",
-        "what": "limit_individual, limit_business, limit_notes, who_can_sue, lawyers_allowed (AO 18 §§ 3-4, 6); e_filing and $20 e-filing fee (AO 21); compilation current through Jan. 29, 2026",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://opinions.arcourts.gov/ark/cr/en/1878/1/document.do",
-        "what": "appeal, appeal_deadline_days (Rule 9), service_methods and procedure (Rule 10), de novo (Rule 2)",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://www.littlerock.gov/media/23270/civil-small-claims-filing-instructions.pdf",
-        "what": "filing_fee_min, filing_fee_max, filing_fee_notes, service costs",
-        "type": "court_site"
-      },
-      {
-        "url": "https://arkansasag.gov/divisions/public-protection/legal-resources/guide-to-small-claims-court/",
-        "what": "self_help_url, filing_fee_notes ($30-$65 range), appeal (30 days)",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "filing_fee_min",
-      "filing_fee_max",
-      "fee_waiver_form",
-      "fee_waiver_threshold"
-    ],
-    "notes": "Filing fee: only the Little Rock District Court schedule ($65) was confirmed; the statute (Ark. Code § 16-17-705) could not be read on an official site, a secondary copy shows $50, and the AG guide says $30-$65. Needs a human check. The AG page is from the Attorney General (state government), not the judiciary; Arkansas courts have no statewide small claims self-help page that could be found. Fee waiver (ARCP 72) not verified from rule text."
-  },
-  {
-    "state": "California",
-    "abbr": "CA",
-    "court_name": "Small claims division of the Superior Court",
-    "limit_individual": 12500,
-    "limit_business": 6250,
-    "limit_notes": "$12,500 for natural persons (including sole proprietors); $6,250 for businesses and public entities. No more than two small claims over $2,500 each per calendar year (statewide). Different limits apply to claims against a guarantor (Code Civ. Proc. § 116.220(c)). As of Oct. 1, 2025, landlords can no longer sue in small claims for COVID-19 rental debt over $12,500. Special rules for suing an attorney over fees, a healthcare provider, or a government entity (government claim must be filed with the agency first). Defendant's claims have the same limits.",
-    "recent_changes": "SB 71 (Stats. 2023, ch. 861) raised the limits from $10,000 to $12,500 (natural persons) and from $5,000 to $6,250 (others), effective Jan. 1, 2024. AB 1827 (2025-26), which would have raised the limit to $15,000 for all plaintiffs and allowed three filings per year, passed the Assembly 77-0 but was held under submission in Senate Appropriations on Aug. 13, 2026 (not enacted). The COVID-19 rental debt rule above changed Oct. 1, 2025.",
-    "filing_fee_min": 30,
-    "filing_fee_max": 100,
-    "filing_fee_notes": "$30 for claims up to $1,500; $50 for over $1,500 to $5,000; $75 for over $5,000 to $12,500; $100 if the plaintiff filed more than 12 small claims in California in the past 12 months. Same statewide. Clerk certified-mail service is $15 (offered only in some courts); sheriff and process server fees extra.",
-    "who_can_sue": "Plaintiffs must be 18 or older (minors through a guardian ad litem) and must be the original owner of the claim: assignees (e.g., debt buyers) cannot sue, with two narrow exceptions. Must first demand payment if possible. Corporations appear through an employee, officer or director; other entities through a regular employee, who must not be hired just to appear in small claims (form SC-109 required).",
-    "lawyers_allowed": "no",
-    "lawyers_notes": "Parties may consult a lawyer before court but cannot be represented by one at the small claims trial. Lawyers may represent parties after judgment and on appeal.",
-    "appeal": "Only the party ordered to pay can appeal: a plaintiff cannot appeal the decision on their own claim, but can appeal a judgment on the defendant's claim. File a Notice of Appeal (form SC-140) within 30 days after the clerk mails or hands over the Notice of Entry of Judgment. The appeal is a new trial before a different superior court judge; lawyers are allowed. The appealing side can be ordered to pay up to $150 attorney fees and $150 costs (up to $1,000 each if the appeal was to harass or delay).",
-    "appeal_who": "defendant_only",
-    "appeal_deadline_days": 30,
-    "e_filing": "some_courts",
-    "e_filing_notes": "Some superior courts allow e-filing of small claims; filing by mail is available everywhere. The Judicial Council's free Guide & File interview prepares the forms.",
-    "fee_waiver_form": "FW-001, Request to Waive Court Fees (Rev. March 1, 2026): https://www.courts.ca.gov/documents/fw001.pdf (info sheet FW-001-INFO)",
-    "fee_waiver_threshold": "Qualify if receiving listed public benefits (Medi-Cal, CalFresh/SNAP, SSI/SSP, CalWORKs, CAPI, WIC, unemployment, etc.), or gross household income below the table on FW-001 item 5b (125% of federal poverty guidelines under Gov. Code § 68632(b)), or cannot pay court fees and meet basic needs.",
-    "service_methods": "The plaintiff cannot serve. Personal service by anyone 18+ who is not a party (friend, relative, sheriff/marshal in some counties for a fee, or registered process server); substituted service at home or work plus mailing (complete 10 days after mailing); or certified mail by the court clerk ($15, only some courts). Must be served at least 15 days before trial (20 days if served outside the county).",
-    "self_help_url": "https://selfhelp.courts.ca.gov/small-claims-california",
-    "citation": "Cal. Code Civ. Proc. §§ 116.110-116.950 (esp. §§ 116.220, 116.221, 116.230, 116.231, 116.710); Gov. Code §§ 68630-68641",
-    "sources": [
-      {
-        "url": "https://www.courts.ca.gov/documents/sc100info.pdf",
-        "what": "limit_individual, limit_business, limit_notes (2 claims >$2,500/yr, guarantor), who_can_sue, lawyers, service_methods (SC-100-INFO, Rev. Jan. 1, 2024)",
-        "type": "form"
-      },
-      {
-        "url": "https://selfhelp.courts.ca.gov/small-claims/before-you-start",
-        "what": "limit_individual, limit_business, limit_notes (COVID rental debt, special defendants)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://selfhelp.courts.ca.gov/small-claims-california",
-        "what": "self_help_url, lawyers_allowed, appeal summary, fee range",
-        "type": "court_site"
-      },
-      {
-        "url": "https://selfhelp.courts.ca.gov/file-form-start-your-small-claims-case-plaintiffs-claim",
-        "what": "filing_fee_min, filing_fee_max, filing_fee_notes, e_filing",
-        "type": "court_site"
-      },
-      {
-        "url": "https://selfhelp.courts.ca.gov/small-claims/start-case/serve",
-        "what": "service_methods ($15 clerk certified mail; 15/20-day deadlines)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://selfhelp.courts.ca.gov/small-claims-appeals",
-        "what": "appeal, appeal_who",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.courts.ca.gov/documents/sc130.pdf",
-        "what": "appeal_deadline_days (SC-130, Rev. Jan. 1, 2025)",
-        "type": "form"
-      },
-      {
-        "url": "https://selfhelp.courts.ca.gov/fee-waiver",
-        "what": "fee_waiver_threshold",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.courts.ca.gov/documents/fw001.pdf",
-        "what": "fee_waiver_form",
-        "type": "form"
-      },
-      {
-        "url": "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1827",
-        "what": "recent_changes (AB 1827 held in committee Aug. 13, 2026)",
-        "type": "secondary"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "recent_changes",
-      "fee_waiver_threshold"
-    ],
-    "notes": "Leads confirmed: $12,500 / $6,250 per Judicial Council forms and self-help site. The Legislature's statute site (leginfo.legislature.ca.gov) blocks automated access (Cloudflare challenge), so the statute text itself was not read; facts are from mandatory Judicial Council forms and the official self-help guide. recent_changes is listed as unverified because SB 71's date and AB 1827's status come from a legislative analysis lead and a secondary bill tracker. The 125% figure for fee waivers is from Gov. Code § 68632(b), which could not be fetched; the FW-001 income table itself was confirmed. Statewide rules only; county details are researched separately."
-  },
-  {
-    "state": "Colorado",
-    "abbr": "CO",
-    "court_name": "Small claims court (division of County Court)",
-    "limit_individual": 7500,
-    "limit_business": 7500,
-    "limit_notes": "$7,500 exclusive of interest and costs, including civil penalties (C.R.S. § 13-6-403(1)). Also covers HOA assessment/fine disputes, enforcing residential restrictive covenants, replevin, and specific performance or rescission of contracts, each up to $7,500. Excluded: libel/slander, evictions (FED), class actions and other listed matters. A plaintiff may file no more than 2 small claims per calendar month and 18 per calendar year in a county (JDF 250 declaration). Claims cannot be split. A defendant can move the case to regular county/district court by filing JDF 251 at least 7 days before trial.",
-    "recent_changes": null,
-    "filing_fee_min": 31,
-    "filing_fee_max": 55,
-    "filing_fee_notes": "$31 for claims up to $500; $55 for $500.01-$7,500. Response $26/$41; response with counterclaim $31/$46. Copies $0.25/page. Sheriff/process server fees extra.",
-    "who_can_sue": "Any natural person, corporation, partnership, association or other organization. No assignee or other person not a real party to the transaction may sue (except a court-appointed personal representative, conservator or guardian). Individuals represent themselves; corporations through a full-time officer or employee; partnerships through an active general partner or full-time employee; property managers may represent owners in security deposit/landlord-tenant cases (C.R.S. § 13-6-407).",
-    "lawyers_allowed": "limited",
-    "lawyers_notes": "Attorneys may not appear except as a party, or as the full-time officer/employee/partner of an entity party (C.R.S. § 13-6-407(2)). Per JDF 250, a defendant who wants a lawyer must file a Notice of Representation (JDF 256) at least 7 days before trial; the plaintiff may then also have a lawyer. Small claims rules still apply.",
-    "appeal": "Either plaintiff or defendant may appeal to district court under county court rules (C.R.S. § 13-6-410; C.R.C.P. 411). Notice of appeal is due within 14 days of judgment (JDF 250). The district court reviews the record and recording; no new trial or new evidence. An appeal bond and district court filing fee apply.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 14,
-    "e_filing": "no",
-    "e_filing_notes": "Colorado Courts E-Filing (CCE) is open to non-attorneys only in domestic relations and eviction cases, so self-represented small claims parties must file in person or by mail.",
-    "fee_waiver_form": "JDF 205 Motion to File Without Payment and Supporting Financial Affidavit, with JDF 206 Order (JDF 209 Notice for certain public-benefit recipients): https://www.coloradojudicial.gov/self-help/fee-waivers",
-    "fee_waiver_threshold": "Household income below 125% of the federal poverty guidelines, or enrolled in certain public benefits (e.g., SSI, TANF, SNAP, Old Age Pension).",
-    "service_methods": "Personal service by the sheriff or a private process server (any non-party 18+); or clerk's certified mail (not preferred; personal service needed if it fails). Must be completed at least 15 days before trial.",
-    "self_help_url": "https://www.coloradojudicial.gov/self-help/opening-case",
-    "citation": "C.R.S. §§ 13-6-401 to 13-6-417; Colorado Rules of Procedure for Small Claims Courts (C.R.C.P. 501-521); C.R.C.P. 411",
-    "sources": [
-      {
-        "url": "https://content.leg.colorado.gov/sites/default/files/images/olls/crs2024-title-13.pdf",
-        "what": "limit_individual, limit_business, limit_notes (13-6-403), who_can_sue and lawyers (13-6-407), appeal (13-6-410), no jury (13-6-414)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.coloradojudicial.gov/self-help/opening-case",
-        "what": "limit, filing_fee_min, filing_fee_max, service deadline, self_help_url",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.coloradojudicial.gov/media/11429",
-        "what": "filing_fee_notes, 2/month and 18/year cap, service_methods, fee waiver forms (JDF 248 Guide, rev. Dec. 14, 2023)",
-        "type": "form"
-      },
-      {
-        "url": "https://www.coloradojudicial.gov/media/11266",
-        "what": "appeal_deadline_days (14 days, C.R.C.P. 411), lawyers_notes, filing caps (JDF 250, R 1-24)",
-        "type": "form"
-      },
-      {
-        "url": "https://www.coloradojudicial.gov/self-help/small-claims-or-county-civil-appeal",
-        "what": "appeal (record review, no new trial)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.coloradojudicial.gov/self-help/fee-waivers",
-        "what": "fee_waiver_form, fee_waiver_threshold",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.coloradojudicial.gov/e-filing-non-attorneys",
-        "what": "e_filing, e_filing_notes",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [],
-    "notes": "Statute text read from the official 2024 C.R.S. Title 13 PDF (the 2025 PDF link was not available); no 2025-2026 bill changing small claims limits was found. A secondary source claims small claims filing fees drop by $5 on July 1, 2027 (C.R.S. 13-32-101); not confirmed and not recorded. lawhelp.colorado.gov (secondary) says the appellant must also file in district court within 35 days and pay a $163 fee; not recorded as fact."
-  },
-  {
-    "state": "Connecticut",
-    "abbr": "CT",
-    "court_name": "Small Claims session of the Superior Court (housing session for landlord-tenant matters)",
-    "limit_individual": 5000,
-    "limit_business": 5000,
-    "limit_notes": "$5,000 for money damages (libel/slander excluded). Up to $15,000 for claims arising from home improvement work by a certified contractor or new home construction by a certified new home construction contractor (Conn. Gen. Stat. § 51-15(d)). Tenants suing for a security deposit can be awarded double damages even if the total exceeds $5,000. Out-of-state individuals can be sued only if they own property in Connecticut; out-of-state corporations can be sued.",
-    "recent_changes": null,
-    "filing_fee_min": 95,
-    "filing_fee_max": 95,
-    "filing_fee_notes": "$95 entry fee (same for a counterclaim) (Conn. Gen. Stat. § 52-259(b)). Motion to transfer to the regular docket: $125. Service costs extra (marshal fees; postage). No charge for copies for service on defendants.",
-    "who_can_sue": "Individuals and business entities, including out-of-state individuals and businesses. Individual plaintiffs may file where they live, where the defendant lives/does business, or where the transaction/injury occurred; business plaintiffs cannot use their own location as venue. The writ must be signed under oath (notarized).",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Attorneys are not required but are permitted. Cases are usually heard by magistrates (lawyers appointed by the Chief Court Administrator).",
-    "appeal": "No right to appeal a small claims decision. There is no transcript or recording. A party wanting a jury or full procedure must move to transfer to the regular docket ($125).",
-    "appeal_who": "none",
-    "appeal_deadline_days": null,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "Small claims cases and documents can be filed electronically through Judicial Branch E-Services (sign-up required).",
-    "fee_waiver_form": "JD-CV-120, Application for Waiver of Fees/Payment of Costs - Civil, Housing, Small Claims, and Appellate (Rev. 1-19): https://www.jud.ct.gov/webforms/forms/CV120.pdf",
-    "fee_waiver_threshold": "Rebuttable presumption of indigency if receiving public assistance (state general assistance, temporary family assistance, aid to aged/blind/disabled, SNAP, SSI) or income after taxes, mandatory wage deductions and child care is at or below 125% of the federal poverty level; court may also find others indigent. If granted, the state also pays the cost of service (Conn. Gen. Stat. § 52-259b).",
-    "service_methods": "Plaintiff (or representative) may serve each defendant by priority mail with delivery confirmation or by certified mail, return receipt requested, then file a Statement of Service (JD-CV-123); or hire a proper officer such as a state marshal. Out-of-state business entities must be served by a proper officer.",
-    "self_help_url": "https://www.jud.ct.gov/faq/smallclaims.html",
-    "citation": "Conn. Gen. Stat. §§ 51-15, 51-193l, 52-259, 52-259b; Conn. Practice Book ch. 24",
-    "sources": [
-      {
-        "url": "https://www.cga.ct.gov/current/pub/chap_870.htm",
-        "what": "limit_individual, limit_business, limit_notes (§ 51-15)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.cga.ct.gov/current/pub/chap_901.htm",
-        "what": "filing_fee_min, filing_fee_max (§ 52-259(b)), fee_waiver_threshold (§ 52-259b)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.jud.ct.gov/faq/smallclaims.html",
-        "what": "limit_notes, filing fee, who_can_sue (venue), lawyers, appeal (none), e_filing, service_methods, self_help_url",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.jud.ct.gov/webforms/forms/CV120.pdf",
-        "what": "fee_waiver_form",
-        "type": "form"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [],
-    "notes": "The FAQ lists '4 methods' of service; only three (priority mail, certified mail, proper officer) were captured in the page text. No 2025-2026 change to the $5,000 limit was found (earlier bills to raise it to $10,000 did not pass). Minimum age for plaintiffs not found on official pages."
-  },
-  {
-    "state": "Delaware",
-    "abbr": "DE",
-    "court_name": "Justice of the Peace Court (civil) - no separate small claims court",
-    "limit_individual": 25000,
-    "limit_business": 25000,
-    "limit_notes": "The JP Court hears contract (debt) actions, property damage (trespass), replevin and landlord-tenant cases where the amount does not exceed $25,000 (10 Del. C. § 9301). A plaintiff with a larger claim can file in JP Court only by giving up the excess. The JP Court cannot hear personal injury or mental anguish claims. The $25,000 cap does not apply to claims within commercial-lease summary possession actions.",
-    "recent_changes": null,
-    "filing_fee_min": 35,
-    "filing_fee_max": 55,
-    "filing_fee_notes": "Debt and trespass claims: $35 (under $1,000), $40 ($1,000-$5,000), $45 (over $5,000). Replevin: $55. Court service on in-state defendants is included in the filing fee; alias (second attempt) service $20; out-of-state service and special process servers cost extra. Fee page labeled 'Updated 11/05/2021'.",
-    "who_can_sue": "Individuals may appear without a lawyer. An artificial entity (corporation, LLC, etc.) or public body may appear without a lawyer only by filing a Certificate of Representation (Civil Form 50) with the Chief Magistrate under Supreme Court Rule 57, renewed annually ($20 registration fee). Businesses filing five or more cases a year must e-file.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Parties may appear with or without attorneys.",
-    "appeal": "Either party may appeal any final judgment in a civil action to the Court of Common Pleas in the same county within 15 days; the appeal is a new trial (de novo), with damages capped at $25,000 unless more was claimed below (10 Del. C. §§ 9571-9572). A motion for a new trial may be filed in JP Court within 10 days (JP Ct. Civ. R. 59). Landlord-tenant (summary possession) cases instead go to a three-judge JP panel, requested within 5 days.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 15,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "The JP Court uses eFlex e-filing (JP Ct. Civ. R. 79.1; Policy Directive 08-232). E-filing is required for those covered by the directive, including businesses filing five or more cases per year; individuals can file in person or by mail.",
-    "fee_waiver_form": "Application and Affidavit to Proceed in Forma Pauperis (JP Court Civil Form 49)",
-    "fee_waiver_threshold": "The court applies its published 'Income Level for Individuals Eligible for Assistance' guidelines: applicants with income and assets at or below the guidelines are generally approved; above them, the court considers unusual necessary expenses.",
-    "service_methods": "After filing, the court serves the defendant (cost included in the filing fee) unless the plaintiff hires a court-approved special process server. Special procedures and fees apply to out-of-state defendants (the court does not serve them), corporations, insurance companies and the State.",
-    "self_help_url": "https://courts.delaware.gov/help/proceedings/jp_startcivil.aspx",
-    "citation": "10 Del. C. §§ 9301, 9570-9572; Justice of the Peace Court Civil Rules; Del. Supr. Ct. R. 57",
-    "sources": [
-      {
-        "url": "https://delcode.delaware.gov/title10/c093/index.html",
-        "what": "limit_individual, limit_business, limit_notes (§ 9301)",
-        "type": "statute"
-      },
-      {
-        "url": "https://delcode.delaware.gov/title10/c095/sc02/index.html",
-        "what": "appeal, appeal_who, appeal_deadline_days (§§ 9570-9572)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.courts.delaware.gov/Help/fees/jpfees.aspx",
-        "what": "filing_fee_min, filing_fee_max, filing_fee_notes, fee_waiver_form, fee_waiver_threshold",
-        "type": "court_site"
-      },
-      {
-        "url": "https://courts.delaware.gov/help/proceedings/jp_startcivil.aspx",
-        "what": "limit_notes (no personal injury), who_can_sue, service_methods, e-filing for 5+ cases, self_help_url",
-        "type": "court_site"
-      },
-      {
-        "url": "https://courts.delaware.gov/jpcourt/jpcivil.aspx",
-        "what": "appeal (new trial motion 10 days; L/T appeal 5 days), lawyers",
-        "type": "court_site"
-      },
-      {
-        "url": "https://courts.delaware.gov/jpcourt/efiling.aspx",
-        "what": "e_filing, e_filing_notes",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "e_filing"
-    ],
-    "notes": "Lead confirmed: $25,000 in the Justice of the Peace Court. Delaware has no court called 'small claims'; the JP Court is a general limited-jurisdiction civil court. Whether self-represented individuals may (optionally) e-file through eFlex was not confirmed; 'yes_statewide' reflects that the system covers JP civil cases statewide. Fee page last updated 2021; a second JP fee URL returned 'page not found'."
-  },
-  {
-    "state": "District of Columbia",
-    "abbr": "DC",
-    "court_name": "Small Claims and Conciliation Branch, Civil Division, D.C. Superior Court",
-    "limit_individual": 10000,
-    "limit_business": 10000,
-    "limit_notes": "Money-only claims up to $10,000 exclusive of interest, attorney fees, protest fees and costs; exclusive jurisdiction (D.C. Code § 11-1321). No actions affecting an interest in real property. Limit applies to cases filed on or after Dec. 14, 2016 (was $5,000). Counterclaims are not limited to $10,000. If either side requests a jury, the case moves to a Civil Division associate judge.",
-    "recent_changes": null,
-    "filing_fee_min": 5,
-    "filing_fee_max": 45,
-    "filing_fee_notes": "$5 for claims of $500 or less; $10 for over $500 to $2,500; $45 for over $2,500 (Super. Ct. Civ. R. 202). Jury demand $75. Set-off has no fee. Cost of service by certified/registered mail or marshal is added.",
-    "who_can_sue": "Individuals may represent themselves; the clerk will help an individual prepare the statement of claim but not a corporation, partnership or association (D.C. Code § 16-3902(a)). Per the court, a business that files a claim must have a lawyer.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Most individuals proceed without a lawyer; businesses filing claims must be represented by counsel (court small claims page).",
-    "appeal": "Review is only by an application for allowance of an appeal filed in the D.C. Court of Appeals within 3 days of the judgment (D.C. Code §§ 11-721(c), 17-301, 17-307(b)). Three judges consider it; if any one votes to allow, the appeal is heard on the record; if all deny, the judgment is affirmed. The clerk prepares the application for an unrepresented party.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 3,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "eFileDC (efiledcsuperiorcourt.gov, Tyler Technologies) accepts small claims filings; the court encourages self-represented people to e-file. Paper filing in person, by mail, or by drop box also available.",
-    "fee_waiver_form": "Fee Waiver Application (D.C. Superior Court), filed with the statement of claim; available from the Small Claims Clerk's Office or dccourts.gov",
-    "fee_waiver_threshold": "Full waiver required if the litigant receives listed D.C. or federal benefits (e.g., SNAP, SSI, TANF, Medicaid/Alliance, WIC) or monthly income is at or below 200% of federal poverty guidelines; otherwise full or partial waiver on showing of substantial hardship (D.C. Code § 15-712).",
-    "service_methods": "Clerk mails by registered or certified mail (plaintiff pays postage); or service by a private individual with an affidavit of service; or by the marshal (D.C. Code § 16-3902).",
-    "self_help_url": "https://www.dccourts.gov/superior-court/superior-court-divisions/civil-division/small-claims",
-    "citation": "D.C. Code §§ 11-1321 to 11-1323, 16-3901 to 16-3910, 11-721(c), 17-301, 17-307(b), 15-712; Super. Ct. Small Claims Rules; Super. Ct. Civ. R. 202",
-    "sources": [
-      {
-        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/11-1321",
-        "what": "limit_individual, limit_business, limit_notes",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/11-721",
-        "what": "appeal (application for allowance)",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/17-301",
-        "what": "appeal procedure",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/17-307",
-        "what": "appeal_deadline_days (3 days)",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/16-3902",
-        "what": "service_methods, who_can_sue (clerk assistance)",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/15-712",
-        "what": "fee_waiver_threshold",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.dccourts.gov/sites/default/files/rules-superior-court/Civil%20Rule%20202.%20Fees.pdf",
-        "what": "filing_fee_min, filing_fee_max, filing_fee_notes",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://www.dccourts.gov/superior-court/superior-court-divisions/civil-division/small-claims",
-        "what": "lawyers (business must have lawyer), e_filing, fee_waiver_form, jury, self_help_url",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "fee_waiver_form"
-    ],
-    "notes": "The 3-day statutory deadline for an application for allowance of appeal is very short; check D.C. Court of Appeals rules for any computation details. The exact title/URL of the Superior Court fee waiver form was not confirmed. The business-must-have-a-lawyer rule comes from the court's page; the underlying Small Claims Rule was not read."
-  },
-  {
-    "state": "Florida",
-    "abbr": "FL",
-    "court_name": "County Court, under the Florida Small Claims Rules (no separate small claims court)",
-    "limit_individual": 8000,
-    "limit_business": 8000,
-    "limit_notes": "The Small Claims Rules apply to county court civil actions for money or property up to $8,000 exclusive of costs, interest and attorney fees (Fla. Sm. Cl. R. 7.010(b)). Larger claims within county court jurisdiction proceed under the regular Florida Rules of Civil Procedure.",
-    "recent_changes": null,
-    "filing_fee_min": 55,
-    "filing_fee_max": 300,
-    "filing_fee_notes": "Clerks charge $55 (under $100), $80 ($100-$500), $175 ($500.01-$2,500), $300 ($2,500.01-$8,000) (Miami-Dade Clerk). Statute sets base fees of $50 / $75 / $170 / $295 plus an additional $4 fee (Fla. Stat. § 34.041(1)). Plus $10 per summons issued (§ 34.041(1)(d)) and service costs (sheriff, process server or certified mail).",
-    "who_can_sue": "Individuals; any business entity may be represented at trial by a principal (officer, member, managing member or partner) or an employee authorized in writing by a principal. The court may require a business that buys or collects assigned claims to hire counsel. A non-attorney may not represent a business entity on appeal (Fla. Sm. Cl. R. 7.050, 7.230).",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Parties may have attorneys; if one side has a lawyer, discovery rules change (Rule 7.020).",
-    "appeal": "Either party may appeal under the Florida Rules of Appellate Procedure (Rule 7.230). Since Jan. 1, 2021, appeals from county court final orders go to the district court of appeal, not the circuit court (ch. 2020-61, Laws of Fla.; Fla. Stat. § 26.012(1) no longer lists county-court appeals). Notice of appeal is due within 30 days of rendition (Fla. R. App. P. 9.110(b)). The appeal is on the record, not a new trial.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 30,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "The Florida Courts E-Filing Portal (myflcourtaccess.com) is statewide and open to registered self-represented litigants.",
-    "fee_waiver_form": "Application for Determination of Civil Indigent Status (Florida Clerks of Court Operations Corporation form, filed with the clerk)",
-    "fee_waiver_threshold": "Clerk finds the applicant indigent if income is at or below 200% of federal poverty guidelines (Fla. Stat. § 57.082(2)(a)), subject to other statutory factors.",
-    "service_methods": "As provided by law and Fla. R. Civ. P. 1.070 (sheriff or certified process server), or for Florida residents only, certified mail with return receipt signed by the defendant or someone authorized at the residence or business, mailed by the clerk or attorney (cost extra) (Fla. Sm. Cl. R. 7.070).",
-    "self_help_url": "https://www.miamidade.gov/clerk/small-claims.page",
-    "citation": "Fla. Sm. Cl. R. 7.010-7.341; Fla. Stat. §§ 34.01, 34.041, 57.082; Fla. R. App. P. 9.110",
-    "sources": [
-      {
-        "url": "https://www-media.floridabar.org/uploads/2026/08/2026_01-JUL-Small-Claims-Rules-7-1-2026-1.pdf",
-        "what": "limit_individual, limit_business (Rule 7.010), who_can_sue (7.050), service_methods (7.070), appeal (7.230); compilation dated July 1, 2026",
-        "type": "court_rule"
-      },
-      {
-        "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0000-0099/0034/Sections/0034.041.html",
-        "what": "filing_fee_notes (statutory base fees, $4 add-on, $10 summons)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.miamidade.gov/clerk/small-claims.page",
-        "what": "filing_fee_min, filing_fee_max, limit, self_help_url",
-        "type": "court_site"
-      },
-      {
-        "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0000-0099/0026/Sections/0026.012.html",
-        "what": "appeal (circuit courts no longer list county-court appeals)",
-        "type": "statute"
-      },
-      {
-        "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0000-0099/0057/Sections/0057.082.html",
-        "what": "fee_waiver_threshold, fee_waiver_form",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.myflcourtaccess.com/",
-        "what": "e_filing, e_filing_notes",
-        "type": "court_site"
-      },
-      {
-        "url": "https://coxlawflorida.com/featured/most-county-court-appeals-are-now-directed-to-the-district-court-of-appeal/",
-        "what": "appeal (DCA routing since Jan. 1, 2021; 30-day deadline) - lead only",
-        "type": "secondary"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "appeal_deadline_days",
-      "fee_waiver_form"
-    ],
-    "notes": "Small claims in Florida is a set of procedural rules in county court, not a separate court. Clerk fees ($55/$80/$175/$300) are $1 higher than the statute's base-plus-$4 ($54/$79/$174/$299); the extra $1 may be another statutory add-on - worth a human check. The Florida Bar appellate rules PDF could not be downloaded, so the 30-day deadline (Fla. R. App. P. 9.110(b)) and DCA routing rely on a secondary lead plus the change to § 26.012. Fla. Stat. § 34.017 still refers to judgments 'appealable to the circuit court' (legacy wording). Rules 7.010 and 7.020 were amended effective Jan. 1, 2026 (SC2025-1254) but the $8,000 limit is unchanged in the July 1, 2026 compilation. No statewide judiciary self-help page for small claims was found (flcourts.gov page returned not found); a county clerk page is used."
-  },
-  {
-    "state": "Georgia",
-    "abbr": "GA",
-    "court_name": "Magistrate Court (general civil limit; often called small claims court)",
-    "limit_individual": 15000,
-    "limit_business": 15000,
-    "limit_notes": "Magistrate courts hear civil claims (including garnishment and attachment) where exclusive jurisdiction is not in superior court and the amount or property value does not exceed $15,000 (O.C.G.A. § 15-10-2(5)); they also hear dispossessory (eviction) cases. No jury trials (§ 15-10-41(a)). The Civil Practice Act does not apply (§ 15-10-42). Some counties recommend or require mediation. A corporate defendant must be sued in the county of its registered agent.",
-    "recent_changes": null,
-    "filing_fee_min": 45,
-    "filing_fee_max": 60,
-    "filing_fee_notes": "Fees vary by county. The Attorney General's consumer page says the filing fee, which includes service on one defendant, ranges from about $45 to $55, plus about $25-$35 per additional defendant. Gwinnett County Magistrate Court charges $60 filing plus $50 sheriff service per defendant ($110 total for one defendant).",
-    "who_can_sue": "Any person or business may file in their own name, with or without an attorney (AG consumer page). Detailed rules for business representation were not confirmed.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Parties may appear with or without an attorney (O.C.G.A. § 15-10-43 notice; AG consumer page).",
-    "appeal": "Either party may appeal to the state court or superior court of the county for a new trial (de novo), where a jury may be requested (O.C.G.A. § 15-10-41(b)). Appeals must be filed within 30 days of the decision; the appellate court charges a filing fee and accrued magistrate costs must be paid. No appeal from a default judgment; review of those is by certiorari.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 30,
-    "e_filing": "some_courts",
-    "e_filing_notes": "Many county magistrate courts accept e-filing (e.g., Gwinnett via eFileGA, Chatham); there is no single statewide system for magistrate courts.",
-    "fee_waiver_form": "Affidavit of indigence (pauper's affidavit), available from the county magistrate court",
-    "fee_waiver_threshold": "Judge's discretion",
-    "service_methods": "Personal service, leaving a copy at the defendant's home with a resident of suitable age and discretion, or delivery to an authorized agent, by any official or person authorized to serve process in superior court, a constable, or a person specially appointed; service outside the county by second original (O.C.G.A. § 15-10-43(b)). Defendant has 30 days to answer, plus 15 days to open default by paying costs.",
-    "self_help_url": "https://consumer.georgia.gov/consumer-topics/magistrate-court",
-    "citation": "O.C.G.A. §§ 15-10-2(5), 15-10-40 to 15-10-54 (esp. 15-10-41, 15-10-43); O.C.G.A. § 5-3-20",
-    "sources": [
-      {
-        "url": "https://www.gwinnettcourts.com/magistrate/civil-fifa",
-        "what": "limit_individual, limit_business (statute text of § 15-10-2(5)), appeal (§ 15-10-41), service_methods (§ 15-10-43), e_filing (eFileGA)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.gwinnettcourts.com/magistrate/fees",
-        "what": "filing_fee_max, filing_fee_notes (Gwinnett)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://consumer.georgia.gov/consumer-topics/magistrate-court",
-        "what": "filing_fee_min, filing_fee_notes, who_can_sue, lawyers, appeal_deadline_days, self_help_url (Georgia AG Consumer Protection Division)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://courts.chathamcountyga.gov/Magistrate",
-        "what": "e_filing (Chatham e-filing)",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "filing_fee_min",
-      "filing_fee_max",
-      "who_can_sue",
-      "fee_waiver_form",
-      "fee_waiver_threshold"
-    ],
-    "notes": "Georgia has no separate small claims court; the Magistrate Court's general civil limit ($15,000) serves that role. Statute text was read from Gwinnett County's official court site (Georgia's official code is hosted by LexisNexis and was not fetched). Fee conflict: the AG page's $45-$55 (including service) is lower than Gwinnett's $60 + $50 service - fees vary by county and the AG range may be outdated. The 30-day appeal deadline comes from the AG page; O.C.G.A. § 5-3-20 was not read. The AG page is from the state Attorney General, not the judiciary."
-  },
-  {
-    "state": "Hawaii",
-    "abbr": "HI",
-    "court_name": "Small Claims Division of the District Court",
-    "limit_individual": 5000,
-    "limit_business": 5000,
-    "limit_notes": "$5,000 for money claims (including loan, car repair, car accident and landlord damage/back-rent claims) and for return of leased or rented personal property worth less than $5,000. No dollar limit for tenant claims for return of a residential security deposit. Counterclaims up to $40,000 are heard in the regular district court.",
-    "recent_changes": null,
-    "filing_fee_min": 35,
-    "filing_fee_max": 35,
-    "filing_fee_notes": "$35 filing fee; service costs extra. Fee, service costs and out-of-pocket costs may be added to the judgment.",
-    "who_can_sue": null,
-    "lawyers_allowed": "limited",
-    "lawyers_notes": "A party may be represented by an attorney, but attorney's fees generally cannot be awarded. Attorneys cannot appear for the landlord or tenant in security deposit disputes unless the attorney is the landlord or tenant representing themselves.",
-    "appeal": "No right to appeal a small claims decision; the judge decides at the end of the trial.",
-    "appeal_who": "none",
-    "appeal_deadline_days": null,
-    "e_filing": "no",
-    "e_filing_notes": "Cases must be filed in person at the District Court Legal Documents Branch on the island.",
-    "fee_waiver_form": null,
-    "fee_waiver_threshold": null,
-    "service_methods": "Plaintiff serves by certified mail restricted delivery, or by in-person delivery to the defendant or a resident of the defendant's home, by a civil process server, by any non-party over age 17, or by the plaintiff with a witness.",
-    "self_help_url": "https://www.courts.state.hi.us/self-help/small_claims_info",
-    "citation": "Haw. Rev. Stat. §§ 633-27 to 633-36; Rules of the Small Claims Division of the District Courts",
-    "sources": [
-      {
-        "url": "https://www.courts.state.hi.us/self-help/small_claims_info",
-        "what": "limit_individual, limit_notes (security deposits unlimited), filing fee, lawyers, appeal (none), e_filing (in person), service_methods",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.courts.state.hi.us/small_claims",
-        "what": "limit_notes (leased property, $40,000 counterclaims)",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "who_can_sue",
-      "fee_waiver_form",
-      "fee_waiver_threshold",
-      "citation"
-    ],
-    "notes": "The Hawaii Legislature's statute site (capitol.hawaii.gov) blocked automated access, so HRS ch. 633 text was not read; facts come from the Judiciary's self-help pages. A 2022 bill (HB2223) to raise the limit to $10,000 apparently did not pass; the Judiciary still states $5,000. Some secondary sites wrongly say attorneys are banned outright. Fee waiver (in forma pauperis) procedure for small claims not found on official pages."
-  },
-  {
-    "state": "Idaho",
-    "abbr": "ID",
-    "court_name": "Small Claims Department of the Magistrate Division of District Court",
-    "limit_individual": 15000,
-    "limit_business": 15000,
-    "limit_notes": "Recovery of money where each claim does not exceed $15,000, or personal property worth up to $15,000; no punitive damages or damages for pain and suffering (Idaho Code § 1-2301, as amended effective July 1, 2026). File in the county where the defendant lives or the claim arose. No jury (§ 1-2315).",
-    "recent_changes": "SB 1330 (2026 Idaho Sess. Laws ch. 196), signed March 2026, raised the limit from $5,000 to $15,000 for both money and personal property, effective July 1, 2026 (emergency clause). It also amended § 1-2311 to remove the fixed $25 attorney-fee amount on appeal (fee now 'as provided in section 12-120(6)').",
-    "filing_fee_min": 69,
-    "filing_fee_max": 69,
-    "filing_fee_notes": "$69 filing fee per the Court Assistance Office plaintiff instructions dated 07/01/2026 (statute § 1-2303(3) lists a $33 component; other statutory surcharges make up the rest). Service costs extra (clerk certified mail, sheriff, or process server). Appeal filing fee $81.",
-    "who_can_sue": "Individuals and businesses. A business organization (corporation, partnership, LLC, sole proprietorship, etc.) must be represented by an owner of a substantial interest or a non-attorney employee. Assignees, including licensed collection agencies, may sue, but an attorney-assignee may not appear. Government entities may be parties but cannot appear through an attorney (Idaho Code §§ 1-2306, 1-2307).",
-    "lawyers_allowed": "no",
-    "lawyers_notes": "No attorney may appear for a party at trial, pretrial or post-trial motions; attorneys may give advice and help prepare exhibits, and may appear in post-judgment collection. An attorney who is a party may represent themselves (except on assigned claims) (§ 1-2307). Lawyers may be used on appeal.",
-    "appeal": "Either party may appeal within 30 days from entry of judgment to a lawyer magistrate (not the one who decided the case); the appeal is a new trial (trial de novo) in the county where the claim was filed. Statutory $20 appeal fee goes to the court technology fund (court instructions list $81 total). If the appellant loses again, they pay the prevailing party's attorney fee under § 12-120(6) (Idaho Code §§ 1-2311, 1-2312).",
-    "appeal_who": "both",
-    "appeal_deadline_days": 30,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "Forms can be prepared and e-filed through Guide & File (guideandfile.idaho.gov). Court instructions say businesses must e-file 'in a county where e-filing is available'.",
-    "fee_waiver_form": "Fee waiver forms from the Idaho Court Assistance Office (courtselfhelp.idaho.gov)",
-    "fee_waiver_threshold": "Court finds the person indigent after an informal inquiry based on an affidavit of income, assets and expenses; no fixed income test in statute (Idaho Code § 31-3220).",
-    "service_methods": "Someone 18+ who is not a party must serve: clerk by certified or registered mail, return receipt requested, signed by the defendant (on plaintiff's request and fee); sheriff; professional process server; or any adult non-party. Affidavit of service usually due within 30 days (Idaho Code § 1-2304; CAO SC 1-1b).",
-    "self_help_url": "https://courtselfhelp.idaho.gov/docs/instructions/CAO_SC_Instr_1-1.pdf",
-    "citation": "Idaho Code §§ 1-2301 to 1-2315; § 31-3220",
-    "sources": [
-      {
-        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2301",
-        "what": "limit_individual, limit_business, limit_notes (current text, history 'am. 2026, ch. 196')",
-        "type": "statute"
-      },
-      {
-        "url": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/legislation/S1330E1.pdf",
-        "what": "recent_changes (SB 1330 as amended; effective July 1, 2026 emergency clause)",
-        "type": "statute"
-      },
-      {
-        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2311",
-        "what": "appeal, appeal_deadline_days",
-        "type": "statute"
-      },
-      {
-        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2303",
-        "what": "filing_fee_notes ($33 statutory component)",
-        "type": "statute"
-      },
-      {
-        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2304",
-        "what": "service_methods (mail)",
-        "type": "statute"
-      },
-      {
-        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2307",
-        "what": "who_can_sue, lawyers_allowed, lawyers_notes, appeal (trial de novo)",
-        "type": "statute"
-      },
-      {
-        "url": "https://legislature.idaho.gov/statutesrules/idstat/Title31/T31CH32/SECT31-3220",
-        "what": "fee_waiver_threshold",
-        "type": "statute"
-      },
-      {
-        "url": "https://courtselfhelp.idaho.gov/docs/instructions/CAO_SC_Instr_1-1.pdf",
-        "what": "filing_fee_min, filing_fee_max ($69), appeal fee $81, service_methods, e_filing, self_help_url (instructions dated 07/01/2026)",
-        "type": "form"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "e_filing",
-      "fee_waiver_form"
-    ],
-    "notes": "Lead confirmed: SB 1330 raised the limit to $15,000 effective July 1, 2026; that is the current limit as of this check. Many secondary sites still show $5,000. Idaho's e-filing (iCourt/Guide & File) is believed to be statewide, but the court instructions still say 'where e-filing is available', so 'yes_statewide' is unconfirmed. The breakdown of the $69 filing fee beyond the $33 in § 1-2303 was not checked."
-  }
+ {
+  "state": "Alabama",
+  "abbr": "AL",
+  "court_name": "Small claims docket of the District Court",
+  "limit_individual": 6000,
+  "limit_business": 6000,
+  "limit_notes": "$6,000 exclusive of interest and costs (Ala. Code § 12-12-31(a)). Unlawful detainer (eviction) cases are not handled under the Small Claims Rules; they go on the regular district court docket (Ala. Sm. Cl. R. A). Attorney fees can only be awarded if the party has a licensed attorney (§ 12-12-31(c)). For claims over $1,500 the docket fee is the same as for regular (non-small-claims) district court cases (§ 12-12-31(f)).",
+  "recent_changes": null,
+  "filing_fee_min": 75.5,
+  "filing_fee_max": 248,
+  "filing_fee_notes": "Fees are tiered by claim amount (up to $1,500; $1,500.01-$3,000; $3,000.01-$6,000) and differ by county. Cherokee County: $75.50 / $149.50 / $238.50, plus $25 sheriff service per defendant, $10 per additional defendant. Russell County: $85 / $159 / $248, plus $15 sheriff service, $15 per additional defendant. Both list $50 per additional plaintiff (max $500). Certified mail postage is extra. Only two county fee tables were checked, so the statewide range may be wider.",
+  "who_can_sue": "Individuals aged 19 or older (Alabama age of majority, per county court pages), partnerships and corporations. Without a lawyer, a partnership must appear through a partner or employee and a corporation through an officer or full-time employee (§ 12-12-31(b)). An assignee of a claim, such as a debt buyer or collection agency, must use a licensed attorney, and non-attorneys may not file on behalf of the original owner (§ 12-12-31(d)). Lawyers whose licenses are revoked or suspended may not file (§ 12-12-31(e)).",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Parties may appear with or without an attorney (§ 12-12-31(b)). Attorney fees are recoverable only if the party is represented by a licensed attorney (§ 12-12-31(c)).",
+  "appeal": "Either party may appeal to circuit court by filing a notice of appeal with the district court clerk within 14 days of the judgment and posting a bond or cash for costs, or an approved affidavit of substantial hardship (Ala. Sm. Cl. R. M). The appeal is a new trial (trial de novo) in circuit court (Ala. Code § 12-12-71); jury only if demanded in the notice of appeal. Cherokee County lists a circuit court fee of $265.50 (non-jury) or $365.50 (jury).",
+  "appeal_who": "both",
+  "appeal_deadline_days": 14,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "AlaFile (efile.alacourt.gov) is statewide. Self-represented parties may register and file electronically but are not required to; the e-filing mandate does not cover pro se filings (AOC Administrative Policies and Procedures, 2026).",
+  "fee_waiver_form": "Form C-10-CIVIL, Affidavit of Substantial Hardship and Order (Request to Waive Filing Fees), Rev. 10/2026: https://eforms.alacourt.gov/media/na1j0cie/c-10-civil-affidavit-of-substantial-hardship-order-10-2026.pdf",
+  "fee_waiver_threshold": "Docket fee may be waived at filing and taxed as costs at the end of the case if paying would be a substantial hardship under the income guidelines in Ala. Code § 15-12-1(4)a-b: income at or below 125% of federal poverty guidelines, or 125-200% with a court finding of substantial hardship (§ 12-19-70(b)). If the court makes no written finding within 90 days, hardship is deemed granted (§ 12-19-70(c)).",
+  "service_methods": "Service follows the Alabama Rules of Civil Procedure (Ala. Sm. Cl. R. D). County clerks send the complaint to the sheriff for personal service by default; certified mail is used when the address is a P.O. box or out of state (plaintiff supplies envelope, green card and postage).",
+  "self_help_url": "https://eforms.alacourt.gov/small-claims/",
+  "citation": "Ala. Code §§ 12-12-31, 12-12-71, 12-19-70; Alabama Small Claims Rules A-N",
+  "sources": [
+   {
+    "url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-12-31",
+    "what": "limit_individual, limit_business, limit_notes, who_can_sue, lawyers_allowed (statute text via Legislature's code service)",
+    "type": "statute"
+   },
+   {
+    "url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-12-71",
+    "what": "appeal (trial de novo)",
+    "type": "statute"
+   },
+   {
+    "url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-19-70",
+    "what": "fee_waiver_threshold",
+    "type": "statute"
+   },
+   {
+    "url": "https://alison.legislature.state.al.us/code-of-alabama?section=15-12-1",
+    "what": "fee_waiver_threshold (125%/200% income guidelines)",
+    "type": "statute"
+   },
+   {
+    "url": "https://judicial.alabama.gov/docs/library/rules/smm.pdf",
+    "what": "appeal, appeal_deadline_days (Rule M)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://judicial.alabama.gov/docs/library/rules/smd.pdf",
+    "what": "service_methods (Rule D)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://judicial.alabama.gov/docs/library/rules/sma.pdf",
+    "what": "limit_notes (scope; unlawful detainer excluded)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://cherokee.alacourt.gov/small-claims",
+    "what": "filing_fee_min, filing_fee_notes, who_can_sue (age 19), appeal fees, service_methods",
+    "type": "court_site"
+   },
+   {
+    "url": "https://russell.alacourt.gov/small-claims/",
+    "what": "filing_fee_max, filing_fee_notes, appeal (either party, 14 days), service_methods",
+    "type": "court_site"
+   },
+   {
+    "url": "https://efile.alacourt.gov/media/1118/administrative-policies-and-procedures-02-27-2026.pdf",
+    "what": "e_filing, e_filing_notes",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://eforms.alacourt.gov/media/na1j0cie/c-10-civil-affidavit-of-substantial-hardship-order-10-2026.pdf",
+    "what": "fee_waiver_form",
+    "type": "form"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "filing_fee_min",
+   "filing_fee_max"
+  ],
+  "notes": "Filing fees are not uniform statewide; the range comes from only two official county court pages (Cherokee, Russell). One county page (Lawrence) still shows the pre-2015 $3,000 limit; the statute says $6,000 (Act 2015-224). Some secondary sites list fees from $35 to $294; not used."
+ },
+ {
+  "state": "Alaska",
+  "abbr": "AK",
+  "court_name": "District Court, small claims procedure (heard by a district judge or magistrate judge)",
+  "limit_individual": 10000,
+  "limit_business": 10000,
+  "limit_notes": "$10,000 exclusive of costs, interest and attorney fees (AS 22.15.040(a)). The Dept. of Labor and Workforce Development may bring wage claims up to $20,000. Not available for real-property title or possession disputes, evictions, claims against the State of Alaska or the U.S., injunctions, or lien foreclosure (SC-95). Magistrate judges generally cannot hear cases where the defendant is served outside Alaska (AS 22.15.120(b)), so out-of-state defendants usually need a district judge. Any party may choose the formal civil procedure instead (district court formal cases go up to $100,000).",
+  "recent_changes": null,
+  "filing_fee_min": 50,
+  "filing_fee_max": 100,
+  "filing_fee_notes": "$50 if the claim is $2,500 or less; $100 if more than $2,500 (Alaska Admin. R. 9(c)(2)). No extra filing fee if the case is moved to the formal docket. Service costs (certified mail or process server) are extra.",
+  "who_can_sue": "Anyone 18 or older (under 18 only with a parent or guardian); partnerships, unincorporated associations, LLCs and corporations. A corporation or organization may be represented by an officer or employee authorized in writing (Dist. Ct. Civ. R. 15(a)). A party suing on an assigned claim (e.g., a collection agency) must be represented by a lawyer (Rule 15(c)). Powers of attorney cannot be used to represent someone else.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Any party may be represented by an attorney or legal intern (Dist. Ct. Civ. R. 15(b)); required for assigned claims. Attorney-fee awards in small claims are capped (handbook cites $1,000 under Dist. Ct. Civ. R. 20(c)).",
+  "appeal": "Either party may appeal to the superior court by filing a Notice of Appeal (form AP-100) within 30 days from the date the judgment is distributed. Appeal is on the record (audio recording, exhibits, file); no new trial or new evidence. Filing an appeal does not stop collection unless a bond is posted.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 30,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "TrueFiling is in use at all court locations and covers small claims. Self-represented litigants must use TrueFiling unless exempt (incarcerated, disability, no safe computer/internet/email access, can't get help, language barrier) per Administrative Bulletin 92. Public filing computers only in Anchorage, Fairbanks and Palmer. AK ODR (online dispute resolution pilot, launched Jan. 2024) offers free online negotiation/mediation for small claims.",
+  "fee_waiver_form": "TF-920, Request and Order for Exemption from Payment of Fees (9/25): https://public.courts.alaska.gov/web/forms/docs/tf-920.pdf",
+  "fee_waiver_threshold": "Judge's discretion based on a financial statement (Admin. R. 10). The clerk must accept the filing without the fee once the form is filed; if the court finds the person is not indigent, the fee must be paid within 30 days or the case may be dismissed. No fixed income test found.",
+  "service_methods": "Certified mail, restricted delivery to the addressee only, or a licensed private process server (peace officers/state troopers serve where no private process servers are available). The plaintiff cannot serve personally.",
+  "self_help_url": "https://courts.alaska.gov/shc/sc/index.htm",
+  "citation": "AS 22.15.040; Alaska District Court Civil Rules 8-22; Alaska Admin. Rules 9-10",
+  "sources": [
+   {
+    "url": "https://www.akleg.gov/basis/statutes.asp?media=print&secStart=22.15.040&secEnd=22.15.040",
+    "what": "limit_individual, limit_business, limit_notes",
+    "type": "statute"
+   },
+   {
+    "url": "https://courts.alaska.gov/rules/docs/adm.pdf",
+    "what": "filing_fee_min, filing_fee_max (Admin. R. 9(c)(2)), fee_waiver_threshold (Admin. R. 10)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://public.courts.alaska.gov/web/forms/docs/sc-95.pdf",
+    "what": "limit_notes (exclusions), filing fees (SC-95, rev. 4/21)",
+    "type": "form"
+   },
+   {
+    "url": "https://public.courts.alaska.gov/web/forms/docs/sc-100.pdf",
+    "what": "who_can_sue, lawyers_notes, appeal, appeal_deadline_days, service_methods, Dist. Ct. Civ. R. 15 and 18 text (Alaska Small Claims Handbook SC-100, 8/21)",
+    "type": "form"
+   },
+   {
+    "url": "https://courts.alaska.gov/eFile/index.htm",
+    "what": "e_filing, e_filing_notes",
+    "type": "court_site"
+   },
+   {
+    "url": "https://courts.alaska.gov/media/docs/2024/pr-akodr.pdf",
+    "what": "e_filing_notes (AK ODR)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://public.courts.alaska.gov/web/forms/docs/tf-920.pdf",
+    "what": "fee_waiver_form",
+    "type": "form"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [],
+  "notes": "The SC-95 info sheet states small claims procedure can only be used if all parties agree to it; any party may elect formal rules. The court's small claims self-help page loads content by script and could not be read directly; facts above come from the handbook, forms and rules."
+ },
+ {
+  "state": "Arizona",
+  "abbr": "AZ",
+  "court_name": "Small Claims Division of the Justice Court (separate from regular Justice Court civil cases)",
+  "limit_individual": 5000,
+  "limit_business": 5000,
+  "limit_notes": "Small claims division: claims not exceeding $5,000 exclusive of interest and costs, including actions to rescind a contract or for equitable relief up to $5,000 (A.R.S. § 22-503(A)). Excluded: libel/slander, evictions, specific performance, class actions, prejudgment remedies, injunctions, claims against the state or local governments (§ 22-503(B)). Regular Justice Court civil cases go up to $10,000 (§ 22-201(B)); there lawyers, juries and appeals are available. Any party can move a small claims case to regular justice court by objecting at least 10 days before the hearing (§ 22-504). Claims cannot be split. The AZ Supreme Court self-service page says 'less than $5,000' while the statute says 'does not exceed $5,000'.",
+  "recent_changes": "SB 1022 (Laws 2025, ch. 94), signed May 2, 2025, raised the small claims limit from $3,500 to $5,000 by amending A.R.S. § 22-503. Effective on the 2025 general effective date, September 26, 2025.",
+  "filing_fee_min": 30,
+  "filing_fee_max": 58,
+  "filing_fee_notes": "Statewide base small claims filing fee is $30 (A.R.S. § 22-281 Class C, as increased by AO 2024-211 effective Dec. 28, 2024); answer $18; small claims service by mail $8. Courts may add local fees: Maricopa County Justice Courts charge $58 to file and $46 to answer. Fees in other counties were not surveyed.",
+  "who_can_sue": "Any natural person, corporation, partnership, association, marital community or other organization. Assignees and others not a real party to the original transaction may not sue (except a court-appointed personal representative) (§ 22-512(A)). Individuals represent themselves; corporations appear through a full-time officer or authorized employee; partnerships through an active general partner or authorized full-time employee (§ 22-512(B)).",
+  "lawyers_allowed": "limited",
+  "lawyers_notes": "Attorneys may not take part unless the parties agree in writing before the hearing to allow attorneys (§ 22-512(B)(7), (D)). After judgment, a party may hire a lawyer to collect (§ 22-512(E)).",
+  "appeal": "No appeal: the decision of the hearing officer or justice of the peace is final and binding on both parties (A.R.S. § 22-519). To keep the right to appeal (and to a lawyer or jury), a party must transfer the case to regular justice court at least 10 days before the hearing (§ 22-504). Only a motion to vacate judgment or change venue is allowed (§ 22-505).",
+  "appeal_who": "none",
+  "appeal_deadline_days": null,
+  "e_filing": "some_courts",
+  "e_filing_notes": "eFiling for justice court civil, eviction and small claims cases is live in all justice courts except Maricopa County justice courts and the Pima County Consolidated Justice Court (AZ Supreme Court page last updated March 31, 2026). Self-represented filers may, but need not, e-file (eFileAZ). Maricopa's site says eFiling is 'coming soon'.",
+  "fee_waiver_form": "Application for deferral or waiver of court fees (Arizona Supreme Court standard form, available from each justice court and through eFileAZ)",
+  "fee_waiver_threshold": "Deferral must be granted if the applicant receives TANF, SNAP (food stamps) or SSI, or has income insufficient for daily essentials; gross monthly income at or below 150% of federal poverty guidelines is evidence of this (A.R.S. § 12-302(C)). Full waiver if permanently unable to pay (§ 12-302(D)).",
+  "service_methods": "Plaintiff may serve by registered or certified mail (complete on delivery date on the return receipt); the clerk may serve by certified restricted mail (statutory $8 fee). If mail fails, personal service by a process server, constable/sheriff or other authorized officer, with an affidavit of service (A.R.S. § 22-513).",
+  "self_help_url": "https://www.azcourts.gov/selfservicecenter/Small-Claims",
+  "citation": "A.R.S. §§ 22-501 to 22-524 (esp. 22-503, 22-504, 22-512, 22-513, 22-519); A.R.S. §§ 22-201, 22-281, 12-302; Arizona Rules of Small Claims Procedure",
+  "sources": [
+   {
+    "url": "https://www.azleg.gov/ars/22/00503.htm",
+    "what": "limit_individual, limit_business, limit_notes",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.azleg.gov/legtext/57leg/1R/laws/0094.htm",
+    "what": "recent_changes (SB 1022, Laws 2025 ch. 94, approved May 2, 2025)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.azleg.gov/general-effective-dates/",
+    "what": "recent_changes (2025 general effective date 09-26-2025)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.azleg.gov/ars/22/00201.htm",
+    "what": "limit_notes (justice court $10,000)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.azleg.gov/ars/22/00504.htm",
+    "what": "limit_notes, appeal (transfer to preserve appeal)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.azleg.gov/ars/22/00512.htm",
+    "what": "who_can_sue, lawyers_allowed, lawyers_notes",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.azleg.gov/ars/22/00513.htm",
+    "what": "service_methods",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.azleg.gov/ars/22/00519.htm",
+    "what": "appeal, appeal_who",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.azleg.gov/ars/12/00302.htm",
+    "what": "fee_waiver_threshold",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.azcourts.gov/courtfilingfees/Justice-Court-Filing-Fees",
+    "what": "filing_fee_min, filing_fee_notes (base fees eff. Dec. 28, 2024)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.justicecourts.maricopa.gov/case-types/small-claims",
+    "what": "filing_fee_max (Maricopa $58), lawyers_notes, appeal",
+    "type": "court_site"
+   },
+   {
+    "url": "https://justicecourts.maricopa.gov/media/ga4b33br/howto-file-sc.pdf",
+    "what": "limit_notes, lawyers_notes, who_can_sue (Maricopa handout rev. 9/26/25)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.azcourts.gov/efilinginformation/eFiling-Availability/LJ",
+    "what": "e_filing, e_filing_notes",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.azcourts.gov/selfservicecenter/Small-Claims",
+    "what": "self_help_url, limit wording",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "filing_fee_max",
+   "fee_waiver_form"
+  ],
+  "notes": "Filing fee max is the highest observed (Maricopa County); local fees in other counties were not checked. The exact title/URL of the statewide fee deferral/waiver form was not confirmed. Several secondary sites and a Mohave County page still show the old $3,500 limit."
+ },
+ {
+  "state": "Arkansas",
+  "abbr": "AR",
+  "court_name": "Small claims division of District Court",
+  "limit_individual": 5000,
+  "limit_business": 5000,
+  "limit_notes": "Same amount-in-controversy jurisdiction as district court civil (Admin. Order 18 § 4): contract claims, recovery of personal property, and damage to personal property up to $5,000 excluding interest and costs (AO 18 § 3). Personal injury is not among the listed civil matters. State district courts (pilot courts) have $25,000 civil jurisdiction (AO 18 § 6), but the small claims division is tied to § 3 ($5,000). Most businesses are barred from filing (see who_can_sue).",
+  "recent_changes": null,
+  "filing_fee_min": 65,
+  "filing_fee_max": 65,
+  "filing_fee_notes": "Little Rock District Court charges $65 to file a small claim (civil $80) plus a $2.50 summons fee; service fees (certified mail, sheriff $50 in Pulaski County, or process server) are extra. A $20 electronic filing system fee applies to cases started through e-filing (AO 21). The Attorney General's guide says fees 'typically' range from $30 to $65.",
+  "who_can_sue": "Individuals. No action may be brought by a collection agency, collection agent, assignee of a claim, or any business engaged in lending money at interest (AO 18 § 4(b)). Corporations may sue only if organized in Arkansas with no more than three stockholders, or 85%+ of voting stock held by close relatives, or closely held corporations by unanimous shareholder vote; a corporation must be represented by an officer (AO 18 § 4(c)).",
+  "lawyers_allowed": "no",
+  "lawyers_notes": "No attorney or anyone other than the plaintiff and defendant may take part; if the judge finds an attorney representing a party, the case is immediately transferred to the civil docket (AO 18 § 4(a); Dist. Ct. R. 10(f)).",
+  "appeal": "Any party may appeal to circuit court for a new trial (de novo; Dist. Ct. R. 2(b), 10(e)(6)) by filing a certified copy of the district court docket sheet/record and the claim form with the circuit clerk within 30 days of the docket entry awarding judgment (Dist. Ct. R. 9(a)-(b)). No notice of appeal is required. A 40-day affidavit procedure applies if the district clerk fails to prepare the record.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 30,
+  "e_filing": "some_courts",
+  "e_filing_notes": "Each district court's judges decide whether to adopt the AOC electronic filing system (AO 21). Pro se parties may always file on paper. $20 e-filing system fee for starting a small claims case electronically.",
+  "fee_waiver_form": "Petition to proceed in forma pauperis (Ark. R. Civ. P. 72)",
+  "fee_waiver_threshold": "Judge's discretion under Ark. R. Civ. P. 72 (in forma pauperis)",
+  "service_methods": "Unless the plaintiff asks for the sheriff or another authorized person, the clerk serves the defendant by certified mail, return receipt requested, addressee only; service otherwise follows Ark. R. Civ. P. 4 (Dist. Ct. R. 10(a)(3)). Defendant has 30 days to answer.",
+  "self_help_url": "https://arkansasag.gov/divisions/public-protection/legal-resources/guide-to-small-claims-court/",
+  "citation": "Ark. Sup. Ct. Admin. Order No. 18 §§ 3-4; Ark. Dist. Ct. R. 2, 9, 10; Ark. Sup. Ct. Admin. Order No. 21",
+  "sources": [
+   {
+    "url": "https://opinions.arcourts.gov/ark/ao/en/16691/1/document.do",
+    "what": "limit_individual, limit_business, limit_notes, who_can_sue, lawyers_allowed (AO 18 §§ 3-4, 6); e_filing and $20 e-filing fee (AO 21); compilation current through Jan. 29, 2026",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://opinions.arcourts.gov/ark/cr/en/1878/1/document.do",
+    "what": "appeal, appeal_deadline_days (Rule 9), service_methods and procedure (Rule 10), de novo (Rule 2)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.littlerock.gov/media/23270/civil-small-claims-filing-instructions.pdf",
+    "what": "filing_fee_min, filing_fee_max, filing_fee_notes, service costs",
+    "type": "court_site"
+   },
+   {
+    "url": "https://arkansasag.gov/divisions/public-protection/legal-resources/guide-to-small-claims-court/",
+    "what": "self_help_url, filing_fee_notes ($30-$65 range), appeal (30 days)",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "filing_fee_min",
+   "filing_fee_max",
+   "fee_waiver_form",
+   "fee_waiver_threshold"
+  ],
+  "notes": "Filing fee: only the Little Rock District Court schedule ($65) was confirmed; the statute (Ark. Code § 16-17-705) could not be read on an official site, a secondary copy shows $50, and the AG guide says $30-$65. Needs a human check. The AG page is from the Attorney General (state government), not the judiciary; Arkansas courts have no statewide small claims self-help page that could be found. Fee waiver (ARCP 72) not verified from rule text."
+ },
+ {
+  "state": "California",
+  "abbr": "CA",
+  "court_name": "Small claims division of the Superior Court",
+  "limit_individual": 12500,
+  "limit_business": 6250,
+  "limit_notes": "$12,500 for natural persons (including sole proprietors); $6,250 for businesses and public entities. No more than two small claims over $2,500 each per calendar year (statewide). Different limits apply to claims against a guarantor (Code Civ. Proc. § 116.220(c)). As of Oct. 1, 2025, landlords can no longer sue in small claims for COVID-19 rental debt over $12,500. Special rules for suing an attorney over fees, a healthcare provider, or a government entity (government claim must be filed with the agency first). Defendant's claims have the same limits.",
+  "recent_changes": "SB 71 (Stats. 2023, ch. 861) raised the limits from $10,000 to $12,500 (natural persons) and from $5,000 to $6,250 (others), effective Jan. 1, 2024. AB 1827 (2025-26), which would have raised the limit to $15,000 for all plaintiffs and allowed three filings per year, passed the Assembly 77-0 but was held under submission in Senate Appropriations on Aug. 13, 2026 (not enacted). The COVID-19 rental debt rule above changed Oct. 1, 2025.",
+  "filing_fee_min": 30,
+  "filing_fee_max": 100,
+  "filing_fee_notes": "$30 for claims up to $1,500; $50 for over $1,500 to $5,000; $75 for over $5,000 to $12,500; $100 if the plaintiff filed more than 12 small claims in California in the past 12 months. Same statewide. Clerk certified-mail service is $15 (offered only in some courts); sheriff and process server fees extra.",
+  "who_can_sue": "Plaintiffs must be 18 or older (minors through a guardian ad litem) and must be the original owner of the claim: assignees (e.g., debt buyers) cannot sue, with two narrow exceptions. Must first demand payment if possible. Corporations appear through an employee, officer or director; other entities through a regular employee, who must not be hired just to appear in small claims (form SC-109 required).",
+  "lawyers_allowed": "no",
+  "lawyers_notes": "Parties may consult a lawyer before court but cannot be represented by one at the small claims trial. Lawyers may represent parties after judgment and on appeal.",
+  "appeal": "Only the party ordered to pay can appeal: a plaintiff cannot appeal the decision on their own claim, but can appeal a judgment on the defendant's claim. File a Notice of Appeal (form SC-140) within 30 days after the clerk mails or hands over the Notice of Entry of Judgment. The appeal is a new trial before a different superior court judge; lawyers are allowed. The appealing side can be ordered to pay up to $150 attorney fees and $150 costs (up to $1,000 each if the appeal was to harass or delay).",
+  "appeal_who": "defendant_only",
+  "appeal_deadline_days": 30,
+  "e_filing": "some_courts",
+  "e_filing_notes": "Some superior courts allow e-filing of small claims; filing by mail is available everywhere. The Judicial Council's free Guide & File interview prepares the forms.",
+  "fee_waiver_form": "FW-001, Request to Waive Court Fees (Rev. March 1, 2026): https://www.courts.ca.gov/documents/fw001.pdf (info sheet FW-001-INFO)",
+  "fee_waiver_threshold": "Qualify if receiving listed public benefits (Medi-Cal, CalFresh/SNAP, SSI/SSP, CalWORKs, CAPI, WIC, unemployment, etc.), or gross household income below the table on FW-001 item 5b (200% of federal poverty guidelines under Gov. Code § 68632(b), as amended by SB 54, effective Jan. 1, 2026; was 125%), or cannot pay court fees and meet basic needs.",
+  "service_methods": "The plaintiff cannot serve. Personal service by anyone 18+ who is not a party (friend, relative, sheriff/marshal in some counties for a fee, or registered process server); substituted service at home or work plus mailing (complete 10 days after mailing); or certified mail by the court clerk ($15, only some courts). Must be served at least 15 days before trial (20 days if served outside the county).",
+  "self_help_url": "https://selfhelp.courts.ca.gov/small-claims-california",
+  "citation": "Cal. Code Civ. Proc. §§ 116.110-116.950 (esp. §§ 116.220, 116.221, 116.230, 116.231, 116.710); Gov. Code §§ 68630-68641",
+  "sources": [
+   {
+    "url": "https://www.courts.ca.gov/documents/sc100info.pdf",
+    "what": "limit_individual, limit_business, limit_notes (2 claims >$2,500/yr, guarantor), who_can_sue, lawyers, service_methods (SC-100-INFO, Rev. Jan. 1, 2024)",
+    "type": "form"
+   },
+   {
+    "url": "https://selfhelp.courts.ca.gov/small-claims/before-you-start",
+    "what": "limit_individual, limit_business, limit_notes (COVID rental debt, special defendants)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://selfhelp.courts.ca.gov/small-claims-california",
+    "what": "self_help_url, lawyers_allowed, appeal summary, fee range",
+    "type": "court_site"
+   },
+   {
+    "url": "https://selfhelp.courts.ca.gov/file-form-start-your-small-claims-case-plaintiffs-claim",
+    "what": "filing_fee_min, filing_fee_max, filing_fee_notes, e_filing",
+    "type": "court_site"
+   },
+   {
+    "url": "https://selfhelp.courts.ca.gov/small-claims/start-case/serve",
+    "what": "service_methods ($15 clerk certified mail; 15/20-day deadlines)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://selfhelp.courts.ca.gov/small-claims-appeals",
+    "what": "appeal, appeal_who",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.courts.ca.gov/documents/sc130.pdf",
+    "what": "appeal_deadline_days (SC-130, Rev. Jan. 1, 2025)",
+    "type": "form"
+   },
+   {
+    "url": "https://selfhelp.courts.ca.gov/fee-waiver",
+    "what": "fee_waiver_threshold",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.courts.ca.gov/documents/fw001.pdf",
+    "what": "fee_waiver_form",
+    "type": "form"
+   },
+   {
+    "url": "https://calmatters.digitaldemocracy.org/bills/ca_202520260ab1827",
+    "what": "recent_changes (AB 1827 held in committee Aug. 13, 2026)",
+    "type": "secondary"
+   },
+   {
+    "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=68632",
+    "what": "fee_waiver_threshold: 200% FPG (SB 54, eff. 2026-01-01), per research/california/statewide.json",
+    "type": "statute"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "recent_changes"
+  ],
+  "notes": "Leads confirmed: $12,500 / $6,250 per Judicial Council forms and self-help site. The Legislature's statute site (leginfo.legislature.ca.gov) blocks automated access (Cloudflare challenge), so the statute text itself was not read; facts are from mandatory Judicial Council forms and the official self-help guide. recent_changes is listed as unverified because SB 71's date and AB 1827's status come from a legislative analysis lead and a secondary bill tracker. The 125% figure for fee waivers is from Gov. Code § 68632(b), which could not be fetched; the FW-001 income table itself was confirmed. Statewide rules only; county details are researched separately. Fee-waiver threshold corrected 2026-11-06 from 125% to 200% to match the statute research (statewide.json)."
+ },
+ {
+  "state": "Colorado",
+  "abbr": "CO",
+  "court_name": "Small claims court (division of County Court)",
+  "limit_individual": 7500,
+  "limit_business": 7500,
+  "limit_notes": "$7,500 exclusive of interest and costs, including civil penalties (C.R.S. § 13-6-403(1)). Also covers HOA assessment/fine disputes, enforcing residential restrictive covenants, replevin, and specific performance or rescission of contracts, each up to $7,500. Excluded: libel/slander, evictions (FED), class actions and other listed matters. A plaintiff may file no more than 2 small claims per calendar month and 18 per calendar year in a county (JDF 250 declaration). Claims cannot be split. A defendant can move the case to regular county/district court by filing JDF 251 at least 7 days before trial.",
+  "recent_changes": null,
+  "filing_fee_min": 31,
+  "filing_fee_max": 55,
+  "filing_fee_notes": "$31 for claims up to $500; $55 for $500.01-$7,500. Response $26/$41; response with counterclaim $31/$46. Copies $0.25/page. Sheriff/process server fees extra.",
+  "who_can_sue": "Any natural person, corporation, partnership, association or other organization. No assignee or other person not a real party to the transaction may sue (except a court-appointed personal representative, conservator or guardian). Individuals represent themselves; corporations through a full-time officer or employee; partnerships through an active general partner or full-time employee; property managers may represent owners in security deposit/landlord-tenant cases (C.R.S. § 13-6-407).",
+  "lawyers_allowed": "limited",
+  "lawyers_notes": "Attorneys may not appear except as a party, or as the full-time officer/employee/partner of an entity party (C.R.S. § 13-6-407(2)). Per JDF 250, a defendant who wants a lawyer must file a Notice of Representation (JDF 256) at least 7 days before trial; the plaintiff may then also have a lawyer. Small claims rules still apply.",
+  "appeal": "Either plaintiff or defendant may appeal to district court under county court rules (C.R.S. § 13-6-410; C.R.C.P. 411). Notice of appeal is due within 14 days of judgment (JDF 250). The district court reviews the record and recording; no new trial or new evidence. An appeal bond and district court filing fee apply.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 14,
+  "e_filing": "no",
+  "e_filing_notes": "Colorado Courts E-Filing (CCE) is open to non-attorneys only in domestic relations and eviction cases, so self-represented small claims parties must file in person or by mail.",
+  "fee_waiver_form": "JDF 205 Motion to File Without Payment and Supporting Financial Affidavit, with JDF 206 Order (JDF 209 Notice for certain public-benefit recipients): https://www.coloradojudicial.gov/self-help/fee-waivers",
+  "fee_waiver_threshold": "Household income below 125% of the federal poverty guidelines, or enrolled in certain public benefits (e.g., SSI, TANF, SNAP, Old Age Pension).",
+  "service_methods": "Personal service by the sheriff or a private process server (any non-party 18+); or clerk's certified mail (not preferred; personal service needed if it fails). Must be completed at least 15 days before trial.",
+  "self_help_url": "https://www.coloradojudicial.gov/self-help/opening-case",
+  "citation": "C.R.S. §§ 13-6-401 to 13-6-417; Colorado Rules of Procedure for Small Claims Courts (C.R.C.P. 501-521); C.R.C.P. 411",
+  "sources": [
+   {
+    "url": "https://content.leg.colorado.gov/sites/default/files/images/olls/crs2024-title-13.pdf",
+    "what": "limit_individual, limit_business, limit_notes (13-6-403), who_can_sue and lawyers (13-6-407), appeal (13-6-410), no jury (13-6-414)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.coloradojudicial.gov/self-help/opening-case",
+    "what": "limit, filing_fee_min, filing_fee_max, service deadline, self_help_url",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.coloradojudicial.gov/media/11429",
+    "what": "filing_fee_notes, 2/month and 18/year cap, service_methods, fee waiver forms (JDF 248 Guide, rev. Dec. 14, 2023)",
+    "type": "form"
+   },
+   {
+    "url": "https://www.coloradojudicial.gov/media/11266",
+    "what": "appeal_deadline_days (14 days, C.R.C.P. 411), lawyers_notes, filing caps (JDF 250, R 1-24)",
+    "type": "form"
+   },
+   {
+    "url": "https://www.coloradojudicial.gov/self-help/small-claims-or-county-civil-appeal",
+    "what": "appeal (record review, no new trial)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.coloradojudicial.gov/self-help/fee-waivers",
+    "what": "fee_waiver_form, fee_waiver_threshold",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.coloradojudicial.gov/e-filing-non-attorneys",
+    "what": "e_filing, e_filing_notes",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [],
+  "notes": "Statute text read from the official 2024 C.R.S. Title 13 PDF (the 2025 PDF link was not available); no 2025-2026 bill changing small claims limits was found. A secondary source claims small claims filing fees drop by $5 on July 1, 2027 (C.R.S. 13-32-101); not confirmed and not recorded. lawhelp.colorado.gov (secondary) says the appellant must also file in district court within 35 days and pay a $163 fee; not recorded as fact."
+ },
+ {
+  "state": "Connecticut",
+  "abbr": "CT",
+  "court_name": "Small Claims session of the Superior Court (housing session for landlord-tenant matters)",
+  "limit_individual": 5000,
+  "limit_business": 5000,
+  "limit_notes": "$5,000 for money damages (libel/slander excluded). Up to $15,000 for claims arising from home improvement work by a certified contractor or new home construction by a certified new home construction contractor (Conn. Gen. Stat. § 51-15(d)). Tenants suing for a security deposit can be awarded double damages even if the total exceeds $5,000. Out-of-state individuals can be sued only if they own property in Connecticut; out-of-state corporations can be sued.",
+  "recent_changes": null,
+  "filing_fee_min": 95,
+  "filing_fee_max": 95,
+  "filing_fee_notes": "$95 entry fee (same for a counterclaim) (Conn. Gen. Stat. § 52-259(b)). Motion to transfer to the regular docket: $125. Service costs extra (marshal fees; postage). No charge for copies for service on defendants.",
+  "who_can_sue": "Individuals and business entities, including out-of-state individuals and businesses. Individual plaintiffs may file where they live, where the defendant lives/does business, or where the transaction/injury occurred; business plaintiffs cannot use their own location as venue. The writ must be signed under oath (notarized).",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Attorneys are not required but are permitted. Cases are usually heard by magistrates (lawyers appointed by the Chief Court Administrator).",
+  "appeal": "No right to appeal a small claims decision. There is no transcript or recording. A party wanting a jury or full procedure must move to transfer to the regular docket ($125).",
+  "appeal_who": "none",
+  "appeal_deadline_days": null,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "Small claims cases and documents can be filed electronically through Judicial Branch E-Services (sign-up required).",
+  "fee_waiver_form": "JD-CV-120, Application for Waiver of Fees/Payment of Costs - Civil, Housing, Small Claims, and Appellate (Rev. 1-19): https://www.jud.ct.gov/webforms/forms/CV120.pdf",
+  "fee_waiver_threshold": "Rebuttable presumption of indigency if receiving public assistance (state general assistance, temporary family assistance, aid to aged/blind/disabled, SNAP, SSI) or income after taxes, mandatory wage deductions and child care is at or below 125% of the federal poverty level; court may also find others indigent. If granted, the state also pays the cost of service (Conn. Gen. Stat. § 52-259b).",
+  "service_methods": "Plaintiff (or representative) may serve each defendant by priority mail with delivery confirmation or by certified mail, return receipt requested, then file a Statement of Service (JD-CV-123); or hire a proper officer such as a state marshal. Out-of-state business entities must be served by a proper officer.",
+  "self_help_url": "https://www.jud.ct.gov/faq/smallclaims.html",
+  "citation": "Conn. Gen. Stat. §§ 51-15, 51-193l, 52-259, 52-259b; Conn. Practice Book ch. 24",
+  "sources": [
+   {
+    "url": "https://www.cga.ct.gov/current/pub/chap_870.htm",
+    "what": "limit_individual, limit_business, limit_notes (§ 51-15)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.cga.ct.gov/current/pub/chap_901.htm",
+    "what": "filing_fee_min, filing_fee_max (§ 52-259(b)), fee_waiver_threshold (§ 52-259b)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.jud.ct.gov/faq/smallclaims.html",
+    "what": "limit_notes, filing fee, who_can_sue (venue), lawyers, appeal (none), e_filing, service_methods, self_help_url",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.jud.ct.gov/webforms/forms/CV120.pdf",
+    "what": "fee_waiver_form",
+    "type": "form"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [],
+  "notes": "The FAQ lists '4 methods' of service; only three (priority mail, certified mail, proper officer) were captured in the page text. No 2025-2026 change to the $5,000 limit was found (earlier bills to raise it to $10,000 did not pass). Minimum age for plaintiffs not found on official pages."
+ },
+ {
+  "state": "Delaware",
+  "abbr": "DE",
+  "court_name": "Justice of the Peace Court (civil) - no separate small claims court",
+  "limit_individual": 25000,
+  "limit_business": 25000,
+  "limit_notes": "The JP Court hears contract (debt) actions, property damage (trespass), replevin and landlord-tenant cases where the amount does not exceed $25,000 (10 Del. C. § 9301). A plaintiff with a larger claim can file in JP Court only by giving up the excess. The JP Court cannot hear personal injury or mental anguish claims. The $25,000 cap does not apply to claims within commercial-lease summary possession actions.",
+  "recent_changes": null,
+  "filing_fee_min": 35,
+  "filing_fee_max": 55,
+  "filing_fee_notes": "Debt and trespass claims: $35 (under $1,000), $40 ($1,000-$5,000), $45 (over $5,000). Replevin: $55. Court service on in-state defendants is included in the filing fee; alias (second attempt) service $20; out-of-state service and special process servers cost extra. Fee page labeled 'Updated 11/05/2021'.",
+  "who_can_sue": "Individuals may appear without a lawyer. An artificial entity (corporation, LLC, etc.) or public body may appear without a lawyer only by filing a Certificate of Representation (Civil Form 50) with the Chief Magistrate under Supreme Court Rule 57, renewed annually ($20 registration fee). Businesses filing five or more cases a year must e-file.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Parties may appear with or without attorneys.",
+  "appeal": "Either party may appeal any final judgment in a civil action to the Court of Common Pleas in the same county within 15 days; the appeal is a new trial (de novo), with damages capped at $25,000 unless more was claimed below (10 Del. C. §§ 9571-9572). A motion for a new trial may be filed in JP Court within 10 days (JP Ct. Civ. R. 59). Landlord-tenant (summary possession) cases instead go to a three-judge JP panel, requested within 5 days.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 15,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "The JP Court uses eFlex e-filing (JP Ct. Civ. R. 79.1; Policy Directive 08-232). E-filing is required for those covered by the directive, including businesses filing five or more cases per year; individuals can file in person or by mail.",
+  "fee_waiver_form": "Application and Affidavit to Proceed in Forma Pauperis (JP Court Civil Form 49)",
+  "fee_waiver_threshold": "The court applies its published 'Income Level for Individuals Eligible for Assistance' guidelines: applicants with income and assets at or below the guidelines are generally approved; above them, the court considers unusual necessary expenses.",
+  "service_methods": "After filing, the court serves the defendant (cost included in the filing fee) unless the plaintiff hires a court-approved special process server. Special procedures and fees apply to out-of-state defendants (the court does not serve them), corporations, insurance companies and the State.",
+  "self_help_url": "https://courts.delaware.gov/help/proceedings/jp_startcivil.aspx",
+  "citation": "10 Del. C. §§ 9301, 9570-9572; Justice of the Peace Court Civil Rules; Del. Supr. Ct. R. 57",
+  "sources": [
+   {
+    "url": "https://delcode.delaware.gov/title10/c093/index.html",
+    "what": "limit_individual, limit_business, limit_notes (§ 9301)",
+    "type": "statute"
+   },
+   {
+    "url": "https://delcode.delaware.gov/title10/c095/sc02/index.html",
+    "what": "appeal, appeal_who, appeal_deadline_days (§§ 9570-9572)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.courts.delaware.gov/Help/fees/jpfees.aspx",
+    "what": "filing_fee_min, filing_fee_max, filing_fee_notes, fee_waiver_form, fee_waiver_threshold",
+    "type": "court_site"
+   },
+   {
+    "url": "https://courts.delaware.gov/help/proceedings/jp_startcivil.aspx",
+    "what": "limit_notes (no personal injury), who_can_sue, service_methods, e-filing for 5+ cases, self_help_url",
+    "type": "court_site"
+   },
+   {
+    "url": "https://courts.delaware.gov/jpcourt/jpcivil.aspx",
+    "what": "appeal (new trial motion 10 days; L/T appeal 5 days), lawyers",
+    "type": "court_site"
+   },
+   {
+    "url": "https://courts.delaware.gov/jpcourt/efiling.aspx",
+    "what": "e_filing, e_filing_notes",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "e_filing"
+  ],
+  "notes": "Lead confirmed: $25,000 in the Justice of the Peace Court. Delaware has no court called 'small claims'; the JP Court is a general limited-jurisdiction civil court. Whether self-represented individuals may (optionally) e-file through eFlex was not confirmed; 'yes_statewide' reflects that the system covers JP civil cases statewide. Fee page last updated 2021; a second JP fee URL returned 'page not found'."
+ },
+ {
+  "state": "District of Columbia",
+  "abbr": "DC",
+  "court_name": "Small Claims and Conciliation Branch, Civil Division, D.C. Superior Court",
+  "limit_individual": 10000,
+  "limit_business": 10000,
+  "limit_notes": "Money-only claims up to $10,000 exclusive of interest, attorney fees, protest fees and costs; exclusive jurisdiction (D.C. Code § 11-1321). No actions affecting an interest in real property. Limit applies to cases filed on or after Dec. 14, 2016 (was $5,000). Counterclaims are not limited to $10,000. If either side requests a jury, the case moves to a Civil Division associate judge.",
+  "recent_changes": null,
+  "filing_fee_min": 5,
+  "filing_fee_max": 45,
+  "filing_fee_notes": "$5 for claims of $500 or less; $10 for over $500 to $2,500; $45 for over $2,500 (Super. Ct. Civ. R. 202). Jury demand $75. Set-off has no fee. Cost of service by certified/registered mail or marshal is added.",
+  "who_can_sue": "Individuals may represent themselves; the clerk will help an individual prepare the statement of claim but not a corporation, partnership or association (D.C. Code § 16-3902(a)). Per the court, a business that files a claim must have a lawyer.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Most individuals proceed without a lawyer; businesses filing claims must be represented by counsel (court small claims page).",
+  "appeal": "Review is only by an application for allowance of an appeal filed in the D.C. Court of Appeals within 3 days of the judgment (D.C. Code §§ 11-721(c), 17-301, 17-307(b)). Three judges consider it; if any one votes to allow, the appeal is heard on the record; if all deny, the judgment is affirmed. The clerk prepares the application for an unrepresented party.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 3,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "eFileDC (efiledcsuperiorcourt.gov, Tyler Technologies) accepts small claims filings; the court encourages self-represented people to e-file. Paper filing in person, by mail, or by drop box also available.",
+  "fee_waiver_form": "Fee Waiver Application (D.C. Superior Court), filed with the statement of claim; available from the Small Claims Clerk's Office or dccourts.gov",
+  "fee_waiver_threshold": "Full waiver required if the litigant receives listed D.C. or federal benefits (e.g., SNAP, SSI, TANF, Medicaid/Alliance, WIC) or monthly income is at or below 200% of federal poverty guidelines; otherwise full or partial waiver on showing of substantial hardship (D.C. Code § 15-712).",
+  "service_methods": "Clerk mails by registered or certified mail (plaintiff pays postage); or service by a private individual with an affidavit of service; or by the marshal (D.C. Code § 16-3902).",
+  "self_help_url": "https://www.dccourts.gov/superior-court/superior-court-divisions/civil-division/small-claims",
+  "citation": "D.C. Code §§ 11-1321 to 11-1323, 16-3901 to 16-3910, 11-721(c), 17-301, 17-307(b), 15-712; Super. Ct. Small Claims Rules; Super. Ct. Civ. R. 202",
+  "sources": [
+   {
+    "url": "https://code.dccouncil.gov/us/dc/council/code/sections/11-1321",
+    "what": "limit_individual, limit_business, limit_notes",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.dccouncil.gov/us/dc/council/code/sections/11-721",
+    "what": "appeal (application for allowance)",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.dccouncil.gov/us/dc/council/code/sections/17-301",
+    "what": "appeal procedure",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.dccouncil.gov/us/dc/council/code/sections/17-307",
+    "what": "appeal_deadline_days (3 days)",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.dccouncil.gov/us/dc/council/code/sections/16-3902",
+    "what": "service_methods, who_can_sue (clerk assistance)",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.dccouncil.gov/us/dc/council/code/sections/15-712",
+    "what": "fee_waiver_threshold",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.dccourts.gov/sites/default/files/rules-superior-court/Civil%20Rule%20202.%20Fees.pdf",
+    "what": "filing_fee_min, filing_fee_max, filing_fee_notes",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.dccourts.gov/superior-court/superior-court-divisions/civil-division/small-claims",
+    "what": "lawyers (business must have lawyer), e_filing, fee_waiver_form, jury, self_help_url",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "fee_waiver_form"
+  ],
+  "notes": "The 3-day statutory deadline for an application for allowance of appeal is very short; check D.C. Court of Appeals rules for any computation details. The exact title/URL of the Superior Court fee waiver form was not confirmed. The business-must-have-a-lawyer rule comes from the court's page; the underlying Small Claims Rule was not read."
+ },
+ {
+  "state": "Florida",
+  "abbr": "FL",
+  "court_name": "County Court, under the Florida Small Claims Rules (no separate small claims court)",
+  "limit_individual": 8000,
+  "limit_business": 8000,
+  "limit_notes": "The Small Claims Rules apply to county court civil actions for money or property up to $8,000 exclusive of costs, interest and attorney fees (Fla. Sm. Cl. R. 7.010(b)). Larger claims within county court jurisdiction proceed under the regular Florida Rules of Civil Procedure.",
+  "recent_changes": null,
+  "filing_fee_min": 55,
+  "filing_fee_max": 300,
+  "filing_fee_notes": "Clerks charge $55 (under $100), $80 ($100-$500), $175 ($500.01-$2,500), $300 ($2,500.01-$8,000) (Miami-Dade Clerk). Statute sets base fees of $50 / $75 / $170 / $295 plus an additional $4 fee (Fla. Stat. § 34.041(1)). Plus $10 per summons issued (§ 34.041(1)(d)) and service costs (sheriff, process server or certified mail).",
+  "who_can_sue": "Individuals; any business entity may be represented at trial by a principal (officer, member, managing member or partner) or an employee authorized in writing by a principal. The court may require a business that buys or collects assigned claims to hire counsel. A non-attorney may not represent a business entity on appeal (Fla. Sm. Cl. R. 7.050, 7.230).",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Parties may have attorneys; if one side has a lawyer, discovery rules change (Rule 7.020).",
+  "appeal": "Either party may appeal under the Florida Rules of Appellate Procedure (Rule 7.230). Since Jan. 1, 2021, appeals from county court final orders go to the district court of appeal, not the circuit court (ch. 2020-61, Laws of Fla.; Fla. Stat. § 26.012(1) no longer lists county-court appeals). Notice of appeal is due within 30 days of rendition (Fla. R. App. P. 9.110(b)). The appeal is on the record, not a new trial.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 30,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "The Florida Courts E-Filing Portal (myflcourtaccess.com) is statewide and open to registered self-represented litigants.",
+  "fee_waiver_form": "Application for Determination of Civil Indigent Status (Florida Clerks of Court Operations Corporation form, filed with the clerk)",
+  "fee_waiver_threshold": "Clerk finds the applicant indigent if income is at or below 200% of federal poverty guidelines (Fla. Stat. § 57.082(2)(a)), subject to other statutory factors.",
+  "service_methods": "As provided by law and Fla. R. Civ. P. 1.070 (sheriff or certified process server), or for Florida residents only, certified mail with return receipt signed by the defendant or someone authorized at the residence or business, mailed by the clerk or attorney (cost extra) (Fla. Sm. Cl. R. 7.070).",
+  "self_help_url": "https://www.miamidade.gov/clerk/small-claims.page",
+  "citation": "Fla. Sm. Cl. R. 7.010-7.341; Fla. Stat. §§ 34.01, 34.041, 57.082; Fla. R. App. P. 9.110",
+  "sources": [
+   {
+    "url": "https://www-media.floridabar.org/uploads/2026/08/2026_01-JUL-Small-Claims-Rules-7-1-2026-1.pdf",
+    "what": "limit_individual, limit_business (Rule 7.010), who_can_sue (7.050), service_methods (7.070), appeal (7.230); compilation dated July 1, 2026",
+    "type": "court_rule"
+   },
+   {
+    "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0000-0099/0034/Sections/0034.041.html",
+    "what": "filing_fee_notes (statutory base fees, $4 add-on, $10 summons)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.miamidade.gov/clerk/small-claims.page",
+    "what": "filing_fee_min, filing_fee_max, limit, self_help_url",
+    "type": "court_site"
+   },
+   {
+    "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0000-0099/0026/Sections/0026.012.html",
+    "what": "appeal (circuit courts no longer list county-court appeals)",
+    "type": "statute"
+   },
+   {
+    "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0000-0099/0057/Sections/0057.082.html",
+    "what": "fee_waiver_threshold, fee_waiver_form",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.myflcourtaccess.com/",
+    "what": "e_filing, e_filing_notes",
+    "type": "court_site"
+   },
+   {
+    "url": "https://coxlawflorida.com/featured/most-county-court-appeals-are-now-directed-to-the-district-court-of-appeal/",
+    "what": "appeal (DCA routing since Jan. 1, 2021; 30-day deadline) - lead only",
+    "type": "secondary"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "appeal_deadline_days",
+   "fee_waiver_form"
+  ],
+  "notes": "Small claims in Florida is a set of procedural rules in county court, not a separate court. Clerk fees ($55/$80/$175/$300) are $1 higher than the statute's base-plus-$4 ($54/$79/$174/$299); the extra $1 may be another statutory add-on - worth a human check. The Florida Bar appellate rules PDF could not be downloaded, so the 30-day deadline (Fla. R. App. P. 9.110(b)) and DCA routing rely on a secondary lead plus the change to § 26.012. Fla. Stat. § 34.017 still refers to judgments 'appealable to the circuit court' (legacy wording). Rules 7.010 and 7.020 were amended effective Jan. 1, 2026 (SC2025-1254) but the $8,000 limit is unchanged in the July 1, 2026 compilation. No statewide judiciary self-help page for small claims was found (flcourts.gov page returned not found); a county clerk page is used."
+ },
+ {
+  "state": "Georgia",
+  "abbr": "GA",
+  "court_name": "Magistrate Court (general civil limit; often called small claims court)",
+  "limit_individual": 15000,
+  "limit_business": 15000,
+  "limit_notes": "Magistrate courts hear civil claims (including garnishment and attachment) where exclusive jurisdiction is not in superior court and the amount or property value does not exceed $15,000 (O.C.G.A. § 15-10-2(5)); they also hear dispossessory (eviction) cases. No jury trials (§ 15-10-41(a)). The Civil Practice Act does not apply (§ 15-10-42). Some counties recommend or require mediation. A corporate defendant must be sued in the county of its registered agent.",
+  "recent_changes": null,
+  "filing_fee_min": 45,
+  "filing_fee_max": 60,
+  "filing_fee_notes": "Fees vary by county. The Attorney General's consumer page says the filing fee, which includes service on one defendant, ranges from about $45 to $55, plus about $25-$35 per additional defendant. Gwinnett County Magistrate Court charges $60 filing plus $50 sheriff service per defendant ($110 total for one defendant).",
+  "who_can_sue": "Any person or business may file in their own name, with or without an attorney (AG consumer page). Detailed rules for business representation were not confirmed.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Parties may appear with or without an attorney (O.C.G.A. § 15-10-43 notice; AG consumer page).",
+  "appeal": "Either party may appeal to the state court or superior court of the county for a new trial (de novo), where a jury may be requested (O.C.G.A. § 15-10-41(b)). Appeals must be filed within 30 days of the decision; the appellate court charges a filing fee and accrued magistrate costs must be paid. No appeal from a default judgment; review of those is by certiorari.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 30,
+  "e_filing": "some_courts",
+  "e_filing_notes": "Many county magistrate courts accept e-filing (e.g., Gwinnett via eFileGA, Chatham); there is no single statewide system for magistrate courts.",
+  "fee_waiver_form": "Affidavit of indigence (pauper's affidavit), available from the county magistrate court",
+  "fee_waiver_threshold": "Judge's discretion",
+  "service_methods": "Personal service, leaving a copy at the defendant's home with a resident of suitable age and discretion, or delivery to an authorized agent, by any official or person authorized to serve process in superior court, a constable, or a person specially appointed; service outside the county by second original (O.C.G.A. § 15-10-43(b)). Defendant has 30 days to answer, plus 15 days to open default by paying costs.",
+  "self_help_url": "https://consumer.georgia.gov/consumer-topics/magistrate-court",
+  "citation": "O.C.G.A. §§ 15-10-2(5), 15-10-40 to 15-10-54 (esp. 15-10-41, 15-10-43); O.C.G.A. § 5-3-20",
+  "sources": [
+   {
+    "url": "https://www.gwinnettcourts.com/magistrate/civil-fifa",
+    "what": "limit_individual, limit_business (statute text of § 15-10-2(5)), appeal (§ 15-10-41), service_methods (§ 15-10-43), e_filing (eFileGA)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.gwinnettcourts.com/magistrate/fees",
+    "what": "filing_fee_max, filing_fee_notes (Gwinnett)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://consumer.georgia.gov/consumer-topics/magistrate-court",
+    "what": "filing_fee_min, filing_fee_notes, who_can_sue, lawyers, appeal_deadline_days, self_help_url (Georgia AG Consumer Protection Division)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://courts.chathamcountyga.gov/Magistrate",
+    "what": "e_filing (Chatham e-filing)",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "filing_fee_min",
+   "filing_fee_max",
+   "who_can_sue",
+   "fee_waiver_form",
+   "fee_waiver_threshold"
+  ],
+  "notes": "Georgia has no separate small claims court; the Magistrate Court's general civil limit ($15,000) serves that role. Statute text was read from Gwinnett County's official court site (Georgia's official code is hosted by LexisNexis and was not fetched). Fee conflict: the AG page's $45-$55 (including service) is lower than Gwinnett's $60 + $50 service - fees vary by county and the AG range may be outdated. The 30-day appeal deadline comes from the AG page; O.C.G.A. § 5-3-20 was not read. The AG page is from the state Attorney General, not the judiciary."
+ },
+ {
+  "state": "Hawaii",
+  "abbr": "HI",
+  "court_name": "Small Claims Division of the District Court",
+  "limit_individual": 5000,
+  "limit_business": 5000,
+  "limit_notes": "$5,000 for money claims (including loan, car repair, car accident and landlord damage/back-rent claims) and for return of leased or rented personal property worth less than $5,000. No dollar limit for tenant claims for return of a residential security deposit. Counterclaims up to $40,000 are heard in the regular district court.",
+  "recent_changes": null,
+  "filing_fee_min": 35,
+  "filing_fee_max": 35,
+  "filing_fee_notes": "$35 filing fee; service costs extra. Fee, service costs and out-of-pocket costs may be added to the judgment.",
+  "who_can_sue": null,
+  "lawyers_allowed": "limited",
+  "lawyers_notes": "A party may be represented by an attorney, but attorney's fees generally cannot be awarded. Attorneys cannot appear for the landlord or tenant in security deposit disputes unless the attorney is the landlord or tenant representing themselves.",
+  "appeal": "No right to appeal a small claims decision; the judge decides at the end of the trial.",
+  "appeal_who": "none",
+  "appeal_deadline_days": null,
+  "e_filing": "no",
+  "e_filing_notes": "Cases must be filed in person at the District Court Legal Documents Branch on the island.",
+  "fee_waiver_form": null,
+  "fee_waiver_threshold": null,
+  "service_methods": "Plaintiff serves by certified mail restricted delivery, or by in-person delivery to the defendant or a resident of the defendant's home, by a civil process server, by any non-party over age 17, or by the plaintiff with a witness.",
+  "self_help_url": "https://www.courts.state.hi.us/self-help/small_claims_info",
+  "citation": "Haw. Rev. Stat. §§ 633-27 to 633-36; Rules of the Small Claims Division of the District Courts",
+  "sources": [
+   {
+    "url": "https://www.courts.state.hi.us/self-help/small_claims_info",
+    "what": "limit_individual, limit_notes (security deposits unlimited), filing fee, lawyers, appeal (none), e_filing (in person), service_methods",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.courts.state.hi.us/small_claims",
+    "what": "limit_notes (leased property, $40,000 counterclaims)",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "who_can_sue",
+   "fee_waiver_form",
+   "fee_waiver_threshold",
+   "citation"
+  ],
+  "notes": "The Hawaii Legislature's statute site (capitol.hawaii.gov) blocked automated access, so HRS ch. 633 text was not read; facts come from the Judiciary's self-help pages. A 2022 bill (HB2223) to raise the limit to $10,000 apparently did not pass; the Judiciary still states $5,000. Some secondary sites wrongly say attorneys are banned outright. Fee waiver (in forma pauperis) procedure for small claims not found on official pages."
+ },
+ {
+  "state": "Idaho",
+  "abbr": "ID",
+  "court_name": "Small Claims Department of the Magistrate Division of District Court",
+  "limit_individual": 15000,
+  "limit_business": 15000,
+  "limit_notes": "Recovery of money where each claim does not exceed $15,000, or personal property worth up to $15,000; no punitive damages or damages for pain and suffering (Idaho Code § 1-2301, as amended effective July 1, 2026). File in the county where the defendant lives or the claim arose. No jury (§ 1-2315).",
+  "recent_changes": "SB 1330 (2026 Idaho Sess. Laws ch. 196), signed March 2026, raised the limit from $5,000 to $15,000 for both money and personal property, effective July 1, 2026 (emergency clause). It also amended § 1-2311 to remove the fixed $25 attorney-fee amount on appeal (fee now 'as provided in section 12-120(6)').",
+  "filing_fee_min": 69,
+  "filing_fee_max": 69,
+  "filing_fee_notes": "$69 filing fee per the Court Assistance Office plaintiff instructions dated 07/01/2026 (statute § 1-2303(3) lists a $33 component; other statutory surcharges make up the rest). Service costs extra (clerk certified mail, sheriff, or process server). Appeal filing fee $81.",
+  "who_can_sue": "Individuals and businesses. A business organization (corporation, partnership, LLC, sole proprietorship, etc.) must be represented by an owner of a substantial interest or a non-attorney employee. Assignees, including licensed collection agencies, may sue, but an attorney-assignee may not appear. Government entities may be parties but cannot appear through an attorney (Idaho Code §§ 1-2306, 1-2307).",
+  "lawyers_allowed": "no",
+  "lawyers_notes": "No attorney may appear for a party at trial, pretrial or post-trial motions; attorneys may give advice and help prepare exhibits, and may appear in post-judgment collection. An attorney who is a party may represent themselves (except on assigned claims) (§ 1-2307). Lawyers may be used on appeal.",
+  "appeal": "Either party may appeal within 30 days from entry of judgment to a lawyer magistrate (not the one who decided the case); the appeal is a new trial (trial de novo) in the county where the claim was filed. Statutory $20 appeal fee goes to the court technology fund (court instructions list $81 total). If the appellant loses again, they pay the prevailing party's attorney fee under § 12-120(6) (Idaho Code §§ 1-2311, 1-2312).",
+  "appeal_who": "both",
+  "appeal_deadline_days": 30,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "Forms can be prepared and e-filed through Guide & File (guideandfile.idaho.gov). Court instructions say businesses must e-file 'in a county where e-filing is available'.",
+  "fee_waiver_form": "Fee waiver forms from the Idaho Court Assistance Office (courtselfhelp.idaho.gov)",
+  "fee_waiver_threshold": "Court finds the person indigent after an informal inquiry based on an affidavit of income, assets and expenses; no fixed income test in statute (Idaho Code § 31-3220).",
+  "service_methods": "Someone 18+ who is not a party must serve: clerk by certified or registered mail, return receipt requested, signed by the defendant (on plaintiff's request and fee); sheriff; professional process server; or any adult non-party. Affidavit of service usually due within 30 days (Idaho Code § 1-2304; CAO SC 1-1b).",
+  "self_help_url": "https://courtselfhelp.idaho.gov/docs/instructions/CAO_SC_Instr_1-1.pdf",
+  "citation": "Idaho Code §§ 1-2301 to 1-2315; § 31-3220",
+  "sources": [
+   {
+    "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2301",
+    "what": "limit_individual, limit_business, limit_notes (current text, history 'am. 2026, ch. 196')",
+    "type": "statute"
+   },
+   {
+    "url": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/legislation/S1330E1.pdf",
+    "what": "recent_changes (SB 1330 as amended; effective July 1, 2026 emergency clause)",
+    "type": "statute"
+   },
+   {
+    "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2311",
+    "what": "appeal, appeal_deadline_days",
+    "type": "statute"
+   },
+   {
+    "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2303",
+    "what": "filing_fee_notes ($33 statutory component)",
+    "type": "statute"
+   },
+   {
+    "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2304",
+    "what": "service_methods (mail)",
+    "type": "statute"
+   },
+   {
+    "url": "https://legislature.idaho.gov/statutesrules/idstat/Title1/T1CH23/SECT1-2307",
+    "what": "who_can_sue, lawyers_allowed, lawyers_notes, appeal (trial de novo)",
+    "type": "statute"
+   },
+   {
+    "url": "https://legislature.idaho.gov/statutesrules/idstat/Title31/T31CH32/SECT31-3220",
+    "what": "fee_waiver_threshold",
+    "type": "statute"
+   },
+   {
+    "url": "https://courtselfhelp.idaho.gov/docs/instructions/CAO_SC_Instr_1-1.pdf",
+    "what": "filing_fee_min, filing_fee_max ($69), appeal fee $81, service_methods, e_filing, self_help_url (instructions dated 07/01/2026)",
+    "type": "form"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "e_filing",
+   "fee_waiver_form"
+  ],
+  "notes": "Lead confirmed: SB 1330 raised the limit to $15,000 effective July 1, 2026; that is the current limit as of this check. Many secondary sites still show $5,000. Idaho's e-filing (iCourt/Guide & File) is believed to be statewide, but the court instructions still say 'where e-filing is available', so 'yes_statewide' is unconfirmed. The breakdown of the $69 filing fee beyond the $33 in § 1-2303 was not checked."
+ }
 ]

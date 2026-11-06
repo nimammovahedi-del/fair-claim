@@ -1,38 +1,131 @@
 ---
 import Site from "../../layouts/Site.astro";
 import SideMenu from "../../components/SideMenu.astro";
-import { steps } from "../../lib/steps";
+import Term from "../../components/Term.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import { steps, alternatives, hiddenCosts } from "../../lib/steps";
+import { caStatewide } from "../../lib/data";
+
+// California's "defendant's claim" rule, used as a cited example of a counterclaim.
+const dc = caStatewide.defendants_claim as { sources?: string[] } | undefined;
+const dcSource = dc?.sources?.[0];
+
+const stepLinks: Record<string, { href: string; label: string }[]> = {
+  demand: [{ href: "/demand-letter/", label: "Demand-letter tool" }],
+  file: [{ href: "/states/", label: "Your state's limit, fee and claim form" }],
+  hearing: [{ href: "/sources/#collecting", label: "What studies found about mediation and payment" }],
+  collect: [
+    { href: "/worth-it/", label: "Cost calculator: costs, time and the chance of getting paid" },
+    { href: "/sources/#collecting", label: "What studies found about getting paid" },
+  ],
+};
+// Glossary terms people meet at each step (shown as tap-for-definition links).
+const stepTerms: Record<string, string[]> = {
+  demand: ["demand-letter", "statute-of-limitations", "mediation"],
+  file: ["plaintiff", "defendant", "venue", "filing-fee", "fee-waiver", "small-claims-limit"],
+  serve: ["service-of-process", "process-server", "substituted-service", "proof-of-service"],
+  hearing: ["hearing", "continuance", "counterclaim", "default-judgment", "judgment", "appeal"],
+  collect: ["judgment-debtor", "writ-of-execution", "wage-garnishment", "bank-levy", "exemption", "judgment-proof", "satisfaction-of-judgment"],
+};
 ---
-<Site title="The five steps" description="How small claims court works, from demand letter to collecting your money.">
+<Site
+  title="How small claims court works"
+  description="Options to weigh before suing, then the five steps of a small claims case: ask in writing, file, serve, the hearing, and collecting."
+>
+  <Breadcrumb items={[{ label: "How it works" }]} />
   <div class="narrow">
-    <p class="eyebrow">How small claims works</p>
-    <h1>The five steps</h1>
+    <p class="eyebrow">How it works</p>
+    <h1>How small claims court works</h1>
     <p class="lede">
-      This is the general path in every state. The details — limits, fees, forms, deadlines — change from state to
-      state, so each step points you to your state's page for the cited rules.
+      The general path is the same in every state: ask in writing, file, serve the papers, go to the hearing, and
+      collect. Limits, fees and deadlines differ, so each step points to your state's page for the cited rules.
     </p>
+    <p>Court is one way to settle a money dispute, not the only one. The first section covers the others, and what a case can cost besides the fees.</p>
   </div>
 
   <div class="with-sidemenu">
-    <SideMenu title="The five steps" items={steps.map((s) => ({ href: `#${s.slug}`, label: `${s.n}. ${s.title}` }))} />
-    <ol class="steps">
-      {steps.map((s) => (
-        <li id={s.slug}>
-          <div class="step-num" aria-hidden="true">{s.n}</div>
-          <div class="narrow">
-            <h2><span class="sr-only">Step {s.n}: </span>{s.title}</h2>
-            <div class="step-meta">{s.time} · {s.cost}</div>
-            {s.body.map((p) => <p>{p}</p>)}
-            <h3>Do this</h3>
-            <ul>{s.doThis.map((d) => <li>{d}</li>)}</ul>
-            <h3>Common mistakes</h3>
-            <ul>{s.mistakes.map((d) => <li>{d}</li>)}</ul>
-            {s.slug === "demand" && <p><a class="btn" href="/demand-letter/">Write your demand letter</a></p>}
-            {s.slug === "file" && <p><a class="link-arrow" href="/states/">Find your state's limit, fee and form</a></p>}
-            {s.slug === "collect" && <p><a class="link-arrow" href="/worth-it/">Check whether it's worth it before you file</a></p>}
+    <SideMenu
+      title="On this page"
+      items={[{ href: "#before-you-decide", label: "Before you decide" }, ...steps.map((s) => ({ href: `#${s.slug}`, label: `${s.n}. ${s.title}` }))]}
+    />
+    <div>
+      <section class="decide" id="before-you-decide" aria-labelledby="decide-title">
+        <h2 id="decide-title">Before you decide</h2>
+        <p class="narrow">
+          Small claims court is designed for people without lawyers. It still takes time, money and energy, and a win doesn't guarantee you'll be paid. Here are the other routes people take,
+          and the costs that don't show up on a fee schedule.
+        </p>
+
+        <h3>Other options</h3>
+        <ul class="option-grid">
+          {alternatives.map((o) => (
+            <li class="card tinted">
+              <h4>{o.title}</h4>
+              <p>{o.text}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div class="grid cols-2 decide-pair">
+          <div>
+            <h3>What a case costs besides the fee</h3>
+            <ul>{hiddenCosts.map((c) => <li>{c}</li>)}</ul>
           </div>
-        </li>
-      ))}
-    </ol>
+          <div>
+            <h3>The other side can make a claim too</h3>
+            <p>
+              The person you sue may be able to file their own claim against you in the same case. This is often
+              called a counterclaim. If the judge agrees with them, you could end up owing money.
+            </p>
+            <p>
+              In California, for example, it's called a defendant's claim. It has the same limits as yours, and it
+              doesn't have to be about the same dispute.{" "}
+              <span class="cite">
+                {dcSource ? <a href={dcSource} rel="noopener">Cal. Code Civ. Proc. § 116.360(a)</a> : <span>Cal. Code Civ. Proc. § 116.360(a)</span>}
+                {caStatewide.date_checked && <span>checked {caStatewide.date_checked}</span>}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <p class="callout-title">Winning and getting paid are different things</p>
+          <p>
+            A judgment says you're owed money. It doesn't make the other side pay, and studies of small claims courts
+            found many winners collected little or nothing.{" "}
+            <a href="/sources/#collecting">What the studies found</a>
+          </p>
+        </div>
+      </section>
+
+      <h2 class="steps-heading" id="the-steps">The five steps</h2>
+      <ol class="steps" aria-labelledby="the-steps">
+        {steps.map((s) => (
+          <li id={s.slug}>
+            <div class="step-num" aria-hidden="true">{s.n}</div>
+            <div class="narrow">
+              <h3 class="step-title"><span class="sr-only">Step {s.n}: </span>{s.title}</h3>
+              <dl class="step-meta">
+                <div><dt>Time</dt><dd>{s.time}</dd></div>
+                <div><dt>Cost</dt><dd>{s.cost}</dd></div>
+              </dl>
+              {s.body.map((p) => <p>{p}</p>)}
+              {stepTerms[s.slug] && (
+                <p class="hint">Words to know: {stepTerms[s.slug].map((t, i) => <>{i > 0 && " · "}<Term slug={t} /></>)}</p>
+              )}
+              <h4>What to do</h4>
+              <ul>{s.doThis.map((d) => <li>{d}</li>)}</ul>
+              <h4>Common mistakes</h4>
+              <ul>{s.mistakes.map((d) => <li>{d}</li>)}</ul>
+              {stepLinks[s.slug] && (
+                <ul class="step-links">
+                  {stepLinks[s.slug].map((l) => <li><a class="link-arrow" href={l.href}>{l.label}</a></li>)}
+                </ul>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
   </div>
 </Site>

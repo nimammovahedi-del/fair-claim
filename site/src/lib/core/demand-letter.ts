@@ -5,7 +5,8 @@
  * Wording rules (keep when editing):
  *  - Calm and factual. No threats of arrest, criminal charges, or reporting to anyone
  *    (that can be illegal, and it weakens the letter in front of a judge).
- *  - Only mention court as the next step the sender is actually allowed to take.
+ *  - Only mention court as the next step the sender is actually allowed to take, and say "may", not "will".
+ *    The caller can leave the court sentence out entirely (`mentionCourt: false`).
  *  - State-specific legal lines are passed in by the caller from cited data (`legalNotes`),
  *    never hard-coded here.
  */
@@ -42,6 +43,8 @@ export interface DemandLetterInput {
   legalNotes?: string[];
   /** Note an offer to talk/mediate, which courts like to see. */
   offerToDiscuss?: boolean;
+  /** Say that the sender may file in small claims court if unpaid. Default true. */
+  mentionCourt?: boolean;
 }
 
 export interface DemandLetter {
@@ -110,11 +113,13 @@ export function buildDemandLetter(i: DemandLetterInput): DemandLetter {
     );
   }
 
-  paragraphs.push(
-    `If I do not receive payment or hear from you by then, I intend to file a claim${
-      i.courtPhrase?.trim() ? ` in ${i.courtPhrase.trim()}` : " in small claims court"
-    } to recover the full amount, plus court costs allowed by law.`,
-  );
+  if (i.mentionCourt !== false) {
+    paragraphs.push(
+      `If I do not receive payment or hear from you by then, I may file a claim${
+        i.courtPhrase?.trim() ? ` in ${i.courtPhrase.trim()}` : " in small claims court"
+      } to recover the amount owed, plus any court costs allowed by law.`,
+    );
+  }
 
   const closing = ["Sincerely,", "", "", i.sender.name];
   const subject = SUBJECTS[i.kind](i);

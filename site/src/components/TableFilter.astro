@@ -1,0 +1,63 @@
+---
+// A search box that filters the rows of a table on this page. No libraries; works with the keyboard.
+// <TableFilter table="states-table" label="Find a state" noun="states" />
+// Give each <tr> in the table's <tbody> a data-filter="words to match" attribute (lowercase).
+// Optional: an element with data-filter-empty="<table id>" (and `hidden`) shows when nothing matches.
+// Without JavaScript the box stays hidden and the full table shows.
+interface Props {
+  table: string;
+  label: string;
+  /** Plural noun for the count line, e.g. "states" or "counties". */
+  noun: string;
+  hint?: string;
+  placeholder?: string;
+}
+const { table, label, noun, hint, placeholder } = Astro.props;
+const id = `${table}-filter`;
+---
+<div class="table-filter no-print" data-table-filter={table} data-noun={noun} hidden>
+  <div class="field">
+    <label for={id}>{label}</label>
+    <input id={id} type="search" autocomplete="off" spellcheck="false" placeholder={placeholder} aria-describedby={hint ? `${id}-hint` : undefined} aria-controls={table} />
+    {hint && <span class="hint" id={`${id}-hint`}>{hint}</span>}
+  </div>
+  <p class="table-filter-count" role="status" aria-live="polite" aria-atomic="true"></p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-table-filter]").forEach((box) => {
+    const table = document.getElementById(box.dataset.tableFilter || "");
+    const input = box.querySelector<HTMLInputElement>("input");
+    const count = box.querySelector<HTMLElement>(".table-filter-count");
+    if (!table || !input || !count) return;
+    const rows = Array.from(table.querySelectorAll<HTMLTableRowElement>("tbody tr[data-filter]"));
+    const empty = document.querySelector<HTMLElement>(`[data-filter-empty="${table.id}"]`);
+    const noun = box.dataset.noun || "rows";
+    box.hidden = false;
+
+    let timer: number | undefined;
+    const apply = () => {
+      const q = input.value.trim().toLowerCase();
+      let shown = 0;
+      for (const r of rows) {
+        const match = !q || (r.dataset.filter || "").includes(q);
+        r.hidden = !match;
+        if (match) shown++;
+      }
+      if (empty) empty.hidden = shown > 0;
+      // Announce after typing pauses, so screen readers hear one count.
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        count.textContent = q ? `Showing ${shown} of ${rows.length} ${noun}.` : `Showing all ${rows.length} ${noun}.`;
+      }, q ? 400 : 0);
+    };
+    input.addEventListener("input", apply);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && input.value) {
+        input.value = "";
+        apply();
+      }
+    });
+    count.textContent = `Showing all ${rows.length} ${noun}.`;
+  });
+</script>

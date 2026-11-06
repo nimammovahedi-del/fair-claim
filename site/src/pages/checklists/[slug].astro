@@ -1,0 +1,30 @@
+---
+import Site from "../../layouts/Site.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import ChecklistDoc from "../../components/ChecklistDoc.astro";
+import { states, type StateRow } from "../../lib/data";
+
+export function getStaticPaths() {
+  return states.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+const { s } = Astro.props as { s: StateRow };
+const nUnverified = s.unverified?.length ?? 0;
+---
+<Site title={`Checklists: ${s.state}`} description={`Printable small claims checklists for ${s.state}, with the state's cited limit, fees, service rules and appeal deadline.`}>
+  <Breadcrumb items={[{ href: "/checklists/", label: "Checklists" }, { label: s.state }]} />
+  <div class="narrow checklist-page">
+    <p class="eyebrow no-print">Checklists</p>
+    <h1>Small claims checklists: {s.state}</h1>
+    <p class="lede">
+      Six short lists, with {s.state}'s rules filled in from our research, checked {s.date_checked}.{" "}
+      <span class="no-print">Full details and sources are on the <a href={`/states/${s.slug}/`}>{s.state} page</a>.</span>
+    </p>
+    {nUnverified > 0 && (
+      <p class="hint">
+        <span class="badge unverified">unverified</span> marks a rule we haven't yet confirmed against the law or the
+        court's own site. Check those with the court.
+      </p>
+    )}
+    <ChecklistDoc state={s} />
+  </div>
+</Site>

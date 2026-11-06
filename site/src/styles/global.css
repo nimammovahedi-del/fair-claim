@@ -11,6 +11,7 @@
  *   3. Tokens (dark)   7. Footer                     12. Tables, facts list
  *   4. Base            8. Buttons, links             13. Dialogs (display settings, tool notice)
  *   5. Layout          9. Cards, tags, badges, cite  14. Page blocks (hero, steps, calculator, letter)
+ *                                                    14b. Page additions (calculator, letter, states)
  *                                                    15. Print, reduced motion
  */
 
@@ -68,6 +69,8 @@
   --paper: #fffefa;
   --paper-ink: #1a1a1a;
   --paper-border: #d8d4c8;
+  --paper-mark: #fbe3a6; /* unfilled [placeholder] in the letter: paper-ink on it is 13.8:1 */
+  --paper-mark-line: #8a5d00; /* its dashed outline: 4.6:1 on paper-mark */
 
   /* Shadows */
   --shadow-1: 0 1px 2px rgba(20, 22, 28, 0.06), 0 1px 1px rgba(20, 22, 28, 0.04);
@@ -208,6 +211,8 @@
     --paper: #f7f5ef;
     --paper-ink: #1a1a1a;
     --paper-border: #4a4f58;
+    --paper-mark: #fbe3a6; /* the paper stays light, so these match the light theme */
+    --paper-mark-line: #8a5d00;
 
     --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.25);
     --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.3);
@@ -2085,6 +2090,449 @@ dialog.modal[open]::backdrop {
   border-bottom: 0;
 }
 
+/* ------------------------------------------------------------------ 14b. Page additions
+   Shared bits for the calculator, the letter, the state/county pages and the filterable tables. */
+
+/* Lists of plain links (side cards, 404). Each link gets a comfortable target. */
+.link-list,
+.on-page ul,
+.source-list,
+.step-links,
+.contact-list,
+.loc-list,
+.option-grid,
+.key-points {
+  list-style: none;
+  padding: 0;
+}
+.link-list li,
+.on-page li {
+  margin: 0;
+  padding: var(--space-half) 0;
+}
+.link-list a,
+.on-page a {
+  display: inline-block;
+  min-height: 24px;
+}
+.on-page h2 {
+  margin-bottom: var(--space-half);
+}
+/* Footer links: at least 24px tall targets (WCAG 2.5.8) */
+.footer-links a,
+.footer-links .link-button,
+.footer-bottom a {
+  display: inline-block;
+  min-height: 24px;
+}
+
+/* Required-field marker and numbered legends */
+.req {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  color: var(--muted);
+}
+.has-error .req {
+  color: inherit;
+}
+.legend-num {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-right: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-heavy);
+  font-variant-numeric: tabular-nums;
+  vertical-align: 1px;
+}
+/* A nested group of checkboxes inside a form grid */
+fieldset.choices {
+  border: 0;
+  padding: 0;
+}
+fieldset.choices legend {
+  font-size: var(--text-md);
+  line-height: var(--lh-md);
+  font-weight: var(--weight-medium);
+  margin-bottom: var(--space-1);
+}
+textarea.short {
+  min-height: 4.5rem;
+}
+
+/* Money inputs with a "$" in front */
+.input-affix {
+  position: relative;
+}
+.input-affix .affix {
+  position: absolute;
+  left: var(--space-1h);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+.input-affix input {
+  padding-left: 28px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Filterable tables */
+.table-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  align-items: flex-end;
+  margin: var(--space-3) 0 var(--space-1);
+}
+.table-filter[hidden] {
+  display: none;
+}
+.table-filter .field {
+  flex: 1 1 18rem;
+  max-width: 26rem;
+}
+.table-filter-count {
+  margin: 0 0 var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+tr[hidden] {
+  display: none !important;
+}
+td .badge,
+th .badge {
+  margin-left: 6px;
+}
+.data-table tbody th[scope="row"] {
+  font-weight: var(--weight-bold);
+  white-space: nowrap;
+}
+th.cell-text {
+  font-weight: var(--weight-regular);
+}
+.table-scroll caption {
+  border-bottom: 1px solid var(--border);
+}
+@media (max-width: 47.99em) {
+  .table-stack caption {
+    display: block;
+    width: 100%;
+  }
+  .table-stack td .badge {
+    margin-left: var(--space-1);
+  }
+  .data-table tbody th[scope="row"] a {
+    display: inline-block;
+    min-height: 24px;
+  }
+}
+
+/* "Unverified" explainer: the badge gets an outline so it still reads as a label on the yellow box */
+.unverified-note .badge,
+.callout.warning .badge.unverified {
+  box-shadow: inset 0 0 0 1px var(--warning-border);
+  margin-right: var(--space-half);
+}
+.unverified-note p {
+  margin: 0;
+}
+
+/* Calculator */
+.calc-howto {
+  margin: 0 0 var(--space-3);
+}
+.range-gap {
+  margin-top: var(--space-3);
+}
+.limit-out {
+  font-weight: var(--weight-heavy);
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
+  font-variant-numeric: tabular-nums;
+}
+.chip {
+  min-height: 32px;
+}
+.chip[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.chip[aria-pressed="true"]:hover {
+  background: var(--accent-hover);
+}
+.result-title {
+  font-size: var(--text-h3);
+  line-height: var(--lh-h3);
+  margin: 0 0 var(--space-1);
+}
+.result .outcome {
+  font-weight: var(--weight-heavy);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: var(--ink);
+  margin: 0 0 var(--space-1);
+}
+.result-summary {
+  color: var(--ink-2);
+}
+.result.is-stale .ledger td {
+  color: var(--muted);
+}
+.ledger caption {
+  padding: 0 0 var(--space-half);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--muted);
+  border: 0;
+}
+.ledger th {
+  text-align: left;
+  font-weight: var(--weight-regular);
+  padding: var(--space-1) 0;
+  border-bottom: 1px dashed var(--border-strong);
+}
+.ledger tr.subtotal th,
+.ledger tr.subtotal td,
+.ledger tr.total th {
+  font-weight: var(--weight-bold);
+}
+.ledger tr.total th {
+  border-bottom: 0;
+  border-top: 2px solid var(--ink);
+}
+.caveats {
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+}
+.caveats h3 {
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
+  margin: 0 0 var(--space-1);
+}
+.caveats ul {
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  color: var(--ink-2);
+}
+.result-links {
+  margin: var(--space-2) 0 0;
+}
+/* On wide screens the result panel stays in view beside the form; if it's taller than the window,
+   it scrolls on its own (it's focusable, so keyboard users can scroll it too). */
+@media (min-width: 62em) {
+  .calc .result {
+    max-height: calc(100dvh - 2 * var(--space-3));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+/* Demand letter */
+.key-points li {
+  position: relative;
+  padding-left: var(--space-3);
+}
+.key-points li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.65em;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+.key-points .cite {
+  display: inline;
+}
+.error-summary ul {
+  margin: 0;
+}
+.error-summary:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.preview-head h2 {
+  font-size: var(--text-h3);
+  line-height: var(--lh-h3);
+  margin: 0 0 var(--space-half);
+}
+.result-title:focus,
+.preview-head h2:focus {
+  outline: none;
+}
+.letter-side .actions {
+  margin: var(--space-2) 0;
+}
+.paper {
+  overflow-wrap: anywhere;
+}
+mark.ph {
+  background: var(--warning-bg);
+  color: var(--warning-ink);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+.paper mark.ph {
+  background: var(--paper-mark);
+  color: var(--paper-ink);
+  outline: 1px dashed var(--paper-mark-line);
+}
+@media (min-width: 62em) {
+  .jump-link {
+    display: none;
+  }
+}
+@media (max-width: 29.99em) {
+  .paper {
+    font-size: 1rem;
+    line-height: 1.55;
+    min-height: 0;
+  }
+  .letter-side .actions .btn {
+    flex: 1 1 calc(50% - var(--space-1));
+  }
+}
+
+/* State and county pages */
+.state-head .cite {
+  margin-bottom: var(--space-3);
+}
+.in-short {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: inset var(--bar-width) 0 0 var(--accent);
+  padding: var(--space-3) var(--space-3) var(--space-2) calc(var(--space-3) + var(--bar-width));
+  margin-bottom: var(--space-4);
+}
+.in-short h2 {
+  margin-top: 0;
+  font-size: var(--text-h3);
+  line-height: var(--lh-h3);
+}
+.summary-list {
+  list-style: none;
+  padding: 0;
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
+}
+.summary-list li {
+  margin: 0;
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid var(--border);
+}
+.summary-list li:last-child {
+  border-bottom: 0;
+}
+.state-main > section + section,
+.state-main > .callout + section {
+  margin-top: var(--space-6);
+}
+.ca-detail h2 {
+  margin-top: var(--space-6);
+}
+.source-list li {
+  margin: 0;
+  padding: var(--space-1h) 0;
+  border-bottom: 1px solid var(--border);
+}
+.source-list li:last-child {
+  border-bottom: 0;
+}
+.source-list .tag {
+  margin-left: var(--space-1);
+  vertical-align: 1px;
+}
+.help-grid {
+  margin-top: var(--space-2);
+}
+.help-card h3 {
+  margin-bottom: var(--space-1h);
+}
+.contact-list li {
+  margin: 0 0 var(--space-half);
+}
+.contact-label {
+  display: inline-block;
+  min-width: 4.5rem;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.loc-list .loc {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.sol-out {
+  margin-top: var(--space-3);
+}
+
+/* How it works: "Before you decide" and the step list */
+.decide {
+  margin-bottom: var(--space-8);
+}
+.decide > h2 {
+  margin-top: 0;
+}
+.option-grid {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  margin: var(--space-2) 0 var(--space-4);
+}
+.option-grid li {
+  margin: 0;
+}
+.option-grid h4 {
+  margin: 0 0 var(--space-1);
+}
+.option-grid p {
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  color: var(--ink-2);
+}
+.decide-pair h3 {
+  margin-top: var(--space-2);
+}
+.steps-heading {
+  margin-top: 0;
+}
+.steps h3.step-title {
+  font-size: var(--text-h3);
+  line-height: var(--lh-h3);
+  margin: var(--space-1) 0;
+}
+.steps h4 {
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
+  margin: var(--space-3) 0 var(--space-1);
+}
+dl.step-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-half) var(--space-3);
+}
+dl.step-meta > div {
+  display: flex;
+  gap: var(--space-1);
+}
+dl.step-meta dt {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+dl.step-meta dd {
+  margin: 0;
+}
+.step-links li {
+  margin: var(--space-1) 0 0;
+}
+
 /* ------------------------------------------------------------------ 15. Print + reduced motion */
 @media print {
   body {
@@ -2150,8 +2598,14 @@ dialog.modal[open]::backdrop {
     font-size: 8.5pt;
     color: #555;
   }
-  .page-head {
+  .page-head,
+  .preview-head,
+  .table-filter {
     display: none;
+  }
+  .in-short {
+    box-shadow: none;
+    border: 1px solid #999;
   }
 }
 

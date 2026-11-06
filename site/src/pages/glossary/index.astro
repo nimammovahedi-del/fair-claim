@@ -1,16 +1,115 @@
 ---
-// PLACEHOLDER — to be built by the content agent. Uses the standard Site layout and design-system classes.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import "../../styles/features.css";
+import { glossary, getTerm, glossaryChecked } from "../../lib/glossary";
+
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const groups = letters
+  .map((L) => ({ letter: L, entries: glossary.filter((e) => e.term[0].toUpperCase() === L) }))
+  .filter((g) => g.entries.length > 0);
+const has = new Set(groups.map((g) => g.letter));
+const caCount = glossary.filter((e) => e.ca).length;
 ---
-<Site title="Glossary" description="Plain-English meanings of small claims court words.">
+<Site title="Glossary" description="Plain-English meanings of the words you'll meet in small claims court, with California notes where our research supports them.">
   <Breadcrumb items={[{ label: "Glossary" }]} />
   <div class="narrow">
     <p class="eyebrow">Glossary</p>
-    <h1>Glossary</h1>
-    <p class="lede">Plain-English meanings of the words you'll see on court forms and websites.</p>
-    <div class="callout info">
-      <p>This page is being written. Each state page links to its official self-help site in the meantime.</p>
+    <h1>Small claims words, in plain English</h1>
+    <p class="lede">
+      {glossary.length} words you'll see on court forms and websites, with a short meaning for each. Rules differ by
+      state; {caCount} entries add a California note with its source.
+    </p>
+
+    <div class="glossary-filter" data-js-only>
+      <label for="gloss-filter">Filter the glossary</label>
+      <input id="gloss-filter" type="search" autocomplete="off" spellcheck="false" aria-describedby="gloss-count" placeholder="For example: serve, appeal, fee" />
+    </div>
+    <p class="hint glossary-count" id="gloss-count" aria-live="polite" data-js-only></p>
+
+    <nav aria-label="Jump to a letter">
+      <ul class="letter-index">
+        {letters.map((L) => (
+          <li>{has.has(L) ? <a href={`#letter-${L.toLowerCase()}`} data-letter={L}>{L}</a> : <span aria-hidden="true">{L}</span>}</li>
+        ))}
+      </ul>
+    </nav>
+
+    <p class="hint" id="gloss-none" hidden>No terms match. Try a shorter word, or clear the filter.</p>
+
+    {groups.map((g) => (
+      <section class="glossary-group" aria-labelledby={`letter-${g.letter.toLowerCase()}`} data-group>
+        <h2 id={`letter-${g.letter.toLowerCase()}`}>{g.letter}</h2>
+        <dl class="glossary-list">
+          {g.entries.map((e) => (
+            <div class="gloss" id={e.slug} data-gloss data-text={[e.term, ...(e.aka ?? []), e.def].join(" ").toLowerCase()}>
+              <dt>
+                {e.term}
+                {e.aka && <span class="aka"> · also called {e.aka.join(", ")}</span>}
+              </dt>
+              <dd>
+                <p style="margin:0">{e.def}</p>
+                {e.cite && (
+                  <p class="cite"><a href={e.cite.url} rel={e.cite.url.startsWith("http") ? "noopener" : undefined}>{e.cite.label}</a><span>checked {glossaryChecked}</span></p>
+                )}
+                {e.ca && (
+                  <div class="gloss-ca">
+                    <strong>In California:</strong> {e.ca.text}
+                    <br />
+                    <span class="cite"><a href={e.ca.cite.url} rel="noopener">{e.ca.cite.label}</a><span>checked {glossaryChecked}</span></span>
+                  </div>
+                )}
+                {e.related && e.related.length > 0 && (
+                  <p class="gloss-related">
+                    Related:{" "}
+                    {e.related.map((r, i) => (
+                      <><a href={`#${r}`}>{getTerm(r).term}</a>{i < e.related!.length - 1 ? ", " : ""}</>
+                    ))}
+                  </p>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    ))}
+
+    <div class="callout" style="margin-top: var(--space-6)">
+      <p>
+        These are general meanings, not legal advice. Courts sometimes use these words in narrower ways, and each state
+        has its own forms. Your state's page links to its official self-help site, and the <a href="/about/#not-advice">About page</a>
+        lists free places to ask about your own case.
+      </p>
     </div>
   </div>
 </Site>
+
+<script>
+  const input = document.getElementById("gloss-filter") as HTMLInputElement | null;
+  const count = document.getElementById("gloss-count");
+  const none = document.getElementById("gloss-none");
+  const items = Array.from(document.querySelectorAll<HTMLElement>("[data-gloss]"));
+  const groups = Array.from(document.querySelectorAll<HTMLElement>("[data-group]"));
+  const total = items.length;
+
+  function apply() {
+    const q = (input?.value ?? "").trim().toLowerCase();
+    let shown = 0;
+    for (const it of items) {
+      const match = !q || (it.dataset.text ?? "").includes(q);
+      it.hidden = !match;
+      if (match) shown++;
+    }
+    for (const g of groups) {
+      const any = g.querySelector("[data-gloss]:not([hidden])");
+      g.hidden = !any;
+      const letter = g.querySelector("h2")?.textContent ?? "";
+      const link = document.querySelector<HTMLElement>(`[data-letter="${letter}"]`);
+      if (link) link.style.opacity = any ? "" : "0.4";
+    }
+    if (none) none.hidden = shown > 0;
+    if (count) count.textContent = q ? `Showing ${shown} of ${total} terms` : `${total} terms`;
+  }
+  input?.addEventListener("input", apply);
+  apply();
+</script>

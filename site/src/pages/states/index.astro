@@ -1,52 +1,84 @@
 ---
 import Site from "../../layouts/Site.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import TableFilter from "../../components/TableFilter.astro";
+import UnverifiedNote from "../../components/UnverifiedNote.astro";
 import { states, money, feeRange, lawyersLabel, appealLabel, efileLabel, isUnverified } from "../../lib/data";
-const unv = (s: any, ...f: string[]) => isUnverified(s, ...f);
+const unv = (s: (typeof states)[number], ...f: string[]) => isUnverified(s, ...f);
+const shownFields = ["limit_individual", "limit_business", "filing_fee_min", "filing_fee_max", "lawyers_allowed", "appeal_who", "e_filing"];
+const withUnverified = states.filter((s) => unv(s, ...shownFields)).length;
+const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
 ---
-<Site title="Small claims rules by state" description="Limits, fees, lawyers and appeal rules for small claims court in all 50 states and DC, each with a source and date checked.">
+<Site title="Small claims rules by state" description="Limits, fees, lawyers and appeal rules for small claims court in all 50 states and DC, each with a source and the date it was checked.">
+  <Breadcrumb items={[{ label: "States" }]} />
   <div class="narrow">
-    <p class="eyebrow">All 50 states + DC</p>
+    <p class="eyebrow">All 50 states and DC</p>
     <h1>Small claims rules by state</h1>
     <p class="lede">
-      Every number links to the law or the court's own site on the state's page, with the date we last checked it.
-      Where a state has more than one kind of court, the table shows the main small claims limit; the state page has
-      the details.
+      The basic rules in one table: how much you can sue for, what filing costs, whether lawyers can take part, and who
+      can appeal. Open a state for the details, the sources and the date we checked.
+    </p>
+    <p class="hint">
+      Where a state has more than one kind of court, the table shows the main small claims limit. Last checked {latest}.
     </p>
   </div>
 
   {states.length === 0 ? (
     <div class="callout warning"><p>Research data hasn't been merged yet. Run <code>scripts/build_tables.py</code>.</p></div>
   ) : (
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>State</th>
-            <th class="num">Limit (people)</th>
-            <th class="num">Limit (businesses)</th>
-            <th>Filing fee</th>
-            <th>Lawyers</th>
-            <th>Who can appeal</th>
-            <th>E-filing</th>
-            <th>Checked</th>
-          </tr>
-        </thead>
-        <tbody>
-          {states.map((s) => (
+    <>
+      <UnverifiedNote count={withUnverified} of="states have at least one unverified value in this table" />
+      <TableFilter table="states-table" label="Find a state" noun="states" placeholder="Name or abbreviation, like Ohio or OH" />
+      <div class="table-scroll">
+        <table class="table-stack data-table" id="states-table">
+          <caption>Small claims basics for {states.length} states and DC</caption>
+          <thead>
             <tr>
-              <td><a href={`/states/${s.slug}/`}>{s.state}</a></td>
-              <td class="num">{money(s.limit_individual)} {unv(s, "limit_individual") && <span class="badge unverified" title="unverified">?</span>}</td>
-              <td class="num">{s.limit_business != null && s.limit_business !== s.limit_individual ? money(s.limit_business) : "same"} {unv(s, "limit_business") && <span class="badge unverified" title="unverified">?</span>}</td>
-              <td>{feeRange(s)} {unv(s, "filing_fee_min", "filing_fee_max") && <span class="badge unverified" title="unverified">?</span>}</td>
-              <td>{lawyersLabel[s.lawyers_allowed ?? ""] ?? s.lawyers_allowed ?? "—"}</td>
-              <td>{appealLabel[s.appeal_who ?? ""] ?? s.appeal_who ?? "—"}</td>
-              <td>{efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "—"}</td>
-              <td class="mono">{s.date_checked}</td>
+              <th scope="col">State</th>
+              <th scope="col" class="num">Limit for individuals</th>
+              <th scope="col" class="num">Limit for businesses</th>
+              <th scope="col">Filing fee</th>
+              <th scope="col">Lawyers</th>
+              <th scope="col">Who can appeal</th>
+              <th scope="col">File online</th>
+              <th scope="col">Checked</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {states.map((s) => (
+              <tr data-filter={`${s.state} ${s.abbr}`.toLowerCase()}>
+                <th scope="row"><a href={`/states/${s.slug}/`}>{s.state}</a></th>
+                <td class="num" data-label="Limit for individuals">
+                  {money(s.limit_individual)}
+                  {unv(s, "limit_individual") && <span class="badge unverified">Unverified</span>}
+                </td>
+                <td class="num" data-label="Limit for businesses">
+                  {s.limit_business != null && s.limit_business !== s.limit_individual ? money(s.limit_business) : "Same"}
+                  {unv(s, "limit_business") && <span class="badge unverified">Unverified</span>}
+                </td>
+                <td data-label="Filing fee">
+                  {feeRange(s)}
+                  {unv(s, "filing_fee_min", "filing_fee_max") && <span class="badge unverified">Unverified</span>}
+                </td>
+                <td data-label="Lawyers">
+                  {lawyersLabel[s.lawyers_allowed ?? ""] ?? s.lawyers_allowed ?? "—"}
+                  {unv(s, "lawyers_allowed") && <span class="badge unverified">Unverified</span>}
+                </td>
+                <td data-label="Who can appeal">
+                  {appealLabel[s.appeal_who ?? ""] ?? s.appeal_who ?? "—"}
+                  {unv(s, "appeal_who") && <span class="badge unverified">Unverified</span>}
+                </td>
+                <td data-label="File online">
+                  {efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "Not found"}
+                  {unv(s, "e_filing") && <span class="badge unverified">Unverified</span>}
+                </td>
+                <td class="mono" data-label="Checked">{s.date_checked}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="callout" data-filter-empty="states-table" hidden>No state matches that. Try the full name or the two-letter abbreviation.</p>
+    </>
   )}
-  <p class="hint"><span class="badge unverified">?</span> = not yet confirmed against a primary source.</p>
 </Site>

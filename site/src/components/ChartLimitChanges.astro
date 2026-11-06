@@ -1,0 +1,75 @@
+---
+// Recent increases to small claims limits: a dumbbell per state (old limit → new limit), plus scheduled ones.
+// Data: each state's recent_changes text in states.json, read into lib/stats.ts (limitChanges).
+import ChartFrame from "./ChartFrame.astro";
+import { limitChangeRows, limitChangeFootnote, raisedSince2024, statesChecked, statesSource, usd } from "../lib/stats";
+
+interface Props {
+  headingLevel?: 2 | 3 | 4;
+  id?: string;
+}
+const { headingLevel = 3, id = "chart-limit-changes" } = Astro.props;
+const top = 25000;
+const ticks = [0, 5000, 10000, 15000, 20000, 25000];
+const x = (n: number) => (n / top) * 100;
+const fmtDate = (d: string) =>
+  new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
+const scheduled = limitChangeRows.filter((r) => r.scheduled).length;
+const anyUnverified = limitChangeRows.some((r) => r.unverified);
+---
+<ChartFrame
+  id={id}
+  headingLevel={headingLevel}
+  title={`${raisedSince2024} states have raised their limit since January 2024, and ${scheduled} more increases are scheduled`}
+  subtitle="Limit for individuals before and after each change: changes in effect, newest first, then scheduled ones. Rules change often, so check the date on any guide you read, including this one."
+  sources={[statesSource]}
+  checked={statesChecked}
+  unverified={anyUnverified}
+  unverifiedText={limitChangeRows.filter((r) => r.unverified).map((r) => `${r.state}: ${r.note ?? ""}`).join(" ")}
+>
+  <ul class="legend" slot="legend">
+    <li><span class="swatch dot soft" aria-hidden="true"></span>Before</li>
+    <li><span class="swatch dot" aria-hidden="true"></span>After</li>
+    <li><span class="swatch dot ring" aria-hidden="true"></span>Scheduled, not yet in effect</li>
+  </ul>
+  <div aria-hidden="true">
+    <div class="bars dense" style="--grid-step:20%">
+      {limitChangeRows.map((r) => (
+        <div class="bar-row" title={`${r.state}: ${usd(r.from)} to ${usd(r.to)}, ${r.scheduled ? "scheduled for" : "from"} ${fmtDate(r.effective)}`}>
+          <div class="bar-label">
+            <span class="full">{r.state} <span class="hint" style="display:inline">· {fmtDate(r.effective)}</span></span>
+            <span class="abbr">{r.abbr}</span>
+          </div>
+          <div class="bar-track">
+            <span class="range-link" style={`left:${x(r.from)}%;width:${x(r.to) - x(r.from)}%`}></span>
+            <span class="range-dot soft" style={`left:${x(r.from)}%`}></span>
+            <span class={`range-dot${r.scheduled ? " ring" : ""}`} style={`left:${x(r.to)}%`}></span>
+          </div>
+          <div class="bar-value">{usd(r.from, true)} → {usd(r.to, true)}</div>
+        </div>
+      ))}
+    <div class="bar-axis">
+      <div class="bar-axis-ticks">{ticks.map((t) => <span style={`left:${x(t)}%`}>{usd(t, true)}</span>)}</div>
+    </div>
+    </div>
+  </div>
+  <p class="sr-only">The table below lists each change with its date.</p>
+  <Fragment slot="note">
+    <p>{limitChangeFootnote}</p>
+  </Fragment>
+  <table slot="table">
+    <caption class="sr-only">Recent and scheduled changes to small claims limits for individuals</caption>
+    <thead><tr><th scope="col">State</th><th scope="col" class="num">Before</th><th scope="col" class="num">After</th><th scope="col">Effective</th><th scope="col">Note</th></tr></thead>
+    <tbody>
+      {limitChangeRows.map((r) => (
+        <tr>
+          <th scope="row"><a href={`/states/${r.slug}/`}>{r.state}</a></th>
+          <td class="num">{usd(r.from)}{r.unverified && <span class="badge unverified">unverified</span>}</td>
+          <td class="num">{usd(r.to)}</td>
+          <td class="mono">{r.effective}{r.scheduled ? " (scheduled)" : ""}</td>
+          <td>{r.note ?? ""}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</ChartFrame>

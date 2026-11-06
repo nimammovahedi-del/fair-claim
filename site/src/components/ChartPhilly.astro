@@ -1,0 +1,65 @@
+---
+// Who uses small claims: Pew's study of Philadelphia Municipal Court (debt collection, 2013–2018).
+// Data: research/collection/collection-research.md §3.3 (via lib/stats.ts).
+import ChartFrame from "./ChartFrame.astro";
+import StatTile from "./StatTile.astro";
+import { pew2022, pew2021, pewOtherPct, evidenceChecked } from "../lib/stats";
+
+interface Props {
+  headingLevel?: 2 | 3 | 4;
+  id?: string;
+}
+const { headingLevel = 3, id = "chart-philly" } = Astro.props;
+const ticks = [0, 25, 50, 75, 100];
+const rows = [
+  ...pew2022.outcomes.map((o) => ({ label: o.label, pct: o.pct, display: `${o.pct}%`, muted: false })),
+  { label: "All other outcomes (not broken out in our notes)", pct: pewOtherPct, display: `≈ ${pewOtherPct}%`, muted: true },
+];
+---
+<ChartFrame
+  id={id}
+  headingLevel={headingLevel}
+  title="In Philadelphia, most small claims cases were debt collection, and few were decided at a trial"
+  subtitle={`How ${pew2022.outcomeCases.toLocaleString("en-US")} cases in Pew's outcome table ended, Philadelphia Municipal Court, ${pew2022.years}. One city's data: other courts may differ.`}
+  sources={[pew2022.source, pew2021.source]}
+  checked={evidenceChecked}
+>
+  <div aria-hidden="true">
+    <div class="bars">
+      {rows.map((r) => (
+        <div class="bar-row" title={`${r.label}: ${r.display}`}>
+          <div class="bar-label">{r.label}</div>
+          <div class="bar-track"><div class={`bar${r.muted ? " muted" : ""}`} style={`width:${r.pct}%`}></div></div>
+          <div class="bar-value">{r.display}</div>
+        </div>
+      ))}
+    <div class="bar-axis">
+      <div class="bar-axis-ticks">{ticks.map((t) => <span style={`left:${t}%`}>{t}%</span>)}</div>
+    </div>
+    </div>
+  </div>
+  <p class="sr-only">{rows.map((r) => `${r.label}: ${r.display}. `)}</p>
+  <Fragment slot="note">
+    <ul class="stat-tiles">
+      <StatTile value={`${pew2022.judgmentsDefaultPct}%`} label={`of the ${pew2022.judgmentsTotal} cases that reached a judgment were defaults: the person sued didn't respond or appear (Pew 2022).`} />
+      <StatTile value={`${pew2021.plaintiffsWithLawyersPct}%`} label={`of plaintiffs had a lawyer, compared with about ${pew2021.defendantsWithLawyersPct}% of defendants, in the court's civil cases (Pew 2021).`} />
+    </ul>
+    <p>
+      Pew found that most of the {pew2022.casesTotal} small claims cases filed in Philadelphia from {pew2022.years} were
+      debt collection cases filed against individuals by creditors or debt collectors. The four outcomes above add up
+      to {100 - pewOtherPct}%; the remaining share is calculated, not reported.
+    </p>
+  </Fragment>
+  <table slot="table">
+    <caption class="sr-only">How Philadelphia small claims cases ended</caption>
+    <thead><tr><th scope="col">Outcome</th><th scope="col" class="num">Share of cases</th></tr></thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr><th scope="row">{r.label}</th><td class="num">{r.display}</td></tr>
+      ))}
+      <tr><th scope="row">Cases that reached a judgment that were defaults</th><td class="num">{pew2022.judgmentsDefaultPct}%</td></tr>
+      <tr><th scope="row">Plaintiffs with a lawyer (civil cases, Pew 2021)</th><td class="num">{pew2021.plaintiffsWithLawyersPct}%</td></tr>
+      <tr><th scope="row">Defendants with a lawyer (civil cases, Pew 2021)</th><td class="num">about {pew2021.defendantsWithLawyersPct}%</td></tr>
+    </tbody>
+  </table>
+</ChartFrame>

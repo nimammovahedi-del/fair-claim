@@ -1,0 +1,76 @@
+---
+// US tile-grid map: one square per state + DC, shaded by the small claims limit for individuals.
+// Every tile links to its state page. No geodata, no client JS.
+// <TileMapLimits headingLevel={3} />
+import ChartFrame from "./ChartFrame.astro";
+import { limitTiles, limitBins, limitStats, statesChecked, statesSource, usd } from "../lib/stats";
+
+interface Props {
+  headingLevel?: 2 | 3 | 4;
+  id?: string;
+}
+const { headingLevel = 3, id = "chart-limits-map" } = Astro.props;
+const byName = limitTiles.slice().sort((a, b) => a.state.localeCompare(b.state));
+const flagged = limitTiles.filter((t) => t.unverified);
+const upTo10k = limitStats.binCounts[0] + limitStats.binCounts[1] + limitStats.binCounts[2];
+---
+<ChartFrame
+  id={id}
+  headingLevel={headingLevel}
+  title={`In ${upTo10k} of ${limitStats.count} jurisdictions, the small claims limit is $10,000 or less`}
+  subtitle={`The most an individual can claim, from ${usd(limitStats.min)} (${limitStats.minStates.join(", ")}) to ${usd(limitStats.max)} (${limitStats.maxStates.join(" and ")}). The middle value is ${usd(limitStats.median)}. Each square is a state or DC; select one for its rules.`}
+  sources={[statesSource]}
+  checked={statesChecked}
+  unverified={flagged.length > 0}
+  unverifiedText={`${flagged.map((t) => t.state).join(", ")}: limit not yet confirmed against the statute (marked * on the map).`}
+>
+  <ul class="tile-legend" slot="legend" aria-label="Legend: limit for individuals">
+    {limitBins.map((b, i) => (
+      <li>
+        <span class="key" aria-hidden="true"></span>
+        <strong>{b.label}</strong>
+        {limitStats.binCounts[i]} {limitStats.binCounts[i] === 1 ? "state" : "states"}
+      </li>
+    ))}
+  </ul>
+  <div class="tilemap-wrap">
+    <ul class="tilemap" aria-label="Small claims limit for individuals, by state. Each item links to the state's page.">
+      {limitTiles.map((t) => (
+        <li style={`grid-column:${t.col + 1};grid-row:${t.row + 1}`}>
+          <a
+            class="tile"
+            data-bin={t.bin}
+            href={`/states/${t.slug}/`}
+            aria-label={`${t.state}: ${usd(t.limit)}${t.unverified ? " (unverified)" : ""}`}
+            title={`${t.state}: ${usd(t.limit)}${t.business != null && t.business !== t.limit ? ` (businesses ${usd(t.business)})` : ""}${t.unverified ? " — unverified" : ""}`}
+          >
+            <span aria-hidden="true">{t.abbr}{t.unverified && <span class="tile-flag">*</span>}</span>
+            <span class="tile-val" aria-hidden="true">{usd(t.limit, true)}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <Fragment slot="note">
+    <p>
+      Some states use different limits for some courts or kinds of claim (New York's $10,000 is for New York City
+      courts, for example), and {limitStats.lowerForBusiness.map((b) => b.state).join(" and ")} set a lower limit
+      for businesses. State pages have the details.
+    </p>
+  </Fragment>
+  <table slot="table">
+    <caption class="sr-only">Small claims limit for individuals and businesses, by state</caption>
+    <thead>
+      <tr><th scope="col">State</th><th scope="col" class="num">Individuals</th><th scope="col" class="num">Businesses</th></tr>
+    </thead>
+    <tbody>
+      {byName.map((t) => (
+        <tr>
+          <th scope="row"><a href={`/states/${t.slug}/`}>{t.state}</a></th>
+          <td class="num">{usd(t.limit)}{t.unverified && <span class="badge unverified">unverified</span>}</td>
+          <td class="num">{t.business == null ? "—" : usd(t.business)}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</ChartFrame>

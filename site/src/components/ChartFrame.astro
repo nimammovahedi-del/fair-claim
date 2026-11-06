@@ -1,0 +1,71 @@
+---
+// Frame for every "what the data shows" chart: a takeaway title, an optional subtitle, the chart itself,
+// the source + checked date (with an "unverified" tag when needed) and an expandable data table.
+//
+// <ChartFrame id="limits-map" title="Most states cap claims at $10,000 or less" sources={[{ label, url }]}
+//             checked="2026-11-05" unverified={false}>
+//   <Fragment slot="legend">…</Fragment>       optional, above the chart
+//   …the chart (mark it aria-hidden="true" unless it contains links)…
+//   <Fragment slot="note">…</Fragment>         optional notes above the source line
+//   <Fragment slot="table">…<table>…</table></Fragment>   required: the same numbers as a table
+// </ChartFrame>
+import "../styles/features.css";
+
+interface SourceLink {
+  label: string;
+  url: string;
+}
+interface Props {
+  id: string;
+  title: string;
+  subtitle?: string;
+  sources: SourceLink[];
+  checked: string;
+  unverified?: boolean;
+  unverifiedText?: string;
+  headingLevel?: 2 | 3 | 4;
+  tableLabel?: string;
+}
+const {
+  id,
+  title,
+  subtitle,
+  sources,
+  checked,
+  unverified = false,
+  unverifiedText = "Includes figures not yet confirmed against the original source.",
+  headingLevel = 3,
+  tableLabel = "Show the numbers as a table",
+} = Astro.props;
+const H = (`h${headingLevel}`) as "h2" | "h3" | "h4";
+---
+<figure class="chart" id={id} aria-labelledby={`${id}-title`}>
+  <H class="chart-title" id={`${id}-title`}>{title}</H>
+  {subtitle && <p class="chart-sub">{subtitle}</p>}
+  <slot name="legend" />
+  <div class="chart-body">
+    <slot />
+  </div>
+  <figcaption class="chart-foot">
+    <slot name="note" />
+    {unverified && (
+      <p><span class="badge unverified">unverified</span> {unverifiedText}</p>
+    )}
+    <p class="cite">
+      <span>Source:</span>
+      {sources.map((s, i) => (
+        <>
+          <a href={s.url} rel={s.url.startsWith("http") ? "noopener" : undefined}>{s.label}</a>
+          {i < sources.length - 1 && <span aria-hidden="true">·</span>}
+        </>
+      ))}
+      <span>checked {checked}</span>
+    </p>
+  </figcaption>
+  <details class="accordion chart-table">
+    <summary>{tableLabel}</summary>
+    <div class="table-scroll">
+      <slot name="table" />
+    </div>
+  </details>
+</figure>

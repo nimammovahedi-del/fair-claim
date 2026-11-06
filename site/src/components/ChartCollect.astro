@@ -1,0 +1,84 @@
+---
+// "Winning isn't getting paid": what the few studies found about collecting a small claims judgment.
+// Data: research/collection/collection-research.md, Part 3 (via lib/stats.ts).
+// <ChartCollect headingLevel={3} />
+import ChartFrame from "./ChartFrame.astro";
+import { collectRows, strengthLabel, evidenceChecked, denver } from "../lib/stats";
+
+interface Props {
+  headingLevel?: 2 | 3 | 4;
+  id?: string;
+}
+const { headingLevel = 3, id = "chart-collect" } = Astro.props;
+const ticks = [0, 25, 50, 75, 100];
+const uniqueSources = collectRows
+  .map((r) => r.source)
+  .filter((s, i, a) => a.findIndex((x) => x.url === s.url) === i);
+---
+<ChartFrame
+  id={id}
+  headingLevel={headingLevel}
+  title="Winning isn't getting paid: outside mediation, about half of winners or fewer collected anything"
+  subtitle="Share of small claims winners who got at least some of the money. Different places, years and methods, so compare with care. Courts generally don't track this, and there is no national figure."
+  sources={uniqueSources}
+  checked={evidenceChecked}
+  unverified={true}
+  unverifiedText="The Michigan figures come from a summary; the original report's link is dead. The Maine figure is an informal newspaper survey."
+>
+  <ul class="legend" slot="legend">
+    <li><span class="swatch" aria-hidden="true"></span>Published study</li>
+    <li><span class="swatch soft" aria-hidden="true"></span>Unverified summary or anecdotal survey</li>
+  </ul>
+  <div aria-hidden="true">
+    <div class="bars">
+      {collectRows.map((r) => (
+        <div class="bar-row" title={`${r.label}: ${r.display}. ${strengthLabel[r.strength]}.`}>
+          <div class="bar-label">
+            {r.label}
+            <span class="hint">{strengthLabel[r.strength]}</span>
+          </div>
+          <div class="bar-track">
+            <div class={`bar${r.strength === "study" ? "" : " soft"}`} style={`width:${r.pct}%`}></div>
+          </div>
+          <div class="bar-value">{r.display}</div>
+        </div>
+      ))}
+    <div class="bar-axis">
+      <div class="bar-axis-ticks">
+        {ticks.map((t) => <span style={`left:${t}%`}>{t}%</span>)}
+      </div>
+    </div>
+    </div>
+  </div>
+  <p class="sr-only">
+    {collectRows.map((r) => `${r.label}: ${r.display} of winners got at least some money (${strengthLabel[r.strength]}). `)}
+  </p>
+  <Fragment slot="note">
+    <p>
+      Denver also found that only {denver.dollarsPaidPct}% of all the money awarded was ever paid. (We read the Denver
+      study's abstract; its data year and sample size weren't checked.)
+    </p>
+    <p>
+      Mediated cases were paid more often in Michigan, and a 1984 Maine study found defendants fully complied with mediated
+      agreements at about twice the rate of judges' decisions
+      (<a href="https://www.aboutrsi.org/library/mediation-in-small-claims-court-achieving-compliance-through-consent" rel="noopener">McEwen &amp; Maiman, 18 Law &amp; Society Review</a>;
+      exact figures not confirmed <span class="badge unverified">unverified</span>).
+    </p>
+  </Fragment>
+  <table slot="table">
+    <caption class="sr-only">Share of small claims winners who collected at least some money</caption>
+    <thead>
+      <tr><th scope="col">Where and what</th><th scope="col" class="num">Collected something</th><th scope="col">Strength</th><th scope="col">Source</th></tr>
+    </thead>
+    <tbody>
+      {collectRows.map((r) => (
+        <tr>
+          <th scope="row">{r.label}<br /><span class="hint">{r.detail}</span></th>
+          <td class="num">{r.display}</td>
+          <td>{r.strength === "study" ? strengthLabel[r.strength] : <><span class="badge unverified">{r.strength}</span></>}</td>
+          <td><a href={r.source.url} rel="noopener">{r.source.label}</a></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</ChartFrame>
