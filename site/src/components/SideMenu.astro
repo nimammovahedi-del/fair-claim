@@ -1,0 +1,46 @@
+---
+// Side menu for long pages. Put it as the first child of <div class="with-sidemenu">.
+// <SideMenu title="On this page" items={[{ href: "#demand", label: "1. Ask first" }, …]} />
+// Links to anchors on the same page get aria-current="location" as you scroll (small script below).
+interface Item {
+  href: string;
+  label: string;
+}
+interface Props {
+  title?: string;
+  items: Item[];
+  label?: string;
+}
+const { title = "On this page", items, label = "On this page" } = Astro.props;
+---
+<nav class="sidemenu no-print" aria-label={label} data-sidemenu>
+  <p class="sidemenu-title">{title}</p>
+  <ul>
+    {items.map((it) => (
+      <li><a href={it.href}>{it.label}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  // Mark the section currently in view. No scrolling animation, no layout change: just aria-current.
+  document.querySelectorAll<HTMLElement>("[data-sidemenu]").forEach((menu) => {
+    const links = Array.from(menu.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'));
+    const targets = links
+      .map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))))
+      .filter((el): el is HTMLElement => !!el);
+    if (!targets.length) return;
+    const setCurrent = (id: string) =>
+      links.forEach((a) => (a.hash.slice(1) === id ? a.setAttribute("aria-current", "location") : a.removeAttribute("aria-current")));
+    // Current = the last section whose top has passed 30% of the viewport height.
+    const update = () => {
+      const line = window.innerHeight * 0.3;
+      let current = targets[0];
+      for (const t of targets) if (t.getBoundingClientRect().top <= line) current = t;
+      setCurrent(current.id);
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("hashchange", update);
+    update();
+  });
+</script>

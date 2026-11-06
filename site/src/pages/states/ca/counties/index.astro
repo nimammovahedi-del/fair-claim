@@ -1,9 +1,10 @@
 ---
 import Site from "../../../../layouts/Site.astro";
 import { counties } from "../../../../lib/data";
+import Breadcrumb from "../../../../components/Breadcrumb.astro";
 ---
 <Site title="California small claims by county" description="Courthouses, self-help centers and free small claims advisors for all 58 California counties.">
-  <p class="breadcrumbs"><a href="/states/">States</a> / <a href="/states/ca/">California</a> / Counties</p>
+  <Breadcrumb items={[{ href: "/states/", label: "States" }, { href: "/states/ca/", label: "California" }, { label: "Counties" }]} />
   <div class="narrow">
     <h1>California small claims, county by county</h1>
     <p class="lede">

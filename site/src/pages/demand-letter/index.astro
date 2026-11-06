@@ -1,8 +1,11 @@
 ---
 import Site from "../../layouts/Site.astro";
+import ToolNotice from "../../components/ToolNotice.astro";
 import { states } from "../../lib/data";
 import { letterNotes } from "../../lib/letter-notes";
 
+// Short, neutral line printed at the bottom of the PDF and the printed letter.
+const PRINT_NOTE = "Prepared with Fair Claim's free letter tool (general information, not legal advice). Review before sending.";
 const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.court_name }));
 ---
 <Site title="Demand letter" description="Write a calm, clear demand letter in your browser. Nothing is stored or sent.">
@@ -18,7 +21,21 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
   <script type="application/json" id="letter-states" set:html={JSON.stringify(letterStates)} />
   <script type="application/json" id="letter-notes" set:html={JSON.stringify(letterNotes)} />
 
-  <div class="letter-wrap">
+  <ToolNotice
+    id="demand-letter"
+    target="letter-tool"
+    toolName="the demand-letter tool"
+    points={[
+      "This is general legal information, not legal advice. The tool fills in a plain template; it can't judge your case.",
+      "Nothing you type is stored or sent anywhere. The PDF is made on your device, and everything is gone when you close the page.",
+      "State-law notes are based on the sources we cite. Laws can change, so check them before you rely on them.",
+      "You're responsible for the letter. Read it, edit anything that isn't exactly right, and make sure every fact, date and amount is accurate.",
+      "Keep it factual and calm. Don't add threats (for example, of criminal charges or public posts). The letter only says you may file in small claims court.",
+      "If you're unsure, check with the court's self-help center, a free small claims advisor, or legal aid.",
+    ]}
+  />
+
+  <div class="letter-wrap" id="letter-tool">
     <form id="letter" class="no-print" onsubmit="return false" autocomplete="off">
       <fieldset>
         <legend>What it's about</legend>
@@ -104,7 +121,8 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
       </div>
       <p class="privacy no-print">Nothing is saved. The PDF is made on your device.</p>
       <div class="paper" id="preview" aria-live="polite"></div>
-      <div class="callout no-print">
+      <p class="print-only print-note" id="print-note">{PRINT_NOTE}</p>
+      <div class="callout info no-print">
         <p><strong>Before you send it:</strong> read it over and change anything that isn't exactly right — it's your letter. Send it in a way you can prove (certified mail, or email plus regular mail) and keep a copy for court.</p>
       </div>
     </div>
@@ -144,7 +162,7 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
     ($("notes-field") as HTMLElement).hidden = list.length === 0;
     for (const n of list) {
       const wrap = document.createElement("label");
-      wrap.style.cssText = "display:flex;gap:.5rem;font-weight:400;margin:.3rem 0";
+      wrap.className = "choice";
       const cb = document.createElement("input");
       cb.type = "checkbox";
       cb.checked = true;
@@ -212,6 +230,17 @@ const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.
     write(L.salutation, { gap: 6 });
     for (const p of L.paragraphs) write(p, { gap: 8 });
     for (const c of L.closing) write(c);
+    // Neutral notice line at the foot of the last page.
+    const note = document.getElementById("print-note")?.textContent?.trim();
+    if (note) {
+      if (y > pageH - margin - 10) doc.addPage();
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(110);
+      const noteRows = doc.splitTextToSize(note, width) as string[];
+      doc.text(noteRows, margin, pageH - 40 - (noteRows.length - 1) * 10);
+      doc.setTextColor(0);
+    }
     doc.save("demand-letter.pdf");
   }
 

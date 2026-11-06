@@ -1,0 +1,127 @@
+---
+// "Please read" notice for an interactive tool. Shown once per tool, remembered on this device.
+//
+// <ToolNotice id="worth-it" target="worth-it-tool" toolName="the calculator" />
+// <div id="worth-it-tool">…the tool…</div>
+//
+// - mode="onload" (default): the notice opens as a modal dialog when the page loads.
+// - mode="ondemand": the tool shows a "Read the notice" bar; the dialog opens when the reader asks.
+//   Use this when the tool is a small part of a longer page (e.g. the California deadline estimator).
+// Until "I understand" is pressed, the tool is `inert` (can't be focused or used) and dimmed.
+// Escape or "Not now" closes the dialog WITHOUT accepting: the tool stays paused with a bar to reopen it.
+// Acceptance is stored in localStorage as "fc-notice-v1:<id>". If storage is blocked, the notice shows each visit.
+interface Props {
+  id: string;
+  target: string;
+  toolName: string;
+  title?: string;
+  intro?: string;
+  points?: string[];
+  extraPoints?: string[];
+  mode?: "onload" | "ondemand";
+  readMoreHref?: string;
+  readMoreLabel?: string;
+}
+const {
+  id,
+  target,
+  toolName,
+  title = "Before you start",
+  intro = `Please read this before you use ${toolName}.`,
+  points = [
+    "This is general legal information, not legal advice. It can't tell you what to do in your own case.",
+    "Nothing you type is stored or sent anywhere. It stays in this browser tab and is gone when you close it.",
+    "Numbers are estimates based on the sources we cite. Laws, fees and deadlines can change.",
+    "Before you act, check with the court, a free small claims advisor or self-help center, or legal aid.",
+  ],
+  extraPoints = [],
+  mode = "onload",
+  readMoreHref = "/sources/#not-advice",
+  readMoreLabel = "Read more about what Fair Claim can and can't do",
+} = Astro.props;
+const titleId = `notice-${id}-title`;
+const descId = `notice-${id}-desc`;
+---
+<div class="tool-gate no-print" data-tool-gate={id} hidden>
+  <p><strong>This tool is paused.</strong> Please read a short notice before you use {toolName}.</p>
+  <button class="btn small" type="button" data-notice-open aria-haspopup="dialog">Read the notice</button>
+</div>
+
+<dialog class="modal" data-tool-notice={id} data-target={target} data-mode={mode} aria-labelledby={titleId} aria-describedby={descId}>
+  <div class="modal-header"></div>
+  <div class="modal-body">
+    <h2 class="modal-title" id={titleId} tabindex="-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 11v6M12 7.5v.01" stroke-width="2.2" />
+      </svg>
+      {title}
+    </h2>
+    <p id={descId}>{intro}</p>
+    <ul class="notice-list">
+      {[...points, ...extraPoints].map((p) => <li>{p}</li>)}
+    </ul>
+    <p><a href={readMoreHref} target="_blank" rel="noopener">{readMoreLabel}<span class="sr-only"> (opens in a new tab)</span></a></p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn tertiary" type="button" data-notice-later>Not now</button>
+    <button class="btn" type="button" data-notice-accept>I understand</button>
+  </div>
+</dialog>
+
+<script>
+  const PREFIX = "fc-notice-v1:";
+
+  document.querySelectorAll<HTMLDialogElement>("dialog[data-tool-notice]").forEach((dialog) => {
+    const id = dialog.dataset.toolNotice!;
+    const target = document.getElementById(dialog.dataset.target || "");
+    const gate = document.querySelector<HTMLElement>(`[data-tool-gate="${id}"]`);
+    const title = dialog.querySelector<HTMLElement>(".modal-title");
+    const gateBtn = gate?.querySelector<HTMLButtonElement>("[data-notice-open]");
+    if (!target) return;
+
+    let accepted = false;
+    try {
+      accepted = localStorage.getItem(PREFIX + id) !== null;
+    } catch {
+      /* storage blocked: show the notice every visit */
+    }
+    if (accepted) return;
+
+    // Lock the tool until the reader accepts.
+    target.setAttribute("data-tool-target", "");
+    target.inert = true;
+    target.classList.add("tool-locked");
+    if (gate) gate.hidden = false;
+
+    const open = () => {
+      if (dialog.open) return;
+      dialog.showModal();
+      title?.focus();
+    };
+    const unlock = () => {
+      accepted = true;
+      try {
+        localStorage.setItem(PREFIX + id, new Date().toISOString().slice(0, 10));
+      } catch {
+        /* ignore */
+      }
+      target.inert = false;
+      target.classList.remove("tool-locked");
+      if (gate) gate.hidden = true;
+      dialog.close();
+      const first = target.querySelector<HTMLElement>("input, select, textarea, button, a[href]");
+      first?.focus();
+    };
+
+    gateBtn?.addEventListener("click", open);
+    dialog.querySelector("[data-notice-accept]")?.addEventListener("click", unlock);
+    dialog.querySelector("[data-notice-later]")?.addEventListener("click", () => dialog.close());
+    // Escape fires "cancel" then "close": it never counts as accepting.
+    dialog.addEventListener("close", () => {
+      if (!accepted) gateBtn?.focus();
+    });
+
+    if (dialog.dataset.mode !== "ondemand") open();
+  });
+</script>

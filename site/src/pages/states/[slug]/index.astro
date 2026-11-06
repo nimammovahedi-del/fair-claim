@@ -1,6 +1,7 @@
 ---
 import Site from "../../../layouts/Site.astro";
 import CaliforniaDetail from "../../../components/CaliforniaDetail.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
 import { states, counties, money, feeRange, lawyersLabel, appealLabel, efileLabel, type StateRow } from "../../../lib/data";
 import { steps } from "../../../lib/steps";
 
@@ -52,7 +53,7 @@ const facts: { label: string; big?: string; text?: string | null; fields: string
 ];
 ---
 <Site title={`Small claims court in ${s.state}`} description={`${s.state} small claims limit, fees, appeal rules and forms — cited and dated.`}>
-  <p class="breadcrumbs"><a href="/states/">States</a> / {s.state}</p>
+  <Breadcrumb items={[{ href: "/states/", label: "States" }, { label: s.state }]} />
   <div class="two-col">
     <div>
       <p class="eyebrow">{s.court_name}</p>
@@ -63,7 +64,7 @@ const facts: { label: string; big?: string; text?: string | null; fields: string
       </p>
 
       {s.recent_changes && (
-        <div class="callout"><p><strong>Recent change:</strong> {s.recent_changes}</p></div>
+        <div class="callout info"><p><strong>Recent change:</strong> {s.recent_changes}</p></div>
       )}
 
       <dl class="facts">
@@ -107,13 +108,13 @@ const facts: { label: string; big?: string; text?: string | null; fields: string
           {steps.map((st) => <li><a href={`/steps/#${st.slug}`}>{st.title}</a></li>)}
         </ol>
         <p><a class="btn" href={`/worth-it/?state=${s.slug}`}>Is it worth it?</a></p>
-        {s.self_help_url && <p><a href={s.self_help_url} rel="noopener">Official {s.state} small claims self-help →</a></p>}
+        {s.self_help_url && <p><a class="link-arrow" href={s.self_help_url} rel="noopener">Official {s.state} small claims self-help</a></p>}
       </div>
       {isCA && (
-        <div class="card" style="margin-top:1rem">
+        <div class="card">
           <h2>California by county</h2>
           <p>Courthouses, self-help centers and the free small claims advisor for each county.</p>
-          <p><a href="/states/ca/counties/">All 58 counties →</a></p>
+          <p><a class="link-arrow" href="/states/ca/counties/">All 58 counties</a></p>
           {counties.length > 0 && <p class="hint">e.g. <a href="/states/ca/counties/alameda/">Alameda</a> · <a href="/states/ca/counties/los-angeles/">Los Angeles</a></p>}
         </div>
       )}

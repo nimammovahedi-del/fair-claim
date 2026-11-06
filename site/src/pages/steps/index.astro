@@ -1,5 +1,6 @@
 ---
 import Site from "../../layouts/Site.astro";
+import SideMenu from "../../components/SideMenu.astro";
 import { steps } from "../../lib/steps";
 ---
 <Site title="The five steps" description="How small claims court works, from demand letter to collecting your money.">
@@ -12,23 +13,26 @@ import { steps } from "../../lib/steps";
     </p>
   </div>
 
-  <ol class="steps">
-    {steps.map((s) => (
-      <li id={s.slug}>
-        <div class="step-num" aria-hidden="true">{s.n}</div>
-        <div class="narrow">
-          <h2><span class="sr-only">Step {s.n}: </span>{s.title}</h2>
-          <div class="step-meta">{s.time} · {s.cost}</div>
-          {s.body.map((p) => <p>{p}</p>)}
-          <h3>Do this</h3>
-          <ul>{s.doThis.map((d) => <li>{d}</li>)}</ul>
-          <h3>Common mistakes</h3>
-          <ul>{s.mistakes.map((d) => <li>{d}</li>)}</ul>
-          {s.slug === "demand" && <p><a class="btn" href="/demand-letter/">Write your demand letter</a></p>}
-          {s.slug === "file" && <p><a href="/states/">Find your state's limit, fee and form →</a></p>}
-          {s.slug === "collect" && <p><a href="/worth-it/">Check whether it's worth it before you file →</a></p>}
-        </div>
-      </li>
-    ))}
-  </ol>
+  <div class="with-sidemenu">
+    <SideMenu title="The five steps" items={steps.map((s) => ({ href: `#${s.slug}`, label: `${s.n}. ${s.title}` }))} />
+    <ol class="steps">
+      {steps.map((s) => (
+        <li id={s.slug}>
+          <div class="step-num" aria-hidden="true">{s.n}</div>
+          <div class="narrow">
+            <h2><span class="sr-only">Step {s.n}: </span>{s.title}</h2>
+            <div class="step-meta">{s.time} · {s.cost}</div>
+            {s.body.map((p) => <p>{p}</p>)}
+            <h3>Do this</h3>
+            <ul>{s.doThis.map((d) => <li>{d}</li>)}</ul>
+            <h3>Common mistakes</h3>
+            <ul>{s.mistakes.map((d) => <li>{d}</li>)}</ul>
+            {s.slug === "demand" && <p><a class="btn" href="/demand-letter/">Write your demand letter</a></p>}
+            {s.slug === "file" && <p><a class="link-arrow" href="/states/">Find your state's limit, fee and form</a></p>}
+            {s.slug === "collect" && <p><a class="link-arrow" href="/worth-it/">Check whether it's worth it before you file</a></p>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
 </Site>

@@ -15,7 +15,7 @@ const unv = (s: any, ...f: string[]) => isUnverified(s, ...f);
   </div>
 
   {states.length === 0 ? (
-    <div class="callout"><p>Research data hasn't been merged yet. Run <code>scripts/build_tables.py</code>.</p></div>
+    <div class="callout warning"><p>Research data hasn't been merged yet. Run <code>scripts/build_tables.py</code>.</p></div>
   ) : (
     <div class="table-scroll">
       <table>
@@ -48,5 +48,5 @@ const unv = (s: any, ...f: string[]) => isUnverified(s, ...f);
       </table>
     </div>
   )}
-  <p class="hint" style="margin-top:.8rem"><span class="badge unverified">?</span> = not yet confirmed against a primary source.</p>
+  <p class="hint"><span class="badge unverified">?</span> = not yet confirmed against a primary source.</p>
 </Site>

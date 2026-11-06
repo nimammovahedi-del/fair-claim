@@ -24,7 +24,7 @@ Nothing deployed, no accounts created.*
 | `scripts/build_tables.py` | Merges research → site data + spreadsheet |
 | `site/` | Astro prototype (local only) |
 | `site/src/lib/core/` | Reusable, framework-free logic: deadlines, demand letter, worth-it math |
-| `docs/design-directions.md` | 3 design directions + site structure |
+| `docs/design-system.md` | Design system (tokens, components, motion); live gallery at `/design/` |
 | `docs/plan.md` | Later phases + yearly upkeep plan |
 
 ## Run it
@@ -32,7 +32,7 @@ Nothing deployed, no accounts created.*
 cd ~/Projects/small-claims && .venv/bin/python scripts/build_tables.py   # after editing research
 cd site && npm run dev                                                    # http://localhost:4321
 ```
-Use the **Design** menu in the header to switch between A Counter, B Docket and C Pamphlet.
+Light is the default; switch with **Display** in the header (Light / Dark / System).
 
 ## Prototype pages
 - Home
@@ -42,7 +42,8 @@ Use the **Design** menu in the header to switch between A Counter, B Docket and 
 - `/states/` and 51 state pages. The California page adds fee tiers, deadlines, a "last day to sue" estimator and forms by step.
 - `/states/ca/counties/` and 58 county pages
 - `/sources/`
-- `/design/`
+- `/design/`: the design-system gallery, light and dark side by side
+- `/checklists/`, `/glossary/`, `/about/`: placeholders for now
 
 ## Research findings that change the brief
 - **Rhode Island is $5,000**, not $2,500 (raised July 2021). Kentucky's $2,500 is now the lowest.
@@ -79,7 +80,7 @@ Use the **Design** menu in the header to switch between A Counter, B Docket and 
 
 ## Next steps
 1. Nima reviews the spreadsheet.
-2. Nima picks a design direction (see `docs/design-directions.md`).
+2. Nima reviews the design system at `/design/` (see `docs/design-system.md`).
 3. Close the yellow cells, limits and fees first.
 4. Phase 1 per `docs/plan.md`. Hosting needs a **new** free account, created by Nima. Never use the friend's Cloudflare token.
 

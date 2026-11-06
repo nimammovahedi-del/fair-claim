@@ -1,6 +1,7 @@
 ---
 import Site from "../../../../layouts/Site.astro";
 import { counties, type CountyRow } from "../../../../lib/data";
+import Breadcrumb from "../../../../components/Breadcrumb.astro";
 
 export function getStaticPaths() {
   return counties.map((c) => ({ params: { county: c.slug }, props: { c } }));
@@ -11,7 +12,7 @@ const adv = c.small_claims_advisor;
 const shc = c.self_help_center;
 ---
 <Site title={`Small claims in ${c.county} County, California`} description={`Where to file small claims in ${c.county} County, plus the free small claims advisor and self-help center.`}>
-  <p class="breadcrumbs"><a href="/states/">States</a> / <a href="/states/ca/">California</a> / <a href="/states/ca/counties/">Counties</a> / {c.county}</p>
+  <Breadcrumb items={[{ href: "/states/", label: "States" }, { href: "/states/ca/", label: "California" }, { href: "/states/ca/counties/", label: "Counties" }, { label: c.county }]} />
   <div class="two-col">
     <div>
       <p class="eyebrow">{c.court_name}</p>
@@ -30,7 +31,7 @@ const shc = c.self_help_center;
                 : <>Phone: {adv.phone}<br /></>
             )}
             {adv.email && <>Email: <a href={`mailto:${adv.email}`}>{adv.email}</a><br /></>}
-            {adv.url && <a href={adv.url} rel="noopener">Advisor website →</a>}
+            {adv.url && <a class="link-arrow" href={adv.url} rel="noopener">Advisor website</a>}
           </p>
           {adv.notes && <p class="hint">{adv.notes}</p>}
         </div>
@@ -69,16 +70,16 @@ const shc = c.self_help_center;
             <p><strong>{shc.name}</strong></p>
             {shc.address && <p>{shc.address}</p>}
             {shc.phone && <p>{shc.phone}</p>}
-            {shc.url && <p><a href={shc.url} rel="noopener">Website →</a></p>}
+            {shc.url && <p><a class="link-arrow" href={shc.url} rel="noopener">Website</a></p>}
             {shc.notes && <p class="hint">{shc.notes}</p>}
           </>
         ) : <p>Not found yet.</p>}
       </div>
-      <div class="card" style="margin-top:1rem">
+      <div class="card">
         <h2>Statewide rules</h2>
         <p>Limits, fees, forms and appeal rules are the same in every California county.</p>
-        <p><a href="/states/ca/">California rules →</a></p>
-        {c.small_claims_page_url && <p><a href={c.small_claims_page_url} rel="noopener">{c.county} court's small claims page →</a></p>}
+        <p><a class="link-arrow" href="/states/ca/">California rules</a></p>
+        {c.small_claims_page_url && <p><a class="link-arrow" href={c.small_claims_page_url} rel="noopener">{c.county} court's small claims page</a></p>}
         <p><a class="btn" href="/demand-letter/">Start with a demand letter</a></p>
       </div>
     </aside>

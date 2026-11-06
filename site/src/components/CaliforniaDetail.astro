@@ -2,6 +2,7 @@
 // California-only detail on the CA state page: fee tiers, key deadlines, forms by step,
 // and a "last day to sue" estimator built on the reusable deadline logic.
 import { caStatewide as ca, money } from "../lib/data";
+import ToolNotice from "./ToolNotice.astro";
 
 const tiers = ca.fees?.filing_fee_tiers ?? [];
 const forms = (ca.forms ?? []) as { form: string; title: string; purpose: string; step: string; url: string }[];
@@ -59,7 +60,8 @@ const nice = (s: string) => s.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpper
   <h2>Last day to sue — rough estimate</h2>
   <p>Every claim has a deadline (a "statute of limitations"). Pick your type of claim and the date it happened.</p>
   <script type="application/json" id="sol-data" set:html={JSON.stringify(sols)} />
-  <div class="card">
+  <ToolNotice id="ca-deadline" target="sol-tool" toolName="the “last day to sue” estimator" mode="ondemand" />
+  <div class="card tinted" id="sol-tool">
     <div class="form-grid">
       <div class="field">
         <label for="sol-type">Type of claim</label>
@@ -72,7 +74,7 @@ const nice = (s: string) => s.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpper
         <input id="sol-date" type="date" />
       </div>
     </div>
-    <p id="sol-out" aria-live="polite" style="margin-top:1rem"></p>
+    <p id="sol-out" aria-live="polite" style="margin-top:var(--space-3)"></p>
     <p class="hint">Only an estimate. Special rules can make the deadline earlier (claims against a government agency need a government claim first, often within 6 months) or later (some deadlines pause or start when you discover the problem). If you're close, file sooner.</p>
   </div>
 

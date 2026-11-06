@@ -1,0 +1,19 @@
+---
+// PLACEHOLDER — to be built by the content agent. Uses the standard Site layout and design-system classes.
+import Site from "../../layouts/Site.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+---
+<Site title="About" description="What Fair Claim is, who makes it, and what it is not.">
+  <Breadcrumb items={[{ label: "About" }]} />
+  <div class="narrow">
+    <p class="eyebrow">About</p>
+    <h1>About Fair Claim</h1>
+    <p class="lede">
+      Fair Claim is a free, neutral source of information about small claims court. It gives legal information, not
+      legal advice.
+    </p>
+    <div class="callout info">
+      <p>This page is being written. For now, see <a href="/sources/">how we check our facts</a>.</p>
+    </div>
+  </div>
+</Site>

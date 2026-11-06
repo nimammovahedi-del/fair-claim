@@ -1,104 +1,375 @@
 ---
+// Design-system gallery for review. Shows tokens and every component in light and dark side by side.
 import Site from "../../layouts/Site.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import SideMenu from "../../components/SideMenu.astro";
+import ToolNotice from "../../components/ToolNotice.astro";
+import Samples from "../../components/design/Samples.astro";
 
-const directions = [
-  {
-    key: "counter",
-    name: "A · Counter",
-    tagline: "The clerk's counter: plain, official, impossible to mistrust.",
-    inspirations: [
-      "GOV.UK Design System (black header, yellow focus ring, big bold type, one idea per page)",
-      "U.S. Web Design System and its Public Sans typeface",
-      "California Judicial Council forms like SC-100: numbered boxed items, tight rules",
-    ],
-    feel: "Light, high-contrast, square corners, one civic blue, green action buttons. Numbered steps in solid black squares. Feels like the court's own self-help site done well.",
-    risk: "Can read as 'government website' — trustworthy, but less memorable.",
-    colors: ["#0b0c0c", "#ffffff", "#1d4f91", "#00703c", "#ffdd00", "#f3f4f5"],
-    fonts: "Public Sans (headings and body) · IBM Plex Mono (citations)",
-    sample: { bg: "#ffffff", ink: "#0b0c0c", accent: "#1d4f91", font: "'Public Sans', sans-serif", weight: 800 },
-  },
-  {
-    key: "docket",
-    name: "B · Docket",
-    tagline: "A court docket sheet as a calm dark console.",
-    inspirations: [
-      "PACER docket sheets and courthouse calendar boards (case numbers, dates, status in tight columns)",
-      "Bloomberg Terminal and Linear's dark UI (dense but quiet)",
-      "Your own Congress tracker's monitoring-console style",
-    ],
-    feel: "Dark slate, amber for warnings and key numbers, monospace for every figure, citation and date. Numbers line up in ledgers. Best for the 50-state table and the calculator.",
-    risk: "Dark, data-heavy screens can feel intimidating to someone stressed about a landlord dispute.",
-    colors: ["#0e1215", "#151b20", "#e6e9ec", "#e3b341", "#8fc1ff", "#5cc98b"],
-    fonts: "IBM Plex Sans (body) · IBM Plex Mono (numbers, citations)",
-    sample: { bg: "#0e1215", ink: "#e6e9ec", accent: "#e3b341", font: "'IBM Plex Sans', sans-serif", weight: 600 },
-  },
-  {
-    key: "pamphlet",
-    name: "C · Pamphlet",
-    tagline: "A well-made printed guide from the public library.",
-    inspirations: [
-      "Nolo's classic paperback 'Everybody's Guide to Small Claims Court' and public-library legal pamphlets",
-      "ProPublica and The Marshall Project explainers (serif text, generous margins, sidenote sources)",
-      "Stripe Press book design (warm paper, oxblood accent, big italic numerals)",
-    ],
-    feel: "Cream paper, warm ink, serif type, oxblood accent, large italic step numbers. Reads like a calm, human guide; citations sit quietly beside the text.",
-    risk: "Less 'official' at a glance; dense tables need extra care in a serif.",
-    colors: ["#f5efe3", "#221c15", "#8e2b1d", "#e8a33d", "#3f6b32", "#ede5d4"],
-    fonts: "Source Serif 4 (headings and body) · IBM Plex Mono (citations)",
-    sample: { bg: "#f5efe3", ink: "#221c15", accent: "#8e2b1d", font: "'Source Serif 4', serif", weight: 600 },
-  },
+// Keep in sync with src/styles/global.css (sections 2 and 3).
+const colors: { token: string; use: string; light: string; dark: string }[] = [
+  { token: "--bg", use: "Page background", light: "#ffffff", dark: "#23262c" },
+  { token: "--surface", use: "Tinted surfaces, table headers", light: "#f4f5f8", dark: "#2b2f36" },
+  { token: "--surface-2", use: "Hover on surfaces", light: "#e9ebf1", dark: "#353a43" },
+  { token: "--raised", use: "Cards and dialogs", light: "#ffffff", dark: "#2b2f36" },
+  { token: "--ink", use: "Body text", light: "#1b1d22", dark: "#eceef2" },
+  { token: "--ink-2", use: "Secondary text", light: "#3d424b", dark: "#ccd0d7" },
+  { token: "--muted", use: "Hints, captions, citations", light: "#5a606a", dark: "#a5abb5" },
+  { token: "--border", use: "Dividers", light: "#d6d9e0", dark: "#3f444d" },
+  { token: "--border-strong", use: "Form control borders", light: "#858b96", dark: "#858c97" },
+  { token: "--accent", use: "Links, primary buttons, focus", light: "#2b44ae", dark: "#a8b5ff" },
+  { token: "--accent-hover", use: "Hover on accent", light: "#22388f", dark: "#c0caff" },
+  { token: "--on-accent", use: "Text on accent", light: "#ffffff", dark: "#1a1d23" },
+  { token: "--accent-soft", use: "Tags, chips, selected", light: "#eceffb", dark: "#333a57" },
+  { token: "--info-bg", use: "Info callout", light: "#e9f0fb", dark: "#26324a" },
+  { token: "--success-bg", use: "Success callout", light: "#e6f4ec", dark: "#233a2f" },
+  { token: "--warning-bg", use: "Warning callout, unverified", light: "#fdf3dc", dark: "#3b3322" },
+  { token: "--error-bg", use: "Error callout", light: "#fbeaea", dark: "#44282a" },
 ];
+const hex = (t: string, theme: "light" | "dark") => colors.find((c) => c.token === t)![theme];
+
+// WCAG 2.x contrast ratio, computed at build time.
+function lum(h: string) {
+  const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+}
+const ratio = (a: string, b: string) => {
+  const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
+  return (x + 0.05) / (y + 0.05);
+};
+const extra = {
+  light: { "--info-ink": "#1d4e89", "--success-ink": "#1b5e3a", "--warning-ink": "#6b4300", "--error-ink": "#a1251f" },
+  dark: { "--info-ink": "#a9c7f5", "--success-ink": "#9ad8b1", "--warning-ink": "#f2d48c", "--error-ink": "#f5afab" },
+};
+const pairs: [string, string, string, number][] = [
+  ["--ink", "--bg", "Body text", 4.5],
+  ["--ink-2", "--surface", "Secondary text on surface", 4.5],
+  ["--muted", "--bg", "Hints on page", 4.5],
+  ["--muted", "--surface-2", "Hints on hovered surface (worst case)", 4.5],
+  ["--accent", "--bg", "Links", 4.5],
+  ["--accent", "--accent-soft", "Tag text", 4.5],
+  ["--on-accent", "--accent", "Primary button text", 4.5],
+  ["--border-strong", "--bg", "Input border (non-text)", 3],
+  ["--info-ink", "--info-bg", "Info text", 4.5],
+  ["--success-ink", "--success-bg", "Success / verified", 4.5],
+  ["--warning-ink", "--warning-bg", "Warning / unverified", 4.5],
+  ["--error-ink", "--error-bg", "Error text", 4.5],
+];
+const val = (t: string, theme: "light" | "dark") => (extra[theme] as Record<string, string>)[t] ?? hex(t, theme);
+const contrast = pairs.map(([fg, bg, use, min]) => ({
+  fg,
+  bg,
+  use,
+  min,
+  light: ratio(val(fg, "light"), val(bg, "light")),
+  dark: ratio(val(fg, "dark"), val(bg, "dark")),
+}));
+
+const type = [
+  { cls: "h1", label: "H1 · 40/48 (32/40 on phones) · 800", text: "Small claims court in California" },
+  { cls: "h2", label: "H2 · 28/36 (24/32) · 700", text: "Deadlines that trip people up" },
+  { cls: "h3", label: "H3 · 22/28 (20/28) · 700", text: "Serving the papers" },
+  { cls: "h4", label: "H4 · 18/28 · 700", text: "Common mistakes" },
+  { cls: "lede", label: "Lede · 20/32 (18/28)", text: "Winning is only half the question." },
+  { cls: "", label: "Body · 16/24", text: "Small claims court is built for people without lawyers. The details change from state to state." },
+  { cls: "hint", label: "Small / hint · 14/24", text: "Leave at 0 to ignore, or use your hourly pay if you'd lose work." },
+  { cls: "cite", label: "Citation · IBM Plex Mono 12/20", text: "Cal. Code Civ. Proc. § 116.221 · checked 2026-11-05" },
+];
+const spaces = [
+  ["--space-half", 4],
+  ["--space-1", 8],
+  ["--space-1h", 12],
+  ["--space-2", 16],
+  ["--space-3", 24],
+  ["--space-4", 32],
+  ["--space-5", 40],
+  ["--space-6", 48],
+  ["--space-8", 64],
+  ["--space-10", 80],
+] as const;
 ---
-<Site title="Design directions" description="Three visual directions for Fair Claim.">
+<Site title="Design system" description="Fair Claim's design system: tokens and components in light and dark.">
+  <Breadcrumb items={[{ label: "Design system" }]} />
   <div class="narrow">
-    <p class="eyebrow">For Nima</p>
-    <h1>Three design directions</h1>
+    <p class="eyebrow">For review</p>
+    <h1>Fair Claim design system</h1>
     <p class="lede">
-      All three use the same pages and structure — only the look changes. Use the <strong>Design</strong> menu at the
-      top right to see any page of this prototype in each direction. Motion is the same in all three: short fades and
-      color changes only, no bounce or overshoot.
+      One calm, accessible system for every page. Light is the default; dark is a dim gray, not black. Every
+      component below is shown in both themes side by side.
+    </p>
+    <p>
+      Full notes are in <code>docs/design-system.md</code>. Use <button class="link-button" type="button" data-open-display-settings>Display settings</button>
+      to switch the whole site.
     </p>
   </div>
 
-  {directions.map((d) => (
-    <section style="margin-top:2.5rem">
-      <h2>{d.name}</h2>
-      <p class="lede" style="font-size:1.1rem">{d.tagline}</p>
-      <div
-        style={`background:${d.sample.bg};color:${d.sample.ink};border:1px solid var(--rule);padding:1.4rem 1.5rem;margin:1rem 0;font-family:${d.sample.font}`}
-      >
-        <div style={`font-weight:${d.sample.weight};font-size:1.7rem;line-height:1.15;margin-bottom:.4rem`}>
-          Your landlord kept your deposit.
-        </div>
-        <div style="opacity:.85">California limit for individuals</div>
-        <div style={`font-weight:${d.sample.weight};font-size:2.4rem;color:${d.sample.accent}`}>$12,500</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.75rem;opacity:.7">Cal. Code Civ. Proc. § 116.221 · checked 2026-11-05</div>
-      </div>
-      <div style="display:flex;gap:.4rem;margin:.6rem 0 1rem">
-        {d.colors.map((c) => (
-          <span title={c} style={`width:2.2rem;height:2.2rem;background:${c};border:1px solid var(--rule);display:inline-block`}></span>
-        ))}
-      </div>
-      <div class="narrow">
-        <p><strong>Feel:</strong> {d.feel}</p>
-        <p><strong>Type:</strong> {d.fonts}</p>
-        <p><strong>Inspired by:</strong></p>
-        <ul>{d.inspirations.map((i) => <li>{i}</li>)}</ul>
-        <p><strong>Watch out for:</strong> {d.risk}</p>
-        <button class="btn secondary" type="button" data-try={d.key}>Try {d.name} on this site</button>
-      </div>
-    </section>
-  ))}
+  <div class="with-sidemenu">
+    <SideMenu
+      title="Sections"
+      items={[
+        { href: "#principles", label: "Principles" },
+        { href: "#color", label: "Color" },
+        { href: "#contrast", label: "Contrast checks" },
+        { href: "#type", label: "Type" },
+        { href: "#space", label: "Spacing and shape" },
+        { href: "#motion", label: "Motion" },
+        { href: "#components", label: "Components" },
+        { href: "#notice", label: "Tool notice" },
+      ]}
+    />
+    <div>
+      <section id="principles">
+        <h2>Principles</h2>
+        <ul>
+          <li><strong>Calm and neutral.</strong> White page, one blue accent, no decoration that suggests urgency.</li>
+          <li><strong>Readable first.</strong> 16px body, 46rem reading width, AA contrast or better in both themes.</li>
+          <li><strong>Sourced.</strong> Every fact can carry a mono citation line and an "unverified" badge.</li>
+          <li><strong>Quiet motion.</strong> Short fades and color changes only.</li>
+        </ul>
+      </section>
 
-  <script is:inline>
-    document.querySelectorAll("[data-try]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        document.documentElement.dataset.direction = b.dataset.try;
-        var sel = document.getElementById("direction-select");
-        if (sel) sel.value = b.dataset.try;
-        try { localStorage.setItem("fc-direction", b.dataset.try); } catch (e) {}
-        window.scrollTo({ top: 0 });
-      });
+      <section id="color">
+        <h2>Color</h2>
+        <div class="ds-panels">
+          {(["light", "dark"] as const).map((theme) => (
+            <div class="ds-panel" data-theme={theme}>
+              <p class="ds-panel-label">{theme === "light" ? "Light (default)" : "Dark (dim)"}</p>
+              <ul class="ds-swatches">
+                {colors.map((c) => (
+                  <li>
+                    <span class="ds-swatch" style={`background:var(${c.token})`}></span>
+                    <span>
+                      <code>{c.token}</code> <span class="mono ds-hex">{c[theme]}</span>
+                      <br /><span class="hint">{c.use}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p class="hint">
+          The accent, "claim blue" <code>#2b44ae</code>, is a softer blue-violet chosen to be clearly different from the
+          French state's "bleu France".
+        </p>
+      </section>
+
+      <section id="contrast">
+        <h2>Contrast checks</h2>
+        <p>Computed from the token values when the site is built. WCAG 2.2 AA needs 4.5:1 for text and 3:1 for control borders.</p>
+        <div class="table-scroll">
+          <table class="table-stack">
+            <thead><tr><th>Pair</th><th>Used for</th><th class="num">Light</th><th class="num">Dark</th></tr></thead>
+            <tbody>
+              {contrast.map((c) => (
+                <tr>
+                  <td><code>{c.fg}</code> on <code>{c.bg}</code></td>
+                  <td data-label="Used for">{c.use}</td>
+                  <td class="num" data-label="Light">{c.light.toFixed(1)}:1 {c.light >= c.min ? <span class="badge verified">pass</span> : <span class="badge error">fail</span>}</td>
+                  <td class="num" data-label="Dark">{c.dark.toFixed(1)}:1 {c.dark >= c.min ? <span class="badge verified">pass</span> : <span class="badge error">fail</span>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="type">
+        <h2>Type</h2>
+        <p>
+          <strong>Public Sans</strong> (variable, open license) for everything; <strong>IBM Plex Mono</strong> for
+          citations, dates and figures in ledgers. Both are self-hosted, so pages make no requests to font services.
+        </p>
+        <div class="ds-type">
+          {type.map((t) => (
+            <div class="ds-type-row">
+              <p class="hint ds-type-label">{t.label}</p>
+              <p class={t.cls} style="margin:0">{t.text}</p>
+            </div>
+          ))}
+          <div class="ds-type-row">
+            <p class="hint ds-type-label">Stat · 56/64 (40/48) · 800</p>
+            <p class="stat" style="margin:0">55%</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="space">
+        <h2>Spacing and shape</h2>
+        <p>Everything sits on an 8px grid. <code>--space-N</code> means N × 8px.</p>
+        <ul class="ds-spaces">
+          {spaces.map(([t, px]) => (
+            <li><span class="ds-space-bar" style={`width:${px}px`}></span><code>{t}</code> <span class="hint">{px}px</span></li>
+          ))}
+        </ul>
+        <p>
+          Corners: <code>--radius-sm</code> 4px for buttons, inputs and badges; <code>--radius</code> 8px for cards,
+          tables and dialogs; pills for tags and chips. Colored bars are <code>--bar-width</code> 4px.
+        </p>
+        <p>
+          Page gutters: 16px on phones, 24px on tablets, 32px on desktop. Content is at most 1248px wide; reading text
+          at most 46rem.
+        </p>
+      </section>
+
+      <section id="motion">
+        <h2>Motion</h2>
+        <ul>
+          <li>Only color, background, border and opacity change. Nothing slides, scales, bounces or overshoots.</li>
+          <li><code>--dur-fast</code> 150ms for hovers; <code>--dur</code> 200ms for dialogs and the accordion chevron.</li>
+          <li>One curve, <code>--ease-out</code> (cubic-bezier(0.22, 0.61, 0.36, 1)), which never overshoots.</li>
+          <li>With "reduce motion" turned on, all transitions and animations are switched off.</li>
+        </ul>
+      </section>
+
+      <section id="components">
+        <h2>Components</h2>
+        <p>The same markup in each theme. Class names are listed in <code>docs/design-system.md</code>.</p>
+        <div class="ds-panels">
+          <div class="ds-panel" data-theme="light">
+            <p class="ds-panel-label">Light</p>
+            <Samples k="l" />
+          </div>
+          <div class="ds-panel" data-theme="dark">
+            <p class="ds-panel-label">Dark</p>
+            <Samples k="d" />
+          </div>
+        </div>
+      </section>
+
+      <section id="notice">
+        <h2>Tool notice</h2>
+        <p>
+          Each tool (the calculator, the demand letter, the California deadline estimator) shows a short "please read"
+          notice once. The tool stays paused until the reader presses <strong>I understand</strong>. Escape or
+          <strong>Not now</strong> closes the notice without accepting. The choice is remembered on this device only.
+        </p>
+        <ToolNotice id="design-demo" target="ds-demo-tool" toolName="this demo tool" mode="ondemand" />
+        <div class="card tinted" id="ds-demo-tool">
+          <div class="field">
+            <label for="ds-demo-input">A field inside the demo tool</label>
+            <input id="ds-demo-input" type="text" placeholder="Locked until you accept" />
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="btn secondary" type="button" id="ds-reset">Reset all notices on this device</button>
+          <span class="hint" id="ds-reset-out" aria-live="polite"></span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("ds-reset")?.addEventListener("click", () => {
+      let n = 0;
+      try {
+        for (const key of Object.keys(localStorage)) {
+          if (key.startsWith("fc-notice-")) {
+            localStorage.removeItem(key);
+            n++;
+          }
+        }
+      } catch {
+        /* storage blocked */
+      }
+      const out = document.getElementById("ds-reset-out");
+      if (out) out.textContent = n ? `Cleared ${n}. Reload a tool page to see its notice again.` : "No saved notices on this device.";
     });
   </script>
 </Site>
+
+<style is:global>
+  /* Gallery-only helpers (prefixed ds-). Not part of the reusable system. */
+  .ds-panels {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+    margin: var(--space-3) 0;
+  }
+  .ds-panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    min-width: 0;
+  }
+  .ds-panel-label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-2);
+  }
+  .ds-swatches {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-1h);
+  }
+  .ds-swatches li {
+    display: flex;
+    gap: var(--space-1h);
+    align-items: center;
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.25rem;
+  }
+  .ds-swatch {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+  .ds-hex {
+    color: var(--muted);
+  }
+  .ds-type-row {
+    padding: var(--space-2) 0;
+    border-top: 1px solid var(--border);
+  }
+  .ds-type-label {
+    margin: 0 0 var(--space-half);
+  }
+  .ds-spaces {
+    list-style: none;
+    padding: 0;
+  }
+  .ds-spaces li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1h);
+    margin: var(--space-1) 0;
+  }
+  .ds-space-bar {
+    display: inline-block;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .ds-h {
+    font-size: var(--text-lg);
+    line-height: var(--lh-lg);
+    margin: var(--space-4) 0 var(--space-2);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border);
+  }
+  .ds-samples > .ds-h:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .ds-modal-sample {
+    background: var(--raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-2);
+    max-width: 36rem;
+  }
+  .ds-modal-sample .modal-title {
+    font-size: var(--text-h3);
+    line-height: var(--lh-h3);
+    font-weight: var(--weight-bold);
+  }
+</style>
