@@ -143,6 +143,7 @@ export const limitChanges: LimitChange[] = [
   // California: confirmed against SB 71 in ca-statewide.json (the states.json row flags its longer recent_changes
   // text, which also covers a bill that did not pass).
   { abbr: "CA", from: caPrior ?? 10000, to: 12500, effective: "2024-01-01", note: "Businesses: $6,250." },
+  { abbr: "GA", from: 15000, to: 25000, effective: "2027-01-01", scheduled: true, note: "HB 999 (2026). Magistrate court." },
   { abbr: "WI", from: 10000, to: 15000, effective: "2027-01-01", scheduled: true },
   { abbr: "UT", from: 20000, to: 25000, effective: "2030-01-01", scheduled: true },
 ];
@@ -416,3 +417,33 @@ export const upkeep = [
 export const coreOpen = states.some((s) =>
   isU(s, "limit_individual", "limit_business", "filing_fee_min", "filing_fee_max", "appeal", "appeal_who", "appeal_deadline_days", "lawyers_allowed"),
 );
+
+// ------------------------------------------------------------------ Upcoming rule changes (home page)
+// Dated changes already enacted but not yet in effect. Limits come from limitChanges (scheduled);
+// fee changes are read by hand from each state's `recent_changes` (verified, see research/verification).
+export interface UpcomingChange {
+  abbr: string;
+  state: string;
+  slug: string;
+  effective: string; // ISO date
+  kind: "Limit" | "Filing fee";
+  from: string;
+  to: string;
+  note?: string;
+}
+const feeChanges = [
+  { abbr: "RI", effective: "2027-01-01", from: "$75.75", to: "$75", note: "One flat fee instead of $55 plus add-ons." },
+  { abbr: "SC", effective: "2027-01-01", from: "$70", to: "$105" },
+];
+// Home page rows (structured before/after amounts). About uses `upcomingChanges` above, which carries the law citations.
+export const upcomingRows: UpcomingChange[] = [
+  ...limitChanges
+    .filter((c) => c.scheduled)
+    .map((c) => ({ abbr: c.abbr, effective: c.effective, kind: "Limit" as const, from: usd(c.from), to: usd(c.to), note: undefined })),
+  ...feeChanges.map((f) => ({ ...f, kind: "Filing fee" as const })),
+]
+  .map((c) => {
+    const st = states.find((x) => x.abbr === c.abbr)!;
+    return { ...c, state: st.state, slug: st.slug };
+  })
+  .sort((a, b) => a.effective.localeCompare(b.effective) || a.state.localeCompare(b.state));

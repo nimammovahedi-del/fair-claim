@@ -6,7 +6,7 @@ import Site from "../layouts/Site.astro";
 import LocationSearch from "../components/LocationSearch.astro";
 import TileMapLimits from "../components/TileMapLimits.astro";
 import "../styles/features.css";
-import { statesChecked, denver, evidenceChecked } from "../lib/stats";
+import { statesChecked, denver, evidenceChecked, upcomingRows } from "../lib/stats";
 import { steps } from "../lib/steps";
 
 const doors = [
@@ -108,9 +108,131 @@ const strip = steps.map((s) => ({ slug: s.slug, word: stepWords[s.slug] ?? s.tit
     </div>
     <TileMapLimits compact headingLevel={2} id="home-limits" />
   </section>
+
+  <section class="wrap land-soon" aria-labelledby="soon-title">
+    <div class="land-soon-head">
+      <h2 id="soon-title" class="lbl">Rules changing soon</h2>
+      <p class="land-soon-sub">Laws already passed that take effect later. We update each state's page on the day.</p>
+    </div>
+    <ol class="land-soon-list">
+      {upcomingRows.map((c) => {
+        const d = new Date(c.effective + "T00:00:00Z");
+        const when = d.toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
+        return (
+          <li>
+            <a class="land-soon-row" href={`/states/${c.slug}/`}>
+              <time class="land-soon-date" datetime={c.effective}>{when}</time>
+              <span class="land-soon-state">{c.state}</span>
+              <span class="land-soon-kind">{c.kind}</span>
+              <span class="land-soon-change"><span class="land-soon-from">{c.from}</span><span aria-hidden="true">→</span><span class="sr-only">to</span><span class="land-soon-to">{c.to}</span></span>
+              <span class="land-soon-go" aria-hidden="true">→</span>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+  </section>
 </Site>
 
 <style>
+  .land-soon {
+    padding-top: var(--sp-section, 64px);
+  }
+  .land-soon-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .land-soon-head h2 {
+    margin: 0;
+  }
+  .land-soon-sub {
+    margin: 0;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .land-soon-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .land-soon-row {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1.2fr) 7rem minmax(0, 1fr) 1.5rem;
+    align-items: baseline;
+    gap: 8px 24px;
+    padding: 18px 4px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background-color var(--t-fast, 160ms) var(--ease, ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .land-soon-row:hover {
+      background: var(--panel);
+    }
+    .land-soon-row:hover .land-soon-go {
+      transform: translateX(3px);
+    }
+  }
+  .land-soon-row:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .land-soon-date,
+  .land-soon-kind {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .land-soon-state {
+    font-family: var(--f-display);
+    font-size: clamp(22px, 2.2vw, 28px);
+    letter-spacing: -0.02em;
+  }
+  .land-soon-change {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    font-variant-numeric: tabular-nums;
+    font-size: 18px;
+  }
+  .land-soon-from {
+    color: var(--ink-3);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+  .land-soon-to {
+    font-family: var(--f-display);
+    font-size: clamp(22px, 2.2vw, 28px);
+    letter-spacing: -0.02em;
+  }
+  .land-soon-go {
+    justify-self: end;
+    color: var(--ink-2);
+    transition: transform var(--t-fast, 160ms) var(--ease, ease-out);
+  }
+  @media (max-width: 760px) {
+    .land-soon-row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4px 16px;
+    }
+    .land-soon-date { grid-column: 1; grid-row: 1; }
+    .land-soon-kind { grid-column: 2; grid-row: 1; justify-self: end; }
+    .land-soon-state { grid-column: 1; grid-row: 2; }
+    .land-soon-change { grid-column: 2; grid-row: 2; justify-self: end; }
+    .land-soon-go { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .land-soon-row, .land-soon-go { transition: none; }
+  }
   .land-hero {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);

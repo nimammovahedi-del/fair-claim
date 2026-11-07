@@ -178,3 +178,4 @@ Nima wants the short address **https://fairclaim.pages.dev**. Pages projects can
 - **Glossary:** letters with terms are now clearly stronger than empty ones.
 - **Logo: "Balance"** (a scale with cobalt and tomato tiles). It's in the header, the favicon (follows light/dark), apple-touch-icon, icon-512 and a new og.png share image. The 10 logo options are in `output/logos/`.
 - **Rhode Island:** the 2027 fee change now reads "$75.75 total today becomes a flat $75".
+- Home: added "Rules changing soon" (GA, RI, SC, WI on 2027-01-01; UT on 2030-01-01), built from `upcomingRows` in stats.ts. **Update these on the day.** Georgia was added to the limit-change chart as scheduled.
