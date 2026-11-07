@@ -678,28 +678,7 @@ main:focus {
 }
 
 /* ------------------------------------------------------------------ 7. Header, nav, mobile menu, theme switch */
-.proto-line {
-  border-bottom: 1px solid var(--line);
-  font-family: var(--f-mono);
-  font-size: 11px;
-  line-height: 1.4;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-.proto-line .wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
-  padding-block: 7px;
-}
-.proto-line p {
-  margin: 0;
-}
 @media (max-width: 560px) {
-  .proto-line .pl-extra {
-    display: none;
-  }
 }
 
 .hdr {
@@ -2671,16 +2650,6 @@ dialog.tool-notice {
   }
   .hdr,
   .ftr,
-  .proto-line,
-  .skip-link,
-  .no-print,
-  .tool-gate,
-  .sidemenu,
-  .theme-switch,
-  dialog,
-  .btn {
-    display: none !important;
-  }
   .print-only {
     display: block;
   }
