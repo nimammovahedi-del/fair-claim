@@ -147,3 +147,11 @@ Agents checked every remaining state detail plus the California county gaps. Cor
 - **CA counties:** 25 confirmed, 25 corrected (advisors in Butte, Shasta, Napa, Humboldt and others). **42 details in 31 counties are still open**, mostly whether small counties allow small-claims e-filing or remote hearings; their court sites don't say. Advisors are still unconfirmed in Del Norte, San Francisco, Sierra, Tehama, Yolo and Yuba.
 - **New dated change:** Rhode Island's fee goes from $55 to $75 and its counterclaim cap to $5,000 on 2027-01-01 (P.L. 2026 ch. 323).
 - **Launch prep** is done; see `docs/publish.md`. Hosting is the fedmoney Cloudflare account.
+
+## Live preview (2026-11-07)
+- **Address:** https://fair-claim-706.pages.dev. It's Cloudflare Pages project `fair-claim` on the fedmoney account ("federal-money-atlas2"), and it auto-deploys on every push to github.com/nimammovahedi-del/fair-claim (private).
+- **Checked live:** all page types return 200, review-only pages return 404, robots.txt blocks crawlers, every page is noindex, security headers are active, and the PDF library loads under them.
+- **To do:**
+  - Nima changes Cloudflare's `SITE_URL` variable to `https://fair-claim-706.pages.dev`, or deletes it, so canonical and share links use the real address.
+  - Test on a real phone.
+  - Go public later by setting `PUBLIC_INDEXABLE=true`.
