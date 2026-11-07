@@ -158,3 +158,4 @@ Agents checked every remaining state detail plus the California county gaps. Cor
 
 ## Address change (2026-11-07)
 Nima wants the short address **https://fairclaim.pages.dev**. Pages projects can't be renamed, so the plan is: create a new Cloudflare Pages project named `fairclaim` on the same repo (same settings), check it, then delete the old `fair-claim` project (fair-claim-706.pages.dev). The code's default address is already set to fairclaim.pages.dev.
+- 2026-11-07: **Live at https://fairclaim.pages.dev** (Pages project `fairclaim`, fedmoney account). Checked: all page types 200, mockups 404, canonical correct, security headers on, still noindex. The old `fair-claim` project (fair-claim-706.pages.dev) can be deleted by Nima.
