@@ -1,0 +1,227 @@
+---
+// Mockup · Option A — demand-letter tool as a guided flow with a live paper preview.
+// The preview is built with the real buildDemandLetter() from sample answers.
+import Layout from "../../../../mockups/a/Layout.astro";
+import { buildDemandLetter } from "../../../../lib/core/demand-letter";
+import { letterNotes } from "../../../../lib/letter-notes";
+
+const notes = letterNotes.ca;
+const sample = {
+  kind: "security_deposit" as const,
+  sender: { name: "Alex Rivera", addressLines: ["88 Linden Avenue, Apt 2", "Oakland, CA 94610"], email: "alex@example.com" },
+  recipient: { name: "Harbor Point Rentals LLC", addressLines: ["410 Grand Avenue, Suite 5", "Oakland, CA 94610"] },
+  letterDate: "2026-11-06",
+  amount: 1850,
+  subjectDetail: "1420 Alder Street, Unit 3, Oakland",
+  eventDate: "2026-09-30",
+  facts:
+    "I left the unit clean and undamaged, and I returned the keys on the day I moved out. More than 21 days have passed and I have not received my deposit or an itemized statement.",
+  responseDays: 14,
+  paymentMethods: "check mailed to the address above",
+  courtPhrase: "small claims court in Alameda County",
+  legalNotes: [notes[0].text],
+  offerToDiscuss: true,
+  mentionCourt: true,
+};
+const letter = buildDemandLetter(sample);
+const kinds = [
+  { v: "security_deposit", label: "Security deposit", sub: "Not returned after moving out", c: "c-verm" },
+  { v: "consumer_refund", label: "A refund", sub: "Product or service", c: "c-blue" },
+  { v: "unpaid_invoice", label: "Unpaid invoice", sub: "Money owed to my business", c: "c-violet" },
+  { v: "property_damage", label: "Damage to my property", sub: "Car, home, belongings", c: "c-lime" },
+  { v: "other", label: "Something else", sub: "Any other amount owed", c: "c-amber" },
+];
+const keys = "ABCDE";
+const noticePoints = [
+  "This is general legal information, not legal advice. The tool fills in a plain template; it can't judge your case.",
+  "Nothing you type is stored or sent anywhere. The PDF is made on your device and is gone when you close the page.",
+  "You're responsible for the letter. Read it and make sure every fact, date and amount is right.",
+  "Keep it calm and factual. No threats of criminal charges or public posts. Saying you may go to small claims court is optional.",
+];
+---
+<Layout title="Write a demand letter" current="tools">
+  <section class="wrap page-hero lt-hero">
+    <p class="lbl"><span class="crumb"><a href="/mockups/a/">Tools</a><span class="sep" aria-hidden="true"></span><span class="lbl-ink">Demand letter</span></span></p>
+    <div class="lt-top">
+      <h1 class="display">Write a demand letter</h1>
+      <p class="muted lt-aside">A written request for money you believe you're owed. Many people try one before court, or instead of it. Sending one doesn't commit you to suing.</p>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="notice-title">
+    <div class="notice">
+      <span class="n-icon" aria-hidden="true">i</span>
+      <div>
+        <p class="lbl">Please read · 30 seconds</p>
+        <h2 class="h3" id="notice-title">Before you start</h2>
+        <ol>{noticePoints.map((p) => <li>{p}</li>)}</ol>
+      </div>
+      <div class="n-actions">
+        <button class="btn" type="button" data-accept>I understand</button>
+        <a class="go" href="/mockups/a/about/#help">Where to get free advice</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap lt-grid">
+    <div class="lt-flow">
+      <div class="lt-prog-row">
+        <div class="progress lt-prog" aria-hidden="true">
+          <span class="seg done"></span><span class="seg done"></span><span class="seg done"></span><span class="seg now"></span><span class="seg"></span>
+        </div>
+        <p class="lbl">Step 4 of 5</p>
+      </div>
+
+      <section class="q is-done" aria-labelledby="l1">
+        <div class="q-head"><span class="q-n">01 / 05</span><h2 class="h2" id="l1">What is it about?</h2></div>
+        <div class="q-body">
+          <div class="tiles lt-kinds" role="group" aria-labelledby="l1">
+            {kinds.map((k, i) => (
+              <button type="button" class={`tile ${k.c}`} aria-pressed={i === 0 ? "true" : "false"}>
+                <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span></span>
+                <span><span class="t-label">{k.label}</span><span class="t-sub">{k.sub}</span></span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="q is-done" aria-labelledby="l2">
+        <div class="q-head"><span class="q-n">02 / 05</span><h2 class="h2" id="l2">The details</h2></div>
+        <div class="q-body">
+          <div class="fields fields-2">
+            <div class="field"><label for="amt">Amount <span class="f-req">Required</span></label><div class="affix"><span aria-hidden="true">$</span><input id="amt" value="1,850" /></div></div>
+            <div class="field"><label for="mo">Move-out date</label><input id="mo" value="Sep 30, 2026" /></div>
+            <div class="field wide"><label for="addr">Rental address <span class="f-req">Required</span></label><input id="addr" value="1420 Alder Street, Unit 3, Oakland" /></div>
+            <div class="field wide tall"><label for="facts">What happened, in your words</label><textarea id="facts" rows="3">{sample.facts}</textarea><span class="f-hint">Dates, amounts and what you did. Keep it factual.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="q is-done" aria-labelledby="l3">
+        <div class="q-head"><span class="q-n">03 / 05</span><h2 class="h2" id="l3">From you, to them</h2></div>
+        <div class="q-body">
+          <div class="fields fields-2">
+            <div class="field"><label for="sn">Your name</label><input id="sn" value="Alex Rivera" /></div>
+            <div class="field"><label for="rn">Their name or business name</label><input id="rn" value="Harbor Point Rentals LLC" /></div>
+            <div class="field"><label for="sa">Your mailing address</label><input id="sa" value="88 Linden Ave, Apt 2" /></div>
+            <div class="field"><label for="ra">Their mailing address</label><input id="ra" value="410 Grand Ave, Suite 5" /></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="q is-current" aria-labelledby="l4">
+        <div class="q-head">
+          <span class="q-n">04 / 05</span>
+          <h2 class="h2" id="l4">How long will you give them?</h2>
+          <p class="q-help">Many people allow 10 to 14 days. The deadline is printed in the letter.</p>
+        </div>
+        <div class="q-body">
+          <div class="tiles lt-days" role="group" aria-labelledby="l4">
+            <button type="button" class="tile c-blue" aria-pressed="false"><span class="t-top"><span class="key">A</span></span><span><span class="num t-big">10</span><span class="t-sub">days</span></span></button>
+            <button type="button" class="tile c-violet" aria-pressed="true"><span class="t-top"><span class="key">B</span></span><span><span class="num t-big">14</span><span class="t-sub">days · by Nov 20</span></span></button>
+            <button type="button" class="tile c-lime" aria-pressed="false"><span class="t-top"><span class="key">C</span></span><span><span class="num t-big">21</span><span class="t-sub">days</span></span></button>
+          </div>
+          <div class="q-foot">
+            <button class="btn" type="button">Continue</button>
+            <span class="hint"><span class="kbd">↵</span> press Enter</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="q is-next" aria-labelledby="l5">
+        <div class="q-head"><span class="q-n">05 / 05</span><h2 class="h2" id="l5">What should the letter say?</h2></div>
+        <div class="q-body">
+          <ul class="toggles">
+            <li><span class="tg on" aria-hidden="true"></span><span>Offer to talk it over before the deadline</span></li>
+            <li><span class="tg on" aria-hidden="true"></span><span>Say I may file in small claims court if it isn't resolved</span></li>
+            {notes.map((n, i) => (
+              <li><span class={`tg ${i === 0 ? "on" : ""}`} aria-hidden="true"></span><span>{n.text.split("(")[0].trim()}<span class="cite"><span>{n.citation}</span></span></span></li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <aside class="lt-preview" aria-labelledby="pv-title">
+      <div class="lt-preview-in">
+        <div class="pv-bar">
+          <p class="lbl lbl-ink" id="pv-title">Preview</p>
+          <p class="lbl">Live · updates as you type</p>
+        </div>
+        <article class="paper letter">
+          <div class="lp-head">
+            <div>{letter.heading.slice(0, 4).map((l) => <p>{l}</p>)}</div>
+          </div>
+          <p class="lp-date">{letter.heading[5]}</p>
+          <div class="lp-to">{letter.heading.slice(7).map((l) => <p>{l}</p>)}</div>
+          <p class="lp-re"><span>Re:</span> {letter.subject}</p>
+          <p>{letter.salutation}</p>
+          {letter.paragraphs.map((p) => <p>{p}</p>)}
+          <div class="lp-close"><p>Sincerely,</p><p class="lp-sig">{sample.sender.name}</p></div>
+          <p class="lp-foot">Prepared with Fair Claim's free letter tool (general information, not legal advice). Review before sending.</p>
+        </article>
+        <div class="pv-actions">
+          <button class="btn" type="button">Download PDF</button>
+          <button class="btn ghost" type="button">Print</button>
+          <button class="btn ghost" type="button">Copy text</button>
+        </div>
+        <p class="cite pv-cite"><span>California note: {notes[0].citation}</span><span>Checked 2026-11-05</span></p>
+      </div>
+    </aside>
+  </div>
+</Layout>
+
+<style>
+  .lt-hero { padding-bottom: 48px; }
+  .lt-top { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: end; }
+  .lt-aside { font-size: 18px; max-width: 44ch; padding-bottom: 6px; }
+
+  .lt-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 56px; margin-top: 64px; align-items: start; }
+  .lt-prog-row { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding-bottom: 8px; }
+  .lt-flow .q { padding-block: 52px; }
+  .lt-flow .q:first-of-type { border-top: 0; padding-top: 40px; }
+  .lt-flow .q-head { grid-template-columns: 92px 1fr; }
+  .lt-flow .q-body { margin-left: calc(92px + var(--gap)); }
+  .lt-flow .q.is-current .q-n { color: var(--ink); }
+  .lt-flow .q.is-current .q-n::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--c-violet); margin-right: 8px; }
+  .lt-kinds { grid-template-columns: repeat(3, 1fr); }
+  .lt-days { grid-template-columns: repeat(3, 1fr); }
+  .t-big { display: block; font-size: 56px; line-height: 0.9; }
+  .fields-2 { grid-template-columns: 1fr 1fr; }
+  .field input { font-size: 24px; }
+  .toggles { border-top: 1px solid var(--line); }
+  .toggles li { display: grid; grid-template-columns: 52px 1fr; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 17px; align-items: start; }
+  .toggles .cite { margin-top: 4px; }
+  .tg { width: 36px; height: 20px; border-radius: 999px; background: var(--panel-2); position: relative; margin-top: 3px; }
+  .tg::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--ink-3); }
+  .tg.on { background: var(--c-lime); }
+  :global([data-theme="light"]) .tg.on { box-shadow: inset 0 0 0 1px rgba(17, 17, 18, 0.28); }
+  .tg.on::after { left: 19px; background: #0b0b0c; }
+
+  .lt-preview-in { position: sticky; top: 104px; display: grid; gap: 16px; }
+  .pv-bar { display: flex; justify-content: space-between; }
+  .letter { padding: 44px 44px 36px; font-size: 13.5px; line-height: 1.6; display: grid; gap: 12px; }
+  .letter p { margin: 0; }
+  .lp-head { display: flex; justify-content: flex-end; text-align: right; color: var(--paper-ink-2); }
+  .lp-date { margin-top: 8px !important; }
+  .lp-to { margin-top: 4px; }
+  .lp-re { font-weight: 500; margin-top: 8px !important; }
+  .lp-re span { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--paper-ink-2); font-weight: 400; margin-right: 6px; }
+  .lp-close { margin-top: 8px; }
+  .lp-sig { font-family: var(--f-display); font-size: 24px; letter-spacing: -0.02em; margin-top: 10px !important; }
+  .lp-foot { margin-top: 16px !important; padding-top: 12px; border-top: 1px solid var(--paper-line); font-family: var(--f-mono); font-size: 10.5px; color: var(--paper-ink-2); }
+  .pv-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pv-cite { margin-top: 4px; }
+
+  @media (max-width: 1080px) {
+    .lt-grid, .lt-top { grid-template-columns: 1fr; }
+    .lt-preview-in { position: static; }
+  }
+  @media (max-width: 700px) {
+    .lt-kinds, .lt-days { grid-template-columns: 1fr 1fr; }
+    .fields-2 { grid-template-columns: 1fr; }
+    .lt-flow .q-body { margin-left: 0; }
+    .letter { padding: 28px 22px; }
+  }
+</style>

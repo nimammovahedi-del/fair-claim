@@ -1,0 +1,682 @@
+---
+import Layout from "../../../../mockups/b/Layout.astro";
+import {
+  limitTiles,
+  limitBins,
+  limitStats,
+  limitChangeRows,
+  collectRows,
+  strengthLabel,
+  denver,
+  pew2022,
+  pewOtherPct,
+  statesChecked,
+  raisedSince2024,
+  evidenceChecked,
+  usd,
+} from "../../../../lib/stats";
+
+// Chart 2: dumbbell scale
+const changeMax = 25000;
+const changes = limitChangeRows.slice().sort((a, b) => a.effective.localeCompare(b.effective)).reverse();
+const xPct = (n: number) => (n / changeMax) * 100;
+const ticks = [0, 5000, 10000, 15000, 20000, 25000];
+
+// Chart 4: Pew stacked bar
+const pewSegs = [
+  ...pew2022.outcomes.map((o, i) => ({ label: o.label, pct: o.pct, tone: [5, 3, 2, 2][i] })),
+  { label: "Other outcomes (not itemized)", pct: pewOtherPct, tone: 1 },
+];
+const who = [
+  { k: "A", t: "Tenants", d: "whose landlord kept a security deposit." },
+  { k: "B", t: "Customers", d: "owed a refund or repair by a business or contractor." },
+  { k: "C", t: "Small businesses and freelancers", d: "with an unpaid invoice. Some states set a lower limit for businesses." },
+  { k: "D", t: "Anyone weighing it up", d: "including whether it's worth the time at all." },
+];
+const fmtDate = (iso: string) => new Date(iso + "T00:00:00").toLocaleDateString("en-US", { month: "short", year: "numeric" });
+---
+<Layout title="About" active="about">
+  <section class="wrap hero ab-hero">
+    <div class="hero-meta">
+      <nav class="crumbs label" aria-label="Breadcrumb">
+        <a href="/mockups/b/" data-keep-theme>Fair Claim</a><span aria-hidden="true">/</span>
+        <span aria-current="page" class="label-strong">About</span>
+      </nav>
+    </div>
+    <h1 class="mega ab-title balance">A neutral guide. <span class="faint">Not here to talk you into suing, or out of it.</span></h1>
+  </section>
+
+  <section class="wrap ab-mission">
+    <div class="grid12">
+      <p class="label ab-l">What Fair Claim is</p>
+      <div class="ab-text prose">
+        <p class="ab-lead">
+          Small claims court can be a practical way to settle a money dispute without a lawyer. It can also cost more time
+          and money than it returns, and winning doesn't mean you'll be paid.
+        </p>
+        <p>
+          Fair Claim sets out both sides: the rules in your state, the steps, the costs, the evidence on collecting, and
+          the alternatives. Nothing here is a recommendation to sue, and nothing tells you how your own case will go.
+        </p>
+        <p>
+          It's free, with no ads, no accounts and no tracking. What you type into the tools stays in your browser tab.
+          It's an independent project, not a court, a government agency or a law firm.
+        </p>
+      </div>
+    </div>
+    <div class="tiles ab-who" style="--cols:4; --tile-h:200px">
+      {who.map((w) => (
+        <div class="tile ab-who-t">
+          <span class="tile-top"><span class="k">{w.k}</span><span class="label">Who it's for</span></span>
+          <span><span class="tile-t">{w.t}</span><span class="tile-d">{w.d}</span></span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap section ab-data" aria-labelledby="data-h">
+    <div class="sec-head">
+      <p class="label sec-n">What the data shows</p>
+      <div class="sec-t">
+        <h2 id="data-h" class="l balance">Four views of small claims, with their limits stated.</h2>
+        <p class="lede">
+          Built from our 50-state research and the few published studies. Courts generally don't track whether winners
+          get paid, so the evidence on collecting is thin and old.
+        </p>
+      </div>
+    </div>
+
+    <div class="charts">
+      <!-- 01 Limits tile map -->
+      <figure class="chart chart-wide" aria-labelledby="c1-t">
+        <header class="chart-h">
+          <div>
+            <p class="label">Chart 01 · The limit</p>
+            <h3 id="c1-t" class="s">The most you can claim, by state</h3>
+          </div>
+          <div class="chart-kpi">
+            <span class="num key">{usd(limitStats.median)}</span>
+            <span class="label">median limit</span>
+          </div>
+        </header>
+        <div class="tilemap-wrap">
+          <div class="tilemap" role="img" aria-label={`Tile map of small claims limits. Median ${usd(limitStats.median)}; lowest ${usd(limitStats.min)}, highest ${usd(limitStats.max)}.`}>
+            {limitTiles.map((t) => (
+              <span class={`tm tm-${t.bin + 1}`} style={`grid-column:${t.col + 1}; grid-row:${t.row + 1}`} title={`${t.state}: ${usd(t.limit)}`}>
+                <span class="tm-a">{t.abbr}</span>
+                <span class="tm-v">{usd(t.limit, true)}</span>
+              </span>
+            ))}
+          </div>
+          <ul class="legend">
+            {limitBins.map((b, i) => (
+              <li><span class={`sw tm-${i + 1}`}></span><span>{b.label}</span><span class="label">{limitStats.binCounts[i]}</span></li>
+            ))}
+          </ul>
+        </div>
+        <footer class="cite chart-f"><span>Source: Fair Claim state research, 50 states + DC (each state page lists its laws)</span><span>checked {statesChecked}</span></footer>
+      </figure>
+
+      <!-- 02 Limit changes dumbbell -->
+      <figure class="chart" aria-labelledby="c2-t">
+        <header class="chart-h">
+          <div>
+            <p class="label">Chart 02 · Recent changes</p>
+            <h3 id="c2-t" class="s">Limits are going up</h3>
+          </div>
+          <div class="chart-kpi">
+            <span class="num key">{raisedSince2024}</span>
+            <span class="label">states raised it since 2024</span>
+          </div>
+        </header>
+        <div class="db">
+          <div class="db-axis" aria-hidden="true">
+            {ticks.map((t) => <span style={`left:${xPct(t)}%`}>{t === 0 ? "$0" : usd(t, true)}</span>)}
+          </div>
+          <ul>
+            {changes.map((c) => (
+              <li class:list={{ sched: c.scheduled }}>
+                <span class="db-l"><span>{c.abbr}</span><span class="label">{fmtDate(c.effective)}</span></span>
+                <span class="db-track">
+                  {ticks.map((t) => <i style={`left:${xPct(t)}%`}></i>)}
+                  <span class="db-line" style={`left:${xPct(c.from)}%; width:${xPct(c.to - c.from)}%`}></span>
+                  <span class="db-from" style={`left:${xPct(c.from)}%`}></span>
+                  <span class="db-to" style={`left:${xPct(c.to)}%`}></span>
+                </span>
+                <span class="db-v num">{usd(c.to, true)}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="db-key"><span><i class="db-from-k"></i>Before</span><span><i class="db-to-k"></i>After</span><span><i class="db-sched-k"></i>Planned</span></p>
+        </div>
+        <footer class="cite chart-f"><span>Source: Fair Claim state research (recent changes); California from SB 71. Includes Michigan (no earlier figure, not drawn)</span><span>checked {statesChecked}</span></footer>
+      </figure>
+
+      <!-- 03 Collecting -->
+      <figure class="chart" aria-labelledby="c3-t">
+        <header class="chart-h">
+          <div>
+            <p class="label">Chart 03 · Getting paid</p>
+            <h3 id="c3-t" class="s">Winners who collected anything</h3>
+          </div>
+          <div class="chart-kpi">
+            <span class="num key">{denver.collectedNothingPct}%</span>
+            <span class="label">collected nothing (Denver)</span>
+          </div>
+        </header>
+        <ul class="bars">
+          {collectRows.map((r) => (
+            <li>
+              <div class="bar-top"><span>{r.label}</span><span class="num bar-v">{r.display}</span></div>
+              <div class="bar-track"><span class:list={["bar-fill", r.strength]} style={`width:${r.pct}%`}></span><i style="left:50%"></i></div>
+              <p class="bar-d"><span class="flag">{strengthLabel[r.strength]}</span></p>
+            </li>
+          ))}
+        </ul>
+        <footer class="cite chart-f"><span>Sources: Fordham Urb. L.J. (1994); Resolution Systems Institute summary (2004); Sun Journal (2004)</span><span>checked {evidenceChecked}</span></footer>
+      </figure>
+
+      <!-- 04 Pew -->
+      <figure class="chart chart-wide" aria-labelledby="c4-t">
+        <header class="chart-h">
+          <div>
+            <p class="label">Chart 04 · Who uses small claims</p>
+            <h3 id="c4-t" class="s">In Philadelphia, most cases are debt collection, and most judgments are defaults</h3>
+          </div>
+          <div class="chart-kpi">
+            <span class="num key">{pew2022.judgmentsDefaultPct}%</span>
+            <span class="label">of judgments were defaults</span>
+          </div>
+        </header>
+        <div class="stack" role="img" aria-label={pewSegs.map((s) => `${s.label}: ${s.pct}%`).join("; ")}>
+          {pewSegs.map((s) => (
+            <span class={`stack-seg tone-${s.tone}`} style={`flex:${s.pct}`}><span class="num">{s.pct}%</span></span>
+          ))}
+        </div>
+        <ul class="stack-legend">
+          {pewSegs.map((s) => (
+            <li><span class={`sw tone-${s.tone}`}></span><span>{s.label}</span><span class="num">{s.pct}%</span></li>
+          ))}
+        </ul>
+        <p class="chart-note muted">
+          Outcomes of {pew2022.outcomeCases.toLocaleString("en-US")} cases filed {pew2022.years}. In the same court, 91% of
+          plaintiffs had a lawyer and about 12% of defendants did.
+        </p>
+        <footer class="cite chart-f"><a href={pew2022.source.url} rel="noopener">Pew Charitable Trusts (Oct. 2022)</a><span>checked {evidenceChecked}</span></footer>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap section ab-advice" aria-labelledby="adv-h">
+    <div class="sec-head">
+      <p class="label sec-n">Information, not advice</p>
+      <div class="sec-t"><h2 id="adv-h" class="l balance">What we can tell you, and what only someone who knows your case can.</h2></div>
+    </div>
+    <div class="ab-two">
+      <div class="ab-card">
+        <p class="label">Legal information · what Fair Claim gives</p>
+        <p class="s">How the rules and the process work in general: the limit, which form starts a case, how long you have to appeal.</p>
+      </div>
+      <div class="ab-card">
+        <p class="label">Legal advice · what Fair Claim can't give</p>
+        <p class="s">Whether you have a good claim, how much to ask for, what to say at the hearing.</p>
+      </div>
+    </div>
+    <details class="acc ab-help">
+      <summary>Where to get free help with your own case <span class="pm" aria-hidden="true"></span></summary>
+      <div class="acc-body">
+        <p><strong>California small claims advisors.</strong> Counties must provide free advisor help (CCP 116.260).</p>
+        <p><strong>Court self-help centers.</strong> Many courts run free help centers for people without lawyers.</p>
+        <p><strong>Legal aid.</strong> Nonprofit programs give free help to people with low incomes. LawHelp.org lists them by state.</p>
+      </div>
+    </details>
+    <details class="acc">
+      <summary>How we check facts <span class="pm" aria-hidden="true"></span></summary>
+      <div class="acc-body">
+        <p>
+          Every rule links to the law or the court's own website and shows the date we last checked it. Anything we
+          couldn't confirm against a primary source is marked unverified. If the court tells you something different,
+          the court is right.
+        </p>
+      </div>
+    </details>
+  </section>
+</Layout>
+
+<style>
+  .ab-title {
+    max-width: 16ch;
+  }
+  .ab-mission {
+    padding-bottom: clamp(48px, 6vw, 96px);
+  }
+  .ab-l {
+    grid-column: 1 / span 3;
+    padding-top: 0.5em;
+  }
+  .ab-text {
+    grid-column: 4 / span 7;
+  }
+  .ab-lead {
+    font-family: var(--f-display);
+    font-size: var(--t-m);
+    line-height: 1.18;
+    letter-spacing: -0.026em;
+    margin-bottom: 1.2em !important;
+  }
+  .ab-text p:not(.ab-lead) {
+    color: var(--text-2);
+  }
+  .ab-who {
+    margin-top: clamp(56px, 6vw, 96px);
+  }
+  .ab-who-t {
+    cursor: default;
+  }
+  .ab-who-t .tile-t {
+    font-family: var(--f-display);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  @media (max-width: 900px) {
+    .ab-l,
+    .ab-text {
+      grid-column: 1 / -1;
+    }
+    .ab-l {
+      margin-bottom: 16px;
+    }
+  }
+
+  .charts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media (max-width: 1000px) {
+    .charts {
+      grid-template-columns: 1fr;
+    }
+  }
+  .chart {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(22px, 2.4vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-width: 0;
+  }
+  .chart-wide {
+    grid-column: 1 / -1;
+  }
+  .chart-h {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .chart-h h3 {
+    margin-top: 10px;
+    max-width: 24ch;
+  }
+  .chart-kpi {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: 6px;
+    flex: none;
+  }
+  .chart-kpi .num {
+    font-size: clamp(2.5rem, 1.6rem + 2.6vw, 4.5rem);
+    line-height: 0.95;
+  }
+  .chart-f {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .chart-note {
+    font-size: 15px;
+    max-width: 70ch;
+  }
+
+  /* Tile map */
+  .tilemap-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: clamp(24px, 3vw, 56px);
+    align-items: end;
+  }
+  @media (max-width: 800px) {
+    .tilemap-wrap {
+      grid-template-columns: 1fr;
+    }
+  }
+  .tilemap {
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: repeat(11, minmax(0, 1fr));
+    grid-template-rows: repeat(8, auto);
+    gap: 4px;
+  }
+  .tm {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 6px 7px;
+    font-size: 13px;
+    line-height: 1;
+  }
+  .tm-a {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .tm-v {
+    font-family: var(--f-display);
+    font-size: clamp(11px, 0.6rem + 0.5vw, 17px);
+    letter-spacing: -0.02em;
+  }
+  .tm-1 {
+    background: var(--chart-1);
+    color: var(--text);
+  }
+  .tm-2 {
+    background: var(--chart-2);
+    color: var(--text);
+  }
+  .tm-3 {
+    background: var(--chart-3);
+    color: var(--bg);
+  }
+  .tm-4 {
+    background: var(--chart-4);
+    color: var(--bg);
+  }
+  .tm-5 {
+    background: var(--chart-5);
+    color: var(--bg);
+  }
+  :global([data-theme="dark"]) .tm-3 {
+    color: #0c0c0d;
+  }
+  :global([data-theme="dark"]) .tm-2,
+  :global([data-theme="dark"]) .tm-1 {
+    color: #f3f3ef;
+  }
+  :global([data-theme="light"]) .tm-1,
+  :global([data-theme="light"]) .tm-2 {
+    color: #111112;
+  }
+  :global([data-theme="light"]) .tm-3,
+  :global([data-theme="light"]) .tm-4,
+  :global([data-theme="light"]) .tm-5 {
+    color: #f2f1ec;
+  }
+  :global([data-theme="light"]) .tm-3 {
+    color: #111112;
+  }
+  .legend li {
+    display: grid;
+    grid-template-columns: 18px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .sw {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    display: block;
+  }
+
+  /* Dumbbell */
+  .db {
+    position: relative;
+  }
+  .db-axis {
+    position: relative;
+    height: 20px;
+    margin-left: 108px;
+    margin-right: 64px;
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--text-3);
+  }
+  .db-axis span {
+    position: absolute;
+    transform: translateX(-50%);
+  }
+  .db-axis span:first-child {
+    transform: none;
+  }
+  .db-axis span:last-child {
+    transform: translateX(-100%);
+  }
+  .db li {
+    display: grid;
+    grid-template-columns: 96px 1fr 52px;
+    gap: 12px;
+    align-items: center;
+    height: 38px;
+  }
+  .db-l {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+  .db-l .label {
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+  .db-track {
+    position: relative;
+    height: 100%;
+  }
+  .db-track i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+  .db-line {
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    margin-top: -1px;
+    background: var(--text-3);
+  }
+  .db-from,
+  .db-to {
+    position: absolute;
+    top: 50%;
+    width: 11px;
+    height: 11px;
+    margin: -5.5px 0 0 -5.5px;
+    border-radius: 50%;
+  }
+  .db-from {
+    border: 1.5px solid var(--text-2);
+    background: var(--surface);
+  }
+  .db-to {
+    background: var(--accent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 30%, transparent);
+  }
+  .sched .db-line {
+    background: repeating-linear-gradient(90deg, var(--text-3) 0 4px, transparent 4px 7px);
+  }
+  .sched .db-to {
+    background: var(--surface);
+    border: 1.5px dashed var(--text-2);
+    box-shadow: none;
+  }
+  .db-v {
+    font-size: 16px;
+    text-align: right;
+  }
+  .db-key {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-2);
+  }
+  .db-key span {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .db-key i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .db-from-k {
+    border: 1.5px solid var(--text-2);
+  }
+  .db-to-k {
+    background: var(--accent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 30%, transparent);
+  }
+  .db-sched-k {
+    border: 1.5px dashed var(--text-2);
+  }
+
+  /* Bars */
+  .bars li {
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+  }
+  .bar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    font-size: 15.5px;
+  }
+  .bar-v {
+    font-size: 24px;
+  }
+  .bar-track {
+    position: relative;
+    height: 10px;
+    border-radius: 5px;
+    background: var(--surface-3);
+    margin: 10px 0;
+  }
+  .bar-track i {
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    width: 1px;
+    background: var(--line-3);
+  }
+  .bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: 5px;
+    background: var(--text-2);
+  }
+  .bar-fill.unverified {
+    background: repeating-linear-gradient(135deg, var(--text-2) 0 3px, transparent 3px 6px);
+    box-shadow: inset 0 0 0 1px var(--text-2);
+  }
+  .bar-fill.anecdotal {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--text-2);
+  }
+
+  /* Stacked bar */
+  .stack {
+    display: flex;
+    height: 88px;
+    gap: 3px;
+  }
+  .stack-seg {
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px 12px;
+    min-width: 6px;
+    overflow: hidden;
+  }
+  .stack-seg .num {
+    font-size: 24px;
+    line-height: 1;
+  }
+  .stack-seg[style*="flex:1;"] .num,
+  .stack-seg[style$="flex:1"] .num {
+    display: none;
+  }
+  .tone-1 {
+    background: var(--chart-1);
+    color: var(--text);
+  }
+  .tone-2 {
+    background: var(--chart-3);
+    color: #0c0c0d;
+  }
+  .tone-3 {
+    background: var(--chart-4);
+    color: var(--bg);
+  }
+  .tone-5 {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  .stack-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    column-gap: 24px;
+  }
+  .stack-legend li {
+    display: grid;
+    grid-template-columns: 18px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .stack-legend .num {
+    font-size: 18px;
+  }
+
+  .ab-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 800px) {
+    .ab-two {
+      grid-template-columns: 1fr;
+    }
+  }
+  .ab-card {
+    border-top: 1px solid var(--line-3);
+    padding-top: 18px;
+  }
+  .ab-card .s {
+    margin-top: 16px;
+    max-width: 28ch;
+  }
+  .ab-card + .ab-card .s {
+    color: var(--text-2);
+  }
+</style>

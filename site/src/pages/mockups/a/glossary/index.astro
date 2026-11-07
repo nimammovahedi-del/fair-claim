@@ -1,0 +1,160 @@
+---
+// Mockup · Option A — glossary with a big letter index and tidy term cards.
+import Layout from "../../../../mockups/a/Layout.astro";
+import { glossary, glossaryChecked, getTerm } from "../../../../lib/glossary";
+
+const groups = new Map<string, typeof glossary>();
+for (const e of glossary) {
+  const L = e.term[0].toUpperCase();
+  if (!groups.has(L)) groups.set(L, []);
+  groups.get(L)!.push(e);
+}
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const colors = ["c-verm", "c-blue", "c-violet", "c-lime", "c-amber"];
+const letterColor = new Map([...groups.keys()].map((L, i) => [L, colors[i % colors.length]]));
+const withCa = glossary.filter((e) => e.ca).length;
+---
+<Layout title="Glossary" current="glossary">
+  <section class="wrap page-hero gl-hero">
+    <p class="lbl"><span>Glossary</span><span class="crumb"><span class="sep" aria-hidden="true"></span></span><span>{glossary.length} terms</span></p>
+    <div class="gl-top">
+      <h1 class="display">Court words, in plain English.</h1>
+      <div class="gl-aside">
+        <p class="muted">Each definition holds true in most states. Where California differs or adds detail, it's under <em>In California</em>, with the law it comes from.</p>
+        <p class="cite"><span>{withCa} California notes</span><span>Checked {glossaryChecked}</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-label="Letter index">
+    <nav class="az" aria-label="Jump to a letter">
+      {alphabet.map((L, i) => {
+        const n = groups.get(L)?.length ?? 0;
+        return n ? (
+          <a class={`az-l ${letterColor.get(L)} ${i === 0 ? "is-on" : ""}`} href={`#l-${L}`} aria-label={`${L}, ${n} terms`}>
+            <span class="az-c">{n}</span><span class="az-L">{L}</span>
+          </a>
+        ) : (
+          <span class="az-l is-empty" aria-hidden="true"><span class="az-L">{L}</span></span>
+        );
+      })}
+    </nav>
+    <div class="gl-search">
+      <div class="field gl-field">
+        <label for="gq">Find a word</label>
+        <input id="gq" type="search" placeholder="For example, “service” or “writ”" autocomplete="off" />
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap gl-list">
+    {[...groups.entries()].map(([L, entries]) => (
+      <section class={`gl-group ${letterColor.get(L)}`} id={`l-${L}`} aria-labelledby={`h-${L}`}>
+        <div class="gl-letter">
+          <h2 class="num" id={`h-${L}`}>{L}</h2>
+          <span class="gl-bar" aria-hidden="true"></span>
+          <p class="lbl">{entries.length} {entries.length === 1 ? "term" : "terms"}</p>
+        </div>
+        <div class="gl-cards">
+          {entries.map((e) => (
+            <article class="card" id={e.slug} data-term={`${e.term} ${(e.aka ?? []).join(" ")} ${e.def}`.toLowerCase()}>
+              <div class="card-top">
+                <h3 class="h3">{e.term}</h3>
+                {e.aka && <p class="lbl">Also: {e.aka.join(", ")}</p>}
+              </div>
+              <p class="card-def">{e.def}</p>
+              {e.ca && (
+                <details class="card-ca" open={e.slug === "appeal"}>
+                  <summary><span class="ca-dot" aria-hidden="true"></span>In California<span class="pm" aria-hidden="true"></span></summary>
+                  <p>{e.ca.text}</p>
+                  <p class="cite"><a href={e.ca.cite.url}>{e.ca.cite.label}</a></p>
+                </details>
+              )}
+              {e.related && (
+                <p class="card-rel">
+                  <span class="lbl">See also</span>
+                  {e.related.map((r) => <a class="chip" href={`#${r}`}>{getTerm(r).term}</a>)}
+                </p>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+    <p class="gl-none muted" hidden data-none>No word matches that. Try a shorter search.</p>
+  </div>
+</Layout>
+
+<script>
+  const input = document.getElementById("gq") as HTMLInputElement;
+  input.addEventListener("input", () => {
+    const v = input.value.trim().toLowerCase();
+    let any = false;
+    document.querySelectorAll<HTMLElement>(".gl-group").forEach((g) => {
+      let shown = 0;
+      g.querySelectorAll<HTMLElement>("[data-term]").forEach((c) => {
+        const ok = !v || c.dataset.term!.includes(v);
+        c.hidden = !ok;
+        if (ok) shown++;
+      });
+      g.hidden = shown === 0;
+      any ||= shown > 0;
+    });
+    (document.querySelector("[data-none]") as HTMLElement).hidden = any;
+  });
+</script>
+
+<style>
+  .gl-top { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: end; }
+  .gl-top .display { max-width: 12ch; }
+  .gl-aside { display: grid; gap: 16px; padding-bottom: 8px; }
+  .gl-aside .muted { font-size: 18px; max-width: 44ch; }
+
+  .az { display: grid; grid-template-columns: repeat(13, 1fr); gap: 6px; }
+  .az-l {
+    position: relative; aspect-ratio: 1 / 1; border-radius: var(--r); background: var(--panel); text-decoration: none;
+    display: grid; place-items: end start; padding: 10px 12px; transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  }
+  .az-L { font-family: var(--f-display); font-size: clamp(32px, 3.4vw, 54px); line-height: 0.9; letter-spacing: -0.03em; }
+  .az-c { position: absolute; top: 10px; right: 12px; font-family: var(--f-mono); font-size: 11px; color: var(--ink-3); }
+  a.az-l:hover { background: var(--t); color: var(--on); }
+  a.az-l:hover .az-c, .az-l.is-on .az-c { color: var(--on); }
+  .az-l.is-on { background: var(--t); color: var(--on); }
+  .az-l.is-empty { background: transparent; box-shadow: inset 0 0 0 1px var(--line); color: var(--ink-3); opacity: 0.45; }
+  .gl-search { margin-top: 8px; }
+  .gl-field { min-height: 108px; }
+
+  .gl-list { margin-top: 64px; }
+  .gl-group { display: grid; grid-template-columns: 2fr 10fr; gap: var(--gap); padding: 32px 0 48px; border-top: 1px solid var(--line); }
+  .gl-letter { position: sticky; top: 104px; align-self: start; display: grid; gap: 16px; }
+  .gl-letter .num { font-size: clamp(96px, 10vw, 160px); line-height: 0.8; letter-spacing: -0.05em; font-weight: 400; }
+  .gl-bar { width: 40px; height: 4px; border-radius: 2px; background: var(--t); }
+  .gl-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: start; }
+  .card { padding: 22px 24px 22px; border-radius: var(--r); background: var(--panel); display: grid; gap: 16px; }
+  .card-top { display: grid; gap: 6px; }
+  .card-def { font-size: 16.5px; line-height: 1.6; color: var(--ink-2); }
+  .card-ca { border-top: 1px solid var(--line); padding-top: 12px; }
+  .card-ca summary { display: flex; align-items: center; gap: 10px; cursor: pointer; list-style: none; font-size: 15px; }
+  .card-ca summary::-webkit-details-marker { display: none; }
+  .card-ca .pm { margin-left: auto; position: relative; width: 12px; height: 12px; }
+  .card-ca .pm::before, .card-ca .pm::after { content: ""; position: absolute; left: 0; top: 5.5px; width: 12px; height: 1px; background: currentColor; transition: transform var(--t-med) var(--ease); }
+  .card-ca .pm::after { transform: rotate(90deg); }
+  .card-ca[open] .pm::after { transform: rotate(0); }
+  .card-ca p { margin-top: 10px; font-size: 16px; color: var(--ink-2); }
+  .ca-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--t); }
+  .card-rel { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .card-rel .lbl { margin-right: 6px; }
+  .gl-none { padding: 40px 0; }
+
+  @media (max-width: 1240px) { .gl-cards { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 1080px) {
+    .gl-top { grid-template-columns: 1fr; }
+    .gl-cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .az { grid-template-columns: repeat(7, 1fr); }
+    .gl-group { grid-template-columns: 1fr; }
+    .gl-letter { position: static; grid-template-columns: auto 1fr; align-items: end; }
+    .gl-letter .num { font-size: 80px; }
+  }
+</style>

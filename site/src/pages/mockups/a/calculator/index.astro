@@ -1,0 +1,487 @@
+---
+// Mockup · Option A — cost calculator as a one-question-at-a-time flow. Lightly functional.
+// Uses the real worthIt() math. ?at=1..6 sets which question is "current" (for screenshots).
+import Layout from "../../../../mockups/a/Layout.astro";
+import { states, caStatewide } from "../../../../lib/data";
+import { collectPresets } from "../../../../lib/odds";
+import { WORTH_IT_CAVEATS } from "../../../../lib/core/worth-it";
+
+const pick = ["ca", "tx", "ny", "fl"];
+const allTiers = (caStatewide.fees?.filing_fee_tiers ?? []) as { applies_to: string; fee: number }[];
+const caTiers = allTiers.filter((t) => !/more than 12/i.test(t.applies_to)).map((t) => t.fee);
+const calcStates = states.map((s) => ({
+  slug: s.slug,
+  name: s.state,
+  limitInd: s.limit_individual,
+  limitBiz: s.limit_business,
+  feeMin: s.filing_fee_min,
+  feeMax: s.filing_fee_max,
+  feeTiers: s.slug === "ca" ? caTiers : null,
+  checked: s.date_checked,
+}));
+const featured = pick.map((p) => calcStates.find((s) => s.slug === p)!);
+const keys = "ABCDEF";
+const qs = [
+  { n: 1, short: "State" },
+  { n: 2, short: "Who's suing" },
+  { n: 3, short: "Amount" },
+  { n: 4, short: "Up-front costs" },
+  { n: 5, short: "Your time" },
+  { n: 6, short: "The odds" },
+];
+const colors = ["c-verm", "c-blue", "c-violet", "c-lime"];
+const winTiles = [
+  { v: 90, label: "Very sure", sub: "Clear papers on every point" },
+  { v: 75, label: "Fairly sure", sub: "Good records, some gaps" },
+  { v: 50, label: "Could go either way", sub: "Mostly your word against theirs" },
+  { v: 25, label: "Unlikely", sub: "Little to show the judge" },
+];
+---
+<Layout title="Small claims cost calculator" current="tools">
+  <script type="application/json" id="calc-states" set:html={JSON.stringify(calcStates)} />
+
+  <div class="wrap calc-wrap">
+    <aside class="calc-side" aria-label="Progress">
+      <div class="calc-side-in">
+        <p class="lbl"><span class="crumb"><a href="/mockups/a/">Tools</a><span class="sep" aria-hidden="true"></span><span class="lbl-ink">Calculator</span></span></p>
+        <h1 class="h2 calc-title">Small claims cost calculator</h1>
+        <p class="small muted calc-intro">Puts what you'd spend, your time and the chance of being paid side by side. It doesn't say whether to sue.</p>
+        <div class="progress calc-prog" aria-hidden="true">
+          {qs.map((q) => <span class="seg" data-seg={q.n}></span>)}
+          <span class="seg" data-seg="7"></span>
+        </div>
+        <p class="lbl calc-count" data-count>Question 4 of 6</p>
+        <ol class="calc-index">
+          {qs.map((q) => (
+            <li data-idx={q.n}><a href={`#q${q.n}`}><span class="ci-n">{String(q.n).padStart(2, "0")}</span><span>{q.short}</span><span class="ci-s" aria-hidden="true"></span></a></li>
+          ))}
+          <li data-idx="7"><a href="#result"><span class="ci-n">→</span><span>What the numbers show</span><span class="ci-s" aria-hidden="true"></span></a></li>
+        </ol>
+        <p class="calc-private"><span class="dot" aria-hidden="true"></span>Nothing you type leaves this page.</p>
+      </div>
+    </aside>
+
+    <div class="calc-main">
+      <p class="calc-banner small">
+        <span class="lbl lbl-ink">Please note</span>
+        <span>Arithmetic on your own estimates. It can't predict what a judge will decide or whether you'll be paid. Legal information, not legal advice.</span>
+      </p>
+
+      <!-- Q1 -->
+      <section class="q" id="q1" data-q="1" aria-labelledby="q1-t">
+        <div class="q-head">
+          <span class="q-n">01 / 06</span>
+          <h2 class="h2" id="q1-t">Which state's court would hear it?</h2>
+          <p class="q-help">Sets the court's limit and a typical filing fee.</p>
+        </div>
+        <div class="q-body">
+          <div class="tiles" role="group" aria-labelledby="q1-t" data-group="state">
+            {featured.map((s, i) => (
+              <button type="button" class={`tile ${colors[i]}`} aria-pressed={i === 0 ? "true" : "false"} data-value={s.slug}>
+                <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><svg class="check" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" /></svg></span>
+                <span><span class="t-label">{s.name}</span><span class="t-sub">Limit ${s.limitInd?.toLocaleString("en-US")}</span></span>
+              </button>
+            ))}
+            <label class="tile tile-select c-amber">
+              <span class="t-top"><span class="key" aria-hidden="true">E</span></span>
+              <span><span class="t-label">Another state</span>
+                <select data-state-select aria-label="Another state">
+                  <option value="">Choose…</option>
+                  {calcStates.filter((s) => !pick.includes(s.slug)).map((s) => <option value={s.slug}>{s.name}</option>)}
+                </select>
+              </span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q2 -->
+      <section class="q" id="q2" data-q="2" aria-labelledby="q2-t">
+        <div class="q-head">
+          <span class="q-n">02 / 06</span>
+          <h2 class="h2" id="q2-t">Who would be suing?</h2>
+          <p class="q-help">Some states, including California, set a lower limit for businesses.</p>
+        </div>
+        <div class="q-body">
+          <div class="tiles tiles-2" role="group" aria-labelledby="q2-t" data-group="who">
+            <button type="button" class="tile c-blue" aria-pressed="true" data-value="ind">
+              <span class="t-top"><span class="key" aria-hidden="true">A</span><svg class="check" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" /></svg></span>
+              <span><span class="t-label">Me, as a person</span><span class="t-sub">Including a sole proprietor</span></span>
+            </button>
+            <button type="button" class="tile c-violet" aria-pressed="false" data-value="biz">
+              <span class="t-top"><span class="key" aria-hidden="true">B</span><svg class="check" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" /></svg></span>
+              <span><span class="t-label">A business</span><span class="t-sub">Company, LLC, partnership</span></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q3 -->
+      <section class="q" id="q3" data-q="3" aria-labelledby="q3-t">
+        <div class="q-head">
+          <span class="q-n">03 / 06</span>
+          <h2 class="h2" id="q3-t">How much are you owed?</h2>
+          <p class="q-help">Only what you can back up with papers: receipts, a contract, an invoice.</p>
+        </div>
+        <div class="q-body">
+          <div class="fields fields-2">
+            <div class="field">
+              <label for="amount">Amount you're owed <span class="f-req">Required</span></label>
+              <div class="affix"><span aria-hidden="true">$</span><input id="amount" type="text" inputmode="decimal" value="2,400" data-num /></div>
+            </div>
+            <div class="field field-out" data-limit-box>
+              <span class="f-label" data-limit-label>California limit for individuals</span>
+              <span class="out-n" data-limit>$12,500</span>
+              <span class="out-tag" data-limit-tag><span class="dot" aria-hidden="true"></span><span data-limit-text>Within the limit</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q4 -->
+      <section class="q" id="q4" data-q="4" aria-labelledby="q4-t">
+        <div class="q-head">
+          <span class="q-n">04 / 06</span>
+          <h2 class="h2" id="q4-t">What would you spend up front?</h2>
+          <p class="q-help">We filled in a starting value for each. Change anything you know better.</p>
+        </div>
+        <div class="q-body">
+          <div class="fields fields-3">
+            <div class="field">
+              <label for="fee">Filing fee</label>
+              <div class="affix"><span aria-hidden="true">$</span><input id="fee" type="text" inputmode="decimal" value="50" data-num /></div>
+              <span class="f-hint" data-fee-hint>Set from your amount: California charges $50 for $1,500 to $5,000.</span>
+            </div>
+            <div class="field">
+              <label for="service">Serving the papers</label>
+              <div class="affix"><span aria-hidden="true">$</span><input id="service" type="text" inputmode="decimal" value="40" data-num /></div>
+              <span class="f-hint">Clerk's mail is often $15–30; a sheriff or server $50–100.</span>
+            </div>
+            <div class="field">
+              <label for="other">Other costs</label>
+              <div class="affix"><span aria-hidden="true">$</span><input id="other" type="text" inputmode="decimal" value="0" data-num /></div>
+              <span class="f-hint">Parking, copies, postage, later collection fees.</span>
+            </div>
+          </div>
+          <p class="sub-q">If you win, are these fees added to what they owe?</p>
+          <div class="tiles tiles-2" role="group" aria-label="Fees added to the judgment" data-group="recover">
+            <button type="button" class="tile c-lime" aria-pressed="true" data-value="yes">
+              <span class="t-top"><span class="key" aria-hidden="true">A</span><svg class="check" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" /></svg></span>
+              <span><span class="t-label">Yes, usually</span><span class="t-sub">Judges often add filing and service fees</span></span>
+            </button>
+            <button type="button" class="tile c-amber" aria-pressed="false" data-value="no">
+              <span class="t-top"><span class="key" aria-hidden="true">B</span><svg class="check" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" /></svg></span>
+              <span><span class="t-label">No, or not sure</span><span class="t-sub">Leave them out of the math</span></span>
+            </button>
+          </div>
+          <div class="q-foot">
+            <button class="btn" type="button" data-next>Continue</button>
+            <span class="hint"><span class="kbd">↵</span> press Enter</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q5 -->
+      <section class="q" id="q5" data-q="5" aria-labelledby="q5-t">
+        <div class="q-head">
+          <span class="q-n">05 / 06</span>
+          <h2 class="h2" id="q5-t">How much time would it take?</h2>
+          <p class="q-help">Preparing, getting to court, waiting, and collecting afterward. Leave the hourly value at 0 to leave time out.</p>
+        </div>
+        <div class="q-body">
+          <div class="fields fields-2">
+            <div class="field">
+              <label for="hours">Hours you'd spend</label>
+              <div class="affix"><input id="hours" type="text" inputmode="decimal" value="12" data-num /><span aria-hidden="true">h</span></div>
+            </div>
+            <div class="field">
+              <label for="rate">What an hour is worth to you</label>
+              <div class="affix"><span aria-hidden="true">$</span><input id="rate" type="text" inputmode="decimal" value="20" data-num /></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q6 -->
+      <section class="q" id="q6" data-q="6" aria-labelledby="q6-t">
+        <div class="q-head">
+          <span class="q-n">06 / 06</span>
+          <h2 class="h2" id="q6-t">Your own estimate of the odds</h2>
+          <p class="q-help">Two separate guesses. Nobody can know these for sure; the result only shows what your guesses add up to.</p>
+        </div>
+        <div class="q-body">
+          <p class="sub-q sub-q-first">How likely is a judge to rule for you?</p>
+          <div class="tiles tiles-4" role="group" aria-label="Chance a judge rules for you" data-group="win">
+            {winTiles.map((w, i) => (
+              <button type="button" class={`tile ${colors[i]}`} aria-pressed={w.v === 75 ? "true" : "false"} data-value={w.v}>
+                <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><span class="t-pct">{w.v}%</span></span>
+                <span><span class="t-label">{w.label}</span><span class="t-sub">{w.sub}</span></span>
+              </button>
+            ))}
+          </div>
+          <p class="sub-q">If you win, how likely are you to collect?</p>
+          <div class="tiles tiles-4" role="group" aria-label="Chance you collect" data-group="col">
+            {collectPresets.map((p, i) => (
+              <button type="button" class={`tile ${colors[i]}`} aria-pressed={i === 2 ? "true" : "false"} data-value={Math.round(p.value * 100)}>
+                <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><span class="t-pct">{Math.round(p.value * 100)}%</span></span>
+                <span><span class="t-label">{p.label}</span></span>
+              </button>
+            ))}
+          </div>
+          <p class="cite q-cite"><span>Starting points, not findings. Anchored on studies where about half of winners collected something.</span><a href="/mockups/a/about/#data">The evidence</a></p>
+        </div>
+      </section>
+
+      <!-- Result -->
+      <section class="result" id="result" aria-labelledby="r-title">
+        <div class="r-top">
+          <p class="lbl lbl-ink" id="r-title">What the numbers show</p>
+          <p class="lbl" data-r-live>Updates as you answer</p>
+        </div>
+        <p class="display r-outcome" data-r-outcome>—</p>
+        <p class="lede r-summary" data-r-summary></p>
+
+        <div class="r-compare">
+          <div class="rc">
+            <p class="lbl">Expected back</p>
+            <p class="num rc-n" data-r-back>—</p>
+            <div class="rc-track"><span class="rc-bar rc-bar-back" data-bar-back></span></div>
+            <p class="small muted">Amount × chance of winning × chance of collecting</p>
+          </div>
+          <div class="rc">
+            <p class="lbl">Costs, including your time</p>
+            <p class="num rc-n" data-r-cost>—</p>
+            <div class="rc-track"><span class="rc-bar rc-bar-cost" data-bar-cost></span></div>
+            <p class="small muted">Money up front plus hours × hourly value</p>
+          </div>
+        </div>
+
+        <details class="acc r-ledger">
+          <summary>How it adds up, line by line <span class="pm" aria-hidden="true"></span></summary>
+          <div class="acc-body">
+            <ol class="ledger">
+              <li><span>You can claim</span><span class="num" data-l="claim"></span></li>
+              <li><span>+ Fees added if you win</span><span class="num" data-l="recover"></span></li>
+              <li><span>× Chance a judge rules for you</span><span class="num" data-l="win"></span></li>
+              <li><span>× Chance you collect</span><span class="num" data-l="col"></span></li>
+              <li class="sub"><span>Expected back</span><span class="num" data-l="back"></span></li>
+              <li><span>− Money up front</span><span class="num" data-l="up"></span></li>
+              <li><span>− Your time</span><span class="num" data-l="time"></span></li>
+              <li class="sub"><span>Expected net</span><span class="num" data-l="net"></span></li>
+            </ol>
+          </div>
+        </details>
+
+        <p class="r-break" data-r-break></p>
+        <div class="r-warn" data-r-warn></div>
+
+        <div class="r-keep">
+          <p class="lbl">Keep in mind</p>
+          <ol>
+            {WORTH_IT_CAVEATS.map((c, i) => <li><span class="lbl">{String(i + 1).padStart(2, "0")}</span><span>{c}</span></li>)}
+          </ol>
+        </div>
+        <div class="r-actions">
+          <a class="btn" href="/mockups/a/how-it-works/#decide">Options besides court</a>
+          <a class="btn ghost" href="/mockups/a/letter/">Write a demand letter</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { worthIt, fmt, parseAmount } from "../../../../lib/core/worth-it";
+  type S = { slug: string; name: string; limitInd: number | null; limitBiz: number | null; feeMin: number | null; feeMax: number | null; feeTiers: number[] | null };
+  const data: S[] = JSON.parse(document.getElementById("calc-states")!.textContent || "[]");
+  const q = <T extends Element = HTMLElement>(sel: string) => document.querySelector(sel) as T;
+  const st = { state: "ca", who: "ind", recover: "yes", win: 75, col: 45 };
+  const num = (id: string) => { const v = parseAmount((document.getElementById(id) as HTMLInputElement).value); return v == null || Number.isNaN(v) ? 0 : v; };
+  const money = (n: number) => fmt(Math.round(n));
+
+  let at = Number(new URLSearchParams(location.search).get("at")) || 4;
+  function setAt(n: number) {
+    at = Math.max(1, Math.min(7, n));
+    document.querySelectorAll<HTMLElement>("[data-q]").forEach((s) => {
+      const k = Number(s.dataset.q);
+      s.classList.toggle("is-done", k < at);
+      s.classList.toggle("is-current", k === at);
+      s.classList.toggle("is-next", k === at + 1);
+      s.classList.toggle("is-later", k > at + 1);
+    });
+    document.querySelectorAll<HTMLElement>("[data-seg]").forEach((g) => {
+      const k = Number(g.dataset.seg);
+      g.className = "seg" + (k < at ? " done" : k === at ? " now" : "");
+    });
+    document.querySelectorAll<HTMLElement>("[data-idx]").forEach((li) => {
+      const k = Number(li.dataset.idx);
+      li.dataset.state = k < at ? "done" : k === at ? "now" : "todo";
+    });
+    q("[data-count]").textContent = at <= 6 ? `Question ${at} of 6` : "All answered";
+  }
+
+  function feeFor(s: S, amount: number) {
+    if (s.feeTiers) return amount <= 1500 ? s.feeTiers[0] : amount <= 5000 ? s.feeTiers[1] : s.feeTiers[2];
+    return s.feeMax ?? s.feeMin ?? 0;
+  }
+
+  function update(fromState = false) {
+    const s = data.find((d) => d.slug === st.state)!;
+    const amount = num("amount");
+    const limit = st.who === "biz" ? s.limitBiz : s.limitInd;
+    q("[data-limit-label]").textContent = `${s.name} limit for ${st.who === "biz" ? "businesses" : "individuals"}`;
+    q("[data-limit]").textContent = limit ? money(limit) : "Not confirmed";
+    const over = limit != null && amount > limit;
+    q("[data-limit-text]").textContent = over ? `${money(amount - limit!)} over the limit` : "Within the limit";
+    q("[data-limit-box]").classList.toggle("is-over", over);
+    if (fromState || s.feeTiers) {
+      const f = feeFor(s, amount);
+      (document.getElementById("fee") as HTMLInputElement).value = String(f);
+      q("[data-fee-hint]").textContent = s.feeTiers
+        ? `Set from your amount: California charges ${money(f)} for this size of claim.`
+        : s.feeMin !== s.feeMax ? `${s.name}: ${money(s.feeMin ?? 0)} to ${money(s.feeMax ?? 0)}. We used the highest.` : `${s.name}: ${money(f)}.`;
+    }
+    const r = worthIt({
+      amountOwed: amount, limit, filingFee: num("fee"), serviceCost: num("service"), otherCosts: num("other"),
+      chanceWin: st.win / 100, chanceCollect: st.col / 100, costsRecoverable: st.recover === "yes", hours: num("hours"), hourlyValue: num("rate"),
+    });
+    const costs = r.upfront + r.timeCost;
+    q("[data-r-outcome]").textContent = r.outcomeLabel;
+    q("[data-r-summary]").innerHTML = `On your numbers, you'd get back about <strong>${money(r.expectedBack)}</strong> on average, against <strong>${money(costs)}</strong> in money and time.`;
+    q("[data-r-back]").textContent = money(r.expectedBack);
+    q("[data-r-cost]").textContent = money(costs);
+    const max = Math.max(r.expectedBack, costs, 1);
+    q<HTMLElement>("[data-bar-back]").style.width = `${(r.expectedBack / max) * 100}%`;
+    q<HTMLElement>("[data-bar-cost]").style.width = `${(costs / max) * 100}%`;
+    const L = (k: string, v: string) => (q(`[data-l="${k}"]`).textContent = v);
+    L("claim", money(r.claimable)); L("recover", money(r.recoverable)); L("win", `${st.win}%`); L("col", `${st.col}%`);
+    L("back", money(r.expectedBack)); L("up", money(r.upfront)); L("time", money(r.timeCost)); L("net", money(r.net));
+    q("[data-r-break]").innerHTML = r.breakEvenCollect != null && r.breakEvenCollect <= 1
+      ? `<span class="lbl">Break-even</span><span>Your costs are covered if the chance of collecting is at least <strong>${Math.ceil(r.breakEvenCollect * 100)}%</strong>, with everything else the same.</span>`
+      : `<span class="lbl">Break-even</span><span>With these numbers, even collecting every time wouldn't cover the costs.</span>`;
+    q("[data-r-warn]").innerHTML = r.warnings.map((w) => `<p><span class="w-dot" aria-hidden="true"></span>${w}</p>`).join("");
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-group]").forEach((g) => {
+    const key = g.dataset.group as keyof typeof st;
+    g.querySelectorAll<HTMLButtonElement>("button[data-value]").forEach((b) =>
+      b.addEventListener("click", () => {
+        g.querySelectorAll("button[data-value]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        const v = b.dataset.value!;
+        (st as Record<string, string | number>)[key] = key === "win" || key === "col" ? Number(v) : v;
+        if (key === "state") (q<HTMLSelectElement>("[data-state-select]")).value = "";
+        update(key === "state");
+        const sec = Number(g.closest<HTMLElement>("[data-q]")!.dataset.q);
+        if (sec === at && key !== "recover" && key !== "win") setAt(at + 1);
+      }),
+    );
+  });
+  q<HTMLSelectElement>("[data-state-select]").addEventListener("change", (e) => {
+    const v = (e.target as HTMLSelectElement).value;
+    if (!v) return;
+    q("[data-group=state]").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", "false"));
+    st.state = v;
+    update(true);
+    if (at === 1) setAt(2);
+  });
+  document.querySelectorAll<HTMLInputElement>("[data-num]").forEach((i) => i.addEventListener("input", () => update(i.id === "amount")));
+  q("[data-next]").addEventListener("click", () => setAt(5));
+  document.querySelectorAll<HTMLElement>("[data-q]").forEach((s) => s.addEventListener("focusin", () => { const k = Number(s.dataset.q); if (k > at) setAt(k); }));
+  setAt(at);
+  update(true);
+  // Keep the screenshot defaults: the filled-in fee follows the amount for California.
+</script>
+
+<style>
+  .calc-wrap { display: grid; grid-template-columns: 3fr 9fr; gap: 64px; padding-top: 56px; }
+  .calc-side-in { position: sticky; top: 112px; display: grid; gap: 22px; }
+  .calc-title { font-size: clamp(32px, 2.8vw, 44px); }
+  .calc-intro { max-width: 32ch; }
+  .calc-prog { margin-top: 12px; }
+  .calc-prog .seg.now { background: var(--c-verm); }
+  .calc-index { border-top: 1px solid var(--line); }
+  .calc-index a {
+    display: grid; grid-template-columns: 36px 1fr 10px; align-items: center; gap: 8px; padding: 11px 0; border-bottom: 1px solid var(--line);
+    text-decoration: none; font-size: 15px; color: var(--ink-3); transition: color var(--t-fast) var(--ease);
+  }
+  .calc-index a:hover { color: var(--ink); }
+  .ci-n { font-family: var(--f-mono); font-size: 12px; }
+  .ci-s { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--line-2); }
+  .calc-index li[data-state="done"] a { color: var(--ink-2); }
+  .calc-index li[data-state="done"] .ci-s { background: var(--ink-2); border-color: var(--ink-2); }
+  .calc-index li[data-state="now"] a { color: var(--ink); }
+  .calc-index li[data-state="now"] .ci-s { background: var(--c-verm); border-color: var(--c-verm); }
+  .calc-private { display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--ink-3); }
+  .calc-private .dot, .out-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-lime); }
+
+  .calc-banner { display: flex; gap: 20px; align-items: baseline; padding: 16px 20px; border-radius: var(--r); border: 1px solid var(--line-2); color: var(--ink-2); margin-bottom: 24px; }
+  .calc-banner .lbl { flex: none; }
+
+  .calc-main .q { padding-block: 64px; }
+  .calc-main .q:first-of-type { border-top: 0; }
+  .calc-main .q.is-current .q-head .q-n { color: var(--ink); }
+  .calc-main .q.is-current .q-head .q-n::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--c-verm); margin-right: 8px; }
+  .tiles-2 { grid-template-columns: repeat(2, minmax(0, 260px)); }
+  .tiles-4 { grid-template-columns: repeat(4, 1fr); }
+  .calc-main .tiles:not(.tiles-2):not(.tiles-4) { grid-template-columns: repeat(5, 1fr); }
+  .tile-select select {
+    display: block; margin-top: 4px; width: 100%; appearance: none; border: 0; padding: 0; background: transparent;
+    font-size: 14px; color: var(--ink-3); cursor: pointer;
+  }
+  .t-pct { font-family: var(--f-display); font-size: 22px; letter-spacing: -0.02em; }
+  .fields-2 { grid-template-columns: repeat(2, 1fr); }
+  .fields-3 { grid-template-columns: repeat(3, 1fr); }
+  .field-out { background: transparent; box-shadow: inset 0 0 0 1px var(--line-2); }
+  .field-out:hover { background: transparent; }
+  .out-n { font-family: var(--f-display); font-size: 30px; letter-spacing: -0.02em; line-height: 1.15; }
+  .out-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+  .field-out.is-over .dot { background: var(--c-verm); }
+  .sub-q { margin: 40px 0 14px; font-size: 19px; }
+  .sub-q-first { margin-top: 0; }
+  .q-cite { margin-top: 18px; }
+
+  .result { margin-top: 24px; padding: 56px; border-radius: var(--r-lg); background: var(--bg-2); border: 1px solid var(--line); position: relative; overflow: hidden; }
+  .result::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--c-verm) 0 25%, var(--c-blue) 25% 50%, var(--c-violet) 50% 75%, var(--c-lime) 75%); }
+  .r-top { display: flex; justify-content: space-between; margin-bottom: 32px; }
+  .r-outcome { font-size: clamp(40px, 4.4vw, 68px); max-width: 18ch; }
+  .r-summary { margin-top: 24px; max-width: 46ch; }
+  .r-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 56px; }
+  .rc { display: grid; gap: 14px; padding-top: 20px; border-top: 1px solid var(--line-2); }
+  .rc-n { font-size: clamp(48px, 5vw, 80px); line-height: 1; }
+  .rc-track { height: 10px; border-radius: 4px; background: var(--panel); overflow: hidden; }
+  .rc-bar { display: block; height: 100%; border-radius: 4px; transition: width var(--t-med) var(--ease); }
+  .rc-bar-back { background: var(--c-lime); }
+  .rc-bar-cost { background: var(--c-verm); }
+  :global([data-theme="light"]) .rc-bar-back { box-shadow: inset 0 0 0 1px rgba(17, 17, 18, 0.28); }
+  .r-ledger { margin-top: 48px; }
+  .ledger li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+  .ledger li .num { font-size: 20px; color: var(--ink); }
+  .ledger li.sub { color: var(--ink); border-bottom-color: var(--line-2); }
+  .r-break { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: baseline; margin-top: 36px; font-size: 17px; color: var(--ink-2); max-width: 70ch; }
+  .r-break :global(strong) { color: var(--ink); font-weight: 500; }
+  .r-summary :global(strong) { color: var(--ink); font-weight: 500; }
+  .r-warn :global(p) { display: grid; grid-template-columns: 24px 1fr; margin-top: 16px; font-size: 16px; color: var(--ink-2); max-width: 70ch; }
+  .r-warn :global(.w-dot) { width: 8px; height: 8px; border-radius: 50%; background: var(--c-amber); margin-top: 9px; }
+  .r-keep { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .r-keep ol { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 48px; margin-top: 16px; }
+  .r-keep li { display: grid; grid-template-columns: 32px 1fr; font-size: 16px; line-height: 1.55; color: var(--ink-2); }
+  .r-keep li .lbl { padding-top: 3px; }
+  .r-actions { display: flex; gap: 8px; margin-top: 48px; flex-wrap: wrap; }
+
+  @media (max-width: 1080px) {
+    .calc-wrap { grid-template-columns: 1fr; gap: 24px; }
+    .calc-side-in { position: static; }
+    .calc-index { display: none; }
+    .calc-main .tiles:not(.tiles-2):not(.tiles-4) { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .calc-wrap { padding-top: 32px; }
+    .calc-main .tiles:not(.tiles-2):not(.tiles-4), .tiles-4, .tiles-2 { grid-template-columns: 1fr 1fr; }
+    .fields-2, .fields-3 { grid-template-columns: 1fr; }
+    .calc-banner { flex-direction: column; gap: 6px; }
+    .result { padding: 28px 20px; }
+    .r-compare, .r-keep ol { grid-template-columns: 1fr; gap: 28px; }
+    .r-break { grid-template-columns: 1fr; gap: 4px; }
+    .calc-main .q { padding-block: 44px; }
+  }
+</style>

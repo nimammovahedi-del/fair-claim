@@ -1,0 +1,293 @@
+---
+import Layout from "../../../../mockups/b/Layout.astro";
+import { glossary, glossaryChecked, getTerm } from "../../../../lib/glossary";
+
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const groups = alphabet
+  .map((l) => ({ l, items: glossary.filter((e) => e.term.toUpperCase().startsWith(l)) }))
+  .filter((g) => g.items.length);
+const has = new Set(groups.map((g) => g.l));
+const withCa = glossary.filter((e) => e.ca).length;
+---
+<Layout title="Glossary" active="glossary">
+  <section class="wrap hero">
+    <div class="hero-meta">
+      <nav class="crumbs label" aria-label="Breadcrumb">
+        <a href="/mockups/b/" data-keep-theme>Fair Claim</a><span aria-hidden="true">/</span>
+        <span aria-current="page" class="label-strong">Glossary</span>
+      </nav>
+    </div>
+    <div class="hero-grid">
+      <h1 class="mega h-title">Glossary</h1>
+      <div class="h-side">
+        <p class="muted">
+          <span class="num key gl-count">{glossary.length}</span> court words in plain language. What each one usually
+          means, with a cited California note for {withCa} of them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap gl-index-wrap" aria-label="Jump to a letter">
+    <div class="gl-tools">
+      <label class="panel gl-search">
+        <span class="panel-l">Search the glossary</span>
+        <input type="search" placeholder="Try “levy” or “serve”" data-gl-search />
+      </label>
+      <p class="cite gl-checked"><span>Checked {glossaryChecked}</span><span>General definitions hold in most states</span></p>
+    </div>
+    <nav class="gl-index" aria-label="Letters">
+      {alphabet.map((l) =>
+        has.has(l) ? <a href={`#letter-${l}`} class="gl-l">{l}</a> : <span class="gl-l is-empty" aria-hidden="true">{l}</span>,
+      )}
+    </nav>
+  </section>
+
+  <section class="wrap gl-groups">
+    {groups.map((g) => (
+      <section class="gl-group" id={`letter-${g.l}`} aria-labelledby={`h-${g.l}`}>
+        <h2 class="gl-letter" id={`h-${g.l}`}>
+          {g.l}
+          <span class="label">{g.items.length} {g.items.length === 1 ? "term" : "terms"}</span>
+        </h2>
+        <div class="gl-cards">
+          {g.items.map((e) => (
+            <article class="gl-card" id={e.slug} data-term={`${e.term} ${(e.aka ?? []).join(" ")} ${e.def}`.toLowerCase()}>
+              <header>
+                <h3 class="s">{e.term}</h3>
+                {e.aka && <p class="label">Also: {e.aka.join(", ")}</p>}
+              </header>
+              <p class="gl-def">{e.def}</p>
+              {e.cite && <p class="cite"><a href={e.cite.url} rel="noopener">{e.cite.label}</a></p>}
+              {e.ca && (
+                <details class="gl-ca" open={e.slug === "appeal"}>
+                  <summary><span class="label">CA</span>In California<span class="pm" aria-hidden="true"></span></summary>
+                  <p>{e.ca.text}</p>
+                  <p class="cite"><a href={e.ca.cite.url} rel="noopener">{e.ca.cite.label}</a></p>
+                </details>
+              )}
+              {e.related && (
+                <div class="chips gl-rel">
+                  {e.related.map((r) => <a class="chip" href={`#${r}`}>{getTerm(r).term}</a>)}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </section>
+</Layout>
+
+<style>
+  .gl-count {
+    font-size: 1.6em;
+    line-height: 1;
+    margin-right: 2px;
+  }
+  .gl-index-wrap {
+    border-top: 1px solid var(--line-2);
+    padding-top: 24px;
+  }
+  .gl-tools {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    align-items: end;
+    margin-bottom: 28px;
+  }
+  .gl-search {
+    grid-column: 1 / span 6;
+    --panel-h: 92px;
+  }
+  .gl-checked {
+    grid-column: 8 / span 5;
+    justify-content: flex-end;
+  }
+  .gl-index {
+    display: grid;
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .gl-l {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1.25;
+    font-family: var(--f-display);
+    font-size: clamp(1.75rem, 1rem + 2.4vw, 3.5rem);
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+  }
+  a.gl-l:hover {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  .gl-l.is-empty {
+    color: var(--text-3);
+    opacity: 0.45;
+  }
+  @media (max-width: 700px) {
+    .gl-search,
+    .gl-checked {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+      margin-top: 12px;
+    }
+    .gl-index {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+  }
+  .gl-groups {
+    margin-top: clamp(64px, 7vw, 112px);
+  }
+  .gl-group {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    padding: 28px 0 clamp(48px, 5vw, 80px);
+    border-top: 1px solid var(--line-2);
+    scroll-margin-top: 90px;
+  }
+  .gl-letter {
+    grid-column: 1 / span 3;
+    align-self: start;
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: clamp(4.5rem, 3rem + 6vw, 10rem);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+  }
+  .gl-cards {
+    grid-column: 4 / span 9;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .gl-letter,
+    .gl-cards {
+      grid-column: 1 / -1;
+      position: static;
+    }
+    .gl-letter {
+      margin-bottom: 24px;
+    }
+    .gl-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  .gl-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-s);
+    padding: 22px 24px 22px;
+    scroll-margin-top: 100px;
+    transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
+  }
+  .gl-card:hover {
+    border-color: var(--line-2);
+  }
+  .gl-card:target {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .gl-card header {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .gl-def {
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+  .gl-card > .cite {
+    margin-top: 10px;
+  }
+  .gl-ca {
+    margin-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  .gl-ca summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0 4px;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--text-2);
+    transition: color var(--fast) var(--ease);
+  }
+  .gl-ca summary::-webkit-details-marker {
+    display: none;
+  }
+  .gl-ca summary:hover {
+    color: var(--text);
+  }
+  .gl-ca summary .label {
+    border: 1px solid var(--line-2);
+    border-radius: 4px;
+    padding: 1px 6px;
+  }
+  .gl-ca .pm {
+    margin-left: auto;
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid var(--line-2);
+  }
+  .gl-ca .pm::before,
+  .gl-ca .pm::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 8px;
+    height: 1px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+  }
+  .gl-ca .pm::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .gl-ca[open] .pm::after {
+    opacity: 0;
+  }
+  .gl-ca > p:not(.cite) {
+    margin-top: 10px;
+    font-size: 16px;
+    color: var(--text-2);
+  }
+  .gl-ca .cite {
+    margin-top: 8px;
+  }
+  .gl-rel {
+    margin-top: 18px;
+  }
+  .gl-rel .chip {
+    font-size: 13px;
+  }
+</style>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>("[data-gl-search]");
+  input?.addEventListener("input", () => {
+    const q = input.value.trim().toLowerCase();
+    document.querySelectorAll<HTMLElement>(".gl-card").forEach((c) => {
+      c.hidden = !!q && !(c.dataset.term ?? "").includes(q);
+    });
+    document.querySelectorAll<HTMLElement>(".gl-group").forEach((g) => {
+      g.hidden = !g.querySelector(".gl-card:not([hidden])");
+    });
+  });
+</script>

@@ -1,0 +1,341 @@
+---
+import Layout from "../../../../mockups/b/Layout.astro";
+import { states, caStatewide as ca, feeRange } from "../../../../lib/data";
+
+const s = states.find((x) => x.abbr === "CA")!;
+const checked = s.date_checked;
+const lists = [
+  { id: "before", n: "00", title: "Before you decide", text: "The limit, the deadline to sue, the costs, whether they could pay, and other routes.", count: 8 },
+  { id: "demand", n: "01", title: "Ask for payment in writing", text: "The legal name, the amount and a deadline, sent a way you can prove.", count: 5 },
+  { id: "file", n: "02", title: "File the claim", text: "The right form and court, the exact name to sue, the fee or a fee waiver.", count: 5 },
+  { id: "serve", n: "03", title: "Serve the papers", text: "Allowed methods, the deadline before the hearing, and the proof of service.", count: 4 },
+  { id: "hearing", n: "04", title: "Go to the hearing", text: "Evidence in three copies, witnesses, a short summary, postponing, mediation.", count: 7 },
+  { id: "collect", n: "05", title: "Collect what you won", text: "The appeal period, asking for payment, finding assets, collection tools.", count: 6 },
+];
+const items = [
+  { t: "Get California's small claims form from the court or its self-help site (SC-100).", done: true },
+  { t: "Pick the right court location (venue): usually where the other side lives or does business, or where the problem happened.", done: true },
+  { t: "Use the other side's exact legal name. Suing the wrong name can leave you with a judgment you can't collect.", done: false },
+  { t: "Pay the filing fee, or ask for a fee waiver first if money is tight.", done: false },
+  { t: "Keep copies of everything you file, and write down the hearing date and courtroom.", done: false },
+];
+const forms = ["SC-100", "SC-100A", "SC-103", "FW-001"]
+  .map((id) => (ca.forms as { form: string; title: string }[]).find((f) => f.form === id)!)
+  .filter(Boolean);
+---
+<Layout title="Checklists" active="tools">
+  <section class="wrap hero">
+    <div class="hero-meta">
+      <nav class="crumbs label" aria-label="Breadcrumb">
+        <a href="/mockups/b/" data-keep-theme>Fair Claim</a><span aria-hidden="true">/</span>
+        <span>Tools</span><span aria-hidden="true">/</span>
+        <span aria-current="page" class="label-strong">Checklists</span>
+      </nav>
+    </div>
+    <div class="hero-grid">
+      <h1 class="xl h-title balance">Checklists, with your state's rules filled in.</h1>
+      <div class="h-side">
+        <p class="muted">Six short lists to tick on screen or print. Your ticks aren't saved or sent anywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap cl-section" aria-labelledby="cl-q1">
+    <div class="cl-q-h"><span class="label">01</span><h2 id="cl-q1" class="m">Which state?</h2></div>
+    <div class="tiles" style="--cols:3; --tile-h:120px" role="radiogroup" aria-labelledby="cl-q1">
+      <button type="button" class="tile" role="radio" aria-checked="false">
+        <span class="tile-top"><span class="k">A</span><span class="label">Any state</span></span>
+        <span><span class="tile-t">General version</span><span class="tile-d">No state rules, works anywhere</span></span>
+      </button>
+      <button type="button" class="tile" role="radio" aria-checked="true">
+        <span class="tile-top"><span class="k">B</span><span class="label">Checked {checked}</span></span>
+        <span><span class="tile-t">California</span><span class="tile-d">Forms, fees and deadlines included</span></span>
+      </button>
+      <label class="panel cl-select" style="--panel-h:120px">
+        <span class="panel-corner k">C</span>
+        <span class="panel-l">Another state</span>
+        <select aria-label="Another state">
+          <option>Choose from {states.length}…</option>
+          {states.map((x) => <option value={x.slug}>{x.state}</option>)}
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section class="wrap cl-section" aria-labelledby="cl-q2">
+    <div class="cl-q-h"><span class="label">02</span><h2 id="cl-q2" class="m">Pick a checklist</h2><span class="label cl-q-r">California · 6 lists · 35 items</span></div>
+    <div class="cl-cards">
+      {lists.map((l) => (
+        <button type="button" class:list={["tile", "cl-card"]} aria-pressed={l.id === "file" ? "true" : "false"}>
+          <span class="tile-top"><span class="label">{l.n === "00" ? "First" : `Step ${l.n}`}</span><span class="label">{l.count} items</span></span>
+          <span>
+            <span class="cl-card-t">{l.title}</span>
+            <span class="tile-d">{l.text}</span>
+          </span>
+          <span class="progress cl-mini" style={`--n:${l.count}`}>
+            {Array.from({ length: l.count }, (_, i) => <span class={l.id === "file" && i < 2 ? "done" : ""}></span>)}
+          </span>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap cl-section cl-preview" aria-labelledby="cl-prev">
+    <div class="cl-q-h"><span class="label">03</span><h2 id="cl-prev" class="m">Print or tick it here</h2></div>
+    <div class="cl-grid">
+      <article class="paper cl-paper">
+        <header class="cl-paper-h">
+          <div>
+            <p class="cl-p-label">Fair Claim · Checklist · Step 2 of 5</p>
+            <h3>File the claim</h3>
+          </div>
+          <p class="cl-p-state">California</p>
+        </header>
+        <div class="cl-rules">
+          <p class="cl-p-label">California rules</p>
+          <dl>
+            <div><dt>Court</dt><dd>{s.court_name}</dd></div>
+            <div><dt>Filing fee</dt><dd>$30 up to $1,500 · $50 to $5,000 · $75 to $12,500 (CCP 116.230)</dd></div>
+            <div><dt>Fee waiver</dt><dd>FW-001. With certain public benefits, or household income at or below {ca.fee_waiver.poverty_guideline_percent}% of the federal poverty guidelines.</dd></div>
+            <div><dt>Forms</dt><dd>{forms.map((f) => f.form).join(" · ")}</dd></div>
+          </dl>
+        </div>
+        <ul class="cl-items">
+          {items.map((it) => (
+            <li class:list={{ done: it.done }}>
+              <span class="cl-box" aria-hidden="true"></span>
+              <span>{it.t}</span>
+            </li>
+          ))}
+        </ul>
+        <footer class="cl-paper-f">
+          <span>Fair Claim — general information, not legal advice. Rules checked {checked}; confirm with your court.</span>
+          <span>2 / 6</span>
+        </footer>
+      </article>
+
+      <aside class="cl-side">
+        <div class="cl-progress">
+          <span class="label">Ticked on this page</span>
+          <p class="num cl-big"><span class="key">2</span><span class="faint"> / 5</span></p>
+          <div class="progress" style="--n:5"><span class="done"></span><span class="done"></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="btn-row cl-actions">
+          <button type="button" class="btn btn-primary">Print or save as PDF</button>
+          <button type="button" class="btn">Print all six</button>
+        </div>
+        <label class="cl-opt"><span class="check on" aria-hidden="true"></span>Start each checklist on a new page</label>
+        <p class="cl-note">
+          Printing leaves out the site menus and adds the date the rules were checked at the foot of each page. Ticks are
+          gone when you close the tab.
+        </p>
+        <p class="cite"><span>Filing fee: {feeRange(s)} range incl. frequent filers</span><span>checked {checked}</span></p>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .cl-section {
+    padding-top: clamp(48px, 5vw, 80px);
+  }
+  .cl-section + .cl-section {
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+  .cl-q-h {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding-top: 18px;
+    margin-bottom: 24px;
+    border-top: 1px solid var(--line-2);
+  }
+  .cl-q-r {
+    margin-left: auto;
+  }
+  .cl-select {
+    justify-content: flex-end;
+  }
+  .cl-select .panel-corner {
+    top: 16px;
+    left: 18px;
+    right: auto;
+  }
+  .cl-select select {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--line-2);
+    color: var(--text);
+    font: inherit;
+    font-size: 17px;
+    padding: 2px 0 4px;
+  }
+  .cl-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  @media (max-width: 900px) {
+    .cl-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  .cl-card {
+    min-height: 220px;
+    padding: 20px 22px 22px;
+  }
+  .cl-card-t {
+    display: block;
+    font-family: var(--f-display);
+    font-size: var(--t-s);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .cl-mini {
+    gap: 4px;
+  }
+  .cl-card[aria-pressed="true"] .cl-mini > span {
+    background: rgba(12, 12, 13, 0.18);
+  }
+  .cl-card[aria-pressed="true"] .cl-mini > span.done {
+    background: var(--on-accent);
+  }
+  .cl-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 40px;
+  }
+  .cl-paper {
+    grid-column: 1 / span 8;
+    padding: clamp(28px, 4vw, 64px) clamp(24px, 4.4vw, 72px) clamp(24px, 3vw, 40px);
+  }
+  .cl-side {
+    grid-column: 10 / span 3;
+    align-self: start;
+    position: sticky;
+    top: 100px;
+  }
+  @media (max-width: 1000px) {
+    .cl-paper,
+    .cl-side {
+      grid-column: 1 / -1;
+      position: static;
+    }
+  }
+  .cl-p-label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper-ink-2);
+  }
+  .cl-paper-h {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--paper-ink);
+  }
+  .cl-paper-h h3 {
+    font-size: clamp(2rem, 1.4rem + 2vw, 3.25rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    margin-top: 12px;
+  }
+  .cl-p-state {
+    font-family: var(--f-display);
+    font-size: 20px;
+    letter-spacing: -0.02em;
+  }
+  .cl-rules {
+    margin: 28px 0 8px;
+    padding: 18px 20px;
+    background: rgba(17, 17, 18, 0.04);
+    border-radius: 6px;
+  }
+  .cl-rules dl {
+    margin-top: 10px;
+  }
+  .cl-rules dl > div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 16px;
+    padding: 8px 0;
+    border-top: 1px solid rgba(17, 17, 18, 0.08);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .cl-rules dt {
+    color: var(--paper-ink-2);
+  }
+  .cl-items li {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(17, 17, 18, 0.1);
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  .cl-box {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    border: 1.5px solid var(--paper-ink);
+    border-radius: 4px;
+    position: relative;
+  }
+  .cl-items li.done .cl-box {
+    background: var(--paper-ink);
+  }
+  .cl-items li.done .cl-box::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 8px;
+    height: 4px;
+    border-left: 1.5px solid var(--accent);
+    border-bottom: 1.5px solid var(--accent);
+    transform: rotate(-45deg);
+  }
+  .cl-items li.done > span:last-child {
+    color: var(--paper-ink-2);
+  }
+  .cl-paper-f {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 40px;
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.03em;
+    color: var(--paper-ink-2);
+  }
+  .cl-big {
+    font-size: clamp(3.5rem, 2rem + 4vw, 6rem);
+    line-height: 1;
+    margin: 12px 0 18px;
+  }
+  .cl-actions {
+    margin-top: 36px;
+  }
+  .cl-opt {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--text-2);
+  }
+  .cl-note {
+    margin: 24px 0 16px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--text-2);
+  }
+</style>

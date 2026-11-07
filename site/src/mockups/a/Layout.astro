@@ -1,0 +1,139 @@
+---
+// Mockup · Option A ("Multi-color tiles") — shared layout. Local prototype only.
+// Theme: ?theme=dark (default) or ?theme=light. Nothing is stored.
+import "@fontsource-variable/inter-tight";
+import "@fontsource/geist-sans/400.css";
+import "@fontsource/geist-sans/500.css";
+import "@fontsource/geist-mono/400.css";
+import "@fontsource/geist-mono/500.css";
+import "./a.css";
+
+interface Props {
+  title: string;
+  current?: "home" | "learn" | "state" | "tools" | "glossary" | "about";
+  description?: string;
+}
+const { title, current = "home", description = "Free, neutral information about small claims court." } = Astro.props;
+const base = "/mockups/a";
+const nav = [
+  { href: `${base}/how-it-works/`, label: "How it works", key: "learn" },
+  { href: `${base}/state/`, label: "State rules", key: "state" },
+  { href: `${base}/calculator/`, label: "Tools", key: "tools" },
+  { href: `${base}/glossary/`, label: "Glossary", key: "glossary" },
+  { href: `${base}/about/`, label: "About", key: "about" },
+];
+---
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content={description} />
+    <title>{title} · Fair Claim (Mockup A)</title>
+    <script is:inline>
+      (function () {
+        var p = new URLSearchParams(location.search).get("theme");
+        document.documentElement.dataset.theme = p === "light" ? "light" : "dark";
+      })();
+    </script>
+  </head>
+  <body class="a">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="hdr">
+      <div class="wrap hdr-in">
+        <a class="brand" href={`${base}/`} aria-label="Fair Claim, home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="1" y="1" width="14" height="14" rx="2" fill="var(--c-verm)" />
+            <rect x="17" y="1" width="14" height="14" rx="2" fill="var(--c-blue)" />
+            <rect x="1" y="17" width="14" height="14" rx="2" fill="var(--c-lime)" />
+            <rect x="17" y="17" width="14" height="14" rx="2" fill="var(--c-violet)" />
+          </svg>
+          <span>Fair Claim</span>
+        </a>
+        <nav class="nav" aria-label="Main">
+          {nav.map((n) => (
+            <a href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>
+          ))}
+        </nav>
+        <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch colour theme">
+          <span class="theme-dot" aria-hidden="true"></span>
+          <span class="theme-txt" data-theme-label>Dark</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="ftr">
+      <div class="wrap">
+        <div class="ftr-grid">
+          <div class="ftr-about">
+            <p class="ftr-lead">Free, neutral information about small claims court in all 50 states and DC.</p>
+            <p class="ftr-small">Legal information, not legal advice. No ads, no accounts, no tracking. If the court tells you something different, the court is right.</p>
+          </div>
+          <div>
+            <p class="lbl">Learn</p>
+            <ul class="ftr-links">
+              <li><a href={`${base}/how-it-works/`}>How it works</a></li>
+              <li><a href={`${base}/state/`}>State rules</a></li>
+              <li><a href={`${base}/glossary/`}>Glossary</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="lbl">Tools</p>
+            <ul class="ftr-links">
+              <li><a href={`${base}/calculator/`}>Cost calculator</a></li>
+              <li><a href={`${base}/letter/`}>Demand letter</a></li>
+              <li><a href={`${base}/checklists/`}>Checklists</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="lbl">Project</p>
+            <ul class="ftr-links">
+              <li><a href={`${base}/about/`}>About</a></li>
+              <li><a href={`${base}/about/#sources`}>How we check facts</a></li>
+              <li><a href={`${base}/about/#help`}>Free help with your case</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="ftr-base">
+          <span class="lbl">Rules checked 2026-11-05</span>
+          <span class="lbl">Independent · not a court, agency or law firm</span>
+        </div>
+        <p class="ftr-word" aria-hidden="true">Fair Claim</p>
+      </div>
+    </footer>
+
+    <p class="mock-label" aria-label="This page is a design mockup, option A">Mockup · Option A</p>
+
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var btn = document.querySelector("[data-theme-toggle]");
+        var label = document.querySelector("[data-theme-label]");
+        function sync() {
+          var t = root.dataset.theme;
+          if (label) label.textContent = t === "light" ? "Light" : "Dark";
+          // Keep the theme when moving between mockup pages (URL only, nothing stored).
+          document.querySelectorAll('a[href^="/mockups/a"]').forEach(function (a) {
+            var u = new URL(a.getAttribute("href"), location.origin);
+            u.searchParams.set("theme", t);
+            a.setAttribute("href", u.pathname + u.search + u.hash);
+          });
+        }
+        if (btn)
+          btn.addEventListener("click", function () {
+            root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
+            var u = new URL(location.href);
+            u.searchParams.set("theme", root.dataset.theme);
+            history.replaceState(null, "", u);
+            sync();
+          });
+        sync();
+      })();
+    </script>
+  </body>
+</html>

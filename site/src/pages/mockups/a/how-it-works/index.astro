@@ -1,0 +1,232 @@
+---
+// Mockup · Option A — the five steps, one at a time, plus "Before you decide".
+import Layout from "../../../../mockups/a/Layout.astro";
+import { steps, alternatives, hiddenCosts } from "../../../../lib/steps";
+
+const colors = ["c-verm", "c-blue", "c-violet", "c-lime", "c-amber"];
+const altColors = ["c-verm", "c-blue", "c-violet", "c-lime", "c-amber", ""];
+const pad = (n: number) => String(n).padStart(2, "0");
+const keys = "ABCDEF";
+const costSplit = hiddenCosts.map((c) => {
+  const i = c.indexOf(":");
+  const t = c.slice(i + 1).trim();
+  return { head: c.slice(0, i), text: t.charAt(0).toUpperCase() + t.slice(1) };
+});
+---
+<Layout title="How small claims court works" current="learn">
+  <section class="wrap page-hero hw-hero">
+    <p class="lbl"><span>How it works</span><span class="crumb"><span class="sep" aria-hidden="true"></span></span><span>5 steps</span></p>
+    <div class="hw-top">
+      <h1 class="display hw-title">Five steps, from asking to getting paid.</h1>
+      <div class="hw-aside">
+        <p class="muted">Most cases follow the same path. Each step costs time, and some cost money. The last one, collecting, is the one people most often underestimate.</p>
+        <a class="go" href="#decide">Court is one option. See the others first</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="steps-title">
+    <h2 id="steps-title" class="sr-only">The five steps</h2>
+    <div class="step-nav" role="tablist" aria-label="Steps">
+      {steps.map((s, i) => (
+        <button class={`sn ${colors[i]}`} role="tab" type="button" id={`st-${s.slug}`} aria-controls={`sp-${s.slug}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1} data-step={i}>
+          <span class="sn-seg" aria-hidden="true"></span>
+          <span class="sn-n">{pad(s.n)}</span>
+          <span class="sn-t">{s.title}</span>
+        </button>
+      ))}
+    </div>
+
+    {steps.map((s, i) => (
+      <article class={`sp ${colors[i]}`} role="tabpanel" id={`sp-${s.slug}`} aria-labelledby={`st-${s.slug}`} data-panel={i} hidden={i !== 0}>
+        <div class="sp-head">
+          <div class="sp-num" aria-hidden="true">
+            <span class="sp-sq"></span>
+            <span class="num">{pad(s.n)}</span>
+          </div>
+          <div class="sp-titles">
+            <p class="lbl">Step {s.n} of {steps.length}</p>
+            <h3 class="display sp-title">{s.title}</h3>
+            <p class="lede sp-short">{s.short}</p>
+          </div>
+        </div>
+
+        <dl class="sp-meta">
+          <div><dt class="lbl">Time</dt><dd>{s.time}</dd></div>
+          <div><dt class="lbl">Cost</dt><dd>{s.cost}</dd></div>
+        </dl>
+
+        <div class="sp-cols">
+          <div class="body sp-body">
+            {s.body.map((p) => <p>{p}</p>)}
+          </div>
+          <div class="sp-lists">
+            <div class="sp-do">
+              <p class="lbl lbl-ink">Do this</p>
+              <ol>
+                {s.doThis.map((d, k) => <li><span class="li-n">{pad(k + 1)}</span><span>{d}</span></li>)}
+              </ol>
+            </div>
+            <div class="sp-mis">
+              <p class="lbl lbl-ink">Common mistakes</p>
+              <ul>
+                {s.mistakes.map((m) => <li><span class="li-x" aria-hidden="true"></span><span>{m}</span></li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sp-foot">
+          <div class="progress sp-prog" aria-hidden="true">
+            {steps.map((_, k) => <span class={`seg ${k < i ? "done" : k === i ? "now" : ""}`}></span>)}
+          </div>
+          <div class="sp-btns">
+            {i > 0 && <button class="btn ghost sm" type="button" data-go={i - 1}>← {steps[i - 1].title}</button>}
+            {i < steps.length - 1 && <button class="btn sm" type="button" data-go={i + 1}>Next: {steps[i + 1].title} →</button>}
+          </div>
+        </div>
+      </article>
+    ))}
+
+    <ol class="upnext" aria-label="Later steps">
+      {steps.slice(1).map((s, k) => (
+        <li data-upnext={k + 1}><button type="button" data-go={k + 1}><span class="lbl">{pad(s.n)}</span><span class="h2">{s.title}</span></button></li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="wrap section" id="decide" aria-labelledby="decide-title">
+    <div class="sec-head">
+      <p class="lbl">Before you decide</p>
+      <div>
+        <h2 id="decide-title" class="h2">Court is one option among several.</h2>
+        <p class="lede">These can be tried first. They're often quicker and cheaper, and some end the dispute for good.</p>
+      </div>
+    </div>
+    <div class="alts">
+      {alternatives.map((a, i) => (
+        <div class={`alt ${altColors[i]}`}>
+          <div class="alt-top"><span class="key-c">{keys[i]}</span><span class="alt-bar" aria-hidden="true"></span></div>
+          <h3 class="h3">{a.title}</h3>
+          <p>{a.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="costs">
+      <p class="lbl">Costs that don't show up on a fee schedule</p>
+      <ul>
+        {costSplit.map((c, i) => (
+          <li><span class="lbl">{pad(i + 1)}</span><h3 class="h4">{c.head}</h3><p class="small muted">{c.text}</p></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-step]"));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>("[data-panel]"));
+  const next = Array.from(document.querySelectorAll<HTMLElement>("[data-upnext]"));
+  function show(i: number) {
+    tabs.forEach((t, k) => {
+      t.setAttribute("aria-selected", String(k === i));
+      t.tabIndex = k === i ? 0 : -1;
+      t.classList.toggle("is-done", k < i);
+    });
+    panels.forEach((p, k) => (p.hidden = k !== i));
+    next.forEach((n) => (n.hidden = Number(n.dataset.upnext) <= i));
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => show(i));
+    t.addEventListener("keydown", (e) => {
+      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (d) { e.preventDefault(); const j = (i + d + tabs.length) % tabs.length; show(j); tabs[j].focus(); }
+    });
+  });
+  document.querySelectorAll<HTMLButtonElement>("[data-go]").forEach((b) => b.addEventListener("click", () => show(Number(b.dataset.go))));
+  const want = Number(new URLSearchParams(location.search).get("step"));
+  if (want >= 1 && want <= tabs.length) show(want - 1);
+</script>
+
+<style>
+  .hw-top { display: grid; grid-template-columns: 8fr 4fr; gap: 48px; align-items: end; }
+  .hw-title { max-width: 14ch; }
+  .hw-aside { display: grid; gap: 24px; padding-bottom: 8px; }
+  .hw-aside .muted { font-size: 18px; }
+
+  .step-nav { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px; }
+  .sn {
+    display: grid; gap: 10px; align-content: start; text-align: left; padding: 0 0 18px; border: 0; background: none; cursor: pointer;
+    color: var(--ink-3); transition: color var(--t-fast) var(--ease);
+  }
+  .sn-seg { height: 4px; border-radius: 2px; background: var(--line-2); margin-bottom: 8px; transition: background-color var(--t-med) var(--ease); }
+  .sn-n { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.06em; }
+  .sn-t { font-size: 17px; line-height: 1.35; max-width: 18ch; }
+  .sn:hover { color: var(--ink); }
+  .sn[aria-selected="true"] { color: var(--ink); }
+  .sn[aria-selected="true"] .sn-seg { background: var(--t); }
+  .sn.is-done .sn-seg { background: var(--ink); }
+
+  .sp { margin-top: 24px; padding: 56px; border-radius: var(--r-lg); background: var(--bg-2); border: 1px solid var(--line); }
+  .sp-head { display: grid; grid-template-columns: 260px 1fr; gap: 40px; }
+  .sp-num { position: relative; }
+  .sp-num .num { font-size: 200px; line-height: 0.8; letter-spacing: -0.07em; display: block; }
+  .sp-sq { display: block; width: 28px; height: 28px; border-radius: 4px; background: var(--t); margin-bottom: 28px; }
+  .sp-titles { display: grid; gap: 20px; align-content: end; }
+  .sp-title { font-size: clamp(40px, 4.4vw, 68px); max-width: 16ch; }
+  .sp-short { max-width: 44ch; }
+  .sp-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 56px 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .sp-meta > div { padding: 20px 24px 22px 0; display: grid; gap: 8px; }
+  .sp-meta > div + div { padding-left: 24px; border-left: 1px solid var(--line); }
+  .sp-meta dd { font-size: 19px; line-height: 1.45; }
+  .sp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 48px; }
+  .sp-body { color: var(--ink-2); font-size: 18px; }
+  .sp-lists { display: grid; gap: 40px; align-content: start; }
+  .sp-do ol, .sp-mis ul { margin-top: 14px; border-top: 1px solid var(--line); }
+  .sp-do li, .sp-mis li { display: grid; grid-template-columns: 40px 1fr; gap: 8px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 17px; line-height: 1.5; }
+  .li-n { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); padding-top: 5px; }
+  .li-x { position: relative; width: 14px; height: 14px; margin-top: 6px; }
+  .li-x::before, .li-x::after { content: ""; position: absolute; left: 0; top: 6.5px; width: 14px; height: 1.5px; background: var(--ink-3); transform: rotate(45deg); }
+  .li-x::after { transform: rotate(-45deg); }
+  .sp-foot { display: flex; align-items: center; gap: 32px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .sp-prog { width: 220px; }
+  .sp-btns { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+
+  .upnext { margin-top: 8px; }
+  .upnext li button {
+    width: 100%; display: grid; grid-template-columns: 96px 1fr; align-items: baseline; gap: 24px; text-align: left;
+    padding: 28px 0; border: 0; border-bottom: 1px solid var(--line); background: none; cursor: pointer; color: var(--ink);
+    opacity: 0.22; transition: opacity var(--t-med) var(--ease);
+  }
+  .upnext li button:hover { opacity: 0.6; }
+  .upnext li button .lbl { color: var(--ink); }
+
+  .alts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .alt { padding: 22px 24px 28px; border-radius: var(--r); background: var(--panel); display: grid; gap: 16px; align-content: start; min-height: 280px; }
+  .alt-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }
+  .key-c { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line-2); font-family: var(--f-mono); font-size: 11px; color: var(--ink-2); }
+  .alt-bar { width: 28px; height: 4px; border-radius: 2px; background: var(--t, var(--ink-3)); }
+  .alt p { font-size: 16px; line-height: 1.55; color: var(--ink-2); }
+  .costs { margin-top: 96px; }
+  .costs ul { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 20px; }
+  .costs li { padding-top: 18px; border-top: 1px solid var(--line-2); display: grid; gap: 10px; align-content: start; }
+
+  @media (max-width: 1080px) {
+    .hw-top, .sp-cols { grid-template-columns: 1fr; }
+    .sp-head { grid-template-columns: 1fr; }
+    .sp-num .num { font-size: 120px; }
+    .alts { grid-template-columns: 1fr 1fr; }
+    .costs ul { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 700px) {
+    .step-nav { grid-template-columns: repeat(5, 1fr); gap: 4px; }
+    .sn-t { display: none; }
+    .sp { padding: 28px 20px; }
+    .sp-meta { grid-template-columns: 1fr; }
+    .sp-meta > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+    .alts, .costs ul { grid-template-columns: 1fr; }
+    .sp-foot { flex-direction: column; align-items: stretch; }
+    .sp-prog { width: 100%; }
+  }
+</style>

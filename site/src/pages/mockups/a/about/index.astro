@@ -1,0 +1,222 @@
+---
+// Mockup · Option A — About: mission, principles, four charts in the tile language, and where to get help.
+import Layout from "../../../../mockups/a/Layout.astro";
+import {
+  limitStats, limitBins, statesChecked, evidenceChecked, usd, denver, collectRows, strengthLabel, appealGroups, appealDeadlineStats,
+} from "../../../../lib/stats";
+
+const maxBin = Math.max(...limitStats.binCounts);
+const appealColors = ["c-verm", "c-blue", "c-violet", "c-lime"];
+const appealTotal = appealGroups.reduce((a, g) => a + g.count, 0);
+const principles = [
+  { k: "A", t: "Free", d: "No ads, no sponsors, nothing for sale. No accounts.", c: "c-verm" },
+  { k: "B", t: "Private", d: "No analytics, no tracking cookies, no third-party scripts or fonts. What you type stays in your tab.", c: "c-blue" },
+  { k: "C", t: "Sourced and dated", d: "Every rule links to the law or the court, with the date we last checked it.", c: "c-violet" },
+  { k: "D", t: "Neutral", d: "It won't talk you into suing, or out of it. Costs and the odds of getting paid are shown as plainly as the steps.", c: "c-lime" },
+];
+---
+<Layout title="About" current="about">
+  <section class="wrap page-hero ab-hero">
+    <p class="lbl"><span>About Fair Claim</span></p>
+    <h1 class="display-xl ab-title">Information about small claims court that isn't trying to <span class="soft">talk you into anything.</span></h1>
+    <div class="ab-intro">
+      <p class="lede">Small claims court can be a practical way to settle a money dispute without a lawyer. It can also cost more time and money than it returns, and winning doesn't mean you'll be paid.</p>
+      <p class="muted">Fair Claim sets out both sides: the rules in your state, the steps, the costs, the evidence on collecting, and the alternatives. The goal is that you can make your own decision with the facts in front of you. It's an independent project, not a court, a government agency or a law firm.</p>
+    </div>
+  </section>
+
+  <section class="wrap" aria-label="Principles">
+    <div class="principles">
+      {principles.map((p) => (
+        <div class={`pr ${p.c}`}>
+          <span class="pr-top"><span class="key-c">{p.k}</span><span class="pr-bar" aria-hidden="true"></span></span>
+          <h2 class="h3">{p.t}</h2>
+          <p>{p.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap section" id="data" aria-labelledby="data-title">
+    <div class="sec-head">
+      <p class="lbl">What the data shows</p>
+      <div>
+        <h2 class="h2" id="data-title">Four views of small claims in the US.</h2>
+        <p class="lede">From our 50-state research and the few published studies. There's no national dataset on outcomes, and courts generally don't track whether winners get paid, so the evidence on collecting is thin and old. It's shown with its limits stated.</p>
+      </div>
+    </div>
+
+    <div class="charts">
+      <!-- 1. Limits -->
+      <figure class="chart">
+        <figcaption class="ch-head">
+          <span class="lbl">01 · The rules</span>
+          <h3 class="h3">How much you can claim</h3>
+          <p class="small muted">Number of states (and DC) in each range of the limit for individuals.</p>
+        </figcaption>
+        <div class="ch-hero"><span class="num">{usd(limitStats.median)}</span><span class="small muted">median limit, from {usd(limitStats.min)} to {usd(limitStats.max)}</span></div>
+        <div class="hist" role="img" aria-label={limitBins.map((b, i) => `${b.label}: ${limitStats.binCounts[i]} states`).join("; ")}>
+          {limitBins.map((b, i) => (
+            <div class="hist-col" title={`${b.label}: ${limitStats.binCounts[i]}`}>
+              <span class="hist-v">{limitStats.binCounts[i]}</span>
+              <span class="hist-bar" style={`height:${Math.round((limitStats.binCounts[i] / maxBin) * 170)}px`}></span>
+              <span class="hist-l">{b.label.replace(" – ", "–").replace("Up to ", "≤ ")}</span>
+            </div>
+          ))}
+        </div>
+        <p class="cite ch-cite"><span>Fair Claim state research · {limitStats.count} jurisdictions</span><span>Checked {statesChecked}</span></p>
+      </figure>
+
+      <!-- 2. Denver -->
+      <figure class="chart">
+        <figcaption class="ch-head">
+          <span class="lbl">02 · Getting paid</span>
+          <h3 class="h3">Winning isn't the same as being paid</h3>
+          <p class="small muted">One study of Denver's small claims court.</p>
+        </figcaption>
+        <ul class="meters">
+          <li><span class="num m-n">{denver.wonPct}%</span><span class="m-l">of plaintiffs who came to the hearing won</span><span class="m-track"><span class="m-fill" style={`width:${denver.wonPct}%`}></span></span></li>
+          <li><span class="num m-n">{denver.collectedNothingPct}%</span><span class="m-l">of those winners never collected anything</span><span class="m-track"><span class="m-fill" style={`width:${denver.collectedNothingPct}%`}></span></span></li>
+          <li><span class="num m-n">{denver.dollarsPaidPct}%</span><span class="m-l">of all the money awarded was actually paid</span><span class="m-track"><span class="m-fill" style={`width:${denver.dollarsPaidPct}%`}></span></span></li>
+        </ul>
+        <p class="cite ch-cite"><a href={denver.source.url}>Best et al., 21 Fordham Urb. L.J. 343 (1994), abstract</a><span>Checked {evidenceChecked}</span></p>
+      </figure>
+
+      <!-- 3. Collect rows -->
+      <figure class="chart">
+        <figcaption class="ch-head">
+          <span class="lbl">03 · Getting paid</span>
+          <h3 class="h3">Winners who collected something</h3>
+          <p class="small muted">Share of winning plaintiffs paid at least in part. Mediated agreements were paid more often.</p>
+        </figcaption>
+        <ul class="hbars">
+          {collectRows.map((r) => (
+            <li title={r.detail}>
+              <span class="hb-l">{r.label}<span class="hb-s">{strengthLabel[r.strength]}</span></span>
+              <span class="hb-track"><span class={`hb-fill ${r.strength}`} style={`width:${r.pct}%`}></span></span>
+              <span class="num hb-v">{r.display}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="cite ch-cite"><span>Denver (1994), Michigan (2004, via RSI), Sun Journal (2004)</span><span>Checked {evidenceChecked}</span></p>
+      </figure>
+
+      <!-- 4. Appeals -->
+      <figure class="chart">
+        <figcaption class="ch-head">
+          <span class="lbl">04 · The rules</span>
+          <h3 class="h3">Who can appeal a small claims decision</h3>
+          <p class="small muted">All {appealTotal} jurisdictions. Appeal deadlines run from {appealDeadlineStats.min} to {appealDeadlineStats.max} days (median {appealDeadlineStats.median}).</p>
+        </figcaption>
+        <div class="stack" role="img" aria-label={appealGroups.map((g) => `${g.label}: ${g.count}`).join("; ")}>
+          {appealGroups.map((g, i) => g.count > 0 && (
+            <span class={`stack-seg ${appealColors[i]}`} style={`flex:${g.count}`} title={`${g.label}: ${g.count}`}></span>
+          ))}
+        </div>
+        <ul class="legend">
+          {appealGroups.map((g, i) => (
+            <li class={appealColors[i]}><span class="lg-sw" aria-hidden="true"></span><span class="num lg-n">{g.count}</span><span class="lg-l">{g.label}</span></li>
+          ))}
+        </ul>
+        <p class="cite ch-cite"><span>Fair Claim state research</span><span>Checked {statesChecked}</span></p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap section" id="sources" aria-labelledby="chk-title">
+    <div class="sec-head">
+      <p class="lbl">How we check facts</p>
+      <div class="body">
+        <h2 class="h3" id="chk-title">Primary sources first, and a date on everything.</h2>
+        <p class="ab-p">Every rule links to the law or the court's own website and shows the date we last checked it. When we haven't been able to confirm something against a primary source, it's marked unverified. Statistics come only from the studies and reports we cite; where a figure comes from a summary or an informal survey, we say so.</p>
+        <p class="ab-p"><strong>If the court tells you something different, the court is right.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="help" aria-labelledby="help-title">
+    <div class="sec-head">
+      <p class="lbl">Information, not advice</p>
+      <div>
+        <h2 class="h3" id="help-title">Fair Claim explains how the rules work. Only someone who knows your facts can tell you what to do.</h2>
+        <div class="help">
+          <a class="help-c" href="/states/ca/counties/"><span class="lbl">California</span><span class="h4">Free small claims advisors</span><span class="small muted">Courts must offer free advisor help; a few very small courts may opt out of a full program (CCP 116.260, 116.940).</span><span class="go">County pages</span></a>
+          <a class="help-c" href="/mockups/a/state/"><span class="lbl">Every state</span><span class="h4">Court self-help centers</span><span class="small muted">Free help for people without lawyers. Each state page links to its official site.</span><span class="go">State rules</span></a>
+          <a class="help-c" href="https://www.lawhelp.org/"><span class="lbl">Low income</span><span class="h4">Legal aid</span><span class="small muted">Nonprofit programs, listed by state on LawHelp.org.</span><span class="go">LawHelp.org</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .ab-title { max-width: 18ch; }
+  .ab-title .soft { color: var(--ink-3); }
+  .ab-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .ab-intro .lede { margin-top: 0; max-width: 40ch; }
+  .ab-intro .muted { max-width: 56ch; }
+
+  .principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .pr { padding: 22px 24px 28px; border-radius: var(--r); background: var(--panel); display: grid; gap: 14px; align-content: start; min-height: 260px; }
+  .pr-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+  .key-c { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line-2); font-family: var(--f-mono); font-size: 11px; color: var(--ink-2); }
+  .pr-bar { width: 28px; height: 4px; border-radius: 2px; background: var(--t); }
+  .pr p { font-size: 16px; color: var(--ink-2); line-height: 1.55; }
+
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .chart { margin: 0; padding: 32px 32px 26px; border-radius: var(--r-lg); background: var(--bg-2); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 28px; }
+  .ch-head { display: grid; gap: 10px; }
+  .ch-cite { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+  .ch-hero { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .ch-hero .num { font-size: 56px; line-height: 1; }
+
+  .hist { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; height: 250px; align-items: end; }
+  .hist-col { display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; }
+  .hist-v { font-family: var(--f-display); font-size: 22px; letter-spacing: -0.02em; }
+  .hist-col { position: relative; }
+  .hist-bar { display: block; width: 100%; background: var(--c-blue); border-radius: 4px 4px 0 0; min-height: 4px; }
+  .hist-l { font-family: var(--f-mono); font-size: 11px; color: var(--ink-3); padding-top: 8px; border-top: 1px solid var(--line-2); }
+
+  .meters { display: grid; gap: 22px; }
+  .meters li { display: grid; grid-template-columns: 120px 1fr; gap: 6px 20px; align-items: baseline; }
+  .m-n { font-size: 48px; line-height: 1; }
+  .m-l { font-size: 16px; color: var(--ink-2); }
+  .m-track { grid-column: 1 / -1; height: 8px; border-radius: 4px; background: var(--panel); overflow: hidden; }
+  .m-fill { display: block; height: 100%; background: var(--c-verm); border-radius: 4px; }
+
+  .hbars { display: grid; gap: 18px; }
+  .hbars li { display: grid; grid-template-columns: 1fr 90px; gap: 8px 16px; align-items: center; }
+  .hb-l { grid-column: 1 / -1; font-size: 16px; }
+  .hb-s { display: block; font-family: var(--f-mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 2px; }
+  .hb-track { height: 14px; background: var(--panel); border-radius: 4px; overflow: hidden; }
+  .hb-fill { display: block; height: 100%; border-radius: 4px; background: var(--c-violet); }
+  .hb-fill.unverified { background: repeating-linear-gradient(135deg, var(--c-violet) 0 6px, color-mix(in srgb, var(--c-violet) 55%, transparent) 6px 9px); }
+  .hb-fill.anecdotal { background: repeating-linear-gradient(135deg, var(--c-violet) 0 3px, transparent 3px 7px); }
+  .hb-v { font-size: 26px; text-align: right; }
+
+  .stack { display: flex; gap: 2px; height: 56px; border-radius: 4px; overflow: hidden; }
+  .stack-seg { background: var(--t); }
+  :global([data-theme="light"]) .stack-seg.c-lime, :global([data-theme="light"]) .legend .c-lime .lg-sw { box-shadow: inset 0 0 0 1px rgba(17, 17, 18, 0.28); }
+  .legend { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+  .legend li { display: grid; grid-template-columns: 14px 56px 1fr; align-items: baseline; gap: 12px; }
+  .lg-sw { width: 12px; height: 12px; border-radius: 3px; background: var(--t); align-self: center; }
+  .lg-n { font-size: 34px; line-height: 1; }
+  .lg-l { font-size: 15px; color: var(--ink-2); }
+
+  .ab-p { margin-top: 18px; color: var(--ink-2); }
+  .ab-p strong { color: var(--ink); font-weight: 500; }
+  .help { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 36px; }
+  .help-c { display: grid; gap: 10px; align-content: start; padding: 22px 24px 24px; border-radius: var(--r); background: var(--panel); text-decoration: none; transition: background-color var(--t-fast) var(--ease); }
+  .help-c:hover { background: var(--panel-hover); }
+  .help-c .go { margin-top: 14px; }
+
+  @media (max-width: 1080px) {
+    .principles { grid-template-columns: 1fr 1fr; }
+    .charts, .ab-intro { grid-template-columns: 1fr; }
+    .help { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .principles, .legend { grid-template-columns: 1fr; }
+    .chart { padding: 24px 20px; }
+  }
+</style>

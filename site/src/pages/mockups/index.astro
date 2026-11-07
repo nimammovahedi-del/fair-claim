@@ -1,0 +1,113 @@
+---
+// Review gallery for the redesign mockups (Option A vs Option B). Prototype-only page.
+// Screenshots are copied from output/mockups/{a,b}/ into public/mockup-shots/{a,b}/.
+import "@fontsource/geist-sans/400.css";
+import "@fontsource/geist-mono/400.css";
+
+const pages = [
+  { n: "01", key: "landing", label: "Landing page", route: "" },
+  { n: "02", key: "state", label: "State page (California)", route: "state/" },
+  { n: "03", key: "how-it-works", label: "How it works", route: "how-it-works/" },
+  { n: "04", key: "calculator", label: "Cost calculator", route: "calculator/" },
+  { n: "05", key: "letter", label: "Demand letter", route: "letter/" },
+  { n: "06", key: "glossary", label: "Glossary", route: "glossary/" },
+  { n: "07", key: "checklists", label: "Checklists", route: "checklists/" },
+  { n: "08", key: "about", label: "About + charts", route: "about/" },
+];
+const options = [
+  { id: "a", name: "Option A · Multi-color tiles" },
+  { id: "b", name: "Option B · One accent + neutrals" },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Redesign mockups · Fair Claim</title>
+    <style>
+      :root { --bg: #111113; --panel: #1b1b1e; --ink: #f2f2ef; --muted: #a3a3a0; --rule: #2c2c30; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 "Geist Sans", system-ui, sans-serif; }
+      .wrap { max-width: 1500px; margin: 0 auto; padding: 0 24px; }
+      header { padding: 48px 0 24px; border-bottom: 1px solid var(--rule); }
+      h1 { font-weight: 400; font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: -0.03em; margin: 0 0 12px; line-height: 1.05; }
+      .mono { font-family: "Geist Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+      .controls { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--rule); padding: 12px 0; }
+      .controls .wrap { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+      button { font: inherit; font-size: 14px; color: var(--ink); background: var(--panel); border: 1px solid var(--rule); border-radius: 999px; padding: 6px 14px; cursor: pointer; transition: background-color 150ms ease-out, color 150ms ease-out; }
+      button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+      nav a { color: var(--muted); font-size: 14px; margin-right: 12px; text-decoration: none; }
+      nav a:hover { color: var(--ink); }
+      section { padding: 48px 0; border-bottom: 1px solid var(--rule); }
+      h2 { font-weight: 400; font-size: 2rem; letter-spacing: -0.02em; margin: 6px 0 20px; }
+      .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+      @media (max-width: 900px) { .pair { grid-template-columns: 1fr; } }
+      figure { margin: 0; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+      figcaption { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--rule); font-size: 15px; }
+      figcaption a { color: var(--muted); font-size: 13px; }
+      .shot { max-height: 1100px; overflow: auto; }
+      .shot img { display: block; width: 100%; height: auto; }
+      .mobile { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+      .mobile figure { width: 300px; }
+      [data-theme-shot="light"] { display: none; }
+      body.show-light [data-theme-shot="light"] { display: block; }
+      body.show-light [data-theme-shot="dark"] { display: none; }
+      p.note { color: var(--muted); max-width: 70ch; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <p class="mono">Fair Claim · redesign mockups · for review</p>
+        <h1>Two directions, eight pages, dark and light</h1>
+        <p class="note">Both options take their cue from the Cocota form: large regular-weight type, one idea per section, lettered tiles and quiet labels. Option A gives each section its own bold color. Option B uses one accent on neutrals. Each screenshot scrolls inside its frame, and "Open live" shows the working mockup page.</p>
+      </div>
+    </header>
+    <div class="controls">
+      <div class="wrap">
+        <span class="mono">Theme</span>
+        <button type="button" id="t-dark" aria-pressed="true">Dark</button>
+        <button type="button" id="t-light" aria-pressed="false">Light</button>
+        <nav aria-label="Pages">{pages.map((p) => <a href={`#${p.key}`}>{p.n} {p.label}</a>)}</nav>
+      </div>
+    </div>
+    <main class="wrap">
+      {pages.map((p) => (
+        <section id={p.key}>
+          <p class="mono">{p.n}</p>
+          <h2>{p.label}</h2>
+          <div class="pair">
+            {options.map((o) => (
+              <figure>
+                <figcaption><span>{o.name}</span><a href={`/mockups/${o.id}/${p.route}`}>Open live</a></figcaption>
+                {["dark", "light"].map((t) => (
+                  <div class="shot" data-theme-shot={t}>
+                    <img loading="lazy" src={`/mockup-shots/${o.id}/${p.n}-${p.key}-${t}.png`} alt={`${o.name}, ${p.label}, ${t} theme`} />
+                  </div>
+                ))}
+              </figure>
+            ))}
+          </div>
+          {(p.key === "landing" || p.key === "calculator") && (
+            <div class="mobile">
+              {options.map((o) => (
+                <figure>
+                  <figcaption><span>{o.id.toUpperCase()} · phone</span></figcaption>
+                  <div class="shot"><img loading="lazy" src={`/mockup-shots/${o.id}/${p.n}-${p.key}-mobile-dark.png`} alt={`${o.name}, ${p.label}, phone, dark`} /></div>
+                </figure>
+              ))}
+            </div>
+          )}
+        </section>
+      ))}
+    </main>
+    <script is:inline>
+      var d = document.getElementById("t-dark"), l = document.getElementById("t-light");
+      function set(light) { document.body.classList.toggle("show-light", light); d.setAttribute("aria-pressed", String(!light)); l.setAttribute("aria-pressed", String(light)); }
+      d.addEventListener("click", function () { set(false); });
+      l.addEventListener("click", function () { set(true); });
+    </script>
+  </body>
+</html>

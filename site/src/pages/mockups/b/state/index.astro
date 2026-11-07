@@ -1,0 +1,652 @@
+---
+import Layout from "../../../../mockups/b/Layout.astro";
+import { states, counties, caStatewide as ca, sourceLinkText, sourceTypeLabel } from "../../../../lib/data";
+import { denver } from "../../../../lib/stats";
+
+const s = states.find((x) => x.abbr === "CA")!;
+const checked = s.date_checked ?? ca.date_checked;
+const leg = (law: string, sec: string) =>
+  `https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=${law}&sectionNum=${sec}`;
+const $ = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2, minimumFractionDigits: Number.isInteger(n) ? 0 : 2 });
+
+const tiers: { label: string; fee: number; cite: string }[] = [
+  { label: "Claims up to $1,500", fee: ca.fees.filing_fee_tiers[0].fee, cite: ca.fees.filing_fee_tiers[0].citation },
+  { label: "Over $1,500 to $5,000", fee: ca.fees.filing_fee_tiers[1].fee, cite: ca.fees.filing_fee_tiers[1].citation },
+  { label: "Over $5,000 to $12,500", fee: ca.fees.filing_fee_tiers[2].fee, cite: ca.fees.filing_fee_tiers[2].citation },
+  { label: "More than 12 filings in 12 months", fee: ca.fees.filing_fee_tiers[3].fee, cite: ca.fees.filing_fee_tiers[3].citation },
+];
+const maxFee = Math.max(...tiers.map((t) => t.fee));
+const income = ca.fee_waiver.income_table_fw001_monthly;
+
+const solLabel: Record<string, string> = {
+  written_contract: "Written contract",
+  oral_contract: "Oral contract",
+  property_damage_personal_property: "Damage to belongings or a car",
+  property_damage_real_property: "Damage to real property",
+  personal_injury: "Personal injury",
+  fraud_or_mistake: "Fraud or mistake",
+  catch_all: "Anything not listed",
+};
+const sol = (ca.statutes_of_limitations as { claim_type: string; years: number | null; citation: string; source: string }[])
+  .filter((x) => solLabel[x.claim_type] && x.years);
+
+type Form = { form: string; title: string; step: string; revision: string; url: string };
+const forms = ca.forms as Form[];
+const formGroups = [
+  { step: "file", label: "Filing" },
+  { step: "serve", label: "Serving" },
+  { step: "hearing", label: "Hearing" },
+  { step: "collect", label: "After the hearing" },
+].map((g) => ({ ...g, items: forms.filter((f) => f.step === g.step) }));
+
+const tabs = [
+  { id: "filing", n: "01", label: "Filing", fact: "$30–$75", sub: "fee by claim size" },
+  { id: "serving", n: "02", label: "Serving", fact: "15 days", sub: "before the hearing" },
+  { id: "hearing", n: "03", label: "Hearing", fact: "20–70", sub: "days after filing" },
+  { id: "appeals", n: "04", label: "Appeals", fact: "30 days", sub: "defendant only" },
+  { id: "collecting", n: "05", label: "Collecting", fact: "10 years", sub: "a judgment lasts" },
+  { id: "forms", n: "06", label: "Forms", fact: String(forms.length), sub: "official forms" },
+  { id: "counties", n: "07", label: "Counties", fact: String(counties.length), sub: "county pages" },
+];
+const sources = (ca.sources as { url: string; what?: string; type?: string }[]).concat(s.sources);
+const uniqSources = sources.filter((x, i) => sources.findIndex((y) => y.url === x.url) === i);
+---
+<Layout title="California" active="states">
+  <section class="wrap hero st-hero">
+    <div class="hero-meta">
+      <nav class="crumbs label" aria-label="Breadcrumb">
+        <a href="/mockups/b/" data-keep-theme>Fair Claim</a><span aria-hidden="true">/</span>
+        <a href="/mockups/b/state/" data-keep-theme>States</a><span aria-hidden="true">/</span>
+        <span aria-current="page" class="label-strong">California</span>
+      </nav>
+    </div>
+    <div class="hero-grid">
+      <div class="h-title">
+        <p class="label st-code">CA · {String(states.indexOf(s) + 1).padStart(2, "0")} of {states.length}</p>
+        <h1 class="mega">California</h1>
+      </div>
+      <div class="h-side">
+        <p class="st-court">{s.court_name}</p>
+        <p class="cite" style="margin-top:14px"><span>Checked {checked}</span><span>{uniqSources.length} sources</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-label="Key numbers">
+    <div class="stats" style="--cols:4">
+      <div class="stat">
+        <span class="label">Most you can claim</span>
+        <span class="num key">$12,500</span>
+        <span class="stat-sub">For a person. Businesses and public entities: <strong class="key-plain">$6,250</strong>.</span>
+      </div>
+      <div class="stat">
+        <span class="label">Filing fee</span>
+        <span class="num key">$30–$75</span>
+        <span class="stat-sub">Set by the size of the claim. $100 for frequent filers.</span>
+      </div>
+      <div class="stat">
+        <span class="label">Who can appeal</span>
+        <span class="num word">Defendant</span>
+        <span class="stat-sub">Only the side ordered to pay. A plaintiff can't appeal a loss on their own claim.</span>
+      </div>
+      <div class="stat">
+        <span class="label">Time to appeal</span>
+        <span class="num key">30 days</span>
+        <span class="stat-sub">After the clerk mails or hands over the notice of judgment.</span>
+      </div>
+    </div>
+    <p class="cite st-statcite">
+      <a href={leg("CCP", "116.221")} rel="noopener">CCP 116.220–116.221</a>
+      <a href={leg("CCP", "116.230")} rel="noopener">CCP 116.230</a>
+      <a href={leg("CCP", "116.710")} rel="noopener">CCP 116.710</a>
+      <a href={leg("CCP", "116.750")} rel="noopener">CCP 116.750(b)</a>
+      <span>Checked {checked}</span>
+    </p>
+  </section>
+
+  <section class="wrap st-short">
+    <div class="grid12">
+      <p class="label st-short-l">In short</p>
+      <p class="st-short-t pretty">
+        You speak for yourself at the hearing, you can file at most two claims over $2,500 a year, and someone else has
+        to serve the papers. <span class="faint">Lawyers can't represent either side, but most counties offer a free small
+        claims advisor.</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap st-sections" aria-label="California rules by topic">
+    <div class="progress-row">
+      <span class="label">Rules by topic</span>
+      <span class="label" data-tab-count>01 / 07</span>
+    </div>
+    <div class="st-tabs" role="tablist" aria-label="Topics">
+      {tabs.map((t, i) => (
+        <button
+          type="button"
+          class="tile st-tab"
+          role="tab"
+          id={`tab-${t.id}`}
+          aria-controls={`panel-${t.id}`}
+          aria-selected={i === 0 ? "true" : "false"}
+          tabindex={i === 0 ? 0 : -1}
+        >
+          <span class="tile-top"><span class="label">{t.n}</span><span class="tile-t">{t.label}</span></span>
+          <span class="st-tab-fact"><span class="num">{t.fact}</span><span class="tile-d">{t.sub}</span></span>
+        </button>
+      ))}
+    </div>
+
+    <!-- 01 Filing -->
+    <div class="st-panel" role="tabpanel" id="panel-filing" aria-labelledby="tab-filing">
+      <div class="st-panel-head">
+        <p class="label">01 — Filing</p>
+        <h2 class="l">Filing the claim</h2>
+        <p class="muted">
+          The claim form is SC-100, signed under oath. File it with the clerk in person, by mail, or online where your
+          court allows it.
+        </p>
+        <ol class="st-toc">
+          <li><span class="label">a</span>Filing fee by claim size</li>
+          <li><span class="label">b</span>Asking first</li>
+          <li><span class="label">c</span>Two claims a year</li>
+          <li><span class="label">d</span>When the hearing is</li>
+          <li><span class="label">e</span>Fee waiver, deadlines, who can sue</li>
+        </ol>
+        <button type="button" class="btn st-next" data-next-tab>Next: Serving the papers<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4" /></svg></button>
+      </div>
+      <div class="st-panel-body">
+        <figure class="tiers" aria-labelledby="tiers-cap">
+          <figcaption id="tiers-cap" class="tiers-head">
+            <span class="s">Filing fee by claim size</span>
+            <span class="label">Same in every county</span>
+          </figcaption>
+          <ul>
+            {tiers.map((t, i) => (
+              <li class={i === 3 ? "is-alt" : ""}>
+                <span class="tiers-l">{t.label}</span>
+                <span class="tiers-bar"><span style={`width:${(t.fee / maxFee) * 100}%`}></span></span>
+                <span class="tiers-n num">{$(t.fee)}</span>
+                <span class="cite tiers-c">{t.cite}</span>
+              </li>
+            ))}
+          </ul>
+        </figure>
+
+        <dl class="rows">
+          <div>
+            <dt>Ask first</dt>
+            <dd>
+              The claim form asks whether you asked the other side to pay before suing, where that was possible. In person
+              or by phone counts; a letter leaves a record.
+              <p class="cite"><a href={leg("CCP", "116.320")} rel="noopener">CCP 116.320(b)</a><span>SC-100 item 4</span></p>
+            </dd>
+          </div>
+          <div>
+            <dt>Two a year</dt>
+            <dd>
+              No more than two claims over $2,500 in a calendar year, anywhere in California.
+              <p class="cite"><a href={leg("CCP", "116.231")} rel="noopener">CCP 116.231</a></p>
+            </dd>
+          </div>
+          <div>
+            <dt>Hearing date</dt>
+            <dd>
+              The clerk sets the hearing 20 to 70 days after filing. The court's self-help site says one to two months is
+              typical.
+              <p class="cite"><a href={leg("CCP", "116.330")} rel="noopener">CCP 116.330(a)</a></p>
+            </dd>
+          </div>
+        </dl>
+
+        <div class="st-more">
+          <details class="acc">
+            <summary>Fee waiver: who qualifies <span class="pm" aria-hidden="true"></span></summary>
+            <div class="acc-body">
+              <p>
+                Ask with form <strong>FW-001</strong>. You qualify if you get certain public benefits (such as Medi-Cal,
+                CalFresh or SSI), if your household income is at or below {ca.fee_waiver.poverty_guideline_percent}% of
+                the federal poverty guidelines, or if paying would leave you unable to meet basic needs.
+              </p>
+              <div class="mini-table" role="table" aria-label="Monthly income limits from FW-001">
+                {[1, 2, 3, 4].map((n) => (
+                  <div role="row"><span role="cell" class="label">Household of {n}</span><span role="cell" class="num">{$(Math.round(income[`household_${n}`]))}</span></div>
+                ))}
+              </div>
+              <p class="cite"><a href={ca.fee_waiver.fee_waiver_form_url} rel="noopener">FW-001 (Rev. March 1, 2026)</a><a href={leg("GOV", "68632")} rel="noopener">Gov. Code 68632</a><span>monthly, before tax</span></p>
+            </div>
+          </details>
+          <details class="acc">
+            <summary>The deadline to sue <span class="pm" aria-hidden="true"></span></summary>
+            <div class="acc-body">
+              <p>Each kind of claim has its own deadline (the statute of limitations), counted from when the problem happened.</p>
+              <div class="mini-table" role="table" aria-label="Deadlines to sue in California">
+                {sol.map((x) => (
+                  <div role="row"><span role="cell">{solLabel[x.claim_type]}</span><span role="cell" class="num">{x.years} {x.years === 1 ? "year" : "years"}</span><a role="cell" class="cite" href={x.source} rel="noopener">{x.citation}</a></div>
+                ))}
+              </div>
+            </div>
+          </details>
+          <details class="acc">
+            <summary>Who can sue <span class="pm" aria-hidden="true"></span></summary>
+            <div class="acc-body">
+              <p>
+                You must be 18 or older and the original owner of the claim, so debt buyers generally can't sue here.
+                A business appears through an officer or a regular employee, not someone hired just for court.
+              </p>
+              <p class="cite"><a href="https://www.courts.ca.gov/documents/sc100info.pdf" rel="noopener">SC-100-INFO</a></p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 Serving -->
+    <div class="st-panel" role="tabpanel" id="panel-serving" aria-labelledby="tab-serving" hidden>
+      <div class="st-panel-head">
+        <p class="label">02 — Serving</p>
+        <h2 class="l">Serving the papers</h2>
+        <p class="muted">You can't hand the papers over yourself. Someone else does it, and proves it to the court.</p>
+      </div>
+      <div class="st-panel-body">
+        <dl class="rows">
+          <div><dt>Who can serve</dt><dd>Any adult who isn't part of the case, a sheriff or marshal, a registered process server, or the clerk by certified mail ($15, in some courts).<p class="cite"><a href={leg("CCP", "116.340")}>CCP 116.340(a)</a></p></dd></div>
+          <div><dt>Deadline</dt><dd>At least <span class="key">15 days</span> before the hearing if the defendant lives in the county; 20 days if they live outside it.<p class="cite"><a href={leg("CCP", "116.340")}>CCP 116.340(b)</a></p></dd></div>
+          <div><dt>Proof</dt><dd>File the proof of service (SC-104) at least 5 days before the hearing.<p class="cite"><a href={leg("CCP", "116.340")}>CCP 116.340(c)</a></p></dd></div>
+          <div><dt>Sheriff's fee</dt><dd>$50, set by statute.<p class="cite"><span>Gov. Code 26721</span></p></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- 03 Hearing -->
+    <div class="st-panel" role="tabpanel" id="panel-hearing" aria-labelledby="tab-hearing" hidden>
+      <div class="st-panel-head">
+        <p class="label">03 — Hearing</p>
+        <h2 class="l">At the hearing</h2>
+        <p class="muted">Short and informal. Each side speaks for itself and shows its evidence.</p>
+      </div>
+      <div class="st-panel-body">
+        <dl class="rows">
+          <div><dt>Lawyers</dt><dd>{s.lawyers_notes}<p class="cite"><a href={ca.lawyers.source}>{ca.lawyers.citation}</a></p></dd></div>
+          <div><dt>Free advisor</dt><dd>Courts must offer free advisor help; a few very small courts may opt out of a full program but must still provide basic help.<p class="cite"><a href={ca.lawyers.free_advisor_source}>CCP 116.260</a></p></dd></div>
+          <div><dt>If they don't come</dt><dd>You still have to prove your claim with evidence.<p class="cite"><a href={ca.filing_and_hearing.default_requires_proof_source}>CCP 116.520(b)</a></p></dd></div>
+          <div><dt>Postponing</dt><dd>Ask in writing (SC-150) at least 10 days before. The fee is $10.<p class="cite"><a href={ca.postponement.source}>CCP 116.570</a></p></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- 04 Appeals -->
+    <div class="st-panel" role="tabpanel" id="panel-appeals" aria-labelledby="tab-appeals" hidden>
+      <div class="st-panel-head">
+        <p class="label">04 — Appeals</p>
+        <h2 class="l">Appeals</h2>
+        <p class="muted">Only the side ordered to pay can appeal. The appeal is a new hearing before a different judge.</p>
+      </div>
+      <div class="st-panel-body">
+        <dl class="rows">
+          <div><dt>Deadline</dt><dd>30 days after the notice of entry of judgment. Late notices don't count.<p class="cite"><a href={ca.appeal.deadline_source}>{ca.appeal.deadline_citation}</a></p></dd></div>
+          <div><dt>Fee</dt><dd>$75 (form SC-140).<p class="cite"><span>CCP 116.760</span></p></dd></div>
+          <div><dt>What happens</dt><dd>A new hearing in superior court. Lawyers may take part. That decision is final.<p class="cite"><a href={ca.appeal.nature_source}>{ca.appeal.nature_citation}</a></p></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- 05 Collecting -->
+    <div class="st-panel" role="tabpanel" id="panel-collecting" aria-labelledby="tab-collecting" hidden>
+      <div class="st-panel-head">
+        <p class="label">05 — Collecting</p>
+        <h2 class="l">After a judgment</h2>
+        <p class="muted">The court doesn't collect for you. In a Denver study, {denver.collectedNothingPct}% of winners collected nothing.</p>
+      </div>
+      <div class="st-panel-body">
+        <dl class="rows">
+          <div><dt>Waiting period</dt><dd>Collection is paused for 30 days, and during any appeal.<p class="cite"><span>CCP 116.810</span></p></dd></div>
+          <div><dt>Statement of assets</dt><dd>Unless they pay, the debtor must send you form SC-133 within 30 days.<p class="cite"><span>CCP 116.830(b)</span></p></dd></div>
+          <div><dt>Interest</dt><dd>10% a year on what's unpaid; 5% on some medical and personal debts.<p class="cite"><span>CCP 685.010</span></p></dd></div>
+          <div><dt>How long it lasts</dt><dd>10 years, and it can be renewed.<p class="cite"><span>CCP 683.020</span></p></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- 06 Forms -->
+    <div class="st-panel" role="tabpanel" id="panel-forms" aria-labelledby="tab-forms" hidden>
+      <div class="st-panel-head">
+        <p class="label">06 — Forms</p>
+        <h2 class="l">Official forms</h2>
+        <p class="muted">{forms.length} Judicial Council forms, grouped by step. Each links to the court's PDF.</p>
+      </div>
+      <div class="st-panel-body">
+        {formGroups.map((g) => (
+          <details class="acc" open={g.step === "file"}>
+            <summary>{g.label} <span class="label">{g.items.length} forms</span><span class="pm" aria-hidden="true"></span></summary>
+            <ul class="form-list">
+              {g.items.map((f) => (
+                <li><a href={f.url} rel="noopener"><span class="label label-strong">{f.form}</span><span>{f.title}</span><span class="cite">{f.revision}</span></a></li>
+              ))}
+            </ul>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <!-- 07 Counties -->
+    <div class="st-panel" role="tabpanel" id="panel-counties" aria-labelledby="tab-counties" hidden>
+      <div class="st-panel-head">
+        <p class="label">07 — Counties</p>
+        <h2 class="l">Your county</h2>
+        <p class="muted">Courthouses, the free advisor, online filing and remote hearings, for all {counties.length} counties.</p>
+      </div>
+      <div class="st-panel-body">
+        <ul class="county-grid">
+          {counties.map((c) => <li><a href={`/states/ca/counties/${c.slug}/`}>{c.county}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap st-sources">
+    <details class="acc">
+      <summary>
+        <span><span class="label">Sources</span>&nbsp;&nbsp;{uniqSources.length} laws, forms and court pages, checked {checked}</span>
+        <span class="pm" aria-hidden="true"></span>
+      </summary>
+      <ol class="src-list">
+        {uniqSources.map((x, i) => (
+          <li><span class="label">{String(i + 1).padStart(2, "0")}</span><a href={x.url} rel="noopener">{sourceLinkText(x.url)}</a><span class="label">{sourceTypeLabel[x.type ?? ""] ?? ""}</span></li>
+        ))}
+      </ol>
+    </details>
+  </section>
+</Layout>
+
+<style>
+  .st-hero {
+    padding-bottom: clamp(40px, 4vw, 64px);
+  }
+  .st-code {
+    margin-bottom: 18px;
+  }
+  .st-court {
+    font-size: var(--t-small);
+    color: var(--text-2);
+    max-width: 26ch;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-2);
+  }
+  .key-plain {
+    font-weight: 400;
+    color: var(--text);
+  }
+  .st-statcite {
+    margin-top: 6px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .st-short {
+    padding-block: clamp(64px, 8vw, 128px);
+  }
+  .st-short-l {
+    grid-column: 1 / span 3;
+    padding-top: 0.7em;
+  }
+  .st-short-t {
+    grid-column: 4 / span 9;
+    font-family: var(--f-display);
+    font-size: var(--t-m);
+    line-height: 1.18;
+    letter-spacing: -0.026em;
+    max-width: 30ch;
+  }
+  @media (max-width: 900px) {
+    .st-short-l,
+    .st-short-t {
+      grid-column: 1 / -1;
+    }
+  }
+  .st-sections {
+    border-top: 1px solid var(--line-2);
+    padding-top: 16px;
+  }
+  .st-tabs {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+  }
+  @media (max-width: 1100px) {
+    .st-tabs {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    .st-tabs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .st-tab {
+    min-height: 150px;
+    border: 1px solid var(--line);
+  }
+  .st-tab .tile-t {
+    font-size: 15px;
+  }
+  .st-tab-fact {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .st-tab-fact .num {
+    font-size: 30px;
+    line-height: 1;
+  }
+  .st-tab-fact .tile-d {
+    margin: 0;
+    font-size: 13px;
+  }
+  .st-panel {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 40px;
+    padding-top: clamp(56px, 6vw, 96px);
+  }
+  .st-panel[hidden] {
+    display: none;
+  }
+  .st-panel-head {
+    grid-column: 1 / span 4;
+    align-self: start;
+    position: sticky;
+    top: 110px;
+  }
+  .st-panel-head h2 {
+    margin: 18px 0 20px;
+  }
+  .st-panel-head .muted {
+    max-width: 32ch;
+  }
+  .st-panel-body {
+    grid-column: 6 / span 7;
+  }
+  .st-toc {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+  .st-toc li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--text-2);
+  }
+  .st-next {
+    margin-top: 32px;
+  }
+  @media (max-width: 900px) {
+    .st-panel-head,
+    .st-panel-body {
+      grid-column: 1 / -1;
+      position: static;
+    }
+  }
+  .tiers {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(20px, 2vw, 32px);
+    margin-bottom: 48px;
+  }
+  .tiers-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .tiers ul {
+    display: grid;
+    gap: 0;
+  }
+  .tiers li {
+    display: grid;
+    grid-template-columns: 1.3fr 1.6fr 72px;
+    grid-template-areas: "l bar n" "c c c";
+    align-items: center;
+    column-gap: 20px;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+  }
+  .tiers-l {
+    grid-area: l;
+    font-size: 16px;
+  }
+  .tiers-bar {
+    grid-area: bar;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface-3);
+    overflow: hidden;
+  }
+  .tiers-bar span {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+    background: var(--text-2);
+  }
+  .tiers li.is-alt .tiers-bar span {
+    background: transparent;
+    border: 1px dashed var(--text-3);
+  }
+  .tiers li.is-alt .tiers-l {
+    color: var(--text-2);
+  }
+  .tiers-n {
+    grid-area: n;
+    font-size: 28px;
+    text-align: right;
+    line-height: 1;
+  }
+  .tiers-c {
+    grid-area: c;
+    margin-top: 4px;
+  }
+  .st-more {
+    margin-top: 48px;
+  }
+  .mini-table {
+    display: grid;
+    margin: 18px 0 14px;
+  }
+  .mini-table > div {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 20px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    color: var(--text);
+  }
+  .mini-table .num {
+    font-size: 20px;
+  }
+  .form-list {
+    padding-bottom: 20px;
+  }
+  .form-list a {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .form-list a:hover {
+    background: var(--surface);
+  }
+  .county-grid {
+    columns: 3;
+    column-gap: var(--gap);
+  }
+  .county-grid li {
+    break-inside: avoid;
+    padding: 6px 0;
+    border-top: 1px solid var(--line);
+    font-size: 16px;
+  }
+  .county-grid a {
+    text-decoration: none;
+  }
+  .st-sources {
+    margin-top: clamp(72px, 8vw, 128px);
+  }
+  .st-sources summary {
+    font-size: 16px;
+    color: var(--text-2);
+  }
+  .src-list {
+    columns: 2;
+    column-gap: 40px;
+    padding-bottom: 24px;
+  }
+  .src-list li {
+    break-inside: avoid;
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .src-list a {
+    color: var(--text-2);
+    word-break: break-word;
+  }
+</style>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>(".st-tab"));
+  const count = document.querySelector("[data-tab-count]");
+  function select(i: number, focus = false) {
+    tabs.forEach((t, j) => {
+      const on = i === j;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      const p = document.getElementById(t.getAttribute("aria-controls")!);
+      if (p) p.hidden = !on;
+    });
+    if (count) count.textContent = `${String(i + 1).padStart(2, "0")} / ${String(tabs.length).padStart(2, "0")}`;
+    if (focus) tabs[i].focus();
+  }
+  document.querySelector("[data-next-tab]")?.addEventListener("click", () => select(1, true));
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => select(i));
+    t.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") select((i + 1) % tabs.length, true);
+      if (e.key === "ArrowLeft") select((i - 1 + tabs.length) % tabs.length, true);
+    });
+  });
+</script>

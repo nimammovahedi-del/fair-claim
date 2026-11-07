@@ -1,0 +1,651 @@
+---
+import Layout from "../../../../mockups/b/Layout.astro";
+import { states, money } from "../../../../lib/data";
+import { collectPresets, odds } from "../../../../lib/odds";
+import { worthIt, WORTH_IT_CAVEATS, fmt } from "../../../../lib/core/worth-it";
+import { evidenceChecked, statesChecked } from "../../../../lib/stats";
+
+const pick = ["CA", "NY", "TX"].map((a) => states.find((s) => s.abbr === a)!);
+const stateData = states.map((s) => ({
+  slug: s.slug,
+  name: s.state,
+  ind: s.limit_individual,
+  biz: s.limit_business ?? s.limit_individual,
+  feeMin: s.filing_fee_min,
+  feeMax: s.filing_fee_max,
+}));
+
+// Starting answers (the mockup opens on question 4 of 6).
+const start = { state: "ca", who: "ind", amount: 2400, collect: 0.45, win: 0.75, service: 40, other: 0, hours: 12, rate: 0 };
+const caFee = (a: number) => (a <= 1500 ? 30 : a <= 5000 ? 50 : 75);
+const r = worthIt({
+  amountOwed: start.amount,
+  limit: 12500,
+  filingFee: caFee(start.amount),
+  serviceCost: start.service,
+  otherCosts: start.other,
+  chanceWin: start.win,
+  chanceCollect: start.collect,
+  costsRecoverable: true,
+  hours: start.hours,
+  hourlyValue: start.rate,
+});
+const pct = (x: number) => `${Math.round(x * 100)}%`;
+const letters = "ABCDEF";
+const winChoices = [
+  { v: 0.5, t: "Could go either way" },
+  { v: 0.65, t: "Some proof" },
+  { v: 0.75, t: "Good paperwork" },
+  { v: 0.9, t: "Clear, written proof" },
+];
+const qs = [
+  { n: 1, short: "State", value: "California" },
+  { n: 2, short: "Filing as", value: "A person" },
+  { n: 3, short: "Amount owed", value: "$2,400" },
+  { n: 4, short: "Chance they pay", value: "45%" },
+  { n: 5, short: "Chance you win", value: "—" },
+  { n: 6, short: "Other costs", value: "—" },
+];
+---
+<Layout title="Small claims cost calculator" active="tools">
+  <div data-calc data-states={JSON.stringify(stateData)}>
+    <section class="wrap hero calc-hero">
+      <div class="hero-meta">
+        <nav class="crumbs label" aria-label="Breadcrumb">
+          <a href="/mockups/b/" data-keep-theme>Fair Claim</a><span aria-hidden="true">/</span>
+          <span>Tools</span><span aria-hidden="true">/</span>
+          <span aria-current="page" class="label-strong">Cost calculator</span>
+        </nav>
+      </div>
+      <div class="hero-grid">
+        <h1 class="xl h-title balance">What a case could cost, and what it could return.</h1>
+        <div class="h-side">
+          <p class="muted">Six questions. Arithmetic on your own estimates, shown line by line. It doesn't predict a judge's decision.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap calc" aria-label="Questions">
+      <div class="calc-top">
+        <div class="progress-row">
+          <span class="label" data-q-count>Question 04 of 06</span>
+          <span class="label">Nothing you enter leaves this page</span>
+        </div>
+        <div class="progress" style="--n:6" data-progress>
+          {qs.map((q) => <span class={q.n < 4 ? "done" : q.n === 4 ? "now" : ""}></span>)}
+        </div>
+      </div>
+
+      <div class="calc-grid">
+        <aside class="calc-rail" aria-label="Your answers">
+          <p class="label">Your answers</p>
+          <ol>
+            {qs.map((q) => (
+              <li class:list={[{ now: q.n === 4, later: q.n > 4 }]} data-rail={q.n}>
+                <span class="label">{String(q.n).padStart(2, "0")}</span>
+                <span class="rail-k">{q.short}</span>
+                <span class="rail-v" data-rail-v={q.n}>{q.value}</span>
+              </li>
+            ))}
+          </ol>
+          <p class="cite rail-cite"><span>Rules checked {statesChecked}</span></p>
+        </aside>
+
+        <div class="calc-qs">
+          <!-- Q1 -->
+          <fieldset class="q" data-q="1">
+            <legend class="q-h"><span class="label q-n">01</span><span class="m">Which state's court?</span></legend>
+            <div class="tiles" style="--cols:4; --tile-h:118px" role="radiogroup" aria-label="State">
+              {pick.map((s, i) => (
+                <button type="button" class="tile" role="radio" aria-checked={i === 0 ? "true" : "false"} data-pick="state" data-value={s.slug}>
+                  <span class="tile-top"><span class="k">{letters[i]}</span></span>
+                  <span><span class="tile-t">{s.state}</span><span class="tile-d">Limit {money(s.limit_individual)}</span></span>
+                </button>
+              ))}
+              <label class="tile tile-select">
+                <span class="tile-top"><span class="k">D</span></span>
+                <span>
+                  <span class="tile-t">Another state</span>
+                  <select data-pick-select="state" aria-label="Another state">
+                    <option value="">Choose…</option>
+                    {states.filter((s) => !["CA", "NY", "TX"].includes(s.abbr)).map((s) => <option value={s.slug}>{s.state}</option>)}
+                  </select>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Q2 -->
+          <fieldset class="q" data-q="2">
+            <legend class="q-h"><span class="label q-n">02</span><span class="m">Who would be filing?</span></legend>
+            <div class="tiles" style="--cols:2; --tile-h:118px" role="radiogroup" aria-label="Filing as">
+              <button type="button" class="tile" role="radio" aria-checked="true" data-pick="who" data-value="ind">
+                <span class="tile-top"><span class="k">A</span><span class="label">Limit <span data-limit="ind">$12,500</span></span></span>
+                <span class="tile-t">A person, including a sole proprietor</span>
+              </button>
+              <button type="button" class="tile" role="radio" aria-checked="false" data-pick="who" data-value="biz">
+                <span class="tile-top"><span class="k">B</span><span class="label">Limit <span data-limit="biz">$6,250</span></span></span>
+                <span class="tile-t">A business or other organization</span>
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- Q3 -->
+          <div class="q" data-q="3">
+            <h2 class="q-h"><span class="label q-n">03</span><span class="m">How much are you owed?</span></h2>
+            <div class="fields" style="--cols:2">
+              <label class="panel panel-big" style="--panel-h:168px; grid-column: span 1">
+                <span class="panel-l">Amount owed</span>
+                <span class="inline"><span class="cur">$</span><input data-in="amount" inputmode="decimal" value="2,400" autocomplete="off" /></span>
+              </label>
+              <div class="panel panel-info" style="--panel-h:168px">
+                <span class="panel-l">Filing fee for this amount</span>
+                <span class="num info-n key" data-fee-out>$50</span>
+                <span class="cite" data-fee-cite>CCP 116.230(b)(2) · same in every county</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4 (current) -->
+          <fieldset class="q q-now" data-q="4">
+            <legend class="q-h"><span class="label q-n">04</span><span class="m">If you win, how likely are they to pay?</span></legend>
+            <p class="q-help">
+              Winning gets you a judgment, not a payment. Studies of small claims courts found about half of winners
+              collected something. These are rough guides, not findings.
+            </p>
+            <div class="tiles" style="--cols:4; --tile-h:168px" role="radiogroup" aria-label="Chance you collect">
+              {collectPresets.map((p, i) => (
+                <button type="button" class="tile" role="radio" aria-checked={p.value === start.collect ? "true" : "false"} data-pick="collect" data-value={p.value}>
+                  <span class="tile-top"><span class="k">{letters[i]}</span><span class="num tile-pct">{pct(p.value)}</span></span>
+                  <span class="tile-t">{p.label}</span>
+                </button>
+              ))}
+            </div>
+            <p class="cite q-cite"><a href={odds.headline.url} rel="noopener">{odds.headline.sourceLabel}</a><span>checked {evidenceChecked}</span></p>
+            <div class="q-actions">
+              <button type="button" class="btn btn-primary" data-next>Continue<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4" /></svg></button>
+              <span class="label">or press Enter ↵</span>
+            </div>
+          </fieldset>
+
+          <!-- Q5 -->
+          <fieldset class="q is-dim" data-q="5">
+            <legend class="q-h"><span class="label q-n">05</span><span class="m">How likely is a judge to rule for you?</span></legend>
+            <div class="tiles" style="--cols:4; --tile-h:132px" role="radiogroup" aria-label="Chance you win">
+              {winChoices.map((c, i) => (
+                <button type="button" class="tile" role="radio" aria-checked="false" data-pick="win" data-value={c.v}>
+                  <span class="tile-top"><span class="k">{letters[i]}</span><span class="num tile-pct">{pct(c.v)}</span></span>
+                  <span class="tile-t">{c.t}</span>
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          <!-- Q6 -->
+          <div class="q is-dim" data-q="6">
+            <h2 class="q-h"><span class="label q-n">06</span><span class="m">What else will it take?</span></h2>
+            <div class="fields" style="--cols:4">
+              <label class="panel"><span class="panel-l">Serving the papers</span><span class="inline"><span class="faint">$</span><input data-in="service" value="40" inputmode="decimal" /></span></label>
+              <label class="panel"><span class="panel-l">Other costs</span><span class="inline"><span class="faint">$</span><input data-in="other" value="0" inputmode="decimal" /></span></label>
+              <label class="panel"><span class="panel-l">Hours you'd spend</span><input data-in="hours" value="12" inputmode="decimal" /></label>
+              <label class="panel"><span class="panel-l">What an hour is worth</span><span class="inline"><span class="faint">$</span><input data-in="rate" value="0" inputmode="decimal" /></span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap result" aria-labelledby="res-h" aria-live="polite">
+      <div class="res-head">
+        <p class="label">Result · updates as you answer</p>
+        <h2 id="res-h" class="l">What the numbers show</h2>
+        <p class="res-outcome" data-out="outcome">{r.outcomeLabel}</p>
+      </div>
+
+      <div class="stats" style="--cols:3">
+        <div class="stat">
+          <span class="label">Expected back, on average</span>
+          <span class="num key" data-out="expected">{fmt(r.expectedBack)}</span>
+          <span class="stat-sub">Over many cases like this one. A single case either pays or it doesn't.</span>
+        </div>
+        <div class="stat">
+          <span class="label">Spent, including your time</span>
+          <span class="num" data-out="costs">{fmt(r.upfront + r.timeCost)}</span>
+          <span class="stat-sub"><span data-out="upfront">{fmt(r.upfront)}</span> up front, paid whether you win or not.</span>
+        </div>
+        <div class="stat">
+          <span class="label">Difference</span>
+          <span class="num" data-out="net">{r.net >= 0 ? "+" : "−"}{fmt(Math.abs(r.net))}</span>
+          <span class="stat-sub">Break-even needs about a <span data-out="breakeven">{r.breakEvenCollect != null ? pct(r.breakEvenCollect) : "—"}</span> chance of collecting.</span>
+        </div>
+      </div>
+
+      <div class="res-grid">
+        <div class="res-math">
+          <h3 class="label label-strong">How we got there</h3>
+          <dl>
+            <div><dt>Amount you can claim</dt><dd class="num" data-out="claimable">{fmt(r.claimable)}</dd></div>
+            <div><dt>Fees added to the judgment if you win</dt><dd class="num" data-out="recoverable">+ {fmt(r.recoverable)}</dd></div>
+            <div><dt>× chance a judge rules for you</dt><dd class="num" data-out="win">{pct(start.win)}</dd></div>
+            <div><dt>× chance you collect</dt><dd class="num" data-out="col">{pct(start.collect)}</dd></div>
+            <div class="sum"><dt>Expected back</dt><dd class="num" data-out="expected2">{fmt(r.expectedBack)}</dd></div>
+          </dl>
+        </div>
+        <div class="res-notes">
+          <h3 class="label label-strong">Keep in mind</h3>
+          <ol>
+            {WORTH_IT_CAVEATS.map((c) => <li>{c}</li>)}
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .calc-hero {
+    padding-bottom: clamp(40px, 4vw, 72px);
+  }
+  .calc-top {
+    position: sticky;
+    top: 76px;
+    z-index: 5;
+    background: var(--bg);
+    padding: 16px 0 18px;
+    border-top: 1px solid var(--line-2);
+  }
+  .calc-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    padding-top: clamp(40px, 4vw, 64px);
+  }
+  .calc-rail {
+    grid-column: 1 / span 3;
+    align-self: start;
+    position: sticky;
+    top: 160px;
+  }
+  .calc-rail ol {
+    margin-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .calc-rail li {
+    display: grid;
+    grid-template-columns: 30px 1fr auto;
+    gap: 8px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .rail-k {
+    color: var(--text-2);
+  }
+  .rail-v {
+    font-variant-numeric: tabular-nums;
+  }
+  .calc-rail li.now .rail-k {
+    color: var(--text);
+  }
+  .calc-rail li.now .label {
+    color: var(--accent-text);
+  }
+  .calc-rail li.later {
+    opacity: 0.5;
+  }
+  .rail-cite {
+    margin-top: 16px;
+  }
+  .calc-qs {
+    grid-column: 4 / span 9;
+    display: grid;
+    gap: clamp(64px, 7vw, 112px);
+  }
+  @media (max-width: 1000px) {
+    .calc-rail {
+      display: none;
+    }
+    .calc-qs {
+      grid-column: 1 / -1;
+    }
+  }
+  .q {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  .q-h {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding: 0;
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .q-h .m {
+    font-family: var(--f-display);
+    letter-spacing: -0.03em;
+  }
+  .q-n {
+    min-width: 24px;
+  }
+  .q:not(.q-now):not(.is-dim) .q-h .m {
+    color: var(--text-2);
+  }
+  .q-now .q-h .m {
+    font-size: var(--t-l);
+    line-height: 1.04;
+  }
+  .q-now .q-n {
+    color: var(--accent-text);
+  }
+  .q-help {
+    max-width: 60ch;
+    color: var(--text-2);
+    margin: -8px 0 28px 44px;
+  }
+  .q-now .tiles,
+  .q-now .q-cite,
+  .q-now .q-actions {
+    margin-left: 44px;
+  }
+  .q-cite {
+    margin-top: 14px;
+  }
+  .q-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 36px;
+  }
+  .tile-pct {
+    font-size: 28px;
+    line-height: 1;
+  }
+  .tile-select select {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--line-2);
+    color: var(--text-2);
+    font: inherit;
+    font-size: 15px;
+    width: 100%;
+    margin-top: 6px;
+    padding: 2px 0;
+  }
+  .tile-select select option {
+    color: #111;
+  }
+  .panel-info {
+    justify-content: space-between;
+  }
+  .info-n {
+    font-size: clamp(2.5rem, 1.6rem + 3vw, 4.5rem);
+    line-height: 1.05;
+    align-self: flex-start;
+  }
+  @media (max-width: 640px) {
+    .calc-top .progress-row span:last-child {
+      display: none;
+    }
+    .res-math dl > div {
+      font-size: 15px;
+    }
+    .res-math dd {
+      white-space: nowrap;
+      font-size: 19px;
+    }
+    .q-help,
+    .q-now .tiles,
+    .q-now .q-cite,
+    .q-now .q-actions {
+      margin-left: 0;
+    }
+    .q-h {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+
+  .result {
+    margin-top: clamp(96px, 10vw, 160px);
+    padding-top: clamp(40px, 4vw, 64px);
+    border-top: 1px solid var(--line-2);
+  }
+  .res-head {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 16px;
+    align-items: end;
+    margin-bottom: clamp(40px, 4vw, 64px);
+  }
+  .res-head .label {
+    grid-column: 1 / -1;
+  }
+  .res-head h2 {
+    grid-column: 1 / span 6;
+  }
+  .res-outcome {
+    grid-column: 8 / span 5;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    font-size: 17px;
+  }
+  .res-outcome::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 25%, transparent);
+  }
+  @media (max-width: 900px) {
+    .res-head h2,
+    .res-outcome {
+      grid-column: 1 / -1;
+      justify-self: start;
+    }
+    .result .stats {
+      grid-template-columns: 1fr;
+    }
+    .result .stat {
+      padding-left: 0 !important;
+      border-right: 0;
+      border-top: 1px solid var(--line);
+    }
+  }
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 48px;
+    margin-top: clamp(48px, 5vw, 80px);
+  }
+  .res-math {
+    grid-column: 1 / span 6;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(20px, 2vw, 32px);
+  }
+  .res-math dl {
+    margin-top: 18px;
+  }
+  .res-math dl > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    font-size: 16.5px;
+  }
+  .res-math dt {
+    color: var(--text-2);
+  }
+  .res-math dd {
+    font-size: 22px;
+  }
+  .res-math .sum {
+    border-top: 1px solid var(--line-3);
+  }
+  .res-math .sum dt {
+    color: var(--text);
+  }
+  .res-notes {
+    grid-column: 8 / span 5;
+  }
+  .res-notes ol {
+    counter-reset: n;
+    margin-top: 18px;
+  }
+  .res-notes li {
+    counter-increment: n;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    font-size: 16px;
+    color: var(--text-2);
+  }
+  .res-notes li::before {
+    content: counter(n, decimal-leading-zero);
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--text-3);
+    padding-top: 4px;
+  }
+  @media (max-width: 900px) {
+    .res-math,
+    .res-notes {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
+
+<script>
+  import { worthIt, fmt, parseAmount } from "../../../../lib/core/worth-it";
+
+  type S = { slug: string; name: string; ind: number | null; biz: number | null; feeMin: number | null; feeMax: number | null };
+  const root = document.querySelector<HTMLElement>("[data-calc]")!;
+  const data: S[] = JSON.parse(root.dataset.states || "[]");
+  const st = { state: "ca", who: "ind", collect: 0.45, win: 0.75, current: 4 };
+  const $ = (sel: string) => root.querySelector<HTMLElement>(sel);
+  const pct = (x: number) => `${Math.round(x * 100)}%`;
+
+  function fee(s: S, amount: number) {
+    if (s.slug === "ca") return amount <= 1500 ? 30 : amount <= 5000 ? 50 : 75;
+    return s.feeMin ?? s.feeMax ?? 0;
+  }
+  const num = (k: string) => parseAmount((root.querySelector<HTMLInputElement>(`[data-in="${k}"]`)?.value) ?? "") ?? 0;
+
+  function render() {
+    const s = data.find((x) => x.slug === st.state)!;
+    const limit = st.who === "biz" ? s.biz : s.ind;
+    const amount = num("amount") || 0;
+    const f = fee(s, amount);
+    const r = worthIt({
+      amountOwed: amount,
+      limit,
+      filingFee: f,
+      serviceCost: num("service"),
+      otherCosts: num("other"),
+      chanceWin: st.win,
+      chanceCollect: st.collect,
+      costsRecoverable: true,
+      hours: num("hours"),
+      hourlyValue: num("rate"),
+    });
+    const set = (k: string, v: string) => {
+      const el = root.querySelector(`[data-out="${k}"]`);
+      if (el) el.textContent = v;
+    };
+    set("outcome", r.outcomeLabel);
+    set("expected", fmt(r.expectedBack));
+    set("expected2", fmt(r.expectedBack));
+    set("costs", fmt(r.upfront + r.timeCost));
+    set("upfront", fmt(r.upfront));
+    set("net", `${r.net >= 0 ? "+" : "−"}${fmt(Math.abs(r.net))}`);
+    set("breakeven", r.breakEvenCollect != null && r.breakEvenCollect <= 1 ? pct(r.breakEvenCollect) : "—");
+    set("claimable", fmt(r.claimable));
+    set("recoverable", `+ ${fmt(r.recoverable)}`);
+    set("win", pct(st.win));
+    set("col", pct(st.collect));
+    const feeOut = $("[data-fee-out]");
+    if (feeOut) feeOut.textContent = fmt(f);
+    const li = $('[data-limit="ind"]');
+    const lb = $('[data-limit="biz"]');
+    if (li) li.textContent = s.ind ? fmt(s.ind) : "—";
+    if (lb) lb.textContent = s.biz ? fmt(s.biz) : "—";
+    const rv = (n: number, v: string) => {
+      const el = root.querySelector(`[data-rail-v="${n}"]`);
+      if (el) el.textContent = v;
+    };
+    rv(1, s.name);
+    rv(2, st.who === "biz" ? "A business" : "A person");
+    rv(3, fmt(amount));
+    rv(4, pct(st.collect));
+    if (st.current > 5) rv(5, pct(st.win));
+    if (st.current > 6) rv(6, fmt(num("service") + num("other")));
+  }
+
+  root.querySelectorAll<HTMLButtonElement>("[data-pick]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const k = b.dataset.pick!;
+      root.querySelectorAll(`[data-pick="${k}"]`).forEach((x) => x.setAttribute("aria-checked", String(x === b)));
+      (st as Record<string, unknown>)[k] = k === "collect" || k === "win" ? Number(b.dataset.value) : b.dataset.value;
+      render();
+    }),
+  );
+  root.querySelectorAll<HTMLSelectElement>("[data-pick-select]").forEach((sel) =>
+    sel.addEventListener("change", () => {
+      if (!sel.value) return;
+      root.querySelectorAll('[data-pick="state"]').forEach((x) => x.setAttribute("aria-checked", "false"));
+      st.state = sel.value;
+      render();
+    }),
+  );
+  root.querySelectorAll("input[data-in]").forEach((i) => i.addEventListener("input", render));
+
+  function advance() {
+    if (st.current > 6) return;
+    const cur = $(`[data-q="${st.current}"]`);
+    cur?.classList.remove("q-now");
+    st.current += 1;
+    const next = $(`[data-q="${st.current}"]`);
+    if (next) {
+      next.classList.remove("is-dim");
+      next.classList.add("q-now");
+      const actions = $(".q-actions");
+      if (actions && st.current < 7) next.appendChild(actions);
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      next.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    } else {
+      $(".q-actions")?.remove();
+      $(".result")?.scrollIntoView({ block: "start" });
+    }
+    const bars = root.querySelectorAll("[data-progress] > span");
+    bars.forEach((b, i) => {
+      b.className = i + 1 < st.current ? "done" : i + 1 === st.current ? "now" : "";
+    });
+    root.querySelectorAll<HTMLElement>("[data-rail]").forEach((li) => {
+      const n = Number(li.dataset.rail);
+      li.classList.toggle("now", n === st.current);
+      li.classList.toggle("later", n > st.current);
+    });
+    const c = $("[data-q-count]");
+    if (c) c.textContent = st.current > 6 ? "All questions answered" : `Question ${String(st.current).padStart(2, "0")} of 06`;
+    render();
+  }
+  $("[data-next]")?.addEventListener("click", advance);
+  render();
+</script>

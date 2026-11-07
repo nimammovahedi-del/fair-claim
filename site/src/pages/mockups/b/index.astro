@@ -1,0 +1,123 @@
+---
+import Layout from "../../../mockups/b/Layout.astro";
+import { states } from "../../../lib/data";
+import { steps } from "../../../lib/steps";
+import { limitStats, statesChecked, usd } from "../../../lib/stats";
+
+const base = "/mockups/b";
+const doors = [
+  {
+    key: "A",
+    kind: "Guide",
+    href: `${base}/how-it-works/`,
+    title: "Learn how it works",
+    text: `The ${steps.length} steps from a written request to collecting, and the options people try before court.`,
+    meta: `${steps.length} steps · 6 alternatives`,
+  },
+  {
+    key: "B",
+    kind: "Reference",
+    href: `${base}/state/`,
+    title: "Look up your state's rules",
+    text: "Limits, fees, deadlines and appeals, each with its source and the date it was checked.",
+    meta: `${states.length} jurisdictions · checked ${statesChecked}`,
+  },
+  {
+    key: "C",
+    kind: "Tools",
+    href: `${base}/calculator/`,
+    title: "Use a tool",
+    text: "A cost calculator, a demand letter and printable checklists. They run in your browser.",
+    meta: "3 tools · nothing stored",
+  },
+];
+---
+<Layout title="Small claims court, explained">
+  <section class="wrap landing-hero">
+    <div class="hero-meta">
+      <span class="label label-strong">Fair Claim</span>
+      <span class="label">Small claims court, explained</span>
+      <span class="label">50 states + DC</span>
+    </div>
+    <h1 class="mega balance landing-title">
+      Small claims court is where people settle smaller money disputes, <span class="faint">usually without a lawyer.</span>
+    </h1>
+    <div class="landing-sub">
+      <p class="lede">
+        Limits run from <span class="key">{usd(limitStats.min)}</span> to <span class="key">{usd(limitStats.max)}</span>, depending on the state. Here is how it works, what
+        it costs, and what happens after a judgment.
+      </p>
+      <p class="label landing-note">Free · Neutral · Legal information, not legal advice</p>
+    </div>
+  </section>
+
+  <section class="wrap" aria-label="Where to start">
+    <div class="doors-head">
+      <span class="label">Where to start</span>
+      <span class="label">Choose one</span>
+    </div>
+    <div class="doors">
+      {doors.map((d) => (
+        <a class="door" href={d.href} data-keep-theme>
+          <div class="door-top">
+            <span class="k k-l">{d.key}</span>
+            <span class="label">{d.kind}</span>
+          </div>
+          <div class="door-body">
+            <h2 class="door-t">{d.title}</h2>
+            <p class="door-d">{d.text}</p>
+            <div class="door-foot">
+              <span class="label">{d.meta}</span>
+              <span class="arrow" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .landing-hero {
+    padding-top: clamp(64px, 9vw, 152px);
+    padding-bottom: clamp(56px, 7vw, 112px);
+  }
+  .landing-title {
+    max-width: 17ch;
+  }
+  .landing-sub {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    align-items: end;
+    margin-top: clamp(36px, 4.4vw, 72px);
+  }
+  .landing-sub .lede {
+    grid-column: 1 / span 6;
+  }
+  .landing-note {
+    grid-column: 9 / span 4;
+    justify-self: end;
+    text-align: right;
+  }
+  .doors-head {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 16px;
+    margin-bottom: 16px;
+    border-top: 1px solid var(--line-2);
+  }
+  @media (max-width: 900px) {
+    .landing-sub .lede,
+    .landing-note {
+      grid-column: 1 / -1;
+      justify-self: start;
+      text-align: left;
+    }
+    .landing-note {
+      margin-top: 20px;
+    }
+  }
+</style>
