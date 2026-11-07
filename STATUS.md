@@ -155,3 +155,6 @@ Agents checked every remaining state detail plus the California county gaps. Cor
   - Nima changes Cloudflare's `SITE_URL` variable to `https://fair-claim-706.pages.dev`, or deletes it, so canonical and share links use the real address.
   - Test on a real phone.
   - Go public later by setting `PUBLIC_INDEXABLE=true`.
+
+## Address change (2026-11-07)
+Nima wants the short address **https://fairclaim.pages.dev**. Pages projects can't be renamed, so the plan is: create a new Cloudflare Pages project named `fairclaim` on the same repo (same settings), check it, then delete the old `fair-claim` project (fair-claim-706.pages.dev). The code's default address is already set to fairclaim.pages.dev.

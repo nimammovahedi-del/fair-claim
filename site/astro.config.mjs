@@ -31,7 +31,7 @@ function devPages() {
 }
 
 export default defineConfig({
-  site: process.env.SITE_URL || "https://fair-claim-706.pages.dev",
+  site: process.env.SITE_URL || "https://fairclaim.pages.dev",
   trailingSlash: "always",
   build: { format: "directory" },
   output: "static",

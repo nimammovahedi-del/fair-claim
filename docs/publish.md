@@ -25,7 +25,7 @@ git push -u origin main
 
 ### 3. Cloudflare Pages (Nima, in the fedmoney account's dashboard, about 5 minutes)
 1. **Workers & Pages → Create → Pages → Connect to Git**, then pick the `fair-claim` repo. Allow Cloudflare access to just that repo.
-2. Project name: `fair-claim` (Cloudflare assigned `https://fair-claim-706.pages.dev` because the plain name was taken).
+2. Project name: `fairclaim` (gives `https://fairclaim.pages.dev`; the hyphenated `fair-claim.pages.dev` belongs to someone else, which produced the earlier `fair-claim-706` address).
 3. Build settings:
    - Framework preset: **Astro**
    - Root directory: **`site`**
@@ -33,7 +33,7 @@ git push -u origin main
    - Build output directory: **`dist`**
 4. Environment variables (Production):
    - `NODE_VERSION` = `24`
-   - `SITE_URL` = `https://fair-claim-706.pages.dev`, or the real address
+   - `SITE_URL` = `https://fairclaim.pages.dev`, or the real address
    - Leave `PUBLIC_INDEXABLE` **unset** for the quiet preview.
 5. **Save and Deploy.** The first build takes a couple of minutes.
 
