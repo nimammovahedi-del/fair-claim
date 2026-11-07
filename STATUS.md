@@ -32,7 +32,7 @@ Nothing deployed, no accounts created.*
 cd ~/Projects/small-claims && .venv/bin/python scripts/build_tables.py   # after editing research
 cd site && npm run dev                                                    # http://localhost:4321
 ```
-Light is the default; switch with **Display** in the header (Light / Dark / System).
+The theme follows the device; the header switch offers Light / Dark / Auto (Option A design, 2026-11-06).
 
 ## Prototype pages
 - Home

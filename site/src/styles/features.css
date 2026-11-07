@@ -1,6 +1,6 @@
 /* Fair Claim · feature styles: charts, tile map, stat tiles, glossary terms, checklists.
    Imported by the feature pages and components (home, about, glossary, checklists, Chart*, TileMap*, StatTile*,
-   Term*, Checklist*). Uses the tokens from global.css; adds only chart colors, defined for both themes below.
+   Term*, Checklist*). Uses the Option A tokens from global.css (plus its compatibility aliases); adds only chart colors, for both themes.
 
    Sections
    1. Chart tokens (light + dark)
@@ -15,66 +15,63 @@
    10. Checklists (print) */
 
 /* ------------------------------------------------------------------ 1. Chart tokens */
-/* Sequential ramp (one hue, near claim blue), validated with the dataviz ordinal checks:
-   monotone lightness, visible steps, lightest step >= 2:1 on the page. Labels inside a fill use
-   --fc-on-N (near-black or white, whichever reads, the same two colors in both themes). */
-:root {
-  --fc-seq-1: #9db6f5;
-  --fc-seq-2: #7491e2;
-  --fc-seq-3: #4c6bcd;
-  --fc-seq-4: #2f49af;
-  --fc-seq-5: #1b2e87;
-  --fc-on-1: #1b1d22; /* 8.4:1 */
-  --fc-on-2: #1b1d22; /* 5.5:1 */
-  --fc-on-3: #ffffff; /* 4.9:1 */
-  --fc-on-4: #ffffff; /* 7.8:1 */
-  --fc-on-5: #ffffff; /* 11.8:1 */
+/* Sequential ramp in cobalt (the "learn / data" hue of the Option A palette). Monotone lightness; labels inside a
+   fill use --fc-on-N (ink or white, whichever reads; contrast noted). Lightest step is always labeled. */
+:root,
+[data-theme="light"] {
+  --fc-seq-1: #a3b2ee;
+  --fc-seq-2: #8a9ce8;
+  --fc-seq-3: #4a63d4;
+  --fc-seq-4: #2a4bd0;
+  --fc-seq-5: #1a2f8a;
+  --fc-on-1: #111112; /* 9.1:1 */
+  --fc-on-2: #111112; /* 7.2:1 */
+  --fc-on-3: #ffffff; /* 5.2:1 */
+  --fc-on-4: #ffffff; /* 7.0:1 */
+  --fc-on-5: #ffffff; /* 11.6:1 */
 
-  --fc-mark: #2f49af; /* main bars: 7.8:1 on the page */
-  --fc-mark-soft: #9db6f5; /* weaker evidence / "before" values: always labeled */
-  --fc-mark-muted: #b9bdc6; /* context ("everything else"): always labeled */
-  --fc-grid: #e6e8ed; /* hairline gridlines */
-  --fc-axis: #b9bdc6; /* baseline */
-  --fc-track: var(--surface);
+  --fc-mark: #2a4bd0; /* main bars: 6.2:1 on the page */
+  --fc-mark-soft: #a3b2ee; /* weaker evidence / "before" values: always labeled */
+  --fc-mark-muted: #b5b4ad; /* context ("everything else"): always labeled */
+  --fc-grid: rgba(17, 17, 18, 0.08);
+  --fc-axis: rgba(17, 17, 18, 0.3);
+  --fc-track: var(--panel);
 }
-@media screen {
-  :root[data-theme="dark"],
-  [data-theme="dark"] {
-    /* Dark: the ramp flips so bigger values are lighter (more contrast on the dim page). */
-    --fc-seq-1: #405698;
-    --fc-seq-2: #526ebf;
-    --fc-seq-3: #7694e9;
-    --fc-seq-4: #9cb5f8;
-    --fc-seq-5: #cbdaff;
-    --fc-on-1: #ffffff; /* 7.0:1 */
-    --fc-on-2: #ffffff; /* 4.8:1 */
-    --fc-on-3: #1b1d22; /* 5.8:1 */
-    --fc-on-4: #1b1d22; /* 8.3:1 */
-    --fc-on-5: #1b1d22; /* 12.1:1 */
+[data-theme="dark"] {
+  /* Dark: the ramp flips so bigger values are lighter (more contrast on the near-black page). */
+  --fc-seq-1: #2a3a85;
+  --fc-seq-2: #2f44a8;
+  --fc-seq-3: #4d68e0;
+  --fc-seq-4: #8a9ef0;
+  --fc-seq-5: #c5cff8;
+  --fc-on-1: #ffffff; /* 10.3:1 */
+  --fc-on-2: #ffffff; /* 8.4:1 */
+  --fc-on-3: #ffffff; /* 4.8:1 */
+  --fc-on-4: #111112; /* 7.4:1 */
+  --fc-on-5: #111112; /* 12.3:1 */
 
-    --fc-mark: #9cb5f8; /* 7.5:1 on the page */
-    --fc-mark-soft: #526ebf;
-    --fc-mark-muted: #5d636e;
-    --fc-grid: #343941;
-    --fc-axis: #4b515b;
-    --fc-track: var(--surface);
-  }
+  --fc-mark: #8a9ef0; /* 7.7:1 on the page */
+  --fc-mark-soft: #2f44a8;
+  --fc-mark-muted: #4a4a47;
+  --fc-grid: rgba(255, 255, 255, 0.07);
+  --fc-axis: rgba(255, 255, 255, 0.25);
+  --fc-track: var(--panel);
 }
 
 /* ------------------------------------------------------------------ 2. Chart frame */
 .chart {
-  margin: var(--space-4) 0 var(--space-6);
-  padding: var(--space-3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--raised);
+  margin: var(--space-4) 0 var(--space-8);
+  padding: 20px 0 0;
+  border-top: 1px solid var(--line-2);
   container-type: inline-size;
 }
 .chart .chart-title {
-  margin: 0 0 var(--space-half);
-  font-size: var(--text-lg);
-  line-height: var(--lh-lg);
-  max-width: 44rem;
+  margin: 0 0 var(--space-1);
+  font-family: var(--f-display);
+  font-size: var(--fs-h3);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 30ch;
 }
 .chart-sub {
   margin: 0 0 var(--space-2);
@@ -382,7 +379,7 @@
   margin: 0;
   aspect-ratio: 1;
 }
-.tile {
+.map-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -398,21 +395,21 @@
   color: var(--fc-on-1);
   transition: box-shadow var(--dur-fast) var(--ease-out);
 }
-.tile[data-bin="1"] { background: var(--fc-seq-2); color: var(--fc-on-2); }
-.tile[data-bin="2"] { background: var(--fc-seq-3); color: var(--fc-on-3); }
-.tile[data-bin="3"] { background: var(--fc-seq-4); color: var(--fc-on-4); }
-.tile[data-bin="4"] { background: var(--fc-seq-5); color: var(--fc-on-5); }
-.tile:hover {
+.map-tile[data-bin="1"] { background: var(--fc-seq-2); color: var(--fc-on-2); }
+.map-tile[data-bin="2"] { background: var(--fc-seq-3); color: var(--fc-on-3); }
+.map-tile[data-bin="3"] { background: var(--fc-seq-4); color: var(--fc-on-4); }
+.map-tile[data-bin="4"] { background: var(--fc-seq-5); color: var(--fc-on-5); }
+.map-tile:hover {
   color: inherit;
   box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink);
   text-decoration: none;
 }
-.tile[data-bin]:hover { color: var(--fc-on-1); }
-.tile[data-bin="1"]:hover { color: var(--fc-on-2); }
-.tile[data-bin="2"]:hover { color: var(--fc-on-3); }
-.tile[data-bin="3"]:hover { color: var(--fc-on-4); }
-.tile[data-bin="4"]:hover { color: var(--fc-on-5); }
-.tile:focus-visible {
+.map-tile[data-bin]:hover { color: var(--fc-on-1); }
+.map-tile[data-bin="1"]:hover { color: var(--fc-on-2); }
+.map-tile[data-bin="2"]:hover { color: var(--fc-on-3); }
+.map-tile[data-bin="3"]:hover { color: var(--fc-on-4); }
+.map-tile[data-bin="4"]:hover { color: var(--fc-on-5); }
+.map-tile:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
@@ -426,7 +423,7 @@
   font-weight: var(--weight-heavy);
 }
 @container (max-width: 36rem) {
-  .tile {
+  .map-tile {
     font-size: 0.6875rem;
   }
   .tile-val {
@@ -448,7 +445,7 @@
   line-height: var(--lh-xs);
   color: var(--ink-2);
 }
-.tile-legend .key {
+.tile-legend .map-key {
   display: block;
   height: 10px;
   border-radius: 2px;
@@ -492,18 +489,29 @@
   list-style: none;
 }
 .stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin: 0;
-  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: inset var(--bar-width) 0 0 var(--accent);
+  padding: 20px 0 0;
+  border-top: 1px solid var(--line-2);
+}
+.stat-tile::before {
+  content: "";
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--t, var(--c-cobalt));
+  margin-bottom: 8px;
 }
 .stat-tile-value {
   margin: 0;
-  font-weight: var(--weight-heavy);
-  font-size: 2.25rem;
-  line-height: 2.75rem;
-  letter-spacing: -0.02em;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(40px, 4vw, 64px);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
   color: var(--ink);
 }
 .stat-tile-label {
@@ -523,6 +531,8 @@
   display: inline;
 }
 .term-link {
+  color: inherit;
+  text-decoration-color: currentColor;
   text-decoration-style: dotted;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 0.22em;
@@ -538,12 +548,12 @@
   left: 0;
   width: max-content;
   max-width: min(20rem, calc(100vw - 2 * var(--gutter)));
-  padding: var(--space-1h) var(--space-2);
-  background: var(--raised);
+  padding: 14px 16px;
+  background: var(--bg-2);
   color: var(--ink);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-2);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
   font-size: var(--text-sm);
   line-height: var(--lh-sm);
   font-weight: var(--weight-regular);
@@ -565,8 +575,12 @@
 }
 .term-tip-name {
   display: block;
-  font-weight: var(--weight-bold);
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
 .term-tip-more {
   display: block;

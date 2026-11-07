@@ -1,157 +1,98 @@
 ---
+// Landing page: one statement, three doors. Keep the text to a minimum.
+// The old home page's charts now live on /about/; the state picker moves to /states/.
 import Site from "../layouts/Site.astro";
-import Term from "../components/Term.astro";
-import TileMapLimits from "../components/TileMapLimits.astro";
-import ChartCollect from "../components/ChartCollect.astro";
-import "../styles/features.css";
-import { steps } from "../lib/steps";
-import { states } from "../lib/data";
-import { limitStats, feeStats, denver, statesChecked, evidenceChecked, usd } from "../lib/stats";
+import { statesChecked } from "../lib/stats";
+
+const doors = [
+  {
+    href: "/steps/",
+    c: "c-learn",
+    key: "A",
+    title: "Learn how it works",
+    text: "Five steps, from asking to collecting.",
+    foot: "Steps · Before you decide",
+  },
+  {
+    href: "/states/",
+    c: "c-states",
+    key: "B",
+    title: "Look up your state's rules",
+    text: "Limits, fees and deadlines, each with its source.",
+    foot: "51 states · 58 CA counties",
+  },
+  {
+    href: "/tools/",
+    c: "c-tools",
+    key: "C",
+    title: "Use a tool",
+    text: "Cost calculator, demand letter, checklists.",
+    foot: "Nothing you type is stored",
+  },
+];
 ---
-<Site title="Fair Claim">
-  <section class="hero">
-    <p class="eyebrow">Small claims court, explained</p>
-    <h1>What small claims court is, what it costs, and what happens after a judgment</h1>
-    <p class="lede">
-      Free, neutral information about small claims court in every US state, with a source and a date next to each
-      rule. It covers the costs and the odds of getting paid as plainly as the steps, so you can decide whether it's
-      worth it for you.
-    </p>
-    <form class="state-picker" action="/states/" method="get" data-state-picker>
-      <label class="sr-only" for="s">Your state</label>
-      <select id="s" name="s">
-        <option value="">Choose your state…</option>
-        {states.map((s) => <option value={s.slug}>{s.state}</option>)}
-      </select>
-      <button class="btn" type="submit">See your state's rules</button>
-    </form>
-    <p class="hint">
-      Or browse <a href="/states/">all states</a>. Legal information, not legal advice. Free, no ads, no tracking.
-    </p>
+<Site title="Fair Claim" bleed>
+  <section class="wrap land-hero">
+    <h1 class="display-xl land-title">Small claims, explained.</h1>
+    <p class="lbl land-meta">50 states + DC · checked {statesChecked}</p>
   </section>
 
-  <h2>The basics</h2>
-  <div class="home-facts">
-    <section class="home-fact" aria-labelledby="fact-what">
-      <h3 id="fact-what">What it is</h3>
-      <p class="figure">{usd(limitStats.min)} to {usd(limitStats.max)}</p>
-      <p>
-        A simpler part of the court system for smaller money disputes, where people usually speak for themselves. The
-        most you can claim depends on the state, from {usd(limitStats.min)} in {limitStats.minStates.join(", ")} to
-        {" "}{usd(limitStats.max)} in {limitStats.maxStates.join(" and ")}.
-      </p>
-      <p class="cite"><a href="/states/">State research, 50 states + DC</a><span>checked {statesChecked}</span></p>
-    </section>
-    <section class="home-fact" aria-labelledby="fact-cost">
-      <h3 id="fact-cost">What it costs</h3>
-      <p class="figure">{usd(feeStats.lowest)} to {usd(feeStats.highest)} to file</p>
-      <p>
-        The <Term slug="filing-fee" /> varies this much across states and claim sizes; in half the states it starts at
-        {" "}{usd(feeStats.medianLowest)} or less. Add <Term slug="service-of-process">serving the papers</Term>, time off
-        for the hearing, and more fees to collect if you aren't paid. A <Term slug="fee-waiver" /> can help if you can't
-        afford them.
-      </p>
-      <p class="cite"><a href="/about/#chart-fees">Fees by state</a><span>checked {statesChecked}</span></p>
-    </section>
-    <section class="home-fact" aria-labelledby="fact-paid">
-      <h3 id="fact-paid">Winning isn't getting paid</h3>
-      <p class="figure">{denver.collectedNothingPct}% collected nothing</p>
-      <p>
-        That's the share of winners in a study of Denver's small claims court, where only {denver.dollarsPaidPct}% of
-        the money awarded was ever paid. A <Term slug="judgment" /> is a right to be paid; the court doesn't collect it
-        for you.
-      </p>
-      <p class="cite"><a href={denver.source.url} rel="noopener">Fordham Urban Law Journal (1994)</a><span>checked {evidenceChecked}</span></p>
-    </section>
-  </div>
-
-  <h2 id="data">What the data shows</h2>
-  <p class="section-intro">
-    Numbers from our state-by-state research and the few studies that exist. Each chart names its source and when we
-    checked it, and each has a table version.
-  </p>
-  <TileMapLimits />
-  <ChartCollect />
-  <p><a class="link-arrow" href="/about/#data">More charts: fees, appeals, recent changes and who uses small claims</a></p>
-
-  <h2>Other ways to settle a dispute</h2>
-  <p class="section-intro">Court is one option. These can be tried first, and are often quicker and cheaper.</p>
-  <ul class="routes">
-    <li>
-      <strong>Ask in writing</strong>
-      <p>A calm <Term slug="demand-letter" /> with the amount and a deadline settles many disputes, and some courts ask whether you sent one. <a href="/demand-letter/">Write one</a>.</p>
-    </li>
-    <li>
-      <strong>Mediation</strong>
-      <p>A neutral person helps you both reach an agreement. In the studies above, mediated agreements were paid more often than judges' decisions.</p>
-    </li>
-    <li>
-      <strong>A complaint to a regulator</strong>
-      <p>For a licensed business, such as a contractor, a complaint to the licensing board or a consumer agency is another route.</p>
-    </li>
-    <li>
-      <strong>Letting it go</strong>
-      <p>After the time, the fees and the odds of collecting, some claims aren't worth pursuing. That's a reasonable choice too.</p>
-    </li>
-  </ul>
-
-  <h2>If you go ahead: the five steps</h2>
-  <ol class="strip">
-    {steps.map((s) => (
-      <li>
-        <span class="n">Step {s.n}</span>
-        <a class="t" href={`/steps/#${s.slug}`}>{s.title}</a>
-        <span class="d">{s.short}</span>
-      </li>
-    ))}
-  </ol>
-
-  <h2>Tools</h2>
-  <div class="grid">
-    <a class="card card-link" href="/worth-it/">
-      <h3>Is it worth it?</h3>
-      <p>Put in the amount, your state's fees and a chance of collecting, and see the likely result in dollars.</p>
-      <span class="go">Open the calculator</span>
-    </a>
-    <a class="card card-link" href="/demand-letter/">
-      <h3>Demand letter</h3>
-      <p>A calm, clear letter asking for payment. It runs in your browser; nothing is stored.</p>
-      <span class="go">Write a letter</span>
-    </a>
-    <a class="card card-link" href="/checklists/">
-      <h3>Checklists</h3>
-      <p>Printable lists for each step, with your state's limit, fees and deadlines filled in.</p>
-      <span class="go">Open the checklists</span>
-    </a>
-    <a class="card card-link" href="/glossary/">
-      <h3>Glossary</h3>
-      <p>Plain-English meanings of words like service, default judgment and writ of execution.</p>
-      <span class="go">Look up a word</span>
-    </a>
-    <a class="card card-link" href="/states/ca/counties/">
-      <h3>California, county by county</h3>
-      <p>Courthouses, self-help centers and free small claims advisor help in all 58 counties.</p>
-      <span class="go">California counties</span>
-    </a>
-  </div>
-
-  <div class="callout info" style="margin-top: var(--space-6)">
-    <p>
-      <strong>Being sued instead?</strong> A guide for people who've been sued — most often by a debt collector — is
-      planned for a later version. Until then, don't ignore the papers: missing your court date usually means losing
-      automatically (a <Term slug="default-judgment" />). Your state's court self-help page (linked on every state page)
-      explains how to respond.
+  <section class="wrap" aria-labelledby="doors-title">
+    <h2 id="doors-title" class="sr-only">Where to start</h2>
+    <div class="doors">
+      {doors.map((d, i) => (
+        <a class={`tile fill door ${d.c}`} href={d.href}>
+          <span class="t-top">
+            <span class="key" aria-hidden="true">{d.key}</span>
+            <span class="lbl door-idx" aria-hidden="true">0{i + 1}</span>
+          </span>
+          <span class="door-body">
+            <span class="door-title">{d.title}</span>
+            <span class="door-text">{d.text}</span>
+          </span>
+          <span class="door-foot"><span>{d.foot}</span><span class="door-arrow" aria-hidden="true"></span></span>
+        </a>
+      ))}
+    </div>
+    <p class="land-sued">
+      <span class="lbl lbl-ink">Being sued?</span>
+      <span>Don't ignore the papers. Your <a href="/states/">state's page</a> links to the court's guide.</span>
     </p>
-  </div>
+  </section>
 </Site>
 
-<script>
-  document.querySelectorAll<HTMLFormElement>("[data-state-picker]").forEach((f) => {
-    f.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const sel = f.elements.namedItem("s") as HTMLSelectElement;
-      if (sel.value) location.href = `/states/${sel.value}/`;
-      else sel.focus();
-    });
-  });
-</script>
+<style>
+  .land-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 48px;
+    padding-top: clamp(80px, 12vw, 184px);
+    padding-bottom: clamp(48px, 6vw, 88px);
+  }
+  .land-title {
+    margin: 0;
+    max-width: 12ch;
+  }
+  .land-meta {
+    margin: 0 0 0.6em;
+  }
+  .door-idx {
+    color: inherit;
+  }
+  .land-sued {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 14px;
+    margin: 28px 0 0;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  @media (max-width: 560px) {
+    .land-hero {
+      padding-top: 56px;
+    }
+  }
+</style>

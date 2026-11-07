@@ -1,0 +1,86 @@
+---
+// Theme switch: Light / Dark / Auto, as three radios in a segmented pill. Rendered once, in the header
+// (Site.astro); on phones it sits inside the Menu panel.
+//
+// - "Auto" (the default) follows the device setting (prefers-color-scheme) and keeps following it live.
+// - The choice is saved in localStorage as "fc-theme" (light | dark | auto). If storage is blocked, the choice
+//   still applies to this page view. The inline script in Site.astro applies it before first paint.
+// - A ?theme=light|dark URL parameter overrides it for that page view only (handy for screenshots). Not saved.
+// - Any element with [data-open-display-settings] (older markup) moves focus to this switch.
+const options = [
+  { value: "light", label: "Light" },
+  { value: "dark", label: "Dark" },
+  { value: "auto", label: "Auto" },
+];
+---
+<fieldset class="theme-switch" data-theme-switch>
+  <legend>Colour theme</legend>
+  {options.map((o) => (
+    <label>
+      <input type="radio" name="fc-theme" value={o.value} />
+      <svg class="ts-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+        {o.value === "light" && (
+          <>
+            <circle cx="8" cy="8" r="3" />
+            <path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1" stroke-linecap="round" />
+          </>
+        )}
+        {o.value === "dark" && <path d="M13 10.2A5.5 5.5 0 0 1 5.8 3a5.5 5.5 0 1 0 7.2 7.2z" stroke-linejoin="round" />}
+        {o.value === "auto" && (
+          <>
+            <circle cx="8" cy="8" r="5.5" />
+            <path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor" stroke="none" />
+          </>
+        )}
+      </svg>
+      <span>{o.label}</span>
+    </label>
+  ))}
+</fieldset>
+
+<script>
+  const KEY = "fc-theme";
+  const root = document.documentElement;
+  const media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+  function apply(pref: string) {
+    const dark = pref === "dark" || (pref === "auto" && !!media?.matches);
+    // Switch in one step: pause transitions so nothing fades at its own speed.
+    root.classList.add("theme-switching");
+    root.setAttribute("data-theme", dark ? "dark" : "light");
+    root.setAttribute("data-theme-pref", pref);
+    void root.offsetHeight;
+    setTimeout(() => root.classList.remove("theme-switching"), 0);
+  }
+
+  document.querySelectorAll<HTMLFieldSetElement>("[data-theme-switch]").forEach((box) => {
+    const radios = Array.from(box.querySelectorAll<HTMLInputElement>('input[name="fc-theme"]'));
+    const current = root.getAttribute("data-theme-pref") || "auto";
+    radios.forEach((r) => {
+      r.checked = r.value === current;
+      r.addEventListener("change", () => {
+        if (!r.checked) return;
+        apply(r.value);
+        try {
+          localStorage.setItem(KEY, r.value);
+        } catch {
+          /* storage blocked: the choice still applies for this page view */
+        }
+      });
+    });
+  });
+
+  media?.addEventListener("change", () => {
+    if ((root.getAttribute("data-theme-pref") || "auto") === "auto") apply("auto");
+  });
+
+  // Older "Display settings" buttons: open the menu on phones, then focus the switch.
+  document.querySelectorAll<HTMLElement>("[data-open-display-settings]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const menuBtn = document.querySelector<HTMLButtonElement>("[data-menu-btn]");
+      if (menuBtn && getComputedStyle(menuBtn).display !== "none" && menuBtn.getAttribute("aria-expanded") !== "true") menuBtn.click();
+      const checked = document.querySelector<HTMLInputElement>('[data-theme-switch] input:checked');
+      checked?.focus();
+    }),
+  );
+</script>

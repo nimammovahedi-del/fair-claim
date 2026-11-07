@@ -29,10 +29,10 @@ const {
   title = "Before you start",
   intro = `Please read this before you use ${toolName}.`,
   points = [
-    "This is general legal information, not legal advice. It can't tell you what to do in your own case.",
-    "Nothing you type is stored or sent anywhere. It stays in this browser tab and is gone when you close it.",
-    "Numbers are estimates based on the sources we cite. Laws, fees and deadlines can change.",
-    "Before you act, check with the court, a free small claims advisor or self-help center, or legal aid.",
+    "This is legal information, not legal advice. It can't tell you what to do in your case.",
+    "Nothing you type is stored or sent. It's gone when you close the tab.",
+    "Numbers are estimates from the sources we cite. Laws and fees change.",
+    "Before you act, check with the court, a free small claims advisor, or legal aid.",
   ],
   extraPoints = [],
   mode = "onload",
@@ -43,28 +43,22 @@ const titleId = `notice-${id}-title`;
 const descId = `notice-${id}-desc`;
 ---
 <div class="tool-gate no-print" data-tool-gate={id} hidden>
-  <p><strong>This tool is paused.</strong> Please read a short notice before you use {toolName}.</p>
-  <button class="btn small" type="button" data-notice-open aria-haspopup="dialog">Read the notice</button>
+  <p><span class="lbl lbl-ink">Paused</span>&ensp;Read a short notice before you use {toolName}.</p>
+  <button class="btn sm" type="button" data-notice-open aria-haspopup="dialog">Read the notice</button>
 </div>
 
-<dialog class="modal" data-tool-notice={id} data-target={target} data-mode={mode} aria-labelledby={titleId} aria-describedby={descId}>
-  <div class="modal-header"></div>
+<dialog class="modal tool-notice" data-tool-notice={id} data-target={target} data-mode={mode} aria-labelledby={titleId} aria-describedby={descId}>
   <div class="modal-body">
-    <h2 class="modal-title" id={titleId} tabindex="-1">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 11v6M12 7.5v.01" stroke-width="2.2" />
-      </svg>
-      {title}
-    </h2>
-    <p id={descId}>{intro}</p>
-    <ul class="notice-list">
+    <span class="n-icon" aria-hidden="true">i</span>
+    <h2 class="modal-title" id={titleId} tabindex="-1">{title}</h2>
+    <p class="modal-intro" id={descId}>{intro}</p>
+    <ol class="n-list">
       {[...points, ...extraPoints].map((p) => <li>{p}</li>)}
-    </ul>
-    <p><a href={readMoreHref} target="_blank" rel="noopener">{readMoreLabel}<span class="sr-only"> (opens in a new tab)</span></a></p>
+    </ol>
+    <p class="modal-more"><a href={readMoreHref} target="_blank" rel="noopener">{readMoreLabel}<span class="sr-only"> (opens in a new tab)</span></a></p>
   </div>
   <div class="modal-footer">
-    <button class="btn tertiary" type="button" data-notice-later>Not now</button>
+    <button class="btn ghost" type="button" data-notice-later>Not now</button>
     <button class="btn" type="button" data-notice-accept>I understand</button>
   </div>
 </dialog>

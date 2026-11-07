@@ -1,0 +1,55 @@
+---
+// Tools hub: three doors. The tools keep their own URLs (/worth-it/, /demand-letter/, /checklists/).
+import Site from "../../layouts/Site.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+
+const tools = [
+  {
+    href: "/worth-it/",
+    c: "c-calculator",
+    key: "A",
+    title: "Cost calculator",
+    text: "What you'd spend, side by side with what you might get back.",
+    foot: "Six questions",
+  },
+  {
+    href: "/demand-letter/",
+    c: "c-letter",
+    key: "B",
+    title: "Demand letter",
+    text: "A calm letter asking to be paid. Copy, print or save as PDF.",
+    foot: "Often the first step",
+  },
+  {
+    href: "/checklists/",
+    c: "c-checklists",
+    key: "C",
+    title: "Checklists",
+    text: "Printable lists for each step, with your state's rules.",
+    foot: "One per state",
+  },
+];
+---
+<Site title="Tools" description="Free small claims tools: a cost calculator, a demand-letter writer and printable checklists. Nothing you type is stored." bleed color="c-tools">
+  <section class="wrap page-hero">
+    <Breadcrumb items={[{ label: "Tools" }]} />
+    <h1 class="display">Tools</h1>
+    <p class="lede">Free. Nothing you type is stored or sent.</p>
+  </section>
+  <section class="wrap" aria-label="Tools">
+    <div class="doors">
+      {tools.map((t) => (
+        <a class={`tile fill door ${t.c}`} href={t.href}>
+          <span class="t-top">
+            <span class="key" aria-hidden="true">{t.key}</span>
+          </span>
+          <span class="door-body">
+            <span class="door-title">{t.title}</span>
+            <span class="door-text">{t.text}</span>
+          </span>
+          <span class="door-foot"><span>{t.foot}</span><span class="door-arrow" aria-hidden="true"></span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Site>

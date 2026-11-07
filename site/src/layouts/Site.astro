@@ -1,32 +1,42 @@
 ---
+// Fair Claim · site layout (Option A design system, 2026-11-06).
+// Props:
+//   title        Page title ("Fair Claim" alone on the home page).
+//   description  Meta description.
+//   bleed        true = the page manages its own full-width sections and .wrap containers.
+//                false (default) = the page body is wrapped in <div class="wrap page">.
+//   color        Optional color slot for the page (e.g. "c-states"); sets --t on <body> so dots, the
+//                current-nav marker and progress segments pick up the section's hue.
 import "../styles/global.css";
-import DisplaySettings from "../components/DisplaySettings.astro";
+import ThemeSwitch from "../components/ThemeSwitch.astro";
+import { statesChecked } from "../lib/stats";
 
 interface Props {
   title: string;
   description?: string;
+  bleed?: boolean;
+  color?: string;
 }
 const {
   title,
-  description = "Free, neutral information about small claims court: cited, dated rules for every state, the odds of getting paid, and a demand-letter tool. Legal information, not legal advice.",
+  description = "Free, neutral information about small claims court: cited, dated rules for every state, the costs, and what happens after a judgment. Legal information, not legal advice.",
+  bleed = false,
+  color,
 } = Astro.props;
 const path = Astro.url.pathname;
 
-// Main navigation. An item is "current" when the page path starts with its href.
+// Main navigation. "Tools" covers the hub and the three tools.
 const nav = [
-  { href: "/steps/", label: "How it works" },
-  { href: "/worth-it/", label: "Cost calculator" },
-  { href: "/demand-letter/", label: "Demand letter" },
-  { href: "/states/", label: "States" },
-  { href: "/checklists/", label: "Checklists" },
-  { href: "/glossary/", label: "Glossary" },
-  { href: "/about/", label: "About" },
-  { href: "/sources/", label: "How we check" },
+  { href: "/steps/", label: "How it works", match: ["/steps/"], c: "c-learn" },
+  { href: "/states/", label: "State rules", match: ["/states/"], c: "c-states" },
+  { href: "/tools/", label: "Tools", match: ["/tools/", "/worth-it/", "/demand-letter/", "/checklists/"], c: "c-tools" },
+  { href: "/glossary/", label: "Glossary", match: ["/glossary/"], c: "c-glossary" },
+  { href: "/about/", label: "About", match: ["/about/"], c: "c-about" },
 ];
-const isCurrent = (href: string) => path.startsWith(href);
+const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
 ---
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,145 +45,166 @@ const isCurrent = (href: string) => path.startsWith(href);
     <meta name="robots" content="noindex" />
     <meta name="color-scheme" content="light dark" />
     <script is:inline>
-      // Apply the saved theme before first paint (no flash). Light is the default.
+      // Before first paint: pick the theme. Order: ?theme= (this view only) > saved choice > device (Auto).
       (function () {
         var d = document.documentElement;
+        d.classList.remove("no-js");
         d.classList.add("js");
-        var pref = "light";
+        var pref = "auto";
         try {
-          pref = localStorage.getItem("fc-theme") || "light";
+          var saved = localStorage.getItem("fc-theme");
+          if (saved === "system") saved = "auto"; // value used by the old Display settings dialog
+          if (saved === "light" || saved === "dark" || saved === "auto") pref = saved;
         } catch (e) {}
-        var dark =
-          pref === "dark" ||
-          (pref === "system" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        try {
+          var q = new URLSearchParams(location.search).get("theme");
+          if (q === "light" || q === "dark" || q === "auto") pref = q;
+        } catch (e) {}
+        var dark = pref === "dark" || (pref === "auto" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
         d.setAttribute("data-theme", dark ? "dark" : "light");
         d.setAttribute("data-theme-pref", pref);
       })();
     </script>
   </head>
-  <body>
+  <body class={color}>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="proto-banner no-print">
+    <div class="proto-line no-print">
       <div class="wrap">
-        Prototype for review, not published. Legal information, not legal advice. Facts marked
-        <span class="badge unverified">Unverified</span> still need checking against the law or the court's own site.
+        <p>Prototype for review · not published</p>
+        <p class="pl-extra">Legal information, not legal advice</p>
       </div>
     </div>
 
-    <header class="site-header">
-      <div class="wrap header-top">
-        <a class="brand" href="/">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3.5V20M7.5 20h9M4.5 6.5h15" />
-              <path d="M4.5 6.5 2 12.5M4.5 6.5 7 12.5M19.5 6.5 17 12.5M19.5 6.5 22 12.5" />
-              <path d="M2 12.5a2.5 2.5 0 0 0 5 0zM17 12.5a2.5 2.5 0 0 0 5 0z" />
-            </svg>
-          </span>
-          <span class="brand-text">
-            <span class="brand-name">Fair Claim</span>
-            <span class="brand-tagline">Small claims court, explained. Free and neutral.</span>
-          </span>
+    <header class="hdr">
+      <div class="wrap hdr-in">
+        <a class="brand" href="/" aria-label="Fair Claim, home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="1" y="1" width="14" height="14" rx="2" fill="var(--c-cobalt)" />
+            <rect x="17" y="1" width="14" height="14" rx="2" fill="var(--c-tomato)" />
+            <rect x="1" y="17" width="14" height="14" rx="2" fill="var(--c-sage)" />
+            <rect x="17" y="17" width="14" height="14" rx="2" fill="var(--c-lilac)" />
+          </svg>
+          <span>Fair Claim</span>
         </a>
-        <div class="header-tools">
-          <button class="btn ghost small" type="button" data-open-display-settings aria-haspopup="dialog">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <circle cx="12" cy="12" r="8" />
-              <path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" stroke="none" />
-            </svg>
-            <span class="label-wide">Display</span><span class="sr-only"> settings</span>
-          </button>
-          <button class="btn tertiary small nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" id="nav-toggle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-            Menu
-          </button>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-btn>
+          <span>Menu</span><span class="menu-icon" aria-hidden="true"></span>
+        </button>
+        <div class="hdr-menu" id="site-menu" data-menu>
+          <nav class="nav" aria-label="Main">
+            <ul>
+              {nav.map((n) => (
+                <li class={n.c}>
+                  <a href={n.href} aria-current={isCurrent(n.match) ? "page" : undefined}>{n.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ThemeSwitch />
         </div>
       </div>
-      <nav class="main-nav" id="main-nav" aria-label="Main">
-        <div class="wrap">
-          <ul>
-            {nav.map((n) => (
-              <li>
-                <a href={n.href} aria-current={isCurrent(n.href) ? "page" : undefined}>{n.label}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
     </header>
 
     <main id="main" tabindex="-1">
-      <div class="wrap">
-        <slot />
-      </div>
+      {bleed ? <slot /> : <div class="wrap page"><slot /></div>}
     </main>
 
-    <footer class="site-footer">
-      <div class="wrap footer-top">
-        <div class="footer-about">
-          <p class="footer-brand">Fair Claim</p>
-          <p>
-            <strong>Legal information, not legal advice.</strong> Court rules change, and every case is different.
-            Each fact links to the law or the court's own website and shows when we last checked it. If something here
-            doesn't match what your court tells you, the court is right.
-          </p>
-          <p>Free, no ads, no tracking. Nothing you type into our tools is stored or sent anywhere.</p>
+    <footer class="ftr">
+      <div class="wrap">
+        <div class="ftr-grid">
+          <div class="ftr-about">
+            <p class="ftr-lead">Free, neutral information about small claims court in all 50 states and DC.</p>
+            <p class="ftr-small">
+              <strong>Legal information, not legal advice.</strong> If the court tells you something different, the
+              court is right.
+            </p>
+            <p class="ftr-small">No ads, no accounts, no tracking. Nothing you type is stored or sent.</p>
+          </div>
+          <div>
+            <p class="lbl">Learn</p>
+            <ul class="ftr-links">
+              <li><a href="/steps/">How it works</a></li>
+              <li><a href="/states/">State rules</a></li>
+              <li><a href="/glossary/">Glossary</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="lbl">Tools</p>
+            <ul class="ftr-links">
+              <li><a href="/worth-it/">Cost calculator</a></li>
+              <li><a href="/demand-letter/">Demand letter</a></li>
+              <li><a href="/checklists/">Checklists</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="lbl">Project</p>
+            <ul class="ftr-links">
+              <li><a href="/about/">About</a></li>
+              <li><a href="/sources/">How we check</a></li>
+              <li><a href="/design/">Design system</a></li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <p class="footer-heading">Guide</p>
-          <ul class="footer-links">
-            <li><a href="/steps/">How small claims works</a></li>
-            <li><a href="/steps/#before-you-decide">Before you decide</a></li>
-            <li><a href="/worth-it/">Cost calculator</a></li>
-            <li><a href="/demand-letter/">Demand letter</a></li>
-            <li><a href="/checklists/">Checklists</a></li>
-          </ul>
+        <div class="ftr-base">
+          <p class="lbl">Rules checked {statesChecked}</p>
+          <p class="lbl">Independent · not a court, agency or law firm</p>
         </div>
-        <div>
-          <p class="footer-heading">Rules</p>
-          <ul class="footer-links">
-            <li><a href="/states/">All states</a></li>
-            <li><a href="/states/ca/">California</a></li>
-            <li><a href="/states/ca/counties/">California counties</a></li>
-            <li><a href="/glossary/">Glossary</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="footer-heading">About</p>
-          <ul class="footer-links">
-            <li><a href="/about/">About Fair Claim</a></li>
-            <li><a href="/sources/">How we check</a></li>
-            <li><button class="link-button" type="button" data-open-display-settings aria-haspopup="dialog">Display settings</button></li>
-          </ul>
-        </div>
-      </div>
-      <div class="wrap footer-bottom">
-        <p>Fair Claim is an independent project. It is not a court, a government agency or a law firm.</p>
-        <p><a href="/design/">Design system</a></p>
+        <p class="ftr-word" aria-hidden="true">Fair Claim</p>
       </div>
     </footer>
 
-    <DisplaySettings />
-
     <script>
-      // Mobile menu: a disclosure button that shows/hides the main nav under 62em.
-      const toggle = document.getElementById("nav-toggle");
-      const nav = document.getElementById("main-nav");
-      if (toggle && nav) {
-        const setOpen = (open: boolean) => {
-          toggle.setAttribute("aria-expanded", String(open));
-          nav.classList.toggle("is-open", open);
+      // Mobile menu (under 900px): a disclosure button that shows/hides the nav + theme switch.
+      const btn = document.querySelector<HTMLButtonElement>("[data-menu-btn]");
+      const menu = document.querySelector<HTMLElement>("[data-menu]");
+      if (btn && menu) {
+        const isOpen = () => btn.getAttribute("aria-expanded") === "true";
+        const setOpen = (open: boolean, focusBtn = false) => {
+          btn.setAttribute("aria-expanded", String(open));
+          btn.querySelector("span")!.textContent = open ? "Close" : "Menu";
+          menu.classList.toggle("is-open", open);
+          if (focusBtn) btn.focus();
         };
-        toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
-        nav.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
-            setOpen(false);
-            toggle.focus();
-          }
+        btn.addEventListener("click", () => setOpen(!isOpen()));
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && isOpen()) setOpen(false, true);
         });
+        document.addEventListener("click", (e) => {
+          if (isOpen() && !menu.contains(e.target as Node) && !btn.contains(e.target as Node)) setOpen(false);
+        });
+        // Back to desktop width: reset.
+        window.matchMedia("(min-width: 901px)").addEventListener("change", (m) => m.matches && setOpen(false));
       }
+
+      // Tabs: any [data-tabs] container with role="tablist" buttons (see global.css, section 12).
+      document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((box) => {
+        const tabs = Array.from(box.querySelectorAll<HTMLElement>('[role="tab"]'));
+        const select = (tab: HTMLElement, focus = false) => {
+          tabs.forEach((t) => {
+            const on = t === tab;
+            t.setAttribute("aria-selected", String(on));
+            t.tabIndex = on ? 0 : -1;
+            const panel = document.getElementById(t.getAttribute("aria-controls") || "");
+            if (panel) panel.hidden = !on;
+          });
+          if (focus) tab.focus();
+        };
+        tabs.forEach((t, i) => {
+          t.addEventListener("click", () => select(t));
+          t.addEventListener("keydown", (e) => {
+            const k = e.key;
+            let n = -1;
+            if (k === "ArrowRight" || k === "ArrowDown") n = (i + 1) % tabs.length;
+            else if (k === "ArrowLeft" || k === "ArrowUp") n = (i - 1 + tabs.length) % tabs.length;
+            else if (k === "Home") n = 0;
+            else if (k === "End") n = tabs.length - 1;
+            if (n >= 0) {
+              e.preventDefault();
+              select(tabs[n], true);
+            }
+          });
+        });
+        select(tabs.find((t) => t.getAttribute("aria-selected") === "true") ?? tabs[0]);
+      });
     </script>
   </body>
 </html>

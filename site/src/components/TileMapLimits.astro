@@ -27,7 +27,7 @@ const upTo10k = limitStats.binCounts[0] + limitStats.binCounts[1] + limitStats.b
   <ul class="tile-legend" slot="legend" aria-label="Legend: limit for individuals">
     {limitBins.map((b, i) => (
       <li>
-        <span class="key" aria-hidden="true"></span>
+        <span class="map-key" aria-hidden="true"></span>
         <strong>{b.label}</strong>
         {limitStats.binCounts[i]} {limitStats.binCounts[i] === 1 ? "state" : "states"}
       </li>
@@ -38,7 +38,7 @@ const upTo10k = limitStats.binCounts[0] + limitStats.binCounts[1] + limitStats.b
       {limitTiles.map((t) => (
         <li style={`grid-column:${t.col + 1};grid-row:${t.row + 1}`}>
           <a
-            class="tile"
+            class="map-tile"
             data-bin={t.bin}
             href={`/states/${t.slug}/`}
             aria-label={`${t.state}: ${usd(t.limit)}${t.unverified ? " (unverified)" : ""}`}
