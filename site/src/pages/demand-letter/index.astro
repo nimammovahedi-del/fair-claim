@@ -1,237 +1,369 @@
 ---
-// Demand-letter tool. Framed as one option people often try first, not as "how to get paid".
-// Everything runs in the browser: nothing is stored or sent. Copy, print and PDF are blocked
-// until the required boxes are filled in, with an error summary that links to each box.
+// Demand-letter tool (Option A guided flow). Framed as one option people often try first, not as "how to get paid".
+// Everything runs in the browser: nothing is stored or sent. A live "paper" preview updates as you type.
+// Copy, print and PDF are blocked until the required boxes are filled in, with an error summary that links to each box.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import ToolNotice from "../../components/ToolNotice.astro";
+import ToolStatePicker from "../../components/ToolStatePicker.astro";
+import "../../components/ToolFlow.css";
 import { states, caStatewide } from "../../lib/data";
 import { letterNotes } from "../../lib/letter-notes";
 
 // Short, neutral line printed at the bottom of the PDF and the printed letter.
 const PRINT_NOTE = "Prepared with Fair Claim's free letter tool (general information, not legal advice). Review before sending.";
-const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, court: s.court_name }));
+const letterStates = states.map((s) => ({ slug: s.slug, name: s.state, abbr: s.abbr, court: s.court_name, checked: s.date_checked }));
 const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?: string[] } | undefined;
----
-<Site title="Demand letter" description="A demand letter is one option many people try before going to court. Write a calm, clear one in your browser. Nothing is stored or sent.">
-  <div class="no-print">
-    <Breadcrumb items={[{ label: "Demand letter" }]} />
-  </div>
-  <div class="narrow page-head">
-    <p class="eyebrow">Letter tool</p>
-    <h1>Write a demand letter</h1>
-    <p class="lede">
-      A demand letter is a written request for money you believe you're owed. Many people try one before going to
-      court, or instead of it. This tool turns your answers into a plain, calm letter you can print, save as a PDF or
-      copy.
-    </p>
-    <ul class="key-points">
-      <li>Sending a letter doesn't commit you to suing. Some disputes end with a letter; some don't.</li>
-      <li>
-        Some states, including California, expect you to ask for payment before you file a small claims case.{" "}
-        {preFiling?.citation && (
-          <span class="cite">
-            {preFiling.sources?.[0] ? <a href={preFiling.sources[0]} rel="noopener">{preFiling.citation}</a> : preFiling.citation}
-          </span>
-        )}
-      </li>
-      <li>It runs entirely in your browser. Nothing you type is saved or sent to us, and it's gone when you close the page.</li>
-    </ul>
-    <p class="hint">Other options, like mediation or a complaint to a regulator, are on <a href="/steps/#before-you-decide">Before you decide</a>.</p>
-  </div>
 
+const colors = ["c-lilac", "c-tomato", "c-sage", "c-cobalt", "c-sand"];
+const kinds = [
+  { v: "security_deposit", label: "Security deposit", sub: "Not returned after moving out" },
+  { v: "consumer_refund", label: "A refund", sub: "Product or service" },
+  { v: "unpaid_invoice", label: "Unpaid invoice", sub: "Money owed to my business" },
+  { v: "property_damage", label: "Damage to my property", sub: "Car, home, belongings" },
+  { v: "other", label: "Something else", sub: "Any other amount owed" },
+];
+const days = [10, 14, 21, 30];
+const keys = "ABCDEF";
+const steps = ["What it's about", "State", "The details", "You", "Them", "Deadline", "Review"];
+const TOTAL = steps.length;
+const pad = (n: number) => String(n).padStart(2, "0");
+---
+<Site
+  title="Demand letter"
+  description="A demand letter is one option many people try before going to court. Write a calm, clear one in your browser. Nothing is stored or sent."
+  bleed
+  color="c-letter"
+>
   <script type="application/json" id="letter-states" set:html={JSON.stringify(letterStates)} />
   <script type="application/json" id="letter-notes" set:html={JSON.stringify(letterNotes)} />
 
-  <ToolNotice
-    id="demand-letter"
-    target="letter-tool"
-    toolName="the demand-letter tool"
-    points={[
-      "This is general legal information, not legal advice. The tool fills in a plain template; it can't judge your case.",
-      "Nothing you type is stored or sent anywhere. The PDF is made on your device, and everything is gone when you close the page.",
-      "State-law notes are based on the sources we cite. Laws can change, so check them before you rely on them.",
-      "You're responsible for the letter. Read it, edit anything that isn't exactly right, and make sure every fact, date and amount is accurate.",
-      "Keep it factual and calm. Don't add threats (for example, of criminal charges or public posts). The letter can say you may file in small claims court, and you can leave that out.",
-      "If you're unsure, check with the court's self-help center, a free small claims advisor, or legal aid.",
-    ]}
-  />
-
-  <div class="letter-wrap" id="letter-tool">
-    <form id="letter" class="no-print letter-form" novalidate autocomplete="off" aria-labelledby="form-title">
-      <h2 class="sr-only" id="form-title">Your answers</h2>
-      <p class="hint">Boxes marked <span class="req">(required)</span> are needed before you can print, save or copy. <a class="jump-link" href="#preview-title">Skip to the preview</a></p>
-
-      <div class="callout error error-summary" id="error-summary" tabindex="-1" hidden aria-labelledby="error-summary-title">
-        <p class="callout-title" id="error-summary-title"></p>
-        <ul id="error-list"></ul>
-      </div>
-
-      <fieldset>
-        <legend><span class="legend-num" aria-hidden="true">1</span> What it's about</legend>
-        <div class="form-grid">
-          <div class="field">
-            <label for="kind">Type of dispute</label>
-            <select id="kind">
-              <option value="security_deposit">Security deposit not returned</option>
-              <option value="consumer_refund">Refund for a product or service</option>
-              <option value="unpaid_invoice">Unpaid invoice (my business)</option>
-              <option value="property_damage">Damage to my property</option>
-              <option value="other">Something else</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="st">State</label>
-            <select id="st" aria-describedby="st-hint">
-              <option value="">Choose a state</option>
-              {letterStates.map((s) => <option value={s.slug}>{s.name}</option>)}
-            </select>
-            <span class="hint" id="st-hint">Optional. Adds cited state-law notes where we have them.</span>
-          </div>
-          <div class="field" data-req>
-            <label for="amount">Amount <span class="req">(required)</span></label>
-            <div class="input-affix">
-              <span class="affix" aria-hidden="true">$</span>
-              <input id="amount" type="text" inputmode="decimal" placeholder="1,850.00" aria-required="true" aria-describedby="amount-hint" />
-            </div>
-            <span class="hint" id="amount-hint">The amount you're asking for, and no more than you can show.</span>
-          </div>
-          <div class="field">
-            <label for="eventDate" id="eventDateLabel">Move-out date</label>
-            <input id="eventDate" type="date" aria-describedby="eventDate-hint" />
-            <span class="hint" id="eventDate-hint">Optional.</span>
-          </div>
-          <div class="field full" data-req>
-            <label for="detail"><span id="detailLabel">Rental address</span> <span class="req">(required)</span></label>
-            <input id="detail" type="text" placeholder="123 Main St, Apt 4, Oakland, CA" aria-required="true" aria-describedby="detail-hint" />
-            <span class="hint" id="detail-hint">Goes in the subject line, so keep it short.</span>
-          </div>
-          <div class="field full">
-            <label for="facts">What happened</label>
-            <textarea id="facts" aria-describedby="facts-hint" placeholder="I paid a $2,000 deposit when I moved in. I left the unit clean and returned the keys on June 30. I received $150 back with no itemized list of deductions."></textarea>
-            <span class="hint" id="facts-hint">Recommended. Short and factual, in your own words. Dates and amounts help.</span>
-          </div>
+  <div class="fl dl">
+    <section class="wrap page-hero dl-hero no-print">
+      <Breadcrumb items={[{ href: "/tools/", label: "Tools" }, { label: "Demand letter" }]} />
+      <div class="dl-top">
+        <h1 class="display">Write a demand letter</h1>
+        <div class="dl-aside">
+          <p>A written request for money you believe you're owed. Many people try one before court, or instead of it. Sending one doesn't commit you to suing.</p>
+          {preFiling?.citation && (
+            <p class="cite">
+              California expects you to ask before you file:{" "}
+              {preFiling.sources?.[0] ? <a href={preFiling.sources[0]} rel="noopener">{preFiling.citation}</a> : preFiling.citation}
+            </p>
+          )}
         </div>
-      </fieldset>
-
-      <fieldset>
-        <legend><span class="legend-num" aria-hidden="true">2</span> From you</legend>
-        <div class="form-grid">
-          <div class="field full" data-req>
-            <label for="sName">Your name <span class="req">(required)</span></label>
-            <input id="sName" type="text" autocomplete="name" aria-required="true" />
-          </div>
-          <div class="field full" data-req>
-            <label for="sAddr">Your mailing address <span class="req">(required)</span></label>
-            <textarea id="sAddr" class="short" autocomplete="street-address" aria-required="true" aria-describedby="sAddr-hint"></textarea>
-            <span class="hint" id="sAddr-hint">Street on the first line, then city, state and ZIP on the next.</span>
-          </div>
-          <div class="field">
-            <label for="sPhone">Phone</label>
-            <input id="sPhone" type="tel" autocomplete="tel" aria-describedby="sPhone-hint" />
-            <span class="hint" id="sPhone-hint">Optional.</span>
-          </div>
-          <div class="field">
-            <label for="sEmail">Email</label>
-            <input id="sEmail" type="email" autocomplete="email" aria-describedby="sEmail-hint" />
-            <span class="hint" id="sEmail-hint">Optional.</span>
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend><span class="legend-num" aria-hidden="true">3</span> To them</legend>
-        <div class="form-grid">
-          <div class="field full" data-req>
-            <label for="rName">Their name or business name <span class="req">(required)</span></label>
-            <input id="rName" type="text" aria-required="true" aria-describedby="rName-hint" />
-            <span class="hint" id="rName-hint">For a business, use its legal name. Your Secretary of State's business search shows it.</span>
-          </div>
-          <div class="field full" data-req>
-            <label for="rAddr">Their mailing address <span class="req">(required)</span></label>
-            <textarea id="rAddr" class="short" aria-required="true" aria-describedby="rAddr-hint"></textarea>
-            <span class="hint" id="rAddr-hint">One line per row, like an envelope.</span>
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend><span class="legend-num" aria-hidden="true">4</span> Deadline and wording</legend>
-        <div class="form-grid">
-          <div class="field" data-req>
-            <label for="date">Date of the letter <span class="req">(required)</span></label>
-            <input id="date" type="date" aria-required="true" />
-          </div>
-          <div class="field">
-            <label for="days">Days to respond</label>
-            <select id="days" aria-describedby="days-hint"><option>10</option><option selected>14</option><option>21</option><option>30</option></select>
-            <span class="hint" id="days-hint">10 to 14 days is common.</span>
-          </div>
-          <div class="field full">
-            <label for="pay">How they can pay</label>
-            <input id="pay" type="text" placeholder="a check mailed to the address above" aria-describedby="pay-hint" />
-            <span class="hint" id="pay-hint">Optional.</span>
-          </div>
-          <div class="field full">
-            <fieldset class="choices">
-              <legend class="label">What the letter says</legend>
-              <label class="choice"><input type="checkbox" id="offer" checked /> <span>Offer to talk it over before the deadline</span></label>
-              <label class="choice"><input type="checkbox" id="mentionCourt" checked /> <span>Say I may file in small claims court if it isn't resolved</span></label>
-            </fieldset>
-          </div>
-          <div class="field full" id="court-field">
-            <label for="court">Court to name</label>
-            <input id="court" type="text" placeholder="small claims court in Alameda County" aria-describedby="court-hint" />
-            <span class="hint" id="court-hint">Optional. Leave blank to say “small claims court”.</span>
-          </div>
-          <div class="field full" id="notes-field" hidden>
-            <fieldset class="choices">
-              <legend class="label">State law to mention</legend>
-              <p class="hint">Cited from the law. Untick any you don't want in the letter.</p>
-              <div id="notes-list"></div>
-            </fieldset>
-          </div>
-        </div>
-      </fieldset>
-    </form>
-
-    <section class="letter-side" aria-labelledby="preview-title">
-      <div class="preview-head no-print">
-        <h2 id="preview-title" tabindex="-1">Preview</h2>
-        <p class="hint">Updates as you type. Text in <mark class="ph">[brackets]</mark> still needs an answer.</p>
       </div>
-      <div class="actions no-print">
-        <button class="btn" type="button" id="pdf">Download PDF</button>
-        <button class="btn secondary" type="button" id="print">Print</button>
-        <button class="btn secondary" type="button" id="copy">Copy text</button>
-        <button class="btn tertiary" type="button" id="clear">Clear everything</button>
-      </div>
-      <p class="sr-only" role="status" aria-live="polite" id="letter-status"></p>
-      <div class="paper" id="preview"></div>
-      <p class="print-only print-note" id="print-note">{PRINT_NOTE}</p>
-      <div class="callout info no-print">
-        <p class="callout-title">Before you send it</p>
-        <p>
-          Read it over and change anything that isn't exactly right. It's your letter. Send it in a way you can prove,
-          like certified mail, or email plus regular mail, and keep a copy.
-        </p>
-      </div>
-      <p class="no-print"><a class="jump-link" href="#form-title">Back to your answers</a></p>
     </section>
+
+    <div class="wrap">
+      <ToolNotice
+        id="demand-letter"
+        target="letter-tool"
+        toolName="the demand-letter tool"
+        points={[
+          "This is general legal information, not legal advice. The tool fills in a plain template; it can't judge your case.",
+          "Nothing you type is stored or sent anywhere. The PDF is made on your device, and everything is gone when you close the page.",
+          "State-law notes are based on the sources we cite. Laws can change, so check them before you rely on them.",
+          "You're responsible for the letter. Read it, edit anything that isn't exactly right, and make sure every fact, date and amount is accurate.",
+          "Keep it factual and calm. Don't add threats (for example, of criminal charges or public posts). The letter can say you may file in small claims court, and you can leave that out.",
+          "If you're unsure, check with the court's self-help center, a free small claims advisor, or legal aid.",
+        ]}
+      />
+
+      <div class="fl-layout fl-split dl-layout" id="letter-tool">
+        <div class="fl-main dl-flow no-print">
+          <div class="dl-prog">
+            <div class="progress" aria-hidden="true">
+              {steps.map((_, i) => <span class={i === 0 ? "seg now" : "seg"} data-seg={i + 1}></span>)}
+            </div>
+            <p class="lbl" data-count>Step 1 of {TOTAL}</p>
+          </div>
+
+          <form id="letter" novalidate autocomplete="off">
+            <!-- 1 · Kind -->
+            <section class="fl-q" data-q="1" data-state="now" aria-labelledby="l1-t">
+              <div class="fl-q-head">
+                <span class="fl-q-n">{pad(1)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+                <h2 class="fl-q-title" id="l1-t" tabindex="-1" data-notice-focus>What is it about?</h2>
+              </div>
+              <div class="fl-q-body">
+                <fieldset class="fl-group" data-keys data-auto>
+                  <legend class="sr-only">What is it about?</legend>
+                  <div class="tiles fl-tiles-3">
+                    {kinds.map((k, i) => (
+                      <label class={`tile ${colors[i]}`}>
+                        <input type="radio" name="kind" value={k.v} checked={i === 0} />
+                        <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><span class="check" aria-hidden="true"></span></span>
+                        <span><span class="t-label">{k.label}</span><span class="t-sub">{k.sub}</span></span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+              </div>
+              <div class="fl-q-foot">
+                <button class="btn" type="button" data-next>Continue</button>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter · letter keys pick an answer</span>
+              </div>
+            </section>
+
+            <!-- 2 · State -->
+            <section class="fl-q" data-q="2" data-state="next" aria-labelledby="l2-t">
+              <div class="fl-q-head">
+                <span class="fl-q-n">{pad(2)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+                <h2 class="fl-q-title" id="l2-t" tabindex="-1">Which state are you in?</h2>
+                <p class="fl-q-help" id="l2-help">Optional. Adds cited state-law notes where we have them.</p>
+              </div>
+              <div class="fl-q-body">
+                <ToolStatePicker name="st" legend="Which state are you in?" states={letterStates} featured={["ca", "tx", "ny"]} colors={colors} skipLabel="Skip" skipSub="No state notes" describedby="l2-help" auto={false} checked="" />
+                <div class="dl-notes" id="notes-box">
+                  <p class="fl-sub" id="notes-title" hidden>State law to mention</p>
+                  <ul class="fl-toggles" id="notes-list" aria-labelledby="notes-title" hidden></ul>
+                  <p class="fl-note" id="notes-none"></p>
+                </div>
+              </div>
+              <div class="fl-q-foot">
+                <button class="btn" type="button" data-next>Continue</button>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              </div>
+            </section>
+
+            <!-- 3 · Details -->
+            <section class="fl-q" data-q="3" data-state="later" aria-labelledby="l3-t">
+              <div class="fl-q-head">
+                <span class="fl-q-n">{pad(3)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+                <h2 class="fl-q-title" id="l3-t" tabindex="-1">The details</h2>
+                <p class="fl-q-help">Only what you can show. Short and factual.</p>
+              </div>
+              <div class="fl-q-body">
+                <div class="fields fl-fields-2">
+                  <div class="field">
+                    <label for="amount">Amount <span class="f-req">Required</span></label>
+                    <div class="affix"><span aria-hidden="true">$</span><input id="amount" type="text" inputmode="decimal" enterkeyhint="next" placeholder="1,850.00" aria-required="true" aria-describedby="amount-hint" /></div>
+                    <span class="f-hint" id="amount-hint">What you're asking for, and no more than you can show.</span>
+                  </div>
+                  <div class="field">
+                    <label for="eventDate" id="eventDateLabel">Move-out date</label>
+                    <input id="eventDate" type="date" aria-describedby="eventDate-hint" />
+                    <span class="f-hint" id="eventDate-hint">Optional.</span>
+                  </div>
+                  <div class="field wide">
+                    <label for="detail"><span id="detailLabel">Rental address</span> <span class="f-req">Required</span></label>
+                    <input id="detail" type="text" enterkeyhint="next" placeholder="123 Main St, Apt 4, Oakland, CA" aria-required="true" aria-describedby="detail-hint" />
+                    <span class="f-hint" id="detail-hint">Goes in the subject line, so keep it short.</span>
+                  </div>
+                  <div class="field wide">
+                    <label for="facts">What happened, in your words</label>
+                    <textarea id="facts" rows="4" aria-describedby="facts-hint" placeholder="I paid a $2,000 deposit when I moved in. I left the unit clean and returned the keys on June 30. I received $150 back with no itemized list of deductions."></textarea>
+                    <span class="f-hint" id="facts-hint">Recommended. Dates, amounts and what you did.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="fl-q-foot">
+                <button class="btn" type="button" data-next>Continue</button>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              </div>
+            </section>
+
+            <!-- 4 · You -->
+            <section class="fl-q" data-q="4" data-state="later" aria-labelledby="l4-t">
+              <div class="fl-q-head">
+                <span class="fl-q-n">{pad(4)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+                <h2 class="fl-q-title" id="l4-t" tabindex="-1">From you</h2>
+                <p class="fl-q-help">Printed at the top, so they can reply.</p>
+              </div>
+              <div class="fl-q-body">
+                <div class="fields fl-fields-2">
+                  <div class="field wide">
+                    <label for="sName">Your name <span class="f-req">Required</span></label>
+                    <input id="sName" type="text" autocomplete="name" enterkeyhint="next" aria-required="true" />
+                  </div>
+                  <div class="field wide">
+                    <label for="sAddr">Your mailing address <span class="f-req">Required</span></label>
+                    <textarea id="sAddr" rows="2" autocomplete="street-address" aria-required="true" aria-describedby="sAddr-hint"></textarea>
+                    <span class="f-hint" id="sAddr-hint">Street on the first line, then city, state and ZIP.</span>
+                  </div>
+                  <div class="field">
+                    <label for="sPhone">Phone</label>
+                    <input id="sPhone" type="tel" autocomplete="tel" enterkeyhint="next" aria-describedby="sPhone-hint" />
+                    <span class="f-hint" id="sPhone-hint">Optional.</span>
+                  </div>
+                  <div class="field">
+                    <label for="sEmail">Email</label>
+                    <input id="sEmail" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" enterkeyhint="next" aria-describedby="sEmail-hint" />
+                    <span class="f-hint" id="sEmail-hint">Optional.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="fl-q-foot">
+                <button class="btn" type="button" data-next>Continue</button>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              </div>
+            </section>
+
+            <!-- 5 · Them -->
+            <section class="fl-q" data-q="5" data-state="later" aria-labelledby="l5-t">
+              <div class="fl-q-head">
+                <span class="fl-q-n">{pad(5)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+                <h2 class="fl-q-title" id="l5-t" tabindex="-1">To them</h2>
+                <p class="fl-q-help">The person or business you're asking to pay.</p>
+              </div>
+              <div class="fl-q-body">
+                <div class="fields fl-fields-2">
+                  <div class="field wide">
+                    <label for="rName">Their name or business name <span class="f-req">Required</span></label>
+                    <input id="rName" type="text" enterkeyhint="next" aria-required="true" aria-describedby="rName-hint" />
+                    <span class="f-hint" id="rName-hint">For a business, its legal name. Your Secretary of State's business search shows it.</span>
+                  </div>
+                  <div class="field wide">
+                    <label for="rAddr">Their mailing address <span class="f-req">Required</span></label>
+                    <textarea id="rAddr" rows="2" aria-required="true" aria-describedby="rAddr-hint"></textarea>
+                    <span class="f-hint" id="rAddr-hint">One line per row, like an envelope.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="fl-q-foot">
+                <button class="btn" type="button" data-next>Continue</button>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              </div>
+            </section>
+
+            <!-- 6 · Deadline + wording -->
+            <section class="fl-q" data-q="6" data-state="later" aria-labelledby="l6-t">
+              <div class="fl-q-head">
+                <span class="fl-q-n">{pad(6)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+                <h2 class="fl-q-title" id="l6-t" tabindex="-1">How long will you give them?</h2>
+                <p class="fl-q-help" id="l6-help">Many people allow 10 to 14 days. The deadline is printed in the letter.</p>
+              </div>
+              <div class="fl-q-body">
+                <fieldset class="fl-group" data-keys aria-describedby="l6-help">
+                  <legend class="sr-only">Days to respond</legend>
+                  <div class="tiles fl-tiles-4">
+                    {days.map((d, i) => (
+                      <label class={`tile ${colors[i]}`}>
+                        <input type="radio" name="days" value={d} checked={d === 14} />
+                        <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><span class="check" aria-hidden="true"></span></span>
+                        <span><span class="t-big">{d}</span><span class="t-sub" data-by={d}>days</span></span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <div class="fields fl-fields-2 dl-gap">
+                  <div class="field">
+                    <label for="date">Date of the letter <span class="f-req">Required</span></label>
+                    <input id="date" type="date" aria-required="true" />
+                  </div>
+                  <div class="field">
+                    <label for="pay">How they can pay</label>
+                    <input id="pay" type="text" enterkeyhint="next" placeholder="a check mailed to the address above" aria-describedby="pay-hint" />
+                    <span class="f-hint" id="pay-hint">Optional.</span>
+                  </div>
+                </div>
+                <fieldset class="fl-group dl-gap">
+                  <legend>What the letter says</legend>
+                  <ul class="fl-toggles">
+                    <li><label class="fl-toggle"><input type="checkbox" id="offer" checked /><span class="tg" aria-hidden="true"></span><span>Offer to talk it over before the deadline</span></label></li>
+                    <li><label class="fl-toggle"><input type="checkbox" id="mentionCourt" checked /><span class="tg" aria-hidden="true"></span><span>Say I may file in small claims court if it isn't resolved</span></label></li>
+                  </ul>
+                </fieldset>
+                <div class="fields dl-gap" id="court-field">
+                  <div class="field wide compact">
+                    <label for="court">Court to name</label>
+                    <input id="court" type="text" enterkeyhint="done" placeholder="small claims court in Alameda County" aria-describedby="court-hint" />
+                    <span class="f-hint" id="court-hint">Optional. Blank says “small claims court”.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="fl-q-foot">
+                <button class="btn" type="button" data-next>Review the letter</button>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              </div>
+            </section>
+
+            <!-- 7 · Review -->
+            <section class="fl-q" data-q="7" data-state="later" aria-labelledby="l7-t">
+              <div class="fl-q-head">
+                <span class="fl-q-n">{pad(7)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+                <h2 class="fl-q-title" id="l7-t" tabindex="-1">Read it, then save or print</h2>
+                <p class="fl-q-help">It's your letter. Change anything that isn't exactly right.</p>
+              </div>
+              <div class="fl-q-body">
+                <div class="callout error dl-errors" id="error-summary" tabindex="-1" hidden aria-labelledby="error-summary-title">
+                  <p class="callout-title" id="error-summary-title"></p>
+                  <ul id="error-list"></ul>
+                </div>
+                <p class="dl-ready" id="ready-line"></p>
+                <div class="dl-actions">
+                  <button class="btn" type="button" data-action="pdf">Download PDF</button>
+                  <button class="btn ghost" type="button" data-action="print">Print</button>
+                  <button class="btn ghost" type="button" data-action="copy">Copy text</button>
+                  <button class="btn ghost dl-clear" type="button" data-action="clear">Clear everything</button>
+                </div>
+                <div class="callout info">
+                  <p class="callout-title">Before you send it</p>
+                  <p>Send it in a way you can prove, like certified mail, or email plus regular mail. Keep a copy.</p>
+                </div>
+                <p class="fl-note">Other options, like mediation or a complaint to a regulator: <a href="/steps/#before-you-decide">Before you decide</a>.</p>
+              </div>
+            </section>
+          </form>
+        </div>
+
+        <aside class="dl-side" aria-labelledby="preview-title">
+          <div class="dl-side-in">
+            <div class="dl-bar no-print">
+              <h2 class="lbl lbl-ink" id="preview-title" tabindex="-1">Preview</h2>
+              <p class="lbl">Live · <mark class="dl-ph-key">[brackets]</mark> still need an answer</p>
+            </div>
+            <article class="paper dl-paper" id="preview" tabindex="0" role="region" aria-label="Letter preview">
+              <div class="lp-head" id="lp-from"></div>
+              <p class="lp-date" id="lp-date"></p>
+              <div class="lp-to" id="lp-to"></div>
+              <p class="lp-re"><span class="lp-re-k">Re:</span> <span id="lp-re"></span></p>
+              <p id="lp-sal"></p>
+              <div class="lp-body" id="lp-body"></div>
+              <div class="lp-close"><p>Sincerely,</p><p class="lp-sig" id="lp-sig"></p></div>
+              <p class="lp-foot" id="print-note">{PRINT_NOTE}</p>
+            </article>
+            <div class="dl-actions dl-side-actions no-print">
+              <button class="btn sm" type="button" data-action="pdf">Download PDF</button>
+              <button class="btn sm ghost" type="button" data-action="print">Print</button>
+              <button class="btn sm ghost" type="button" data-action="copy">Copy text</button>
+            </div>
+            <p class="cite no-print" id="notes-cite"></p>
+            <p class="sr-only" role="status" aria-live="polite" id="letter-status"></p>
+          </div>
+        </aside>
+
+        <div class="fl-dock no-print" id="dock">
+          <p class="d-text"><strong>Your letter</strong><span>Updates as you type</span></p>
+          <a class="btn sm" href="#preview-title" id="dock-go">See the preview</a>
+        </div>
+      </div>
+    </div>
   </div>
 </Site>
 
 <script>
   import { buildDemandLetter, formatMoney, type DisputeKind } from "../../lib/core/demand-letter";
-  import { todayISO } from "../../lib/core/deadlines";
+  import { todayISO, addCalendarDays, formatLongDate } from "../../lib/core/deadlines";
   import { parseAmount } from "../../lib/core/worth-it";
+  import { createFlow, initStatePicker } from "../../components/ToolFlow";
 
   type Note = { id: string; kinds: string[]; text: string; citation: string; url: string; unverified?: boolean };
+  type St = { slug: string; name: string; abbr: string; court: string | null; checked: string | null };
+  const TOTAL = 7;
   const notesByState: Record<string, Note[]> = JSON.parse(document.getElementById("letter-notes")!.textContent || "{}");
-  const $ = <T extends HTMLElement = HTMLInputElement>(id: string) => document.getElementById(id) as unknown as T;
-  const val = (id: string) => ($(id) as unknown as HTMLInputElement).value.trim();
+  const stateList: St[] = JSON.parse(document.getElementById("letter-states")!.textContent || "[]");
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const field = (id: string) => $<HTMLInputElement>(id);
+  const val = (id: string) => field(id).value.trim();
   const lines = (id: string) => val(id).split("\n").map((l) => l.trim()).filter(Boolean);
-  const checked = (id: string) => ($(id) as HTMLInputElement).checked;
+  const checked = (id: string) => field(id).checked;
+  const radio = (name: string) => document.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? "";
+  const root = $("letter-tool");
+  const form = $<HTMLFormElement>("letter");
+  form.addEventListener("submit", (e) => e.preventDefault());
+  let stateSlug = "";
 
   const labels: Record<string, [string, string, string]> = {
     security_deposit: ["Move-out date", "Rental address", "123 Main St, Apt 4, Oakland, CA"],
@@ -241,10 +373,11 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
     other: ["Key date", "What this is about", "the loan of $800 I made on January 5"],
   };
 
-  // Required boxes and the words used in error messages.
-  const required: { id: string; name: string; check?: (v: string) => string | null }[] = [
+  // Required boxes, where they live, and the words used in error messages.
+  const required: { id: string; q: number; name: string; check?: (v: string) => string | null }[] = [
     {
       id: "amount",
+      q: 3,
       name: "the amount",
       check: (v) => {
         const n = parseAmount(v);
@@ -254,23 +387,26 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
         return null;
       },
     },
-    { id: "detail", name: "what it's about" },
-    { id: "sName", name: "your name" },
-    { id: "sAddr", name: "your mailing address" },
-    { id: "rName", name: "their name" },
-    { id: "rAddr", name: "their mailing address" },
-    { id: "date", name: "the date of the letter" },
+    { id: "detail", q: 3, name: "what it's about" },
+    { id: "sName", q: 4, name: "your name" },
+    { id: "sAddr", q: 4, name: "your mailing address" },
+    { id: "rName", q: 5, name: "their name" },
+    { id: "rAddr", q: 5, name: "their mailing address" },
+    { id: "date", q: 6, name: "the date of the letter" },
   ];
-  const optionalChecks: { id: string; check: (v: string) => string | null }[] = [
-    { id: "sEmail", check: (v) => (v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Check the email address, like name@example.com." : null) },
-    { id: "eventDate", check: (v) => (($("eventDate") as HTMLInputElement).validity.badInput ? "Enter a full date." : null) },
+  const optionalChecks: { id: string; q: number; check: (v: string) => string | null }[] = [
+    { id: "sEmail", q: 4, check: (v) => (v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "Check the email address, like name@example.com." : null) },
+    { id: "eventDate", q: 3, check: () => (field("eventDate").validity.badInput ? "Enter a full date." : null) },
   ];
+  const stepOf: Record<string, number> = {};
+  for (const r of [...required, ...optionalChecks]) stepOf[r.id] = r.q;
   const touched = new Set<string>();
   const hintIds: Record<string, string> = {};
-  for (const id of [...required.map((r) => r.id), ...optionalChecks.map((o) => o.id)]) hintIds[id] = $(id).getAttribute("aria-describedby") || "";
+  for (const id of Object.keys(stepOf)) hintIds[id] = field(id).getAttribute("aria-describedby") || "";
 
-  ($("date") as HTMLInputElement).value = todayISO();
+  field("date").value = todayISO();
 
+  // ---------------------------------------------------------------- Errors
   function errors(): Map<string, string> {
     const out = new Map<string, string>();
     for (const r of required) {
@@ -285,98 +421,119 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
     return out;
   }
 
-  function paintErrors(errs: Map<string, string>, all = false) {
+  function paintErrors(errs: Map<string, string>) {
     for (const id of Object.keys(hintIds)) {
-      const el = $(id);
-      const field = el.closest<HTMLElement>(".field")!;
+      const el = field(id);
+      const box = el.closest<HTMLElement>(".field")!;
       const msg = errs.get(id);
-      const show = msg && (all || touched.has(id));
+      const show = msg && touched.has(id);
       const errId = `${id}-error`;
       let p = document.getElementById(errId);
       if (show) {
         if (!p) {
           p = document.createElement("p");
-          p.className = "error-text";
+          p.className = "f-error";
           p.id = errId;
-          field.appendChild(p);
+          box.appendChild(p);
         }
         p.textContent = msg!;
-        field.classList.add("has-error");
+        box.classList.add("has-error");
         el.setAttribute("aria-invalid", "true");
         el.setAttribute("aria-describedby", `${errId} ${hintIds[id]}`.trim());
       } else {
         p?.remove();
-        field.classList.remove("has-error");
+        box.classList.remove("has-error");
         el.removeAttribute("aria-invalid");
         if (hintIds[id]) el.setAttribute("aria-describedby", hintIds[id]);
         else el.removeAttribute("aria-describedby");
       }
     }
-    // Keep an open error summary in step with the boxes.
-    const summary = $("error-summary") as HTMLElement;
-    if (!summary.hidden) fillSummary(errs);
+    if (!$("error-summary").hidden) fillSummary(errs);
+    readyLine(errs);
   }
 
   function fillSummary(errs: Map<string, string>) {
-    const summary = $("error-summary") as HTMLElement;
+    const summary = $("error-summary");
     if (!errs.size) {
       summary.hidden = true;
       return;
     }
     $("error-summary-title").textContent =
       errs.size === 1 ? "1 box needs an answer before you can print, save or copy" : `${errs.size} boxes need an answer before you can print, save or copy`;
-    const list = $("error-list");
-    list.replaceChildren();
-    for (const [id, msg] of errs) {
-      const li = document.createElement("li");
-      const a = document.createElement("a");
-      a.href = `#${id}`;
-      a.textContent = msg;
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
-        $(id).focus();
-      });
-      li.appendChild(a);
-      list.appendChild(li);
-    }
+    $("error-list").replaceChildren(
+      ...[...errs].map(([id, msg]) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `#${id}`;
+        a.textContent = msg;
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          flow.open(stepOf[id]);
+          field(id).focus();
+        });
+        li.appendChild(a);
+        return li;
+      }),
+    );
     summary.hidden = false;
+  }
+
+  function readyLine(errs: Map<string, string>) {
+    const n = [...errs.keys()].filter((id) => required.some((r) => r.id === id)).length;
+    $("ready-line").textContent = errs.size === 0 ? "Everything needed is filled in." : n ? `${n} required ${n === 1 ? "box is" : "boxes are"} still empty or need a fix.` : "One box needs a fix.";
   }
 
   /** Run before print, PDF or copy. Returns true when the letter is ready. */
   function ready(): boolean {
     const errs = errors();
     for (const id of errs.keys()) touched.add(id);
-    paintErrors(errs, true);
+    paintErrors(errs);
     fillSummary(errs);
     if (errs.size) {
-      ($("error-summary") as HTMLElement).focus();
+      flow.goTo(TOTAL);
+      $("error-summary").focus();
       return false;
     }
     return true;
   }
 
+  // ---------------------------------------------------------------- State notes
   function selectedNotes(): string[] {
     return Array.from(document.querySelectorAll<HTMLInputElement>("#notes-list input:checked")).map((c) => c.value);
   }
 
   function renderNotes() {
-    const st = val("st");
-    const kind = val("kind");
-    const list = (notesByState[st] || []).filter((n) => n.kinds.includes(kind));
+    const kind = radio("kind");
+    const st = stateList.find((s) => s.slug === stateSlug);
+    const list = (notesByState[stateSlug] || []).filter((n) => n.kinds.includes(kind));
     const box = $("notes-list");
+    const keep = new Set(selectedNotes());
+    const had = box.childElementCount > 0;
     box.replaceChildren();
-    ($("notes-field") as HTMLElement).hidden = list.length === 0;
+    box.hidden = list.length === 0;
+    $("notes-title").hidden = list.length === 0;
+    $("notes-none").textContent = !st
+      ? "No state picked. The letter works without state notes."
+      : list.length
+        ? "Cited from the law. Turn off any you don't want in the letter."
+        : `We don't have cited notes for ${st.name} and this kind of dispute yet. The letter works without them.`;
+    const cites: string[] = [];
     for (const n of list) {
-      const wrap = document.createElement("label");
-      wrap.className = "choice";
+      const li = document.createElement("li");
+      const label = document.createElement("label");
+      label.className = "fl-toggle";
       const cb = document.createElement("input");
       cb.type = "checkbox";
-      cb.checked = true;
+      cb.checked = had ? keep.has(n.text) : true;
       cb.value = n.text;
+      const tg = document.createElement("span");
+      tg.className = "tg";
+      tg.setAttribute("aria-hidden", "true");
       const span = document.createElement("span");
-      span.append(n.text, " ");
-      const cite = document.createElement("span");
-      cite.className = "cite";
+      span.textContent = n.text;
+      label.append(cb, tg, span);
+      const cite = document.createElement("p");
+      cite.className = "cite dl-note-cite";
       if (n.unverified) {
         const b = document.createElement("span");
         b.className = "badge unverified";
@@ -387,13 +544,16 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
       a.href = n.url;
       a.rel = "noopener";
       a.textContent = n.citation;
-      cite.appendChild(a);
-      span.appendChild(cite);
-      wrap.append(cb, span);
-      box.appendChild(wrap);
+      cite.append(a);
+      if (st?.checked) cite.append(` · checked ${st.checked}`);
+      li.append(label, cite);
+      box.appendChild(li);
+      cites.push(n.citation);
     }
+    $("notes-cite").textContent = cites.length && st ? `${st.name} notes: ${cites.join("; ")}${st.checked ? ` · checked ${st.checked}` : ""}` : "";
   }
 
+  // ---------------------------------------------------------------- Letter
   /** Builds the letter. With `forPreview`, missing answers show as [bracketed] placeholders. */
   function current(forPreview = false) {
     const amount = parseAmount(val("amount"));
@@ -401,20 +561,20 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
     const sAddr = lines("sAddr");
     const rAddr = lines("rAddr");
     const L = buildDemandLetter({
-      kind: val("kind") as DisputeKind,
+      kind: radio("kind") as DisputeKind,
       sender: {
-        name: val("sName") || "[Your name]",
+        name: val("sName") || (forPreview ? "[Your name]" : ""),
         addressLines: sAddr.length || !forPreview ? sAddr : ["[Your mailing address]"],
         phone: val("sPhone"),
         email: val("sEmail"),
       },
-      recipient: { name: val("rName") || "[Their name]", addressLines: rAddr.length || !forPreview ? rAddr : ["[Their mailing address]"] },
+      recipient: { name: val("rName") || (forPreview ? "[Their name]" : ""), addressLines: rAddr.length || !forPreview ? rAddr : ["[Their mailing address]"] },
       letterDate: val("date") || todayISO(),
       amount: amountOk ? amount! : 0,
       subjectDetail: val("detail") || "[what it's about]",
-      eventDate: val("eventDate") || undefined,
+      eventDate: field("eventDate").value || undefined,
       facts: val("facts"),
-      responseDays: Number(val("days")) || 14,
+      responseDays: Number(radio("days")) || 14,
       paymentMethods: val("pay"),
       courtPhrase: val("court"),
       legalNotes: selectedNotes(),
@@ -429,26 +589,52 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
     return L;
   }
 
-  function render() {
-    const k = val("kind");
-    const [d, det, ph] = labels[k] || labels.other;
-    $("eventDateLabel").textContent = d;
-    $("detailLabel").textContent = det;
-    ($("detail") as HTMLInputElement).placeholder = ph;
-    ($("court-field") as HTMLElement).hidden = !checked("mentionCourt");
-
-    // Preview: plain text, with [placeholders] marked so they're easy to spot (the brackets carry the meaning too).
-    const text = current(true).text;
-    const out = $("preview");
-    out.replaceChildren();
+  /** Put text in an element, marking [placeholders] (the brackets carry the meaning; the mark is extra). */
+  function put(el: HTMLElement, text: string) {
+    el.replaceChildren();
     for (const part of text.split(/(\[[^\]\n]+\])/)) {
       if (/^\[[^\]]+\]$/.test(part)) {
         const m = document.createElement("mark");
         m.className = "ph";
         m.textContent = part;
-        out.appendChild(m);
-      } else if (part) out.appendChild(document.createTextNode(part));
+        el.appendChild(m);
+      } else if (part) el.appendChild(document.createTextNode(part));
     }
+  }
+  function putLines(el: HTMLElement, rows: string[]) {
+    el.replaceChildren(
+      ...rows.map((r) => {
+        const p = document.createElement("p");
+        put(p, r);
+        return p;
+      }),
+    );
+  }
+
+  function render() {
+    const [d, det, ph] = labels[radio("kind")] || labels.other;
+    $("eventDateLabel").textContent = d;
+    $("detailLabel").textContent = det;
+    field("detail").placeholder = ph;
+    $("court-field").hidden = !checked("mentionCourt");
+
+    // Deadline under each day tile
+    const date = val("date");
+    document.querySelectorAll<HTMLElement>("[data-by]").forEach((el) => {
+      const n = Number(el.dataset.by);
+      el.textContent = date ? `days · by ${formatLongDate(addCalendarDays(date, n)).replace(/, \d{4}$/, "")}` : "days";
+    });
+
+    const L = current(true);
+    // heading = sender lines, "", date, "", recipient lines
+    const firstBlank = L.heading.indexOf("");
+    putLines($("lp-from"), L.heading.slice(0, firstBlank));
+    put($("lp-date"), L.heading[firstBlank + 1] ?? "");
+    putLines($("lp-to"), L.heading.slice(firstBlank + 3));
+    put($("lp-re"), L.subject);
+    put($("lp-sal"), L.salutation);
+    putLines($("lp-body"), L.paragraphs);
+    put($("lp-sig"), L.closing[L.closing.length - 1] || "");
   }
 
   function status(msg: string) {
@@ -469,7 +655,7 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
     doc.setFont("times", "normal");
     doc.setFontSize(11.5);
     const lh = 15;
-    const write = (text: string, opts: { bold?: boolean; gap?: number } = {}) => {
+    const write = (text: string, opts: { bold?: boolean; gap?: number; right?: boolean } = {}) => {
       doc.setFont("times", opts.bold ? "bold" : "normal");
       const rows = text === "" ? [""] : (doc.splitTextToSize(text, width) as string[]);
       for (const r of rows) {
@@ -477,19 +663,21 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
           doc.addPage();
           y = margin;
         }
-        doc.text(r, margin, y);
+        if (opts.right) doc.text(r, margin + width, y, { align: "right" });
+        else doc.text(r, margin, y);
         y += lh;
       }
       y += opts.gap ?? 0;
     };
-    for (const h of L.heading) write(h);
+    const firstBlank = L.heading.indexOf("");
+    L.heading.forEach((h, i) => write(h, { right: i < firstBlank }));
     write("");
     write(`Re: ${L.subject}`, { bold: true, gap: lh });
     write(L.salutation, { gap: 6 });
     for (const p of L.paragraphs) write(p, { gap: 8 });
     for (const c of L.closing) write(c);
     // Neutral notice line at the foot of the last page.
-    const note = document.getElementById("print-note")?.textContent?.trim();
+    const note = $("print-note").textContent?.trim();
     if (note) {
       if (y > pageH - margin - 10) doc.addPage();
       doc.setFont("helvetica", "normal");
@@ -503,14 +691,64 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
     status("PDF created. Check your downloads.");
   }
 
-  // Events
-  $("letter").addEventListener("input", (e) => {
+  async function copy(btn: HTMLButtonElement) {
+    if (!ready()) return;
+    try {
+      await navigator.clipboard.writeText(current().text + "\n\n" + ($("print-note").textContent?.trim() ?? ""));
+      const was = btn.textContent;
+      btn.textContent = "Copied";
+      status("Letter copied. Paste it into an email or a document.");
+      window.setTimeout(() => (btn.textContent = was), 2000);
+    } catch {
+      status("Copying didn't work in this browser. Select the letter text and copy it instead.");
+    }
+  }
+
+  function clearAll() {
+    if (!window.confirm("Clear every answer? This can't be undone.")) return;
+    form.reset();
+    field("date").value = todayISO();
+    picker.set("");
+    touched.clear();
+    $("error-summary").hidden = true;
+    paintErrors(new Map());
+    renderNotes();
+    render();
+    status("All answers cleared.");
+    flow.goTo(1, "key");
+  }
+
+  // ---------------------------------------------------------------- Flow
+  const flow = createFlow({
+    root,
+    total: TOTAL,
+    countText: (at, total) => `Step ${at} of ${total}`,
+    validate(k) {
+      const ids = Object.keys(stepOf).filter((id) => stepOf[id] === k);
+      if (!ids.length) return null;
+      const errs = errors();
+      ids.forEach((id) => errs.has(id) && touched.add(id));
+      paintErrors(errs);
+      return root.querySelector<HTMLElement>(`[data-q="${k}"] [aria-invalid="true"]`);
+    },
+  });
+
+  // ---------------------------------------------------------------- Events
+  const picker = initStatePicker(root.querySelector<HTMLElement>("[data-state-picker]")!, stateList, (slug) => {
+    stateSlug = slug;
+    renderNotes();
+    render();
+  });
+  form.addEventListener("input", (e) => {
     const id = (e.target as HTMLElement).id;
     if (touched.has(id)) paintErrors(errors());
     render();
   });
-  $("letter").addEventListener("change", render);
-  $("letter").addEventListener(
+  form.addEventListener("change", (e) => {
+    if ((e.target as HTMLInputElement).name === "kind") renderNotes();
+    render();
+  });
+  form.addEventListener(
     "blur",
     (e) => {
       const el = e.target as HTMLInputElement;
@@ -522,40 +760,288 @@ const preFiling = caStatewide.pre_filing_demand as { citation?: string; sources?
       }
       if (el.value.trim() || touched.has(el.id)) touched.add(el.id);
       paintErrors(errors());
+      render();
     },
     true,
   );
-  $("letter").addEventListener("submit", (e) => e.preventDefault());
-  $("st").addEventListener("change", () => { renderNotes(); render(); });
-  $("kind").addEventListener("change", () => { renderNotes(); render(); });
-  $("pdf").addEventListener("click", downloadPdf);
-  $("print").addEventListener("click", () => {
-    if (ready()) window.print();
+  document.querySelectorAll<HTMLButtonElement>("[data-action]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const a = b.dataset.action;
+      if (a === "pdf") downloadPdf();
+      else if (a === "print") ready() && window.print();
+      else if (a === "copy") copy(b);
+      else if (a === "clear") clearAll();
+    }),
+  );
+  $("dock-go").addEventListener("click", (e) => {
+    e.preventDefault();
+    $("preview-title").scrollIntoView({ block: "start" });
+    $("preview-title").focus({ preventScroll: true });
   });
-  $("copy").addEventListener("click", async () => {
-    if (!ready()) return;
-    const btn = $("copy");
-    try {
-      await navigator.clipboard.writeText(current().text);
-      btn.textContent = "Copied";
-      status("Letter copied. Paste it into an email or a document.");
-      window.setTimeout(() => (btn.textContent = "Copy text"), 2000);
-    } catch {
-      status("Copying didn't work in this browser. Select the letter text and copy it instead.");
-    }
-  });
-  $("clear").addEventListener("click", () => {
-    if (!window.confirm("Clear every answer? This can't be undone.")) return;
-    ($("letter") as unknown as HTMLFormElement).reset();
-    ($("date") as HTMLInputElement).value = todayISO();
-    touched.clear();
-    ($("error-summary") as HTMLElement).hidden = true;
-    paintErrors(new Map());
-    renderNotes();
-    render();
-    status("All answers cleared.");
-    $("kind").focus();
-  });
+  // Phone dock: hide while the preview is on screen.
+  new IntersectionObserver(([e]) => $("dock").toggleAttribute("data-off", e.isIntersecting)).observe($("preview"));
+
+  // Development only (screenshots): ?demo=1 fills sample answers; ?at=N opens step N.
+  const params = new URLSearchParams(location.search);
+  if (import.meta.env.DEV && params.get("demo")) {
+    const set = (id: string, v: string) => (field(id).value = v);
+    picker.set("ca");
+    set("amount", "1,850.00");
+    set("eventDate", "2026-09-30");
+    set("detail", "1420 Alder Street, Unit 3, Oakland");
+    set("facts", "I left the unit clean and undamaged, and I returned the keys on the day I moved out. More than 21 days have passed and I have not received my deposit or an itemized statement.");
+    set("sName", "Alex Rivera");
+    set("sAddr", "88 Linden Avenue, Apt 2\nOakland, CA 94610");
+    set("sEmail", "alex@example.com");
+    set("rName", "Harbor Point Rentals LLC");
+    set("rAddr", "410 Grand Avenue, Suite 5\nOakland, CA 94610");
+    set("pay", "check mailed to the address above");
+    set("court", "small claims court in Alameda County");
+  }
   renderNotes();
   render();
+  readyLine(errors());
+  if (import.meta.env.DEV && params.get("at")) flow.goTo(Number(params.get("at")));
 </script>
+
+<style>
+  .dl-hero {
+    padding-bottom: clamp(32px, 4vw, 56px);
+  }
+  .dl-hero :global(.breadcrumb) {
+    margin-bottom: 28px;
+  }
+  .dl-top {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 48px;
+    align-items: end;
+  }
+  .dl-top h1 {
+    margin: 0;
+  }
+  .dl-aside p {
+    margin: 0;
+    max-width: 44ch;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .dl-aside .cite {
+    margin-top: 12px;
+    font-size: 12px;
+  }
+  .dl-layout {
+    padding-top: clamp(24px, 3vw, 40px);
+  }
+  .dl-prog {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: center;
+    padding-bottom: 8px;
+  }
+  .dl-prog p {
+    margin: 0;
+  }
+  .dl-flow :global(.fl-q:first-of-type) {
+    padding-top: 40px;
+  }
+  .dl-gap {
+    margin-top: 32px;
+  }
+  .dl-notes {
+    margin-top: 24px;
+  }
+  .dl-notes :global(.dl-note-cite) {
+    margin: -6px 0 0 52px;
+    padding-bottom: 14px;
+  }
+  .dl-notes .fl-note:empty {
+    display: none;
+  }
+  #court-field[hidden] {
+    display: none;
+  }
+  .dl-errors {
+    margin: 0 0 24px;
+  }
+  .dl-errors:focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  .dl-errors ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    list-style: disc;
+  }
+  .dl-errors a {
+    color: var(--ink);
+  }
+  .dl-ready {
+    margin: 0 0 16px;
+    font-size: 17px;
+    color: var(--ink-2);
+  }
+  .dl-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dl-clear {
+    margin-left: auto;
+  }
+
+  /* Preview */
+  .dl-side {
+    min-width: 0;
+  }
+  .dl-side-in {
+    position: sticky;
+    top: calc(var(--hdr-h) + 24px);
+    display: grid;
+    gap: 14px;
+  }
+  .dl-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 16px;
+  }
+  .dl-bar :is(h2, p) {
+    margin: 0;
+  }
+  .dl-bar h2:focus {
+    outline: none;
+  }
+  .dl-ph-key {
+    background: transparent;
+    color: inherit;
+  }
+  .dl-paper {
+    padding: 40px 40px 32px;
+    max-height: calc(100dvh - var(--hdr-h) - 150px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .dl-paper:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  .dl-paper :global(p) {
+    margin: 0;
+  }
+  .dl-paper > * + * {
+    margin-top: 12px;
+  }
+  .lp-head {
+    text-align: right;
+    color: var(--paper-ink-2);
+  }
+  .lp-date {
+    margin-top: 20px !important;
+  }
+  .lp-re {
+    font-weight: 500;
+    margin-top: 20px !important;
+  }
+  .lp-re-k {
+    margin-right: 6px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper-ink-2);
+  }
+  .lp-body {
+    display: grid;
+    gap: 12px;
+  }
+  .lp-close {
+    margin-top: 16px !important;
+  }
+  .lp-sig {
+    margin-top: 10px !important;
+    font-family: var(--f-display);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+  }
+  .lp-foot {
+    margin-top: 24px !important;
+    padding-top: 12px;
+    border-top: 1px solid var(--paper-line);
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--paper-ink-2);
+  }
+  .dl-paper :global(mark.ph) {
+    padding: 0 2px;
+    border-radius: 2px;
+    background: var(--paper-mark);
+    color: var(--paper-ink);
+    box-shadow: inset 0 -1px 0 var(--paper-mark-line);
+  }
+  .dl-side .cite {
+    margin: 0;
+  }
+  .dl-side .cite:empty {
+    display: none;
+  }
+  .dl-layout > :global(.fl-dock) {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 1080px) {
+    .dl-top {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .dl-side-in {
+      position: static;
+    }
+    .dl-paper {
+      max-height: none;
+      overflow: visible;
+    }
+  }
+  @media (max-width: 860px) {
+    .dl-paper {
+      padding: 28px 22px;
+    }
+    .dl-clear {
+      margin-left: 0;
+    }
+    .dl-actions .btn {
+      flex: 1 1 calc(50% - 4px);
+    }
+  }
+
+  /* Print: only the letter. */
+  @media print {
+    .dl-layout {
+      display: block;
+      padding: 0;
+    }
+    .dl-side-in {
+      position: static;
+      display: block;
+    }
+    .dl-paper {
+      max-height: none;
+      overflow: visible;
+      padding: 0;
+      font-size: 11.5pt;
+      box-shadow: none;
+    }
+    .dl-paper :global(mark.ph) {
+      background: none;
+      box-shadow: none;
+    }
+    .lp-head {
+      color: #000;
+    }
+  }
+</style>

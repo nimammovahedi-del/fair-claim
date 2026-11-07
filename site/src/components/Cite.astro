@@ -1,5 +1,6 @@
 ---
 // Shows where a fact comes from and when it was checked, plus an "unverified" flag.
+// Quiet mono line. Links show the site name, once per site (the first source from that site is linked).
 interface Source {
   url: string;
   what?: string;
@@ -12,7 +13,7 @@ interface Props {
   label?: string;
 }
 const { sources = [], checked, unverified = false, label } = Astro.props;
-const shown = sources.slice(0, 3);
+const shown = sources.filter((s, i) => sources.findIndex((x) => host(x.url) === host(s.url)) === i).slice(0, 3);
 function host(u: string) {
   try {
     return new URL(u).hostname.replace(/^www\./, "");
@@ -27,5 +28,5 @@ function host(u: string) {
   {shown.map((s) => (
     <a href={s.url} rel="noopener" title={s.what ?? ""}>{host(s.url)}</a>
   ))}
-  {checked ? <span>checked {checked}</span> : null}
+  {checked ? <span>Checked {checked}</span> : null}
 </span>

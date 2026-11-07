@@ -8,8 +8,9 @@ import { collectRows, strengthLabel, evidenceChecked, denver } from "../lib/stat
 interface Props {
   headingLevel?: 2 | 3 | 4;
   id?: string;
+  class?: string;
 }
-const { headingLevel = 3, id = "chart-collect" } = Astro.props;
+const { headingLevel = 3, id = "chart-collect", class: cls } = Astro.props;
 const ticks = [0, 25, 50, 75, 100];
 const uniqueSources = collectRows
   .map((r) => r.source)
@@ -17,15 +18,17 @@ const uniqueSources = collectRows
 ---
 <ChartFrame
   id={id}
+  class={cls}
   headingLevel={headingLevel}
   title="Winning isn't getting paid: outside mediation, about half of winners or fewer collected anything"
-  subtitle="Share of small claims winners who got at least some of the money. Different places, years and methods, so compare with care. Courts generally don't track this, and there is no national figure."
+  subtitle="Share of small claims winners who got at least some of the money. Different places, years and methods, so compare with care. There is no national figure."
+  kicker="Getting paid · the evidence"
   sources={uniqueSources}
   checked={evidenceChecked}
   unverified={true}
   unverifiedText="The Michigan figures come from a summary; the original report's link is dead. The Maine figure is an informal newspaper survey."
 >
-  <ul class="legend" slot="legend">
+  <ul class="chart-legend" slot="legend">
     <li><span class="swatch" aria-hidden="true"></span>Published study</li>
     <li><span class="swatch soft" aria-hidden="true"></span>Unverified summary or anecdotal survey</li>
   </ul>
@@ -35,7 +38,7 @@ const uniqueSources = collectRows
         <div class="bar-row" title={`${r.label}: ${r.display}. ${strengthLabel[r.strength]}.`}>
           <div class="bar-label">
             {r.label}
-            <span class="hint">{strengthLabel[r.strength]}</span>
+            <span class="sub">{strengthLabel[r.strength]}</span>
           </div>
           <div class="bar-track">
             <div class={`bar${r.strength === "study" ? "" : " soft"}`} style={`width:${r.pct}%`}></div>

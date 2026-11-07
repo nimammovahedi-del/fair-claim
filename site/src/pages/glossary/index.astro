@@ -1,4 +1,8 @@
 ---
+// Glossary (Option A). A big letter index filters the list to one letter at a time; "All" and the search box
+// widen it. Without JavaScript every letter shows and the index links jump down the page.
+// Deep links: /glossary/#<term-slug> switches to that term's letter and scrolls to it (on load and on hashchange).
+// /glossary/#letter-x opens a letter.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import "../../styles/features.css";
@@ -8,108 +12,227 @@ const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const groups = letters
   .map((L) => ({ letter: L, entries: glossary.filter((e) => e.term[0].toUpperCase() === L) }))
   .filter((g) => g.entries.length > 0);
-const has = new Set(groups.map((g) => g.letter));
+const count = new Map(groups.map((g) => [g.letter, g.entries.length]));
 const caCount = glossary.filter((e) => e.ca).length;
+const first = groups[0].letter;
 ---
-<Site title="Glossary" description="Plain-English meanings of the words you'll meet in small claims court, with California notes where our research supports them.">
-  <Breadcrumb items={[{ label: "Glossary" }]} />
-  <div class="narrow">
-    <p class="eyebrow">Glossary</p>
-    <h1>Small claims words, in plain English</h1>
-    <p class="lede">
-      {glossary.length} words you'll see on court forms and websites, with a short meaning for each. Rules differ by
-      state; {caCount} entries add a California note with its source.
-    </p>
-
-    <div class="glossary-filter" data-js-only>
-      <label for="gloss-filter">Filter the glossary</label>
-      <input id="gloss-filter" type="search" autocomplete="off" spellcheck="false" aria-describedby="gloss-count" placeholder="For example: serve, appeal, fee" />
+<Site
+  title="Glossary"
+  description="Plain-English meanings of the words you'll meet in small claims court, with California notes where our research supports them."
+  bleed
+  color="c-glossary"
+>
+  <section class="wrap page-hero">
+    <Breadcrumb items={[{ label: "Glossary" }]} />
+    <div class="gl-top">
+      <h1 class="display">Court words, in plain English.</h1>
+      <div class="gl-aside">
+        <p class="lede">Meanings that hold in most states. Where California adds detail, it's under <em>In California</em>, with the law it comes from.</p>
+        <p class="cite"><span>{glossary.length} terms</span><span>{caCount} California notes</span><span>Checked {glossaryChecked}</span></p>
+      </div>
     </div>
-    <p class="hint glossary-count" id="gloss-count" aria-live="polite" data-js-only></p>
+  </section>
 
-    <nav aria-label="Jump to a letter">
-      <ul class="letter-index">
-        {letters.map((L) => (
-          <li>{has.has(L) ? <a href={`#letter-${L.toLowerCase()}`} data-letter={L}>{L}</a> : <span aria-hidden="true">{L}</span>}</li>
-        ))}
+  <section class="wrap" aria-label="Find a word">
+    <div class="gl-tools" data-js-only>
+      <div class="field">
+        <label for="gl-q">Search all terms</label>
+        <input id="gl-q" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" placeholder="For example, “serve” or “writ”" aria-describedby="gl-count" />
+      </div>
+      <button class="gl-all" type="button" aria-pressed="false" data-all>
+        <span class="lbl">{glossary.length} terms</span>
+        <span class="az-L">All</span>
+      </button>
+    </div>
+    <nav aria-label="Letters">
+      <ul class="az">
+        {letters.map((L) =>
+          count.has(L) ? (
+            <li>
+              <a class="az-l" href={`#letter-${L.toLowerCase()}`} data-letter={L} aria-current={L === first ? "true" : undefined}>
+                <span class="az-c" aria-hidden="true">{count.get(L)}</span>
+                <span class="az-L">{L}</span>
+                <span class="sr-only">, {count.get(L)} {count.get(L) === 1 ? "term" : "terms"}</span>
+              </a>
+            </li>
+          ) : (
+            <li aria-hidden="true"><span class="az-l is-empty"><span class="az-L">{L}</span></span></li>
+          ),
+        )}
       </ul>
     </nav>
 
-    <p class="hint" id="gloss-none" hidden>No terms match. Try a shorter word, or clear the filter.</p>
+    <div class="gl-status" data-js-only>
+      <p class="lbl" id="gl-count" aria-live="polite" data-count></p>
+      <p class="hint">Pick a letter, or search all terms.</p>
+    </div>
+  </section>
 
+  <div class="wrap gl-list" data-list>
     {groups.map((g) => (
-      <section class="glossary-group" aria-labelledby={`letter-${g.letter.toLowerCase()}`} data-group>
-        <h2 id={`letter-${g.letter.toLowerCase()}`}>{g.letter}</h2>
-        <dl class="glossary-list">
+      <section class="gl-group" id={`letter-${g.letter.toLowerCase()}`} aria-labelledby={`h-${g.letter}`} data-group={g.letter}>
+        <div class="gl-letter">
+          <h2 class="num" id={`h-${g.letter}`}>{g.letter}</h2>
+          <span class="gl-bar" aria-hidden="true"></span>
+          <p class="lbl" data-group-count>{g.entries.length} {g.entries.length === 1 ? "term" : "terms"}</p>
+        </div>
+        <div class="gl-cards">
           {g.entries.map((e) => (
-            <div class="gloss" id={e.slug} data-gloss data-text={[e.term, ...(e.aka ?? []), e.def].join(" ").toLowerCase()}>
-              <dt>
-                {e.term}
-                {e.aka && <span class="aka"> · also called {e.aka.join(", ")}</span>}
-              </dt>
-              <dd>
-                <p style="margin:0">{e.def}</p>
-                {e.cite && (
-                  <p class="cite"><a href={e.cite.url} rel={e.cite.url.startsWith("http") ? "noopener" : undefined}>{e.cite.label}</a><span>checked {glossaryChecked}</span></p>
-                )}
-                {e.ca && (
-                  <div class="gloss-ca">
-                    <strong>In California:</strong> {e.ca.text}
-                    <br />
-                    <span class="cite"><a href={e.ca.cite.url} rel="noopener">{e.ca.cite.label}</a><span>checked {glossaryChecked}</span></span>
+            <article class="gl-card" id={e.slug} aria-labelledby={`t-${e.slug}`} data-card data-text={[e.term, ...(e.aka ?? []), e.def].join(" ").toLowerCase()}>
+              <div class="gl-card-top">
+                <h3 id={`t-${e.slug}`}>{e.term}</h3>
+                {e.aka && <p class="lbl">Also called {e.aka.join(", ")}</p>}
+              </div>
+              <p class="gl-def">{e.def}</p>
+              {e.cite && (
+                <p class="cite"><a href={e.cite.url} rel={e.cite.url.startsWith("http") ? "noopener" : undefined}>{e.cite.label}</a><span>Checked {glossaryChecked}</span></p>
+              )}
+              {e.ca && (
+                <details class="gl-ca">
+                  <summary><span class="dot" aria-hidden="true"></span>In California<span class="pm" aria-hidden="true"></span></summary>
+                  <div class="gl-ca-body">
+                    <p>{e.ca.text}</p>
+                    <p class="cite"><a href={e.ca.cite.url} rel="noopener">{e.ca.cite.label}</a><span>Checked {glossaryChecked}</span></p>
                   </div>
-                )}
-                {e.related && e.related.length > 0 && (
-                  <p class="gloss-related">
-                    Related:{" "}
-                    {e.related.map((r, i) => (
-                      <><a href={`#${r}`}>{getTerm(r).term}</a>{i < e.related!.length - 1 ? ", " : ""}</>
-                    ))}
-                  </p>
-                )}
-              </dd>
-            </div>
+                </details>
+              )}
+              {e.related && e.related.length > 0 && (
+                <div class="gl-rel">
+                  <span class="lbl">See also</span>
+                  {e.related.map((r) => <a class="chip" href={`#${r}`}>{getTerm(r).term}</a>)}
+                </div>
+              )}
+            </article>
           ))}
-        </dl>
+        </div>
       </section>
     ))}
+    <p class="gl-none" hidden data-none>No term matches that. Try a shorter word, or clear the search.</p>
 
-    <div class="callout" style="margin-top: var(--space-6)">
-      <p>
-        These are general meanings, not legal advice. Courts sometimes use these words in narrower ways, and each state
-        has its own forms. Your state's page links to its official self-help site, and the <a href="/about/#not-advice">About page</a>
-        lists free places to ask about your own case.
-      </p>
-    </div>
+    <p class="note-strip gl-foot">
+      <span class="lbl">Please note</span>
+      <span>General meanings, not legal advice. Courts sometimes use these words more narrowly, and each state has its own forms. <a href="/about/#not-advice">Where to get free help</a>.</span>
+    </p>
   </div>
 </Site>
 
 <script>
-  const input = document.getElementById("gloss-filter") as HTMLInputElement | null;
-  const count = document.getElementById("gloss-count");
-  const none = document.getElementById("gloss-none");
-  const items = Array.from(document.querySelectorAll<HTMLElement>("[data-gloss]"));
+  // Letter filter, search and deep links. Changes are instant (no animation): readers flip letters often.
+  const list = document.querySelector<HTMLElement>("[data-list]")!;
   const groups = Array.from(document.querySelectorAll<HTMLElement>("[data-group]"));
-  const total = items.length;
+  const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-card]"));
+  const letterLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-letter]"));
+  const allBtn = document.querySelector<HTMLButtonElement>("[data-all]")!;
+  const input = document.getElementById("gl-q") as HTMLInputElement;
+  const countEl = document.querySelector<HTMLElement>("[data-count]")!;
+  const none = document.querySelector<HTMLElement>("[data-none]")!;
+  const total = cards.length;
+  const termWord = (n: number) => `${n} ${n === 1 ? "term" : "terms"}`;
 
-  function apply() {
-    const q = (input?.value ?? "").trim().toLowerCase();
+  type Mode = "letter" | "all" | "search";
+  let mode: Mode = "letter";
+  let letter = groups[0]?.dataset.group ?? "A";
+
+  function render() {
+    const q = input.value.trim().toLowerCase();
     let shown = 0;
-    for (const it of items) {
-      const match = !q || (it.dataset.text ?? "").includes(q);
-      it.hidden = !match;
-      if (match) shown++;
-    }
+    const hits = new Set<string>();
     for (const g of groups) {
-      const any = g.querySelector("[data-gloss]:not([hidden])");
-      g.hidden = !any;
-      const letter = g.querySelector("h2")?.textContent ?? "";
-      const link = document.querySelector<HTMLElement>(`[data-letter="${letter}"]`);
-      if (link) link.style.opacity = any ? "" : "0.4";
+      let n = 0;
+      g.querySelectorAll<HTMLElement>("[data-card]").forEach((c) => {
+        const ok =
+          mode === "all" || (mode === "search" ? (c.dataset.text ?? "").includes(q) : g.dataset.group === letter);
+        c.hidden = !ok;
+        if (ok) n++;
+      });
+      g.hidden = n === 0;
+      if (n) hits.add(g.dataset.group!);
+      shown += n;
+      const gc = g.querySelector<HTMLElement>("[data-group-count]");
+      if (gc) gc.textContent = termWord(n);
     }
-    if (none) none.hidden = shown > 0;
-    if (count) count.textContent = q ? `Showing ${shown} of ${total} terms` : `${total} terms`;
+    letterLinks.forEach((a) => {
+      a.classList.toggle("is-dim", mode === "search" && !hits.has(a.dataset.letter!));
+      if (mode === "letter" && a.dataset.letter === letter) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+    allBtn.setAttribute("aria-pressed", String(mode === "all"));
+    list.classList.toggle("is-letter", mode === "letter");
+    list.classList.toggle("is-search", mode === "search");
+    none.hidden = shown > 0;
+    countEl.textContent =
+      mode === "search"
+        ? `${termWord(shown)} match “${input.value.trim()}”`
+        : mode === "all"
+          ? `All ${termWord(total)}`
+          : `${termWord(shown)} under ${letter}`;
   }
-  input?.addEventListener("input", apply);
-  apply();
+
+  function showLetter(L: string) {
+    if (!groups.some((g) => g.dataset.group === L)) return;
+    letter = L;
+    mode = "letter";
+    input.value = "";
+    render();
+  }
+
+  // Bring a term (or a letter) into view, switching letter first when it's hidden.
+  function reveal(hash: string) {
+    const id = decodeURIComponent(hash.replace(/^#/, ""));
+    if (!id) return;
+    const m = id.match(/^letter-([a-z])$/);
+    if (m) {
+      showLetter(m[1].toUpperCase());
+      return;
+    }
+    const card = document.getElementById(id);
+    if (!card || !card.matches("[data-card]")) return;
+    if (card.hidden) showLetter(card.closest<HTMLElement>("[data-group]")!.dataset.group!);
+    cards.forEach((c) => c.classList.toggle("is-target", c === card));
+    card.scrollIntoView({ block: "start" });
+    const h = card.querySelector<HTMLElement>("h3");
+    if (h) {
+      h.tabIndex = -1;
+      h.focus({ preventScroll: true });
+    }
+  }
+
+  letterLinks.forEach((a) =>
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      showLetter(a.dataset.letter!);
+      history.replaceState(null, "", `#letter-${a.dataset.letter!.toLowerCase()}`);
+    }),
+  );
+  allBtn.addEventListener("click", () => {
+    mode = mode === "all" ? "letter" : "all";
+    input.value = "";
+    render();
+    history.replaceState(null, "", location.pathname + location.search);
+  });
+  input.addEventListener("input", () => {
+    mode = input.value.trim() ? "search" : "letter";
+    render();
+  });
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && input.value) {
+      input.value = "";
+      mode = "letter";
+      render();
+    }
+  });
+  window.addEventListener("hashchange", () => reveal(location.hash));
+  // A "See also" link to the term already in the address bar fires no hashchange: reveal it anyway.
+  document.querySelectorAll<HTMLAnchorElement>(".gl-rel a").forEach((a) =>
+    a.addEventListener("click", () => {
+      if (a.hash === location.hash) reveal(a.hash);
+    }),
+  );
+
+  render();
+  if (location.hash) {
+    reveal(location.hash);
+    // The browser may have scrolled before the filter ran; settle on the term once layout is final.
+    window.addEventListener("load", () => reveal(location.hash), { once: true });
+  }
 </script>

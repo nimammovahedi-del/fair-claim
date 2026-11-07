@@ -1,19 +1,25 @@
 ---
-// Cost calculator. The URL stays /worth-it/ for old links, but the page never says whether to sue:
-// it shows what the reader's own numbers add up to, with caveats that are always visible.
+// Cost calculator (Option A guided flow). The URL stays /worth-it/ for old links, but the page never says
+// whether to sue: it shows what the reader's own numbers add up to, with caveats that are always visible.
+// Six questions, one at a time; answered ones stay editable; results update live. ?state=xx preselects.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import ToolNotice from "../../components/ToolNotice.astro";
+import ToolStatePicker from "../../components/ToolStatePicker.astro";
+import "../../components/ToolFlow.css";
 import { states, caStatewide, money } from "../../lib/data";
 import { collectPresets } from "../../lib/odds";
+import { WORTH_IT_CAVEATS } from "../../lib/core/worth-it";
 
 const allTiers = (caStatewide.fees?.filing_fee_tiers ?? []) as { applies_to: string; fee: number; citation: string }[];
 const caTiers = allTiers.filter((t) => !/more than 12/i.test(t.applies_to)).map((t) => t.fee); // [≤1,500, ≤5,000, above]
 const caFrequent = allTiers.find((t) => /more than 12/i.test(t.applies_to));
+const caCite = allTiers[0]?.citation?.replace(/\(b\)\(1\)$/, "") ?? "";
 // Only what the calculator needs, embedded as JSON for the browser script.
 const calcStates = states.map((s) => ({
   slug: s.slug,
   name: s.state,
+  abbr: s.abbr,
   limitInd: s.limit_individual,
   limitBiz: s.limit_business,
   feeMin: s.filing_fee_min,
@@ -21,209 +27,391 @@ const calcStates = states.map((s) => ({
   limitUnverified: s.unverified.some((f) => /^limit/.test(f)),
   feeUnverified: s.unverified.some((f) => /^filing_fee/.test(f)),
   checked: s.date_checked,
-  // Fee by claim amount, where we have a verified schedule (California so far).
   feeTiers: s.slug === "ca" ? caTiers : null,
   tierNote:
     s.slug === "ca" && caFrequent
-      ? `Set from your amount (${allTiers[0]?.citation?.replace(/\(b\)\(1\)$/, "")}). It's ${money(caFrequent.fee)} if you filed more than 12 small claims in California in the past 12 months.`
+      ? `Set from your amount (${caCite}). It's ${money(caFrequent.fee)} if you filed more than 12 small claims in California in the past 12 months.`
       : null,
 }));
 
-const presetValues = collectPresets.map((p) => Math.round(p.value * 100));
+const featured = ["ca", "tx", "ny", "fl"];
+const subs = Object.fromEntries(
+  featured.map((f) => {
+    const s = calcStates.find((x) => x.slug === f)!;
+    return [f, s.limitInd != null ? `Limit ${money(s.limitInd)}` : "Limit not confirmed"];
+  }),
+);
+const colors = ["c-sage", "c-cobalt", "c-sand", "c-lilac", "c-tomato"];
+const keys = "ABCDEF";
+const winTiles = [
+  { v: 90, label: "Very likely", sub: "Papers back up every point" },
+  { v: 75, label: "Fairly likely", sub: "Good records, some gaps" },
+  { v: 50, label: "Could go either way", sub: "Mostly my word against theirs" },
+  { v: 25, label: "Unlikely", sub: "Little to show the judge" },
+];
+const colTiles = collectPresets.map((p) => ({ v: Math.round(p.value * 100), label: p.label }));
+const qs = ["State", "Who's suing", "Amount", "Up-front costs", "Your time", "The odds"];
+const TOTAL = qs.length;
+const pad = (n: number) => String(n).padStart(2, "0");
 ---
 <Site
   title="Small claims cost calculator"
   description="Put the costs of a small claims case, your time and the chance of getting paid side by side. Arithmetic on your own estimates, not a prediction."
+  bleed
+  color="c-calculator"
 >
-  <Breadcrumb items={[{ label: "Cost calculator" }]} />
-  <div class="narrow">
-    <p class="eyebrow">Calculator</p>
-    <h1>Small claims cost calculator</h1>
-    <p class="lede">
-      Put the money you'd spend, your time and the chance of actually getting paid side by side. It doesn't tell you
-      whether to sue. It shows what your own numbers add up to.
-    </p>
-    <p class="hint">
-      Nothing you enter leaves this page. Not sure suing is the right route?{" "}
-      <a href="/steps/#before-you-decide">Read about other options first</a>.
-    </p>
-  </div>
-
   <script type="application/json" id="calc-states" set:html={JSON.stringify(calcStates)} />
 
-  <ToolNotice
-    id="worth-it"
-    target="worth-it-tool"
-    toolName="the cost calculator"
-    extraPoints={["The result is arithmetic on your own guesses. It can't tell you whether you'll win or get paid, or whether you should sue."]}
-  />
+  <div class="wrap fl wi">
+    <div class="wi-gate">
+      <ToolNotice
+        id="worth-it"
+        target="worth-it-tool"
+        toolName="the cost calculator"
+        extraPoints={["The result is arithmetic on your own guesses. It can't tell you whether you'll win or get paid, or whether you should sue."]}
+      />
+    </div>
 
-  <div class="calc" id="worth-it-tool">
-    <form id="calc" novalidate aria-describedby="calc-howto">
-      <p id="calc-howto" class="hint calc-howto">
-        Fill in what you know. Every box has a starting value you can change. Results update as you type.{" "}
-        <a class="jump-link" href="#result-title">Skip to the results</a>
-      </p>
-
-      <fieldset>
-        <legend><span class="legend-num" aria-hidden="true">1</span> Your claim</legend>
-        <div class="form-grid">
-          <div class="field">
-            <label for="state">State</label>
-            <select id="state" aria-describedby="state-hint">
-              <option value="">Choose a state</option>
-              {calcStates.map((s) => <option value={s.slug}>{s.name}</option>)}
-            </select>
-            <span class="hint" id="state-hint">Sets the court's limit and a typical filing fee.</span>
+    <div class="fl-layout" id="worth-it-tool">
+      <aside class="fl-rail" aria-label="About this calculator">
+        <div class="fl-rail-in">
+          <Breadcrumb items={[{ href: "/tools/", label: "Tools" }, { label: "Cost calculator" }]} />
+          <h1 class="fl-title">Small claims cost calculator</h1>
+          <p class="fl-intro">Puts what you'd spend, your time and the chance of being paid side by side. It doesn't say whether to sue.</p>
+          <div class="progress" aria-hidden="true">
+            {qs.map((_, i) => <span class={i === 0 ? "seg now" : "seg"} data-seg={i + 1}></span>)}
           </div>
-          <div class="field">
-            <label for="who">You'd be suing as</label>
-            <select id="who" aria-describedby="who-hint">
-              <option value="ind">An individual</option>
-              <option value="biz">A business</option>
-            </select>
-            <span class="hint" id="who-hint">Some states set a lower limit for businesses.</span>
-          </div>
-          <div class="field" data-field="amountOwed">
-            <label for="amount">Amount you're owed <span class="req">(required)</span></label>
-            <div class="input-affix">
-              <span class="affix" aria-hidden="true">$</span>
-              <input id="amount" type="text" inputmode="decimal" autocomplete="off" value="2,400" required aria-required="true" aria-describedby="amount-hint" data-money />
-            </div>
-            <span class="hint" id="amount-hint">Only what you can back up with papers: receipts, a contract, an invoice.</span>
-          </div>
-          <div class="field">
-            <span class="label" id="limit-label">Court limit</span>
-            <output id="limit-out" class="limit-out" for="state who" aria-labelledby="limit-label">Choose a state</output>
-            <span id="limit-note" class="hint"></span>
-          </div>
+          <p class="lbl fl-count" data-count>Question 1 of {TOTAL}</p>
+          <nav class="fl-qnav" aria-label="Questions">
+            <ol class="fl-index">
+              {qs.map((q, i) => (
+                <li>
+                  <button type="button" class="fl-jump" data-jump={i + 1} data-state={i === 0 ? "now" : "todo"}>
+                    <span class="j-n" aria-hidden="true">{pad(i + 1)}</span>
+                    <span><span>{q}</span><span class="j-a" data-answer={i + 1}></span></span>
+                    <span class="j-s" aria-hidden="true"></span>
+                  </button>
+                </li>
+              ))}
+              <li>
+                <button type="button" class="fl-jump" data-jump={TOTAL + 1} data-state="todo">
+                  <span class="j-n" aria-hidden="true">→</span><span>What the numbers show</span><span class="j-s" aria-hidden="true"></span>
+                </button>
+              </li>
+            </ol>
+          </nav>
+          <button type="button" class="fl-mini" data-jump={TOTAL + 1} aria-describedby="mini-out mini-nums">
+            <span class="lbl">So far · go to the result</span>
+            <span class="m-out" id="mini-out">—</span>
+            <span class="m-nums" id="mini-nums"></span>
+          </button>
+          <p class="fl-private"><span class="dot" aria-hidden="true"></span>Nothing you type leaves this page.</p>
         </div>
-      </fieldset>
+      </aside>
 
-      <fieldset>
-        <legend><span class="legend-num" aria-hidden="true">2</span> Money you'd spend</legend>
-        <div class="form-grid">
-          <div class="field" data-field="filingFee">
-            <label for="fee">Filing fee</label>
-            <div class="input-affix">
-              <span class="affix" aria-hidden="true">$</span>
-              <input id="fee" type="text" inputmode="decimal" autocomplete="off" value="50" aria-describedby="fee-hint" data-money />
+      <div class="fl-main">
+        <p class="note-strip fl-strip">
+          <span class="lbl">Please note</span>
+          <span>Arithmetic on your own estimates. It can't predict what a judge will decide or whether you'll be paid. Not sure court is the right route? <a href="/steps/#before-you-decide">See other options</a>.</span>
+        </p>
+
+        <form id="calc" novalidate autocomplete="off">
+          <!-- 1 · State -->
+          <section class="fl-q" data-q="1" data-state="now" aria-labelledby="q1-t">
+            <div class="fl-q-head">
+              <span class="fl-q-n">{pad(1)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+              <h2 class="fl-q-title" id="q1-t" tabindex="-1" data-notice-focus>Which state's court would hear it?</h2>
+              <p class="fl-q-help" id="q1-help">Sets the court's limit and a typical filing fee.</p>
             </div>
-            <span class="hint" id="fee-hint">Paid to the court when you file. Choose a state to fill it in.</span>
-          </div>
-          <div class="field" data-field="serviceCost">
-            <label for="service">Serving the papers</label>
-            <div class="input-affix">
-              <span class="affix" aria-hidden="true">$</span>
-              <input id="service" type="text" inputmode="decimal" autocomplete="off" value="40" aria-describedby="service-hint" data-money />
+            <div class="fl-q-body">
+              <ToolStatePicker name="state" legend="Which state's court would hear it?" states={calcStates} featured={featured} subs={subs} colors={colors} describedby="q1-help" />
+              <p class="fl-confirm" id="state-line"></p>
             </div>
-            <span class="hint" id="service-hint">Certified mail by the clerk is often $15–30. A sheriff or process server is often $50–100.</span>
-          </div>
-          <div class="field" data-field="otherCosts">
-            <label for="other">Other costs</label>
-            <div class="input-affix">
-              <span class="affix" aria-hidden="true">$</span>
-              <input id="other" type="text" inputmode="decimal" autocomplete="off" value="0" aria-describedby="other-hint" data-money />
+            <div class="fl-q-foot">
+              <button class="btn" type="button" data-next>Continue</button>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter · letter keys pick an answer</span>
             </div>
-            <span class="hint" id="other-hint">Parking, copies, postage, and later collection fees.</span>
-          </div>
-          <div class="field">
-            <label for="recover">Fees added to the judgment if you win?</label>
-            <select id="recover" aria-describedby="recover-hint">
-              <option value="yes">Yes</option>
-              <option value="no">No, or not sure</option>
-            </select>
-            <span class="hint" id="recover-hint">Judges often add filing and service fees to what the other side owes. Check your state's rules.</span>
-          </div>
-        </div>
-      </fieldset>
+          </section>
 
-      <fieldset>
-        <legend><span class="legend-num" aria-hidden="true">3</span> Your time</legend>
-        <div class="form-grid">
-          <div class="field" data-field="hours">
-            <label for="hours">Hours you'd spend</label>
-            <input id="hours" type="text" inputmode="decimal" autocomplete="off" value="12" aria-describedby="hours-hint" />
-            <span class="hint" id="hours-hint">Preparing, getting to court, waiting, and collecting afterward.</span>
-          </div>
-          <div class="field" data-field="hourlyValue">
-            <label for="rate">What an hour is worth to you</label>
-            <div class="input-affix">
-              <span class="affix" aria-hidden="true">$</span>
-              <input id="rate" type="text" inputmode="decimal" autocomplete="off" value="0" aria-describedby="rate-hint" data-money />
+          <!-- 2 · Who -->
+          <section class="fl-q" data-q="2" data-state="next" aria-labelledby="q2-t">
+            <div class="fl-q-head">
+              <span class="fl-q-n">{pad(2)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+              <h2 class="fl-q-title" id="q2-t" tabindex="-1">Who would be suing?</h2>
+              <p class="fl-q-help" id="q2-help">Some states set a lower limit for businesses.</p>
             </div>
-            <span class="hint" id="rate-hint">Leave at 0 to leave time out, or use your hourly pay if you'd lose work.</span>
+            <div class="fl-q-body">
+              <fieldset class="fl-group" data-keys data-auto aria-describedby="q2-help">
+                <legend class="sr-only">Who would be suing?</legend>
+                <div class="tiles fl-tiles-2">
+                  <label class="tile c-sage">
+                    <input type="radio" name="who" value="ind" checked />
+                    <span class="t-top"><span class="key" aria-hidden="true">A</span><span class="check" aria-hidden="true"></span></span>
+                    <span><span class="t-label">Me, as a person</span><span class="t-sub" id="who-sub-ind">Including a sole proprietor</span></span>
+                  </label>
+                  <label class="tile c-cobalt">
+                    <input type="radio" name="who" value="biz" />
+                    <span class="t-top"><span class="key" aria-hidden="true">B</span><span class="check" aria-hidden="true"></span></span>
+                    <span><span class="t-label">A business</span><span class="t-sub" id="who-sub-biz">Company, LLC, partnership</span></span>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+            <div class="fl-q-foot">
+              <button class="btn" type="button" data-next>Continue</button>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+            </div>
+          </section>
+
+          <!-- 3 · Amount -->
+          <section class="fl-q" data-q="3" data-state="later" aria-labelledby="q3-t">
+            <div class="fl-q-head">
+              <span class="fl-q-n">{pad(3)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+              <h2 class="fl-q-title" id="q3-t" tabindex="-1">How much are you owed?</h2>
+              <p class="fl-q-help" id="q3-help">Only what you can back up with papers: receipts, a contract, an invoice.</p>
+            </div>
+            <div class="fl-q-body">
+              <div class="fields fl-fields-2">
+                <div class="field">
+                  <label for="amount">Amount you're owed <span class="f-req">Required</span></label>
+                  <div class="affix"><span aria-hidden="true">$</span><input id="amount" type="text" inputmode="decimal" enterkeyhint="next" value="2,400" required aria-required="true" aria-describedby="q3-help" data-money /></div>
+                </div>
+                <div class="field fl-out" id="limit-box">
+                  <span class="f-label" id="limit-label">Court limit</span>
+                  <span class="o-n" id="limit-out">Choose a state</span>
+                  <span class="o-tag"><span class="dot" aria-hidden="true"></span><span id="limit-status" aria-live="polite">—</span></span>
+                </div>
+              </div>
+              <div id="over-warn"></div>
+            </div>
+            <div class="fl-q-foot">
+              <button class="btn" type="button" data-next>Continue</button>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+            </div>
+          </section>
+
+          <!-- 4 · Up-front costs -->
+          <section class="fl-q" data-q="4" data-state="later" aria-labelledby="q4-t">
+            <div class="fl-q-head">
+              <span class="fl-q-n">{pad(4)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+              <h2 class="fl-q-title" id="q4-t" tabindex="-1">What would you spend up front?</h2>
+              <p class="fl-q-help">We filled in a starting value for each. Change anything you know better.</p>
+            </div>
+            <div class="fl-q-body">
+              <div class="fields fl-fields-3">
+                <div class="field">
+                  <label for="fee">Filing fee</label>
+                  <div class="affix"><span aria-hidden="true">$</span><input id="fee" type="text" inputmode="decimal" enterkeyhint="next" value="50" aria-describedby="fee-hint" data-money /></div>
+                  <span class="f-hint" id="fee-hint">Paid to the court when you file.</span>
+                  <button type="button" class="link-button fl-reset" id="fee-reset" hidden>Use the court's fee</button>
+                </div>
+                <div class="field">
+                  <label for="service">Serving the papers</label>
+                  <div class="affix"><span aria-hidden="true">$</span><input id="service" type="text" inputmode="decimal" enterkeyhint="next" value="40" aria-describedby="service-hint" data-money /></div>
+                  <span class="f-hint" id="service-hint">Clerk's mail is often $15–30; a sheriff or server $50–100.</span>
+                </div>
+                <div class="field">
+                  <label for="other">Other costs</label>
+                  <div class="affix"><span aria-hidden="true">$</span><input id="other" type="text" inputmode="decimal" enterkeyhint="next" value="0" aria-describedby="other-hint" data-money /></div>
+                  <span class="f-hint" id="other-hint">Parking, copies, postage, later collection fees.</span>
+                </div>
+              </div>
+              <fieldset class="fl-group" data-keys aria-describedby="recover-hint">
+                <legend>If you win, are these fees added to what they owe?</legend>
+                <div class="tiles fl-tiles-2">
+                  <label class="tile c-sage">
+                    <input type="radio" name="recover" value="yes" checked />
+                    <span class="t-top"><span class="key" aria-hidden="true">A</span><span class="check" aria-hidden="true"></span></span>
+                    <span><span class="t-label">Yes, usually</span><span class="t-sub">Judges often add filing and service fees</span></span>
+                  </label>
+                  <label class="tile c-sand">
+                    <input type="radio" name="recover" value="no" />
+                    <span class="t-top"><span class="key" aria-hidden="true">B</span><span class="check" aria-hidden="true"></span></span>
+                    <span><span class="t-label">No, or not sure</span><span class="t-sub">Leave them out of the math</span></span>
+                  </label>
+                </div>
+                <p class="fl-note" id="recover-hint">Your state's rules page says whether costs are added.</p>
+              </fieldset>
+            </div>
+            <div class="fl-q-foot">
+              <button class="btn" type="button" data-next>Continue</button>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+            </div>
+          </section>
+
+          <!-- 5 · Time -->
+          <section class="fl-q" data-q="5" data-state="later" aria-labelledby="q5-t">
+            <div class="fl-q-head">
+              <span class="fl-q-n">{pad(5)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+              <h2 class="fl-q-title" id="q5-t" tabindex="-1">How much time would it take?</h2>
+              <p class="fl-q-help">Preparing, getting to court, waiting, and collecting afterward.</p>
+            </div>
+            <div class="fl-q-body">
+              <div class="fields fl-fields-2">
+                <div class="field">
+                  <label for="hours">Hours you'd spend</label>
+                  <div class="affix"><input id="hours" type="text" inputmode="decimal" enterkeyhint="next" value="12" aria-describedby="hours-hint" /><span aria-hidden="true">h</span></div>
+                  <span class="f-hint" id="hours-hint">Your own guess. Include waiting time.</span>
+                </div>
+                <div class="field">
+                  <label for="rate">What an hour is worth to you</label>
+                  <div class="affix"><span aria-hidden="true">$</span><input id="rate" type="text" inputmode="decimal" enterkeyhint="next" value="0" aria-describedby="rate-hint" data-money /></div>
+                  <span class="f-hint" id="rate-hint">0 leaves time out. Use your hourly pay if you'd lose work.</span>
+                </div>
+              </div>
+            </div>
+            <div class="fl-q-foot">
+              <button class="btn" type="button" data-next>Continue</button>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+            </div>
+          </section>
+
+          <!-- 6 · Odds -->
+          <section class="fl-q" data-q="6" data-state="later" aria-labelledby="q6-t">
+            <div class="fl-q-head">
+              <span class="fl-q-n">{pad(6)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
+              <h2 class="fl-q-title" id="q6-t" tabindex="-1">Your own estimate of the odds</h2>
+              <p class="fl-q-help">Two guesses. Nobody can know these for sure.</p>
+            </div>
+            <div class="fl-q-body">
+              <fieldset class="fl-group" data-keys aria-describedby="odds-note">
+                <legend>How likely is a judge to rule for you?</legend>
+                <div class="tiles fl-tiles-4">
+                  {winTiles.map((w, i) => (
+                    <label class={`tile ${colors[i]}`}>
+                      <input type="radio" name="win" value={w.v} checked={w.v === 75} />
+                      <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><span class="t-pct">{w.v}%</span></span>
+                      <span><span class="t-label">{w.label}</span><span class="t-sub">{w.sub}</span></span>
+                    </label>
+                  ))}
+                </div>
+                <div class="fl-own">
+                  <div class="field compact">
+                    <label for="win-own">Or your own number</label>
+                    <div class="affix"><input id="win-own" type="text" inputmode="numeric" enterkeyhint="next" value="75" aria-describedby="own-hint" data-pct="win" /><span aria-hidden="true">%</span></div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="fl-group" data-keys aria-describedby="odds-note">
+                <legend>If you win, how likely are you to collect?</legend>
+                <div class="tiles fl-tiles-4">
+                  {colTiles.map((p, i) => (
+                    <label class={`tile ${colors[i]}`}>
+                      <input type="radio" name="col" value={p.v} checked={p.v === 45} />
+                      <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><span class="t-pct">{p.v}%</span></span>
+                      <span><span class="t-label">{p.label}</span></span>
+                    </label>
+                  ))}
+                </div>
+                <div class="fl-own">
+                  <div class="field compact">
+                    <label for="col-own">Or your own number</label>
+                    <div class="affix"><input id="col-own" type="text" inputmode="numeric" enterkeyhint="done" value="45" aria-describedby="own-hint" data-pct="col" /><span aria-hidden="true">%</span></div>
+                  </div>
+                </div>
+              </fieldset>
+              <p class="sr-only" id="own-hint">A whole number from 0 to 100.</p>
+              <p class="fl-note" id="odds-note">
+                These are rough guides, not findings. Studies found about half of winners collected something.{" "}
+                <a href="/sources/#collecting">What studies found about getting paid</a>
+              </p>
+            </div>
+            <div class="fl-q-foot">
+              <button class="btn" type="button" data-next>See the numbers</button>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+            </div>
+          </section>
+        </form>
+
+        <!-- Result -->
+        <section class="wi-result" id="result" data-q={TOTAL + 1} aria-labelledby="r-title">
+          <div class="r-top">
+            <h2 class="lbl lbl-ink r-title" id="r-title" tabindex="-1">What the numbers show</h2>
+            <p class="lbl">Updates as you answer</p>
           </div>
-        </div>
-      </fieldset>
+          <p class="r-outcome" id="r-outcome">—</p>
+          <p class="r-summary" id="r-summary"></p>
 
-      <fieldset>
-        <legend><span class="legend-num" aria-hidden="true">4</span> The odds: your own estimate</legend>
-        <div class="field">
-          <div class="range-row"><label for="win">Chance a judge rules for you</label><output id="win-out" for="win">75%</output></div>
-          <input id="win" type="range" min="0" max="100" step="5" value="75" aria-describedby="win-hint" aria-valuetext="75 percent" />
-          <span class="hint" id="win-hint">Higher with a strong paper trail (contract, photos, texts, receipts). Lower when it's your word against theirs.</span>
-        </div>
-        <div class="field range-gap">
-          <div class="range-row"><label for="col">Chance you collect if you win</label><output id="col-out" for="col">45%</output></div>
-          <input id="col" type="range" min="0" max="100" step="5" value="45" aria-describedby="col-hint" aria-valuetext="45 percent" />
-          <div class="presets" role="group" aria-label="Starting points for the chance you collect">
-            {collectPresets.map((p, i) => (
-              <button type="button" class="chip" data-col={presetValues[i]} aria-pressed="false">{p.label}</button>
-            ))}
+          <div class="r-compare">
+            <div class="rc">
+              <p class="lbl">Expected back</p>
+              <p class="num rc-n" id="r-back">—</p>
+              <div class="rc-track" aria-hidden="true"><span class="rc-bar rc-back" id="bar-back"></span></div>
+              <p class="rc-sub">Amount × chance of winning × chance of collecting</p>
+            </div>
+            <div class="rc">
+              <p class="lbl">Costs, including your time</p>
+              <p class="num rc-n" id="r-cost">—</p>
+              <div class="rc-track" aria-hidden="true"><span class="rc-bar rc-cost" id="bar-cost"></span></div>
+              <p class="rc-sub">Money up front plus hours × hourly value</p>
+            </div>
           </div>
-          <span class="hint" id="col-hint">
-            The buttons are rough starting points, not research findings.{" "}
-            <a href="/sources/#collecting">What studies found about getting paid</a>
-          </span>
+
+          <div class="r-block">
+            <h3 class="r-h">How it adds up, line by line</h3>
+            <table class="r-ledger">
+              <caption class="sr-only">How the expected net is worked out</caption>
+              <tbody>
+                <tr><th scope="row">You can claim</th><td id="l-claim">—</td></tr>
+                <tr><th scope="row">+ Fees added if you win</th><td id="l-recover">—</td></tr>
+                <tr><th scope="row">× Chance a judge rules for you</th><td id="l-win">—</td></tr>
+                <tr><th scope="row">× Chance you collect</th><td id="l-col">—</td></tr>
+                <tr class="sub"><th scope="row">Expected back</th><td id="l-back">—</td></tr>
+                <tr><th scope="row">− Money up front</th><td id="l-up">—</td></tr>
+                <tr><th scope="row">− Your time</th><td id="l-time">—</td></tr>
+                <tr class="sub"><th scope="row">Expected net</th><td id="l-net">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="r-break">
+            <h3 class="r-h">Break-even</h3>
+            <p id="r-break">—</p>
+          </div>
+          <div class="r-warn" id="r-warn"></div>
+
+          <div class="r-keep">
+            <h3 class="r-h">Keep in mind</h3>
+            <ol>
+              {WORTH_IT_CAVEATS.map((c, i) => <li><span class="lbl" aria-hidden="true">{pad(i + 1)}</span><span>{c}</span></li>)}
+            </ol>
+          </div>
+          <div class="r-actions no-print">
+            <a class="btn" href="/steps/#before-you-decide">Options besides court</a>
+            <a class="btn ghost" href="/demand-letter/">Write a demand letter</a>
+          </div>
+          <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="calc-status"></p>
+        </section>
+
+        <div class="fl-dock no-print" id="dock" data-off>
+          <p class="d-text"><strong id="dock-out">—</strong><span id="dock-nums"></span></p>
+          <button type="button" class="btn sm" data-jump={TOTAL + 1}>See the numbers</button>
         </div>
-      </fieldset>
-    </form>
-
-    <section class="result" aria-labelledby="result-title" tabindex="0">
-      <h2 class="result-title" id="result-title" tabindex="-1">What the numbers show</h2>
-      <p class="outcome" id="outcome">—</p>
-      <p class="result-summary" id="summary"></p>
-
-      <table class="ledger" id="ledger">
-        <caption>How it adds up</caption>
-        <tbody>
-          <tr><th scope="row">You can claim</th><td id="r-claim">—</td></tr>
-          <tr><th scope="row">Fees added if you win</th><td id="r-recover">—</td></tr>
-          <tr><th scope="row">× Chance a judge rules for you</th><td id="r-win">—</td></tr>
-          <tr><th scope="row">× Chance you collect</th><td id="r-col">—</td></tr>
-          <tr class="subtotal"><th scope="row">Expected back</th><td id="r-back">—</td></tr>
-          <tr><th scope="row">Money spent up front</th><td id="r-up">—</td></tr>
-          <tr><th scope="row">Your time</th><td id="r-time">—</td></tr>
-          <tr class="total"><th scope="row">Expected net</th><td id="r-net">—</td></tr>
-        </tbody>
-      </table>
-      <p id="r-break" class="hint"></p>
-      <div id="r-warn" class="stack"></div>
-
-      <div class="caveats">
-        <h3>Keep in mind</h3>
-        <ul id="caveats"></ul>
       </div>
-      <p class="result-links">
-        <a class="link-arrow" href="/steps/#before-you-decide">Options besides going to court</a>
-      </p>
-      <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="calc-status"></p>
-    </section>
+    </div>
   </div>
 </Site>
 
 <script>
-  import { worthIt, fmt, checkWorthItInput, parseAmount, WORTH_IT_CAVEATS, type WorthItInput } from "../../lib/core/worth-it";
+  import { worthIt, fmt, checkWorthItInput, parseAmount, type WorthItInput } from "../../lib/core/worth-it";
+  import { createFlow, announcer, initStatePicker } from "../../components/ToolFlow";
 
   type S = {
-    slug: string; name: string; limitInd: number | null; limitBiz: number | null; feeMin: number | null; feeMax: number | null;
+    slug: string; name: string; abbr: string; limitInd: number | null; limitBiz: number | null; feeMin: number | null; feeMax: number | null;
     limitUnverified: boolean; feeUnverified: boolean; checked: string | null; feeTiers: number[] | null; tierNote: string | null;
   };
+  const TOTAL = 6;
   const data: S[] = JSON.parse(document.getElementById("calc-states")!.textContent || "[]");
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const input = (id: string) => $<HTMLInputElement>(id);
-  const pct = (id: string) => Number(input(id).value) || 0;
+  const radio = (name: string) => document.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? "";
+  const asText = (n: number) => n.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const root = $("worth-it-tool");
+  $("calc").addEventListener("submit", (e) => e.preventDefault());
+
+  let stateSlug = "";
+  let feeEdited = false;
+  const current = () => data.find((d) => d.slug === stateSlug);
 
   // Text inputs and the WorthItInput key each one feeds.
   const fields: [string, keyof WorthItInput][] = [
@@ -234,33 +422,11 @@ const presetValues = collectPresets.map((p) => Math.round(p.value * 100));
     ["hours", "hours"],
     ["rate", "hourlyValue"],
   ];
+  const pctFields = ["win-own", "col-own"];
   const touched = new Set<string>();
   const hintIds: Record<string, string> = {};
-  for (const [id] of fields) hintIds[id] = input(id).getAttribute("aria-describedby") || "";
-
-  // Caveats are the same for every result, so they are written once.
-  $("caveats").replaceChildren(...WORTH_IT_CAVEATS.map((c) => Object.assign(document.createElement("li"), { textContent: c })));
-
-  const current = () => data.find((d) => d.slug === $<HTMLSelectElement>("state").value);
-  const asText = (n: number) => n.toLocaleString("en-US", { maximumFractionDigits: 2 });
-
-  function onStateChange() {
-    const s = current();
-    const hint = $("fee-hint");
-    if (s && s.feeMin != null) {
-      const top = s.feeMax ?? s.feeMin;
-      input("fee").value = asText(top);
-      hint.textContent =
-        s.feeMin === top
-          ? `${s.name}: ${fmt(s.feeMin)}.`
-          : `${s.name}: ${fmt(s.feeMin)} to ${fmt(top)}. We filled in the highest; your state page explains which applies.`;
-    } else {
-      hint.textContent = s ? `We don't have a fee for ${s.name} yet. Ask the court clerk.` : "Paid to the court when you file. Choose a state to fill it in.";
-    }
-    if (s?.feeUnverified) hint.append(" ", badge());
-    tierFee(s);
-    update();
-  }
+  for (const id of [...fields.map((f) => f[0]), ...pctFields]) hintIds[id] = input(id).getAttribute("aria-describedby") || "";
+  const sectionOf: Record<string, number> = { amount: 3, fee: 4, service: 4, other: 4, hours: 5, rate: 5, "win-own": 6, "col-own": 6 };
 
   function badge() {
     const b = document.createElement("span");
@@ -269,33 +435,116 @@ const presetValues = collectPresets.map((p) => Math.round(p.value * 100));
     return b;
   }
 
-  function tierFee(s: S | undefined) {
-    if (!s?.feeTiers || s.feeTiers.length < 3) return;
-    const a = parseAmount(input("amount").value);
-    if (a == null || Number.isNaN(a)) return;
-    const fee = a <= 1500 ? s.feeTiers[0] : a <= 5000 ? s.feeTiers[1] : s.feeTiers[2];
-    input("fee").value = asText(fee);
-    if (s.tierNote) $("fee-hint").textContent = s.tierNote;
+  // ---------------------------------------------------------------- State, fee, limit
+  function courtFee(s: S | undefined): number | null {
+    if (!s) return null;
+    if (s.feeTiers && s.feeTiers.length >= 3) {
+      const a = parseAmount(input("amount").value);
+      if (a != null && !Number.isNaN(a)) return a <= 1500 ? s.feeTiers[0] : a <= 5000 ? s.feeTiers[1] : s.feeTiers[2];
+    }
+    return s.feeMax ?? s.feeMin;
   }
 
+  function setFee() {
+    const s = current();
+    const hint = $("fee-hint");
+    const fee = courtFee(s);
+    $("fee-reset").hidden = !(feeEdited && fee != null);
+    if (feeEdited) return;
+    // No fee on file: leave the box empty rather than keep another state's number.
+    input("fee").value = fee != null ? asText(fee) : "";
+    if (!s) hint.textContent = "Paid to the court when you file.";
+    else if (s.feeTiers && s.tierNote) hint.textContent = s.tierNote;
+    else if (s.feeMin != null) {
+      const top = s.feeMax ?? s.feeMin;
+      hint.textContent = s.feeMin === top ? `${s.name}: ${fmt(top)}.` : `${s.name}: ${fmt(s.feeMin)} to ${fmt(top)}. We used the highest.`;
+    } else hint.textContent = `We don't have a fee for ${s.name} yet. Ask the court clerk and type it in; empty counts as $0.`;
+    if (s?.feeUnverified) hint.append(" ", badge());
+  }
+
+  function onState(slug: string) {
+    stateSlug = slug;
+    feeEdited = false;
+    const s = current();
+    const line = $("state-line");
+    line.replaceChildren();
+    if (s) {
+      const t = document.createElement("span");
+      const ind = s.limitInd != null ? fmt(s.limitInd) : "not confirmed";
+      const biz = s.limitBiz != null && s.limitBiz !== s.limitInd ? ` for people, ${fmt(s.limitBiz)} for businesses` : "";
+      t.textContent = `${s.name}: limit ${ind}${biz}.`;
+      line.append(t);
+      if (s.limitUnverified) line.append(badge());
+      const a = document.createElement("a");
+      a.className = "go";
+      a.href = `/states/${s.slug}/`;
+      a.textContent = `${s.name} rules`;
+      line.append(a);
+      if (s.checked) {
+        const c = document.createElement("span");
+        c.className = "cite";
+        c.textContent = `Checked ${s.checked}`;
+        line.append(c);
+      }
+    }
+    // Who's suing: show each limit on its tile.
+    const sub = (v: number | null, fallback: string) => (s ? (v != null ? `Limit ${fmt(v)}` : "Limit not confirmed") : fallback);
+    $("who-sub-ind").textContent = sub(s?.limitInd ?? null, "Including a sole proprietor");
+    $("who-sub-biz").textContent = sub(s ? s.limitBiz ?? s.limitInd : null, "Company, LLC, partnership");
+    setFee();
+    update();
+  }
+
+  // ---------------------------------------------------------------- Odds: tiles and "your own number" stay in step
+  function pctValue(id: string): number | null {
+    const v = parseAmount(input(id).value);
+    return v == null || Number.isNaN(v) || v < 0 || v > 100 ? null : v;
+  }
+  document.querySelectorAll<HTMLInputElement>('input[name="win"], input[name="col"]').forEach((r) =>
+    r.addEventListener("change", () => {
+      input(`${r.name}-own`).value = r.value;
+      touched.delete(`${r.name}-own`);
+      update();
+    }),
+  );
+  for (const id of pctFields) {
+    input(id).addEventListener("input", () => {
+      const name = input(id).dataset.pct!;
+      const v = pctValue(id);
+      document.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`).forEach((r) => (r.checked = v != null && Number(r.value) === v));
+      update();
+    });
+    input(id).addEventListener("blur", () => {
+      touched.add(id);
+      update();
+    });
+  }
+
+  // ---------------------------------------------------------------- Errors
   function readInputs() {
     const raw: Partial<Record<keyof WorthItInput, number | null>> = {};
     for (const [id, key] of fields) raw[key] = parseAmount(input(id).value);
     return raw;
   }
-
-  function showErrors(errors: Partial<Record<keyof WorthItInput, string>>, all = false) {
-    for (const [id, key] of fields) {
+  function allErrors(): Map<string, string> {
+    const e = checkWorthItInput(readInputs());
+    const out = new Map<string, string>();
+    for (const [id, key] of fields) if (e[key]) out.set(id, e[key]!);
+    for (const id of pctFields) if (pctValue(id) == null) out.set(id, "Enter a whole number from 0 to 100.");
+    return out;
+  }
+  function paintErrors(errs: Map<string, string>) {
+    for (const id of Object.keys(hintIds)) {
       const el = input(id);
       const field = el.closest<HTMLElement>(".field")!;
-      const msg = errors[key];
-      const show = msg && (all || touched.has(id));
+      const msg = errs.get(id);
+      const show = msg && touched.has(id);
       const errId = `${id}-error`;
       let p = document.getElementById(errId);
       if (show) {
         if (!p) {
           p = document.createElement("p");
-          p.className = "error-text";
+          p.className = "f-error";
           p.id = errId;
           field.appendChild(p);
         }
@@ -307,134 +556,190 @@ const presetValues = collectPresets.map((p) => Math.round(p.value * 100));
         p?.remove();
         field.classList.remove("has-error");
         el.removeAttribute("aria-invalid");
-        el.setAttribute("aria-describedby", hintIds[id]);
+        if (hintIds[id]) el.setAttribute("aria-describedby", hintIds[id]);
       }
     }
   }
 
-  let statusTimer: number | undefined;
-  let ready = false; // don't announce the starting numbers on page load
-  function announce(text: string) {
-    // Wait until typing pauses so screen readers hear one summary, not one per keystroke.
-    window.clearTimeout(statusTimer);
-    if (!ready) return;
-    statusTimer = window.setTimeout(() => ($("calc-status").textContent = text), 900);
-  }
-
-  function setLedger(values: Record<string, string>) {
-    for (const [id, v] of Object.entries(values)) $(id).textContent = v;
-  }
+  // ---------------------------------------------------------------- Result
+  const say = announcer($("calc-status"));
+  const L = (id: string, v: string) => ($(`l-${id}`).textContent = v);
+  const answer = (k: number, text: string) => {
+    const el = document.querySelector<HTMLElement>(`[data-answer="${k}"]`);
+    if (el) el.textContent = text;
+  };
 
   function update() {
     const s = current();
-    const biz = $<HTMLSelectElement>("who").value === "biz";
+    const biz = radio("who") === "biz";
     const limit = s ? (biz ? s.limitBiz ?? s.limitInd : s.limitInd) : null;
-
-    // Court limit
-    $("limit-out").textContent = s ? (limit != null ? fmt(limit) : "Not confirmed yet") : "Choose a state";
-    const note = $("limit-note");
-    note.replaceChildren();
-    if (s) {
-      if (s.limitUnverified) note.append(badge(), " ");
-      const a = document.createElement("a");
-      a.href = `/states/${s.slug}/`;
-      a.textContent = `${s.name} small claims rules`;
-      note.append(a, s.checked ? ` · checked ${s.checked}` : "");
-    }
-
-    // Sliders
-    for (const id of ["win", "col"]) {
-      $(`${id}-out`).textContent = `${pct(id)}%`;
-      input(id).setAttribute("aria-valuetext", `${pct(id)} percent`);
-    }
-    document.querySelectorAll<HTMLButtonElement>(".chip[data-col]").forEach((b) =>
-      b.setAttribute("aria-pressed", String(Number(b.dataset.col) === pct("col"))),
-    );
-
-    // Validate
+    const errs = allErrors();
+    paintErrors(errs);
     const raw = readInputs();
-    const errors = checkWorthItInput(raw);
-    showErrors(errors);
-    const result = $("worth-it-tool").querySelector<HTMLElement>(".result")!;
-    if (Object.keys(errors).length) {
+    const amount = raw.amountOwed;
+    const amountOk = amount != null && !Number.isNaN(amount) && amount > 0;
+
+    // Limit panel. The status text only changes when it flips, so the live region doesn't chatter.
+    $("limit-label").textContent = s ? `${s.name} limit for ${biz ? "businesses" : "people"}` : "Court limit";
+    $("limit-out").textContent = s ? (limit != null ? fmt(limit) : "Not confirmed yet") : "Choose a state";
+    const over = s != null && limit != null && amountOk && amount! > limit;
+    $("limit-box").classList.toggle("is-over", over);
+    const status = !s ? "Choose a state to check" : limit == null ? "We can't check it yet" : over ? "Over the limit" : "Within the limit";
+    if ($("limit-status").textContent !== status) $("limit-status").textContent = status;
+
+    // Rail answers
+    answer(1, s ? s.name : "");
+    answer(2, biz ? "A business" : "A person");
+    answer(3, amountOk ? fmt(amount!) : "");
+    const win = pctValue("win-own");
+    const col = pctValue("col-own");
+    answer(6, win != null && col != null ? `${win}% · ${col}%` : "");
+
+    const result = $("result");
+    if (errs.size) {
       result.classList.add("is-stale");
-      $("outcome").textContent = "Check the highlighted boxes";
-      $("summary").textContent = "The numbers will show here once every box has a usable value.";
-      setLedger({ "r-claim": "—", "r-recover": "—", "r-win": "—", "r-col": "—", "r-back": "—", "r-up": "—", "r-time": "—", "r-net": "—" });
-      $("r-break").textContent = "";
+      $("r-outcome").textContent = "Check the highlighted boxes";
+      const where = [...new Set([...errs.keys()].map((id) => sectionOf[id]))].sort().map((k) => `question ${k}`);
+      $("r-summary").textContent = `The numbers come back once ${where.join(" and ")} ${where.length > 1 ? "have" : "has"} a usable value.`;
+      for (const id of ["claim", "recover", "win", "col", "back", "up", "time", "net"]) L(id, "—");
+      $("r-back").textContent = "—";
+      $("r-cost").textContent = "—";
+      $("r-break").textContent = "—";
       $("r-warn").replaceChildren();
-      const n = Object.keys(errors).length;
-      announce(`${n} ${n === 1 ? "box needs" : "boxes need"} a fix before the numbers can update.`);
+      $("over-warn").replaceChildren();
+      setBars(0, 0);
+      mini("Check the highlighted boxes", "");
+      say.say(`${errs.size} ${errs.size === 1 ? "box needs" : "boxes need"} a fix before the numbers can update.`);
       return;
     }
     result.classList.remove("is-stale");
 
     const r = worthIt({
-      amountOwed: raw.amountOwed ?? 0,
+      amountOwed: amount ?? 0,
       limit: s ? limit : null,
       filingFee: raw.filingFee ?? 0,
       serviceCost: raw.serviceCost ?? 0,
       otherCosts: raw.otherCosts ?? 0,
-      chanceWin: pct("win") / 100,
-      chanceCollect: pct("col") / 100,
-      costsRecoverable: $<HTMLSelectElement>("recover").value === "yes",
+      chanceWin: win! / 100,
+      chanceCollect: col! / 100,
+      costsRecoverable: radio("recover") === "yes",
       hours: raw.hours ?? 0,
       hourlyValue: raw.hourlyValue ?? 0,
     });
-
     const costs = r.upfront + r.timeCost;
-    setLedger({
-      "r-claim": fmt(r.claimable),
-      "r-recover": r.recoverable ? `+${fmt(r.recoverable)}` : fmt(0),
-      "r-win": `${pct("win")}%`,
-      "r-col": `${pct("col")}%`,
-      "r-back": fmt(r.expectedBack),
-      "r-up": `−${fmt(r.upfront)}`,
-      "r-time": r.timeCost ? `−${fmt(r.timeCost)}` : "Not counted",
-      "r-net": (r.net < 0 ? "−" : "") + fmt(Math.abs(r.net)),
-    });
-    $("outcome").textContent = r.outcomeLabel;
-    const summary = `On average, cases with these numbers would bring back about ${fmt(r.expectedBack)}, against ${fmt(costs)} in costs${
-      r.timeCost ? " and time" : ""
-    }.${r.timeCost ? "" : " Your time isn't counted. Add what an hour is worth to you to include it."}`;
-    $("summary").textContent = summary;
+    answer(4, fmt(r.upfront));
+    answer(5, r.timeCost ? fmt(r.timeCost) : `${asText(raw.hours ?? 0)} h, not counted`);
 
+    L("claim", fmt(r.claimable));
+    L("recover", r.recoverable ? `+${fmt(r.recoverable)}` : fmt(0));
+    L("win", `${win}%`);
+    L("col", `${col}%`);
+    L("back", fmt(r.expectedBack));
+    L("up", `−${fmt(r.upfront)}`);
+    L("time", r.timeCost ? `−${fmt(r.timeCost)}` : "Not counted");
+    L("net", (r.net < 0 ? "−" : "") + fmt(Math.abs(r.net)));
+    $("r-outcome").textContent = r.outcomeLabel;
+    $("r-back").textContent = fmt(r.expectedBack);
+    $("r-cost").textContent = fmt(costs);
+    setBars(r.expectedBack, costs);
+
+    $("r-summary").replaceChildren(
+      "On your numbers, cases like this would bring back about ",
+      strong(fmt(r.expectedBack)),
+      " on average, against ",
+      strong(fmt(costs)),
+      r.timeCost ? " in money and time." : " in money. Your time isn't counted; add what an hour is worth to you to include it.",
+    );
     $("r-break").textContent =
       r.breakEvenCollect == null
-        ? ""
+        ? "There's nothing to recover with these numbers."
         : r.breakEvenCollect > 1
-          ? "Even with a 100% chance of collecting, the costs above would be more than what you'd get back."
-          : `The costs and the expected recovery are equal when the chance of collecting is about ${Math.ceil(r.breakEvenCollect * 100)}%.`;
+          ? "With these numbers, even collecting every time wouldn't cover the costs."
+          : `Costs and expected recovery are equal when the chance of collecting is about ${Math.ceil(r.breakEvenCollect * 100)}%, with everything else the same.`;
 
-    const w = $("r-warn");
-    w.replaceChildren();
+    // The over-the-limit note also sits with the amount question.
     const warnings = s ? r.warnings : r.warnings.filter((x) => !x.startsWith("We don't have"));
-    for (const msg of warnings) {
-      const d = document.createElement("div");
-      d.className = "callout warning";
-      const p = document.createElement("p");
-      p.textContent = msg;
-      d.appendChild(p);
-      w.appendChild(d);
-    }
-    announce(`${r.outcomeLabel}. ${summary}${warnings.length ? ` ${warnings.length} note${warnings.length > 1 ? "s" : ""} below.` : ""}`);
+    const overMsg = r.overLimitBy > 0 ? warnings.find((w) => w.startsWith("Your claim is")) : undefined;
+    $("over-warn").replaceChildren(...(overMsg ? [callout(overMsg)] : []));
+    $("r-warn").replaceChildren(...warnings.map(callout));
+
+    mini(r.outcomeLabel, `Back ≈ ${fmt(r.expectedBack)} · costs ${fmt(costs)}`);
+    say.say(
+      `${r.outcomeLabel}. About ${fmt(r.expectedBack)} back on average, against ${fmt(costs)} in costs.${
+        warnings.length ? ` ${warnings.length} note${warnings.length > 1 ? "s" : ""} in the result.` : ""
+      }`,
+    );
   }
 
-  // Events
-  $("state").addEventListener("change", onStateChange);
-  $("who").addEventListener("change", update);
-  $("recover").addEventListener("change", update);
-  for (const id of ["win", "col"]) input(id).addEventListener("input", update);
-  document.querySelectorAll<HTMLButtonElement>(".chip[data-col]").forEach((b) =>
-    b.addEventListener("click", () => {
-      input("col").value = b.dataset.col!;
+  function strong(t: string) {
+    const b = document.createElement("strong");
+    b.textContent = t;
+    return b;
+  }
+  function callout(msg: string) {
+    const d = document.createElement("div");
+    d.className = "callout warning";
+    const p = document.createElement("p");
+    p.textContent = msg;
+    d.appendChild(p);
+    return d;
+  }
+  function setBars(back: number, cost: number) {
+    const max = Math.max(back, cost, 1);
+    $("bar-back").style.transform = `scaleX(${back / max})`;
+    $("bar-cost").style.transform = `scaleX(${cost / max})`;
+  }
+  function mini(out: string, nums: string) {
+    $("mini-out").textContent = out;
+    $("mini-nums").textContent = nums;
+    $("dock-out").textContent = out;
+    $("dock-nums").textContent = nums;
+  }
+
+  // ---------------------------------------------------------------- Flow
+  let resultVisible = false;
+  let maxStep = 1;
+  const flow = createFlow({
+    root,
+    total: TOTAL,
+    validate(k) {
+      if (k === 1) {
+        const other = document.querySelector<HTMLInputElement>('input[name="state"][value="other"]');
+        if (other?.checked && !stateSlug) return input("state-search");
+        return null;
+      }
+      Object.keys(sectionOf)
+        .filter((id) => sectionOf[id] === k)
+        .forEach((id) => touched.add(id));
       update();
-    }),
-  );
+      return root.querySelector<HTMLElement>(`[data-q="${k}"] [aria-invalid="true"]`);
+    },
+    onStep: (_at, max) => {
+      maxStep = max;
+      dock();
+    },
+  });
+  // Phone dock: a one-line summary once there's an amount, hidden while the result itself is on screen.
+  function dock() {
+    const on = maxStep >= 3 && !resultVisible;
+    $("dock").toggleAttribute("data-off", !on);
+  }
+  new IntersectionObserver(([e]) => {
+    resultVisible = e.isIntersecting;
+    dock();
+  }).observe($("result"));
+
+  // ---------------------------------------------------------------- Events
+  const picker = initStatePicker(root.querySelector<HTMLElement>("[data-state-picker]")!, data, onState);
+  document.querySelectorAll<HTMLInputElement>('input[name="who"], input[name="recover"]').forEach((r) => r.addEventListener("change", update));
   for (const [id] of fields) {
     const el = input(id);
     el.addEventListener("input", () => {
-      if (id === "amount") tierFee(current());
+      if (id === "fee") {
+        feeEdited = true;
+        $("fee-reset").hidden = courtFee(current()) == null;
+      }
+      if (id === "amount") setFee();
       update();
     });
     // Errors appear once the reader leaves a box, then update live while they fix it.
@@ -445,17 +750,256 @@ const presetValues = collectPresets.map((p) => Math.round(p.value * 100));
       update();
     });
   }
-  $("calc").addEventListener("submit", (e) => {
-    e.preventDefault();
-    for (const [id] of fields) touched.add(id);
+  $("fee-reset").addEventListener("click", () => {
+    feeEdited = false;
+    setFee();
     update();
-    const first = $("calc").querySelector<HTMLElement>("[aria-invalid='true']");
-    first?.focus();
+    input("fee").focus();
   });
 
-  // Pre-select from ?state=xx
-  const qs = new URLSearchParams(location.search).get("state");
-  if (qs && data.some((d) => d.slug === qs)) $<HTMLSelectElement>("state").value = qs;
-  onStateChange();
-  ready = true;
+  // ?state=xx preselects and opens the next question.
+  const params = new URLSearchParams(location.search);
+  const qs = params.get("state")?.toLowerCase();
+  if (qs && data.some((d) => d.slug === qs)) {
+    picker.set(qs);
+    flow.goTo(2);
+  } else {
+    update();
+  }
+  // Development only (screenshots): ?at=N opens question N as if the earlier ones were answered.
+  if (import.meta.env.DEV && params.get("at")) flow.goTo(Number(params.get("at")));
+  say.enable();
 </script>
+
+<style>
+  .wi-gate :global(.tool-gate) {
+    margin: clamp(24px, 3vw, 40px) 0 0;
+  }
+  .fl-main {
+    min-width: 0;
+  }
+  .fl-rail-in :global(.breadcrumb) {
+    margin: 0;
+  }
+
+  /* Result */
+  .wi-result {
+    position: relative;
+    margin-top: 24px;
+    padding: clamp(28px, 4vw, 56px);
+    border-radius: var(--r-lg);
+    background: var(--bg-2);
+    box-shadow: inset 0 0 0 1px var(--line);
+    overflow: hidden;
+    scroll-margin-top: calc(var(--hdr-h) + 16px);
+  }
+  .wi-result::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: var(--c-sage);
+  }
+  .r-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-bottom: 32px;
+  }
+  .r-top p {
+    margin: 0;
+  }
+  .r-title {
+    margin: 0;
+  }
+  .r-title:focus {
+    outline: none;
+  }
+  .r-title:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 4px;
+  }
+  .r-outcome {
+    margin: 0;
+    max-width: 18ch;
+    font-family: var(--f-display);
+    font-size: clamp(38px, 4.4vw, 68px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    transition: color var(--t-med) var(--ease);
+  }
+  .r-summary {
+    margin: 24px 0 0;
+    max-width: 48ch;
+    font-size: var(--fs-lede);
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  .r-summary :global(strong) {
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .is-stale .r-outcome {
+    color: var(--ink-2);
+  }
+  .r-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 56px;
+  }
+  .rc {
+    display: grid;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-2);
+  }
+  .rc p {
+    margin: 0;
+  }
+  .rc-n {
+    font-family: var(--f-display);
+    font-size: clamp(48px, 5vw, 80px);
+    line-height: 1;
+  }
+  .rc-sub {
+    font-size: 15px;
+    color: var(--ink-3);
+  }
+  .rc-track {
+    height: 10px;
+    border-radius: 4px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .rc-bar {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform var(--t-med) var(--ease);
+    box-shadow: var(--tile-edge);
+  }
+  .rc-back {
+    background: var(--c-sage);
+  }
+  .rc-cost {
+    background: var(--c-tomato);
+  }
+  .r-block {
+    margin-top: 56px;
+  }
+  .r-h {
+    margin: 0 0 12px;
+    font-family: var(--f-mono);
+    font-size: var(--fs-label);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .r-ledger {
+    width: 100%;
+    max-width: 640px;
+    border-collapse: collapse;
+  }
+  .r-ledger :is(th, td) {
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--f-body);
+    font-size: 17px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    text-align: left;
+    color: var(--ink-2);
+    background: none;
+  }
+  .r-ledger td {
+    padding-left: 24px;
+    text-align: right;
+    font-family: var(--f-display);
+    font-size: 20px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .r-ledger tr.sub :is(th, td) {
+    color: var(--ink);
+    border-bottom-color: var(--line-2);
+  }
+  .r-break {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 16px;
+    align-items: baseline;
+    margin-top: 36px;
+    max-width: 76ch;
+  }
+  .r-break .r-h {
+    margin: 0;
+  }
+  .r-break p {
+    margin: 0;
+    font-size: 17px;
+    color: var(--ink-2);
+  }
+  .r-warn :global(.callout) {
+    max-width: 76ch;
+    margin: 16px 0 0;
+  }
+  .r-keep {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .r-keep ol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 48px;
+    margin: 16px 0 0;
+  }
+  .r-keep li {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .r-keep li .lbl {
+    padding-top: 3px;
+  }
+  .r-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 48px;
+  }
+  @media (max-width: 700px) {
+    .r-compare,
+    .r-keep ol {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .r-break {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .r-actions .btn {
+      flex: 1 1 100%;
+    }
+  }
+  @media print {
+    .wi-result {
+      padding: 0;
+      box-shadow: none;
+    }
+    .wi-result::before,
+    .rc-track {
+      display: none;
+    }
+  }
+</style>

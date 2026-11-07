@@ -1,84 +1,187 @@
 ---
+// State rules hub (Option A): a big "Which state?" with a compact picker, then the 51-row table.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import TableFilter from "../../components/TableFilter.astro";
 import UnverifiedNote from "../../components/UnverifiedNote.astro";
+import "../../styles/states.css";
 import { states, money, feeRange, lawyersLabel, appealLabel, efileLabel, isUnverified } from "../../lib/data";
 const unv = (s: (typeof states)[number], ...f: string[]) => isUnverified(s, ...f);
 const shownFields = ["limit_individual", "limit_business", "filing_fee_min", "filing_fee_max", "lawyers_allowed", "appeal_who", "e_filing"];
 const withUnverified = states.filter((s) => unv(s, ...shownFields)).length;
 const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
 ---
-<Site title="Small claims rules by state" description="Limits, fees, lawyers and appeal rules for small claims court in all 50 states and DC, each with a source and the date it was checked.">
-  <Breadcrumb items={[{ label: "States" }]} />
-  <div class="narrow">
-    <p class="eyebrow">All 50 states and DC</p>
-    <h1>Small claims rules by state</h1>
-    <p class="lede">
-      The basic rules in one table: how much you can sue for, what filing costs, whether lawyers can take part, and who
-      can appeal. Open a state for the details, the sources and the date we checked.
-    </p>
-    <p class="hint">
-      Where a state has more than one kind of court, the table shows the main small claims limit. Last checked {latest}.
-    </p>
-  </div>
-
-  {states.length === 0 ? (
-    <div class="callout warning"><p>Research data hasn't been merged yet. Run <code>scripts/build_tables.py</code>.</p></div>
-  ) : (
-    <>
-      <UnverifiedNote count={withUnverified} of="states have at least one unverified value in this table" />
-      <TableFilter table="states-table" label="Find a state" noun="states" placeholder="Name or abbreviation, like Ohio or OH" />
-      <div class="table-scroll">
-        <table class="table-stack data-table" id="states-table">
-          <caption>Small claims basics for {states.length} states and DC</caption>
-          <thead>
-            <tr>
-              <th scope="col">State</th>
-              <th scope="col" class="num">Limit for individuals</th>
-              <th scope="col" class="num">Limit for businesses</th>
-              <th scope="col">Filing fee</th>
-              <th scope="col">Lawyers</th>
-              <th scope="col">Who can appeal</th>
-              <th scope="col">File online</th>
-              <th scope="col">Checked</th>
-            </tr>
-          </thead>
-          <tbody>
-            {states.map((s) => (
-              <tr data-filter={`${s.state} ${s.abbr}`.toLowerCase()}>
-                <th scope="row"><a href={`/states/${s.slug}/`}>{s.state}</a></th>
-                <td class="num" data-label="Limit for individuals">
-                  {money(s.limit_individual)}
-                  {unv(s, "limit_individual") && <span class="badge unverified">Unverified</span>}
-                </td>
-                <td class="num" data-label="Limit for businesses">
-                  {s.limit_business != null && s.limit_business !== s.limit_individual ? money(s.limit_business) : "Same"}
-                  {unv(s, "limit_business") && <span class="badge unverified">Unverified</span>}
-                </td>
-                <td data-label="Filing fee">
-                  {feeRange(s)}
-                  {unv(s, "filing_fee_min", "filing_fee_max") && <span class="badge unverified">Unverified</span>}
-                </td>
-                <td data-label="Lawyers">
-                  {lawyersLabel[s.lawyers_allowed ?? ""] ?? s.lawyers_allowed ?? "—"}
-                  {unv(s, "lawyers_allowed") && <span class="badge unverified">Unverified</span>}
-                </td>
-                <td data-label="Who can appeal">
-                  {appealLabel[s.appeal_who ?? ""] ?? s.appeal_who ?? "—"}
-                  {unv(s, "appeal_who") && <span class="badge unverified">Unverified</span>}
-                </td>
-                <td data-label="File online">
-                  {efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "Not found"}
-                  {unv(s, "e_filing") && <span class="badge unverified">Unverified</span>}
-                </td>
-                <td class="mono" data-label="Checked">{s.date_checked}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+<Site
+  title="Small claims rules by state"
+  description="Limits, fees, lawyers and appeal rules for small claims court in all 50 states and DC, each with a source and the date it was checked."
+  color="c-states"
+  bleed
+>
+  <section class="wrap sr-hero">
+    <Breadcrumb items={[{ label: "State rules" }]} />
+    <div class="pick-row">
+      <div>
+        <h1 class="display sr-title">Which state?</h1>
+        <p class="lede pick-lede">Limits, fees and appeal rules for all 50 states and DC. Each one has a source and a date.</p>
       </div>
-      <p class="callout" data-filter-empty="states-table" hidden>No state matches that. Try the full name or the two-letter abbreviation.</p>
-    </>
-  )}
+      <form class="pick" data-state-pick hidden aria-label="Go to a state">
+        <div class="field">
+          <label for="pick-state">Your state</label>
+          <select id="pick-state" name="state" required>
+            <option value="">Choose…</option>
+            {states.map((s) => <option value={s.slug}>{s.state}</option>)}
+          </select>
+        </div>
+        <button class="btn color c-states pick-go" type="submit">Go to state</button>
+      </form>
+    </div>
+    <p class="lbl pick-meta">
+      {states.length} states and DC · checked {latest} · <a href="/states/ca/counties/">California by county</a>
+    </p>
+  </section>
+
+  <section class="wrap section" aria-labelledby="table-title" style="padding-top:clamp(40px,5vw,72px)">
+    <div class="sec-head">
+      <p class="lbl">At a glance</p>
+      <div>
+        <h2 id="table-title" class="h2">All {states.length}, side by side.</h2>
+        <p class="lede">Open a state for the details and the sources. Where a state has more than one kind of court, this shows the main limit.</p>
+      </div>
+    </div>
+
+    {states.length === 0 ? (
+      <div class="callout warning"><p>Research data hasn't been merged yet. Run <code>scripts/build_tables.py</code>.</p></div>
+    ) : (
+      <>
+        <div class="tbl-tools">
+          <TableFilter table="states-table" label="Find a state" noun="states" placeholder="Ohio or OH" />
+          <UnverifiedNote compact count={withUnverified} of="states have an unverified value in this table" />
+        </div>
+        <div class="table-scroll">
+          <table class="table-stack sr-table" id="states-table">
+            <caption>Small claims basics for {states.length} states and DC</caption>
+            <thead>
+              <tr>
+                <th scope="col">State</th>
+                <th scope="col" class="num">Limit</th>
+                <th scope="col" class="num">Business limit</th>
+                <th scope="col">Filing fee</th>
+                <th scope="col">Lawyers</th>
+                <th scope="col">Who can appeal</th>
+                <th scope="col">File online</th>
+                <th scope="col">Checked</th>
+              </tr>
+            </thead>
+            <tbody>
+              {states.map((s) => (
+                <tr data-filter={`${s.state} ${s.abbr}`.toLowerCase()}>
+                  <th scope="row"><a href={`/states/${s.slug}/`}>{s.state}</a></th>
+                  <td class="num" data-label="Limit">
+                    {money(s.limit_individual)}
+                    {unv(s, "limit_individual") && <span class="badge unverified">Unverified</span>}
+                  </td>
+                  <td class:list={["num", { quiet: !(s.limit_business != null && s.limit_business !== s.limit_individual) }]} data-label="Business limit">
+                    {s.limit_business != null && s.limit_business !== s.limit_individual ? money(s.limit_business) : "Same"}
+                    {unv(s, "limit_business") && <span class="badge unverified">Unverified</span>}
+                  </td>
+                  <td data-label="Filing fee">
+                    {feeRange(s)}
+                    {unv(s, "filing_fee_min", "filing_fee_max") && <span class="badge unverified">Unverified</span>}
+                  </td>
+                  <td data-label="Lawyers">
+                    {lawyersLabel[s.lawyers_allowed ?? ""] ?? s.lawyers_allowed ?? "—"}
+                    {unv(s, "lawyers_allowed") && <span class="badge unverified">Unverified</span>}
+                  </td>
+                  <td data-label="Who can appeal">
+                    {appealLabel[s.appeal_who ?? ""] ?? s.appeal_who ?? "—"}
+                    {unv(s, "appeal_who") && <span class="badge unverified">Unverified</span>}
+                  </td>
+                  <td data-label="File online">
+                    {efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "Not found"}
+                    {unv(s, "e_filing") && <span class="badge unverified">Unverified</span>}
+                  </td>
+                  <td class="mono" data-label="Checked">{s.date_checked}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="callout" data-filter-empty="states-table" hidden>No state matches that. Try the full name or the two-letter abbreviation.</p>
+      </>
+    )}
+  </section>
 </Site>
+
+<script>
+  // The picker needs JavaScript to jump to a page; without it, the table below has a link for every state.
+  const form = document.querySelector<HTMLFormElement>("[data-state-pick]");
+  if (form) {
+    form.hidden = false;
+    const sel = form.querySelector<HTMLSelectElement>("select")!;
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (sel.value) location.href = `/states/${sel.value}/`;
+      else sel.focus();
+    });
+  }
+</script>
+
+<style>
+  .pick-row {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 32px 64px;
+    align-items: end;
+  }
+  .pick-lede {
+    margin-top: 28px;
+  }
+  .pick {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .pick[hidden] {
+    display: none;
+  }
+  .pick .field {
+    min-height: 104px;
+  }
+  .pick-go {
+    height: auto;
+    min-height: 52px;
+    padding-inline: 28px;
+    border-radius: var(--r);
+    touch-action: manipulation;
+  }
+  .pick-go:active {
+    filter: brightness(0.94);
+  }
+  .pick-meta {
+    margin: 40px 0 0;
+  }
+  .pick-meta a {
+    color: var(--ink);
+  }
+  .tbl-tools {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 8px 24px;
+    align-items: start;
+  }
+  .tbl-tools :global(.unverified-note) {
+    margin: 0;
+  }
+  @media (max-width: 860px) {
+    .pick-row,
+    .tbl-tools {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .pick {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

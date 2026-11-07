@@ -1,10 +1,73 @@
 ---
-// California-only detail on the CA state page: fee tiers, key deadlines, forms by step,
-// and a "last day to sue" estimator built on the reusable deadline logic.
-import { caStatewide as ca, money } from "../lib/data";
+// California-only panels for the CA state page (Option A). One component, one panel body per `part`:
+//   <CaliforniaDetail part="filing" />   fee tiers, hearing timing, fee waiver table, two-per-year rule
+//   part="serving" | "hearing" | "appeals" | "collecting" | "deadlines" | "forms" | "counties"
+// Every figure comes from src/data/ca-statewide.json (or lib/stats) and carries its cite.
+// "deadlines" holds the "last day to sue" estimator, gated by ToolNotice (mode="ondemand").
+import { caStatewide as ca, counties, money } from "../lib/data";
 import ToolNotice from "./ToolNotice.astro";
+import Term from "./Term.astro";
 
-const tiers = ca.fees?.filing_fee_tiers ?? [];
+interface Props {
+  part: "filing" | "serving" | "hearing" | "appeals" | "collecting" | "deadlines" | "forms" | "counties";
+}
+const { part } = Astro.props;
+const checked = ca.date_checked as string;
+const leg = (sec: string, code = "CCP") =>
+  `https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=${code}&sectionNum=${sec}`;
+// Unverified notes in the research are free text that starts with the field path ("fees.sheriff_service_fee — …").
+const caUnverified = ((ca.unverified ?? []) as string[]).map((x) => x.split(" ")[0]);
+const isU = (path: string) => caUnverified.some((x) => x.startsWith(path));
+
+// ---- Filing
+type Tier = { applies_to: string; fee: number; citation: string };
+const tiers = (ca.fees?.filing_fee_tiers ?? []) as Tier[];
+// Short labels for the four tiers, keyed by the subsection (the full wording is in applies_to).
+const tierShort: Record<string, { range: string; note?: string }> = {
+  "CCP 116.230(b)(1)": { range: "Up to $1,500" },
+  "CCP 116.230(b)(2)": { range: "$1,500 – $5,000" },
+  "CCP 116.230(b)(3)": { range: "$5,000 – $12,500", note: "Above $6,250, individuals only" },
+  "CCP 116.230(c)": { range: "Frequent filers", note: "More than 12 claims in 12 months" },
+};
+const fees = ca.fees ?? {};
+const fw = ca.fee_waiver ?? {};
+const fwIncome = fw.income_table_fw001_monthly ?? {};
+const twoRule = ca.limits?.two_claims_over_2500_rule ?? {};
+
+// ---- Serving / hearing / appeals / collecting
+const svc = ca.service ?? {};
+const lw = ca.lawyers ?? {};
+const pp = ca.postponement ?? {};
+const dc = ca.defendants_claim ?? {};
+const fh = ca.filing_and_hearing ?? {};
+const ap = ca.appeal ?? {};
+const mv = ca.motion_to_vacate ?? {};
+const jb = ca.judgment_basics ?? {};
+type StepFee = { step: string; fee: number; citation: string; source?: string };
+const collectFees = ((fees.other_step_fees ?? []) as StepFee[]).filter((f) =>
+  /examination|Writ of execution|Abstract|Renewal|wage garnishment|bank account/i.test(f.step),
+);
+
+// ---- Deadlines (statutes of limitations)
+type Sol = { claim_type: string; years?: number; days?: number; accrual?: string; citation: string; source: string };
+const sols = ((ca.statutes_of_limitations ?? []) as Sol[]).filter((r) => r.years || r.days);
+const solLabel: Record<string, string> = {
+  written_contract: "Written contract",
+  book_account_or_account_stated_in_writing: "Account stated in writing",
+  oral_contract: "Spoken (oral) agreement",
+  property_damage_personal_property: "Damage to belongings",
+  property_damage_real_property: "Damage to land or a building",
+  personal_injury: "Personal injury",
+  fraud_or_mistake: "Fraud or mistake",
+  liability_created_by_statute: "A duty set by a law",
+  statutory_penalty_to_individual: "A penalty set by a law",
+  libel_slander: "Libel or slander",
+  catch_all: "Anything else",
+};
+const nice = (s: string) => solLabel[s] ?? s.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+const span = (r: { years?: number; days?: number }) => (r.years ? `${r.years} ${r.years === 1 ? "year" : "years"}` : `${r.days} days`);
+
+// ---- Forms
 const forms = (ca.forms ?? []) as { form: string; title: string; purpose: string; step: string; url: string }[];
 const stepOrder = ["demand", "file", "serve", "hearing", "collect"];
 const stepNames: Record<string, string> = {
@@ -12,121 +75,331 @@ const stepNames: Record<string, string> = {
   file: "Filing",
   serve: "Serving",
   hearing: "Hearing",
-  collect: "After judgment & collecting",
+  collect: "After the hearing",
 };
-const byStep = stepOrder
-  .map((s) => ({ step: s, forms: forms.filter((f) => f.step === s) }))
-  .filter((g) => g.forms.length);
+const byStep = stepOrder.map((s) => ({ step: s, forms: forms.filter((f) => f.step === s) })).filter((g) => g.forms.length);
 const other = forms.filter((f) => !stepOrder.includes(f.step));
 if (other.length) byStep.push({ step: "other", forms: other });
-
-const sols = (ca.statutes_of_limitations ?? []).filter((r: any) => r.years || r.days) as {
-  claim_type: string;
-  years?: number;
-  days?: number;
-  accrual?: string;
-  citation: string;
-  source: string;
-}[];
-const svc = ca.service ?? {};
-const ap = ca.appeal ?? {};
-const jb = ca.judgment_basics ?? {};
-const nice = (s: string) => s.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+const shortTitle = (t: string) => t.replace(/\s*\(Small Claims\)\s*/g, " ").trim();
 ---
-<section class="ca-detail">
-  <h2 id="ca-fees">California filing fees</h2>
-  <div class="table-scroll">
-    <table class="table-stack">
-      <caption>Filing fee by claim amount</caption>
-      <thead><tr><th scope="col">Your claim</th><th scope="col" class="num">Fee</th><th scope="col">Law</th></tr></thead>
-      <tbody>
-        {tiers.map((t: any) => (
-          <tr><th scope="row" class="cell-text">{t.applies_to}</th><td class="num" data-label="Fee">{money(t.fee)}</td><td class="mono" data-label="Law">{t.citation}</td></tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-  {ca.fees?.service_by_clerk_certified_mail != null && (
-    <p class="hint">Clerk service by certified mail: {money(ca.fees.service_by_clerk_certified_mail)} per defendant (CCP 116.232). Fees can be waived with form FW-001.</p>
-  )}
-
-  <h2 id="ca-deadlines">Deadlines that trip people up</h2>
-  <dl class="facts">
-    <div class="fact"><dt>Serve the papers</dt><dd>At least <strong>{svc.deadline_in_county_days} days</strong> before the hearing if the defendant lives in the county, <strong>{svc.deadline_out_of_county_days} days</strong> if outside it. You can't serve them yourself. <span class="cite">{svc.citation}</span></dd></div>
-    <div class="fact"><dt>File proof of service</dt><dd>At least <strong>{svc.proof_of_service_deadline_days} days</strong> before the hearing (form SC-104). <span class="cite">CCP 116.340(c)</span></dd></div>
-    <div class="fact"><dt>Appeal</dt><dd>Only the defendant can appeal the plaintiff's claim, within <strong>{ap.appeal_deadline_days} days</strong> of the notice of judgment. The appeal is a brand-new hearing. <span class="cite">{ap.citation}; {ap.deadline_citation}</span></dd></div>
-    <div class="fact"><dt>Collecting</dt><dd>You must wait out the 30-day appeal period. Unless they pay, the loser must send you a Statement of Assets (SC-133) within 30 days. Judgments earn {jb.interest_rate_general}% interest a year (5% for some consumer debts) and last {jb.judgment_life_years} years, renewable. <span class="cite">CCP 116.810, 116.830, 685.010, 683.020</span></dd></div>
-  </dl>
-
-  <h2 id="ca-last-day">Last day to sue: a rough estimate</h2>
-  <p>Every type of claim has a deadline to file, called a statute of limitations. Pick your type of claim and the date it happened to see the usual deadline.</p>
-  <script type="application/json" id="sol-data" set:html={JSON.stringify(sols)} />
-  <ToolNotice id="ca-deadline" target="sol-tool" toolName="the “last day to sue” estimator" mode="ondemand" />
-  <div class="card tinted" id="sol-tool">
-    <div class="form-grid">
-      <div class="field">
-        <label for="sol-type">Type of claim</label>
-        <select id="sol-type" aria-describedby="sol-type-hint">
-          {sols.map((s, i) => <option value={i}>{nice(s.claim_type)} — {s.years ? `${s.years} yr` : `${s.days} days`}</option>)}
-        </select>
-        <span class="hint" id="sol-type-hint">The number after the dash is the usual time limit.</span>
+{part === "filing" && (
+  <>
+    <p class="lbl pn-sub">Filing fee by amount claimed</p>
+    <ol class="rows">
+      {tiers.map((t) => (
+        <li class="row">
+          <span class="num row-n">{money(t.fee)}</span>
+          <span class="row-l">
+            {tierShort[t.citation]?.range ?? t.applies_to}
+            {tierShort[t.citation]?.note && <span class="row-note">{tierShort[t.citation].note}</span>}
+          </span>
+          <span class="cite"><a href={leg("116.230")} rel="noopener">{t.citation}</a></span>
+        </li>
+      ))}
+    </ol>
+    <div class="fx3">
+      <div class="fx">
+        <p class="num fx-n">20–70</p>
+        <p class="fx-t">days from filing to the hearing date the clerk sets.</p>
+        <p class="cite"><a href={leg("116.330")} rel="noopener">CCP 116.330(a)</a></p>
       </div>
-      <div class="field">
-        <label for="sol-date">Date it happened</label>
-        <input id="sol-date" type="date" aria-describedby="sol-date-hint" />
-        <span class="hint" id="sol-date-hint">For example, when the contract was broken or the damage happened.</span>
+      <div class="fx">
+        <p class="num fx-n">{twoRule.max_filings_per_calendar_year ?? 2}</p>
+        <p class="fx-t">claims over {money(twoRule.threshold ?? 2500)} per calendar year, anywhere in California.</p>
+        <p class="cite"><a href={twoRule.source ?? leg("116.231")} rel="noopener">{twoRule.citation ?? "CCP 116.231"}</a></p>
+      </div>
+      <div class="fx">
+        <p class="num fx-n">{fw.poverty_guideline_percent}%</p>
+        <p class="fx-t">of federal poverty guidelines: the income test for a <Term slug="fee-waiver" /> since 2026 (was {fw.poverty_guideline_percent_previous}%).</p>
+        <p class="cite"><a href={leg("68632", "GOV")} rel="noopener">{fw.citation}</a></p>
       </div>
     </div>
-    <p id="sol-out" class="sol-out" role="status" aria-live="polite"></p>
-    <p class="hint">Only an estimate. Special rules can make the deadline earlier (claims against a government agency need a government claim first, often within 6 months) or later (some deadlines pause, or start when you discover the problem). If the date is close, a self-help center or small claims advisor can help you check.</p>
-  </div>
+    <div class="accs">
+      <details class="acc">
+        <summary>Fee waiver: who qualifies <span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          <p>You qualify if you get certain public benefits (such as Medi-Cal, CalFresh, SSI/SSP or unemployment), or if your household's monthly income is at or under these amounts. Ask with form FW-001 before you pay.</p>
+          <div class="table-scroll">
+            <table class="mini">
+              <caption class="sr-only">Monthly income limits for a California fee waiver</caption>
+              <thead><tr><th scope="col">Household</th><th scope="col" class="num">1</th><th scope="col" class="num">2</th><th scope="col" class="num">3</th><th scope="col" class="num">4</th><th scope="col" class="num">Each extra</th></tr></thead>
+              <tbody><tr><th scope="row">Monthly income</th><td class="num">{money(fwIncome.household_1)}</td><td class="num">{money(fwIncome.household_2)}</td><td class="num">{money(fwIncome.household_3)}</td><td class="num">{money(fwIncome.household_4)}</td><td class="num">{money(fwIncome.each_additional_person)}</td></tr></tbody>
+            </table>
+          </div>
+          <p class="cite"><a href={fw.fee_waiver_form_url} rel="noopener">FW-001 (Rev. March 1, 2026)</a><a href={leg("68632", "GOV")} rel="noopener">Gov. Code 68632</a><span>Checked {checked}</span></p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>If you change the amount after filing <span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          <ul class="rows">
+            {(fees.amendment_fees ?? []).map((a: { change: string; fee: number; citation: string }) => (
+              <li class="row"><span class="num row-n">{money(a.fee)}</span><span class="row-l">{a.change}</span><span class="cite"><a href={leg("116.230")} rel="noopener">{a.citation}</a></span></li>
+            ))}
+          </ul>
+        </div>
+      </details>
+    </div>
+  </>
+)}
 
-  <h2 id="ca-forms">California forms, by step</h2>
-  {byStep.map((g) => (
-    <>
-      <h3>{stepNames[g.step] ?? "Other"}</h3>
-      <ul>
-        {g.forms.map((f) => (
-          <li><a href={f.url} rel="noopener"><strong>{f.form}</strong>: {f.title}</a> <span class="hint">{f.purpose}</span></li>
-        ))}
-      </ul>
-    </>
-  ))}
-</section>
+{part === "serving" && (
+  <>
+    <ul class="tiles methods">
+      <li class="tile fill c-states">
+        <span class="t-top"><span class="key" aria-hidden="true">A</span><span class="m-cost">{money(fees.service_by_clerk_certified_mail)}</span></span>
+        <span><span class="t-label">The clerk mails it</span><span class="t-sub">Certified mail, per defendant. Only some courts offer it.</span></span>
+      </li>
+      <li class="tile">
+        <span class="t-top"><span class="key" aria-hidden="true">B</span><span class="m-cost">{money(fees.sheriff_service_fee)}</span></span>
+        <span>
+          <span class="t-label">Someone hands it over</span>
+          <span class="t-sub">Any adult not in the case, or a sheriff or marshal for a fee.</span>
+          {isU("fees.sheriff_service_fee") && <span class="badge unverified">Unverified</span>}
+        </span>
+      </li>
+      <li class="tile">
+        <span class="t-top"><span class="key" aria-hidden="true">C</span><span class="m-cost">+10 days</span></span>
+        <span><span class="t-label">Leave it, then mail it</span><span class="t-sub">With an adult at home or work, plus a mailed copy. Done 10 days after mailing.</span></span>
+      </li>
+    </ul>
+    <p class="cite" style="margin-top:12px"><a href={leg("116.232")} rel="noopener">CCP 116.232</a><a href={leg("26720.9", "GOV")} rel="noopener">Gov. Code 26720.9</a><a href={leg("415.20")} rel="noopener">CCP 415.20</a></p>
+    <div class="fx3">
+      <div class="fx"><p class="num fx-n">{svc.deadline_in_county_days} days</p><p class="fx-t">before the hearing, if they live in the county where you filed.</p></div>
+      <div class="fx"><p class="num fx-n">{svc.deadline_out_of_county_days} days</p><p class="fx-t">before the hearing, if they live in another county.</p></div>
+      <div class="fx"><p class="num fx-n">{svc.proof_of_service_deadline_days} days</p><p class="fx-t">before the hearing: file the <Term slug="proof-of-service" /> (SC-104).</p></div>
+    </div>
+    <p class="cite" style="margin-top:12px"><a href={leg("116.340")} rel="noopener">CCP 116.340(b), (c)</a><span>Checked {checked}</span></p>
+  </>
+)}
+
+{part === "hearing" && (
+  <>
+    <div class="fx3" style="margin-top:0">
+      <div class="fx">
+        <p class="num fx-n word">Free</p>
+        <p class="fx-t">help from a <Term slug="small-claims-advisor" />. Every county must offer it.</p>
+        <p class="cite"><a href={lw.free_advisor_source} rel="noopener">CCP 116.260, 116.940</a></p>
+      </div>
+      <div class="fx">
+        <p class="num fx-n">{money(pp.fee)}</p>
+        <p class="fx-t">to ask to postpone, at least 10 days before the hearing.</p>
+        <p class="cite"><a href={pp.source} rel="noopener">CCP 116.570</a></p>
+      </div>
+      <div class="fx">
+        <p class="num fx-n">{dc.service_deadline_days} days</p>
+        <p class="fx-t">before the hearing: last day to serve a defendant's claim (a <Term slug="counterclaim" />).</p>
+        <p class="cite"><a href={leg("116.360")} rel="noopener">CCP 116.360(c)</a></p>
+      </div>
+    </div>
+    <div class="accs">
+      <details class="acc">
+        <summary>When lawyers can help <span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          <p>A lawyer can advise you before and after the hearing, represent you on appeal, and help enforce a judgment. A lawyer can't speak for you at the small claims hearing itself.</p>
+          <p class="cite"><a href={lw.source} rel="noopener">{lw.citation}</a><span>Checked {checked}</span></p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>If the other side doesn't come <span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          <p>The judge still asks you to prove your claim before deciding. A judgment like this is a <Term slug="default-judgment" />.</p>
+          <p class="cite"><a href={fh.default_requires_proof_source} rel="noopener">CCP 116.520(b)</a></p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>The defendant's own claim <span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          <p>The person you sue can file a claim against you (form {dc.form}) with the same limits. It doesn't have to be about the same dispute.</p>
+          <p class="cite"><a href={leg("116.360")} rel="noopener">CCP 116.360(a)</a></p>
+        </div>
+      </details>
+    </div>
+  </>
+)}
+
+{part === "appeals" && (
+  <>
+    <div class="fx3" style="margin-top:0">
+      <div class="fx">
+        <p class="num fx-n">{ap.appeal_deadline_days} days</p>
+        <p class="fx-t">to file the Notice of Appeal (SC-140). Late notices don't count.</p>
+        <p class="cite"><a href={ap.deadline_source} rel="noopener">{ap.deadline_citation}</a></p>
+      </div>
+      <div class="fx">
+        <p class="num fx-n">{money(ap.fee)}</p>
+        <p class="fx-t">appeal fee.</p>
+        <p class="cite"><a href={leg("116.760")} rel="noopener">CCP 116.760</a></p>
+      </div>
+      <div class="fx">
+        <p class="num fx-n word">Final</p>
+        <p class="fx-t">The decision after an appeal can't be appealed again.</p>
+        <p class="cite"><a href={ap.nature_source} rel="noopener">{ap.nature_citation}</a></p>
+      </div>
+    </div>
+    <div class="accs">
+      <details class="acc">
+        <summary>Costs of an appeal <span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          <p>For good cause, the court can order up to $150 in lawyer fees and up to $150 for lost earnings and travel. For an appeal meant to harass or delay, up to $1,000 each.</p>
+          <p class="cite"><a href={ap.fees_on_appeal_source} rel="noopener">CCP 116.780(c), 116.790</a></p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>If someone missed the hearing <span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          <p>A defendant who didn't come can't appeal, but can ask the court to cancel the judgment (a <Term slug="motion-to-vacate" />, form {mv.form}). The fee is {money(mv.fee)}. The usual deadline is {mv.defendant_who_missed_hearing?.deadline_days} days after the notice of judgment is mailed, or {mv.defendant_not_properly_served?.deadline_days} days from finding out about it if they were never properly served.</p>
+          <p class="cite"><a href={mv.source} rel="noopener">CCP 116.720–116.745</a></p>
+        </div>
+      </details>
+    </div>
+  </>
+)}
+
+{part === "collecting" && (
+  <>
+    <div class="fx3" style="margin-top:0">
+      <div class="fx">
+        <p class="num fx-n">{jb.interest_rate_general}%</p>
+        <p class="fx-t">yearly <Term slug="interest" /> on the unpaid amount ({jb.interest_rate_reduced}% on some medical and personal debts).</p>
+        <p class="cite"><a href={leg("685.010")} rel="noopener">CCP 685.010</a></p>
+      </div>
+      <div class="fx">
+        <p class="num fx-n">{jb.judgment_life_years} years</p>
+        <p class="fx-t">a judgment lasts. It can be renewed before it runs out.</p>
+        <p class="cite"><a href={leg("683.020")} rel="noopener">CCP 683.020</a></p>
+      </div>
+      <div class="fx">
+        <p class="num fx-n">30 days</p>
+        <p class="fx-t">for the other side to send a statement of assets (SC-133), unless they pay.</p>
+        <p class="cite"><a href={leg("116.830")} rel="noopener">CCP 116.830(b)</a></p>
+      </div>
+    </div>
+    <div class="accs">
+      <details class="acc">
+        <summary>Fees for collection tools <span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          <ul class="rows">
+            {collectFees.map((f) => (
+              <li class="row"><span class="num row-n">{money(f.fee)}</span><span class="row-l">{f.step}</span><span class="cite">{f.source ? <a href={f.source} rel="noopener">{f.citation}</a> : f.citation}</span></li>
+            ))}
+          </ul>
+          <p>The winner can usually add these costs to what the other side owes.</p>
+          <p class="cite"><a href={leg("116.820")} rel="noopener">CCP 116.820(c)</a><span>Checked {checked}</span></p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>When it's paid <span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          <p>Once you're paid in full, you must file an Acknowledgment of Satisfaction of Judgment (SC-290). This is the <Term slug="satisfaction-of-judgment" />.</p>
+          <p class="cite"><a href={leg("116.850")} rel="noopener">CCP 116.850</a></p>
+        </div>
+      </details>
+    </div>
+  </>
+)}
+
+{part === "deadlines" && (
+  <>
+    <p class="lbl pn-sub">Usual time to sue, by type of claim</p>
+    <ul class="rows">
+      {sols.map((r) => (
+        <li class="row"><span class="num row-n">{span(r)}</span><span class="row-l">{nice(r.claim_type)}{r.accrual && r.accrual !== "from accrual" && <span class="row-note">Counted {r.accrual}</span>}</span><span class="cite"><a href={r.source} rel="noopener">{r.citation}</a></span></li>
+      ))}
+    </ul>
+    <p class="cite" style="margin-top:12px"><span>Checked {checked}</span></p>
+
+    <div class="sol-tool" id="ca-last-day">
+      <h4 class="h3">Last day to sue: a rough estimate</h4>
+      <p class="hint">Pick the type of claim and the date it happened.</p>
+      <script type="application/json" id="sol-data" set:html={JSON.stringify(sols)} />
+      <ToolNotice id="ca-deadline" target="sol-tool" toolName="the “last day to sue” estimator" mode="ondemand" />
+      <div id="sol-tool">
+        <div class="fields">
+          <div class="field">
+            <label for="sol-type">Type of claim</label>
+            <select id="sol-type">
+              {sols.map((s, i) => <option value={i}>{nice(s.claim_type)} ({span(s)})</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="sol-date">Date it happened</label>
+            <input id="sol-date" type="date" aria-describedby="sol-date-hint" />
+            <p class="f-hint" id="sol-date-hint">For example, when the deal was broken or the damage happened.</p>
+          </div>
+        </div>
+        <p id="sol-out" class="sol-out" role="status" aria-live="polite"></p>
+        <p class="hint">Only an estimate. Special rules can make the deadline earlier (a claim against a government agency needs a government claim first, often within 6 months) or later. If the date is close, a small claims advisor can help you check.</p>
+      </div>
+    </div>
+  </>
+)}
+
+{part === "forms" && (
+  <div class="forms-cols">
+    {byStep.map((g) => (
+      <div>
+        <p class="lbl pn-sub">{stepNames[g.step] ?? "Other"}</p>
+        <ul class="forms">
+          {g.forms.map((f) => (
+            <li><a href={f.url} rel="noopener"><span class="f-code">{f.form}</span><span>{shortTitle(f.title)}</span></a></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+)}
+
+{part === "counties" && (
+  <ul class="county-grid">
+    {counties.map((c) => <li><a href={`/states/ca/counties/${c.slug}/`}>{c.county}</a></li>)}
+  </ul>
+)}
 
 <script>
   import { limitationDeadline, describeDeadline, formatLongDate, todayISO } from "../lib/core/deadlines";
-  const sols = JSON.parse(document.getElementById("sol-data")!.textContent || "[]");
-  const type = document.getElementById("sol-type") as HTMLSelectElement;
-  const date = document.getElementById("sol-date") as HTMLInputElement;
-  const out = document.getElementById("sol-out")!;
-  function run() {
-    const r = sols[Number(type.value)];
-    if (!r || !date.value) {
-      out.textContent = "";
-      return;
-    }
-    const d = limitationDeadline(date.value, { label: r.claim_type, years: r.years, days: r.days, citation: r.citation });
-    const info = describeDeadline(d, todayISO(), 60);
-    const when = formatLongDate(d);
-    const msg =
-      info.status === "passed"
-        ? `The usual deadline was ${when}, ${Math.abs(info.daysLeft)} days ago. Some exceptions can extend a deadline; a self-help center or small claims advisor can tell you whether any apply.`
-        : info.status === "today"
-          ? `The usual deadline is today, ${when}.`
-          : `About ${when}, ${info.daysLeft} days from today.${info.status === "soon" ? " That's less than two months away." : ""}`;
-    out.innerHTML = "";
-    const strong = document.createElement("strong");
-    strong.textContent = msg;
-    const cite = document.createElement("span");
-    cite.className = "cite";
-    const a = document.createElement("a");
-    a.href = r.source;
-    a.rel = "noopener";
-    a.textContent = r.citation;
-    cite.append(" ", a);
-    out.append(strong, " ", cite);
+  const dataEl = document.getElementById("sol-data");
+  const type = document.getElementById("sol-type") as HTMLSelectElement | null;
+  const date = document.getElementById("sol-date") as HTMLInputElement | null;
+  const out = document.getElementById("sol-out");
+  if (dataEl && type && date && out) {
+    const sols = JSON.parse(dataEl.textContent || "[]");
+    const run = () => {
+      const r = sols[Number(type.value)];
+      if (!r || !date.value) {
+        out.textContent = "";
+        return;
+      }
+      const d = limitationDeadline(date.value, { label: r.claim_type, years: r.years, days: r.days, citation: r.citation });
+      const info = describeDeadline(d, todayISO(), 60);
+      const when = formatLongDate(d);
+      const msg =
+        info.status === "passed"
+          ? `The usual deadline was ${when}, ${Math.abs(info.daysLeft)} days ago.`
+          : info.status === "today"
+            ? `The usual deadline is today, ${when}.`
+            : `About ${when}, ${info.daysLeft} days from today.`;
+      const extra =
+        info.status === "passed"
+          ? "Some exceptions can extend a deadline. A small claims advisor can tell you whether any apply."
+          : info.status === "soon"
+            ? "That's less than two months away."
+            : "";
+      out.innerHTML = "";
+      const strong = document.createElement("strong");
+      strong.textContent = msg;
+      out.append(strong);
+      if (extra) out.append(extra, " ");
+      const cite = document.createElement("span");
+      cite.className = "cite";
+      const a = document.createElement("a");
+      a.href = r.source;
+      a.rel = "noopener";
+      a.textContent = r.citation;
+      cite.append(a);
+      out.append(cite);
+    };
+    type.addEventListener("change", run);
+    date.addEventListener("input", run);
   }
-  type.addEventListener("change", run);
-  date.addEventListener("input", run);
 </script>

@@ -1,0 +1,541 @@
+/* State rules pages (Option A): /states/, /states/[slug]/, /states/ca/counties/…, plus /sources/ and 404.
+   Owned by the state-pages rebuild. Uses global.css tokens only. Hover styles are gated to real pointers
+   (no sticky hover on touch); press feedback uses :active. */
+
+/* ------------------------------------------------------------------ Hero */
+.sr-hero {
+  padding-top: clamp(40px, 6vw, 96px);
+  padding-bottom: clamp(32px, 4vw, 56px);
+}
+.sr-hero .breadcrumb {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.sr-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px 48px;
+}
+.sr-title {
+  margin: 0;
+  font-size: clamp(56px, 9vw, 152px);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+  overflow-wrap: anywhere;
+}
+.sr-title.is-long {
+  font-size: clamp(48px, 7.2vw, 120px);
+}
+.sr-meta {
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+  text-align: right;
+  max-width: 34ch;
+  padding-bottom: 10px;
+}
+.sr-meta p {
+  margin: 0;
+}
+.sr-meta .cite {
+  justify-content: flex-end;
+}
+@media (max-width: 860px) {
+  .sr-title-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sr-meta {
+    justify-items: start;
+    text-align: left;
+  }
+  .sr-meta .cite {
+    justify-content: flex-start;
+  }
+}
+
+/* ------------------------------------------------------------------ "In short" */
+.sr-short {
+  padding-top: clamp(56px, 7vw, 104px);
+}
+.sr-short .sec-head {
+  margin-bottom: 0;
+}
+.sr-short-text {
+  margin: 0;
+  max-width: 32ch;
+  font-size: clamp(26px, 2.6vw, 40px);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+}
+.sr-short-text .badge {
+  vertical-align: 0.4em;
+}
+.sr-short-foot {
+  margin-top: 24px;
+}
+
+/* ------------------------------------------------------------------ Stats tweaks */
+.stat .badge {
+  align-self: flex-start;
+}
+.stat .num.word {
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------------ Topic tabs */
+.sr-topics {
+  padding-top: clamp(64px, 8vw, 120px);
+}
+.sr-topics-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  margin: 0 0 20px;
+}
+.sr-topics-top > * {
+  margin: 0;
+}
+.sr-tabs {
+  grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr));
+}
+.sr-tabs .tab {
+  min-height: 128px;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+.sr-tabs .t-label {
+  font-family: var(--f-display);
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.sr-tabs .tab:active {
+  background: var(--panel-2);
+}
+.sr-tabs .tab[aria-selected="true"]:active {
+  background: color-mix(in srgb, var(--t) 88%, var(--bg));
+}
+@media (max-width: 1080px) {
+  .sr-tabs {
+    grid-template-columns: repeat(min(var(--n, 4), 4), minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .sr-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sr-tabs .tab {
+    min-height: 88px;
+    gap: 12px;
+  }
+  .sr-tabs .t-label {
+    font-size: 20px;
+  }
+  .sr-tabs .t-sub {
+    display: none;
+  }
+}
+
+/* Panel layout: side (title, intro, cite) + main (facts, rows, accordions) */
+.pn-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: clamp(32px, 5vw, 72px);
+}
+.pn-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+.pn-side > * {
+  margin: 0;
+}
+.pn-intro {
+  color: var(--ink-2);
+  max-width: 40ch;
+}
+.pn-intro strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.pn-main > :first-child {
+  margin-top: 0;
+}
+.pn-sub {
+  margin: 0 0 8px;
+}
+.pn-text {
+  max-width: 62ch;
+  color: var(--ink-2);
+}
+@media (max-width: 960px) {
+  .pn-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Big-number facts, three across */
+.fx3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 32px;
+  margin: 40px 0 0;
+}
+.fx3.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.fx {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-2);
+}
+.fx > * {
+  margin: 0;
+}
+.fx-n {
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1;
+}
+.fx-n.word {
+  font-size: clamp(26px, 2.2vw, 32px);
+  line-height: 1.1;
+}
+.fx-t {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+@media (max-width: 720px) {
+  .fx3,
+  .fx3.two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Number rows (fee tiers, statutes of limitations) */
+.rows {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.row {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 8px 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.row > * {
+  margin: 0;
+}
+.row-n {
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1;
+}
+.row-l {
+  font-size: 18px;
+  line-height: 1.4;
+}
+.row-note {
+  display: block;
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--ink-3);
+}
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+  .row .cite {
+    grid-column: 2;
+  }
+}
+
+.accs {
+  margin-top: 40px;
+}
+.acc summary .badge {
+  margin-left: auto;
+}
+.acc-body .cite {
+  margin-top: 12px;
+}
+
+/* Small table inside an accordion */
+.mini {
+  margin: 12px 0;
+  font-size: 15px;
+}
+.mini th,
+.mini td {
+  padding: 10px 12px 10px 0;
+  font-weight: 400;
+}
+
+/* Method tiles (California serving) */
+.methods {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.methods .tile {
+  min-height: 176px;
+  cursor: default;
+}
+.methods .tile:hover {
+  background: var(--panel);
+}
+.methods .tile.fill:hover {
+  background: var(--t);
+}
+.m-cost {
+  font-family: var(--f-display);
+  font-size: 28px;
+  letter-spacing: -0.03em;
+}
+@media (max-width: 720px) {
+  .methods {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .methods .tile {
+    min-height: 0;
+  }
+}
+
+/* Forms by step */
+.forms-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 32px;
+}
+.forms {
+  border-top: 1px solid var(--line);
+}
+.forms a {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.4;
+  transition: color var(--t-fast) var(--ease);
+}
+.forms .f-code {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  padding-top: 2px;
+  color: var(--ink);
+}
+@media (max-width: 720px) {
+  .forms-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* County list (inside the California "Counties" tab) */
+.county-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 0 24px;
+  border-top: 1px solid var(--line);
+}
+.county-grid a {
+  display: block;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color var(--t-fast) var(--ease);
+}
+
+/* Estimator */
+.sol-tool {
+  margin-top: 24px;
+}
+.sol-out {
+  margin: 20px 0 0;
+  font-size: 19px;
+  line-height: 1.5;
+}
+.sol-out:empty {
+  display: none;
+}
+.sol-out strong {
+  font-weight: 400;
+  font-family: var(--f-display);
+  font-size: clamp(22px, 2vw, 28px);
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ------------------------------------------------------------------ Next / links row */
+.sr-next {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.sr-next .card-link {
+  min-height: 168px;
+}
+.sr-next .card-link .h4 {
+  margin: 0 0 6px;
+}
+.sr-next .card-link p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+.sr-next .card-link:active {
+  background: var(--panel-2);
+}
+@media (max-width: 860px) {
+  .sr-next {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sr-next .card-link {
+    min-height: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ Sources list */
+.src-list {
+  border-top: 1px solid var(--line);
+}
+.src-list li {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 4px 24px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.src-list li > * {
+  margin: 0;
+}
+.src-list .src-what {
+  grid-column: 2;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+.src-list .lbl .badge {
+  margin-left: 0;
+}
+.src-foot {
+  margin-top: 16px;
+}
+@media (max-width: 640px) {
+  .src-list li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .src-list .src-what {
+    grid-column: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ Tables on these pages */
+.sr-table th[scope="row"] {
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sr-table th[scope="row"] a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+}
+.sr-table td .badge,
+.sr-table th .badge {
+  margin-left: 6px;
+}
+.sr-table td.quiet {
+  color: var(--ink-3);
+}
+@media (max-width: 720px) {
+  .sr-table th[scope="row"] a {
+    display: inline-block;
+    min-height: 24px;
+    font-size: 22px;
+    font-family: var(--f-display);
+    letter-spacing: -0.02em;
+  }
+  .sr-table caption {
+    display: block;
+    width: 100%;
+  }
+}
+
+/* ------------------------------------------------------------------ Pointer-only hover (no sticky hover on touch) */
+@media (hover: hover) and (pointer: fine) {
+  .forms a:hover,
+  .county-grid a:hover {
+    color: var(--ink);
+  }
+  .sr-table th[scope="row"] a:hover {
+    border-bottom-color: var(--ink);
+  }
+}
+
+.src-more {
+  border-bottom: 1px solid var(--line);
+}
+.src-more .acc-body {
+  max-width: none;
+}
+.src-more .src-list {
+  border-top: 0;
+}
+
+/* Phones: key numbers two across instead of four tall blocks */
+@media (max-width: 560px) {
+  .sr-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sr-stats .stat {
+    gap: 8px;
+    padding: 20px 12px 22px 0 !important;
+    border-top: 1px solid var(--line);
+  }
+  .sr-stats .stat:nth-child(2n) {
+    padding-left: 12px !important;
+    border-left: 1px solid var(--line);
+  }
+  .sr-stats .stat:nth-child(-n + 2) {
+    border-top: 0;
+  }
+  .sr-stats .stat .num {
+    font-size: 34px;
+  }
+  .sr-stats .stat .num.word {
+    font-size: 24px;
+  }
+  .sr-stats .s-label {
+    font-size: 15px;
+  }
+  .sr-stats .s-sub {
+    font-size: 14px;
+  }
+  .sr-stats .cite {
+    font-size: 11px;
+  }
+}
+
+.sol-tool .fields {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+}
+.sol-tool .field select {
+  font-size: 22px;
+}
+@media (max-width: 720px) {
+  .sol-tool .fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

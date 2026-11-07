@@ -1,78 +1,154 @@
 ---
+// Checklists index (Option A): 01 choose a state (tiles), 02 pick a step (cards). The step cards link to the chosen
+// state's page, or to the general version. Without JavaScript the cards go to the general version and the
+// "All states" list links every state.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import "../../styles/features.css";
-import { states } from "../../lib/data";
+import { states, stateBySlug, money } from "../../lib/data";
 import { statesChecked } from "../../lib/stats";
 
+const featured = ["ca", "tx", "ny", "fl"].map((s) => stateBySlug(s)!);
+const keys = "ABCDEF";
 const lists = [
-  { id: "before", title: "Before you decide", text: "The limit, the deadline to sue, the costs, whether the other side could pay, and other routes." },
-  { id: "demand", title: "1. Ask for payment in writing", text: "The other side's legal name, the amount and a deadline, sent a way you can prove." },
-  { id: "file", title: "2. File the claim", text: "The right form and court, the exact name to sue, the fee or a fee waiver." },
-  { id: "serve", title: "3. Serve the papers", text: "Allowed methods, the deadline before the hearing, and the proof of service." },
-  { id: "hearing", title: "4. Go to the hearing", text: "Evidence in three copies, witnesses, a short summary, postponing, mediation." },
-  { id: "collect", title: "5. Collect what you won", text: "The appeal period, asking for payment, finding assets, collection tools and their fees." },
+  { n: "00", id: "before", title: "Before you decide", text: "The limit, the deadline to sue, the costs, whether they could pay, other routes.", items: 8 },
+  { n: "01", id: "demand", title: "Ask for payment in writing", text: "Their legal name, the amount and a deadline, sent a way you can prove.", items: 5 },
+  { n: "02", id: "file", title: "File the claim", text: "The right form and court, the exact name to sue, the fee or a fee waiver.", items: 5 },
+  { n: "03", id: "serve", title: "Serve the papers", text: "Allowed methods, the deadline before the hearing, proof of service.", items: 4 },
+  { n: "04", id: "hearing", title: "Go to the hearing", text: "Evidence in three copies, witnesses, a short summary, postponing.", items: 7 },
+  { n: "05", id: "collect", title: "Collect what you won", text: "The appeal period, asking for payment, finding assets, collection tools.", items: 6 },
 ];
+const names = Object.fromEntries(states.map((s) => [s.slug, s.state]));
 ---
-<Site title="Checklists" description="Printable small claims checklists for each step, with your state's cited rules filled in.">
-  <Breadcrumb items={[{ label: "Checklists" }]} />
-  <div class="narrow">
-    <p class="eyebrow">Checklists</p>
-    <h1>Printable checklists</h1>
-    <p class="lede">
-      Short lists of what to gather and do before and during a small claims case. Pick your state to fill in its
-      limit, fees, service rules and appeal deadline, each with the date we checked it.
-    </p>
+<Site title="Checklists" description="Printable small claims checklists for each step, with your state's cited rules filled in." bleed color="c-checklists">
+  <section class="wrap page-hero">
+    <Breadcrumb items={[{ href: "/tools/", label: "Tools" }, { label: "Checklists" }]} />
+    <div class="cl-top">
+      <h1 class="display">Printable checklists</h1>
+      <p class="lede">What to gather and do at each step. Pick a state to fill in its limit, fees and deadlines.</p>
+    </div>
+  </section>
 
-    <form class="state-picker" action="/checklists/" method="get" data-checklist-picker>
-      <label class="sr-only" for="cl-state">Your state</label>
-      <select id="cl-state" name="s">
-        <option value="">Choose your state…</option>
-        {states.map((s) => <option value={s.slug}>{s.state}</option>)}
-      </select>
-      <button class="btn" type="submit">Open checklists</button>
-    </form>
-    <p class="hint">
-      Or use the <a href="/checklists/general/">general version</a>, which works anywhere. Rules checked {statesChecked}.
-    </p>
+  <section class="wrap cl-q" aria-labelledby="cq-state" data-js-only>
+    <p class="cl-q-n">01 / 02</p>
+    <div>
+      <div class="cl-q-head">
+        <h2 class="h2" id="cq-state">Which state are you in?</h2>
+      </div>
+      <div class="tiles cl-states" role="radiogroup" aria-labelledby="cq-state">
+        <label class="tile">
+          <input type="radio" name="cl-state" value="" checked />
+          <span class="t-top"><span class="key" aria-hidden="true">A</span><span class="check" aria-hidden="true"></span></span>
+          <span><span class="t-label">Any state</span><span class="t-sub">General version</span></span>
+        </label>
+        {featured.map((s, i) => (
+          <label class="tile">
+            <input type="radio" name="cl-state" value={s.slug} />
+            <span class="t-top"><span class="key" aria-hidden="true">{keys[i + 1]}</span><span class="check" aria-hidden="true"></span></span>
+            <span><span class="t-label">{s.state}</span><span class="t-sub">Limit {money(s.limit_individual)}</span></span>
+          </label>
+        ))}
+        <div class="tile cl-other" data-other>
+          <span class="t-top"><span class="key" aria-hidden="true">F</span><span class="check" aria-hidden="true"></span></span>
+          <span>
+            <label class="t-label" for="cl-other">Another state</label>
+            <select id="cl-other" data-other-select>
+              <option value="">Choose…</option>
+              {states.map((s) => <option value={s.slug}>{s.state}</option>)}
+            </select>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <h2>What's in them</h2>
-    <ul class="routes">
-      {lists.map((l) => (
-        <li><strong>{l.title}</strong><p>{l.text}</p></li>
-      ))}
-    </ul>
-    <p>
-      Tick boxes on screen or print them. Printing leaves out the site menus and puts a line at the foot of each list
-      saying when the rules were checked. Your ticks aren't saved or sent anywhere; they're gone when you close the page.
-    </p>
-    <div class="callout">
-      <p>
-        These lists are general information, not legal advice, and they don't cover every situation. Court rules
-        change: confirm deadlines and fees with your court before you rely on them.
-        <a href="/about/#not-advice">Where to get free advice</a>.
+  <section class="wrap cl-q" aria-labelledby="cq-step">
+    <p class="cl-q-n"><span data-js-only>02 / 02</span></p>
+    <div>
+      <div class="cl-q-head">
+        <h2 class="h2" id="cq-step">Which step do you need?</h2>
+        <p data-for-label>Six lists, general version. Tick boxes on screen or print them; ticks aren't saved.</p>
+      </div>
+      <ul class="cl-cards">
+        {lists.map((l) => (
+          <li>
+            <a class="clc" href={`/checklists/general/#${l.id}`} data-step={l.id}>
+              <span class="clc-band" aria-hidden="true"></span>
+              <span class="clc-top"><span class="clc-n" aria-hidden="true">{l.n}</span><span class="lbl">{l.items} items</span></span>
+              <span class="clc-t">{l.title}</span>
+              <span class="clc-d">{l.text}</span>
+              <span class="clc-go"><span data-step-for>General version</span><span class="door-arrow" aria-hidden="true"></span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="cl-open">
+        <a class="btn" href="/checklists/general/" data-open-all>Open all six</a>
+        <p class="hint">Rules checked {statesChecked}. Printing leaves out the menus and adds that date at the foot.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap cl-q" aria-labelledby="cq-all">
+    <p class="cl-q-n">More</p>
+    <div>
+      <details class="acc">
+        <summary id="cq-all">Every state's checklists</summary>
+        <div class="acc-body">
+          <ul class="state-links">
+            {states.map((s) => <li><a href={`/checklists/${s.slug}/`}>{s.state}</a></li>)}
+          </ul>
+        </div>
+      </details>
+      <p class="note-strip cl-note">
+        <span class="lbl">Please note</span>
+        <span>General information, not legal advice, and not every situation is covered. Confirm deadlines and fees with your court. <a href="/about/#not-advice">Where to get free help</a>.</span>
       </p>
     </div>
-
-    <details class="accordion">
-      <summary>All states</summary>
-      <div class="accordion-body">
-        <ul class="state-links">
-          {states.map((s) => <li><a href={`/checklists/${s.slug}/`}>{s.state}</a></li>)}
-        </ul>
-      </div>
-    </details>
-  </div>
+  </section>
 </Site>
 
-<script>
-  // Without JS the form can't route on a static site, so the "All states" list above is the fallback.
-  document.querySelectorAll<HTMLFormElement>("[data-checklist-picker]").forEach((f) => {
-    f.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const v = (f.elements.namedItem("s") as HTMLSelectElement).value;
-      if (v) location.href = `/checklists/${v}/`;
-      else (f.elements.namedItem("s") as HTMLSelectElement).focus();
+<script define:vars={{ names }}>
+  // Picking a state rewrites the step links. Nothing is stored.
+  const radios = Array.from(document.querySelectorAll('input[name="cl-state"]'));
+  const other = document.querySelector("[data-other]");
+  const sel = document.querySelector("[data-other-select]");
+  const cards = Array.from(document.querySelectorAll("[data-step]"));
+  const openAll = document.querySelector("[data-open-all]");
+  const label = document.querySelector("[data-for-label]");
+
+  function apply(slug) {
+    const base = slug ? `/checklists/${slug}/` : "/checklists/general/";
+    const name = slug ? names[slug] : "";
+    cards.forEach((c) => {
+      c.href = `${base}#${c.dataset.step}`;
+      c.querySelector("[data-step-for]").textContent = name ? `With ${name} rules` : "General version";
     });
+    openAll.href = base;
+    openAll.textContent = name ? `Open all six for ${name}` : "Open all six";
+    label.textContent = name
+      ? `Six lists for ${name}. Tick boxes on screen or print them; ticks aren't saved.`
+      : "Six lists, general version. Tick boxes on screen or print them; ticks aren't saved.";
+  }
+
+  radios.forEach((r) =>
+    r.addEventListener("change", () => {
+      if (!r.checked) return;
+      sel.value = "";
+      other.classList.remove("is-on");
+      apply(r.value);
+    }),
+  );
+  sel.addEventListener("change", () => {
+    if (!sel.value) return;
+    radios.forEach((r) => (r.checked = false));
+    other.classList.add("is-on");
+    apply(sel.value);
   });
+  // Back/forward cache can restore a checked radio: sync the links with it.
+  const start = radios.find((r) => r.checked);
+  if (sel.value) {
+    other.classList.add("is-on");
+    apply(sel.value);
+  } else if (start) apply(start.value);
 </script>

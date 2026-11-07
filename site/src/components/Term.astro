@@ -16,7 +16,9 @@
 //   - With JavaScript, the definition appears in a small popover on mouse hover, on keyboard focus, and on the
 //     first tap on a touch screen (a second tap follows the link). Escape closes it; so does tapping elsewhere.
 //   - Screen readers hear the definition as the link's description (aria-describedby), with or without JS.
-//   - The popover only fades (opacity, 150ms); nothing moves. Reduced motion turns the fade off (global rule).
+//   - Mouse hover waits 200ms before opening (so passing over a word doesn't flash a popover). If another popover was
+//     open a moment ago, the next one opens at once with no fade, so moving along a sentence feels instant.
+//   - The popover only fades in (opacity, 150ms) and closes at once; nothing moves. Reduced motion turns the fade off.
 import "../styles/features.css";
 import { getTerm } from "../lib/glossary";
 
@@ -40,6 +42,10 @@ const fallback = entry.term.toLowerCase();
   type TermEl = HTMLElement & { _hideTimer?: number };
   let open: TermEl | null = null;
   let lastPointer = "mouse";
+  let lastClosed = 0; // time the last popover closed, for the "instant next one" rule
+  let hoverTimer = 0;
+  const HOVER_DELAY = 200;
+  const WARM_WINDOW = 400;
 
   const tipOf = (t: TermEl) => t.querySelector<HTMLElement>(".term-tip")!;
 
@@ -57,19 +63,32 @@ const fallback = entry.term.toLowerCase();
   }
 
   function show(t: TermEl) {
+    window.clearTimeout(hoverTimer);
+    const warm = !!open || performance.now() - lastClosed < WARM_WINDOW;
     if (open && open !== t) hide(open);
     window.clearTimeout(t._hideTimer);
     const tip = tipOf(t);
     if (!tip.hidden) return;
+    tip.classList.toggle("is-instant", warm);
     tip.hidden = false;
     place(t);
-    requestAnimationFrame(() => tip.classList.add("is-open"));
+    if (warm) tip.classList.add("is-open");
+    else requestAnimationFrame(() => tip.classList.add("is-open"));
     open = t;
+  }
+
+  // Mouse hover: short delay the first time; instant while the reader is moving between terms.
+  function showSoon(t: TermEl) {
+    window.clearTimeout(hoverTimer);
+    const warm = !!open || performance.now() - lastClosed < WARM_WINDOW;
+    if (warm) show(t);
+    else hoverTimer = window.setTimeout(() => show(t), HOVER_DELAY);
   }
 
   function hide(t: TermEl) {
     window.clearTimeout(t._hideTimer);
     const tip = tipOf(t);
+    if (!tip.hidden) lastClosed = performance.now();
     tip.classList.remove("is-open");
     tip.hidden = true;
     if (open === t) open = null;
@@ -87,10 +106,12 @@ const fallback = entry.term.toLowerCase();
     const link = t.querySelector<HTMLAnchorElement>(".term-link")!;
     // Hover (mouse and pen only); the popover itself is part of the hover area, so it can be read and selected.
     t.addEventListener("pointerenter", (e) => {
-      if (e.pointerType !== "touch") show(t);
+      if (e.pointerType !== "touch") showSoon(t);
     });
     t.addEventListener("pointerleave", (e) => {
-      if (e.pointerType !== "touch") hideSoon(t);
+      if (e.pointerType === "touch") return;
+      window.clearTimeout(hoverTimer);
+      hideSoon(t);
     });
     // Keyboard focus.
     link.addEventListener("focus", () => {

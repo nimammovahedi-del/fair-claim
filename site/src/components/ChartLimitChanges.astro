@@ -7,8 +7,9 @@ import { limitChangeRows, limitChangeFootnote, raisedSince2024, statesChecked, s
 interface Props {
   headingLevel?: 2 | 3 | 4;
   id?: string;
+  class?: string;
 }
-const { headingLevel = 3, id = "chart-limit-changes" } = Astro.props;
+const { headingLevel = 3, id = "chart-limit-changes", class: cls } = Astro.props;
 const top = 25000;
 const ticks = [0, 5000, 10000, 15000, 20000, 25000];
 const x = (n: number) => (n / top) * 100;
@@ -19,15 +20,17 @@ const anyUnverified = limitChangeRows.some((r) => r.unverified);
 ---
 <ChartFrame
   id={id}
+  class={cls}
   headingLevel={headingLevel}
   title={`${raisedSince2024} states have raised their limit since January 2024, and ${scheduled} more increases are scheduled`}
-  subtitle="Limit for individuals before and after each change: changes in effect, newest first, then scheduled ones. Rules change often, so check the date on any guide you read, including this one."
+  subtitle="Limit for individuals before and after each change, newest first, then scheduled ones. Rules change often, so check the date on any guide, including this one."
+  kicker="The rules · changes"
   sources={[statesSource]}
   checked={statesChecked}
   unverified={anyUnverified}
   unverifiedText={limitChangeRows.filter((r) => r.unverified).map((r) => `${r.state}: ${r.note ?? ""}`).join(" ")}
 >
-  <ul class="legend" slot="legend">
+  <ul class="chart-legend" slot="legend">
     <li><span class="swatch dot soft" aria-hidden="true"></span>Before</li>
     <li><span class="swatch dot" aria-hidden="true"></span>After</li>
     <li><span class="swatch dot ring" aria-hidden="true"></span>Scheduled, not yet in effect</li>
@@ -37,7 +40,7 @@ const anyUnverified = limitChangeRows.some((r) => r.unverified);
       {limitChangeRows.map((r) => (
         <div class="bar-row" title={`${r.state}: ${usd(r.from)} to ${usd(r.to)}, ${r.scheduled ? "scheduled for" : "from"} ${fmtDate(r.effective)}`}>
           <div class="bar-label">
-            <span class="full">{r.state} <span class="hint" style="display:inline">· {fmtDate(r.effective)}</span></span>
+            <span class="full">{r.state} <span class="when">{fmtDate(r.effective)}</span></span>
             <span class="abbr">{r.abbr}</span>
           </div>
           <div class="bar-track">

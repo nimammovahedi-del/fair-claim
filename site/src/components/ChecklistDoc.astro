@@ -46,29 +46,30 @@ const leg = (law: string, sec: string) =>
   `https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=${law}&sectionNum=${sec}`;
 
 const sections = [
-  { id: "before", n: "", title: "Before you decide" },
-  { id: "demand", n: "1", title: "Ask for payment in writing" },
-  { id: "file", n: "2", title: "File the claim" },
-  { id: "serve", n: "3", title: "Serve the papers" },
-  { id: "hearing", n: "4", title: "Go to the hearing" },
-  { id: "collect", n: "5", title: "Collect what you won" },
+  { id: "before", n: "00", title: "Before you decide", items: 8 },
+  { id: "demand", n: "01", title: "Ask for payment in writing", items: 5 },
+  { id: "file", n: "02", title: "File the claim", items: 5 },
+  { id: "serve", n: "03", title: "Serve the papers", items: 4 },
+  { id: "hearing", n: "04", title: "Go to the hearing", items: 7 },
+  { id: "collect", n: "05", title: "Collect what you won", items: 6 },
 ];
+const sec = Object.fromEntries(sections.map((x) => [x.id, x]));
 ---
-<div class="checklist-doc" data-checklist-doc>
-  <div class="checklist-tools no-print">
-    <button class="btn" type="button" data-print data-js-only>Print or save as PDF</button>
-    <label class="choice" data-js-only><input type="checkbox" data-one-per-page /> Start each checklist on a new page when printing</label>
-  </div>
-
-  <nav class="no-print" aria-label="Checklists on this page">
-    <ul class="tags">
-      {sections.map((sec) => <li><a class="tag" href={`#${sec.id}`}>{sec.n ? `${sec.n}. ` : ""}{sec.title}</a></li>)}
+<div class="checklist-doc cl-doc-layout c-checklists" data-checklist-doc>
+  <aside class="cl-side no-print" aria-label="Checklists on this page">
+    <ul class="cl-steps">
+      {sections.map((x) => <li><a href={`#${x.id}`}><span>{x.n}</span><span>{x.title}</span></a></li>)}
     </ul>
-  </nav>
-
+    <div class="cl-actions">
+      <button class="btn" type="button" data-print data-js-only>Print or save as PDF</button>
+      <label class="choice" data-js-only><input type="checkbox" data-one-per-page /> Start each list on a new page</label>
+      <p class="hint">Your ticks stay on this page. They aren't saved or sent anywhere.</p>
+    </div>
+  </aside>
+  <div class="cl-main">
   <!-- Before you decide -->
   <section class="checklist-section" id="before" aria-labelledby="h-before">
-    <h2 id="h-before">Before you decide</h2>
+    <header class="cl-sec-head"><span class="cl-sec-n" aria-hidden="true">{sec.before.n}</span><h2 id="h-before">{sec.before.title}</h2><span class="lbl">{sec.before.items} items</span></header>
     {s && (
       <div class="checklist-rules">
         <h3>{s.state} basics</h3>
@@ -115,7 +116,7 @@ const sections = [
 
   <!-- 1. Demand -->
   <section class="checklist-section" id="demand" aria-labelledby="h-demand">
-    <h2 id="h-demand"><span class="n">Step 1</span>Ask for payment in writing</h2>
+    <header class="cl-sec-head"><span class="cl-sec-n" aria-hidden="true">{sec.demand.n}</span><h2 id="h-demand">{sec.demand.title}</h2><span class="lbl">{sec.demand.items} items</span></header>
     {isCA && (
       <div class="checklist-rules">
         <h3>California</h3>
@@ -136,13 +137,13 @@ const sections = [
       <li><label class="choice"><input type="checkbox" /><span>Send it in a way you can prove, such as certified mail, or email plus regular mail. Keep a copy.</span></label></li>
       <li><label class="choice"><input type="checkbox" /><span>Write down the date you sent it and any reply. If they offer part of the amount, consider it.</span></label></li>
     </ul>
-    <p class="no-print"><a class="link-arrow" href="/demand-letter/">Write a demand letter</a> · <a href={`/steps/#${stepBySlug.demand?.slug ?? "demand"}`}>More on this step</a></p>
+    <p class="cl-links no-print"><a class="go" href="/demand-letter/">Write a demand letter</a><a class="go" href={`/steps/#${stepBySlug.demand?.slug ?? "demand"}`}>More on this step</a></p>
     <p class="checklist-print-foot">{footLine}</p>
   </section>
 
   <!-- 2. File -->
   <section class="checklist-section" id="file" aria-labelledby="h-file">
-    <h2 id="h-file"><span class="n">Step 2</span>File the claim</h2>
+    <header class="cl-sec-head"><span class="cl-sec-n" aria-hidden="true">{sec.file.n}</span><h2 id="h-file">{sec.file.title}</h2><span class="lbl">{sec.file.items} items</span></header>
     {s && (
       <div class="checklist-rules">
         <h3>{s.state}</h3>
@@ -196,7 +197,7 @@ const sections = [
 
   <!-- 3. Serve -->
   <section class="checklist-section" id="serve" aria-labelledby="h-serve">
-    <h2 id="h-serve"><span class="n">Step 3</span>Serve the papers</h2>
+    <header class="cl-sec-head"><span class="cl-sec-n" aria-hidden="true">{sec.serve.n}</span><h2 id="h-serve">{sec.serve.title}</h2><span class="lbl">{sec.serve.items} items</span></header>
     {s && (
       <div class="checklist-rules">
         <h3>{s.state}</h3>
@@ -232,7 +233,7 @@ const sections = [
 
   <!-- 4. Hearing -->
   <section class="checklist-section" id="hearing" aria-labelledby="h-hearing">
-    <h2 id="h-hearing"><span class="n">Step 4</span>Go to the hearing</h2>
+    <header class="cl-sec-head"><span class="cl-sec-n" aria-hidden="true">{sec.hearing.n}</span><h2 id="h-hearing">{sec.hearing.title}</h2><span class="lbl">{sec.hearing.items} items</span></header>
     {s && (
       <div class="checklist-rules">
         <h3>{s.state}</h3>
@@ -269,7 +270,7 @@ const sections = [
 
   <!-- 5. Collect -->
   <section class="checklist-section" id="collect" aria-labelledby="h-collect">
-    <h2 id="h-collect"><span class="n">Step 5</span>Collect what you won</h2>
+    <header class="cl-sec-head"><span class="cl-sec-n" aria-hidden="true">{sec.collect.n}</span><h2 id="h-collect">{sec.collect.title}</h2><span class="lbl">{sec.collect.items} items</span></header>
     {s && (
       <div class="checklist-rules">
         <h3>{s.state}</h3>
@@ -310,6 +311,7 @@ const sections = [
     {caForms("collect").length > 0 && <FormsList forms={caForms("collect")} />}
     <p class="checklist-print-foot">{footLine}</p>
   </section>
+  </div>
 </div>
 
 <script>

@@ -7,8 +7,9 @@ import { appealGroups, lawyerGroups, appealDeadlineStats, statesChecked, statesS
 interface Props {
   headingLevel?: 2 | 3 | 4;
   id?: string;
+  class?: string;
 }
-const { headingLevel = 3, id = "chart-rules" } = Astro.props;
+const { headingLevel = 3, id = "chart-rules", class: cls } = Astro.props;
 const total = appealGroups.reduce((a, g) => a + g.count, 0);
 const both = appealGroups.find((g) => g.key === "both")!;
 const none = appealGroups.find((g) => g.key === "none")!;
@@ -22,9 +23,11 @@ const anyU = [...appealGroups, ...lawyerGroups].some((g) => g.states.some((s) =>
 ---
 <ChartFrame
   id={id}
+  class={cls}
   headingLevel={headingLevel}
   title={`Either side can appeal in ${both.count} of ${total} jurisdictions; in ${none.count}, the small claims decision is final`}
   subtitle={`Appeal deadlines run from ${appealDeadlineStats.min} to ${appealDeadlineStats.max} days where there is one (middle value ${appealDeadlineStats.median} days). Lawyers can represent a party in ${lawyersYes.count} jurisdictions.`}
+  kicker="The rules · appeals and lawyers"
   sources={[statesSource]}
   checked={statesChecked}
   unverified={anyU}

@@ -8,8 +8,9 @@ import { pew2022, pew2021, pewOtherPct, evidenceChecked } from "../lib/stats";
 interface Props {
   headingLevel?: 2 | 3 | 4;
   id?: string;
+  class?: string;
 }
-const { headingLevel = 3, id = "chart-philly" } = Astro.props;
+const { headingLevel = 3, id = "chart-philly", class: cls } = Astro.props;
 const ticks = [0, 25, 50, 75, 100];
 const rows = [
   ...pew2022.outcomes.map((o) => ({ label: o.label, pct: o.pct, display: `${o.pct}%`, muted: false })),
@@ -18,9 +19,11 @@ const rows = [
 ---
 <ChartFrame
   id={id}
+  class={cls}
   headingLevel={headingLevel}
   title="In Philadelphia, most small claims cases were debt collection, and few were decided at a trial"
   subtitle={`How ${pew2022.outcomeCases.toLocaleString("en-US")} cases in Pew's outcome table ended, Philadelphia Municipal Court, ${pew2022.years}. One city's data: other courts may differ.`}
+  kicker="Who uses it · one city"
   sources={[pew2022.source, pew2021.source]}
   checked={evidenceChecked}
 >
@@ -38,12 +41,12 @@ const rows = [
     </div>
     </div>
   </div>
+  <ul class="stat-tiles philly-tiles">
+    <StatTile value={`${pew2022.judgmentsDefaultPct}%`} label={`of the ${pew2022.judgmentsTotal} cases that reached a judgment were defaults: the person sued didn't respond or appear (Pew 2022).`} />
+    <StatTile value={`${pew2021.plaintiffsWithLawyersPct}%`} label={`of plaintiffs had a lawyer, compared with about ${pew2021.defendantsWithLawyersPct}% of defendants, in the court's civil cases (Pew 2021).`} />
+  </ul>
   <p class="sr-only">{rows.map((r) => `${r.label}: ${r.display}. `)}</p>
   <Fragment slot="note">
-    <ul class="stat-tiles">
-      <StatTile value={`${pew2022.judgmentsDefaultPct}%`} label={`of the ${pew2022.judgmentsTotal} cases that reached a judgment were defaults: the person sued didn't respond or appear (Pew 2022).`} />
-      <StatTile value={`${pew2021.plaintiffsWithLawyersPct}%`} label={`of plaintiffs had a lawyer, compared with about ${pew2021.defendantsWithLawyersPct}% of defendants, in the court's civil cases (Pew 2021).`} />
-    </ul>
     <p>
       Pew found that most of the {pew2022.casesTotal} small claims cases filed in Philadelphia from {pew2022.years} were
       debt collection cases filed against individuals by creditors or debt collectors. The four outcomes above add up

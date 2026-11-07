@@ -1,0 +1,78 @@
+---
+// State question for the tools: featured states as lettered radio tiles, then "Another state", which opens a
+// searchable list of all 50 states + DC. Wire it up with initStatePicker() from ToolFlow.ts.
+//
+// <ToolStatePicker name="state" legend="Which state's court would hear it?" states={…} featured={["ca","tx","ny","fl"]}
+//   subs={{ ca: "Limit $12,500" }} colors={["c-sage", …]} skipLabel="Skip" describedby="q1-help" />
+interface Props {
+  name: string;
+  legend: string;
+  states: { slug: string; name: string; abbr?: string }[];
+  featured: string[];
+  subs?: Record<string, string>;
+  colors: string[];
+  /** Adds a last tile that answers "no state" (value ""). */
+  skipLabel?: string;
+  skipSub?: string;
+  describedby?: string;
+  checked?: string;
+  /** Pointer taps on a featured state move on to the next question. Default true. */
+  auto?: boolean;
+}
+const { name, legend, states, featured, subs = {}, colors, skipLabel, skipSub, describedby, checked, auto = true } = Astro.props;
+const keys = "ABCDEFGHIJ";
+const feat = featured.map((f) => states.find((s) => s.slug === f)!).filter(Boolean);
+const n = feat.length + 1 + (skipLabel ? 1 : 0);
+const cols = n >= 5 ? "fl-tiles-5" : n === 4 ? "fl-tiles-4" : "fl-tiles-3";
+const pickId = `${name}-pick`;
+---
+<div data-state-picker>
+  <fieldset class="fl-group" data-keys data-auto={auto ? "" : undefined} aria-describedby={describedby}>
+    <legend class="sr-only">{legend}</legend>
+    <div class={`tiles ${cols}`}>
+      {feat.map((s, i) => (
+        <label class={`tile ${colors[i % colors.length]}`}>
+          <input type="radio" name={name} value={s.slug} checked={checked === s.slug} />
+          <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><span class="check" aria-hidden="true"></span></span>
+          <span><span class="t-label">{s.name}</span>{subs[s.slug] && <span class="t-sub" data-sub={s.slug}>{subs[s.slug]}</span>}</span>
+        </label>
+      ))}
+      <label class={`tile ${colors[feat.length % colors.length]}`}>
+        <input type="radio" name={name} value="other" data-noauto aria-controls={pickId} />
+        <span class="t-top"><span class="key" aria-hidden="true">{keys[feat.length]}</span><span class="check" aria-hidden="true"></span></span>
+        <span><span class="t-label">Another state</span><span class="t-sub" data-other-sub>Search all 51</span></span>
+      </label>
+      {skipLabel && (
+        <label class={`tile ${colors[(feat.length + 1) % colors.length]}`}>
+          <input type="radio" name={name} value="" checked={checked === ""} />
+          <span class="t-top"><span class="key" aria-hidden="true">{keys[feat.length + 1]}</span><span class="check" aria-hidden="true"></span></span>
+          <span><span class="t-label">{skipLabel}</span>{skipSub && <span class="t-sub">{skipSub}</span>}</span>
+        </label>
+      )}
+    </div>
+  </fieldset>
+  <div class="fl-pick" id={pickId} data-pick hidden>
+    <div class="field compact" data-no-enter>
+      <label for={`${name}-search`}>Find a state</label>
+      <input
+        id={`${name}-search`}
+        type="search"
+        autocomplete="off"
+        autocapitalize="words"
+        spellcheck="false"
+        enterkeyhint="search"
+        placeholder="Type a name, like Ohio"
+        aria-controls={`${name}-list`}
+        aria-describedby={`${name}-search-hint`}
+      />
+      <span class="f-hint" id={`${name}-search-hint`}>Enter picks the first match.</span>
+    </div>
+    <p class="sr-only" aria-live="polite" data-pick-count></p>
+    <ul id={`${name}-list`} aria-label="States">
+      {states.map((s) => (
+        <li><button type="button" data-slug={s.slug} data-abbr={s.abbr} aria-pressed="false">{s.name}</button></li>
+      ))}
+    </ul>
+    <p class="p-empty" hidden>No state matches. Check the spelling.</p>
+  </div>
+</div>

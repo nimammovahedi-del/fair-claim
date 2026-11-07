@@ -7,8 +7,9 @@ import { feeRows, feeMissing, feeStats, feeWaiverStats, statesChecked, statesSou
 interface Props {
   headingLevel?: 2 | 3 | 4;
   id?: string;
+  class?: string;
 }
-const { headingLevel = 3, id = "chart-fees" } = Astro.props;
+const { headingLevel = 3, id = "chart-fees", class: cls } = Astro.props;
 const top = 400;
 const ticks = [0, 100, 200, 300, 400];
 const x = (n: number) => (n / top) * 100;
@@ -23,17 +24,19 @@ const label = (r: (typeof feeRows)[number]) =>
 ---
 <ChartFrame
   id={id}
+  class={cls}
   headingLevel={headingLevel}
   title={`Filing fees: half of states start at ${usd(feeStats.medianLowest)} or less, but in ${feeStats.overOneFifty} states the top fee is over $150`}
   subtitle={`Lowest and highest small claims filing fee in each of the ${feeStats.statesWithFigures} jurisdictions with figures, sorted by the lowest. Ranges depend on the claim amount, the court or the county. Serving the papers costs extra.`}
+  kicker="The rules · fees"
   sources={[statesSource]}
   checked={statesChecked}
   unverified={feeStats.unverifiedCount > 0}
   unverifiedText={`${feeStats.unverifiedCount} states' fee figures aren't confirmed yet; their ranges are drawn lighter.`}
 >
-  <ul class="legend" slot="legend">
+  <ul class="chart-legend" slot="legend">
     <li><span class="swatch dot" aria-hidden="true"></span>Confirmed figure</li>
-    <li><span class="swatch dot soft" aria-hidden="true"></span>Not yet confirmed</li>
+    <li><span class="swatch dot soft" aria-hidden="true"></span>Not yet confirmed (lighter)</li>
   </ul>
   <div aria-hidden="true">
     <div class="bars dense">

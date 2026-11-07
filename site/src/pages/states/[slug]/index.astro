@@ -1,24 +1,31 @@
 ---
+// State page (Option A): huge state name, four key numbers, one "In short" line, then topic tabs.
+// California adds Collecting, Deadlines (with the estimator), Forms and Counties from CaliforniaDetail.
+// Every figure keeps a quiet source; unverified values keep their badge.
 import Site from "../../../layouts/Site.astro";
 import CaliforniaDetail from "../../../components/CaliforniaDetail.astro";
 import Term from "../../../components/Term.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
 import UnverifiedNote from "../../../components/UnverifiedNote.astro";
+import Cite from "../../../components/Cite.astro";
+import "../../../styles/states.css";
 import {
   states,
   counties,
+  caStatewide as ca,
   money,
   feeRange,
   lawyersLabel,
   appealLabel,
   efileLabel,
   lawyersSentence,
-  appealSentence,
   sourceLinkText,
   sourceTypeLabel,
   humanizeFields,
   type StateRow,
+  type Source,
 } from "../../../lib/data";
+import { denver, evidenceChecked } from "../../../lib/stats";
 
 export function getStaticPaths() {
   return states.map((s) => ({ params: { slug: s.slug }, props: { s } }));
@@ -26,214 +33,534 @@ export function getStaticPaths() {
 const { s } = Astro.props as { s: StateRow };
 const u = (...f: string[]) => f.some((x) => s.unverified.includes(x));
 const isCA = s.slug === "ca";
+const checked = s.date_checked ?? undefined;
 
-// Plain-language summary at the top. Each line points at the cited detail below.
+// Sources whose "what" mentions a topic (for the quiet cite under each figure).
+const srcFor = (re: RegExp): Source[] => s.sources.filter((x) => re.test(x.what ?? "")).slice(0, 2);
+const srcLimit = srcFor(/limit/i);
+const srcFee = srcFor(/filing_fee|filing fee|\bfee\b(?! waiver)/i);
+const srcAppeal = srcFor(/appeal/i);
+const srcLawyers = srcFor(/lawyer|represent|attorney/i);
+const srcService = srcFor(/serv/i);
+const srcWho = srcFor(/who_can_sue|parties|who can sue/i);
+const srcEfile = srcFor(/e_?-?fil|efil/i);
+const srcWaiver = srcFor(/waiver/i);
+
 const bizDiffers = s.limit_business != null && s.limit_business !== s.limit_individual;
 const fee = feeRange(s);
-const summary: { text: string; unverified: boolean }[] = [
-  {
-    text:
-      s.limit_individual != null
-        ? `You can ask for up to ${money(s.limit_individual)}${bizDiffers ? `. A business can ask for up to ${money(s.limit_business)}` : ""}.`
-        : "We haven't confirmed the limit yet. Check with the court.",
-    unverified: u("limit_individual", "limit_business"),
-  },
-  {
-    text: fee === "—" ? "We haven't found the filing fee yet. Ask the court clerk." : `Filing costs ${fee}${fee.includes("–") ? ", depending on the claim or the court" : ""}.`,
-    unverified: u("filing_fee_min", "filing_fee_max"),
-  },
-  {
-    text: lawyersSentence[s.lawyers_allowed ?? ""] ?? "We haven't confirmed whether lawyers can take part.",
-    unverified: u("lawyers_allowed"),
-  },
-  {
-    text: s.appeal_who
-      ? `${appealSentence[s.appeal_who] ?? s.appeal_who}${
-          s.appeal_who !== "none" && s.appeal_deadline_days ? `, within ${s.appeal_deadline_days} days` : ""
-        }.`
-      : "We haven't confirmed the appeal rules yet.",
-    unverified: u("appeal_who", "appeal_deadline_days"),
-  },
-];
+const appealShown = s.appeal_who && s.appeal_who !== "none" && s.appeal_deadline_days;
 
-// Fact labels that link to a plain-language glossary entry.
-const factTerms: Record<string, string> = {
-  fee: "filing-fee",
-  service: "service-of-process",
-  "fee-waiver": "fee-waiver",
-  limit: "small-claims-limit",
-  appeals: "appeal",
+// ---- In short: what the key numbers don't already say.
+const efileSentence: Record<string, string> = {
+  yes_statewide: "Courts across the state take filings online.",
+  some_courts: "Some courts take filings online.",
+  no: "There's no online filing for small claims.",
 };
-const facts: { id: string; label: string; big?: string; text?: string | null; fields: string[] }[] = [
-  {
-    id: "limit",
-    label: "Limit for individuals",
-    big: money(s.limit_individual),
-    text: s.limit_notes,
-    fields: ["limit_individual", "limit_notes"],
-  },
-  {
-    id: "limit-business",
-    label: "Limit for businesses",
-    big: s.limit_business == null ? "—" : s.limit_business === s.limit_individual ? "Same" : money(s.limit_business),
-    fields: ["limit_business"],
-  },
-  { id: "fee", label: "Filing fee", big: fee, text: s.filing_fee_notes, fields: ["filing_fee_min", "filing_fee_max", "filing_fee_notes"] },
-  { id: "who", label: "Who can sue", text: s.who_can_sue, fields: ["who_can_sue"] },
-  {
-    id: "lawyers",
-    label: "Lawyers",
-    big: lawyersLabel[s.lawyers_allowed ?? ""] ?? s.lawyers_allowed ?? "—",
-    text: s.lawyers_notes,
-    fields: ["lawyers_allowed", "lawyers_notes"],
-  },
-  {
-    id: "appeals",
-    label: "Appeals",
-    big: appealLabel[s.appeal_who ?? ""] ?? s.appeal_who ?? "—",
-    text: [s.appeal, s.appeal_deadline_days ? `Deadline: ${s.appeal_deadline_days} days.` : null].filter(Boolean).join(" "),
-    fields: ["appeal", "appeal_who", "appeal_deadline_days"],
-  },
-  { id: "service", label: "Serving the papers", text: s.service_methods, fields: ["service_methods"] },
-  {
-    id: "online",
-    label: "Filing online",
-    big: efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "—",
-    text: s.e_filing_notes,
-    fields: ["e_filing", "e_filing_notes"],
-  },
-  {
-    id: "fee-waiver",
-    label: "Fee waiver",
-    text: [s.fee_waiver_form, s.fee_waiver_threshold].filter(Boolean).join(" — "),
-    fields: ["fee_waiver_form", "fee_waiver_threshold"],
-  },
-];
+const shortLines: { text: string; unverified: boolean }[] = isCA
+  ? []
+  : [
+      { text: lawyersSentence[s.lawyers_allowed ?? ""] ?? "We haven't confirmed whether lawyers can take part.", unverified: u("lawyers_allowed") },
+      ...(s.e_filing && efileSentence[s.e_filing] ? [{ text: efileSentence[s.e_filing], unverified: u("e_filing") }] : []),
+    ];
 
-const onPage = [
-  { href: "#in-short", label: "In short" },
-  { href: "#details", label: "The details" },
-  ...(s.notes ? [{ href: "#good-to-know", label: "Good to know" }] : []),
+// ---- Topic tabs
+type Tab = { id: string; label: string; sub: string };
+const tabs: Tab[] = [
+  { id: "filing", label: "Filing", sub: "Limits, fees, online" },
+  { id: "serving", label: "Serving", sub: "Telling the other side" },
+  { id: "hearing", label: "Hearing", sub: isCA ? "The day in court" : "Lawyers at the hearing" },
+  { id: "appeals", label: "Appeals", sub: "Who, how long" },
   ...(isCA
     ? [
-        { href: "#ca-fees", label: "Filing fees" },
-        { href: "#ca-deadlines", label: "Deadlines" },
-        { href: "#ca-last-day", label: "Last day to sue" },
-        { href: "#ca-forms", label: "Forms by step" },
+        { id: "collecting", label: "Collecting", sub: "After a judgment" },
+        { id: "deadlines", label: "Deadlines", sub: "Last day to sue" },
+        { id: "forms", label: "Forms", sub: `${(ca.forms ?? []).length} official forms` },
+        { id: "counties", label: "Counties", sub: `${counties.length} local courts` },
       ]
     : []),
-  { href: "#sources", label: "Sources" },
 ];
+const keys = "ABCDEFGHIJ";
+const caLeg = (sec: string) => `https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=${sec}`;
+
+// Accordions in the generic Filing panel. Only those with text are shown.
+const filingAccs = [
+  { title: "About the limit", text: s.limit_notes, fields: ["limit_notes", "limit_individual", "limit_business"], src: srcLimit },
+  { title: "About the fee", text: s.filing_fee_notes, fields: ["filing_fee_notes", "filing_fee_min", "filing_fee_max"], src: srcFee },
+  { title: "Who can sue", text: s.who_can_sue, fields: ["who_can_sue"], src: srcWho },
+  {
+    title: `Filing online: ${efileLabel[s.e_filing ?? ""] ?? "not found"}`,
+    text: s.e_filing_notes,
+    fields: ["e_filing", "e_filing_notes"],
+    src: srcEfile,
+  },
+  {
+    title: "Fee waiver",
+    text: [s.fee_waiver_form, s.fee_waiver_threshold].filter(Boolean).join(" "),
+    fields: ["fee_waiver_form", "fee_waiver_threshold"],
+    src: srcWaiver,
+  },
+].filter((a) => a.text);
+const unvCount = s.unverified.length;
+// Long source lists: the first five show, the rest sit in an accordion.
+const srcMain = s.sources.length > 6 ? s.sources.slice(0, 5) : s.sources;
+const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
 ---
-<Site title={`Small claims court in ${s.state}`} description={`${s.state} small claims limit, filing fee, lawyer and appeal rules, in plain language, with sources and the date checked.`}>
-  <Breadcrumb items={[{ href: "/states/", label: "States" }, { label: s.state }]} />
-  <div class="state-head narrow">
-    <p class="eyebrow">{s.court_name ?? "Small claims court"}</p>
-    <h1>Small claims court in {s.state}</h1>
-    <p class="cite">
-      <span>{s.citation}</span>
-      {s.date_checked && <span>checked {s.date_checked}</span>}
-    </p>
-  </div>
-
-  <div class="two-col state-layout">
-    <div class="state-main">
-      <section class="in-short" id="in-short" aria-labelledby="in-short-title">
-        <h2 id="in-short-title">In short</h2>
-        <ul class="summary-list">
-          {summary.map((line) => (
-            <li>
-              {line.text}
-              {line.unverified && <> <span class="badge unverified">Unverified</span></>}
-            </li>
-          ))}
-        </ul>
-        <p class="hint">The details below say where each rule comes from. If your court tells you something different, the court is right.</p>
-      </section>
-
-      {s.recent_changes && (
-        <div class="callout info">
-          <p class="callout-title">Recent change{u("recent_changes") && <> <span class="badge unverified">Unverified</span></>}</p>
-          <p>{s.recent_changes}</p>
-        </div>
-      )}
-
-      <UnverifiedNote count={s.unverified.length} of={s.unverified.length === 1 ? "item on this page is unverified" : "items on this page are unverified"} />
-
-      <section id="details" aria-labelledby="details-title">
-        <h2 id="details-title">The details</h2>
-        <dl class="facts">
-          {facts.map((f) => (
-            <div class="fact" id={`fact-${f.id}`}>
-              <dt>
-                {factTerms[f.id] ? <Term slug={factTerms[f.id]}>{f.label}</Term> : f.label}
-                {u(...f.fields) && <> <span class="badge unverified">Unverified</span></>}
-              </dt>
-              <dd>
-                {f.big && <div class="big">{f.big}</div>}
-                {f.text && <div class="value">{f.text}</div>}
-                {!f.big && !f.text && <div class="value">Not found yet.</div>}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      {s.notes && (
-        <section id="good-to-know" aria-labelledby="gtk-title">
-          <h2 id="gtk-title">Good to know</h2>
-          <p>{s.notes}</p>
-        </section>
-      )}
-
-      {isCA && <CaliforniaDetail />}
-
-      <section id="sources" aria-labelledby="sources-title">
-        <h2 id="sources-title">Sources</h2>
-        <p class="hint">What we used for this page, checked {s.date_checked}. Laws and court sites change; the link is the place to confirm.</p>
-        <ul class="source-list">
-          {s.sources.map((src) => (
-            <li>
-              <a href={src.url} rel="noopener">{sourceLinkText(src.url)}</a>
-              {src.type && <span class="tag small">{sourceTypeLabel[src.type] ?? src.type}</span>}
-              {src.what && <div class="hint">Used for: {humanizeFields(src.what)}</div>}
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
-
-    <aside class="aside state-aside" aria-label={`${s.state} quick links`}>
-      <nav class="card on-page" aria-labelledby="onpage-title">
-        <h2 id="onpage-title">On this page</h2>
-        <ul>{onPage.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
-      </nav>
-      {s.self_help_url && (
-        <div class="card tinted">
-          <h2>Official help</h2>
-          <p>The {s.state} courts' own guide to small claims.{u("self_help_url") && <> <span class="badge unverified">Unverified</span></>}</p>
-          <p><a class="link-arrow" href={s.self_help_url} rel="noopener">{s.state} small claims self-help</a></p>
-        </div>
-      )}
-      {isCA && (
-        <div class="card tinted">
-          <h2>California by county</h2>
-          <p>Courthouses, self-help centers and the free small claims advisor in each county.</p>
-          <p><a class="link-arrow" href="/states/ca/counties/">All 58 counties</a></p>
-          {counties.length > 0 && <p class="hint">For example, <a href="/states/ca/counties/alameda/">Alameda</a> or <a href="/states/ca/counties/los-angeles/">Los Angeles</a></p>}
-        </div>
-      )}
-      <div class="card">
-        <h2>Guides and tools</h2>
-        <ul class="link-list">
-          <li><a href="/steps/#before-you-decide">Options besides going to court</a></li>
-          <li><a href="/steps/">How a small claims case works</a></li>
-          <li><a href={`/worth-it/?state=${s.slug}`}>Cost calculator for {s.state}</a></li>
-          <li><a href="/demand-letter/">Demand-letter tool</a></li>
-          <li><a href={`/checklists/${s.slug}/`}>Printable {s.state} checklists</a></li>
-          <li><a href="/glossary/">Glossary of court terms</a></li>
-        </ul>
+<Site
+  title={`Small claims court in ${s.state}`}
+  description={`${s.state} small claims limit, filing fee, lawyer and appeal rules, in plain language, with sources and the date checked.`}
+  color="c-states"
+  bleed
+>
+  <section class="wrap sr-hero">
+    <Breadcrumb items={[{ href: "/states/", label: "State rules" }, { label: s.state }]} />
+    <div class="sr-title-row">
+      <h1 class:list={["display", "sr-title", { "is-long": s.state.length > 12 }]}>{s.state}</h1>
+      <div class="sr-meta">
+        <p class="small muted">{s.court_name ?? "Small claims court"}</p>
+        <p class="cite"><span>{s.citation}</span>{checked && <span>Checked {checked}</span>}</p>
       </div>
-    </aside>
-  </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="key-title">
+    <h2 id="key-title" class="sr-only">Key numbers</h2>
+    <div class="stats sr-stats">
+      <div class="stat c-states">
+        <span class="s-bar" aria-hidden="true"></span>
+        <p class="num">{money(s.limit_individual)}</p>
+        <div>
+          <p class="s-label">Most you can claim</p>
+          <p class="s-sub">{bizDiffers ? `${money(s.limit_business)} for businesses.` : s.limit_business != null ? "Same for businesses." : ""}</p>
+        </div>
+        {u("limit_individual", "limit_business") && <span class="badge unverified">Unverified</span>}
+        <Cite sources={srcLimit} />
+      </div>
+      <div class="stat c-sand">
+        <span class="s-bar" aria-hidden="true"></span>
+        <p class:list={["num", { word: fee.length > 6 }]}>{fee === "—" ? "Not found" : fee}</p>
+        <div>
+          <p class="s-label"><Term slug="filing-fee">Filing fee</Term></p>
+          <p class="s-sub">{isCA ? "Set by claim size. Can be waived." : fee.includes("–") ? "Depends on the claim or the court." : ""}</p>
+        </div>
+        {u("filing_fee_min", "filing_fee_max") && <span class="badge unverified">Unverified</span>}
+        <Cite sources={srcFee} />
+      </div>
+      <div class="stat c-lilac">
+        <span class="s-bar" aria-hidden="true"></span>
+        <p class="num word">{appealLabel[s.appeal_who ?? ""] ?? "Not found"}</p>
+        <div>
+          <p class="s-label">Who can <Term slug="appeal">appeal</Term></p>
+          {s.appeal_who === "defendant_only" && <p class="s-sub">Generally, only the side being sued.</p>}
+        </div>
+        {u("appeal_who") && <span class="badge unverified">Unverified</span>}
+        <Cite sources={srcAppeal} />
+      </div>
+      {appealShown ? (
+        <div class="stat c-sage">
+          <span class="s-bar" aria-hidden="true"></span>
+          <p class="num">{s.appeal_deadline_days} days</p>
+          <div>
+            <p class="s-label">To file an appeal</p>
+            {isCA && <p class="s-sub">From when the clerk mails the judgment. Fee {money(ca.appeal?.fee)}.</p>}
+          </div>
+          {u("appeal_deadline_days") && <span class="badge unverified">Unverified</span>}
+          <Cite sources={srcAppeal} />
+        </div>
+      ) : (
+        <div class="stat c-sage">
+          <span class="s-bar" aria-hidden="true"></span>
+          <p class="num word">{lawyersLabel[s.lawyers_allowed ?? ""] ?? "Not found"}</p>
+          <div><p class="s-label">Lawyers at the hearing</p></div>
+          {u("lawyers_allowed") && <span class="badge unverified">Unverified</span>}
+          <Cite sources={srcLawyers} />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="wrap sr-short" aria-labelledby="short-title">
+    <div class="sec-head">
+      <p class="lbl">In short</p>
+      <div>
+        <h2 id="short-title" class="sr-only">In short</h2>
+        {isCA ? (
+          <p class="sr-short-text">
+            You speak for yourself: lawyers can't represent either side at the hearing. Every county must offer a{" "}
+            <span class="mark">free small claims advisor</span>. Hearings are set 20 to 70 days after you file.
+          </p>
+        ) : (
+          <p class="sr-short-text">
+            {shortLines.map((l, i) => (
+              <>
+                {i > 0 && " "}
+                {l.text}
+                {l.unverified && <> <span class="badge unverified">Unverified</span></>}
+              </>
+            ))}
+          </p>
+        )}
+        <div class="sr-short-foot">
+          {isCA ? (
+            <p class="cite"><a href={caLeg("116.530")} rel="noopener">CCP 116.530</a><a href={caLeg("116.260")} rel="noopener">116.260</a><a href={caLeg("116.330")} rel="noopener">116.330</a><span>Checked {checked}</span></p>
+          ) : (
+            <Cite sources={[...srcLawyers, ...srcEfile].slice(0, 2)} checked={checked} />
+          )}
+        </div>
+        {s.recent_changes && (
+          <details class="acc" style="margin-top:32px">
+            <summary>
+              Recent change{u("recent_changes") && <span class="badge unverified">Unverified</span>}
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="acc-body"><p>{s.recent_changes}</p></div>
+          </details>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sr-topics" aria-labelledby="topics-title">
+    <div class="sr-topics-top">
+      <h2 id="topics-title" class="lbl lbl-ink">The rules, by topic</h2>
+      <p class="lbl">{tabs.length} topics</p>
+    </div>
+    {unvCount > 0 && (
+      <UnverifiedNote compact count={unvCount} of={unvCount === 1 ? "item on this page is unverified" : "items on this page are unverified"} />
+    )}
+    <div data-tabs data-state-tabs>
+      <div class="tabs tiles sr-tabs" role="tablist" aria-label={`${s.state} rules by topic`} style={`--n:${tabs.length}`}>
+        {tabs.map((t, i) => (
+          <button
+            class="tile tab c-states"
+            role="tab"
+            type="button"
+            id={`tab-${t.id}`}
+            aria-controls={`panel-${t.id}`}
+            aria-selected={i === 0 ? "true" : "false"}
+            tabindex={i === 0 ? 0 : -1}
+          >
+            <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><span class="t-dot" aria-hidden="true"></span></span>
+            <span><span class="t-label">{t.label}</span><span class="t-sub">{t.sub}</span></span>
+          </button>
+        ))}
+      </div>
+
+      <!-- A · Filing -->
+      <div class="tab-panel" role="tabpanel" id="panel-filing" aria-labelledby="tab-filing" tabindex="0">
+        <div class="pn-grid">
+          <div class="pn-side">
+            <p class="lbl">A · Filing</p>
+            <h3 class="h2">Filing the claim</h3>
+            {isCA ? (
+              <p class="pn-intro">Use form SC-100. File it with the clerk in person, by mail, or online where your court allows it. There are no formal pleadings and no pre-trial discovery.</p>
+            ) : (
+              <p class="pn-intro">File with the {s.court_name ?? "small claims court"}. The limit, the fee and who can sue are below.</p>
+            )}
+            {isCA ? (
+              <p class="cite"><a href={caLeg("116.320")} rel="noopener">CCP 116.320, 116.310</a><span>Checked {checked}</span></p>
+            ) : (
+              <Cite sources={[...srcLimit, ...srcFee].slice(0, 2)} checked={checked} />
+            )}
+          </div>
+          <div class="pn-main">
+            {isCA ? (
+              <CaliforniaDetail part="filing" />
+            ) : (
+              <>
+                <div class="fx3" style="margin-top:0">
+                  <div class="fx">
+                    <p class="num fx-n">{money(s.limit_individual)}</p>
+                    <p class="fx-t">most an individual can ask for. <Term slug="small-claims-limit">About limits</Term></p>
+                  </div>
+                  <div class="fx">
+                    <p class:list={["num", "fx-n", { word: !bizDiffers }]}>{bizDiffers ? money(s.limit_business) : s.limit_business == null ? "Not found" : "Same"}</p>
+                    <p class="fx-t">for a business.</p>
+                  </div>
+                  <div class="fx">
+                    <p class:list={["num", "fx-n", { word: fee.length > 9 }]}>{fee === "—" ? "Not found" : fee}</p>
+                    <p class="fx-t">to file. You can ask for a <Term slug="fee-waiver" />.</p>
+                  </div>
+                </div>
+                <div class="accs">
+                  {filingAccs.map((a) => (
+                    <details class="acc">
+                      <summary>
+                        {a.title}
+                        {u(...a.fields) && <span class="badge unverified">Unverified</span>}
+                        <span class="pm" aria-hidden="true"></span>
+                      </summary>
+                      <div class="acc-body">
+                        <p>{a.text}</p>
+                        <Cite sources={a.src} checked={checked} />
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- B · Serving -->
+      <div class="tab-panel" role="tabpanel" id="panel-serving" aria-labelledby="tab-serving" tabindex="0" hidden>
+        <div class="pn-grid">
+          <div class="pn-side">
+            <p class="lbl">B · Serving</p>
+            <h3 class="h2">Serving the papers</h3>
+            {isCA ? (
+              <p class="pn-intro">The other side has to be officially given the claim. In California, <strong>you can't serve it yourself</strong>. There are three ways it can be done.</p>
+            ) : (
+              <p class="pn-intro">The other side has to be officially told about the case before the hearing. This is called <Term slug="service-of-process">service</Term>.</p>
+            )}
+            {isCA ? (
+              <p class="cite"><a href={caLeg("116.340")} rel="noopener">CCP 116.340; CCP 415.20</a><span>Checked {checked}</span></p>
+            ) : (
+              <Cite sources={srcService} checked={checked} />
+            )}
+          </div>
+          <div class="pn-main">
+            {isCA ? (
+              <CaliforniaDetail part="serving" />
+            ) : s.service_methods ? (
+              <>
+                <p class="lbl pn-sub">Allowed ways{u("service_methods") && <> <span class="badge unverified">Unverified</span></>}</p>
+                <p class="pn-text">{s.service_methods}</p>
+                <p class="hint">Words to know: <Term slug="process-server" /> · <Term slug="substituted-service" /> · <Term slug="proof-of-service" /></p>
+              </>
+            ) : (
+              <p class="pn-text">We haven't found the service rules yet. Ask the court clerk.</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- C · Hearing -->
+      <div class="tab-panel" role="tabpanel" id="panel-hearing" aria-labelledby="tab-hearing" tabindex="0" hidden>
+        <div class="pn-grid">
+          <div class="pn-side">
+            <p class="lbl">C · Hearing</p>
+            <h3 class="h2">At the hearing</h3>
+            {isCA ? (
+              <p class="pn-intro">Each side speaks for itself. Lawyers can advise you before and after, but can't represent you at the hearing. If the other side doesn't come, you still have to prove your claim.</p>
+            ) : (
+              <p class="pn-intro">Small claims hearings are short and informal. Here is whether lawyers can take part.</p>
+            )}
+            {isCA ? (
+              <p class="cite"><a href={caLeg("116.530")} rel="noopener">CCP 116.530, 116.520(b), 116.570</a><span>Checked {checked}</span></p>
+            ) : (
+              <Cite sources={srcLawyers} checked={checked} />
+            )}
+          </div>
+          <div class="pn-main">
+            {isCA ? (
+              <CaliforniaDetail part="hearing" />
+            ) : (
+              <>
+                <div class="fx">
+                  <p class="num fx-n word">
+                    Lawyers: {(lawyersLabel[s.lawyers_allowed ?? ""] ?? "not found").toLowerCase()}
+                    {u("lawyers_allowed") && <> <span class="badge unverified">Unverified</span></>}
+                  </p>
+                  {s.lawyers_notes && <p class="pn-text">{s.lawyers_notes}</p>}
+                </div>
+                <p class="hint" style="margin-top:24px">Words to know: <Term slug="hearing" /> · <Term slug="continuance" /> · <Term slug="default-judgment" /> · <Term slug="counterclaim" /></p>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- D · Appeals -->
+      <div class="tab-panel" role="tabpanel" id="panel-appeals" aria-labelledby="tab-appeals" tabindex="0" hidden>
+        <div class="pn-grid">
+          <div class="pn-side">
+            <p class="lbl">D · Appeals</p>
+            <h3 class="h2">Appeals</h3>
+            {isCA ? (
+              <p class="pn-intro">Only the side ordered to pay can appeal. The appeal is a brand-new hearing in superior court in front of a different judge, and lawyers may take part.</p>
+            ) : (
+              <p class="pn-intro">Who can ask a higher court to look at the decision, and how long they have.</p>
+            )}
+            {isCA ? (
+              <p class="cite"><a href={caLeg("116.710")} rel="noopener">CCP 116.710, 116.750, 116.770</a><span>Checked {checked}</span></p>
+            ) : (
+              <Cite sources={srcAppeal} checked={checked} />
+            )}
+          </div>
+          <div class="pn-main">
+            {isCA ? (
+              <CaliforniaDetail part="appeals" />
+            ) : (
+              <>
+                <div class="fx3 two" style="margin-top:0">
+                  <div class="fx">
+                    <p class="num fx-n word">{appealLabel[s.appeal_who ?? ""] ?? "Not found"}{u("appeal_who") && <> <span class="badge unverified">Unverified</span></>}</p>
+                    <p class="fx-t">{s.appeal_who === "none" ? "from a small claims decision." : "can appeal."}</p>
+                  </div>
+                  {s.appeal_deadline_days != null && (
+                    <div class="fx">
+                      <p class="num fx-n">{s.appeal_deadline_days} days{u("appeal_deadline_days") && <> <span class="badge unverified">Unverified</span></>}</p>
+                      <p class="fx-t">to file the appeal.</p>
+                    </div>
+                  )}
+                </div>
+                {s.appeal && (
+                  <details class="acc" style="margin-top:40px">
+                    <summary>How an appeal works here{u("appeal") && <span class="badge unverified">Unverified</span>}<span class="pm" aria-hidden="true"></span></summary>
+                    <div class="acc-body">
+                      <p>{s.appeal}</p>
+                      <Cite sources={srcAppeal} checked={checked} />
+                    </div>
+                  </details>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {isCA && (
+        <>
+          <div class="tab-panel" role="tabpanel" id="panel-collecting" aria-labelledby="tab-collecting" tabindex="0" hidden>
+            <div class="pn-grid">
+              <div class="pn-side">
+                <p class="lbl">E · Collecting</p>
+                <h3 class="h2">After a judgment</h3>
+                <p class="pn-intro">The court doesn't collect for you. Collection waits 30 days, for the appeal period. In a Denver study, {denver.collectedNothingPct}% of winners never collected anything.</p>
+                <p class="cite"><a href={caLeg("116.810")} rel="noopener">CCP 116.810</a><a href={denver.source.url} rel="noopener">Fordham Urb. L.J. (1994)</a><span>Checked {evidenceChecked}</span></p>
+              </div>
+              <div class="pn-main"><CaliforniaDetail part="collecting" /></div>
+            </div>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="panel-deadlines" aria-labelledby="tab-deadlines" tabindex="0" hidden>
+            <div class="pn-grid">
+              <div class="pn-side">
+                <p class="lbl">F · Deadlines</p>
+                <h3 class="h2">How long you have to sue</h3>
+                <p class="pn-intro">Each type of claim has a time limit, called a <Term slug="statute-of-limitations" />. Once it passes, the claim can be thrown out.</p>
+                <p class="cite"><a href={ca.self_help_url} rel="noopener">selfhelp.courts.ca.gov</a><span>Checked {checked}</span></p>
+              </div>
+              <div class="pn-main"><CaliforniaDetail part="deadlines" /></div>
+            </div>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="panel-forms" aria-labelledby="tab-forms" tabindex="0" hidden>
+            <div class="pn-grid">
+              <div class="pn-side">
+                <p class="lbl">G · Forms</p>
+                <h3 class="h2">Official forms</h3>
+                <p class="pn-intro">Judicial Council forms, grouped by step. Titles and revision dates were read from the PDFs.</p>
+                <p class="cite"><span>courts.ca.gov</span><span>Checked {checked}</span></p>
+              </div>
+              <div class="pn-main"><CaliforniaDetail part="forms" /></div>
+            </div>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="panel-counties" aria-labelledby="tab-counties" tabindex="0" hidden>
+            <div class="pn-grid">
+              <div class="pn-side">
+                <p class="lbl">H · Counties</p>
+                <h3 class="h2">County by county</h3>
+                <p class="pn-intro">Free help, courthouses and online options in all {counties.length} counties.</p>
+                <a class="go" href="/states/ca/counties/">Compare all counties</a>
+              </div>
+              <div class="pn-main"><CaliforniaDetail part="counties" /></div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <section class="wrap section" id="sources" aria-labelledby="src-title">
+    <div class="sec-head">
+      <p class="lbl">Sources</p>
+      <div>
+        <h2 id="src-title" class="h3">Where these rules come from. Laws change, so the link is the place to confirm.</h2>
+        <ul class="src-list" style="margin-top:32px">
+          {srcMain.map((x) => (
+            <li>
+              <span class="lbl">{sourceTypeLabel[x.type ?? ""] ?? "Source"}</span>
+              <a class="cite" href={x.url} rel="noopener">{sourceLinkText(x.url)}</a>
+              {x.what && <span class="src-what">Used for: {humanizeFields(x.what)}</span>}
+            </li>
+          ))}
+        </ul>
+        {srcMore.length > 0 && (
+          <details class="acc src-more">
+            <summary>{srcMore.length} more sources<span class="pm" aria-hidden="true"></span></summary>
+            <div class="acc-body">
+              <ul class="src-list">
+                {srcMore.map((x) => (
+                  <li>
+                    <span class="lbl">{sourceTypeLabel[x.type ?? ""] ?? "Source"}</span>
+                    <a class="cite" href={x.url} rel="noopener">{sourceLinkText(x.url)}</a>
+                    {x.what && <span class="src-what">Used for: {humanizeFields(x.what)}</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
+        )}
+        <p class="cite src-foot">
+          {isCA && <span>{(ca.sources as unknown[]).length} sources in the California research</span>}
+          <span>Checked {checked}</span>
+          <a href="/sources/">How we check</a>
+        </p>
+        {s.notes && (
+          <details class="acc" style="margin-top:24px">
+            <summary>Research note<span class="pm" aria-hidden="true"></span></summary>
+            <div class="acc-body"><p>{s.notes}</p></div>
+          </details>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="next-title">
+    <h2 id="next-title" class="sr-only">More for {s.state}</h2>
+    <div class="sr-next">
+      {s.self_help_url && (
+        <div class="card card-link">
+          <h3 class="h4"><a href={s.self_help_url} rel="noopener">The court's own guide</a></h3>
+          <p>{s.state} courts' small claims self-help pages.{u("self_help_url") && <> <span class="badge unverified">Unverified</span></>}</p>
+          <span class="go" aria-hidden="true">Official</span>
+        </div>
+      )}
+      <div class="card card-link">
+        <h3 class="h4"><a href={`/checklists/${s.slug}/`}>Printable checklist</a></h3>
+        <p>What to bring and do at each step in {s.state}.</p>
+        <span class="go" aria-hidden="true">Checklists</span>
+      </div>
+      <div class="card card-link">
+        <h3 class="h4"><a href={`/worth-it/?state=${s.slug}`}>Cost calculator</a></h3>
+        <p>Fees, time and the odds of getting paid.</p>
+        <span class="go" aria-hidden="true">Tools</span>
+      </div>
+    </div>
+  </section>
 </Site>
+
+<script>
+  // Open the tab that holds a linked target: /states/ca/#ca-last-day, #panel-forms or ?tab=forms.
+  const box = document.querySelector<HTMLElement>("[data-state-tabs]");
+  const openFor = (id: string | null) => {
+    if (!box || !id) return;
+    const el = document.getElementById(id) ?? document.getElementById(`panel-${id}`);
+    const panel = el?.closest<HTMLElement>('[role="tabpanel"]');
+    const tab = panel && box.querySelector<HTMLElement>(`[aria-controls="${panel.id}"]`);
+    if (tab && tab.getAttribute("aria-selected") !== "true") {
+      // Same state change as the Site.astro tabs script, done here so it works whichever script runs first.
+      box.querySelectorAll<HTMLElement>('[role="tab"]').forEach((t) => {
+        const on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        const p = document.getElementById(t.getAttribute("aria-controls") || "");
+        if (p) p.hidden = !on;
+      });
+    }
+    if (el && el !== panel) el.scrollIntoView();
+  };
+  openFor(new URLSearchParams(location.search).get("tab"));
+  if (location.hash) openFor(decodeURIComponent(location.hash.slice(1)));
+  window.addEventListener("hashchange", () => openFor(decodeURIComponent(location.hash.slice(1))));
+</script>

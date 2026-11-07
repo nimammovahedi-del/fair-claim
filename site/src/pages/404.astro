@@ -1,18 +1,51 @@
 ---
+// 404 (Option A): one line, three ways forward.
 import Site from "../layouts/Site.astro";
+const ways = [
+  { href: "/states/", c: "c-states", key: "A", title: "State rules", text: "Limits, fees and deadlines for every state." },
+  { href: "/steps/", c: "c-learn", key: "B", title: "How it works", text: "Five steps, from asking to collecting." },
+  { href: "/tools/", c: "c-tools", key: "C", title: "Tools", text: "Cost calculator, demand letter, checklists." },
+];
 ---
-<Site title="Page not found" description="This page doesn't exist on Fair Claim.">
-  <div class="narrow">
-    <p class="eyebrow">Error 404</p>
-    <h1>We can't find that page</h1>
-    <p class="lede">The link may be old, or the address may have a typo. These pages may have what you were looking for.</p>
-    <ul class="link-list">
-      <li><a href="/states/">Small claims rules by state</a></li>
-      <li><a href="/steps/">How small claims court works</a></li>
-      <li><a href="/steps/#before-you-decide">Options besides going to court</a></li>
-      <li><a href="/worth-it/">Cost calculator</a></li>
-      <li><a href="/demand-letter/">Demand-letter tool</a></li>
-      <li><a href="/">Home page</a></li>
-    </ul>
-  </div>
+<Site title="Page not found" description="This page doesn't exist on Fair Claim." bleed>
+  <section class="wrap nf">
+    <p class="lbl">Error 404</p>
+    <h1 class="display nf-title">We can't find that page.</h1>
+    <p class="lede">The link may be old, or the address may have a typo.</p>
+    <div class="doors nf-doors">
+      {ways.map((w) => (
+        <a class={`tile fill door ${w.c}`} href={w.href}>
+          <span class="t-top"><span class="key" aria-hidden="true">{w.key}</span></span>
+          <span class="door-body">
+            <span class="door-title">{w.title}</span>
+            <span class="door-text">{w.text}</span>
+          </span>
+          <span class="door-foot"><span></span><span class="door-arrow" aria-hidden="true"></span></span>
+        </a>
+      ))}
+    </div>
+    <p class="nf-home"><a class="go" href="/">Home page</a></p>
+  </section>
 </Site>
+
+<style>
+  .nf {
+    padding-top: clamp(56px, 9vw, 144px);
+  }
+  .nf > .lbl {
+    margin: 0 0 28px;
+  }
+  .nf-title {
+    margin: 0;
+    max-width: 14ch;
+  }
+  .nf .lede {
+    margin: 28px 0 0;
+  }
+  .nf-doors {
+    margin-top: clamp(48px, 6vw, 88px);
+  }
+  .nf-home {
+    margin: 32px 0 0;
+  }
+</style>

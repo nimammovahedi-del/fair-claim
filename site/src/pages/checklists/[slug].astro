@@ -10,21 +10,19 @@ export function getStaticPaths() {
 const { s } = Astro.props as { s: StateRow };
 const nUnverified = s.unverified?.length ?? 0;
 ---
-<Site title={`Checklists: ${s.state}`} description={`Printable small claims checklists for ${s.state}, with the state's cited limit, fees, service rules and appeal deadline.`}>
-  <Breadcrumb items={[{ href: "/checklists/", label: "Checklists" }, { label: s.state }]} />
-  <div class="narrow checklist-page">
-    <p class="eyebrow no-print">Checklists</p>
-    <h1>Small claims checklists: {s.state}</h1>
-    <p class="lede">
-      Six short lists, with {s.state}'s rules filled in from our research, checked {s.date_checked}.{" "}
-      <span class="no-print">Full details and sources are on the <a href={`/states/${s.slug}/`}>{s.state} page</a>.</span>
-    </p>
-    {nUnverified > 0 && (
-      <p class="hint">
-        <span class="badge unverified">unverified</span> marks a rule we haven't yet confirmed against the law or the
-        court's own site. Check those with the court.
+<Site title={`Checklists: ${s.state}`} description={`Printable small claims checklists for ${s.state}, with the state's cited limit, fees, service rules and appeal deadline.`} bleed color="c-checklists">
+  <div class="checklist-page">
+    <section class="wrap page-hero">
+      <Breadcrumb items={[{ href: "/tools/", label: "Tools" }, { href: "/checklists/", label: "Checklists" }, { label: s.state }]} />
+      <h1 class="display">Checklists: {s.state}</h1>
+      <p class="lede">Six short lists with {s.state}'s rules filled in. <span class="no-print">Sources are on the <a href={`/states/${s.slug}/`}>{s.state} page</a>.</span></p>
+      <p class="cite" style="margin-top:20px">
+        <span>Rules checked {s.date_checked}</span>
+        {nUnverified > 0 && <span><span class="badge unverified">unverified</span> = not yet confirmed; check it with the court</span>}
       </p>
-    )}
-    <ChecklistDoc state={s} />
+    </section>
+    <div class="wrap">
+      <ChecklistDoc state={s} />
+    </div>
   </div>
 </Site>

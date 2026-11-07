@@ -1,7 +1,10 @@
 ---
+// California county page (Option A): free help first and prominent, courthouses as cards, quiet sources.
 import Site from "../../../../layouts/Site.astro";
 import Breadcrumb from "../../../../components/Breadcrumb.astro";
 import UnverifiedNote from "../../../../components/UnverifiedNote.astro";
+import Term from "../../../../components/Term.astro";
+import "../../../../styles/states.css";
 import { counties, yesNoLabel, sourceLinkText, sourceTypeLabel, humanizeFields, type CountyRow } from "../../../../lib/data";
 
 export function getStaticPaths() {
@@ -13,156 +16,336 @@ const adv = c.small_claims_advisor;
 const shc = c.self_help_center;
 // Only make a tap-to-call link when the text is a single 10-digit US number.
 const telHref = (p?: string) => (p && /^\D*\d{3}\D*\d{3}\D*\d{4}\D*$/.test(p) ? `tel:+1${p.replace(/\D/g, "")}` : null);
-const advTel = telHref(adv?.phone);
+// Some advisors list several numbers separated by ";": one line each.
+const advPhones = (adv?.phone ?? "").split(";").map((x) => x.trim()).filter(Boolean);
 const shcTel = telHref(shc?.phone);
+const advisorLaw = "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.940";
+const locs = c.small_claims_locations;
+const srcMain = c.sources.length > 6 ? c.sources.slice(0, 5) : c.sources;
+const srcMore = c.sources.length > 6 ? c.sources.slice(5) : [];
 ---
 <Site
   title={`Small claims in ${c.county} County, California`}
   description={`Free small claims help in ${c.county} County, where cases are heard, and what you can do online.`}
+  color="c-states"
+  bleed
 >
-  <Breadcrumb items={[{ href: "/states/", label: "States" }, { href: "/states/ca/", label: "California" }, { href: "/states/ca/counties/", label: "Counties" }, { label: c.county }]} />
-  <div class="narrow">
-    <p class="eyebrow">{c.court_name}</p>
-    <h1>Small claims in {c.county} County</h1>
-    <p class="lede">
-      Where to get free help, where cases are heard, and what you can do online. Limits, fees and forms are the same
-      everywhere in California.
-    </p>
-    <p class="cite"><span>checked {c.date_checked}</span></p>
-  </div>
-
-  <div class="two-col">
-    <div>
-      <section aria-labelledby="free-help">
-        <h2 id="free-help">Free help</h2>
-        <p>
-          These offices can explain the forms, the steps and local practices. Small claims advisor help is free; a few
-          very small courts can offer a reduced program instead. <span class="cite">Cal. Code Civ. Proc. § 116.940(c)</span>
+  <section class="wrap sr-hero">
+    <Breadcrumb items={[{ href: "/states/", label: "State rules" }, { href: "/states/ca/", label: "California" }, { href: "/states/ca/counties/", label: "Counties" }, { label: c.county }]} />
+    <div class="sr-title-row">
+      <h1 class:list={["display", "sr-title", { "is-long": c.county.length > 9 }]}>{c.county} County</h1>
+      <div class="sr-meta">
+        <p class="small muted">{c.court_name}</p>
+        <p class="cite">
+          {c.small_claims_page_url && <a href={c.small_claims_page_url} rel="noopener">Court's small claims page</a>}
+          <span>Checked {c.date_checked}</span>
         </p>
-        <div class="grid cols-2 help-grid">
-          <div class="card help-card">
-            <p class="card-detail">Small claims advisor</p>
-            <h3>
-              {adv?.provider ?? "Not found yet"}
-              {u("small_claims_advisor") && <> <span class="badge unverified">Unverified</span></>}
-            </h3>
-            {adv ? (
-              <>
-                {adv.free !== false && <p><span class="tag small">Free</span></p>}
-                {adv.format && <p>{adv.format}</p>}
-                <ul class="contact-list">
-                  {adv.phone && <li><span class="contact-label">Phone</span> {advTel ? <a href={advTel}>{adv.phone}</a> : adv.phone}</li>}
-                  {adv.email && <li><span class="contact-label">Email</span> <a href={`mailto:${adv.email}`}>{adv.email}</a></li>}
-                </ul>
-                {adv.url && <p><a class="link-arrow" href={adv.url} rel="noopener">{c.county} County small claims advisor website</a></p>}
-                {adv.notes && <p class="hint">{adv.notes}</p>}
-              </>
-            ) : (
-              <p>We haven't found a named advisor program yet. Ask the court's self-help center or clerk.</p>
-            )}
-          </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="card help-card">
-            <p class="card-detail">Self-help center</p>
-            <h3>
-              {shc?.name ?? "Not found yet"}
-              {u("self_help_center") && <> <span class="badge unverified">Unverified</span></>}
-            </h3>
-            {shc ? (
-              <>
-                <ul class="contact-list">
-                  {shc.address && <li><span class="contact-label">Address</span> {shc.address}</li>}
-                  {shc.phone && <li><span class="contact-label">Phone</span> {shcTel ? <a href={shcTel}>{shc.phone}</a> : shc.phone}</li>}
-                </ul>
-                {shc.url && <p><a class="link-arrow" href={shc.url} rel="noopener">{c.county} County self-help center website</a></p>}
-                {shc.notes && <p class="hint">{shc.notes}</p>}
-              </>
-            ) : (
-              <p>We haven't found it yet. The <a href="https://selfhelp.courts.ca.gov/" rel="noopener">California Courts self-help guide</a> lists every center.</p>
+  <section class="wrap" aria-labelledby="free-help">
+    <div class="sr-topics-top">
+      <h2 id="free-help" class="lbl lbl-ink">Free help</h2>
+      <p class="cite"><a href={advisorLaw} rel="noopener">CCP 116.940(c)</a></p>
+    </div>
+    <div class="help">
+      <article class="help-main c-states">
+        <p class="lbl help-k">Small claims advisor{adv?.free !== false && " · free"}</p>
+        <h3 class="h2 help-name">
+          {adv?.provider ?? "Not found yet"}
+          {u("small_claims_advisor.provider") && <span class="badge unverified">Unverified</span>}
+        </h3>
+        {adv ? (
+          <>
+            {adv.phone && (
+              <p class:list={["help-phone", { many: advPhones.length > 1 }]}>
+                {advPhones.map((ph, i) => (
+                  <span class="ph">{telHref(ph) ? <a href={telHref(ph)!}>{ph}</a> : ph}</span>
+                ))}
+                {u("small_claims_advisor.phone") && <span class="badge unverified">Unverified</span>}
+              </p>
             )}
+            {adv.format && (
+              <p class="help-text">
+                {adv.format}
+                {u("small_claims_advisor.format") && <> <span class="badge unverified">Unverified</span></>}
+              </p>
+            )}
+            <div class="help-links">
+              {adv.url && <a class="go" href={adv.url} rel="noopener">Advisor website</a>}
+              {adv.email && <a class="go" href={`mailto:${adv.email}`}>{adv.email}</a>}
+            </div>
+          </>
+        ) : (
+          <p class="help-text">We haven't found a named advisor program yet. Ask the court's self-help center or clerk.</p>
+        )}
+      </article>
+
+      <article class="help-side">
+        <p class="lbl">Self-help center</p>
+        <h3 class="h3">
+          {shc?.name ?? "Not found yet"}
+          {u("self_help_center") && <span class="badge unverified">Unverified</span>}
+        </h3>
+        {shc ? (
+          <>
+            {shc.phone && <p class="help-phone sm">{shcTel ? <a href={shcTel}>{shc.phone}</a> : shc.phone}</p>}
+            {shc.address && <p class="help-text">{shc.address}</p>}
+            {shc.url && <a class="go" href={shc.url} rel="noopener">Self-help center website</a>}
+          </>
+        ) : (
+          <p class="help-text">The <a href="https://selfhelp.courts.ca.gov/" rel="noopener">California Courts self-help guide</a> lists every center.</p>
+        )}
+      </article>
+    </div>
+    {(adv?.notes || shc?.notes) && (
+      <details class="acc help-more">
+        <summary>Hours and details<span class="pm" aria-hidden="true"></span></summary>
+        <div class="acc-body">
+          {adv?.notes && <p><strong>Advisor.</strong> {adv.notes}</p>}
+          {shc?.notes && <p><strong>Self-help center.</strong> {shc.notes}</p>}
+        </div>
+      </details>
+    )}
+  </section>
+
+  <section class="wrap section" aria-labelledby="where">
+    <div class="sec-head">
+      <p class="lbl">Courthouses</p>
+      <div>
+        <h2 id="where" class="h2">
+          Where cases are heard.
+          {u("small_claims_locations") && <span class="badge unverified">Unverified</span>}
+        </h2>
+        <p class="lede">{locs.length === 1 ? "One location." : `${locs.length} locations.`}</p>
+      </div>
+    </div>
+    {locs.length ? (
+      <ul class="locs">
+        {locs.map((l, i) => (
+          <li class="card loc-card">
+            <span class="key" aria-hidden="true">{String.fromCharCode(65 + (i % 26))}</span>
+            <h3 class="h4">{l.name}</h3>
+            <p class="loc-addr">{l.address}</p>
+            {l.notes && <p class="loc-note">{l.notes}</p>}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>Not found yet. The court's small claims page should list it.</p>
+    )}
+  </section>
+
+  <section class="wrap section" aria-labelledby="online">
+    <div class="sec-head">
+      <p class="lbl">Online</p>
+      <div>
+        <h2 id="online" class="sr-only">Online and remote options</h2>
+        <div class="fx3 two" style="margin-top:0">
+          <div class="fx">
+            <p class="num fx-n word">{yesNoLabel[c.e_filing ?? ""] ?? c.e_filing ?? "Not found"}{u("e_filing") && <> <span class="badge unverified">Unverified</span></>}</p>
+            <p class="fx-t">File online{c.e_filing_notes ? `. ${c.e_filing_notes}` : "."}</p>
+          </div>
+          <div class="fx">
+            <p class="num fx-n word">{yesNoLabel[c.remote_hearings ?? ""] ?? c.remote_hearings ?? "Not found"}{u("remote_hearings") && <> <span class="badge unverified">Unverified</span></>}</p>
+            <p class="fx-t">Remote hearings (by video or phone).</p>
           </div>
         </div>
-      </section>
-
-      <UnverifiedNote count={c.unverified.length} of={c.unverified.length === 1 ? "detail on this page is unverified" : "details on this page are unverified"} />
-
-      <section aria-labelledby="where">
-        <h2 id="where">
-          Where cases are heard
-          {u("small_claims_locations") && <> <span class="badge unverified">Unverified</span></>}
-        </h2>
-        {c.small_claims_locations.length ? (
-          <ul class="loc-list">
-            {c.small_claims_locations.map((l) => (
-              <li class="loc">
-                <strong>{l.name}</strong>
-                <span class="loc-address">{l.address}</span>
-                {l.notes && <span class="hint">{l.notes}</span>}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Not found yet. The court's small claims page should list it.</p>
+        {c.local_notes && (
+          <details class="acc" style="margin-top:32px">
+            <summary>Local details{u("local_notes") && <span class="badge unverified">Unverified</span>}<span class="pm" aria-hidden="true"></span></summary>
+            <div class="acc-body"><p>{c.local_notes}</p></div>
+          </details>
         )}
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section aria-labelledby="online">
-        <h2 id="online">Online and remote options</h2>
-        <dl class="facts">
-          <div class="fact">
-            <dt>File online {u("e_filing") && <span class="badge unverified">Unverified</span>}</dt>
-            <dd>
-              <div class="value">{yesNoLabel[c.e_filing ?? ""] ?? c.e_filing ?? "—"}</div>
-              {c.e_filing_notes && <div class="hint">{c.e_filing_notes}</div>}
-            </dd>
-          </div>
-          <div class="fact">
-            <dt>Remote hearings {u("remote_hearings") && <span class="badge unverified">Unverified</span>}</dt>
-            <dd><div class="value">{yesNoLabel[c.remote_hearings ?? ""] ?? c.remote_hearings ?? "—"}</div></dd>
-          </div>
-          {c.local_notes && (
-            <div class="fact">
-              <dt>Local details {u("local_notes") && <span class="badge unverified">Unverified</span>}</dt>
-              <dd><div class="value">{c.local_notes}</div></dd>
-            </div>
-          )}
-        </dl>
-        {c.notes && <p class="hint"><strong>Research note:</strong> {c.notes}</p>}
-      </section>
-
-      <section aria-labelledby="sources">
-        <h2 id="sources">Sources</h2>
-        <ul class="source-list">
-          {c.sources.map((s) => (
+  <section class="wrap section" aria-labelledby="sources">
+    <div class="sec-head">
+      <p class="lbl">Sources</p>
+      <div>
+        <h2 id="sources" class="h3">Checked {c.date_checked} on the court's and county's own sites.</h2>
+        {c.unverified.length > 0 && (
+          <UnverifiedNote compact count={c.unverified.length} of={c.unverified.length === 1 ? "detail on this page is unverified" : "details on this page are unverified"} />
+        )}
+        <ul class="src-list" style="margin-top:24px">
+          {srcMain.map((s) => (
             <li>
-              <a href={s.url} rel="noopener">{sourceLinkText(s.url)}</a>
-              {s.type && <span class="tag small">{sourceTypeLabel[s.type] ?? s.type}</span>}
-              {s.what && <div class="hint">Used for: {humanizeFields(s.what)}</div>}
+              <span class="lbl">{sourceTypeLabel[s.type ?? ""] ?? "Source"}</span>
+              <a class="cite" href={s.url} rel="noopener">{sourceLinkText(s.url)}</a>
+              {s.what && <span class="src-what">Used for: {humanizeFields(s.what)}</span>}
             </li>
           ))}
         </ul>
-      </section>
+        {srcMore.length > 0 && (
+          <details class="acc src-more">
+            <summary>{srcMore.length} more sources<span class="pm" aria-hidden="true"></span></summary>
+            <div class="acc-body">
+              <ul class="src-list">
+                {srcMore.map((s) => (
+                  <li>
+                    <span class="lbl">{sourceTypeLabel[s.type ?? ""] ?? "Source"}</span>
+                    <a class="cite" href={s.url} rel="noopener">{sourceLinkText(s.url)}</a>
+                    {s.what && <span class="src-what">Used for: {humanizeFields(s.what)}</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
+        )}
+        {c.notes && (
+          <details class="acc" style="margin-top:24px">
+            <summary>Research note<span class="pm" aria-hidden="true"></span></summary>
+            <div class="acc-body"><p>{c.notes}</p></div>
+          </details>
+        )}
+      </div>
     </div>
+  </section>
 
-    <aside class="aside state-aside" aria-label={`${c.county} County quick links`}>
-      <div class="card tinted">
-        <h2>Statewide rules</h2>
-        <p>Limits, fees, forms and appeal rules are the same in every California county.</p>
-        <ul class="link-list">
-          <li><a href="/states/ca/">California small claims rules</a></li>
-          {c.small_claims_page_url && <li><a href={c.small_claims_page_url} rel="noopener">{c.county} County court's small claims page</a></li>}
-          <li><a href="/states/ca/counties/">All 58 counties</a></li>
-        </ul>
+  <section class="wrap section" aria-labelledby="next-title">
+    <h2 id="next-title" class="sr-only">More for California</h2>
+    <div class="sr-next">
+      <div class="card card-link">
+        <h3 class="h4"><a href="/states/ca/">California rules</a></h3>
+        <p>Limits, fees, forms and deadlines. The same in every county.</p>
+        <span class="go" aria-hidden="true">Statewide</span>
       </div>
-      <div class="card">
-        <h2>Guides and tools</h2>
-        <ul class="link-list">
-          <li><a href="/steps/#before-you-decide">Options besides going to court</a></li>
-          <li><a href="/steps/">How a small claims case works</a></li>
-          <li><a href="/worth-it/?state=ca">Cost calculator for California</a></li>
-          <li><a href="/demand-letter/">Demand-letter tool</a></li>
-        </ul>
+      <div class="card card-link">
+        <h3 class="h4"><a href="/states/ca/counties/">All 58 counties</a></h3>
+        <p>Compare free help and online options.</p>
+        <span class="go" aria-hidden="true">Counties</span>
       </div>
-    </aside>
-  </div>
+      <div class="card card-link">
+        <h3 class="h4"><a href="/steps/">How a case works</a></h3>
+        <p>Five steps, from asking to collecting.</p>
+        <span class="go" aria-hidden="true">Learn</span>
+      </div>
+    </div>
+  </section>
 </Site>
+
+<style>
+  .help {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 8px;
+  }
+  .help-main,
+  .help-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: clamp(24px, 3vw, 40px);
+    border-radius: var(--r-lg);
+  }
+  :where(.help > article > *) {
+    margin: 0;
+  }
+  .help-main {
+    background: var(--t);
+    color: var(--on);
+    min-height: 360px;
+  }
+  .help-main .lbl,
+  .help-main a,
+  .help-main .help-text {
+    color: var(--on);
+  }
+  .help-main .help-k {
+    margin-bottom: auto;
+    padding-bottom: 24px;
+  }
+  .help-name {
+    max-width: 22ch;
+  }
+  .help-side {
+    background: var(--panel);
+  }
+  .help-side .h3 {
+    font-size: clamp(22px, 1.8vw, 28px);
+  }
+  .help-phone {
+    font-family: var(--f-display);
+    font-size: clamp(26px, 2.6vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-variant-numeric: tabular-nums;
+  }
+  .help-phone .ph {
+    display: block;
+  }
+  .help-phone.many {
+    font-size: clamp(22px, 2vw, 30px);
+  }
+  .help-phone.sm {
+    font-size: clamp(22px, 2vw, 28px);
+  }
+  .help-phone a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .help-text {
+    max-width: 52ch;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .help-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    margin-top: 8px;
+    overflow-wrap: anywhere;
+  }
+  .help .badge {
+    margin-left: 8px;
+  }
+  .help-more {
+    margin-top: 16px;
+  }
+  .locs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 8px;
+  }
+  .loc-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 200px;
+  }
+  :where(.loc-card > *) {
+    margin: 0;
+  }
+  .loc-card .key {
+    margin-bottom: auto;
+    color: var(--ink-3);
+  }
+  .loc-card .h4 {
+    margin-top: 20px;
+  }
+  .loc-addr {
+    color: var(--ink);
+  }
+  .loc-note {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-3);
+  }
+  @media (max-width: 860px) {
+    .help {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .help-main {
+      min-height: 0;
+    }
+    .loc-card {
+      min-height: 0;
+    }
+  }
+</style>

@@ -1,155 +1,176 @@
 ---
+// About (Option A): mission, principles, who it's for, what the data shows (five charts), how facts are checked,
+// and #not-advice (tool notices link to /about/#not-advice: keep that id).
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
-import SideMenu from "../../components/SideMenu.astro";
 import Term from "../../components/Term.astro";
 import TileMapLimits from "../../components/TileMapLimits.astro";
 import ChartLimitChanges from "../../components/ChartLimitChanges.astro";
-import ChartFees from "../../components/ChartFees.astro";
 import ChartRules from "../../components/ChartRules.astro";
 import ChartCollect from "../../components/ChartCollect.astro";
 import ChartPhilly from "../../components/ChartPhilly.astro";
-import StatTile from "../../components/StatTile.astro";
 import "../../styles/features.css";
 import { denver, evidenceChecked } from "../../lib/stats";
 
-const menu = [
-  { href: "#mission", label: "What Fair Claim is" },
-  { href: "#who", label: "Who it's for" },
-  { href: "#funding", label: "How it's paid for" },
-  { href: "#checking", label: "How we check facts" },
-  { href: "#data", label: "What the data shows" },
-  { href: "#not-advice", label: "Information, not advice" },
+const principles = [
+  { k: "A", t: "Free", d: "No ads, no sponsors, nothing for sale, no accounts. It isn't paid for by anyone.", c: "c-cobalt" },
+  { k: "B", t: "Private", d: "No analytics, no tracking cookies, no third-party scripts or fonts. What you type stays in your tab.", c: "c-tomato" },
+  { k: "C", t: "Sourced and dated", d: "Every rule links to the law or the court, with the date we last checked it.", c: "c-sage" },
+  { k: "D", t: "Neutral", d: "It won't talk you into suing, or out of it. Costs and the odds of being paid sit next to the steps.", c: "c-lilac" },
+];
+const who = [
+  { t: "Tenants", d: "A landlord kept a security deposit." },
+  { t: "Customers", d: "A business or contractor owes a refund or a repair." },
+  { t: "Small businesses", d: "An invoice went unpaid. Some states set a lower limit for businesses." },
+  { t: "Anyone weighing it up", d: "Including whether it's worth the time at all." },
 ];
 ---
-<Site title="About" description="What Fair Claim is, who it's for, how facts are checked, the numbers behind small claims court, and where to get free advice.">
-  <Breadcrumb items={[{ label: "About" }]} />
-  <div class="with-sidemenu">
-    <SideMenu items={menu} />
-    <div>
-      <div class="narrow">
-        <p class="eyebrow">About</p>
-        <h1>About Fair Claim</h1>
-        <p class="lede">
-          A free, neutral source of information about small claims court in the United States. It gives legal
-          information, not legal advice, and it isn't here to talk you into suing or out of it.
+<Site
+  title="About"
+  description="What Fair Claim is, how facts are checked, the numbers behind small claims court, and where to get free advice."
+  bleed
+  color="c-about"
+>
+  <section class="wrap page-hero">
+    <Breadcrumb items={[{ label: "About" }]} />
+    <h1 class="display-xl ab-title">Information about small claims court that isn't trying to <span class="soft">talk you into anything.</span></h1>
+    <div class="ab-intro">
+      <p class="lede">Small claims court can settle a money dispute without a lawyer. It can also cost more than it returns, and winning doesn't mean being paid.</p>
+      <p class="muted">Fair Claim sets out both sides: your state's rules, the steps, the costs, the evidence on collecting, and other routes. You decide. It's an independent project, not a court, a government agency or a law firm.</p>
+    </div>
+  </section>
+
+  <section class="wrap" id="mission" aria-label="Principles">
+    <ul class="principles">
+      {principles.map((p) => (
+        <li class={`pr ${p.c}`}>
+          <span class="t-top"><span class="key" aria-hidden="true">{p.k}</span><span class="t-dot" aria-hidden="true"></span></span>
+          <h2 class="h3">{p.t}</h2>
+          <p>{p.d}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap section" id="who" aria-labelledby="who-title">
+    <div class="sec-head">
+      <p class="lbl">Who it's for</p>
+      <div>
+        <h2 class="h2" id="who-title">People with a money dispute, on either side of it.</h2>
+        <ul class="ab-who" style="margin-top:36px">
+          {who.map((w) => <li><strong>{w.t}</strong><span>{w.d}</span></li>)}
+        </ul>
+        <p class="note-strip ab-sued">
+          <span class="lbl">Been sued?</span>
+          <span>A guide for defendants is planned. Until then: don't ignore the papers. Missing the hearing usually means a <Term slug="default-judgment" />.</span>
         </p>
-
-        <section class="about-section" id="mission" aria-labelledby="h-mission">
-          <h2 id="h-mission">What Fair Claim is</h2>
-          <p>
-            Small claims court can be a practical way to settle a money dispute without a lawyer. It can also cost more
-            time and money than it returns, and winning doesn't mean you'll be paid. Fair Claim sets out both sides:
-            the rules in your state, the steps, the costs, the evidence on collecting, and the alternatives.
-          </p>
-          <p>
-            The goal is that you can make your own decision with the facts in front of you. Nothing here is a
-            recommendation to sue, and nothing tells you how your own case will go.
-          </p>
-        </section>
-
-        <section class="about-section" id="who" aria-labelledby="h-who">
-          <h2 id="h-who">Who it's for</h2>
-          <ul>
-            <li><strong>Tenants</strong> whose landlord kept a security deposit.</li>
-            <li><strong>Customers</strong> owed a refund or repair by a business or contractor.</li>
-            <li><strong>Small businesses and freelancers</strong> with an unpaid invoice. Some states set a lower limit for businesses.</li>
-            <li><strong>Anyone weighing it up</strong>, including whether it's worth the time at all.</li>
-          </ul>
-          <p>
-            A guide for people who've <em>been</em> sued, most often by a debt collector, is planned for a later version.
-            If that's you, don't ignore the papers: missing the hearing usually means a <Term slug="default-judgment" />.
-          </p>
-        </section>
-
-        <section class="about-section" id="funding" aria-labelledby="h-funding">
-          <h2 id="h-funding">How it's paid for</h2>
-          <p>
-            It isn't. Fair Claim is free, has no ads, sells nothing and has no sponsors. There are no accounts and no
-            tracking: no analytics, no tracking cookies, and no third-party scripts or fonts. What you type into
-            the tools stays in your browser tab and is never stored or sent anywhere. It's an independent project, not a
-            court, a government agency or a law firm.
-          </p>
-        </section>
-
-        <section class="about-section" id="checking" aria-labelledby="h-checking">
-          <h2 id="h-checking">How we check facts</h2>
-          <p>
-            Every rule links to the law or the court's own website and shows the date we last checked it. When we
-            haven't been able to confirm something against a primary source, it's marked
-            {" "}<span class="badge unverified">unverified</span>. Statistics come only from the studies and reports we
-            cite; where a figure comes from a summary or an informal survey, we say so. If the court tells you something
-            different, the court is right.
-          </p>
-          <p><a class="link-arrow" href="/sources/">Read how we check, and how often</a></p>
-        </section>
       </div>
+    </div>
+  </section>
 
-      <section class="about-section" id="data" aria-labelledby="h-data">
-        <div class="narrow">
-          <h2 id="h-data">What the data shows</h2>
-          <p>
-            Six views of small claims in the US, built from our 50-state research and the few published studies. There
-            is no national dataset on small claims outcomes, and courts generally don't track whether winners get paid,
-            so the evidence on collecting is thin and old. We show it anyway, with its limits stated.
-          </p>
+  <section class="wrap section" id="data" aria-labelledby="data-title">
+    <div class="sec-head">
+      <p class="lbl">What the data shows</p>
+      <div>
+        <h2 class="h2" id="data-title">Five views of small claims in the US.</h2>
+        <p class="lede">From our 50-state research and the few published studies. Evidence on collecting is thin and old, so it's shown with its limits.</p>
+      </div>
+    </div>
+
+    <div class="charts">
+      <TileMapLimits headingLevel={3} class="wide" />
+      <ChartLimitChanges headingLevel={3} />
+      <ChartRules headingLevel={3} />
+
+      <div class="ab-paid wide" id="chart-denver" role="group" aria-labelledby="denver-title">
+        <div class="chart-head">
+          <p class="lbl">Getting paid · one court</p>
+          <h3 class="chart-title" id="denver-title">Winning isn't the same as being paid</h3>
+          <p class="chart-sub">One study of Denver's small claims court.</p>
+        </div>
+        <div class="stats">
+          <div class="stat c-sage"><span class="s-bar"></span><p class="num">{denver.wonPct}%</p><p class="s-label">of plaintiffs who came to the hearing won</p></div>
+          <div class="stat c-tomato"><span class="s-bar"></span><p class="num">{denver.collectedNothingPct}%</p><p class="s-label">of those winners never collected anything</p></div>
+          <div class="stat c-sand"><span class="s-bar"></span><p class="num">{denver.dollarsPaidPct}%</p><p class="s-label">of all the money awarded was actually paid</p></div>
+        </div>
+        <div class="chart-foot">
+          <p class="cite"><span>Source</span><a href={denver.source.url} rel="noopener">{denver.source.label}</a><span>Checked {evidenceChecked}</span></p>
+          <p class="hint">{denver.caveat}</p>
+        </div>
+      </div>
+      <ChartCollect headingLevel={3} class="wide" />
+
+      <ChartPhilly headingLevel={3} class="wide" />
+    </div>
+  </section>
+
+  <section class="wrap section" id="checking" aria-labelledby="chk-title">
+    <div class="sec-head">
+      <p class="lbl">How we check facts</p>
+      <div class="ab-body">
+        <h2 class="h3" id="chk-title">Primary sources first, and a date on everything.</h2>
+        <p style="margin-top:18px">
+          Every rule links to the law or the court's own site, with the date we checked it. Anything not yet confirmed is
+          marked <span class="badge unverified">unverified</span>. Statistics come only from the studies we cite.
+        </p>
+        <p><strong>If the court tells you something different, the court is right.</strong></p>
+        <p><a class="go" href="/sources/">How we check, and how often</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="not-advice" aria-labelledby="not-advice-title">
+    <div class="sec-head">
+      <p class="lbl">Information, not advice</p>
+      <div>
+        <h2 class="h2" id="not-advice-title">Fair Claim explains the rules. Only someone who knows your facts can tell you what to do.</h2>
+        <div class="ab-def-wrap">
+        <div class="ab-def">
+          <div class="is-us">
+            <p class="lbl">What you get here</p>
+            <p class="h4">Legal information</p>
+            <p>How the rules and the process work in general: the limit, which form starts a case, how long you have to appeal.</p>
+          </div>
+          <div>
+            <p class="lbl">What you won't</p>
+            <p class="h4">Legal advice</p>
+            <p>Whether your claim is good, how much to ask for, what to say. Our tools do arithmetic and fill in templates; they don't judge your case.</p>
+          </div>
         </div>
 
-        <h3>The rules</h3>
-        <TileMapLimits headingLevel={4} />
-        <ChartLimitChanges headingLevel={4} />
-        <ChartFees headingLevel={4} />
-        <ChartRules headingLevel={4} />
-
-        <h3>Getting paid</h3>
-        <ul class="stat-tiles">
-          <StatTile value={`${denver.wonPct}%`} label="of plaintiffs who filed and came to the hearing won." />
-          <StatTile value={`${denver.collectedNothingPct}%`} label="of those winners never collected any of the judgment." />
-          <StatTile value={`${denver.dollarsPaidPct}%`} label="of all the money awarded was actually paid." />
-        </ul>
-        <p class="cite">
-          <span>Denver small claims court:</span>
-          <a href={denver.source.url} rel="noopener">{denver.source.label}</a>
-          <span>checked {evidenceChecked}</span>
-        </p>
-        <ChartCollect headingLevel={4} />
-
-        <h3>Who uses small claims</h3>
-        <ChartPhilly headingLevel={4} />
-      </section>
-
-      <section class="about-section narrow" id="not-advice" aria-labelledby="h-not-advice">
-        <h2 id="h-not-advice">Information, not advice</h2>
-        <p>
-          <strong>Legal information</strong> explains how the rules and the process work in general: what the limit is,
-          which form starts a case, how long you have to appeal. That's what Fair Claim gives you.
-        </p>
-        <p>
-          <strong>Legal advice</strong> applies the law to your situation: whether you have a good claim, how much to
-          ask for, what to say at the hearing. Only someone who knows the facts of your case can give that, and
-          Fair Claim can't. Our tools do arithmetic and fill in templates; they don't judge your case.
-        </p>
-        <h3>Where to get free help with your own case</h3>
-        <ul>
+        <h3 class="h3 help-head">Where to get free help with your own case</h3>
+        <ul class="help">
           <li>
-            <strong>California small claims advisors.</strong> California law requires counties to provide free small
-            claims advisor help (<a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.260" rel="noopener">CCP 116.260</a>).
-            Find yours on our <a href="/states/ca/counties/">California county pages</a>.
+            <div class="card card-link">
+              <p class="lbl">California</p>
+              <h3 class="h4"><a href="/states/ca/counties/">Free small claims advisors</a></h3>
+              <p>Counties must offer free advisor help (CCP 116.260).</p>
+              <span class="go">County pages</span>
+            </div>
           </li>
           <li>
-            <strong>Court self-help centers.</strong> Many courts run free help centers and websites for people without
-            lawyers. Each <a href="/states/">state page</a> links to that state's official self-help site.
+            <div class="card card-link">
+              <p class="lbl">Every state</p>
+              <h3 class="h4"><a href="/states/">Court self-help centers</a></h3>
+              <p>Free help for people without lawyers. Each state page links to its official site.</p>
+              <span class="go">State rules</span>
+            </div>
           </li>
           <li>
-            <strong>Legal aid.</strong> Nonprofit <Term slug="legal-aid" /> programs give free help to people with low
-            incomes. <a href="https://www.lawhelp.org/" rel="noopener">LawHelp.org</a> lists programs by state.
+            <div class="card card-link">
+              <p class="lbl">Low income</p>
+              <h3 class="h4"><a href="https://www.lawhelp.org/" rel="noopener">Legal aid</a></h3>
+              <p>Nonprofit <Term slug="legal-aid" plain>legal aid</Term> programs, listed by state on LawHelp.org.</p>
+              <span class="go">LawHelp.org</span>
+            </div>
           </li>
         </ul>
-        <p>
-          Before you act on anything you read here, check the current rule with your court. Laws, fees and deadlines
-          change.
+        <p class="note-strip" style="margin-top:24px">
+          <span class="lbl">Before you act</span>
+          <span>Check the current rule with your court. Laws, fees and deadlines change.</span>
         </p>
-      </section>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </Site>

@@ -1,0 +1,114 @@
+---
+// Option A component samples for the /design/ gallery. Rendered once per theme panel; `k` keeps ids unique.
+import Term from "../Term.astro";
+import StatTile from "../StatTile.astro";
+interface Props {
+  k: string;
+}
+const { k } = Astro.props;
+---
+<div class="ds-block">
+  <p class="lbl">Tiles · a choice (tap one) · .tile + .key, .t-label, .t-sub</p>
+  <div class="tiles ds-mini-tiles" role="radiogroup" aria-label="Sample tiles">
+    <label class="tile c-cobalt"><input type="radio" name={`ds-t-${k}`} checked /><span class="t-top"><span class="key" aria-hidden="true">A</span><span class="check" aria-hidden="true"></span></span><span><span class="t-label">Selected</span><span class="t-sub">Fills with its slot</span></span></label>
+    <label class="tile c-tomato"><input type="radio" name={`ds-t-${k}`} /><span class="t-top"><span class="key" aria-hidden="true">B</span><span class="check" aria-hidden="true"></span></span><span><span class="t-label">Tomato slot</span><span class="t-sub">Neutral until chosen</span></span></label>
+    <label class="tile c-sage"><input type="radio" name={`ds-t-${k}`} /><span class="t-top"><span class="key" aria-hidden="true">C</span><span class="check" aria-hidden="true"></span></span><span><span class="t-label">Sage slot</span><span class="t-sub">Hairline in light</span></span></label>
+  </div>
+</div>
+
+<div class="ds-block">
+  <p class="lbl">Doors · .doors > a.tile.fill.door</p>
+  <div class="doors ds-mini-doors">
+    <a class="tile fill door c-learn" href="/steps/"><span class="t-top"><span class="key" aria-hidden="true">A</span></span><span class="door-body"><span class="door-title">How it works</span><span class="door-text">Five steps.</span></span><span class="door-foot"><span>Learn</span><span class="door-arrow" aria-hidden="true"></span></span></a>
+    <a class="tile fill door c-states" href="/states/"><span class="t-top"><span class="key" aria-hidden="true">B</span></span><span class="door-body"><span class="door-title">State rules</span><span class="door-text">51 places.</span></span><span class="door-foot"><span>Rules</span><span class="door-arrow" aria-hidden="true"></span></span></a>
+    <a class="tile fill door c-tools" href="/tools/"><span class="t-top"><span class="key" aria-hidden="true">C</span></span><span class="door-body"><span class="door-title">Tools</span><span class="door-text">Three of them.</span></span><span class="door-foot"><span>Tools</span><span class="door-arrow" aria-hidden="true"></span></span></a>
+  </div>
+</div>
+
+<div class="ds-block">
+  <p class="lbl">Fields · .fields > .field (label inside, big value)</p>
+  <div class="fields">
+    <div class="field">
+      <label for={`ds-amt-${k}`}>Amount owed <span class="f-req">Required</span></label>
+      <div class="affix"><span aria-hidden="true">$</span><input id={`ds-amt-${k}`} type="text" inputmode="decimal" value="2,400" aria-describedby={`ds-amt-h-${k}`} /></div>
+      <p class="f-hint" id={`ds-amt-h-${k}`}>Only what you can back up.</p>
+    </div>
+    <div class="field has-error">
+      <label for={`ds-days-${k}`}>Days to pay</label>
+      <input id={`ds-days-${k}`} type="text" inputmode="numeric" value="0" aria-invalid="true" aria-describedby={`ds-days-e-${k}`} />
+      <p class="f-error" id={`ds-days-e-${k}`}>Give at least 7 days.</p>
+    </div>
+  </div>
+</div>
+
+<div class="ds-block">
+  <p class="lbl">Notice · .notice (+ .n-icon, numbered list)</p>
+  <div class="notice c-sage">
+    <span class="n-icon" aria-hidden="true">i</span>
+    <div>
+      <p class="h4">Before you use this tool</p>
+      <ol><li>It does arithmetic. It doesn't judge your case.</li><li>Nothing you type is stored or sent.</li></ol>
+    </div>
+  </div>
+  <p class="note-strip"><span class="lbl">Please note</span><span>A one-line strip above a tool.</span></p>
+</div>
+
+<div class="ds-block">
+  <p class="lbl">Tabs · [data-tabs] > .tabs.tiles + .tab-panel</p>
+  <div data-tabs>
+    <div class="tabs tiles" role="tablist" aria-label="Sample tabs">
+      <button class="tile tab c-tomato" type="button" role="tab" id={`ds-ta-${k}`} aria-controls={`ds-pa-${k}`} aria-selected="true"><span class="t-top"><span class="key" aria-hidden="true">A</span></span><span class="t-label">Limit</span></button>
+      <button class="tile tab c-cobalt" type="button" role="tab" id={`ds-tb-${k}`} aria-controls={`ds-pb-${k}`} aria-selected="false" tabindex="-1"><span class="t-top"><span class="key" aria-hidden="true">B</span></span><span class="t-label">Fees</span></button>
+    </div>
+    <div class="tab-panel" role="tabpanel" id={`ds-pa-${k}`} aria-labelledby={`ds-ta-${k}`}><p style="margin:0">Arrow keys move between tabs.</p></div>
+    <div class="tab-panel" role="tabpanel" id={`ds-pb-${k}`} aria-labelledby={`ds-tb-${k}`} hidden><p style="margin:0">One panel at a time.</p></div>
+  </div>
+</div>
+
+<div class="ds-block">
+  <p class="lbl">Accordion · details.acc</p>
+  <div class="accordions">
+    <details class="acc" open><summary>Open by default<span class="pm" aria-hidden="true"></span></summary><div class="acc-body"><p style="margin:0 0 16px">Detail goes here, out of the way until asked for.</p></div></details>
+    <details class="acc"><summary>Closed<span class="pm" aria-hidden="true"></span></summary><div class="acc-body"><p style="margin:0 0 16px">More detail.</p></div></details>
+  </div>
+</div>
+
+<div class="ds-block">
+  <p class="lbl">Progress · .progress > .seg (.done, .now)</p>
+  <div class="progress c-tomato" role="img" aria-label="Question 3 of 6"><span class="seg done"></span><span class="seg done"></span><span class="seg now"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+</div>
+
+<div class="ds-block">
+  <p class="lbl">Buttons, chips, badges, cite</p>
+  <div class="cluster">
+    <button class="btn" type="button">Primary</button>
+    <button class="btn ghost" type="button">Ghost</button>
+    <button class="btn color c-sage" type="button">Color</button>
+    <button class="btn sm" type="button">Small</button>
+  </div>
+  <div class="tags">
+    <a class="chip" href="#">Chip link</a>
+    <button class="chip" type="button" aria-pressed="true">Selected</button>
+    <span class="chip c-lilac"><span class="d"></span>With dot</span>
+  </div>
+  <p class="cluster">
+    <span class="badge">Neutral</span>
+    <span class="badge unverified">Unverified</span>
+    <span class="badge verified">Verified</span>
+    <span class="badge info">Info</span>
+    <span class="badge error">Error</span>
+  </p>
+  <p class="cite"><a href="#">CCP 116.221</a><span>Checked 2026-11-05</span></p>
+</div>
+
+<div class="ds-block">
+  <p class="lbl">Glossary term · &lt;Term&gt; (hover, focus or tap)</p>
+  <p style="margin:0">Missing the hearing usually means a <Term slug="default-judgment" />, and you may still need a <Term slug="writ-of-execution" /> to collect.</p>
+</div>
+
+<div class="ds-block">
+  <p class="lbl">Stat tile · StatTile</p>
+  <ul class="stat-tiles">
+    <StatTile value="55%" label="of Denver winners never collected anything (Best et al., 1994)." />
+  </ul>
+</div>

@@ -1,0 +1,764 @@
+/* Tool flow (Option A): one question at a time, lettered tiles, input panels, segmented progress.
+   Shared by /worth-it/ and /demand-letter/. Everything is scoped under .fl so nothing leaks.
+   Motion: color and opacity only (--t-fast / --t-med, --ease). Global CSS turns it off for reduced motion.
+
+   States on each question (set by ToolFlow.ts, rendered server-side for the first paint):
+     data-state="now"   the question being answered
+     data-state="done"  answered (still editable: focus or click it to make it current)
+     data-state="next"  the one after the furthest answered: heading only, quieter
+     data-state="later" further ahead: heading only, quietest
+   Without JavaScript every question is open. */
+
+.fl {
+  --fl-num: 92px;
+}
+
+/* ---------------------------------------------------------------- Touch: native feel */
+.fl :is(.tile, .btn, .chip, .fl-jump, .fl-pick button, .link-button) {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.fl :is(.tile, .btn, .chip, .fl-jump, .fl-pick button) {
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* Press feedback: a slight give, on press only (not hover). */
+.fl .tile,
+.fl .btn {
+  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.fl .tile:active {
+  transform: scale(0.985);
+}
+.fl .btn:active {
+  transform: scale(0.97);
+}
+/* Touch screens fake :hover on tap and leave it stuck: undo the hover fill there. */
+@media (hover: none) {
+  .fl .tile:not(:has(> input:checked)):hover {
+    background: var(--panel);
+  }
+  .fl .field:not(:focus-within):hover {
+    background: var(--panel);
+  }
+}
+
+/* ---------------------------------------------------------------- Page layout */
+.fl-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: 64px;
+  padding-top: clamp(32px, 4vw, 56px);
+  padding-bottom: clamp(64px, 8vw, 120px);
+  align-items: start;
+}
+.fl-layout.fl-split {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 56px;
+}
+
+/* Side rail (calculator) */
+.fl-rail-in {
+  position: sticky;
+  top: calc(var(--hdr-h) + 32px);
+  display: grid;
+  gap: 22px;
+}
+.fl-title {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(32px, 2.8vw, 44px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+.fl-intro {
+  margin: 0;
+  max-width: 34ch;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.fl-count {
+  margin: -10px 0 0;
+}
+.fl-index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.fl-jump {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 10px;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.3;
+  text-align: left;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease);
+}
+.fl-jump:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .fl-jump:hover {
+    color: var(--ink);
+  }
+}
+.fl-jump .j-n {
+  font-family: var(--f-mono);
+  font-size: 12px;
+}
+.fl-jump .j-a {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fl-jump .j-a:empty {
+  display: none;
+}
+.fl-jump .j-s {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  transition: background-color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.fl-jump[data-state="done"] {
+  color: var(--ink-2);
+}
+.fl-jump[data-state="done"] .j-s {
+  background: var(--ink-2);
+  border-color: var(--ink-2);
+}
+.fl-jump[data-state="now"] {
+  color: var(--ink);
+}
+.fl-jump[data-state="now"] .j-s {
+  background: var(--t);
+  border-color: var(--t);
+  box-shadow: var(--edge, none);
+}
+.fl-private {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.fl-private .dot {
+  background: var(--t);
+}
+
+/* Mini result in the rail */
+.fl-mini {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 16px 18px;
+  border-radius: var(--r);
+  background: var(--panel);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background-color var(--t-fast) var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .fl-mini:hover {
+    background: var(--panel-hover);
+  }
+}
+.fl-mini:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+.fl-mini .m-out {
+  font-family: var(--f-display);
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.fl-mini .m-nums {
+  font-size: 14px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Strip above the flow */
+.fl-strip {
+  margin: 0 0 8px;
+}
+
+/* ---------------------------------------------------------------- Questions */
+.fl-q {
+  padding-block: 56px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: calc(var(--hdr-h) + 16px);
+}
+.fl-q:first-of-type {
+  border-top: 0;
+}
+.fl-q-head {
+  display: grid;
+  grid-template-columns: var(--fl-num) minmax(0, 1fr);
+  gap: 0 var(--gap);
+  align-items: baseline;
+}
+.fl-q-n {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.fl-q-n::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--t);
+  box-shadow: var(--edge, none);
+  display: none;
+}
+.fl-q[data-state="now"] .fl-q-n {
+  color: var(--ink);
+}
+.fl-q[data-state="now"] .fl-q-n::before {
+  display: inline-block;
+}
+.fl-q-n .q-ok {
+  display: none;
+  width: 12px;
+  height: 12px;
+  background: currentColor;
+  -webkit-mask: var(--icon-check) center / contain no-repeat;
+  mask: var(--icon-check) center / contain no-repeat;
+}
+.fl-q[data-state="done"] .q-ok {
+  display: inline-block;
+}
+.fl-q-title {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: var(--fs-h2);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  transition: color var(--t-med) var(--ease);
+}
+.fl-q-title:focus {
+  outline: none;
+}
+.fl-q-title:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+}
+.fl-q-help {
+  grid-column: 2;
+  margin: 14px 0 0;
+  max-width: 54ch;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.fl-q-body {
+  margin: 32px 0 0 calc(var(--fl-num) + var(--gap));
+  transition: opacity var(--t-med) var(--ease);
+}
+/* A question that opens fades its body in; nothing moves. Only after the first paint (.fl-ready),
+   so nothing fades on page load. */
+@starting-style {
+  .fl-ready .fl-q-body {
+    opacity: 0;
+  }
+}
+.fl-q-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: center;
+  margin: 32px 0 0 calc(var(--fl-num) + var(--gap));
+}
+.fl-q-foot .hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+/* Collapsed (upcoming) questions: heading only, in quieter ink. Large text keeps ≥3:1 in both themes. */
+.js .fl-q:is([data-state="next"], [data-state="later"]) {
+  padding-block: 36px;
+  cursor: pointer;
+}
+.js .fl-q:is([data-state="next"], [data-state="later"]) :is(.fl-q-body, .fl-q-help) {
+  display: none;
+}
+.js .fl-q[data-state="next"] .fl-q-title {
+  color: var(--ink-3);
+}
+.js .fl-q[data-state="later"] .fl-q-title {
+  color: var(--line-strong);
+}
+@media (hover: hover) and (pointer: fine) {
+  .js .fl-q:is([data-state="next"], [data-state="later"]):hover .fl-q-title {
+    color: var(--ink-2);
+  }
+}
+.js .fl-q:not([data-state="now"]) .fl-q-foot {
+  display: none;
+}
+/* Answered questions stay fully readable and editable. */
+
+/* Sub-question inside a question */
+.fl-sub {
+  margin: 40px 0 14px;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.fl-sub:first-child {
+  margin-top: 0;
+}
+.fl-group {
+  min-width: 0;
+}
+.fl-group > legend {
+  margin: 0 0 14px;
+  padding: 0;
+  font-family: var(--f-body);
+  font-size: 19px;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.fl-group + .fl-group,
+.fl-group + .fields,
+.fields + .fl-group {
+  margin-top: 40px;
+}
+
+/* ---------------------------------------------------------------- Tiles */
+.fl .tiles {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+.fl .fl-tiles-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.fl .fl-tiles-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.fl .fl-tiles-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.fl .fl-tiles-2 {
+  grid-template-columns: repeat(2, minmax(0, 280px));
+}
+.fl .tile {
+  min-height: 124px;
+}
+.fl .tile .t-pct {
+  font-family: var(--f-display);
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.fl .tile .t-big {
+  display: block;
+  font-family: var(--f-display);
+  font-size: clamp(40px, 4vw, 56px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- Fields */
+.fl .fields {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+}
+.fl .fl-fields-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.fl .fl-fields-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.fl .field {
+  min-height: 116px;
+}
+.fl .field.compact {
+  min-height: 0;
+}
+.fl .field :is(input:not([type="checkbox"], [type="radio"]), select) {
+  font-size: 28px;
+}
+.fl .field.compact :is(input:not([type="checkbox"], [type="radio"]), select) {
+  font-size: 22px;
+}
+.fl .field input[type="date"] {
+  font-size: 24px;
+  min-height: 1.2em;
+}
+.fl .field textarea {
+  font-size: 18px;
+}
+.fl .field .affix input {
+  min-width: 0;
+}
+/* Read-only panel that shows a number we looked up */
+.fl-out {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.fl-out:hover,
+.fl-out:focus-within {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.fl-out .o-n {
+  font-family: var(--f-display);
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.fl-out .o-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.fl-out .o-tag .dot {
+  background: var(--c-sage);
+}
+.fl-out.is-over .o-tag .dot {
+  background: var(--c-tomato);
+}
+.fl-out.is-over .o-tag {
+  color: var(--ink);
+}
+.fl-own {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 8px;
+}
+.fl-own .field {
+  flex: 0 1 260px;
+}
+.fl-reset {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.fl .callout {
+  margin: 16px 0 0;
+}
+.fl-note {
+  margin: 18px 0 0;
+  max-width: 70ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+.fl-note a {
+  color: var(--ink);
+}
+.fl-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: center;
+  margin: 16px 0 0;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.fl-confirm:empty {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- State picker */
+.fl-pick {
+  margin-top: 8px;
+  padding: 16px;
+  border-radius: var(--r);
+  background: var(--bg-2);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.fl-pick[hidden] {
+  display: none;
+}
+.fl-pick .field {
+  background: var(--panel);
+}
+.fl-pick ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 4px;
+  max-height: 264px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.fl-pick ul button {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: var(--r);
+  background: transparent;
+  font: inherit;
+  font-size: 16px;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .fl-pick ul button:hover {
+    background: var(--panel-hover);
+  }
+}
+.fl-pick ul button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+.fl-pick ul button[aria-pressed="true"] {
+  background: var(--t);
+  color: var(--on);
+  box-shadow: var(--edge, none);
+}
+.fl-pick .p-empty {
+  margin: 12px 4px 0;
+  font-size: 15px;
+  color: var(--ink-3);
+}
+
+/* ---------------------------------------------------------------- Toggles (switch rows) */
+.fl-toggles {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.fl-toggles > li {
+  border-bottom: 1px solid var(--line);
+}
+.fl-toggle {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: start;
+  padding: 16px 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+  cursor: pointer;
+}
+.fl-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 36px;
+  height: 22px;
+  margin: 2px 0 0;
+  cursor: pointer;
+}
+.fl-toggle .tg {
+  position: relative;
+  width: 36px;
+  height: 22px;
+  margin-top: 2px;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  transition: background-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.fl-toggle .tg::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink-2);
+  transition: transform var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
+}
+.fl-toggle input:checked + .tg {
+  background: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+.fl-toggle input:checked + .tg::after {
+  transform: translateX(14px);
+  background: var(--bg);
+}
+.fl-toggle input:focus-visible + .tg {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+.fl-toggle .cite {
+  display: block;
+  margin-top: 6px;
+}
+
+/* ---------------------------------------------------------------- Phone dock (sticky summary at the bottom) */
+.fl-dock {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- Responsive */
+@media (max-width: 1080px) {
+  .fl-layout,
+  .fl-layout.fl-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .fl-rail-in {
+    position: static;
+  }
+  .fl-qnav,
+  .fl-index,
+  .fl-mini {
+    display: none;
+  }
+  .fl-rail-in {
+    gap: 16px;
+  }
+  .fl .fl-tiles-5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 860px) {
+  .fl {
+    --fl-num: 0px;
+  }
+  .fl-q {
+    padding-block: 44px;
+  }
+  .fl-q-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .fl-q-help {
+    grid-column: 1;
+    margin-top: 4px;
+  }
+  .fl-q-body {
+    margin-left: 0;
+    margin-top: 24px;
+  }
+  .fl-q-foot {
+    margin-left: 0;
+  }
+  .js .fl-q:is([data-state="next"], [data-state="later"]) {
+    padding-block: 28px;
+  }
+  .fl-dock {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 0 calc(-1 * var(--pad));
+    padding: 12px var(--pad) calc(12px + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    backdrop-filter: saturate(140%) blur(12px);
+    border-top: 1px solid var(--line);
+    transition: opacity var(--t-fast) var(--ease), visibility var(--t-fast);
+  }
+  .fl-dock[data-off] {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .fl-dock .btn {
+    flex: none;
+    white-space: nowrap;
+  }
+  .fl-dock .d-text {
+    min-width: 0;
+    font-size: 14px;
+    line-height: 1.35;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .fl-dock .d-text strong {
+    display: block;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fl .fl-tiles-4,
+  .fl .fl-tiles-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fl .fl-fields-2,
+  .fl .fl-fields-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .fl .fl-tiles-5,
+  .fl .fl-tiles-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fl .tile {
+    min-height: 108px;
+    gap: 18px;
+  }
+  .fl .field {
+    min-height: 100px;
+  }
+  .fl-pick {
+    padding: 12px;
+  }
+  .fl-pick ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------------------------------------------------------------- Print: only what the page marks as printable */
+@media print {
+  .fl-rail,
+  .fl-dock,
+  .fl-strip,
+  .fl-q {
+    display: none !important;
+  }
+}
+
+/* Starting values aren't answers yet: only show them in the rail once a question is reached. */
+.fl-jump[data-state="todo"] .j-a {
+  display: none;
+}

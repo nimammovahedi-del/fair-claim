@@ -1,71 +1,145 @@
 ---
+// California counties (Option A): free help first, then a filterable table of all 58.
 import Site from "../../../../layouts/Site.astro";
 import Breadcrumb from "../../../../components/Breadcrumb.astro";
 import TableFilter from "../../../../components/TableFilter.astro";
 import UnverifiedNote from "../../../../components/UnverifiedNote.astro";
+import Term from "../../../../components/Term.astro";
+import "../../../../styles/states.css";
 import { counties, yesNoLabel } from "../../../../lib/data";
 
 const uv = (c: (typeof counties)[number], prefix: string) => c.unverified.some((f) => f === prefix || f.startsWith(prefix + "."));
 const withUnverified = counties.filter((c) => c.unverified.length).length;
 const latest = counties.map((c) => c.date_checked).filter(Boolean).sort().at(-1);
+const efileYes = counties.filter((c) => c.e_filing === "yes").length;
+const advisorSrc = "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=116.940";
 ---
-<Site title="California small claims by county" description="Free small claims advisors, self-help centers, courthouses and online options for all 58 California counties.">
-  <Breadcrumb items={[{ href: "/states/", label: "States" }, { href: "/states/ca/", label: "California" }, { label: "Counties" }]} />
-  <div class="narrow">
-    <p class="eyebrow">California</p>
-    <h1>California small claims, county by county</h1>
-    <p class="lede">
-      The rules and fees are the same across California. What changes by county is who can help you for free, where
-      cases are heard, and whether you can file or appear online.
-    </p>
-    <p>
-      Courts must offer free help from a small claims advisor. A few very small courts (1,000 or fewer small claims
-      filings a year) may opt out of a full program but still have to provide basic help.{" "}
-      <span class="cite">Cal. Code Civ. Proc. § 116.940(c)</span>
-    </p>
-    <p class="hint">Last checked {latest}. <a href="/states/ca/">Statewide California rules</a></p>
-  </div>
+<Site
+  title="California small claims by county"
+  description="Free small claims advisors, self-help centers, courthouses and online options for all 58 California counties."
+  color="c-states"
+  bleed
+>
+  <section class="wrap sr-hero">
+    <Breadcrumb items={[{ href: "/states/", label: "State rules" }, { href: "/states/ca/", label: "California" }, { label: "Counties" }]} />
+    <div class="sr-title-row">
+      <h1 class="display sr-title is-long">California, county by county</h1>
+      <div class="sr-meta">
+        <p class="small muted">Rules and fees are the same statewide. Free help and courthouses differ.</p>
+        <p class="cite"><span>Checked {latest}</span><a href="/states/ca/">Statewide rules</a></p>
+      </div>
+    </div>
+  </section>
 
-  <UnverifiedNote count={withUnverified} of="counties have at least one unverified detail" />
-  <TableFilter table="counties-table" label="Find a county" noun="counties" placeholder="County name, like Fresno" />
-  <div class="table-scroll">
-    <table class="table-stack data-table" id="counties-table">
-      <caption>Free help and court access in {counties.length} California counties</caption>
-      <thead>
-        <tr>
-          <th scope="col">County</th>
-          <th scope="col">Free small claims advisor</th>
-          <th scope="col" class="num">Courthouses</th>
-          <th scope="col">File online</th>
-          <th scope="col">Remote hearings</th>
-          <th scope="col">Checked</th>
-        </tr>
-      </thead>
-      <tbody>
-        {counties.map((c) => (
-          <tr data-filter={c.county.toLowerCase()}>
-            <th scope="row"><a href={`/states/ca/counties/${c.slug}/`}>{c.county}</a></th>
-            <td data-label="Free advisor">
-              {c.small_claims_advisor?.provider ?? "Not found yet"}
-              {uv(c, "small_claims_advisor") && <span class="badge unverified">Unverified</span>}
-            </td>
-            <td class="num" data-label="Courthouses">
-              {c.small_claims_locations.length || "—"}
-              {uv(c, "small_claims_locations") && <span class="badge unverified">Unverified</span>}
-            </td>
-            <td data-label="File online">
-              {yesNoLabel[c.e_filing ?? ""] ?? c.e_filing ?? "—"}
-              {uv(c, "e_filing") && <span class="badge unverified">Unverified</span>}
-            </td>
-            <td data-label="Remote hearings">
-              {yesNoLabel[c.remote_hearings ?? ""] ?? c.remote_hearings ?? "—"}
-              {uv(c, "remote_hearings") && <span class="badge unverified">Unverified</span>}
-            </td>
-            <td class="mono" data-label="Checked">{c.date_checked}</td>
+  <section class="wrap" aria-labelledby="help-title">
+    <div class="stats">
+      <div class="stat c-states">
+        <span class="s-bar" aria-hidden="true"></span>
+        <p class="num word">Free</p>
+        <div>
+          <p class="s-label" id="help-title">Help from a <Term slug="small-claims-advisor" /></p>
+          <p class="s-sub">Every court must offer it. Very small courts may run a reduced program.</p>
+        </div>
+        <p class="cite"><a href={advisorSrc} rel="noopener">CCP 116.940(c)</a></p>
+      </div>
+      <div class="stat c-sand">
+        <span class="s-bar" aria-hidden="true"></span>
+        <p class="num">{counties.length}</p>
+        <div><p class="s-label">Counties, each with its own court</p></div>
+      </div>
+      <div class="stat c-sage">
+        <span class="s-bar" aria-hidden="true"></span>
+        <p class="num">{efileYes}</p>
+        <div><p class="s-label">Counties where you can file online</p><p class="s-sub">From each court's website.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="table-title" style="padding-top:clamp(48px,6vw,88px)">
+    <div class="sec-head">
+      <p class="lbl">All counties</p>
+      <div>
+        <h2 id="table-title" class="h2">Find your county.</h2>
+        <p class="lede">Each county page lists the free advisor first, then where cases are heard.</p>
+      </div>
+    </div>
+    <div class="tbl-tools">
+      <TableFilter table="counties-table" label="Find a county" noun="counties" placeholder="Fresno" />
+      <UnverifiedNote compact count={withUnverified} of="counties have an unverified detail" />
+    </div>
+    <div class="table-scroll">
+      <table class="table-stack sr-table" id="counties-table">
+        <caption>Free help and court access in {counties.length} California counties</caption>
+        <thead>
+          <tr>
+            <th scope="col">County</th>
+            <th scope="col">Free advisor</th>
+            <th scope="col" class="num">Courthouses</th>
+            <th scope="col">File online</th>
+            <th scope="col">Remote hearings</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-  <p class="callout" data-filter-empty="counties-table" hidden>No county matches that. Check the spelling, or clear the box to see all 58.</p>
+        </thead>
+        <tbody>
+          {counties.map((c) => (
+            <tr data-filter={c.county.toLowerCase()}>
+              <th scope="row"><a href={`/states/ca/counties/${c.slug}/`}>{c.county}</a></th>
+              <td data-label="Free advisor" class="adv-cell">
+                {c.small_claims_advisor?.provider ?? "Not found yet"}
+                {uv(c, "small_claims_advisor") && <span class="badge unverified">Unverified</span>}
+              </td>
+              <td class="num" data-label="Courthouses">
+                {c.small_claims_locations.length || "—"}
+                {uv(c, "small_claims_locations") && <span class="badge unverified">Unverified</span>}
+              </td>
+              <td data-label="File online">
+                {yesNoLabel[c.e_filing ?? ""] ?? c.e_filing ?? "—"}
+                {uv(c, "e_filing") && <span class="badge unverified">Unverified</span>}
+              </td>
+              <td data-label="Remote hearings">
+                {yesNoLabel[c.remote_hearings ?? ""] ?? c.remote_hearings ?? "—"}
+                {uv(c, "remote_hearings") && <span class="badge unverified">Unverified</span>}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="callout" data-filter-empty="counties-table" hidden>No county matches that. Check the spelling, or clear the box to see all 58.</p>
+    <p class="cite" style="margin-top:16px"><span>All county details checked {latest}</span><a href="/sources/">How we check</a></p>
+  </section>
 </Site>
+
+<style>
+  .tbl-tools {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 8px 24px;
+    align-items: start;
+  }
+  .tbl-tools :global(.unverified-note) {
+    margin: 0;
+  }
+  .adv-cell {
+    max-width: 36ch;
+    color: var(--ink-2);
+  }
+  /* Three stats here, not four */
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (max-width: 860px) {
+    .tbl-tools {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 1080px) {
+    .stats {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .stats :global(.stat) {
+      padding-left: 0 !important;
+      border-right: 0;
+      border-top: 1px solid var(--line);
+    }
+  }
+</style>

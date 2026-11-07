@@ -1,375 +1,172 @@
 ---
-// Design-system gallery for review. Shows tokens and every component in light and dark side by side.
+// Design-system gallery (Option A). Palette with contrast, theme tokens, type scale, and the components side by side
+// in light and dark. Values mirror global.css sections 2–3 and docs/design-system.md; contrast is computed at build.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
-import SideMenu from "../../components/SideMenu.astro";
-import ToolNotice from "../../components/ToolNotice.astro";
-import Samples from "../../components/design/Samples.astro";
+import GallerySamples from "../../components/design/GallerySamples.astro";
+import "../../styles/features.css";
 
-// Keep in sync with src/styles/global.css (sections 2 and 3).
-const colors: { token: string; use: string; light: string; dark: string }[] = [
-  { token: "--bg", use: "Page background", light: "#ffffff", dark: "#23262c" },
-  { token: "--surface", use: "Tinted surfaces, table headers", light: "#f4f5f8", dark: "#2b2f36" },
-  { token: "--surface-2", use: "Hover on surfaces", light: "#e9ebf1", dark: "#353a43" },
-  { token: "--raised", use: "Cards and dialogs", light: "#ffffff", dark: "#2b2f36" },
-  { token: "--ink", use: "Body text", light: "#1b1d22", dark: "#eceef2" },
-  { token: "--ink-2", use: "Secondary text", light: "#3d424b", dark: "#ccd0d7" },
-  { token: "--muted", use: "Hints, captions, citations", light: "#5a606a", dark: "#a5abb5" },
-  { token: "--border", use: "Dividers", light: "#d6d9e0", dark: "#3f444d" },
-  { token: "--border-strong", use: "Form control borders", light: "#858b96", dark: "#858c97" },
-  { token: "--accent", use: "Links, primary buttons, focus", light: "#2b44ae", dark: "#a8b5ff" },
-  { token: "--accent-hover", use: "Hover on accent", light: "#22388f", dark: "#c0caff" },
-  { token: "--on-accent", use: "Text on accent", light: "#ffffff", dark: "#1a1d23" },
-  { token: "--accent-soft", use: "Tags, chips, selected", light: "#eceffb", dark: "#333a57" },
-  { token: "--info-bg", use: "Info callout", light: "#e9f0fb", dark: "#26324a" },
-  { token: "--success-bg", use: "Success callout", light: "#e6f4ec", dark: "#233a2f" },
-  { token: "--warning-bg", use: "Warning callout, unverified", light: "#fdf3dc", dark: "#3b3322" },
-  { token: "--error-bg", use: "Error callout", light: "#fbeaea", dark: "#44282a" },
-];
-const hex = (t: string, theme: "light" | "dark") => colors.find((c) => c.token === t)![theme];
-
-// WCAG 2.x contrast ratio, computed at build time.
+// WCAG 2.x contrast ratio.
 function lum(h: string) {
-  const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  const c = [1, 3, 5]
+    .map((i) => parseInt(h.slice(i, i + 2), 16) / 255)
+    .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
   return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
 }
 const ratio = (a: string, b: string) => {
   const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
   return (x + 0.05) / (y + 0.05);
 };
-const extra = {
-  light: { "--info-ink": "#1d4e89", "--success-ink": "#1b5e3a", "--warning-ink": "#6b4300", "--error-ink": "#a1251f" },
-  dark: { "--info-ink": "#a9c7f5", "--success-ink": "#9ad8b1", "--warning-ink": "#f2d48c", "--error-ink": "#f5afab" },
-};
-const pairs: [string, string, string, number][] = [
-  ["--ink", "--bg", "Body text", 4.5],
-  ["--ink-2", "--surface", "Secondary text on surface", 4.5],
-  ["--muted", "--bg", "Hints on page", 4.5],
-  ["--muted", "--surface-2", "Hints on hovered surface (worst case)", 4.5],
-  ["--accent", "--bg", "Links", 4.5],
-  ["--accent", "--accent-soft", "Tag text", 4.5],
-  ["--on-accent", "--accent", "Primary button text", 4.5],
-  ["--border-strong", "--bg", "Input border (non-text)", 3],
-  ["--info-ink", "--info-bg", "Info text", 4.5],
-  ["--success-ink", "--success-bg", "Success / verified", 4.5],
-  ["--warning-ink", "--warning-bg", "Warning / unverified", 4.5],
-  ["--error-ink", "--error-bg", "Error text", 4.5],
+const fmt = (n: number) => `${n.toFixed(1)}:1`;
+
+const hues = [
+  { slot: "c-tomato", name: "Tomato", token: "--c-tomato", hex: "#f2583e", on: "#111112", onName: "ink", use: "State rules" },
+  { slot: "c-cobalt", name: "Cobalt", token: "--c-cobalt", hex: "#2a4bd0", on: "#ffffff", onName: "white", use: "How it works, charts" },
+  { slot: "c-lilac", name: "Lilac", token: "--c-lilac", hex: "#c7b8f2", on: "#111112", onName: "ink", use: "Glossary, letter" },
+  { slot: "c-sage", name: "Sage", token: "--c-sage", hex: "#a7d3b4", on: "#111112", onName: "ink", use: "Tools, calculator" },
+  { slot: "c-sand", name: "Sand", token: "--c-sand", hex: "#ecd6aa", on: "#111112", onName: "ink", use: "Checklists, about" },
 ];
-const val = (t: string, theme: "light" | "dark") => (extra[theme] as Record<string, string>)[t] ?? hex(t, theme);
-const contrast = pairs.map(([fg, bg, use, min]) => ({
-  fg,
-  bg,
-  use,
-  min,
-  light: ratio(val(fg, "light"), val(bg, "light")),
-  dark: ratio(val(fg, "dark"), val(bg, "dark")),
-}));
+
+const light = {
+  "--bg": "#f3f2ee", "--bg-2": "#fbfaf7", "--panel": "#e7e6e0", "--panel-hover": "#d8d7cf",
+  "--ink": "#111112", "--ink-2": "#3c3c38", "--ink-3": "#55554f", "--line-strong": "#76766f",
+  "--error-ink": "#b3261e", "--ok-ink": "#1f6b3a", "--fc-mark": "#2a4bd0",
+} as Record<string, string>;
+const dark = {
+  "--bg": "#0b0b0c", "--bg-2": "#121214", "--panel": "#18181a", "--panel-hover": "#26262a",
+  "--ink": "#f2f1ec", "--ink-2": "#bdbdb7", "--ink-3": "#96968f", "--line-strong": "#6a6a65",
+  "--error-ink": "#ff8a78", "--ok-ink": "#8fd3a5", "--fc-mark": "#8a9ef0",
+} as Record<string, string>;
+const tokens = [
+  { t: "--bg", use: "Page" },
+  { t: "--bg-2", use: "Raised: tab panels, popovers, charts" },
+  { t: "--panel", use: "Tiles, input panels, cards" },
+  { t: "--panel-hover", use: "Hover on a panel" },
+  { t: "--ink", use: "Text", on: "--bg", min: 4.5 },
+  { t: "--ink-2", use: "Secondary text", on: "--panel", min: 4.5 },
+  { t: "--ink-3", use: "Labels, hints, cites (worst case)", on: "--panel-hover", min: 4.5 },
+  { t: "--line-strong", use: "Plain input borders (non-text)", on: "--panel", min: 3 },
+  { t: "--error-ink", use: "Error text", on: "--panel", min: 4.5 },
+  { t: "--ok-ink", use: "Success text", on: "--panel", min: 4.5 },
+  { t: "--fc-mark", use: "Chart marks (non-text)", on: "--bg-2", min: 3 },
+];
 
 const type = [
-  { cls: "h1", label: "H1 · 40/48 (32/40 on phones) · 800", text: "Small claims court in California" },
-  { cls: "h2", label: "H2 · 28/36 (24/32) · 700", text: "Deadlines that trip people up" },
-  { cls: "h3", label: "H3 · 22/28 (20/28) · 700", text: "Serving the papers" },
-  { cls: "h4", label: "H4 · 18/28 · 700", text: "Common mistakes" },
-  { cls: "lede", label: "Lede · 20/32 (18/28)", text: "Winning is only half the question." },
-  { cls: "", label: "Body · 16/24", text: "Small claims court is built for people without lawyers. The details change from state to state." },
-  { cls: "hint", label: "Small / hint · 14/24", text: "Leave at 0 to ignore, or use your hourly pay if you'd lose work." },
-  { cls: "cite", label: "Citation · IBM Plex Mono 12/20", text: "Cal. Code Civ. Proc. § 116.221 · checked 2026-11-05" },
+  { cls: "display-xl", label: "Display XL · 48–120 · −0.045em", text: "Small claims, explained." },
+  { cls: "display", label: "Display / h1 · 42–84", text: "Court words, in plain English." },
+  { cls: "h2", label: "h2 · 30–52", text: "Which state are you in?" },
+  { cls: "h3", label: "h3 · 23–30", text: "Serving the papers" },
+  { cls: "h4", label: "h4 · 21", text: "Free small claims advisors" },
+  { cls: "lede", label: "Lede · 19–23", text: "Winning doesn't mean being paid." },
+  { cls: "", label: "Body · 17 / 1.65", text: "Small claims court is built for people without lawyers. The details change from state to state." },
+  { cls: "small", label: "Small · 15", text: "Leave at 0 to ignore, or use your hourly pay." },
+  { cls: "lbl", label: "Label · mono 12 caps", text: "Rules checked 2026-11-05" },
+  { cls: "cite", label: "Cite · mono 12", text: "CCP 116.221 · checked 2026-11-05" },
 ];
-const spaces = [
-  ["--space-half", 4],
-  ["--space-1", 8],
-  ["--space-1h", 12],
-  ["--space-2", 16],
-  ["--space-3", 24],
-  ["--space-4", 32],
-  ["--space-5", 40],
-  ["--space-6", 48],
-  ["--space-8", 64],
-  ["--space-10", 80],
-] as const;
 ---
-<Site title="Design system" description="Fair Claim's design system: tokens and components in light and dark.">
-  <Breadcrumb items={[{ label: "Design system" }]} />
-  <div class="narrow">
-    <p class="eyebrow">For review</p>
-    <h1>Fair Claim design system</h1>
-    <p class="lede">
-      One calm, accessible system for every page. Light is the default; dark is a dim gray, not black. Every
-      component below is shown in both themes side by side.
-    </p>
-    <p>
-      Full notes are in <code>docs/design-system.md</code>. Use <button class="link-button" type="button" data-open-display-settings>Display settings</button>
-      to switch the whole site.
-    </p>
-  </div>
+<Site title="Design system" description="Fair Claim's design system: palette, type, tiles, fields, notices and charts, in light and dark." bleed>
+  <section class="wrap page-hero">
+    <Breadcrumb items={[{ label: "Design system" }]} />
+    <h1 class="display">Design system</h1>
+    <p class="lede">Multi-color tiles on a quiet page. Large regular type, one idea per section, mono labels.</p>
+  </section>
 
-  <div class="with-sidemenu">
-    <SideMenu
-      title="Sections"
-      items={[
-        { href: "#principles", label: "Principles" },
-        { href: "#color", label: "Color" },
-        { href: "#contrast", label: "Contrast checks" },
-        { href: "#type", label: "Type" },
-        { href: "#space", label: "Spacing and shape" },
-        { href: "#motion", label: "Motion" },
-        { href: "#components", label: "Components" },
-        { href: "#notice", label: "Tool notice" },
-      ]}
-    />
-    <div>
-      <section id="principles">
-        <h2>Principles</h2>
-        <ul>
-          <li><strong>Calm and neutral.</strong> White page, one blue accent, no decoration that suggests urgency.</li>
-          <li><strong>Readable first.</strong> 16px body, 46rem reading width, AA contrast or better in both themes.</li>
-          <li><strong>Sourced.</strong> Every fact can carry a mono citation line and an "unverified" badge.</li>
-          <li><strong>Quiet motion.</strong> Short fades and color changes only.</li>
-        </ul>
-      </section>
-
-      <section id="color">
-        <h2>Color</h2>
-        <div class="ds-panels">
-          {(["light", "dark"] as const).map((theme) => (
-            <div class="ds-panel" data-theme={theme}>
-              <p class="ds-panel-label">{theme === "light" ? "Light (default)" : "Dark (dim)"}</p>
-              <ul class="ds-swatches">
-                {colors.map((c) => (
-                  <li>
-                    <span class="ds-swatch" style={`background:var(${c.token})`}></span>
-                    <span>
-                      <code>{c.token}</code> <span class="mono ds-hex">{c[theme]}</span>
-                      <br /><span class="hint">{c.use}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <p class="hint">
-          The accent, "claim blue" <code>#2b44ae</code>, is a softer blue-violet chosen to be clearly different from the
-          French state's "bleu France".
-        </p>
-      </section>
-
-      <section id="contrast">
-        <h2>Contrast checks</h2>
-        <p>Computed from the token values when the site is built. WCAG 2.2 AA needs 4.5:1 for text and 3:1 for control borders.</p>
-        <div class="table-scroll">
-          <table class="table-stack">
-            <thead><tr><th>Pair</th><th>Used for</th><th class="num">Light</th><th class="num">Dark</th></tr></thead>
-            <tbody>
-              {contrast.map((c) => (
-                <tr>
-                  <td><code>{c.fg}</code> on <code>{c.bg}</code></td>
-                  <td data-label="Used for">{c.use}</td>
-                  <td class="num" data-label="Light">{c.light.toFixed(1)}:1 {c.light >= c.min ? <span class="badge verified">pass</span> : <span class="badge error">fail</span>}</td>
-                  <td class="num" data-label="Dark">{c.dark.toFixed(1)}:1 {c.dark >= c.min ? <span class="badge verified">pass</span> : <span class="badge error">fail</span>}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="type">
-        <h2>Type</h2>
-        <p>
-          <strong>Public Sans</strong> (variable, open license) for everything; <strong>IBM Plex Mono</strong> for
-          citations, dates and figures in ledgers. Both are self-hosted, so pages make no requests to font services.
-        </p>
-        <div class="ds-type">
-          {type.map((t) => (
-            <div class="ds-type-row">
-              <p class="hint ds-type-label">{t.label}</p>
-              <p class={t.cls} style="margin:0">{t.text}</p>
-            </div>
-          ))}
-          <div class="ds-type-row">
-            <p class="hint ds-type-label">Stat · 56/64 (40/48) · 800</p>
-            <p class="stat" style="margin:0">55%</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="space">
-        <h2>Spacing and shape</h2>
-        <p>Everything sits on an 8px grid. <code>--space-N</code> means N × 8px.</p>
-        <ul class="ds-spaces">
-          {spaces.map(([t, px]) => (
-            <li><span class="ds-space-bar" style={`width:${px}px`}></span><code>{t}</code> <span class="hint">{px}px</span></li>
-          ))}
-        </ul>
-        <p>
-          Corners: <code>--radius-sm</code> 4px for buttons, inputs and badges; <code>--radius</code> 8px for cards,
-          tables and dialogs; pills for tags and chips. Colored bars are <code>--bar-width</code> 4px.
-        </p>
-        <p>
-          Page gutters: 16px on phones, 24px on tablets, 32px on desktop. Content is at most 1248px wide; reading text
-          at most 46rem.
-        </p>
-      </section>
-
-      <section id="motion">
-        <h2>Motion</h2>
-        <ul>
-          <li>Only color, background, border and opacity change. Nothing slides, scales, bounces or overshoots.</li>
-          <li><code>--dur-fast</code> 150ms for hovers; <code>--dur</code> 200ms for dialogs and the accordion chevron.</li>
-          <li>One curve, <code>--ease-out</code> (cubic-bezier(0.22, 0.61, 0.36, 1)), which never overshoots.</li>
-          <li>With "reduce motion" turned on, all transitions and animations are switched off.</li>
-        </ul>
-      </section>
-
-      <section id="components">
-        <h2>Components</h2>
-        <p>The same markup in each theme. Class names are listed in <code>docs/design-system.md</code>.</p>
-        <div class="ds-panels">
-          <div class="ds-panel" data-theme="light">
-            <p class="ds-panel-label">Light</p>
-            <Samples k="l" />
-          </div>
-          <div class="ds-panel" data-theme="dark">
-            <p class="ds-panel-label">Dark</p>
-            <Samples k="d" />
-          </div>
-        </div>
-      </section>
-
-      <section id="notice">
-        <h2>Tool notice</h2>
-        <p>
-          Each tool (the calculator, the demand letter, the California deadline estimator) shows a short "please read"
-          notice once. The tool stays paused until the reader presses <strong>I understand</strong>. Escape or
-          <strong>Not now</strong> closes the notice without accepting. The choice is remembered on this device only.
-        </p>
-        <ToolNotice id="design-demo" target="ds-demo-tool" toolName="this demo tool" mode="ondemand" />
-        <div class="card tinted" id="ds-demo-tool">
-          <div class="field">
-            <label for="ds-demo-input">A field inside the demo tool</label>
-            <input id="ds-demo-input" type="text" placeholder="Locked until you accept" />
-          </div>
-        </div>
-        <div class="btn-group">
-          <button class="btn secondary" type="button" id="ds-reset">Reset all notices on this device</button>
-          <span class="hint" id="ds-reset-out" aria-live="polite"></span>
-        </div>
-      </section>
+  <section class="wrap section" style="padding-top:0" aria-labelledby="pal-title">
+    <div class="sec-head">
+      <p class="lbl">Palette</p>
+      <div>
+        <h2 class="h2" id="pal-title">Five hues, the same in both themes.</h2>
+        <p class="lede">Two strong, three soft. Each section has a fixed one. Text on a hue is ink or white.</p>
+      </div>
     </div>
-  </div>
+    <ul class="ds-swatches">
+      {hues.map((h) => (
+        <li>
+          <div class={`ds-sw ${h.slot}`}>
+            <span class="lbl">{h.use}</span>
+            <span>
+              <span class="ds-sw-name">{h.name}</span>
+              <span class="ds-sw-meta">
+                <span>{h.token} {h.hex}</span>
+                <span>Text: {h.onName} · {fmt(ratio(h.hex, h.on))}</span>
+                <span>On light page {fmt(ratio(h.hex, light["--bg"]))} · dark {fmt(ratio(h.hex, dark["--bg"]))}</span>
+              </span>
+            </span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
 
-  <script>
-    document.getElementById("ds-reset")?.addEventListener("click", () => {
-      let n = 0;
-      try {
-        for (const key of Object.keys(localStorage)) {
-          if (key.startsWith("fc-notice-")) {
-            localStorage.removeItem(key);
-            n++;
-          }
-        }
-      } catch {
-        /* storage blocked */
-      }
-      const out = document.getElementById("ds-reset-out");
-      if (out) out.textContent = n ? `Cleared ${n}. Reload a tool page to see its notice again.` : "No saved notices on this device.";
-    });
-  </script>
+  <section class="wrap section" aria-labelledby="tok-title">
+    <div class="sec-head">
+      <p class="lbl">Theme tokens</p>
+      <div>
+        <h2 class="h2" id="tok-title">Two themes, checked for contrast.</h2>
+        <p class="lede">The theme follows the device unless the reader picks Light or Dark. Body text needs 4.5:1; borders and chart marks 3:1.</p>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table class="ds-tokens">
+        <caption>Theme tokens · contrast computed with the WCAG formula</caption>
+        <thead><tr><th scope="col">Token</th><th scope="col">Use</th><th scope="col">Light</th><th scope="col">Dark</th><th scope="col">Contrast (light / dark)</th></tr></thead>
+        <tbody>
+          {tokens.map((r) => {
+            const cl = r.on ? ratio(light[r.t], light[r.on]) : 0;
+            const cd = r.on ? ratio(dark[r.t], dark[r.on]) : 0;
+            return (
+              <tr>
+                <td>{r.t}</td>
+                <td>{r.use}</td>
+                <td class="mono"><span class="ds-chip" style={`background:${light[r.t]}`}></span>{light[r.t]}</td>
+                <td class="mono"><span class="ds-chip" style={`background:${dark[r.t]}`}></span>{dark[r.t]}</td>
+                <td class="mono">
+                  {r.on ? (
+                    <span class={cl >= r.min! && cd >= r.min! ? "ds-pass" : "ds-fail"}>
+                      {fmt(cl)} / {fmt(cd)} on {r.on} {cl >= r.min! && cd >= r.min! ? "· pass" : "· below " + r.min}
+                    </span>
+                  ) : "Surface"}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="type-title">
+    <div class="sec-head">
+      <p class="lbl">Type</p>
+      <div>
+        <h2 class="h2" id="type-title">Inter Tight, Geist Sans, Geist Mono.</h2>
+        <p class="lede">Display at weight 400 with tight tracking. All self-hosted.</p>
+      </div>
+    </div>
+    <ul class="ds-type">
+      {type.map((t) => (
+        <li><span class="lbl">{t.label}</span><p class={t.cls}>{t.text}</p></li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap section" aria-labelledby="comp-title">
+    <div class="sec-head">
+      <p class="lbl">Components</p>
+      <div>
+        <h2 class="h2" id="comp-title">Every piece, light and dark.</h2>
+        <p class="lede">Motion is short fades and color changes only. Nothing bounces; reduced motion turns it off.</p>
+      </div>
+    </div>
+    <div class="ds-split">
+      <div class="ds-panel" data-theme="light">
+        <p class="lbl">Light</p>
+        <GallerySamples k="l" />
+      </div>
+      <div class="ds-panel" data-theme="dark">
+        <p class="lbl">Dark</p>
+        <GallerySamples k="d" />
+      </div>
+    </div>
+  </section>
 </Site>
-
-<style is:global>
-  /* Gallery-only helpers (prefixed ds-). Not part of the reusable system. */
-  .ds-panels {
-    display: grid;
-    gap: var(--space-3);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
-    margin: var(--space-3) 0;
-  }
-  .ds-panel {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: var(--space-3);
-    min-width: 0;
-  }
-  .ds-panel-label {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-bold);
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: var(--space-2);
-  }
-  .ds-swatches {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: var(--space-1h);
-  }
-  .ds-swatches li {
-    display: flex;
-    gap: var(--space-1h);
-    align-items: center;
-    margin: 0;
-    font-size: var(--text-sm);
-    line-height: 1.25rem;
-  }
-  .ds-swatch {
-    flex: none;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
-  }
-  .ds-hex {
-    color: var(--muted);
-  }
-  .ds-type-row {
-    padding: var(--space-2) 0;
-    border-top: 1px solid var(--border);
-  }
-  .ds-type-label {
-    margin: 0 0 var(--space-half);
-  }
-  .ds-spaces {
-    list-style: none;
-    padding: 0;
-  }
-  .ds-spaces li {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1h);
-    margin: var(--space-1) 0;
-  }
-  .ds-space-bar {
-    display: inline-block;
-    height: 16px;
-    background: var(--accent);
-    border-radius: 2px;
-  }
-  .ds-h {
-    font-size: var(--text-lg);
-    line-height: var(--lh-lg);
-    margin: var(--space-4) 0 var(--space-2);
-    padding-top: var(--space-2);
-    border-top: 1px solid var(--border);
-  }
-  .ds-samples > .ds-h:first-child {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: 0;
-  }
-  .ds-modal-sample {
-    background: var(--raised);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-2);
-    max-width: 36rem;
-  }
-  .ds-modal-sample .modal-title {
-    font-size: var(--text-h3);
-    line-height: var(--lh-h3);
-    font-weight: var(--weight-bold);
-  }
-</style>

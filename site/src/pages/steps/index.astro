@@ -1,25 +1,38 @@
 ---
+// How it works (Option A, cobalt): five big numbered steps with progress segments and a short line each;
+// the detail sits in accordions. "Before you decide" shows the alternatives as tiles.
+// Anchors kept: #demand #file #serve #hearing #collect, #before-you-decide.
 import Site from "../../layouts/Site.astro";
-import SideMenu from "../../components/SideMenu.astro";
 import Term from "../../components/Term.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import { steps, alternatives, hiddenCosts } from "../../lib/steps";
 import { caStatewide } from "../../lib/data";
 
+const pad = (n: number) => String(n).padStart(2, "0");
+const keys = "ABCDEF";
+const altColors = ["c-sage", "c-lilac", "c-sand", "c-sage", "c-lilac", "c-sand"];
+
 // California's "defendant's claim" rule, used as a cited example of a counterclaim.
 const dc = caStatewide.defendants_claim as { sources?: string[] } | undefined;
 const dcSource = dc?.sources?.[0];
 
+const costSplit = hiddenCosts.map((c) => {
+  const i = c.indexOf(":");
+  const t = c.slice(i + 1).trim();
+  return { head: c.slice(0, i), text: t.charAt(0).toUpperCase() + t.slice(1) };
+});
+
 const stepLinks: Record<string, { href: string; label: string }[]> = {
   demand: [{ href: "/demand-letter/", label: "Demand-letter tool" }],
   file: [{ href: "/states/", label: "Your state's limit, fee and claim form" }],
+  serve: [{ href: "/states/", label: "Your state's service rules" }],
   hearing: [{ href: "/sources/#collecting", label: "What studies found about mediation and payment" }],
   collect: [
-    { href: "/worth-it/", label: "Cost calculator: costs, time and the chance of getting paid" },
+    { href: "/worth-it/", label: "Cost calculator" },
     { href: "/sources/#collecting", label: "What studies found about getting paid" },
   ],
 };
-// Glossary terms people meet at each step (shown as tap-for-definition links).
+// Glossary terms people meet at each step (tap-for-definition links).
 const stepTerms: Record<string, string[]> = {
   demand: ["demand-letter", "statute-of-limitations", "mediation"],
   file: ["plaintiff", "defendant", "venue", "filing-fee", "fee-waiver", "small-claims-limit"],
@@ -30,102 +43,490 @@ const stepTerms: Record<string, string[]> = {
 ---
 <Site
   title="How small claims court works"
-  description="Options to weigh before suing, then the five steps of a small claims case: ask in writing, file, serve, the hearing, and collecting."
+  description="The five steps of a small claims case: ask in writing, file, serve, the hearing, and collecting. Plus the options besides going to court."
+  color="c-learn"
+  bleed
 >
-  <Breadcrumb items={[{ label: "How it works" }]} />
-  <div class="narrow">
-    <p class="eyebrow">How it works</p>
-    <h1>How small claims court works</h1>
-    <p class="lede">
-      The general path is the same in every state: ask in writing, file, serve the papers, go to the hearing, and
-      collect. Limits, fees and deadlines differ, so each step points to your state's page for the cited rules.
-    </p>
-    <p>Court is one way to settle a money dispute, not the only one. The first section covers the others, and what a case can cost besides the fees.</p>
-  </div>
-
-  <div class="with-sidemenu">
-    <SideMenu
-      title="On this page"
-      items={[{ href: "#before-you-decide", label: "Before you decide" }, ...steps.map((s) => ({ href: `#${s.slug}`, label: `${s.n}. ${s.title}` }))]}
-    />
-    <div>
-      <section class="decide" id="before-you-decide" aria-labelledby="decide-title">
-        <h2 id="decide-title">Before you decide</h2>
-        <p class="narrow">
-          Small claims court is designed for people without lawyers. It still takes time, money and energy, and a win doesn't guarantee you'll be paid. Here are the other routes people take,
-          and the costs that don't show up on a fee schedule.
-        </p>
-
-        <h3>Other options</h3>
-        <ul class="option-grid">
-          {alternatives.map((o) => (
-            <li class="card tinted">
-              <h4>{o.title}</h4>
-              <p>{o.text}</p>
-            </li>
-          ))}
-        </ul>
-
-        <div class="grid cols-2 decide-pair">
-          <div>
-            <h3>What a case costs besides the fee</h3>
-            <ul>{hiddenCosts.map((c) => <li>{c}</li>)}</ul>
-          </div>
-          <div>
-            <h3>The other side can make a claim too</h3>
-            <p>
-              The person you sue may be able to file their own claim against you in the same case. This is often
-              called a counterclaim. If the judge agrees with them, you could end up owing money.
-            </p>
-            <p>
-              In California, for example, it's called a defendant's claim. It has the same limits as yours, and it
-              doesn't have to be about the same dispute.{" "}
-              <span class="cite">
-                {dcSource ? <a href={dcSource} rel="noopener">Cal. Code Civ. Proc. § 116.360(a)</a> : <span>Cal. Code Civ. Proc. § 116.360(a)</span>}
-                {caStatewide.date_checked && <span>checked {caStatewide.date_checked}</span>}
-              </span>
-            </p>
-          </div>
-        </div>
-
-        <div class="callout">
-          <p class="callout-title">Winning and getting paid are different things</p>
-          <p>
-            A judgment says you're owed money. It doesn't make the other side pay, and studies of small claims courts
-            found many winners collected little or nothing.{" "}
-            <a href="/sources/#collecting">What the studies found</a>
-          </p>
-        </div>
-      </section>
-
-      <h2 class="steps-heading" id="the-steps">The five steps</h2>
-      <ol class="steps" aria-labelledby="the-steps">
+  <section class="wrap hw-hero">
+    <Breadcrumb items={[{ label: "How it works" }]} />
+    <div class="hw-top">
+      <h1 class="display hw-title">Five steps, from asking to getting paid.</h1>
+      <div class="hw-aside">
+        <p class="hw-aside-text">Most cases follow the same path. Each step costs time, and some cost money. The last one, collecting, is the one people most often underestimate.</p>
+        <a class="go" href="#before-you-decide">Court is one option. See the others</a>
+      </div>
+    </div>
+    <nav class="hw-nav" aria-label="The five steps">
+      <ol class="hw-nav-list">
         {steps.map((s) => (
-          <li id={s.slug}>
-            <div class="step-num" aria-hidden="true">{s.n}</div>
-            <div class="narrow">
-              <h3 class="step-title"><span class="sr-only">Step {s.n}: </span>{s.title}</h3>
-              <dl class="step-meta">
-                <div><dt>Time</dt><dd>{s.time}</dd></div>
-                <div><dt>Cost</dt><dd>{s.cost}</dd></div>
-              </dl>
-              {s.body.map((p) => <p>{p}</p>)}
-              {stepTerms[s.slug] && (
-                <p class="hint">Words to know: {stepTerms[s.slug].map((t, i) => <>{i > 0 && " · "}<Term slug={t} /></>)}</p>
-              )}
-              <h4>What to do</h4>
-              <ul>{s.doThis.map((d) => <li>{d}</li>)}</ul>
-              <h4>Common mistakes</h4>
-              <ul>{s.mistakes.map((d) => <li>{d}</li>)}</ul>
-              {stepLinks[s.slug] && (
-                <ul class="step-links">
-                  {stepLinks[s.slug].map((l) => <li><a class="link-arrow" href={l.href}>{l.label}</a></li>)}
-                </ul>
-              )}
-            </div>
+          <li>
+            <a href={`#${s.slug}`}>
+              <span class="hw-seg" aria-hidden="true"></span>
+              <span class="hw-n">{pad(s.n)}</span>
+              <span class="hw-t">{s.title}</span>
+            </a>
           </li>
         ))}
       </ol>
+    </nav>
+  </section>
+
+  <section class="wrap" aria-labelledby="steps-title">
+    <h2 id="steps-title" class="sr-only">The five steps</h2>
+    <ol class="hw-steps">
+      {steps.map((s, i) => (
+        <li class="hw-step" id={s.slug} aria-labelledby={`${s.slug}-title`}>
+          <div class="progress hw-prog" role="img" aria-label={`Step ${s.n} of ${steps.length}`}>
+            {steps.map((_, k) => <span class:list={["seg", { done: k < i, now: k === i }]}></span>)}
+          </div>
+          <div class="hw-grid">
+            <div class="hw-num" aria-hidden="true">
+              <span class="hw-sq"></span>
+              <span class="num">{pad(s.n)}</span>
+            </div>
+            <div class="hw-body">
+              <p class="lbl">Step {s.n} of {steps.length}</p>
+              <h3 class="hw-step-title" id={`${s.slug}-title`}>{s.title}</h3>
+              <p class="lede hw-short">{s.short}</p>
+              <dl class="hw-meta">
+                <div><dt class="lbl">Time</dt><dd>{s.time}</dd></div>
+                <div><dt class="lbl">Cost</dt><dd>{s.cost}</dd></div>
+              </dl>
+              <div class="hw-accs">
+                <details class="acc">
+                  <summary>What happens<span class="pm" aria-hidden="true"></span></summary>
+                  <div class="acc-body">{s.body.map((p) => <p>{p}</p>)}</div>
+                </details>
+                <details class="acc">
+                  <summary>What to do<span class="pm" aria-hidden="true"></span></summary>
+                  <div class="acc-body">
+                    <ol class="hw-list">
+                      {s.doThis.map((d, k) => <li><span class="hw-li-n">{pad(k + 1)}</span><span>{d}</span></li>)}
+                    </ol>
+                  </div>
+                </details>
+                <details class="acc">
+                  <summary>Common mistakes<span class="pm" aria-hidden="true"></span></summary>
+                  <div class="acc-body">
+                    <ul class="hw-list">
+                      {s.mistakes.map((m) => <li><span class="hw-li-x" aria-hidden="true"></span><span>{m}</span></li>)}
+                    </ul>
+                  </div>
+                </details>
+              </div>
+              {stepTerms[s.slug] && (
+                <p class="hw-terms"><span class="lbl">Words to know</span> {stepTerms[s.slug].map((t, k) => <>{k > 0 && <span class="hw-dot" aria-hidden="true">·</span>}<Term slug={t} /></>)}</p>
+              )}
+              {stepLinks[s.slug] && (
+                <p class="hw-links">{stepLinks[s.slug].map((l) => <a class="go" href={l.href}>{l.label}</a>)}</p>
+              )}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="wrap section" id="before-you-decide" aria-labelledby="decide-title">
+    <div class="sec-head">
+      <p class="lbl">Before you decide</p>
+      <div>
+        <h2 id="decide-title" class="h2">Court is one option among several.</h2>
+        <p class="lede">These can come first. They're often quicker and cheaper, and some end the dispute for good.</p>
+      </div>
     </div>
-  </div>
+    <ul class="hw-alts">
+      {alternatives.map((a, i) => (
+        <li class={`hw-alt ${altColors[i]}`}>
+          <span class="t-top"><span class="key" aria-hidden="true">{keys[i]}</span><span class="hw-bar" aria-hidden="true"></span></span>
+          <h3 class="h3">{a.title}</h3>
+          <p>{a.text}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="hw-costs">
+      <p class="lbl">Costs that don't show up on a fee schedule</p>
+      <ul>
+        {costSplit.map((c, i) => (
+          <li><span class="lbl">{pad(i + 1)}</span><h3 class="h4">{c.head}</h3><p>{c.text}</p></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="hw-pair">
+      <div class="hw-pair-item">
+        <h3 class="h3">The other side can make a claim too.</h3>
+        <p>The person you sue may be able to file their own <Term slug="counterclaim" /> in the same case. If the judge agrees with them, you could end up owing money.</p>
+        <details class="acc">
+          <summary>An example from California<span class="pm" aria-hidden="true"></span></summary>
+          <div class="acc-body">
+            <p>It's called a defendant's claim. It has the same limits as yours, and it doesn't have to be about the same dispute.</p>
+            <p class="cite">
+              {dcSource ? <a href={dcSource} rel="noopener">Cal. Code Civ. Proc. § 116.360(a)</a> : <span>Cal. Code Civ. Proc. § 116.360(a)</span>}
+              {caStatewide.date_checked && <span>Checked {caStatewide.date_checked}</span>}
+            </p>
+          </div>
+        </details>
+      </div>
+      <div class="hw-pair-item">
+        <h3 class="h3">Winning and getting paid are different things.</h3>
+        <p>A judgment says you're owed money. It doesn't make the other side pay. Studies of small claims courts found many winners collected little or nothing.</p>
+        <a class="go" href="/sources/#collecting">What the studies found</a>
+      </div>
+    </div>
+  </section>
 </Site>
+
+<style>
+  .hw-hero {
+    padding-top: clamp(40px, 6vw, 96px);
+  }
+  .hw-top {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    gap: 32px 48px;
+    align-items: end;
+  }
+  .hw-title {
+    margin: 0;
+    max-width: 14ch;
+  }
+  .hw-aside {
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+    padding-bottom: 8px;
+  }
+  .hw-aside-text {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  /* Step overview: five segments that link down the page */
+  .hw-nav {
+    margin-top: clamp(48px, 6vw, 80px);
+  }
+  .hw-nav ol {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .hw-nav a {
+    display: grid;
+    gap: 10px;
+    padding-bottom: 8px;
+    color: var(--ink-2);
+    text-decoration: none;
+    touch-action: manipulation;
+    transition: color var(--t-fast) var(--ease);
+  }
+  .hw-seg {
+    height: 4px;
+    margin-bottom: 8px;
+    border-radius: 2px;
+    background: var(--line-2);
+    transition: background-color var(--t-fast) var(--ease);
+  }
+  .hw-nav li:first-child .hw-seg {
+    background: var(--t);
+  }
+  .hw-n {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+  }
+  .hw-t {
+    font-size: 17px;
+    line-height: 1.35;
+    max-width: 18ch;
+  }
+  .hw-nav a:active .hw-seg {
+    background: var(--t);
+  }
+
+  /* Steps */
+  .hw-steps {
+    margin-top: clamp(40px, 5vw, 72px);
+  }
+  .hw-step {
+    padding: 28px 0 clamp(56px, 7vw, 104px);
+    scroll-margin-top: calc(var(--hdr-h) + 16px);
+  }
+  .hw-prog {
+    max-width: 220px;
+  }
+  .hw-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: 32px clamp(32px, 5vw, 72px);
+    margin-top: 40px;
+  }
+  .hw-num {
+    display: grid;
+    align-content: start;
+    gap: 28px;
+  }
+  .hw-sq {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--r);
+    background: var(--t);
+  }
+  .hw-num .num {
+    font-size: clamp(120px, 15vw, 220px);
+    line-height: 0.8;
+    letter-spacing: -0.07em;
+  }
+  :where(.hw-body > *) {
+    margin: 0;
+  }
+  .hw-step-title {
+    margin: 16px 0 0;
+    font-size: clamp(38px, 4.4vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    max-width: 16ch;
+  }
+  .hw-short {
+    margin-top: 20px;
+    max-width: 44ch;
+  }
+  .hw-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+  .hw-meta > div {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    padding: 18px 24px 20px 0;
+  }
+  .hw-meta > div + div {
+    padding-left: 24px;
+    border-left: 1px solid var(--line);
+  }
+  .hw-meta dd {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  .hw-accs {
+    margin-top: 8px;
+  }
+  .hw-list li {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 8px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .hw-list li:last-child {
+    border-bottom: 0;
+  }
+  .hw-li-n {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    padding-top: 5px;
+  }
+  .hw-li-x {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin-top: 7px;
+  }
+  .hw-li-x::before,
+  .hw-li-x::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5.5px;
+    width: 12px;
+    height: 1.5px;
+    background: var(--ink-3);
+    transform: rotate(45deg);
+  }
+  .hw-li-x::after {
+    transform: rotate(-45deg);
+  }
+  .hw-terms {
+    margin-top: 28px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--ink-2);
+  }
+  .hw-terms .lbl {
+    margin-right: 12px;
+  }
+  .hw-dot {
+    margin: 0 8px;
+    color: var(--ink-3);
+  }
+  .hw-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    margin-top: 20px;
+  }
+
+  /* Before you decide */
+  .hw-alts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .hw-alt {
+    display: grid;
+    gap: 14px;
+    align-content: start;
+    min-height: 260px;
+    padding: 16px 24px 28px;
+    border-radius: var(--r);
+    background: var(--panel);
+  }
+  :where(.hw-alt > *) {
+    margin: 0;
+  }
+  .hw-alt .t-top {
+    margin-bottom: 32px;
+  }
+  .hw-alt .key {
+    color: var(--ink-2);
+  }
+  .hw-bar {
+    width: 28px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--t);
+  }
+  .hw-alt p {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .hw-costs {
+    margin-top: clamp(64px, 7vw, 96px);
+  }
+  .hw-costs ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+    margin-top: 20px;
+  }
+  .hw-costs li {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-2);
+  }
+  :where(.hw-costs li > *) {
+    margin: 0;
+  }
+  .hw-costs p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .hw-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: clamp(64px, 7vw, 96px);
+  }
+  .hw-pair-item {
+    display: grid;
+    gap: 16px;
+    align-content: start;
+    justify-items: start;
+    padding: clamp(24px, 3vw, 40px);
+    border-radius: var(--r-lg);
+    background: var(--bg-2);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  :where(.hw-pair-item > *) {
+    margin: 0;
+  }
+  .hw-pair-item p {
+    color: var(--ink-2);
+    max-width: 52ch;
+  }
+  .hw-pair-item .acc {
+    justify-self: stretch;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hw-nav a:hover {
+      color: var(--ink);
+    }
+    .hw-nav a:hover .hw-seg {
+      background: var(--ink-3);
+    }
+    .hw-nav li:first-child a:hover .hw-seg {
+      background: var(--t);
+    }
+  }
+  @media (max-width: 1080px) {
+    .hw-top,
+    .hw-pair {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hw-alts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .hw-costs ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 860px) {
+    .hw-grid {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: 28px;
+    }
+    .hw-num {
+      grid-auto-flow: column;
+      justify-content: start;
+      align-items: end;
+      gap: 16px;
+    }
+    .hw-num .num {
+      font-size: 96px;
+    }
+    .hw-sq {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  @media (max-width: 640px) {
+    .hw-nav ol {
+      gap: 4px;
+    }
+    .hw-t {
+      display: none;
+    }
+    .hw-meta {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hw-meta > div + div {
+      padding-left: 0;
+      border-left: 0;
+      border-top: 1px solid var(--line);
+    }
+    .hw-alts,
+    .hw-costs ul {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hw-alt {
+      min-height: 0;
+    }
+    .hw-alt .t-top {
+      margin-bottom: 12px;
+    }
+  }
+</style>
