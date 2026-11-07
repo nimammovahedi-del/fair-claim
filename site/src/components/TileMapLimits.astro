@@ -2,6 +2,8 @@
 // US tile-grid map: one square per state + DC, shaded by the small claims limit for individuals.
 // Every tile links to its state page. No geodata, no client JS.
 // <TileMapLimits headingLevel={3} />
+// <TileMapLimits compact headingLevel={2} />: a small summary card (one link to /states/, the map is decorative)
+// for the home page. Same numbers, same source and date.
 import ChartFrame from "./ChartFrame.astro";
 import { limitTiles, limitBins, limitStats, statesChecked, statesSource, usd } from "../lib/stats";
 
@@ -9,12 +11,33 @@ interface Props {
   headingLevel?: 2 | 3 | 4;
   id?: string;
   class?: string;
+  compact?: boolean;
 }
-const { headingLevel = 3, id = "chart-limits-map", class: cls } = Astro.props;
+const { headingLevel = 3, id = "chart-limits-map", class: cls, compact = false } = Astro.props;
+const H = (`h${headingLevel}`) as "h2" | "h3" | "h4";
 const byName = limitTiles.slice().sort((a, b) => a.state.localeCompare(b.state));
 const flagged = limitTiles.filter((t) => t.unverified);
 const upTo10k = limitStats.binCounts[0] + limitStats.binCounts[1] + limitStats.binCounts[2];
 ---
+{compact ? (
+<a class:list={["tm-mini", cls]} href="/states/" aria-labelledby={`${id}-title`} aria-describedby={`${id}-desc`}>
+  <span class="tm-mini-text">
+    <span class="lbl">Limits by state</span>
+    <H class="tm-mini-title" id={`${id}-title`}>{usd(limitStats.min)} to {usd(limitStats.max)}</H>
+    <span class="tm-mini-sub" id={`${id}-desc`}>
+      The most an individual can claim. In {upTo10k} of {limitStats.count}, it's $10,000 or less.
+      {flagged.length > 0 && <span class="badge unverified">{flagged.length} unverified</span>}
+    </span>
+    <span class="cite"><span>Checked {statesChecked}</span></span>
+    <span class="go">State rules</span>
+  </span>
+  <span class="tm-mini-map" aria-hidden="true">
+    {limitTiles.map((t) => (
+      <span class="map-tile" data-bin={t.bin} style={`grid-column:${t.col + 1};grid-row:${t.row + 1}`}>{t.abbr}</span>
+    ))}
+  </span>
+</a>
+) : (
 <ChartFrame
   id={id}
   class={cls}
@@ -86,3 +109,4 @@ const upTo10k = limitStats.binCounts[0] + limitStats.binCounts[1] + limitStats.b
     </tbody>
   </table>
 </ChartFrame>
+)}

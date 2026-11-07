@@ -1,15 +1,14 @@
 ---
-// Checklists index (Option A): 01 choose a state (tiles), 02 pick a step (cards). The step cards link to the chosen
-// state's page, or to the general version. Without JavaScript the cards go to the general version and the
-// "All states" list links every state.
+// Checklists index (Option A): 01 find your state (location search: ZIP, city, county or state goes to
+// /checklists/{state}/), 02 pick a step (cards, general version). "Every state's checklists" (#all-checklists)
+// links every state and works without JavaScript.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import LocationSearch from "../../components/LocationSearch.astro";
 import "../../styles/features.css";
-import { states, stateBySlug, money } from "../../lib/data";
+import { states } from "../../lib/data";
 import { statesChecked } from "../../lib/stats";
 
-const featured = ["ca", "tx", "ny", "fl"].map((s) => stateBySlug(s)!);
-const keys = "ABCDEF";
 const lists = [
   { n: "00", id: "before", title: "Before you decide", text: "The limit, the deadline to sue, the costs, whether they could pay, other routes.", items: 8 },
   { n: "01", id: "demand", title: "Ask for payment in writing", text: "Their legal name, the amount and a deadline, sent a way you can prove.", items: 5 },
@@ -18,7 +17,6 @@ const lists = [
   { n: "04", id: "hearing", title: "Go to the hearing", text: "Evidence in three copies, witnesses, a short summary, postponing.", items: 7 },
   { n: "05", id: "collect", title: "Collect what you won", text: "The appeal period, asking for payment, finding assets, collection tools.", items: 6 },
 ];
-const names = Object.fromEntries(states.map((s) => [s.slug, s.state]));
 ---
 <Site title="Checklists" description="Printable small claims checklists for each step, with your state's cited rules filled in." bleed color="c-checklists">
   <section class="wrap page-hero">
@@ -29,61 +27,39 @@ const names = Object.fromEntries(states.map((s) => [s.slug, s.state]));
     </div>
   </section>
 
-  <section class="wrap cl-q" aria-labelledby="cq-state" data-js-only>
+  <section class="wrap cl-q" aria-labelledby="cq-state">
     <p class="cl-q-n">01 / 02</p>
     <div>
       <div class="cl-q-head">
         <h2 class="h2" id="cq-state">Which state are you in?</h2>
+        <p>Opens all six lists with that state's limit, fees and deadlines filled in.</p>
       </div>
-      <div class="tiles cl-states" role="radiogroup" aria-labelledby="cq-state">
-        <label class="tile">
-          <input type="radio" name="cl-state" value="" checked />
-          <span class="t-top"><span class="key" aria-hidden="true">A</span><span class="check" aria-hidden="true"></span></span>
-          <span><span class="t-label">Any state</span><span class="t-sub">General version</span></span>
-        </label>
-        {featured.map((s, i) => (
-          <label class="tile">
-            <input type="radio" name="cl-state" value={s.slug} />
-            <span class="t-top"><span class="key" aria-hidden="true">{keys[i + 1]}</span><span class="check" aria-hidden="true"></span></span>
-            <span><span class="t-label">{s.state}</span><span class="t-sub">Limit {money(s.limit_individual)}</span></span>
-          </label>
-        ))}
-        <div class="tile cl-other" data-other>
-          <span class="t-top"><span class="key" aria-hidden="true">F</span><span class="check" aria-hidden="true"></span></span>
-          <span>
-            <label class="t-label" for="cl-other">Another state</label>
-            <select id="cl-other" data-other-select>
-              <option value="">Choose…</option>
-              {states.map((s) => <option value={s.slug}>{s.state}</option>)}
-            </select>
-          </span>
-        </div>
-      </div>
+      <LocationSearch label="Your ZIP code, city, county or state" target="checklists" stateHref="#all-checklists" />
     </div>
   </section>
 
   <section class="wrap cl-q" aria-labelledby="cq-step">
-    <p class="cl-q-n"><span data-js-only>02 / 02</span></p>
+    <p class="cl-q-n">02 / 02</p>
     <div>
       <div class="cl-q-head">
         <h2 class="h2" id="cq-step">Which step do you need?</h2>
-        <p data-for-label>Six lists, general version. Tick boxes on screen or print them; ticks aren't saved.</p>
+        <p>Six lists, general version. Tick boxes on screen or print them; ticks aren't saved.</p>
       </div>
       <ul class="cl-cards">
         {lists.map((l) => (
           <li>
-            <a class="clc" href={`/checklists/general/#${l.id}`} data-step={l.id}>
+            <a class="clc" href={`/checklists/general/#${l.id}`}>
               <span class="clc-band" aria-hidden="true"></span>
               <span class="clc-top"><span class="clc-n" aria-hidden="true">{l.n}</span><span class="lbl">{l.items} items</span></span>
               <span class="clc-t">{l.title}</span>
               <span class="clc-d">{l.text}</span>
-              <span class="clc-go"><span data-step-for>General version</span><span class="door-arrow" aria-hidden="true"></span></span>
+              <span class="clc-go"><span>General version</span><span class="door-arrow" aria-hidden="true"></span></span>
             </a>
           </li>
         ))}
       </ul>
       <div class="cl-open">
-        <a class="btn" href="/checklists/general/" data-open-all>Open all six</a>
+        <a class="btn" href="/checklists/general/">Open all six</a>
         <p class="hint">Rules checked {statesChecked}. Printing leaves out the menus and adds that date at the foot.</p>
       </div>
     </div>
@@ -92,7 +68,7 @@ const names = Object.fromEntries(states.map((s) => [s.slug, s.state]));
   <section class="wrap cl-q" aria-labelledby="cq-all">
     <p class="cl-q-n">More</p>
     <div>
-      <details class="acc">
+      <details class="acc" id="all-checklists">
         <summary id="cq-all">Every state's checklists</summary>
         <div class="acc-body">
           <ul class="state-links">
@@ -108,47 +84,12 @@ const names = Object.fromEntries(states.map((s) => [s.slug, s.state]));
   </section>
 </Site>
 
-<script define:vars={{ names }}>
-  // Picking a state rewrites the step links. Nothing is stored.
-  const radios = Array.from(document.querySelectorAll('input[name="cl-state"]'));
-  const other = document.querySelector("[data-other]");
-  const sel = document.querySelector("[data-other-select]");
-  const cards = Array.from(document.querySelectorAll("[data-step]"));
-  const openAll = document.querySelector("[data-open-all]");
-  const label = document.querySelector("[data-for-label]");
-
-  function apply(slug) {
-    const base = slug ? `/checklists/${slug}/` : "/checklists/general/";
-    const name = slug ? names[slug] : "";
-    cards.forEach((c) => {
-      c.href = `${base}#${c.dataset.step}`;
-      c.querySelector("[data-step-for]").textContent = name ? `With ${name} rules` : "General version";
-    });
-    openAll.href = base;
-    openAll.textContent = name ? `Open all six for ${name}` : "Open all six";
-    label.textContent = name
-      ? `Six lists for ${name}. Tick boxes on screen or print them; ticks aren't saved.`
-      : "Six lists, general version. Tick boxes on screen or print them; ticks aren't saved.";
+<script>
+  // "Or pick your state" links here: open the list when it's the target.
+  function openList() {
+    const d = document.getElementById("all-checklists") as HTMLDetailsElement | null;
+    if (d && location.hash === "#all-checklists") d.open = true;
   }
-
-  radios.forEach((r) =>
-    r.addEventListener("change", () => {
-      if (!r.checked) return;
-      sel.value = "";
-      other.classList.remove("is-on");
-      apply(r.value);
-    }),
-  );
-  sel.addEventListener("change", () => {
-    if (!sel.value) return;
-    radios.forEach((r) => (r.checked = false));
-    other.classList.add("is-on");
-    apply(sel.value);
-  });
-  // Back/forward cache can restore a checked radio: sync the links with it.
-  const start = radios.find((r) => r.checked);
-  if (sel.value) {
-    other.classList.add("is-on");
-    apply(sel.value);
-  } else if (start) apply(start.value);
+  openList();
+  window.addEventListener("hashchange", openList);
 </script>

@@ -9,8 +9,10 @@ interface Props {
   headingLevel?: 2 | 3 | 4;
   id?: string;
   class?: string;
+  /** Show the two stat tiles under the bars (set false when the page shows those numbers itself). */
+  tiles?: boolean;
 }
-const { headingLevel = 3, id = "chart-philly", class: cls } = Astro.props;
+const { headingLevel = 3, id = "chart-philly", class: cls, tiles = true } = Astro.props;
 const ticks = [0, 25, 50, 75, 100];
 const rows = [
   ...pew2022.outcomes.map((o) => ({ label: o.label, pct: o.pct, display: `${o.pct}%`, muted: false })),
@@ -41,10 +43,10 @@ const rows = [
     </div>
     </div>
   </div>
-  <ul class="stat-tiles philly-tiles">
+  {tiles && <ul class="stat-tiles philly-tiles">
     <StatTile value={`${pew2022.judgmentsDefaultPct}%`} label={`of the ${pew2022.judgmentsTotal} cases that reached a judgment were defaults: the person sued didn't respond or appear (Pew 2022).`} />
     <StatTile value={`${pew2021.plaintiffsWithLawyersPct}%`} label={`of plaintiffs had a lawyer, compared with about ${pew2021.defendantsWithLawyersPct}% of defendants, in the court's civil cases (Pew 2021).`} />
-  </ul>
+  </ul>}
   <p class="sr-only">{rows.map((r) => `${r.label}: ${r.display}. `)}</p>
   <Fragment slot="note">
     <p>

@@ -1,6 +1,10 @@
 ---
-// About (Option A): mission, principles, who it's for, what the data shows (five charts), how facts are checked,
-// and #not-advice (tool notices link to /about/#not-advice: keep that id).
+// About (Option A, round 5): an editorial page in four parts, in order of emphasis:
+//   01 #paid      Winning isn't getting paid (lead story: big numbers + the collection chart)
+//   02 #who       Who uses small claims (Pew, Philadelphia: debt collectors, defaults)
+//   03 #checking  How we check facts (counts from the data, what's open, dated changes, upkeep, rules charts)
+//   04 #mission   Why the site exists + #not-advice and free help (tool notices link to /about/#not-advice: keep that id)
+// Every number keeps its source and date; unverified ones keep their badge. Numbers come from lib/stats.ts.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import Term from "../../components/Term.astro";
@@ -10,8 +14,28 @@ import ChartRules from "../../components/ChartRules.astro";
 import ChartCollect from "../../components/ChartCollect.astro";
 import ChartPhilly from "../../components/ChartPhilly.astro";
 import "../../styles/features.css";
-import { denver, evidenceChecked } from "../../lib/stats";
+import {
+  denver,
+  evidenceChecked,
+  pew2022,
+  pew2021,
+  statesChecked,
+  countiesChecked,
+  stateFacts,
+  countyFacts,
+  statesOpen,
+  recheckRounds,
+  upcomingChanges,
+  upkeep,
+  coreOpen,
+} from "../../lib/stats";
 
+const parts = [
+  { href: "#paid", n: "01", t: "Winning isn't getting paid", c: "c-tomato" },
+  { href: "#who", n: "02", t: "Who uses small claims", c: "c-cobalt" },
+  { href: "#checking", n: "03", t: "How we check facts", c: "c-sage" },
+  { href: "#mission", n: "04", t: "Why this site exists", c: "c-sand" },
+];
 const principles = [
   { k: "A", t: "Free", d: "No ads, no sponsors, nothing for sale, no accounts. It isn't paid for by anyone.", c: "c-cobalt" },
   { k: "B", t: "Private", d: "No analytics, no tracking cookies, no third-party scripts or fonts. What you type stays in your tab.", c: "c-tomato" },
@@ -22,100 +46,224 @@ const who = [
   { t: "Tenants", d: "A landlord kept a security deposit." },
   { t: "Customers", d: "A business or contractor owes a refund or a repair." },
   { t: "Small businesses", d: "An invoice went unpaid. Some states set a lower limit for businesses." },
-  { t: "Anyone weighing it up", d: "Including whether it's worth the time at all." },
+  { t: "People who were sued", d: "A guide for defendants is planned. State pages link to each court's guide." },
 ];
+const fmtDate = (iso: string) =>
+  new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 ---
 <Site
   title="About"
-  description="What Fair Claim is, how facts are checked, the numbers behind small claims court, and where to get free advice."
+  description="What the evidence shows about small claims court, who uses it, how Fair Claim checks its facts, and where to get free help."
   bleed
   color="c-about"
 >
-  <section class="wrap page-hero">
+  <section class="wrap page-hero ab-hero">
     <Breadcrumb items={[{ label: "About" }]} />
-    <h1 class="display-xl ab-title">Information about small claims court that isn't trying to <span class="soft">talk you into anything.</span></h1>
+    <h1 class="display ab-title">Small claims court, by the numbers we can source.</h1>
     <div class="ab-intro">
       <p class="lede">Small claims court can settle a money dispute without a lawyer. It can also cost more than it returns, and winning doesn't mean being paid.</p>
-      <p class="muted">Fair Claim sets out both sides: your state's rules, the steps, the costs, the evidence on collecting, and other routes. You decide. It's an independent project, not a court, a government agency or a law firm.</p>
+      <nav aria-label="On this page">
+        <ol class="ab-index">
+          {parts.map((p) => (
+            <li class={p.c}>
+              <a href={p.href}><span class="ab-index-n">{p.n}</span><span>{p.t}</span></a>
+            </li>
+          ))}
+        </ol>
+      </nav>
     </div>
   </section>
 
-  <section class="wrap" id="mission" aria-label="Principles">
+  <!-- 01 · Lead story -->
+  <section class="wrap ab-part c-tomato" id="paid" aria-labelledby="paid-title">
+    <div class="ab-head is-lead">
+      <p class="lbl"><span class="ab-part-n">01</span>Getting paid</p>
+      <div>
+        <h2 class="ab-h" id="paid-title">Winning isn't getting paid.</h2>
+        <p class="lede">Courts don't track whether winners collect. The few studies that looked found that many never do.</p>
+      </div>
+    </div>
+
+    <div class="ab-figs" role="group" aria-labelledby="denver-title">
+      <p class="sr-only" id="denver-title">One study of Denver's small claims court</p>
+      <div class="ab-fig is-hero">
+        <p class="ab-fig-num">{denver.collectedNothingPct}%</p>
+        <p class="ab-fig-label">of winners never collected anything</p>
+      </div>
+      <div class="ab-fig">
+        <span class="s-bar c-sage" aria-hidden="true"></span>
+        <p class="ab-fig-num">{denver.wonPct}%</p>
+        <p class="ab-fig-label">of plaintiffs who came to the hearing won</p>
+      </div>
+      <div class="ab-fig">
+        <span class="s-bar c-sand" aria-hidden="true"></span>
+        <p class="ab-fig-num">{denver.dollarsPaidPct}%</p>
+        <p class="ab-fig-label">of all the money awarded was actually paid</p>
+      </div>
+    </div>
+    <div class="ab-figs-foot">
+      <p class="cite"><span>One study of Denver's small claims court</span><a href={denver.source.url} rel="noopener">{denver.source.label}</a><span>Checked {evidenceChecked}</span></p>
+      <p class="hint">{denver.caveat}</p>
+    </div>
+
+    <div class="ab-chart">
+      <ChartCollect headingLevel={3} />
+    </div>
+    <p class="note-strip ab-note">
+      <span class="lbl">What a judgment does</span>
+      <span>It lets the winner use the court's collection tools, such as a wage garnishment or a bank levy. It doesn't make the other side pay. <a href="/steps/#collect">Step 5: collecting</a>.</span>
+    </p>
+  </section>
+
+  <!-- 02 · Who uses it -->
+  <section class="wrap ab-part c-cobalt" id="who" aria-labelledby="who-title">
+    <div class="ab-head">
+      <p class="lbl"><span class="ab-part-n">02</span>Who uses small claims</p>
+      <div>
+        <h2 class="ab-h" id="who-title">In one big city, most cases were debt collection, and most judgments came by default.</h2>
+        <p class="lede">Pew studied {pew2022.casesTotal} small claims cases in Philadelphia's Municipal Court, {pew2022.years}. One city's data: other courts may differ.</p>
+      </div>
+    </div>
+
+    <div class="ab-figs is-two">
+      <div class="ab-fig is-hero">
+        <p class="ab-fig-num">{pew2022.judgmentsDefaultPct}%</p>
+        <p class="ab-fig-label">of the {pew2022.judgmentsTotal} cases that reached a judgment were defaults: the person sued didn't respond or appear</p>
+        <p class="cite"><a href={pew2022.source.url} rel="noopener">Pew (2022)</a><span>Checked {evidenceChecked}</span></p>
+      </div>
+      <div class="ab-fig">
+        <span class="s-bar" aria-hidden="true"></span>
+        <p class="ab-fig-num">{pew2021.plaintiffsWithLawyersPct}%</p>
+        <p class="ab-fig-label">of plaintiffs had a lawyer, against about {pew2021.defendantsWithLawyersPct}% of defendants, in the court's civil cases</p>
+        <p class="cite"><a href={pew2021.source.url} rel="noopener">Pew (2021)</a><span>Checked {evidenceChecked}</span></p>
+      </div>
+    </div>
+
+    <div class="ab-chart">
+      <ChartPhilly headingLevel={3} tiles={false} />
+    </div>
+    <p class="note-strip ab-note">
+      <span class="lbl">Been sued?</span>
+      <span>Don't ignore the papers. Missing the hearing usually means a <Term slug="default-judgment" />. Your <a href="/states/">state's page</a> links to the court's guide.</span>
+    </p>
+  </section>
+
+  <!-- 03 · How we check -->
+  <section class="wrap ab-part c-sage" id="checking" aria-labelledby="chk-title">
+    <div class="ab-head">
+      <p class="lbl"><span class="ab-part-n">03</span>How we check facts</p>
+      <div>
+        <h2 class="ab-h" id="chk-title">Primary sources first, and a date on everything.</h2>
+        <p class="lede">Every rule links to the law or the court's own site. Anything not yet confirmed says so.</p>
+      </div>
+    </div>
+
+    <div class="ab-figs is-three">
+      <div class="ab-fig is-hero">
+        <p class="ab-fig-num">{stateFacts.confirmed}<span class="ab-of"> of {stateFacts.tracked}</span></p>
+        <p class="ab-fig-label">state facts confirmed, across 50 states and DC</p>
+        <p class="cite"><span>Checked {statesChecked}</span></p>
+      </div>
+      <div class="ab-fig">
+        <span class="s-bar" aria-hidden="true"></span>
+        <p class="ab-fig-num">{countyFacts.confirmed}<span class="ab-of"> of {countyFacts.tracked}</span></p>
+        <p class="ab-fig-label">California county facts confirmed, across {countyFacts.rows} counties</p>
+        <p class="cite"><span>Checked {countiesChecked}</span></p>
+      </div>
+      <div class="ab-fig">
+        <span class="s-bar" aria-hidden="true"></span>
+        <p class="ab-fig-num">{recheckRounds.corrected}</p>
+        <p class="ab-fig-label">values corrected, and {recheckRounds.confirmed} confirmed, in two re-check rounds</p>
+        <p class="cite"><span>{recheckRounds.when}</span></p>
+      </div>
+    </div>
+    <p class="hint ab-count-note">A fact is one filled-in field, such as a state's limit, fee, appeal deadline or self-help link. Counted from our data files.</p>
+
+    <div class="ab-check-grid">
+      <div class="ab-col">
+        <h3 class="h4">How a fact gets on the site</h3>
+        <ol class="ab-rules">
+          <li><span>It comes from the statute, the court's rules or the court's own site. Secondary sources are named as such.</span></li>
+          <li><span>It carries the date we last checked it.</span></li>
+          <li><span>If we couldn't confirm it, it's marked <span class="badge unverified">unverified</span>.</span></li>
+          <li><span>Statistics come only from the studies we cite, with their limits.</span></li>
+        </ol>
+        <p class="ab-court"><strong>If the court tells you something different, the court is right.</strong></p>
+        <p><a class="go" href="/sources/">Sources and method</a></p>
+      </div>
+      <div class="ab-col">
+        <h3 class="h4">Still open</h3>
+        <p class="ab-p">
+          <span class="badge unverified">unverified</span> {stateFacts.open} details in {stateFacts.rowsOpen} states and{" "}
+          {countyFacts.open} in {countyFacts.rowsOpen} California counties. Mostly e-filing, fee waivers and remote
+          hearings, where official sites were blocked or silent.{!coreOpen && " No limit, filing fee, appeal or lawyer rule is open."}
+        </p>
+        <ul class="tags ab-open">
+          {statesOpen.map((s) => (
+            <li><a class="chip" href={`/states/${s.slug}/`}>{s.state} <span class="ab-open-n">{s.fields}</span></a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="ab-check-grid">
+      <div class="ab-col">
+        <h3 class="h4">Changes already on the calendar</h3>
+        <ul class="ab-dates">
+          {upcomingChanges.map((c) => (
+            <li>
+              <span class="ab-date">{fmtDate(c.date)}</span>
+              <span><a href={`/states/${c.slug}/`}>{c.state}</a>. {c.what}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="cite"><span>Enacted laws; each state page has the source</span><span>Checked {statesChecked}</span></p>
+      </div>
+      <div class="ab-col">
+        <h3 class="h4">The yearly upkeep</h3>
+        <p class="ab-p">Limits and fees change by statute, usually on January 1 or July 1.</p>
+        <ul class="ab-dates">
+          {upkeep.map((u) => (
+            <li><span class="ab-date">{u.when}</span><span>{u.what}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div id="data" class="ab-rules-charts">
+      <h3 class="lbl ab-sub">What the checked rules show</h3>
+      <div class="charts">
+        <TileMapLimits headingLevel={4} class="wide" />
+        <ChartLimitChanges headingLevel={4} />
+        <ChartRules headingLevel={4} />
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · Mission, free help, not advice -->
+  <section class="wrap ab-part c-sand" id="mission" aria-labelledby="mission-title">
+    <div class="ab-head">
+      <p class="lbl"><span class="ab-part-n">04</span>Why this site exists</p>
+      <div>
+        <h2 class="ab-h" id="mission-title">Information about small claims court that isn't trying to <span class="soft">talk you into anything.</span></h2>
+        <p class="lede">Fair Claim sets out both sides: your state's rules, the steps, the costs, the evidence on collecting, and other routes. You decide.</p>
+        <p class="ab-p ab-indep">It's an independent project, not a court, a government agency or a law firm.</p>
+      </div>
+    </div>
     <ul class="principles">
       {principles.map((p) => (
         <li class={`pr ${p.c}`}>
           <span class="t-top"><span class="key" aria-hidden="true">{p.k}</span><span class="t-dot" aria-hidden="true"></span></span>
-          <h2 class="h3">{p.t}</h2>
+          <h3 class="h3">{p.t}</h3>
           <p>{p.d}</p>
         </li>
       ))}
     </ul>
-  </section>
-
-  <section class="wrap section" id="who" aria-labelledby="who-title">
-    <div class="sec-head">
-      <p class="lbl">Who it's for</p>
-      <div>
-        <h2 class="h2" id="who-title">People with a money dispute, on either side of it.</h2>
-        <ul class="ab-who" style="margin-top:36px">
-          {who.map((w) => <li><strong>{w.t}</strong><span>{w.d}</span></li>)}
-        </ul>
-        <p class="note-strip ab-sued">
-          <span class="lbl">Been sued?</span>
-          <span>A guide for defendants is planned. Until then: don't ignore the papers. Missing the hearing usually means a <Term slug="default-judgment" />.</span>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap section" id="data" aria-labelledby="data-title">
-    <div class="sec-head">
-      <p class="lbl">What the data shows</p>
-      <div>
-        <h2 class="h2" id="data-title">Five views of small claims in the US.</h2>
-        <p class="lede">From our 50-state research and the few published studies. Evidence on collecting is thin and old, so it's shown with its limits.</p>
-      </div>
-    </div>
-
-    <div class="charts">
-      <TileMapLimits headingLevel={3} class="wide" />
-      <ChartLimitChanges headingLevel={3} />
-      <ChartRules headingLevel={3} />
-
-      <div class="ab-paid wide" id="chart-denver" role="group" aria-labelledby="denver-title">
-        <div class="chart-head">
-          <p class="lbl">Getting paid · one court</p>
-          <h3 class="chart-title" id="denver-title">Winning isn't the same as being paid</h3>
-          <p class="chart-sub">One study of Denver's small claims court.</p>
-        </div>
-        <div class="stats">
-          <div class="stat c-sage"><span class="s-bar"></span><p class="num">{denver.wonPct}%</p><p class="s-label">of plaintiffs who came to the hearing won</p></div>
-          <div class="stat c-tomato"><span class="s-bar"></span><p class="num">{denver.collectedNothingPct}%</p><p class="s-label">of those winners never collected anything</p></div>
-          <div class="stat c-sand"><span class="s-bar"></span><p class="num">{denver.dollarsPaidPct}%</p><p class="s-label">of all the money awarded was actually paid</p></div>
-        </div>
-        <div class="chart-foot">
-          <p class="cite"><span>Source</span><a href={denver.source.url} rel="noopener">{denver.source.label}</a><span>Checked {evidenceChecked}</span></p>
-          <p class="hint">{denver.caveat}</p>
-        </div>
-      </div>
-      <ChartCollect headingLevel={3} class="wide" />
-
-      <ChartPhilly headingLevel={3} class="wide" />
-    </div>
-  </section>
-
-  <section class="wrap section" id="checking" aria-labelledby="chk-title">
-    <div class="sec-head">
-      <p class="lbl">How we check facts</p>
-      <div class="ab-body">
-        <h2 class="h3" id="chk-title">Primary sources first, and a date on everything.</h2>
-        <p style="margin-top:18px">
-          Every rule links to the law or the court's own site, with the date we checked it. Anything not yet confirmed is
-          marked <span class="badge unverified">unverified</span>. Statistics come only from the studies we cite.
-        </p>
-        <p><strong>If the court tells you something different, the court is right.</strong></p>
-        <p><a class="go" href="/sources/">How we check, and how often</a></p>
-      </div>
+    <div class="ab-for">
+      <h3 class="lbl ab-sub">Who it's for</h3>
+      <ul class="ab-who">
+        {who.map((w) => <li><strong>{w.t}</strong><span>{w.d}</span></li>)}
+      </ul>
     </div>
   </section>
 
@@ -138,7 +286,7 @@ const who = [
           </div>
         </div>
 
-        <h3 class="h3 help-head">Where to get free help with your own case</h3>
+        <h3 class="h3 help-head" id="help">Where to get free help with your own case</h3>
         <ul class="help">
           <li>
             <div class="card card-link">

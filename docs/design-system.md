@@ -156,6 +156,15 @@ with a class loses bullets and padding.
 - **ToolStatePicker** (`ToolStatePicker.astro` + `initStatePicker()` in `ToolFlow.ts`): featured states as lettered
   radio tiles, then "Another state", which opens `.fl-pick`, a searchable list of all 50 states + DC (Enter picks
   the first match).
+- **LocationSearch** (`LocationSearch.astro` + `.ts`): slim pill search bar, label above, Find button inside,
+  quiet "Or pick your state" link under it. ZIP, city/town, county or state name/abbreviation. One clear match goes
+  straight to the state page (or the California county page); several show a `role="listbox"` pick list under the
+  box (combobox pattern: arrows, Enter, Escape). Props: `label`, `compact`, `showStateLink`, `target`
+  (`"states"` default, or `"checklists"` → `/checklists/{st}/`), `stateHref`, `placeholder`. Matching runs in the
+  browser on static files in `/geo/` (built by `scripts/build_places.py` from U.S. Census Bureau public-domain
+  files: 2020 ZCTA-to-county relationship file, 2024 Gazetteer counties and places, 2020 place-by-county list).
+  ZIP files load by first digit, place files by first letter, all same-origin (~270 KB gzip in total, 5–20 KB per
+  search). Without JavaScript the form submits to `/states/` (or `/checklists/`), which list every state.
 - **Tables** `.table-scroll` > `table` (mono column heads, hairlines, `.num` right-aligned). Add `.table-stack` +
   `data-label` on each `td` to stack rows under 720px. `.facts` > `.fact` (dt mono / dd).
 - **Stat strip** `.stats` > `.stat.c-*` (`.s-bar`, `.num` / `.num.word`, `.s-label`, `.s-sub`, `.cite`). `StatTile.astro`

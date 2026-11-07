@@ -159,3 +159,22 @@ Agents checked every remaining state detail plus the California county gaps. Cor
 ## Address change (2026-11-07)
 Nima wants the short address **https://fairclaim.pages.dev**. Pages projects can't be renamed, so the plan is: create a new Cloudflare Pages project named `fairclaim` on the same repo (same settings), check it, then delete the old `fair-claim` project (fair-claim-706.pages.dev). The code's default address is already set to fairclaim.pages.dev.
 - 2026-11-07: **Live at https://fairclaim.pages.dev** (Pages project `fairclaim`, fedmoney account). Checked: all page types 200, mockups 404, canonical correct, security headers on, still noindex. The old `fair-claim` project (fair-claim-706.pages.dev) can be deleted by Nima.
+
+## Location search (2026-11-06)
+- `<LocationSearch />` replaces the state dropdowns on `/states/` and `/checklists/`: ZIP code, city/town, county or
+  state, matched in the browser (nothing typed is sent anywhere). California ZIPs, cities and counties go to the
+  county page.
+- Data: `scripts/build_places.py` downloads U.S. Census Bureau files (public domain) to `research/raw/places/`
+  (git-ignored) and writes `site/public/geo/` (zip-0…9, counties, places-a…z). Sources: 2020 ZCTA-to-county
+  relationship file, 2024 Gazetteer counties + places, 2020 national place-by-county list. ZCTAs approximate USPS
+  ZIPs, so a few PO-box-only ZIPs aren't found; 8 California places have no county in the 2020 list and go to the
+  California page. Rerun after a new Census release.
+
+## Round 6 (2026-11-07): search, home/About, logo
+- **Location search** (ZIP, city, county or state) runs in the browser on Census files in `site/public/geo/`, built by `scripts/build_places.py`. It's on the home, /states/ and /checklists/ pages.
+- **Spacing:** about 25% tighter, set by spacing tokens.
+- **Home page:** shorter. Headline plus search, smaller doors, a five-steps strip, the 55% figure and a compact limits map.
+- **About:** four numbered parts: getting paid, who uses small claims, how we check, and mission plus free help. The fact counts are calculated from the data.
+- **Glossary:** letters with terms are now clearly stronger than empty ones.
+- **Logo: "Balance"** (a scale with cobalt and tomato tiles). It's in the header, the favicon (follows light/dark), apple-touch-icon, icon-512 and a new og.png share image. The 10 logo options are in `output/logos/`.
+- **Rhode Island:** the 2027 fee change now reads "$75.75 total today becomes a flat $75".

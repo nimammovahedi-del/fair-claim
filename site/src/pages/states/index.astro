@@ -1,7 +1,9 @@
 ---
-// State rules hub (Option A): a big "Which state?" with a compact picker, then the 51-row table.
+// State rules hub (Option A): a big "Which state?" with the location search (ZIP, city, county or state),
+// then the 51-row table (#all-states), which also works without JavaScript.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import LocationSearch from "../../components/LocationSearch.astro";
 import TableFilter from "../../components/TableFilter.astro";
 import UnverifiedNote from "../../components/UnverifiedNote.astro";
 import "../../styles/states.css";
@@ -24,23 +26,16 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
         <h1 class="display sr-title">Which state?</h1>
         <p class="lede pick-lede">Limits, fees and appeal rules for all 50 states and DC. Each one has a source and a date.</p>
       </div>
-      <form class="pick" data-state-pick hidden aria-label="Go to a state">
-        <div class="field">
-          <label for="pick-state">Your state</label>
-          <select id="pick-state" name="state" required>
-            <option value="">Choose…</option>
-            {states.map((s) => <option value={s.slug}>{s.state}</option>)}
-          </select>
-        </div>
-        <button class="btn color c-states pick-go" type="submit">Go to state</button>
-      </form>
+      <div class="pick">
+        <LocationSearch label="Your ZIP code, city, county or state" stateHref="#all-states" />
+      </div>
     </div>
     <p class="lbl pick-meta">
       {states.length} states and DC · checked {latest} · <a href="/states/ca/counties/">California by county</a>
     </p>
   </section>
 
-  <section class="wrap section" aria-labelledby="table-title" style="padding-top:clamp(40px,5vw,72px)">
+  <section class="wrap section" id="all-states" aria-labelledby="table-title" style="padding-top:clamp(40px,5vw,72px)">
     <div class="sec-head">
       <p class="lbl">At a glance</p>
       <div>
@@ -112,20 +107,6 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
   </section>
 </Site>
 
-<script>
-  // The picker needs JavaScript to jump to a page; without it, the table below has a link for every state.
-  const form = document.querySelector<HTMLFormElement>("[data-state-pick]");
-  if (form) {
-    form.hidden = false;
-    const sel = form.querySelector<HTMLSelectElement>("select")!;
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (sel.value) location.href = `/states/${sel.value}/`;
-      else sel.focus();
-    });
-  }
-</script>
-
 <style>
   .pick-row {
     display: grid;
@@ -137,26 +118,7 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
     margin-top: 28px;
   }
   .pick {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 8px;
-    align-items: stretch;
-  }
-  .pick[hidden] {
-    display: none;
-  }
-  .pick .field {
-    min-height: 104px;
-  }
-  .pick-go {
-    height: auto;
-    min-height: 52px;
-    padding-inline: 28px;
-    border-radius: var(--r);
-    touch-action: manipulation;
-  }
-  .pick-go:active {
-    filter: brightness(0.94);
+    padding-bottom: 6px;
   }
   .pick-meta {
     margin: 40px 0 0;
@@ -176,11 +138,6 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
   @media (max-width: 860px) {
     .pick-row,
     .tbl-tools {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
-  @media (max-width: 480px) {
-    .pick {
       grid-template-columns: minmax(0, 1fr);
     }
   }

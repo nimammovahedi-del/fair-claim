@@ -55,7 +55,7 @@
 
 /* ------------------------------------------------------------------ "In short" */
 .sr-short {
-  padding-top: clamp(56px, 7vw, 104px);
+  padding-top: var(--sp-section);
 }
 .sr-short .sec-head {
   margin-bottom: 0;
@@ -84,7 +84,7 @@
 
 /* ------------------------------------------------------------------ Topic tabs */
 .sr-topics {
-  padding-top: clamp(64px, 8vw, 120px);
+  padding-top: var(--sp-section);
 }
 .sr-topics-top {
   display: flex;

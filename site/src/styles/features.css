@@ -576,6 +576,83 @@
   color: var(--ink-2);
 }
 
+/* Compact limits map (home page): one link to /states/; the little map is decorative. */
+.tm-mini {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 24px;
+  align-items: stretch;
+  padding: 20px 24px 22px;
+  border-radius: var(--r);
+  background: var(--panel);
+  color: var(--ink);
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: background-color var(--t-fast) var(--ease);
+}
+.tm-mini-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tm-mini-title {
+  margin: auto 0 0;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(28px, 2.6vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.tm-mini-sub {
+  max-width: 30ch;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.tm-mini .go {
+  margin-top: 4px;
+}
+.tm-mini-map {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  grid-template-rows: repeat(8, auto);
+  gap: 2px;
+  align-self: center;
+}
+.tm-mini-map .map-tile {
+  aspect-ratio: 1;
+  height: auto;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  font-size: 8.5px;
+  letter-spacing: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .tm-mini:hover {
+    background: var(--panel-hover);
+  }
+  .tm-mini-map .map-tile:hover {
+    box-shadow: none;
+  }
+}
+.tm-mini:active {
+  background: var(--panel-2);
+}
+.tm-mini:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+@media (max-width: 560px) {
+  .tm-mini {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tm-mini-map {
+    order: -1;
+  }
+}
+
 /* ------------------------------------------------------------------ 5. Stat tiles */
 /* <ul class="stat-tiles"><StatTile …/></ul>. A slot class (c-tomato …) on a tile colors its bar. */
 .stat-tiles {
@@ -787,6 +864,10 @@
 .az li {
   margin: 0;
 }
+/* Letter index. Three clearly different states:
+   - has terms: a filled panel with a 1px --line-strong ring (≥3:1 against the page), full ink letter, count in ink;
+   - selected: the section color, no ring;
+   - no terms: no fill, no ring, a faint letter (disabled, not a control). */
 .az-l {
   position: relative;
   display: flex;
@@ -795,13 +876,17 @@
   padding: 8px 10px;
   border-radius: var(--r);
   background: var(--panel);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
   color: var(--ink);
   text-decoration: none;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
-    opacity var(--t-fast) var(--ease);
+    box-shadow var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease), transform var(--t-press) var(--ease);
+}
+a.az-l:active {
+  transform: scale(0.97);
 }
 .az-L {
   font-family: var(--f-display);
@@ -814,13 +899,15 @@
   top: 8px;
   right: 10px;
   font-family: var(--f-mono);
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 500;
   line-height: 1;
-  color: var(--ink-3);
+  color: var(--ink);
 }
 @media (hover: hover) and (pointer: fine) {
-  a.az-l:hover {
+  a.az-l:not([aria-current="true"]):hover {
     background: var(--panel-hover);
+    box-shadow: inset 0 0 0 1px var(--ink);
   }
 }
 .az-l[aria-current="true"],
@@ -834,11 +921,14 @@
 }
 .az-l.is-empty {
   background: transparent;
-  box-shadow: inset 0 0 0 1px var(--line);
-  color: var(--ink-3);
+  box-shadow: none;
+  color: var(--ink);
+  opacity: 0.22;
+  cursor: default;
 }
 .az-l.is-dim {
   opacity: 0.35;
+  box-shadow: inset 0 0 0 1px var(--line-2);
 }
 .gl-status {
   display: flex;
@@ -1045,25 +1135,363 @@ html.js .gl-list.is-search .gl-letter .num {
 }
 
 /* ------------------------------------------------------------------ 8. About page */
+/* Editorial page in four numbered parts. Each part sets a color slot (.c-tomato …) used by its number,
+   its hero figure and its bars. The lead part (01) is the largest. */
 .ab-title {
-  max-width: 17ch;
+  max-width: 18ch;
 }
-.ab-title .soft {
+.ab-title .soft,
+.ab-h .soft {
   color: var(--ink-3);
 }
 .ab-intro {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 24px 64px;
-  margin-top: clamp(40px, 5vw, 72px);
+  align-items: start;
+  margin-top: clamp(28px, 3.4vw, 48px);
   padding-top: 24px;
   border-top: 1px solid var(--line);
 }
-.ab-intro p {
+.ab-intro .lede {
   margin: 0;
 }
-.ab-intro .muted {
-  max-width: 56ch;
+.ab-index {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.ab-index li {
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+}
+.ab-index a {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: baseline;
+  padding: 11px 0;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 17px;
+  transition: color var(--t-fast) var(--ease);
+}
+.ab-index-n {
+  position: relative;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--ink-3);
+  padding-left: 14px;
+}
+.ab-index-n::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--t);
+}
+@media (hover: hover) and (pointer: fine) {
+  .ab-index a:hover {
+    color: var(--ink-2);
+  }
+}
+.ab-part {
+  padding-top: var(--sp-section);
+  scroll-margin-top: 16px;
+}
+.ab-head {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: 12px var(--gap);
+  align-items: start;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  margin-bottom: var(--sp-head);
+}
+.ab-head > .lbl {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding-top: 10px;
+  color: var(--ink);
+}
+.ab-part-n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 34px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: var(--t);
+  color: var(--on);
+  box-shadow: var(--edge, none);
+}
+.ab-h {
+  margin: 0;
+  max-width: 24ch;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(30px, 3.2vw, 52px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.ab-head.is-lead .ab-h {
+  font-size: clamp(44px, 6vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  max-width: 14ch;
+}
+.ab-head .lede {
+  margin: 18px 0 0;
+  max-width: 52ch;
+}
+.ab-indep {
+  margin-top: 12px;
+}
+.ab-p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--ink-2);
+}
+/* Big figures: one hero figure in the part's color, the rest on panels. */
+.ab-figs {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+}
+.ab-figs.is-two {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+}
+.ab-fig {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 220px;
+  padding: 20px 24px 22px;
+  border-radius: var(--r);
+  background: var(--panel);
+}
+.ab-fig > * {
+  margin: 0;
+}
+.ab-fig .s-bar {
+  margin-bottom: auto;
+}
+#paid .ab-fig {
+  min-height: clamp(240px, 24vw, 340px);
+}
+.ab-fig.is-hero {
+  background: var(--t);
+  color: var(--on);
+  box-shadow: var(--edge, none);
+  justify-content: flex-end;
+}
+.ab-fig.is-hero .cite,
+.ab-fig.is-hero .cite a {
+  color: var(--on);
+}
+.ab-fig-num {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(56px, 6vw, 96px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.ab-fig.is-hero .ab-fig-num {
+  font-size: clamp(80px, 10vw, 168px);
+  margin-top: auto;
+}
+.ab-of {
+  font-size: 0.38em;
+  letter-spacing: -0.02em;
+  color: var(--ink-3);
+}
+.ab-fig.is-hero .ab-of {
+  color: inherit;
+  opacity: 0.8;
+}
+.ab-fig-label {
+  max-width: 30ch;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.ab-fig.is-hero .ab-fig-label {
+  font-size: clamp(17px, 1.4vw, 21px);
+  max-width: 26ch;
+}
+.ab-fig .cite {
+  margin-top: 4px;
+}
+.ab-figs-foot {
+  display: grid;
+  gap: 6px;
+  margin-top: 14px;
+}
+.ab-figs-foot > p {
+  margin: 0;
+}
+.ab-count-note {
+  margin: 12px 0 0;
+}
+.ab-chart {
+  margin-top: clamp(28px, 3vw, 40px);
+}
+.ab-note {
+  margin-top: 20px;
+}
+/* 03: two columns of short blocks */
+.ab-check-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+.ab-check-grid:first-of-type {
+  margin-top: clamp(28px, 3vw, 40px);
+}
+.ab-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 24px 24px;
+  border-radius: var(--r);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.ab-col > * {
+  margin: 0;
+}
+.ab-col .h4 {
+  font-size: 23px;
+}
+.ab-rules {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: r;
+}
+.ab-rules li {
+  counter-increment: r;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.ab-rules li::before {
+  content: counter(r, decimal-leading-zero);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  line-height: 2;
+  color: var(--ink-3);
+}
+.ab-court strong {
+  font-weight: 500;
+}
+.ab-open {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ab-open li {
+  margin: 0;
+}
+.ab-open-n {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.ab-dates {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.ab-dates li {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.ab-date {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ab-sub {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+.ab-sub::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.ab-rules-charts {
+  margin-top: clamp(40px, 4.4vw, 64px);
+  scroll-margin-top: 16px;
+}
+.ab-for {
+  margin-top: clamp(32px, 3.4vw, 48px);
+}
+.help-head {
+  scroll-margin-top: 16px;
+}
+@media (max-width: 1080px) {
+  .ab-figs,
+  .ab-figs.is-two {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .ab-figs .ab-fig.is-hero {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 860px) {
+  .ab-head,
+  .ab-check-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .ab-figs,
+  .ab-figs.is-two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ab-fig {
+    min-height: 0;
+  }
+  .ab-fig .s-bar {
+    margin-bottom: 8px;
+  }
+  .ab-dates li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
 }
 .principles {
   display: grid;
@@ -2163,4 +2591,7 @@ html.js [data-no-js-only] {
 }
 .gl-card h3:focus {
   outline: none; /* focus is moved here for screen readers after a deep link; the card ring shows the target */
+}
+.ab-hero {
+  padding-bottom: 0;
 }

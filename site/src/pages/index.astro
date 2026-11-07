@@ -1,8 +1,13 @@
 ---
-// Landing page: one statement, three doors. Keep the text to a minimum.
-// The old home page's charts now live on /about/; the state picker moves to /states/.
+// Landing page: one statement, a location search, three doors, the five steps at a glance,
+// one key number and the limits map as a small door into State rules. Keep the text to a minimum; neutral:
+// information, not encouragement to sue. The full charts live on /about/.
 import Site from "../layouts/Site.astro";
-import { statesChecked } from "../lib/stats";
+import LocationSearch from "../components/LocationSearch.astro";
+import TileMapLimits from "../components/TileMapLimits.astro";
+import "../styles/features.css";
+import { statesChecked, denver, evidenceChecked } from "../lib/stats";
+import { steps } from "../lib/steps";
 
 const doors = [
   {
@@ -30,16 +35,31 @@ const doors = [
     foot: "Nothing you type is stored",
   },
 ];
+
+// One or two words per step. Anchors are the step slugs on /steps/.
+const stepWords: Record<string, string> = {
+  demand: "Ask in writing",
+  file: "File",
+  serve: "Serve",
+  hearing: "Hearing",
+  collect: "Collect",
+};
+const strip = steps.map((s) => ({ slug: s.slug, word: stepWords[s.slug] ?? s.title }));
 ---
 <Site title="Fair Claim" bleed>
   <section class="wrap land-hero">
-    <h1 class="display-xl land-title">Small claims, explained.</h1>
-    <p class="lbl land-meta">50 states + DC · checked {statesChecked}</p>
+    <div class="land-head">
+      <h1 class="display-xl land-title">Small claims, explained.</h1>
+      <p class="lbl land-meta">50 states + DC · checked {statesChecked}</p>
+    </div>
+    <div class="land-search">
+      <LocationSearch label="Find your state's rules" compact />
+    </div>
   </section>
 
   <section class="wrap" aria-labelledby="doors-title">
     <h2 id="doors-title" class="sr-only">Where to start</h2>
-    <div class="doors">
+    <div class="doors land-doors">
       {doors.map((d, i) => (
         <a class={`tile fill door ${d.c}`} href={d.href}>
           <span class="t-top">
@@ -59,40 +79,251 @@ const doors = [
       <span>Don't ignore the papers. Your <a href="/states/">state's page</a> links to the court's guide.</span>
     </p>
   </section>
+
+  <nav class="wrap c-learn" aria-labelledby="strip-title">
+    <div class="land-steps">
+    <h2 id="strip-title" class="lbl">The five steps</h2>
+    <ol class="strip">
+      {strip.map((s, i) => (
+        <li>
+          <a href={`/steps/#${s.slug}`}>
+            <span class="strip-n" aria-hidden="true">{i + 1}</span>
+            <span class="strip-w"><span class="sr-only">Step {i + 1}: </span>{s.word}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    </div>
+  </nav>
+
+  <section class="wrap land-glance" aria-label="At a glance">
+    <div class="land-key c-tomato">
+      <p class="lbl">Getting paid · one study</p>
+      <p class="land-key-row">
+        <span class="num land-key-num">{denver.collectedNothingPct}%</span>
+        <span class="land-key-label">of winners in a study of Denver's small claims court never collected anything.</span>
+      </p>
+      <p class="cite"><span>Source</span><a href={denver.source.url} rel="noopener">Best et al., Fordham Urb. L.J. (1994)</a><span>Checked {evidenceChecked}</span></p>
+      <a class="go" href="/about/#paid">Winning isn't getting paid</a>
+    </div>
+    <TileMapLimits compact headingLevel={2} id="home-limits" />
+  </section>
 </Site>
 
 <style>
   .land-hero {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px 48px;
-    padding-top: clamp(80px, 12vw, 184px);
-    padding-bottom: clamp(48px, 6vw, 88px);
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+    gap: 28px 48px;
+    padding-top: clamp(40px, 6vw, 88px);
+    padding-bottom: clamp(28px, 3.2vw, 48px);
   }
   .land-title {
     margin: 0;
     max-width: 12ch;
+    font-size: clamp(46px, 6.4vw, 96px);
   }
   .land-meta {
-    margin: 0 0 0.6em;
+    margin: 20px 0 0;
+  }
+  .land-search {
+    padding-bottom: 4px;
   }
   .door-idx {
     color: inherit;
+  }
+  /* Home doors: the same tiles as /tools/, a size down so the core of the page fits about one screen. */
+  .land-doors :global(.door) {
+    min-height: clamp(220px, 21vw, 300px);
+    gap: 24px;
+  }
+  .land-doors :global(.door-title) {
+    font-size: clamp(28px, 2.5vw, 40px);
+  }
+  .land-doors :global(.door-text) {
+    font-size: 16px;
   }
   .land-sued {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 6px 14px;
-    margin: 28px 0 0;
+    margin: 20px 0 0;
     font-size: 15px;
     color: var(--ink-2);
   }
+
+  /* Five steps: numbered marks on one hairline, one or two words each. */
+  .land-steps {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    gap: 16px var(--gap);
+    align-items: start;
+    margin-top: clamp(32px, 3.4vw, 48px);
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .land-steps h2 {
+    margin: 0;
+    padding-top: 9px;
+  }
+  .strip {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .strip::before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 16px;
+    height: 1px;
+    background: var(--line-2);
+  }
+  .strip li {
+    margin: 0;
+  }
+  .strip a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0 8px 4px 0;
+    color: var(--ink);
+    text-decoration: none;
+    touch-action: manipulation;
+  }
+  .strip-n {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: inset 0 0 0 1px var(--line-strong);
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink);
+    transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
+      box-shadow var(--t-fast) var(--ease), transform var(--t-press) var(--ease);
+  }
+  .strip-w {
+    font-size: 16px;
+    line-height: 1.3;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--t-fast) var(--ease);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .strip a:hover .strip-n {
+      background: var(--t);
+      color: var(--on);
+      box-shadow: none;
+    }
+    .strip a:hover .strip-w {
+      text-decoration-color: currentColor;
+    }
+  }
+  .strip a:active .strip-n {
+    transform: scale(0.94);
+  }
+  .strip a:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  /* At a glance: one key number and the limits map, each a small door. */
+  .land-glance {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px;
+    margin-top: clamp(32px, 3.4vw, 48px);
+  }
+  .land-key {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px 24px 22px;
+    border-radius: var(--r);
+    background: var(--panel);
+  }
+  .land-key > * {
+    margin: 0;
+  }
+  .land-key-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    margin-top: auto;
+    padding-top: 12px;
+  }
+  .land-key-num {
+    flex: none;
+    font-size: clamp(64px, 7vw, 112px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+  }
+  .land-key-num::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    margin-top: 14px;
+    border-radius: 2px;
+    background: var(--t);
+  }
+  .land-key-label {
+    max-width: 26ch;
+    padding-bottom: 18px;
+    font-size: 17px;
+    line-height: 1.4;
+  }
+  @media (max-width: 960px) {
+    .land-hero,
+    .land-glance,
+    .land-steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
   @media (max-width: 560px) {
-    .land-hero {
-      padding-top: 56px;
+    .strip {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+    .strip::before {
+      right: auto;
+      bottom: 16px;
+      width: 1px;
+      height: auto;
+    }
+    .strip a {
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+    }
+    .land-key-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .land-key-label {
+      padding-bottom: 0;
+    }
+    .land-doors :global(.door) {
+      min-height: 184px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .strip a:active .strip-n {
+      transform: none;
     }
   }
 </style>

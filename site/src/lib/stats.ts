@@ -5,7 +5,7 @@
 //   research/collection/collection-research.md with its source URL. Nothing is estimated or modelled here.
 // - Simple arithmetic on those numbers (counts, medians, 100 − x) is allowed and labelled as such where shown.
 // - Anything the research marks as unconfirmed carries `unverified: true` (or a field in `unverifiedFields`).
-import { states, caStatewide, type StateRow } from "./data";
+import { states, counties, caStatewide, type StateRow } from "./data";
 
 export interface SourceLink {
   label: string;
@@ -347,3 +347,72 @@ export const feeWaiverStats = {
   unconfirmed: states.filter((s) => s.fee_waiver_form && isU(s, "fee_waiver_form")).length,
   total: states.length,
 };
+
+// ------------------------------------------------------------------ 9. How we check: verification counts
+// Counted from the data files: a "fact" is one filled-in field from the lists below. A fact is open when the
+// row's `unverified` list names it (county lists can name a sub-field, e.g. "small_claims_advisor.provider").
+
+const stateFactFields = [
+  "court_name", "limit_individual", "limit_business", "filing_fee_min", "filing_fee_max", "who_can_sue",
+  "lawyers_allowed", "appeal", "appeal_deadline_days", "e_filing", "fee_waiver_form", "fee_waiver_threshold",
+  "service_methods", "self_help_url",
+] as const;
+const countyFactFields = [
+  "court_name", "small_claims_page_url", "small_claims_locations", "self_help_center", "small_claims_advisor",
+  "e_filing", "remote_hearings",
+] as const;
+const filled = (v: unknown) =>
+  v != null && v !== "" && !(Array.isArray(v) && v.length === 0) && !(typeof v === "object" && !Array.isArray(v) && Object.keys(v as object).length === 0);
+
+function factCounts<T extends { unverified?: string[] | null }>(rows: T[], fields: readonly string[]) {
+  const tracked = rows.reduce((n, r) => n + fields.filter((f) => filled((r as Record<string, unknown>)[f])).length, 0);
+  const open = rows.reduce((n, r) => n + (r.unverified?.length ?? 0), 0);
+  const rowsOpen = rows.filter((r) => (r.unverified?.length ?? 0) > 0).length;
+  return { tracked, open, confirmed: tracked - open, rows: rows.length, rowsOpen };
+}
+
+export const stateFacts = factCounts(states, stateFactFields);
+export const countyFacts = factCounts(counties, countyFactFields);
+export const countiesChecked: string = counties
+  .map((c) => c.date_checked ?? "")
+  .filter(Boolean)
+  .sort()
+  .at(-1) as string;
+
+/** States with open (unverified) fields, for the "still open" list. */
+export const statesOpen = states
+  .filter((s) => (s.unverified?.length ?? 0) > 0)
+  .map((s) => ({ abbr: s.abbr, state: s.state, slug: s.slug, fields: s.unverified.length }));
+
+/** Re-check rounds, from the project's verification log (STATUS.md, rounds 2 and 3, November 2026). */
+export const recheckRounds = {
+  when: "November 2026",
+  confirmed: 53 + 119 + 25, // round 2 states + round 3 states + round 3 CA counties
+  corrected: 36 + 100 + 25,
+};
+
+/** Dated changes already enacted; each state's page has the law and its source. */
+export const upcomingChanges = [
+  { date: "2027-01-01", abbr: "GA", what: "Limit rises from $15,000 to $25,000 (HB 999)." },
+  { date: "2027-01-01", abbr: "WI", what: "Limit rises from $10,000 to $15,000 (2025 Wis. Act 105)." },
+  { date: "2027-01-01", abbr: "SC", what: "Filing fee goes from $70 to $105 (2026 Act No. 155)." },
+  { date: "2027-01-01", abbr: "RI", what: "Entry fee and counterclaim cap change (P.L. 2026, ch. 323)." },
+  { date: "2030-01-01", abbr: "UT", what: "Limit rises from $20,000 to $25,000 (built into § 78A-8-102)." },
+].map((c) => {
+  const s = states.find((x) => x.abbr === c.abbr)!;
+  return { ...c, state: s.state, slug: s.slug };
+});
+
+/** The yearly upkeep plan (docs/plan.md). */
+export const upkeep = [
+  { when: "March–April", what: "Fee-waiver income tables, after the new federal poverty guidelines." },
+  { when: "June", what: "Scan each state's new laws for small claims changes; re-check before July 1." },
+  { when: "December", what: "Full re-check of all 51: limits, fees, appeals, e-filing, self-help links. Update for January 1." },
+  { when: "Every quarter", what: "Check every source link for dead pages." },
+  { when: "Any time", what: "Fix reported errors, re-date the fact and note the change." },
+];
+
+/** True when any limit, filing fee, appeal or lawyer rule is still marked unverified. */
+export const coreOpen = states.some((s) =>
+  isU(s, "limit_individual", "limit_business", "filing_fee_min", "filing_fee_max", "appeal", "appeal_who", "appeal_deadline_days", "lawyers_allowed"),
+);

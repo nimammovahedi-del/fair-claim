@@ -7,3 +7,6 @@ __pycache__/
 .env
 site/public/mockup-shots/
 site/public/final-shots/
+
+# Census downloads for scripts/build_places.py
+research/raw/places/

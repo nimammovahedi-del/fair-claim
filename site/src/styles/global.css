@@ -76,6 +76,13 @@
   --space-16: 128px;
   --gap: 24px; /* grid gap between columns */
   --pad: clamp(20px, 4vw, 56px); /* page side padding */
+  /* Vertical rhythm (round 5: about 25% tighter than round 3, still airy). Use these, not raw clamps. */
+  --sp-page: clamp(32px, 4vw, 56px); /* top of a non-bleed page */
+  --sp-hero-top: clamp(40px, 6vw, 96px); /* above a page title */
+  --sp-hero-bottom: clamp(32px, 4vw, 56px); /* below a page hero */
+  --sp-section: clamp(48px, 6vw, 96px); /* between sections */
+  --sp-head: 36px; /* section head to its content */
+  --sp-footer: clamp(72px, 9vw, 120px); /* last section to the footer */
   --container: 1440px;
   --measure: 66ch;
 
@@ -583,14 +590,14 @@ main:focus {
 }
 /* Site.astro wraps non-"bleed" pages in .wrap.page */
 .page {
-  padding-top: clamp(40px, 5vw, 72px);
+  padding-top: var(--sp-page);
 }
 .narrow {
   max-width: var(--measure);
 }
 .page-hero {
-  padding-top: clamp(56px, 8vw, 128px);
-  padding-bottom: clamp(40px, 5vw, 72px);
+  padding-top: var(--sp-hero-top);
+  padding-bottom: var(--sp-hero-bottom);
 }
 .page-hero .lbl,
 .page-hero .crumb {
@@ -600,7 +607,7 @@ main:focus {
   margin-top: 28px;
 }
 .section {
-  padding-top: clamp(64px, 8vw, 128px);
+  padding-top: var(--sp-section);
 }
 /* Section head: mono label in a 3-column gutter, title + lede beside it */
 .sec-head {
@@ -610,7 +617,7 @@ main:focus {
   align-items: start;
   padding-top: 20px;
   border-top: 1px solid var(--line);
-  margin-bottom: 48px;
+  margin-bottom: var(--sp-head);
 }
 .sec-head > .lbl {
   padding-top: 10px;
@@ -974,9 +981,9 @@ main:focus {
 
 /* ------------------------------------------------------------------ 8. Footer */
 .ftr {
-  margin-top: clamp(96px, 12vw, 160px);
+  margin-top: var(--sp-footer);
   border-top: 1px solid var(--line);
-  padding-top: 64px;
+  padding-top: 48px;
   padding-bottom: env(safe-area-inset-bottom, 0px); /* clear of the home indicator */
   overflow: hidden;
 }
