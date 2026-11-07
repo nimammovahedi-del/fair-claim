@@ -4,11 +4,11 @@
 
 /* ------------------------------------------------------------------ Hero */
 .sr-hero {
-  padding-top: clamp(40px, 6vw, 96px);
-  padding-bottom: clamp(32px, 4vw, 56px);
+  padding-top: clamp(28px, 4vw, 64px);
+  padding-bottom: clamp(24px, 3vw, 40px);
 }
 .sr-hero .breadcrumb {
-  margin-bottom: clamp(28px, 4vw, 48px);
+  margin-bottom: clamp(20px, 3vw, 36px);
 }
 .sr-title-row {
   display: grid;
@@ -37,6 +37,10 @@
 .sr-meta p {
   margin: 0;
 }
+.sr-meta .small {
+  font-size: 17px;
+  color: var(--ink-2);
+}
 .sr-meta .cite {
   justify-content: flex-end;
 }
@@ -54,24 +58,33 @@
 }
 
 /* ------------------------------------------------------------------ "In short" */
+/* One column: the label sits on the rule above the sentence (no empty 3/12 gutter). */
 .sr-short {
-  padding-top: var(--sp-section);
+  padding-top: clamp(28px, 3vw, 44px);
 }
-.sr-short .sec-head {
-  margin-bottom: 0;
+.sr-short-in {
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.sr-short-in > .lbl {
+  margin: 0 0 12px;
 }
 .sr-short-text {
   margin: 0;
-  max-width: 32ch;
-  font-size: clamp(26px, 2.6vw, 40px);
-  line-height: 1.18;
-  letter-spacing: -0.025em;
+  max-width: 44ch;
+  font-size: clamp(24px, 2.3vw, 34px);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
 }
 .sr-short-text .badge {
   vertical-align: 0.4em;
 }
 .sr-short-foot {
-  margin-top: 24px;
+  margin-top: 16px;
+}
+.sr-short .acc {
+  max-width: 60rem;
+  margin-top: 20px;
 }
 
 /* ------------------------------------------------------------------ Stats tweaks */
@@ -81,10 +94,30 @@
 .stat .num.word {
   overflow-wrap: anywhere;
 }
+/* Key numbers on state and county pages: tighter boxes, sources right under the text (not pushed to the bottom),
+   labels a notch larger. */
+:is(.sr-stats, .sr-stats-lite) .stat {
+  gap: 10px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+:is(.sr-stats, .sr-stats-lite) .stat .cite {
+  margin-top: 4px;
+}
+:is(.sr-stats, .sr-stats-lite) .s-label {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+:is(.sr-stats, .sr-stats-lite) .s-sub {
+  margin-top: 4px;
+  font-size: 16px;
+  line-height: 1.45;
+}
 
 /* ------------------------------------------------------------------ Topic tabs */
 .sr-topics {
-  padding-top: var(--sp-section);
+  padding-top: clamp(36px, 4vw, 56px);
 }
 .sr-topics-top {
   display: flex;
@@ -208,7 +241,7 @@
   line-height: 1.1;
 }
 .fx-t {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   color: var(--ink-2);
 }
@@ -246,7 +279,7 @@
 .row-note {
   display: block;
   margin-top: 2px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink-3);
 }
 @media (max-width: 640px) {
@@ -271,7 +304,7 @@
 /* Small table inside an accordion */
 .mini {
   margin: 12px 0;
-  font-size: 15px;
+  font-size: 16px;
 }
 .mini th,
 .mini td {
@@ -396,7 +429,7 @@
 .sr-next .card-link p {
   margin: 0;
   color: var(--ink-2);
-  font-size: 15px;
+  font-size: 16px;
 }
 .sr-next .card-link:active {
   background: var(--panel-2);
@@ -427,7 +460,7 @@
 }
 .src-list .src-what {
   grid-column: 2;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.45;
   color: var(--ink-3);
 }
@@ -447,14 +480,45 @@
 }
 
 /* ------------------------------------------------------------------ Tables on these pages */
+/* Larger than the global table: 17px cells, 18px row names, 13px column heads in --ink-2. */
+.sr-table {
+  font-size: 17px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+.sr-table th,
+.sr-table td {
+  padding: 13px 20px 13px 0;
+}
+.sr-table thead th {
+  padding-top: 0;
+  padding-bottom: 12px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
 .sr-table th[scope="row"] {
+  font-size: 18px;
   font-weight: 500;
   white-space: nowrap;
 }
 .sr-table th[scope="row"] a {
   color: var(--ink);
   text-decoration: none;
+  border-bottom: 2px solid color-mix(in srgb, var(--c-tomato) 55%, transparent);
+}
+.sr-table th[scope="row"] .row-extra {
+  margin-left: 10px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
   border-bottom: 1px solid var(--line-2);
+}
+/* The limit is the number people come for: a little weight */
+.sr-table td.lim {
+  font-weight: 500;
 }
 .sr-table td .badge,
 .sr-table th .badge {
@@ -464,10 +528,22 @@
   color: var(--ink-3);
 }
 @media (max-width: 720px) {
-  .sr-table th[scope="row"] a {
+  .sr-table th,
+  .sr-table td {
+    padding: 3px 0;
+  }
+  .sr-table tr > :first-child {
+    padding-bottom: 8px;
+  }
+  .sr-table td[data-label]::before {
+    min-width: 9.5em;
+    font-size: 12px;
+  }
+  .sr-table th[scope="row"] a:not(.row-extra) {
     display: inline-block;
     min-height: 24px;
-    font-size: 22px;
+    font-size: 24px;
+    font-weight: 400;
     font-family: var(--f-display);
     letter-spacing: -0.02em;
   }
@@ -484,6 +560,9 @@
     color: var(--ink);
   }
   .sr-table th[scope="row"] a:hover {
+    border-bottom-color: var(--c-tomato);
+  }
+  .sr-table th[scope="row"] .row-extra:hover {
     border-bottom-color: var(--ink);
   }
 }
@@ -522,13 +601,13 @@
     font-size: 24px;
   }
   .sr-stats .s-label {
-    font-size: 15px;
+    font-size: 16px;
   }
   .sr-stats .s-sub {
-    font-size: 14px;
+    font-size: 15px;
   }
   .sr-stats .cite {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
@@ -542,4 +621,23 @@
   .sol-tool .fields {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* ------------------------------------------------------------------ Readability on the state-rules pages
+   Cites and mono labels a notch up from the global 12px (scoped to these pages' <main>). */
+body.c-states main .cite {
+  font-size: 13px;
+}
+body.c-states main .lbl {
+  font-size: 13px;
+}
+body.c-states main .unverified-note.compact {
+  font-size: 16px;
+}
+/* Sections below the tabs (sources, more links) and on county pages: less dead space between them */
+.section.sr-sec {
+  padding-top: clamp(40px, 4.5vw, 72px);
+}
+.sr-sec .sec-head {
+  margin-bottom: clamp(20px, 2.5vw, 32px);
 }

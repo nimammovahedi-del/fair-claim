@@ -179,10 +179,9 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
   </section>
 
   <section class="wrap sr-short" aria-labelledby="short-title">
-    <div class="sec-head">
-      <p class="lbl">In short</p>
+    <div class="sr-short-in">
+      <h2 id="short-title" class="lbl">In short</h2>
       <div>
-        <h2 id="short-title" class="sr-only">In short</h2>
         {isCA ? (
           <p class="sr-short-text">
             You speak for yourself: lawyers can't represent either side at the hearing. Most counties offer a{" "}
@@ -207,7 +206,7 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
           )}
         </div>
         {s.recent_changes && (
-          <details class="acc" style="margin-top:32px">
+          <details class="acc">
             <summary>
               Recent change{u("recent_changes") && <span class="badge unverified">Unverified</span>}
               <span class="pm" aria-hidden="true"></span>
@@ -471,7 +470,7 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
     </div>
   </section>
 
-  <section class="wrap section" id="sources" aria-labelledby="src-title">
+  <section class="wrap section sr-sec" id="sources" aria-labelledby="src-title">
     <div class="sec-head">
       <p class="lbl">Sources</p>
       <div>
@@ -516,7 +515,7 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
     </div>
   </section>
 
-  <section class="wrap section" aria-labelledby="next-title">
+  <section class="wrap section sr-sec" aria-labelledby="next-title">
     <h2 id="next-title" class="sr-only">More for {s.state}</h2>
     <div class="sr-next">
       {s.self_help_url && (

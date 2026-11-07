@@ -1,6 +1,6 @@
 ---
 // State rules hub (Option A): a big "Which state?" with the location search (ZIP, city, county or state),
-// then the 51-row table (#all-states), which also works without JavaScript.
+// then the table of all 50 states and DC (#all-states), which also works without JavaScript.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import LocationSearch from "../../components/LocationSearch.astro";
@@ -30,31 +30,38 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
         <LocationSearch label="Your ZIP code, city, county or state" stateHref="#all-states" />
       </div>
     </div>
-    <p class="lbl pick-meta">
-      {states.length} states and DC · checked {latest} · <a href="/states/ca/counties/">California by county</a>
-    </p>
   </section>
 
-  <section class="wrap section" id="all-states" aria-labelledby="table-title" style="padding-top:clamp(40px,5vw,72px)">
-    <div class="sec-head">
-      <p class="lbl">At a glance</p>
-      <div>
-        <h2 id="table-title" class="h2">All {states.length}, side by side.</h2>
-        <p class="lede">Open a state for the details and the sources. Where a state has more than one kind of court, this shows the main limit.</p>
+  <section class="wrap tbl-sec" id="all-states" aria-labelledby="table-title">
+    <div class="tbl-head">
+      <div class="tbl-title">
+        <h2 id="table-title" class="h2">All 50 states and DC, side by side.</h2>
+        <p class="tbl-lede">Open a state for the details and the sources. Where a state has more than one kind of court, this shows the main limit.</p>
       </div>
+      {states.length > 0 && (
+        <div class="tbl-filter">
+          <TableFilter table="states-table" label="Filter" noun="rows" placeholder="Ohio or OH" />
+        </div>
+      )}
     </div>
 
     {states.length === 0 ? (
       <div class="callout warning"><p>Research data hasn't been merged yet. Run <code>scripts/build_tables.py</code>.</p></div>
     ) : (
       <>
-        <div class="tbl-tools">
-          <TableFilter table="states-table" label="Find a state" noun="states" placeholder="Ohio or OH" />
-          <UnverifiedNote compact count={withUnverified} of="states have an unverified value in this table" />
-        </div>
+        <p class="tbl-note">
+          <span class="tbl-note-date">All checked {latest}</span>
+          {withUnverified > 0 && (
+            <span>
+              <span class="badge unverified">Unverified</span> {withUnverified} states have a value we haven't confirmed in the law or on the court's site yet. Check with the court.{" "}
+              <a href="/sources/#unverified">How we check</a>
+            </span>
+          )}
+          <a class="tbl-note-ca" href="/states/ca/counties/">California by county</a>
+        </p>
         <div class="table-scroll">
-          <table class="table-stack sr-table" id="states-table">
-            <caption>Small claims basics for {states.length} states and DC</caption>
+          <table class="table-stack sr-table sr-big" id="states-table">
+            <caption class="sr-only">Small claims basics for all 50 states and DC</caption>
             <thead>
               <tr>
                 <th scope="col">State</th>
@@ -64,14 +71,16 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
                 <th scope="col">Lawyers</th>
                 <th scope="col">Who can appeal</th>
                 <th scope="col">File online</th>
-                <th scope="col">Checked</th>
               </tr>
             </thead>
             <tbody>
               {states.map((s) => (
                 <tr data-filter={`${s.state} ${s.abbr}`.toLowerCase()}>
-                  <th scope="row"><a href={`/states/${s.slug}/`}>{s.state}</a></th>
-                  <td class="num" data-label="Limit">
+                  <th scope="row">
+                    <a href={`/states/${s.slug}/`}>{s.state}</a>
+                    {s.slug === "ca" && <a class="row-extra" href="/states/ca/counties/">By county</a>}
+                  </th>
+                  <td class="num lim" data-label="Limit">
                     {money(s.limit_individual)}
                     {unv(s, "limit_individual") && <span class="badge unverified">Unverified</span>}
                   </td>
@@ -95,7 +104,6 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
                     {efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "Not found"}
                     {unv(s, "e_filing") && <span class="badge unverified">Unverified</span>}
                   </td>
-                  <td class="mono" data-label="Checked">{s.date_checked}</td>
                 </tr>
               ))}
             </tbody>
@@ -108,6 +116,9 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
 </Site>
 
 <style>
+  .sr-hero {
+    padding-bottom: clamp(28px, 3vw, 40px);
+  }
   .pick-row {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -115,30 +126,99 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
     align-items: end;
   }
   .pick-lede {
-    margin-top: 28px;
+    margin-top: 24px;
   }
   .pick {
     padding-bottom: 6px;
   }
-  .pick-meta {
-    margin: 40px 0 0;
+  /* Table head: title on the left, a compact filter on the right, on one line */
+  .tbl-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 24rem);
+    gap: 16px 48px;
+    align-items: end;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
   }
-  .pick-meta a {
+  .tbl-title > * {
+    margin: 0;
+  }
+  .tbl-lede {
+    margin-top: 12px !important;
+    max-width: 60ch;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .tbl-filter :global(.table-filter) {
+    margin: 0;
+    max-width: none;
+    gap: 6px;
+  }
+  .tbl-filter :global(.field) {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 0 20px;
+    border-radius: 999px;
+  }
+  .tbl-filter :global(.field > label) {
+    margin: 0;
+    padding: 0;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .tbl-filter :global(.field input) {
+    font-family: var(--f-body);
+    font-size: 18px;
+    letter-spacing: 0;
+  }
+  /* The count stays for screen readers; on screen the table itself shows the result. */
+  .tbl-filter :global(.table-filter-count) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .tbl-note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 24px;
+    margin: 20px 0 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .tbl-note .badge {
+    margin-right: 4px;
+  }
+  .tbl-note a {
     color: var(--ink);
   }
-  .tbl-tools {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 8px 24px;
-    align-items: start;
+  .tbl-note-date {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-3);
   }
-  .tbl-tools :global(.unverified-note) {
-    margin: 0;
+  .tbl-note-ca {
+    margin-left: auto;
   }
   @media (max-width: 860px) {
     .pick-row,
-    .tbl-tools {
+    .tbl-head {
       grid-template-columns: minmax(0, 1fr);
+    }
+    .tbl-note-ca {
+      margin-left: 0;
     }
   }
 </style>
