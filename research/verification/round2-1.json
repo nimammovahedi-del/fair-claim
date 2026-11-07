@@ -1,0 +1,208 @@
+[
+  {
+    "abbr": "AL",
+    "field": "filing_fee_min",
+    "value": 52,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-19-71", "what": "statutory base small claims docket fees: $35 (<=$1,500), $109 ($1,500.01-$3,000), $198 ($3,000.01+)", "type": "statute"},
+      {"url": "https://elmore.alacourt.gov/small-claims/", "what": "Elmore County $52 / $126 / $215 (lowest observed)", "type": "court_site"},
+      {"url": "https://lawrence.alacourt.gov/small-claims", "what": "Lawrence County $56 / $130 / $219 (page now shows $6,000 limit)", "type": "court_site"},
+      {"url": "https://bullock.alacourt.gov/small-claims/", "what": "Bullock County $77 / $151 / $240, sheriff service $15", "type": "court_site"}
+    ],
+    "note": "Ala. Code 12-19-71(a)(1)-(3) (read on the Legislature's site) sets base fees of $35/$109/$198; county totals are higher because of local add-on court costs. Six official alacourt.gov county pages checked: Elmore $52/$126/$215, Lawrence $56/$130/$219, Cherokee $75.50/$149.50/$238.50, Bullock $77/$151/$240, Russell $85/$159/$248, Pickens $92/$166/$255. Lowest observed lowest-tier fee is $52 (Elmore); other counties may be lower. Pages show no effective dates (copyright footers 2017-2020), so confirm with the clerk."
+  },
+  {
+    "abbr": "AL",
+    "field": "filing_fee_max",
+    "value": 255,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-19-71", "what": "statutory base fee for $3,000.01-$6,000 small claims tier: $198", "type": "statute"},
+      {"url": "https://pickens.alacourt.gov/small-claims/", "what": "Pickens County $92 / $166 / $255 (highest observed), $40 per additional defendant", "type": "court_site"},
+      {"url": "https://russell.alacourt.gov/small-claims/", "what": "Russell County $85 / $159 / $248", "type": "court_site"}
+    ],
+    "note": "Highest observed top-tier ($3,000.01-$6,000) fee among six official county pages is Pickens County $255; Russell $248, Bullock $240, Cherokee $238.50, Lawrence $219, Elmore $215. Statutory base for that tier is $198 plus local add-ons. Service (sheriff or certified mail) and additional-party fees are extra. Not every county checked."
+  },
+  {
+    "abbr": "AZ",
+    "field": "filing_fee_max",
+    "value": 60,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.azcourts.gov/courtfilingfees/Justice-Court-Filing-Fees", "what": "statewide base $30 filing / $18 answer eff. Dec. 28, 2024; 'check with the specific court for additional local fees'", "type": "court_site"},
+      {"url": "https://www.jp.pima.gov/Forms/JP90A%20-%20Civil%20Unit%20Fee%20Schedule.pdf", "what": "Pima County Consolidated Justice Court schedule eff. 9/21/2026: small claims complaint $60 ($30 statutory + $10 automation + $20 operations); answer $38", "type": "court_site"},
+      {"url": "https://www.justicecourts.maricopa.gov/case-types/small-claims", "what": "Maricopa County Justice Courts: $58 to file, $46 to answer", "type": "court_site"}
+    ],
+    "note": "Corrected from $58 to $60. Statewide base is $30 plus court-specific local fees. Pima County's fee schedule effective Sept. 21, 2026 lists $60 ($30 statutory + $10 court automation + $20 court operations fee); Maricopa lists $58. Other counties (e.g. Pinal) not confirmed - Pinal's fee memo could not be opened (403 / file download)."
+  },
+  {
+    "abbr": "AR",
+    "field": "filing_fee_min",
+    "value": 65,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.fortsmithar.gov/government/departments/district-court/civil-small-claims", "what": "Fort Smith District Court: $65 small claims, $80 civil; 'The State Legislature has elected to increase the filing fees'", "type": "court_site"},
+      {"url": "https://www.littlerock.gov/media/23270/civil-small-claims-filing-instructions.pdf", "what": "Little Rock District Court: $65 small claims", "type": "court_site"},
+      {"url": "https://www.fourthjudicialdistrictcourt.org/fees", "what": "4th Judicial District Court (Searcy/Boone/Newton): Small Claims $65", "type": "court_site"}
+    ],
+    "note": "Three official district court fee pages (Little Rock, Fort Smith, 4th Judicial District) all list $65 for small claims; Fort Smith says the Legislature increased fees to $65 small claims / $80 civil. A secondary copy of Ark. Code 16-17-705 shows a $50 small-claims base (and $65 civil), so the extra $15 appears to come from another statutory fee; the official Arkansas Code (Lexis-hosted) was not read, so the statutory breakdown is unconfirmed. The AG guide's '$30-$65' range looks outdated; no official court page showing less than $65 was found. Service (sheriff typically $50) and $20 e-filing fee (AO 21) are extra."
+  },
+  {
+    "abbr": "AR",
+    "field": "filing_fee_max",
+    "value": 67.5,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.fultoncountyar.gov/upages.php?id=55", "what": "Fulton County small claims: filing fee $67.50, service fee $50", "type": "court_site"},
+      {"url": "https://www.fortsmithar.gov/government/departments/district-court/civil-small-claims", "what": "Fort Smith $65", "type": "court_site"}
+    ],
+    "note": "Fulton County's official small claims page lists a $67.50 filing fee (plus $50 service, total $117.50), the highest found; Little Rock, Fort Smith and the 4th Judicial District list $65. Not all districts checked. Fulton County page is a county government page, not a court page."
+  },
+  {
+    "abbr": "FL",
+    "field": "appeal_deadline_days",
+    "value": 30,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://leonclerk.com/?p=1328", "what": "Leon County Clerk: 30 days from rendition to file Notice of Appeal; county civil appeals go to the First DCA", "type": "court_site"},
+      {"url": "https://stjohnsclerk.com/appeals/", "what": "St. Johns County Clerk: notice of appeal within 30 days of rendition of the order", "type": "court_site"},
+      {"url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0000-0099/0026/Sections/0026.012.html", "what": "circuit courts no longer hear county-court appeals", "type": "statute"}
+    ],
+    "note": "30 days from rendition confirmed on two Florida clerk of court pages (Leon, St. Johns); Leon also confirms county civil appeals go to the District Court of Appeal. The rule text itself (Fla. R. App. P. 9.110(b)) was not read: the Florida Bar's Sept. 1, 2026 appellate rules PDF returned 403 to fetching. St. Johns' fee table still shows an 'Appeal to Circuit Court' label (legacy)."
+  },
+  {
+    "abbr": "GA",
+    "field": "filing_fee_min",
+    "value": 107,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://gov.georgia.gov/document/2026-signed-legislation/hb-999/download", "what": "HB 999 (2026, signed; Act 707) rewrote O.C.G.A. 15-10-80 eff. July 1, 2026: filing deposit set by local court rule not to exceed $22 + actual service cost (capped at sheriff fee) + all other sums required by law; also raises magistrate limit to $25,000 for cases filed on/after Jan. 1, 2027", "type": "statute"},
+      {"url": "https://douglascountyga.gov/DocumentCenter/View/13757/Fee-Sheet", "what": "Douglas County Magistrate Court: Statement of Claim $107 (eff. July 1, 2024)", "type": "court_site"},
+      {"url": "https://hartcountyga.gov/magistrate.html", "what": "Hart County: Statement of Claim $108 one defendant, +$50 each additional (eff. July 1, 2024)", "type": "court_site"}
+    ],
+    "note": "Corrected from $45. Values are the total to file against one defendant including sheriff service, because Georgia magistrate courts quote it that way (service is a separate line in Gwinnett). Official county figures: Douglas $107, Hart $108, Gwinnett $60 filing + $50 sheriff service = $110, Upson $115 (eff. July 1, 2025), Pierce $120 (eff. July 1, 2026). The AG page's $45-$55 is outdated. The statute (HB 999 version of 15-10-80) caps only the base deposit ($22) and lets other statutory add-ons stack, so totals vary by county. IMPORTANT for the row: HB 999 also raises the magistrate court limit from $15,000 to $25,000 for actions filed on or after Jan. 1, 2027 - recent_changes/limit should be updated (outside this task's fields). Signing status (signed May 12, 2026, Act 707) is from the bill's appearance in the Governor's 2026 signed-legislation list and the Legislative Counsel summary; not separately confirmed on the bill status page."
+  },
+  {
+    "abbr": "GA",
+    "field": "filing_fee_max",
+    "value": 120,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://piercecountyga.gov/magistrate-court/", "what": "Pierce County: civil claims $120 effective July 1, 2026", "type": "court_site"},
+      {"url": "https://www.upsoncountyga.org/DocumentCenter/View/2430/Magistrate-Court-Fees-2025", "what": "Upson County: Statement of Claim one defendant $115 (eff. July 1, 2025), $10 each additional defendant", "type": "court_site"},
+      {"url": "https://www.gwinnettcourts.com/magistrate/fees", "what": "Gwinnett: $60 filing + $50 sheriff service per defendant = $110", "type": "court_site"}
+    ],
+    "note": "Highest official figure found: Pierce County $120 (effective July 1, 2026). Pierce's page also shows an older breakdown ($45 + $1 + $50 = $96), so it is internally inconsistent; the $120 is the dated, current figure. Range of five counties checked: $107-$120 including service on one defendant. Corrected from $60 (Gwinnett filing-only amount)."
+  },
+  {
+    "abbr": "IL",
+    "field": "filing_fee_min",
+    "value": 89,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.mchenrycircuitclerk.org/small-claims/", "what": "McHenry County: $89 (<=$2,500), $264 ($2,500.01-$10,000); certified mail +$27.58 per defendant", "type": "court_site"},
+      {"url": "https://woodford-county.org/571/E-filing", "what": "Woodford County: $95 (<=$2,500), $262 (over $2,500), appearance $0", "type": "court_site"},
+      {"url": "https://www.circuitclerkofwillcounty.com/civil/small-claims", "what": "Will County: $144 ($.01-$2,500), $314 ($2,500.01-$10,000)", "type": "court_site"},
+      {"url": "https://ilga.gov/Documents/legislation/ilcs/documents/070501050K27.1b.htm", "what": "statutory caps; counties set fees", "type": "statute"}
+    ],
+    "note": "Fees are set by each county within the 705 ILCS 105/27.1b caps. Lowest confirmed: McHenry County $89 for claims of $2,500 or less; Woodford $95, Will $144. Smaller counties may charge less; not all 102 counties checked. Pages show no effective dates (2026 copyright)."
+  },
+  {
+    "abbr": "IN",
+    "field": "filing_fee_notes",
+    "value": "Outside the Marion County township small claims courts the fee is set by statute and is the same statewide: $97 total ($35 small claims filing fee + $10 service fee per named defendant under IC 33-37-4-6, plus $5 document storage, $20 automated record keeping, $5 public defense administration, $1 judicial insurance adjustment, $15 judicial salaries, $1 pro bono and $5 court administration fees). If e-filed, the total is $87 because the $10 per-defendant service fee may not be charged on e-filed cases; on paper filings add $10 for each additional defendant. Sheriff service adds $28. Marion County township small claims courts charge $130 (includes $15 service of process and a $26 small claims service fee required since July 1, 2025 by IC 33-37-5-35).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://www.in.gov/courts/iocs/files/courtmgmt-pubs-trial-court-fee-manual.pdf", "what": "Indiana Trial Court Fee Manual (Indiana Office of Court Services, current through 2026 session): small claims fee table $97/$87 e-filed; Marion County township courts $130", "type": "court_site"},
+      {"url": "https://secure.in.gov/counties/clarkcountyclerkofcourts/filing-fees-and-costs", "what": "Clark County clerk: $97 paper / $87 e-filed, $10 per additional defendant, $28 sheriff service", "type": "court_site"}
+    ],
+    "note": "Confirmed from the Indiana Supreme Court's Office of Court Services fee manual (current through the 2026 legislative session), which itemizes each statutory component. The earlier note's Warren Township figure ($89 + $15) is outdated: the manual gives $130 total for Marion County township courts. filing_fee_max should therefore be 130 (separate entry)."
+  },
+  {
+    "abbr": "IN",
+    "field": "filing_fee_max",
+    "value": 130,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://www.in.gov/courts/iocs/files/courtmgmt-pubs-trial-court-fee-manual.pdf", "what": "Marion County township small claims courts total $130 (IC 33-34-8-1; $26 fee under IC 33-37-5-35 eff. July 1, 2025)", "type": "court_site"}
+    ],
+    "note": "Corrected from $97. Statewide courts: $97 paper / $87 e-filed; Marion County township small claims courts: $130 per the state fee manual. Sheriff service ($28) outside Marion County is extra and not included."
+  },
+  {
+    "abbr": "KS",
+    "field": "filing_fee_max",
+    "value": 69,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://courts.jocogov.org/dc_SmallClaims.aspx", "what": "Johnson County District Court (eff. July 1, 2024): $36.50 + $12.50 surcharge = $49 (<=$500); $56.50 + $12.50 = $69 ($500.01-$10,000); fee includes $1.50 law library fee under K.S.A. 20-3129(b)", "type": "court_site"},
+      {"url": "https://www.kslegislature.gov/li/b2025_26/measures/documents/hb2393_enrolled.pdf", "what": "HB 2393 enrolled: amends K.S.A. 61-2704(c) so the Supreme Court may impose up to $12.50 per docket fee from July 1, 2026 through June 30, 2030", "type": "statute"}
+    ],
+    "note": "Max $69 confirmed (Johnson County, which adds a $1.50 law library fee). The $12.50 surcharge did NOT lapse: 2025 SB 125 extended it to June 30, 2027 (per the Legislative Research Dept. supplemental note on HB 2393), and 2026 HB 2393 (shown as signed by the Governor on the Legislature's bill page) extends it through June 30, 2030."
+  },
+  {
+    "abbr": "KS",
+    "field": "filing_fee_min",
+    "value": 47.5,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.cowleycountyks.gov/175/Court-Costs-Filing-Fees-Online-Payment", "what": "Cowley County: small claims <=$500 $35 + $12.50 surcharge = $47.50; over $500 $55 + $12.50 = $67.50", "type": "court_site"},
+      {"url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_027_0004.html", "what": "K.S.A. 61-2704(b) docket fee $35/$55", "type": "statute"}
+    ],
+    "note": "Corrected from $35: because the $12.50 Judicial Branch surcharge is still in force (extended by 2025 SB 125 and 2026 HB 2393), the lowest real cost is $47.50 (Cowley County, claims up to $500). Cowley's page is undated and still labels the upper tier '<$4,000'."
+  },
+  {
+    "abbr": "KS",
+    "field": "filing_fee_notes",
+    "value": "Statutory docket fee is $35 for claims up to $500 and $55 above $500 (K.S.A. 61-2704(b)), plus a Judicial Branch surcharge of $12.50 that the Supreme Court may impose (K.S.A. 61-2704(c); extended by 2025 SB 125 to June 30, 2027 and by 2026 HB 2393 through June 30, 2030), so most courts charge $47.50 / $67.50. Some counties add a law library fee (Johnson County: $1.50, for $49 / $69). Sheriff service is extra.",
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_027_0004.html", "what": "K.S.A. 61-2704 docket fee and surcharge authority", "type": "statute"},
+      {"url": "https://www.kslegislature.gov/li/b2025_26/measures/documents/supp_note_hb2393_01_0000.pdf", "what": "Supplemental note: 2025 SB 125 extended surcharge sunset to June 30, 2027; HB 2393 extends through June 30, 2030", "type": "statute"},
+      {"url": "https://www.kslegislature.gov/li/b2025_26/measures/hb2393/", "what": "HB 2393 bill page: signed by Governor; effective on publication in the statute book", "type": "statute"},
+      {"url": "https://www.cowleycountyks.gov/175/Court-Costs-Filing-Fees-Online-Payment", "what": "$47.50 / $67.50 totals", "type": "court_site"},
+      {"url": "https://courts.jocogov.org/dc_SmallClaims.aspx", "what": "$49 / $69 totals incl. $1.50 law library fee", "type": "court_site"}
+    ],
+    "note": "The ksrevisor.gov text still shows the old 'through June 30, 2025' sunset because it has not been updated for the 2025-2026 bills. Sheriff service amount was not reconfirmed."
+  },
+  {
+    "abbr": "KY",
+    "field": "filing_fee_max",
+    "value": 83.5,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.kycourts.gov/Courts/Supreme-Court/Supreme%20Court%20Orders/202615.pdf", "what": "Order 2026-15 (entered May 14, 2026, eff. July 1, 2026): CR 3.03(1)(a) small claims fee $38; plus $20 court technology fee and other required fees", "type": "court_rule"},
+      {"url": "https://www.kycourts.gov/Courts/County-Information/Documents/CCCAcctManual.pdf", "what": "AOC Circuit Court Clerks' Accounting Manual: small claims = $38 civil filing fee (eff. 7/1/2026) + $20 court technology + $10 access to justice; plus if applicable library fee, $10 court facilities fee, $2.50 attorney tax fee; facilities fee max $10 for small claims (KRS 23A.220, 24A.185, 64.091)", "type": "court_site"},
+      {"url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=43828", "what": "KRS 172.180: county law library fee on civil actions max $1, or $3 in counties with first-class cities, urban-county governments or cities of 20,000+", "type": "statute"},
+      {"url": "https://codelibrary.amlegal.com/codes/barrencounty/latest/barrencounty_ky/0-0-0-1666", "what": "Barren County Ord. 35.08: additional $10 on all small claims filing fees (example of local facilities fee)", "type": "statute"}
+    ],
+    "note": "$38 fee confirmed in the order. Maximum is computed from official components, not seen as a single posted total: $38 + $20 technology + $10 access to justice + up to $10 local court facilities fee + $2.50 attorney tax fee (if applicable) + up to $3 law library fee = $83.50. Most filers pay $68-$81. No county clerk page showing a post-July-2026 total was found."
+  },
+  {
+    "abbr": "KY",
+    "field": "filing_fee_min",
+    "value": 68,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.kycourts.gov/Courts/County-Information/Documents/CCCAcctManual.pdf", "what": "Accounting Manual small claims fee list: $38 + $20 court technology + $10 access to justice are not marked 'if applicable'", "type": "court_site"},
+      {"url": "https://www.kycourts.gov/Courts/Supreme-Court/Supreme%20Court%20Orders/202615.pdf", "what": "$38 small claims fee + $20 technology fee", "type": "court_rule"}
+    ],
+    "note": "Corrected from $58: the AOC accounting manual lists a $10 Access to Justice Fee on every small claims filing in addition to the $38 fee and $20 technology fee, so the lowest total is $68. filing_fee_notes should mention the $10 access to justice fee, the up-to-$10 county facilities fee, $2.50 attorney tax fee and up-to-$3 library fee."
+  }
+]

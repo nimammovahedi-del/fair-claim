@@ -7,8 +7,8 @@
   "limit_business": 6000,
   "limit_notes": "$6,000 exclusive of interest and costs (Ala. Code § 12-12-31(a)). Unlawful detainer (eviction) cases are not handled under the Small Claims Rules; they go on the regular district court docket (Ala. Sm. Cl. R. A). Attorney fees can only be awarded if the party has a licensed attorney (§ 12-12-31(c)). For claims over $1,500 the docket fee is the same as for regular (non-small-claims) district court cases (§ 12-12-31(f)).",
   "recent_changes": null,
-  "filing_fee_min": 75.5,
-  "filing_fee_max": 248,
+  "filing_fee_min": 52,
+  "filing_fee_max": 255,
   "filing_fee_notes": "Fees are tiered by claim amount (up to $1,500; $1,500.01-$3,000; $3,000.01-$6,000) and differ by county. Cherokee County: $75.50 / $149.50 / $238.50, plus $25 sheriff service per defendant, $10 per additional defendant. Russell County: $85 / $159 / $248, plus $15 sheriff service, $15 per additional defendant. Both list $50 per additional plaintiff (max $500). Certified mail postage is extra. Only two county fee tables were checked, so the statewide range may be wider.",
   "who_can_sue": "Individuals aged 19 or older (Alabama age of majority, per county court pages), partnerships and corporations. Without a lawyer, a partnership must appear through a partner or employee and a corporation through an officer or full-time employee (§ 12-12-31(b)). An assignee of a claim, such as a debt buyer or collection agency, must use a licensed attorney, and non-attorneys may not file on behalf of the original owner (§ 12-12-31(d)). Lawyers whose licenses are revoked or suspended may not file (§ 12-12-31(e)).",
   "lawyers_allowed": "yes",
@@ -78,14 +78,36 @@
     "url": "https://eforms.alacourt.gov/media/na1j0cie/c-10-civil-affidavit-of-substantial-hardship-order-10-2026.pdf",
     "what": "fee_waiver_form",
     "type": "form"
+   },
+   {
+    "url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-19-71",
+    "what": "statutory base small claims docket fees: $35 (<=$1,500), $109 ($1,500.01-$3,000), $198 ($3,000.01+)",
+    "type": "statute"
+   },
+   {
+    "url": "https://elmore.alacourt.gov/small-claims/",
+    "what": "Elmore County $52 / $126 / $215 (lowest observed)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://lawrence.alacourt.gov/small-claims",
+    "what": "Lawrence County $56 / $130 / $219 (page now shows $6,000 limit)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://bullock.alacourt.gov/small-claims/",
+    "what": "Bullock County $77 / $151 / $240, sheriff service $15",
+    "type": "court_site"
+   },
+   {
+    "url": "https://pickens.alacourt.gov/small-claims/",
+    "what": "Pickens County $92 / $166 / $255 (highest observed), $40 per additional defendant",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "filing_fee_min",
-   "filing_fee_max"
-  ],
-  "notes": "Filing fees are not uniform statewide; the range comes from only two official county court pages (Cherokee, Russell). One county page (Lawrence) still shows the pre-2015 $3,000 limit; the statute says $6,000 (Act 2015-224). Some secondary sites list fees from $35 to $294; not used."
+  "unverified": [],
+  "notes": "Filing fees are not uniform statewide; the range comes from only two official county court pages (Cherokee, Russell). One county page (Lawrence) still shows the pre-2015 $3,000 limit; the statute says $6,000 (Act 2015-224). Some secondary sites list fees from $35 to $294; not used. [2026-11-07 filing_fee_min, verified: Ala. Code 12-19-71(a)(1)-(3) (read on the Legislature's site) sets base fees of $35/$109/$198; county totals are higher because of local add-on court costs. Six official alacourt.gov county pages checked: Elmore $52/$126/$215, Lawrence $56/$130/$219, Cherokee $75.50/$149.50/$238.50, Bullock $77/$151/$240, Russell $85/$159/$248, Pickens $92/$166/$255. Lowest observed lowest-tier fee is $52 (Elmore); other counties may be lower. Pages show no effective dates (copyright footers 2017-2020), so confirm with the clerk.] [2026-11-07 filing_fee_max, verified: Highest observed top-tier ($3,000.01-$6,000) fee among six official county pages is Pickens County $255; Russell $248, Bullock $240, Cherokee $238.50, Lawrence $219, Elmore $215. Statutory base for that tier is $198 plus local add-ons. Service (sheriff or certified mail) and additional-party fees are extra. Not every county checked.]"
  },
  {
   "state": "Alaska",
@@ -161,7 +183,7 @@
   "limit_notes": "Small claims division: claims not exceeding $5,000 exclusive of interest and costs, including actions to rescind a contract or for equitable relief up to $5,000 (A.R.S. § 22-503(A)). Excluded: libel/slander, evictions, specific performance, class actions, prejudgment remedies, injunctions, claims against the state or local governments (§ 22-503(B)). Regular Justice Court civil cases go up to $10,000 (§ 22-201(B)); there lawyers, juries and appeals are available. Any party can move a small claims case to regular justice court by objecting at least 10 days before the hearing (§ 22-504). Claims cannot be split. The AZ Supreme Court self-service page says 'less than $5,000' while the statute says 'does not exceed $5,000'.",
   "recent_changes": "SB 1022 (Laws 2025, ch. 94), signed May 2, 2025, raised the small claims limit from $3,500 to $5,000 by amending A.R.S. § 22-503. Effective on the 2025 general effective date, September 26, 2025.",
   "filing_fee_min": 30,
-  "filing_fee_max": 58,
+  "filing_fee_max": 60,
   "filing_fee_notes": "Statewide base small claims filing fee is $30 (A.R.S. § 22-281 Class C, as increased by AO 2024-211 effective Dec. 28, 2024); answer $18; small claims service by mail $8. Courts may add local fees: Maricopa County Justice Courts charge $58 to file and $46 to answer. Fees in other counties were not surveyed.",
   "who_can_sue": "Any natural person, corporation, partnership, association, marital community or other organization. Assignees and others not a real party to the original transaction may not sue (except a court-appointed personal representative) (§ 22-512(A)). Individuals represent themselves; corporations appear through a full-time officer or authorized employee; partnerships through an active general partner or authorized full-time employee (§ 22-512(B)).",
   "lawyers_allowed": "limited",
@@ -246,14 +268,18 @@
     "url": "https://www.azcourts.gov/selfservicecenter/Small-Claims",
     "what": "self_help_url, limit wording",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.jp.pima.gov/Forms/JP90A%20-%20Civil%20Unit%20Fee%20Schedule.pdf",
+    "what": "Pima County Consolidated Justice Court schedule eff. 9/21/2026: small claims complaint $60 ($30 statutory + $10 automation + $20 operations); answer $38",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_max",
    "fee_waiver_form"
   ],
-  "notes": "Filing fee max is the highest observed (Maricopa County); local fees in other counties were not checked. The exact title/URL of the statewide fee deferral/waiver form was not confirmed. Several secondary sites and a Mohave County page still show the old $3,500 limit."
+  "notes": "Filing fee max is the highest observed (Maricopa County); local fees in other counties were not checked. The exact title/URL of the statewide fee deferral/waiver form was not confirmed. Several secondary sites and a Mohave County page still show the old $3,500 limit. [2026-11-07 filing_fee_max, verified: Corrected from $58 to $60. Statewide base is $30 plus court-specific local fees. Pima County's fee schedule effective Sept. 21, 2026 lists $60 ($30 statutory + $10 court automation + $20 court operations fee); Maricopa lists $58. Other counties (e.g. Pinal) not confirmed - Pinal's fee memo could not be opened (403 / file download).]"
  },
  {
   "state": "Arkansas",
@@ -264,7 +290,7 @@
   "limit_notes": "Same amount-in-controversy jurisdiction as district court civil (Admin. Order 18 § 4): contract claims, recovery of personal property, and damage to personal property up to $5,000 excluding interest and costs (AO 18 § 3). Personal injury is not among the listed civil matters. State district courts (pilot courts) have $25,000 civil jurisdiction (AO 18 § 6), but the small claims division is tied to § 3 ($5,000). Most businesses are barred from filing (see who_can_sue).",
   "recent_changes": null,
   "filing_fee_min": 65,
-  "filing_fee_max": 65,
+  "filing_fee_max": 67.5,
   "filing_fee_notes": "Little Rock District Court charges $65 to file a small claim (civil $80) plus a $2.50 summons fee; service fees (certified mail, sheriff $50 in Pulaski County, or process server) are extra. A $20 electronic filing system fee applies to cases started through e-filing (AO 21). The Attorney General's guide says fees 'typically' range from $30 to $65.",
   "who_can_sue": "Individuals. No action may be brought by a collection agency, collection agent, assignee of a claim, or any business engaged in lending money at interest (AO 18 § 4(b)). Corporations may sue only if organized in Arkansas with no more than three stockholders, or 85%+ of voting stock held by close relatives, or closely held corporations by unanimous shareholder vote; a corporation must be represented by an officer (AO 18 § 4(c)).",
   "lawyers_allowed": "no",
@@ -299,16 +325,29 @@
     "url": "https://arkansasag.gov/divisions/public-protection/legal-resources/guide-to-small-claims-court/",
     "what": "self_help_url, filing_fee_notes ($30-$65 range), appeal (30 days)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.fortsmithar.gov/government/departments/district-court/civil-small-claims",
+    "what": "Fort Smith District Court: $65 small claims, $80 civil; 'The State Legislature has elected to increase the filing fees'",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.fourthjudicialdistrictcourt.org/fees",
+    "what": "4th Judicial District Court (Searcy/Boone/Newton): Small Claims $65",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.fultoncountyar.gov/upages.php?id=55",
+    "what": "Fulton County small claims: filing fee $67.50, service fee $50",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
-   "filing_fee_max",
    "fee_waiver_form",
    "fee_waiver_threshold"
   ],
-  "notes": "Filing fee: only the Little Rock District Court schedule ($65) was confirmed; the statute (Ark. Code § 16-17-705) could not be read on an official site, a secondary copy shows $50, and the AG guide says $30-$65. Needs a human check. The AG page is from the Attorney General (state government), not the judiciary; Arkansas courts have no statewide small claims self-help page that could be found. Fee waiver (ARCP 72) not verified from rule text."
+  "notes": "Filing fee: only the Little Rock District Court schedule ($65) was confirmed; the statute (Ark. Code § 16-17-705) could not be read on an official site, a secondary copy shows $50, and the AG guide says $30-$65. Needs a human check. The AG page is from the Attorney General (state government), not the judiciary; Arkansas courts have no statewide small claims self-help page that could be found. Fee waiver (ARCP 72) not verified from rule text. [2026-11-07 filing_fee_min, verified: Three official district court fee pages (Little Rock, Fort Smith, 4th Judicial District) all list $65 for small claims; Fort Smith says the Legislature increased fees to $65 small claims / $80 civil. A secondary copy of Ark. Code 16-17-705 shows a $50 small-claims base (and $65 civil), so the extra $15 appears to come from another statutory fee; the official Arkansas Code (Lexis-hosted) was not read, so the statutory breakdown is unconfirmed. The AG guide's '$30-$65' range looks outdated; no official court page showing less than $65 was found. Service (sheriff typically $50) and $20 e-filing fee (AO 21) are extra.] [2026-11-07 filing_fee_max, verified: Fulton County's official small claims page lists a $67.50 filing fee (plus $50 service, total $117.50), the highest found; Little Rock, Fort Smith and the 4th Judicial District list $65. Not all districts checked. Fulton County page is a county government page, not a court page.]"
  },
  {
   "state": "California",
@@ -705,14 +744,23 @@
     "url": "https://coxlawflorida.com/featured/most-county-court-appeals-are-now-directed-to-the-district-court-of-appeal/",
     "what": "appeal (DCA routing since Jan. 1, 2021; 30-day deadline) - lead only",
     "type": "secondary"
+   },
+   {
+    "url": "https://leonclerk.com/?p=1328",
+    "what": "Leon County Clerk: 30 days from rendition to file Notice of Appeal; county civil appeals go to the First DCA",
+    "type": "court_site"
+   },
+   {
+    "url": "https://stjohnsclerk.com/appeals/",
+    "what": "St. Johns County Clerk: notice of appeal within 30 days of rendition of the order",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "appeal_deadline_days",
    "fee_waiver_form"
   ],
-  "notes": "Small claims in Florida is a set of procedural rules in county court, not a separate court. Clerk fees ($55/$80/$175/$300) are $1 higher than the statute's base-plus-$4 ($54/$79/$174/$299); the extra $1 may be another statutory add-on - worth a human check. The Florida Bar appellate rules PDF could not be downloaded, so the 30-day deadline (Fla. R. App. P. 9.110(b)) and DCA routing rely on a secondary lead plus the change to § 26.012. Fla. Stat. § 34.017 still refers to judgments 'appealable to the circuit court' (legacy wording). Rules 7.010 and 7.020 were amended effective Jan. 1, 2026 (SC2025-1254) but the $8,000 limit is unchanged in the July 1, 2026 compilation. No statewide judiciary self-help page for small claims was found (flcourts.gov page returned not found); a county clerk page is used."
+  "notes": "Small claims in Florida is a set of procedural rules in county court, not a separate court. Clerk fees ($55/$80/$175/$300) are $1 higher than the statute's base-plus-$4 ($54/$79/$174/$299); the extra $1 may be another statutory add-on - worth a human check. The Florida Bar appellate rules PDF could not be downloaded, so the 30-day deadline (Fla. R. App. P. 9.110(b)) and DCA routing rely on a secondary lead plus the change to § 26.012. Fla. Stat. § 34.017 still refers to judgments 'appealable to the circuit court' (legacy wording). Rules 7.010 and 7.020 were amended effective Jan. 1, 2026 (SC2025-1254) but the $8,000 limit is unchanged in the July 1, 2026 compilation. No statewide judiciary self-help page for small claims was found (flcourts.gov page returned not found); a county clerk page is used. [2026-11-07 appeal_deadline_days, verified: 30 days from rendition confirmed on two Florida clerk of court pages (Leon, St. Johns); Leon also confirms county civil appeals go to the District Court of Appeal. The rule text itself (Fla. R. App. P. 9.110(b)) was not read: the Florida Bar's Sept. 1, 2026 appellate rules PDF returned 403 to fetching. St. Johns' fee table still shows an 'Appeal to Circuit Court' label (legacy).]"
  },
  {
   "state": "Georgia",
@@ -721,10 +769,10 @@
   "limit_individual": 15000,
   "limit_business": 15000,
   "limit_notes": "Magistrate courts hear civil claims (including garnishment and attachment) where exclusive jurisdiction is not in superior court and the amount or property value does not exceed $15,000 (O.C.G.A. § 15-10-2(5)); they also hear dispossessory (eviction) cases. No jury trials (§ 15-10-41(a)). The Civil Practice Act does not apply (§ 15-10-42). Some counties recommend or require mediation. A corporate defendant must be sued in the county of its registered agent.",
-  "recent_changes": null,
-  "filing_fee_min": 45,
-  "filing_fee_max": 60,
-  "filing_fee_notes": "Fees vary by county. The Attorney General's consumer page says the filing fee, which includes service on one defendant, ranges from about $45 to $55, plus about $25-$35 per additional defendant. Gwinnett County Magistrate Court charges $60 filing plus $50 sheriff service per defendant ($110 total for one defendant).",
+  "recent_changes": "Coming Jan. 1, 2027: HB 999 (2026, Act 707, signed May 12, 2026) raises the magistrate court limit from $15,000 to $25,000 for cases filed on or after Jan. 1, 2027. It also rewrote the filing-fee statute (O.C.G.A. § 15-10-80) effective July 1, 2026.",
+  "filing_fee_min": 107,
+  "filing_fee_max": 120,
+  "filing_fee_notes": "Totals shown include sheriff service on one defendant, because Georgia magistrate courts usually quote it that way, and they vary by county: Douglas $107, Hart $108, Gwinnett $110 ($60 filing + $50 service), Upson $115, Pierce $120 (as of July 2026). Each added defendant costs more. The Attorney General's older $45–$55 figure is out of date.",
   "who_can_sue": "Any person or business may file in their own name, with or without an attorney (AG consumer page). Detailed rules for business representation were not confirmed.",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Parties may appear with or without an attorney (O.C.G.A. § 15-10-43 notice; AG consumer page).",
@@ -758,17 +806,40 @@
     "url": "https://courts.chathamcountyga.gov/Magistrate",
     "what": "e_filing (Chatham e-filing)",
     "type": "court_site"
+   },
+   {
+    "url": "https://gov.georgia.gov/document/2026-signed-legislation/hb-999/download",
+    "what": "HB 999 (2026, signed; Act 707) rewrote O.C.G.A. 15-10-80 eff. July 1, 2026: filing deposit set by local court rule not to exceed $22 + actual service cost (capped at sheriff fee) + all other sums required by law; also raises magistrate limit to $25,000 for cases filed on/after Jan. 1, 2027",
+    "type": "statute"
+   },
+   {
+    "url": "https://douglascountyga.gov/DocumentCenter/View/13757/Fee-Sheet",
+    "what": "Douglas County Magistrate Court: Statement of Claim $107 (eff. July 1, 2024)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://hartcountyga.gov/magistrate.html",
+    "what": "Hart County: Statement of Claim $108 one defendant, +$50 each additional (eff. July 1, 2024)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://piercecountyga.gov/magistrate-court/",
+    "what": "Pierce County: civil claims $120 effective July 1, 2026",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.upsoncountyga.org/DocumentCenter/View/2430/Magistrate-Court-Fees-2025",
+    "what": "Upson County: Statement of Claim one defendant $115 (eff. July 1, 2025), $10 each additional defendant",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
-   "filing_fee_max",
    "who_can_sue",
    "fee_waiver_form",
    "fee_waiver_threshold"
   ],
-  "notes": "Georgia has no separate small claims court; the Magistrate Court's general civil limit ($15,000) serves that role. Statute text was read from Gwinnett County's official court site (Georgia's official code is hosted by LexisNexis and was not fetched). Fee conflict: the AG page's $45-$55 (including service) is lower than Gwinnett's $60 + $50 service - fees vary by county and the AG range may be outdated. The 30-day appeal deadline comes from the AG page; O.C.G.A. § 5-3-20 was not read. The AG page is from the state Attorney General, not the judiciary."
+  "notes": "Georgia has no separate small claims court; the Magistrate Court's general civil limit ($15,000) serves that role. Statute text was read from Gwinnett County's official court site (Georgia's official code is hosted by LexisNexis and was not fetched). Fee conflict: the AG page's $45-$55 (including service) is lower than Gwinnett's $60 + $50 service - fees vary by county and the AG range may be outdated. The 30-day appeal deadline comes from the AG page; O.C.G.A. § 5-3-20 was not read. The AG page is from the state Attorney General, not the judiciary. [2026-11-07 filing_fee_min, verified: Corrected from $45. Values are the total to file against one defendant including sheriff service, because Georgia magistrate courts quote it that way (service is a separate line in Gwinnett). Official county figures: Douglas $107, Hart $108, Gwinnett $60 filing + $50 sheriff service = $110, Upson $115 (eff. July 1, 2025), Pierce $120 (eff. July 1, 2026). The AG page's $45-$55 is outdated. The statute (HB 999 version of 15-10-80) caps only the base deposit ($22) and lets other statutory add-ons stack, so totals vary by county. IMPORTANT for the row: HB 999 also raises the magistrate court limit from $15,000 to $25,000 for actions filed on or after Jan. 1, 2027 - recent_changes/limit should be updated (outside this task's fields). Signing status (signed May 12, 2026, Act 707) is from the bill's appearance in the Governor's 2026 signed-legislation list and the Legislative Counsel summary; not separately confirmed on the bill status page.] [2026-11-07 filing_fee_max, verified: Highest official figure found: Pierce County $120 (effective July 1, 2026). Pierce's page also shows an older breakdown ($45 + $1 + $50 = $96), so it is internally inconsistent; the $120 is the dated, current figure. Range of five counties checked: $107-$120 including service on one defendant. Corrected from $60 (Gwinnett filing-only amount).]"
  },
  {
   "state": "Hawaii",

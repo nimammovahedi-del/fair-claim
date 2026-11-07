@@ -1,0 +1,248 @@
+[
+  {
+    "abbr": "LA",
+    "field": "filing_fee_min",
+    "value": 65,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77964", "what": "R.S. 13:5205: city court small claims division cost $35 per defendant plus R.S. 13:10.3 costs; up to $20 per extra service/subpoena", "type": "statute"},
+      {"url": "https://bossiercity.org/m/faq?cat=24", "what": "Bossier City Court small claims filing deposit $65 per defendant, $20 each additional defendant", "type": "court_site"},
+      {"url": "https://www.brla.gov/m/faq?cat=27", "what": "Baton Rouge City Court civil division: small claims $85.50 for one defendant, $35 each additional", "type": "court_site"}
+    ],
+    "note": "Fees are set court by court. Statutory base for city court small claims divisions is $35 per defendant (R.S. 13:5205) plus R.S. 13:10.3 costs, so no court actually charges just $35. Lowest confirmed total on an official court page: $65 (Bossier City Court). Baton Rouge City Court: $85.50. New Orleans First City Court's instructions don't list the amount (says call the clerk) and add a $20 constable service fee. Range is what was confirmed, not a guaranteed statewide floor."
+  },
+  {
+    "abbr": "LA",
+    "field": "filing_fee_max",
+    "value": 130,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77379", "what": "R.S. 13:2590(A) (as amended by Acts 2023, No. 61): justice of the peace may demand up to $130 for a new suit, $20 per additional defendant; service $20-$30 extra", "type": "statute"},
+      {"url": "https://www.brla.gov/m/faq?cat=27", "what": "Baton Rouge City Court small claims $85.50 (one defendant)", "type": "court_site"}
+    ],
+    "note": "JP court new-suit fee is capped by statute at $130 (+$20 per additional defendant, plus service/constable fees). City court small claims totals confirmed: $65 (Bossier City), $85.50 (Baton Rouge). Some city courts not checked could charge more; $130 is the highest confirmed amount, for one defendant before service. Suggested filing_fee_notes: 'Varies by court. City court small claims: $35 per defendant by statute plus local costs (e.g., Bossier City $65, Baton Rouge $85.50). Justice of the peace courts: up to $130 plus $20 per extra defendant (R.S. 13:2590). Service fees extra.'"
+  },
+  {
+    "abbr": "LA",
+    "field": "lawyers_allowed",
+    "value": "yes",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://static1.squarespace.com/static/6026ae91e9901c22e746e32a/t/6532dbe4cbf294723a76286c/1697831908828/Instruction%2Bon%2Bhow%2Bto%2Bfile%2Ba%2BSmall%2BClaims%2BSuit+FC.pdf", "what": "First City Court of New Orleans small claims instructions (linked from orleanscivildistrictcourt.org/s/InstructiononhowtofileaSmallClaimsSuit-FC.pdf): 'You can represent yourself... However, either party may hire an attorney if they choose.'", "type": "court_site"},
+      {"url": "https://www.brla.gov/2118/Small-Claims", "what": "East Baton Rouge JP courts: an attorney is not required", "type": "court_site"}
+    ],
+    "note": "Confirmed on a city court's official instructions: either party may hire an attorney. No statutory bar found in R.S. 13:5200 et seq."
+  },
+  {
+    "abbr": "MD",
+    "field": "appeal_deadline_days",
+    "value": 30,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://www.mdcourts.gov/courthelp/aftertrialdistrictcourt", "what": "Md. Judiciary 'Appeals and Motions After Trial in the District Court': most civil cases 30 days after judgment; small claims ($5,000 or less) appeal is de novo; total appeal fee $175 ($10 District Court + $165 circuit court)", "type": "court_site"}
+    ],
+    "note": "Confirmed on the Judiciary's own page (matches Md. Rule 7-104(a), whose text on govt.westlaw.com couldn't be fetched). A timely motion for new trial/alter or amend restarts the clock from the ruling on the motion. Landlord-tenant cases have shorter deadlines (10 days; 4 days for failure to pay rent). New detail for the appeal field: fee $175 for a small claim appeal."
+  },
+  {
+    "abbr": "MA",
+    "field": "filing_fee_max",
+    "value": 150,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://www.mass.gov/info-details/boston-municipal-court-and-district-court-filing-fees", "what": "Trial Court fee table: small claim $500 or less $30+$10 = $40; $501-$2,000 $40+$10 = $50; $2,001-$5,000 $90+$10 = $100; $5,001-$7,000 $140+$10 = $150 (G.L. c. 218, s. 22)", "type": "court_site"}
+    ],
+    "note": "Read the official BMC/District Court fee page in a browser (mass.gov loads there). Values match the current row. Top tier is labeled $5,001-$7,000 (the limit), so 'over $5,000' in the notes is fine. A search summary of mass.gov also mentions a $7 service fee if you eFile, which wasn't checked on the page itself."
+  },
+  {
+    "abbr": "MA",
+    "field": "lawyers_allowed",
+    "value": "yes",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://www.mass.gov/info-details/small-claims-court", "what": "Small Claims Court guide (offered by the Office of Consumer Affairs and Business Regulation, District Court and Boston Municipal Court): 'you do not need an attorney... though you are permitted to retain an attorney if you wish'", "type": "court_site"}
+    ],
+    "note": "Confirmed on a mass.gov page co-offered by the District Court and BMC."
+  },
+  {
+    "abbr": "MN",
+    "field": "filing_fee_max",
+    "value": 80,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://mncourts.gov/help-topics/court-fees/district-court-fees", "what": "Minnesota Judicial Branch fee calculator, Conciliation category, checked for all 87 counties: first-paper fee is the $65 base plus the county law library fee (0 to $15)", "type": "court_site"},
+      {"url": "https://www.revisor.mn.gov/statutes/cite/357.022", "what": "$65 conciliation court base fee", "type": "statute"}
+    ],
+    "note": "Checked every county on the official fee calculator. Range is $65 to $80. $65 (no law library fee): Chippewa, Freeborn, Grant, Houston, Lac qui Parle, Steele, Wabasha, Waseca, Wilkin, Yellow Medicine. $80 ($15 library fee): Anoka, Benton, Carver, Dakota, Jackson, Kandiyohi, Kittson, Koochiching, Lake of the Woods, Meeker, Olmsted, Ramsey, Rice, St. Louis, Swift, Traverse, Wadena, Washington. Others are $70, $75, $77, $78 or $79 (e.g., Hennepin $70, Stearns $79). Same fee applies to a defendant's first paper. Removal to district court is $310 base plus library fee ($322 in Hennepin)."
+  },
+  {
+    "abbr": "MS",
+    "field": "appeal_deadline_days",
+    "value": 30,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://courts.ms.gov/research/rules/msrulesofcourt/Rules%20of%20Justice%20Court.pdf", "what": "Rules of Justice Court, Rule 27(a): civil appeals from justice court are governed by Rules 5.01, 5.04, 5.07, 5.08 and 5.09 of the Uniform Civil Rules of Circuit and County Court", "type": "court_rule"},
+      {"url": "https://courts.ms.gov/research/rules/msrulesofcourt/UCRCCC%20Post-070117.pdf", "what": "UCRCCC 5.01 (direct appeals from justice court are by trial de novo); 5.04 (notice of appeal and payment of costs filed with the circuit court clerk within thirty (30) days of entry of the judgment); 5.08 (supersedeas bond 125% of money judgment); 5.09 (cost bond)", "type": "court_rule"},
+      {"url": "https://desotocountyms.gov/m/faq?cat=16", "what": "DeSoto County justice court FAQ: appeals within 30 days", "type": "court_site"}
+    ],
+    "note": "Resolved the conflict: the Mississippi Supreme Court's Rules of Justice Court (Rule 27) send civil appeals through UCRCCC 5.04, which sets 30 days, filed with the circuit court clerk with costs paid. Miss. Code s. 11-51-85 still says 10 days, but the court rules govern procedure, and DeSoto County's 30-day statement matches them. Suggested appeal text: either party may appeal to circuit court for a new trial (de novo) by filing a notice of appeal and paying costs with the circuit clerk within 30 days of judgment; collection is stayed only by a supersedeas bond of 125% of the judgment. Mention that the statute still says 10 days and to file early if unsure."
+  },
+  {
+    "abbr": "MS",
+    "field": "filing_fee_min",
+    "value": 75,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.rankincounty.org/topic/index.php?topicid=52", "what": "Rankin County Justice Court civil suit filing fees: 1 defendant $75, 2 $85, 3 $95, 4 $105 ($10 per extra defendant)", "type": "court_site"},
+      {"url": "https://desotocountyms.gov/147/Civil-Division", "what": "DeSoto County Justice Court civil: $85 one defendant served in DeSoto County, $100 two defendants at the same address", "type": "court_site"},
+      {"url": "https://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB0876.xml", "what": "2026 HB 876 (would revise justice court filing fees in s. 25-7-25) died in committee 02/03/2026", "type": "statute"}
+    ],
+    "note": "Statute (s. 25-7-25) sets a $25 uniform civil fee, but county totals include state assessments and service. Confirmed one-defendant totals: Rankin $75, DeSoto $85. Hinds County's page (snippet showed $85, eff. 7/1/2022) returned 503, and Holmes County's page ($74 in a snippet) has an untrusted certificate, so neither was read. 2026 fee bill died, so no change pending."
+  },
+  {
+    "abbr": "MS",
+    "field": "filing_fee_max",
+    "value": 85,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://desotocountyms.gov/147/Civil-Division", "what": "DeSoto County Justice Court: $85 one defendant", "type": "court_site"},
+      {"url": "https://www.rankincounty.org/topic/index.php?topicid=52", "what": "Rankin County Justice Court: $75 one defendant", "type": "court_site"}
+    ],
+    "note": "Highest confirmed one-defendant total is $85 (DeSoto). Extra defendants cost more ($10-$15 each). Suggested filing_fee_notes: 'Varies by county: about $75-$85 for one defendant (Rankin $75, DeSoto $85), more for each extra defendant; statute sets the $25 base (Miss. Code s. 25-7-25) and counties add assessments and service.'"
+  },
+  {
+    "abbr": "MO",
+    "field": "filing_fee_min",
+    "value": 35.5,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://revisor.mo.gov/main/OneSection.aspx?section=488.012", "what": "RSMo 488.012.3(7): small claims fee $5 (under $100) / $10 (other) before adjustment by the Supreme Court; Supreme Court sets court costs by rule", "type": "statute"},
+      {"url": "https://greenecounty31.squarespace.com/small-claims", "what": "Greene County Circuit Clerk: small claims filing fee $35.50; certified mail $10 per defendant; Greene County sheriff $55 per defendant", "type": "court_site"},
+      {"url": "https://webstercountymo.gov/circuit-clerks-office/small-claims/", "what": "Webster County Circuit Clerk: small claims filing fee $38.50 plus sheriff service fees", "type": "court_site"}
+    ],
+    "note": "No single statewide amount: the statutory $10 base is adjusted by Supreme Court rule and surcharges/local fees are added, so totals differ by county. Lowest confirmed on an official clerk page: $35.50 (Greene County). A search snippet showed Butler County at $35.50 (eff. 1/1/2024) but it wasn't opened."
+  },
+  {
+    "abbr": "MO",
+    "field": "filing_fee_max",
+    "value": 100,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://www.morgancountymo.gov/small-claims-and-fees", "what": "Morgan County Circuit Clerk small claims page: '$100.00 filing fee plus any additional costs for summons service' by the sheriff", "type": "court_site"},
+      {"url": "https://webstercountymo.gov/circuit-clerks-office/small-claims/", "what": "Webster County $38.50", "type": "court_site"}
+    ],
+    "note": "Highest confirmed: Morgan County's circuit clerk page says $100, much higher than other counties ($35.50-$38.50). It may include service or be out of date; the page gives no date. Treat $100 as the top of the confirmed range, not a statewide cap."
+  },
+  {
+    "abbr": "MO",
+    "field": "filing_fee_notes",
+    "value": "Varies by county. State law sets a small base fee that the Missouri Supreme Court adjusts, and counties add surcharges (RSMo 488.012). Confirmed examples: Greene County $35.50, Webster County $38.50, Morgan County $100. Service is extra: certified mail about $10 per defendant, or sheriff/process server (Greene County sheriff $55 per defendant). Check your county circuit clerk's fee list.",
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://revisor.mo.gov/main/OneSection.aspx?section=488.012", "what": "fee framework", "type": "statute"},
+      {"url": "https://greenecounty31.squarespace.com/small-claims", "what": "Greene County fees and service costs", "type": "court_site"},
+      {"url": "https://webstercountymo.gov/circuit-clerks-office/small-claims/", "what": "Webster County fee", "type": "court_site"},
+      {"url": "https://www.morgancountymo.gov/small-claims-and-fees", "what": "Morgan County fee", "type": "court_site"}
+    ],
+    "note": "Replaces the earlier snippet-based examples (Jackson County $27 wasn't confirmed and is dropped). courts.mo.gov wasn't needed."
+  },
+  {
+    "abbr": "MT",
+    "field": "filing_fee_min",
+    "value": 30,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://mca.legmt.gov/bills/mca/title_0250/chapter_0350/part_0060/section_0080/0250-0350-0060-0080.html", "what": "MCA 25-35-608: $20 from plaintiff at filing; $10 from a defendant who appears and contests or counterclaims", "type": "statute"},
+      {"url": "https://mca.legmt.gov/bills/mca/title_0030/chapter_0010/part_0030/section_0170/0030-0010-0030-0170.html", "what": "MCA 3-1-317: $10 user surcharge (court technology) at the start of each civil action in all courts of original jurisdiction; $10 per appearing defendant", "type": "statute"},
+      {"url": "https://bighorncountymt.gov/172/Justice-Court", "what": "Big Horn County Justice Court: small claims filing fee $30", "type": "court_site"},
+      {"url": "https://carbonmt.gov/departments/justice-court", "what": "Carbon County Justice Court: small claims filing fee $30 (civil suit $50)", "type": "court_site"},
+      {"url": "https://www.parkcountymt.gov/Government-Departments/Justice-Court/Small-Claims/", "what": "Park County Justice Court: $30", "type": "court_site"}
+    ],
+    "note": "$20 statutory fee + $10 technology surcharge (MCA 3-1-317, now read) = $30, confirmed on three county justice court pages. Defendant fees vary in practice (Big Horn lists $20 appearance in its table and $30 in its FAQ). Optional district-court small claims courts (MCA 3-12-) weren't checked."
+  },
+  {
+    "abbr": "MT",
+    "field": "filing_fee_max",
+    "value": 30,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://mca.legmt.gov/bills/mca/title_0250/chapter_0350/part_0060/section_0080/0250-0350-0060-0080.html", "what": "MCA 25-35-608 $20 fee", "type": "statute"},
+      {"url": "https://mca.legmt.gov/bills/mca/title_0030/chapter_0010/part_0030/section_0170/0030-0010-0030-0170.html", "what": "MCA 3-1-317 $10 surcharge", "type": "statute"},
+      {"url": "https://carbonmt.gov/departments/justice-court", "what": "Carbon County $30", "type": "court_site"}
+    ],
+    "note": "Same as min: $30 to file, plus service by sheriff/process server."
+  },
+  {
+    "abbr": "NV",
+    "field": "appeal",
+    "value": "Either party may appeal to district court by filing a notice of appeal in the justice court within 7 calendar days from service of the judgment (JCRCP 98), with a brief statement of the basis for the appeal (JCRCP 99) and an appeal bond: a losing defendant posts the judgment plus interest, plus $100 for costs and $15 for attorney fees; a plaintiff posts $100 + $15 (JCRCP 100). Court fees also apply (e.g., Sparks Justice Court: $50 appeal fee, $115 cost bond, $211 district court fee). The district court does not hold a new trial: it decides the appeal on the justice court record and short written briefs, and you can't add documents that weren't given to the justice court (Clark County: EDCR 9.06-9.08; Washoe County: WDCR 19(4)).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://www.leg.state.nv.us/CourtRules/JCRCP.html", "what": "JCRCP 72, 98-100 (amended effective Oct. 29, 2024): 7 calendar days, notice contents, bonds; Rules 74-76B now 'Reserved' (old JCRCP 76A 'no case may be tried anew' was dropped in the 2024 rewrite)", "type": "court_rule"},
+      {"url": "https://www.leg.state.nv.us/CourtRules/EighthDCR.html", "what": "EDCR Part IX (eff. June 25, 2024): justice court appeals decided on the record (papers, minutes, orders; transcripts for non-small-claims civil appeals) and 10-page briefs; briefs may not include documents not provided to the justice court; no oral argument unless ordered", "type": "court_rule"},
+      {"url": "https://www.leg.state.nv.us/CourtRules/SecondDCR.html", "what": "WDCR 19(4): in civil appeals from justice court, appellant files a brief stating the errors committed in the justice court", "type": "court_rule"},
+      {"url": "https://www.washoecounty.gov/sjc/files/Small Claims Appeal/1. How to Appeal.Small Claims Packet.pdf", "what": "Sparks Justice Court packet (10/31/2024): 7 calendar days (JCRCP 98); fees $50 + $115 cost bond + $211 district court filing fee", "type": "court_site"}
+    ],
+    "note": "No statewide rule now says in words that small claims appeals aren't tried anew (old JCRCP 76A said so; the Oct. 2024 rewrite left 76A reserved). But the district court rules for Clark County (EDCR Part IX) and Washoe County (WDCR 19) handle these as appeals on the record and briefs reviewing errors, not new trials. Rural districts' local rules weren't checked. The Reno Justice Court web page still says '5 judicial days', which is out of date. appeal_who 'both' and appeal_deadline_days 7 are unchanged."
+  },
+  {
+    "abbr": "NV",
+    "field": "filing_fee_min",
+    "value": 46,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {"url": "https://humboldtcountynv.gov/187/Plaintiff-Information", "what": "Humboldt County justice court plaintiff information: small claims filing fee $46 up to $1,000; $66 to $2,500; $86 to $5,000; $126 to $7,500; $176 to $10,000", "type": "court_site"},
+      {"url": "https://www.leg.state.nv.us/nrs/nrs-004.html", "what": "NRS 4.060 base fees + NRS 4.065 $1 fee", "type": "statute"}
+    ],
+    "note": "The calculated $46 minimum ($45 base + $1) now matches a published county schedule (Humboldt County). Other courts add optional fees (Las Vegas $66, Sparks $71 for the lowest tier)."
+  },
+  {
+    "abbr": "NH",
+    "field": "filing_fee_min",
+    "value": 125,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://www.courts.nh.gov/rules-circuit-court-state-new-hampshire-district-division/rule-128-court-fees", "what": "District Division Rule 1.28: small claims entry/counterclaim $5,000 or less $105; $5,001-$10,000 $160; transfer fee $145; (III)(B) $20 e-filing surcharge added to each small claims filing fee except the transfer fee", "type": "court_rule"}
+    ],
+    "note": "Read Rule 1.28 on courts.nh.gov in a browser: $105 + $20 surcharge = $125. Rule 4.1 still cites 'District Division Rule 3.3' for fees, but the live fee rule is 1.28; cite 1.28. Card/e-payment service charges are extra. The 2025 memo about lower fees wasn't adopted in the posted rule."
+  },
+  {
+    "abbr": "NH",
+    "field": "filing_fee_max",
+    "value": 180,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://www.courts.nh.gov/rules-circuit-court-state-new-hampshire-district-division/rule-128-court-fees", "what": "Rule 1.28: $160 for $5,001-$10,000 + $20 e-filing surcharge", "type": "court_rule"}
+    ],
+    "note": "$160 + $20 = $180 for claims of $5,001-$10,000."
+  },
+  {
+    "abbr": "NH",
+    "field": "e_filing",
+    "value": "yes_statewide",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {"url": "https://www.courts.nh.gov/rules-circuit-court-state-new-hampshire-district-division/small-claims-actions/rule-41-filing-small", "what": "Rule 4.1(a)(1): small claim cases shall be filed electronically as required under the Circuit Court Electronic Filing Pilot Rules unless an exemption is requested and granted", "type": "court_rule"}
+    ],
+    "note": "Confirmed on the rule page: e-filing is mandatory unless an exemption is granted. Rule 4.1(a)(3) also says the small claims fee is waived only for extraordinary circumstances (useful for fee_waiver_threshold)."
+  }
+]

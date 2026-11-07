@@ -110,3 +110,19 @@ These changes were made at Nima's request. Three agents worked in order: design 
 
 ## Hosting decision (2026-11-06)
 Fair Claim will use Nima's **fedmoney Cloudflare account**, the same one as the federal-money-map site. Deploy it the same way: a private GitHub repo with Cloudflare Pages' Git integration, connected by Nima in the dashboard. This Mac is never signed into that account. Not deployed yet. Before publishing: finish the polish round, have Nima review it, and close the unverified limits and fees.
+
+## Round 3 (2026-11-07): Option A rebuild, polish, verification
+- **Design:** the whole site was rebuilt in mockup Option A (Cocota-inspired). The landing page is "Small claims, explained." with three doors.
+  - Palette: tomato, cobalt, lilac, sage and sand.
+  - Fonts: Inter Tight and Geist.
+  - Theme: follows the device, with a Light / Dark / Auto switch.
+  - The calculator and the letter are one-question-at-a-time flows.
+  - Polish pass applied Emil Kowalski's design skills (motion audit, mobile rules, stress tests).
+  - Review gallery: `/review/`. Mockups: `/mockups/`.
+- **Verification round 2:** limits, fees, appeal rules and lawyer rules were checked for the 27 states that still had them open. Corrections are in `research/verification/round2-*.json`, merged by `scripts/apply_verification.py`.
+  - 53 facts confirmed and 36 values corrected.
+  - Corrections: Ohio's appeal deadline is 30 days, not 14. Mississippi's is 30 days, not 10. Virginia's fee is $46–$55. New Mexico's Metro Court civil appeals go to the Court of Appeals on the record.
+  - Fees set county by county (AL, AR, GA, LA, MO, OH, TN, etc.) are now documented as ranges.
+  - **New:** Georgia's limit rises to $25,000 on 2027-01-01 (HB 999). Update the limit on that date.
+- **Still unverified** (45 rows, none of them limits, fees, appeals or lawyer rules): fee-waiver forms and thresholds, e-filing, who can sue, self-help links, service methods. Yellow cells in the spreadsheet.
+- **Upcoming date-driven updates:** GA $25,000 (2027-01-01), WI $15,000 (2027-01-01), SC fee $105 (2027-01-01), UT $25,000 (2030-01-01).

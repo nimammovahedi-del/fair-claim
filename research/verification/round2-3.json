@@ -1,0 +1,412 @@
+[
+  {
+    "abbr": "NM",
+    "field": "appeal",
+    "value": "Magistrate court (all counties except Bernalillo): either party may appeal to the district court of the county by filing a notice of appeal in district court within 15 days after the judgment is filed; the case is tried de novo (new trial) under Rule 1-072 NMRA. Bernalillo County Metropolitan Court: for ordinary civil cases (everything except landlord-tenant cases under the Uniform Owner-Resident Relations Act) Metro Court is a court of record, so the appeal goes to the New Mexico Court of Appeals on the record, by a notice of appeal filed in Metro Court within 30 days after the final order (Rule 3-706(C), effective for cases filed on or after Dec. 31, 2025; NMSA 34-8A-6(B)). Landlord-tenant (Owner-Resident Relations Act) judgments from Metro Court are appealed de novo to district court within 15 days (34-8A-6(C); Rule 3-706(B); Rule 1-072).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://supremecourt.nmcourts.gov/wp-content/uploads/sites/2/2025/10/Rule-3-706-NMRA.pdf",
+        "what": "Metro Court civil appeals: de novo to district court in 15 days (B); on-record to Court of Appeals, notice filed in Metro Court within 30 days (C); effective for cases filed on/after Dec. 31, 2025",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://nmlegis.gov/Sessions/19%20Regular/final/HB0279.PDF",
+        "what": "NMSA 34-8A-6 as amended 2019: Metro Court is a court of record for civil actions other than Uniform Owner-Resident Relations Act cases; appeals go to the Court of Appeals; UORRA cases not of record",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nmlegis.gov/Legislation/Legislation?chamber=H&legType=B&legNo=20&year=20",
+        "what": "2020 HB 20 (to put UORRA cases back on record) died, so the 2019 text stands",
+        "type": "statute"
+      },
+      {
+        "url": "https://supremecourt.nmcourts.gov/wp-content/uploads/sites/2/2025/10/Rule-1-072-NMRA.pdf",
+        "what": "de novo appeal procedure, 15 days (magistrate and Metro de novo appeals)",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Corrects the current row: Metro Court on-record civil appeals no longer go to district court; since the 2019 amendment of NMSA 34-8A-6 they go to the Court of Appeals, and amended Rule 3-706 (Rule 1-073 withdrawn) sets a 30-day notice filed in Metro Court. Statute text read from the enrolled 2019 HB 279 on nmlegis.gov (NMOneSource current compilation not opened); no later amendment found. appeal_deadline_days 15 stays correct for magistrate courts and Metro landlord-tenant cases; mention the 30-day Metro on-record exception."
+  },
+  {
+    "abbr": "NY",
+    "field": "appeal",
+    "value": "A claimant who starts a small claims case gives up the right to appeal, except that either party may appeal on the sole ground that substantial justice was not done between the parties under the rules of substantive law (CCA/UCCA/UDCA/UJCA 1807). Review is on the record (transcript or recording), not a new trial. Deadline: 30 days after service of the judgment with notice of entry (CPLR 5513(a)); in NYC Civil Court, 30 days from the earliest service of the judgment by the court or a party, plus 5 days if served by mail (CCA 1703(b)). Court: NYC Civil Court appeals go to the Appellate Term (CCA 1701); City, District and Town/Village Court appeals go to County Court unless the Appellate Division has directed them to the Appellate Term (UCCA, UDCA, UJCA 1701). A decision by a volunteer arbitrator (chosen instead of a judge) cannot be appealed, and a default judgment must first be challenged by a motion to vacate.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CCA/1807",
+        "what": "claimant waives appeal except on substantial-justice ground, either party may appeal on that ground",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CCA/1703",
+        "what": "NYC small/commercial claims appeal: 30 days from earliest service of judgment, +5 days by mail",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/CCA/1701",
+        "what": "NYC Civil Court appeals to Appellate Term (as directed by Appellate Division)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/UCT/1701",
+        "what": "City Court civil appeals to County Court unless Appellate Term directed",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/UDC/1701",
+        "what": "District Court civil appeals to County Court unless Appellate Term directed",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/laws/UJC/1701",
+        "what": "Town/Village Court civil appeals to County Court unless Appellate Term directed",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.nycourts.gov/new-york-city-small-claims-court/appearing-nyc-small-claims-court",
+        "what": "arbitrator's decision cannot be appealed; judge's decision can",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.nycourts.gov/courts/oneida-city-court/oneida-city-court-small-claims-appeals",
+        "what": "example: either party may appeal to County Court within 30 days; review limited to substantial justice on the record; defaults cannot be appealed",
+        "type": "court_site"
+      }
+    ],
+    "note": "Routing now checked against the statutes (nysenate.gov) and nycourts.gov pages (read in the browser; WebFetch gets 403). The 'Appellate Term (2nd Department generally)' wording in the current row is imprecise: Appellate Term is used where the Appellate Division has set one up (NYC, Long Island, and 2nd Dept. counties); elsewhere County Court. appeal_deadline_days 30 confirmed."
+  },
+  {
+    "abbr": "OH",
+    "field": "appeal",
+    "value": "Small claims cases are usually heard by a magistrate. Either party may file written objections to the magistrate's decision within 14 days of its filing (another party may then object within 10 days after the first objections); objecting to findings of fact requires a transcript (Civ.R. 53(D)(3)(b)). The judge then rules and enters judgment. Either party may appeal the final judgment to the district court of appeals by filing a notice of appeal within 30 days of entry of the judgment (App.R. 4(A)); review is on the record, not a new trial. Failing to object to the magistrate's decision generally limits what can be raised on appeal.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/civil/CivilProcedure.pdf",
+        "what": "Civ.R. 53(D)(3)(b)(i): objections within 14 days, others within 10 days after first objections",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/appellate/AppellateProcedure.pdf",
+        "what": "App.R. 4(A)(1): notice of appeal within 30 days of entry of a final order; 4(A)(3) clock starts when clerk completes service if late",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.sanduskymunicipalcourt.org/smClaims.php",
+        "what": "small claims heard by magistrate, objections process (example court)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Rule text read from the Supreme Court of Ohio's official rule PDFs."
+  },
+  {
+    "abbr": "OH",
+    "field": "appeal_deadline_days",
+    "value": 30,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/appellate/AppellateProcedure.pdf",
+        "what": "App.R. 4(A)(1): 30 days from entry of judgment",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/civil/CivilProcedure.pdf",
+        "what": "Civ.R. 53(D)(3)(b)(i): 14-day objection period (not an appeal)",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Corrected from 14 to 30. The 14 days is the deadline to object to a magistrate's decision within the same court, not an appeal; the actual appeal to the court of appeals is 30 days from the judge's final judgment (App.R. 4(A)). Keep the 14-day objection step in the appeal text."
+  },
+  {
+    "abbr": "OH",
+    "field": "filing_fee_min",
+    "value": 49,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-1925.04",
+        "what": "each court sets its own small claims filing fee",
+        "type": "statute"
+      },
+      {
+        "url": "https://courtclerk.org/self-help-resources/file-a-claim-in-small-claims-court/",
+        "what": "Hamilton County Municipal Court: minimum $49 (one defendant, certified mail); bailiff service $69 minimum; +$10 per extra defendant by certified mail",
+        "type": "court_site"
+      }
+    ],
+    "note": "No statewide fee (R.C. 1925.04). Lowest confirmed on an official court/clerk page: Hamilton County Municipal Court (Cincinnati) $49 for one defendant served by certified mail. Other courts may be lower; this is the confirmed range from three courts checked (Hamilton $49, Sandusky $105, Willoughby $124)."
+  },
+  {
+    "abbr": "OH",
+    "field": "filing_fee_max",
+    "value": 124,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://www.willoughbycourt.com/wp-content/uploads/2026/01/Small-Claims-Filing-Instructions-2026.pdf",
+        "what": "Willoughby Municipal Court 2026: $124 for one defendant plus $25 each additional",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.sanduskymunicipalcourt.org/smClaims.php",
+        "what": "Sandusky Municipal Court: $105 (one or two defendants), $10 each additional, personal service $35",
+        "type": "court_site"
+      },
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-1925.04",
+        "what": "fee set by each court",
+        "type": "statute"
+      }
+    ],
+    "note": "Highest confirmed: Willoughby Municipal Court $124 (2026 instructions). Range $49-$124 across three official court pages (Hamilton, Sandusky, Willoughby); some courts may charge more. Mason Municipal Court's page contradicts itself ($75 vs $100), so it is not used. Fees usually include certified-mail service; personal/bailiff service costs extra."
+  },
+  {
+    "abbr": "OK",
+    "field": "appeal_deadline_days",
+    "value": 30,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=94812",
+        "what": "12 O.S. 1763: small claims appeals to the Supreme Court in the same manner as other civil actions",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=94295",
+        "what": "12 O.S. 990A(A): petition in error filed with Supreme Court Clerk within 30 days from filing of the judgment (or from service if not served within 3 days); last amended 2017",
+        "type": "statute"
+      }
+    ],
+    "note": "Confirmed on OSCN (the judiciary's official statute site). The 30 days run from the date the judgment is filed with the trial court clerk; if the appellant did not prepare the judgment and was not served within 3 days (excluding weekends/holidays), from the earliest service date shown."
+  },
+  {
+    "abbr": "PA",
+    "field": "limit_individual",
+    "value": 12000,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=42&div=0&chapter=15&section=15&subsctn=0",
+        "what": "42 Pa.C.S. 1515(a)(3): MDJ civil claims up to $12,000 exclusive of interest and costs; plaintiff may waive excess",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=42&div=0&chapter=11&section=23&subsctn=0",
+        "what": "42 Pa.C.S. 1123(a)(4): Philadelphia Municipal Court civil actions up to $12,000",
+        "type": "statute"
+      }
+    ],
+    "note": "Read on palegis.us in the browser (the statute text loads in an iframe). Both limits are $12,000 exclusive of interest and costs; claims against Commonwealth parties excluded; a plaintiff may waive the excess to fit the limit (waiver revoked if the defendant appeals)."
+  },
+  {
+    "abbr": "PA",
+    "field": "appeal",
+    "value": "Either party aggrieved by a magisterial district judge's money judgment may appeal within 30 days after the date of entry of the judgment by filing a notice of appeal (with a copy of the Notice of Judgment) with the prothonotary of the county Court of Common Pleas; late appeals only with leave of court for good cause (Pa.R.Civ.P.M.D.J. 1002(A)). The appeal is a new trial (de novo) under the ordinary Common Pleas rules (Rule 1007(A)). Philadelphia Municipal Court money judgments are likewise appealed to the Court of Common Pleas within 30 days of entry on the docket, de novo (Phila. Civ. R. *1001 et seq.).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/246/chapter1000/s1002.html",
+        "what": "Rule 1002(A): 30 days from entry of judgment, notice of appeal to prothonotary",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/246/chapter1000/s1007.html",
+        "what": "Rule 1007(A): appeal conducted de novo",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.courts.phila.gov/pdf/regs/2023/04-of-2023-PJ-GCR.pdf",
+        "what": "Philadelphia Civil Rules *1001 et seq.: Municipal Court money judgments appealed to Common Pleas within 30 days, de novo",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Rule texts read on the official Pennsylvania Code site and the Philadelphia courts' general court regulation."
+  },
+  {
+    "abbr": "PA",
+    "field": "appeal_deadline_days",
+    "value": 30,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/246/chapter1000/s1002.html",
+        "what": "Rule 1002(A): 30 days after entry of judgment",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.courts.phila.gov/pdf/regs/2023/04-of-2023-PJ-GCR.pdf",
+        "what": "Philadelphia Municipal Court: 30 days",
+        "type": "court_rule"
+      }
+    ],
+    "note": "30 days from the date of entry of judgment, for both MDJ and Philadelphia Municipal Court money judgments."
+  },
+  {
+    "abbr": "RI",
+    "field": "appeal_deadline_days",
+    "value": 2,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.ri.gov/Courts/districtcourt/Documents/District_Rules_of_Small_Claims_Procedure.pdf",
+        "what": "District Court Rules of Small Claims Procedure (Feb. 2024) Rule 7.01: defendant may claim an appeal within two days, exclusive of Saturdays, Sundays and legal holidays; plaintiff waives appeal; filed in writing with the clerk with the appeal fee",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://webserver.rilegislature.gov/Statutes/TITLE9/9-12/9-12-10.htm",
+        "what": "\u00a7 9-12-10: 2 days excluding weekends and holidays, trial in Superior Court on all questions of law and fact",
+        "type": "statute"
+      },
+      {
+        "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-14.htm",
+        "what": "\u00a7 10-16-14: defendant has same appeal right as in ordinary District Court civil actions; none after default by consumer-product seller",
+        "type": "statute"
+      }
+    ],
+    "note": "Confirmed by the court's own small claims rule (Rule 7.01), not just \u00a7 9-12-10. It is 2 business days (weekends and legal holidays excluded). Rule 7.01 also says: by filing a counterclaim the defendant waives appeal on the counterclaim, and the plaintiff may appeal only on the counterclaim. Worth adding to the appeal text."
+  },
+  {
+    "abbr": "TN",
+    "field": "filing_fee_min",
+    "value": 132.75,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://www.capitol.tn.gov/Bills/114/Amend/HA0381.pdf",
+        "what": "HB 487 House Amendment 1 (adopted, enacted as Pub. Ch. 486): new 8-21-401(f) standard General Sessions civil filing fee $50 as of Jan. 1, 2026/2027/2028; litigation taxes and costs added separately",
+        "type": "statute"
+      },
+      {
+        "url": "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx?BillNumber=HB0487&GA=114",
+        "what": "HB 487 enacted as Public Chapter 486, effective Jan. 1, 2026",
+        "type": "statute"
+      },
+      {
+        "url": "https://andersoncountytn.gov/wp-content/uploads/2026/01/2026-GENERAL-SESSIONS-FILING-FEES.pdf",
+        "what": "Anderson County 2026: civil summons $132.75 when served by private process/attorney; $184.75 with in-county sheriff service for one defendant",
+        "type": "court_site"
+      }
+    ],
+    "note": "Statewide base: the clerk's standard General Sessions civil filing fee is $50 from Jan. 1, 2026 (T.C.A. 8-21-401(f) as amended by Pub. Ch. 486 of 2025); county and state litigation taxes and service fees are added, so the total varies by county. Lowest total confirmed on a county page: Anderson County $132.75 (no sheriff service). Not every county was checked."
+  },
+  {
+    "abbr": "TN",
+    "field": "filing_fee_max",
+    "value": 216.5,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://rutherfordcountytn.gov/vertical/sites/%7B0DE57B3C-95FA-46CF-BF78-CE4E5703EB9C%7D/uploads/GENERAL_SESSIONS_FEES.pdf",
+        "what": "Rutherford County, as of Jan. 1, 2026: civil warrant clerk $50 + litigation tax $166.50 (= $216.50) + sheriff $52 = $268.50; $52 each additional person",
+        "type": "court_site"
+      },
+      {
+        "url": "https://montgomerytn.gov/storage/departments/circuit/General%20Sessions%20Civil%20Cost%20Sheet%2012-31-25.pdf",
+        "what": "Montgomery County, effective 1/1/2026 (TCA 8-21-401): civil cases $148.50; sheriff service $52 per defendant extra",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.capitol.tn.gov/Bills/114/Amend/HA0381.pdf",
+        "what": "$50 standard clerk filing fee",
+        "type": "statute"
+      }
+    ],
+    "note": "Highest confirmed: Rutherford County $216.50 before service ($268.50 with sheriff service for one defendant). Confirmed range before service across three counties: $132.75 (Anderson), $148.50 (Montgomery), $216.50 (Rutherford). Sheriff service is $52 per defendant in all three. Davidson County's sheet URL returned 404. Suggested filing_fee_notes: '$50 state clerk fee (2026) plus county litigation taxes; confirmed totals $132.75-$216.50 before service, sheriff service $52 per defendant'."
+  },
+  {
+    "abbr": "VA",
+    "field": "filing_fee_max",
+    "value": 55,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://vacourts.gov/gdfees_calc_app",
+        "what": "official GDC Civil Filing Fee Calculation for 'Warrant in Debt - Small Claims', all 127 listed courts queried 2026-11-06: totals without sheriff service $46-$55; with one sheriff service $58-$67",
+        "type": "court_site"
+      },
+      {
+        "url": "https://law.lis.virginia.gov/vacode/16.1-69.48:2/",
+        "what": "$36 base fee per civil warrant ($10 to Courts Technology Fund)",
+        "type": "statute"
+      }
+    ],
+    "note": "Ran the official calculator for every court listed (small claims warrant in debt, one case). Example breakdown, Richmond City GDC: processing $26 + Courts Technology Fund $10 + legal aid $9 + indigent defense $1 + law library $4 + courthouse maintenance $2 = $52. Local add-ons (law library, courthouse maintenance, courthouse construction fee for claims over $500) explain the spread. Highest: $55 for claims over $500 in courts like Alexandria, Augusta, Bedford, Culpeper, Frederick. Sheriff service adds $12 per defendant (\u00a7 17.1-272)."
+  },
+  {
+    "abbr": "VA",
+    "field": "filing_fee_min",
+    "value": 46,
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://vacourts.gov/gdfees_calc_app",
+        "what": "official calculator: lowest small claims total $46 (e.g. Amherst, Essex, Lancaster, Lee counties)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Correction: the current $36 is only the statutory base fee (\u00a7 16.1-69.48:2, which already includes $10 for the Courts Technology Fund). Every court adds statutory/local fees (legal aid, indigent defense, and in most courts law library and courthouse maintenance), so the lowest actual total is $46. Also confirmed in passing: the fee waiver petition is form DC-409 'Petition for Proceeding in Civil Case Without Payment of Fees and Costs' (listed on the same vacourts.gov page)."
+  },
+  {
+    "abbr": "WV",
+    "field": "filing_fee_max",
+    "value": 70,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://code.wvlegislature.gov/50-3-1/",
+        "what": "costs 'shall be charged in magistrate courts in civil actions' include (a) tiered $30/$35/$40/$50 and (g) $20 'for filing and trying any civil action'",
+        "type": "statute"
+      },
+      {
+        "url": "https://code.wvlegislature.gov/50-3-4a/",
+        "what": "\u00a7 50-3-4a(b): fees collected under \u00a7 50-3-1(g) are paid monthly into the Regional Jail Operations Partial Reimbursement Fund (separate charge)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.wvlegislature.gov/Bill_Text_HTML/2005_SESSIONS/RS/Bills/SB716%20SUB1%20enr.htm",
+        "what": "2005 SB 716 added the (g) $20 cost to fund regional jails ('increasing court costs')",
+        "type": "statute"
+      }
+    ],
+    "note": "The $20 in \u00a7 50-3-1(g) is a separate, additional cost: it was added in 2005 to fund regional jails and is routed to a different fund (\u00a7 50-3-4a(b)) than the tier fee in (a). So the real filing cost is the (a) tier plus $20: $50 (<= $500 or non-money), $55, $60, or $70 (over $2,000). This reading rests on the statutes; no current courtswv.gov fee sheet was found (a Lincoln County page shows outdated pre-2005 amounts). Sheriff service and $1 certified-mail fee are extra."
+  },
+  {
+    "abbr": "WV",
+    "field": "filing_fee_min",
+    "value": 50,
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://code.wvlegislature.gov/50-3-1/",
+        "what": "(a) lowest tier $30 + (g) $20",
+        "type": "statute"
+      },
+      {
+        "url": "https://code.wvlegislature.gov/50-3-4a/",
+        "what": "(g) fees routed separately to Regional Jail fund",
+        "type": "statute"
+      }
+    ],
+    "note": "Correction from 30 to 50: the lowest tier ($30) plus the separate $20 cost in \u00a7 50-3-1(g). See the filing_fee_max note. filing_fee_notes should list the totals $50/$55/$60/$70."
+  }
+]

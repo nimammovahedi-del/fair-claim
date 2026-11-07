@@ -1,864 +1,904 @@
 [
-  {
-    "state": "Rhode Island",
-    "abbr": "RI",
-    "court_name": "District Court, Small Claims (small claims procedure under R.I. Gen. Laws ch. 10-16)",
-    "limit_individual": 5000,
-    "limit_business": 5000,
-    "limit_notes": "Money only, $5,000 exclusive of interest and costs, for: contract (ex contractu) actions and tax claims; damages from a retail sale of goods or services to a member of the public; and claims on negotiable instruments (§ 10-16-1). The statute does not list ordinary tort claims, so not every kind of case fits. Counterclaims are capped at $2,500 (§ 10-16-9); a larger counterclaim ends the small claims case as a nonsuit and the defendant may sue separately. A corporate plaintiff must file in the District Court division where the defendant lives (§ 10-16-3).",
-    "recent_changes": "Limit raised from $2,500 to $5,000 by P.L. 2021, ch. 143 and ch. 144, effective July 3, 2021 (history note on the official § 10-16-1; many online charts still say $2,500). Pending/likely change: 2026 H 7643 / S 2975 would make the entry fee $75 (inclusive of the processing fee and technology surcharge), raise the counterclaim cap to $5,000, set a $75 appeal fee and let a plaintiff appeal a ruling on a counterclaim, effective January 1, 2027. Senate votes on June 3 and June 9, 2026 are on the legislature's vote-report site; whether it became law (governor action / public-law number) was NOT confirmed from an official source, and the live statute text still shows $55 and $2,500.",
-    "filing_fee_min": 75.75,
-    "filing_fee_max": 75.75,
-    "filing_fee_notes": "Statutory entry fee $55 (§ 10-16-4) plus a one-time $17.50 civil case processing fee and $3.25 technology surcharge, which the District Court fee page says apply to cases e-filed or scanned at the clerk's counter (so $75.75 in practice). 3.25% card fee if paying by credit card. Service by sheriff or constable is paid separately. Small claims execution fee $20.",
-    "who_can_sue": "Individuals. A corporation with under $1 million in assets that is a close or family-held corporation may designate one non-lawyer representative (§ 10-16-3.1); the official complaint packet says a corporation with assets over $1 million must be represented by an attorney. Complaint must be notarized. Assignees/collection agencies not specifically addressed in the statute.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Lawyers may appear (the official complaint form asks for 'your lawyer if you have one'; there is a separate attorney version of the forms). Small corporations may use a designated non-lawyer representative (§ 10-16-3.1).",
-    "appeal": "Plaintiff gives up the right to appeal by filing a written waiver with the claim (§ 10-16-4(b)). Defendant may appeal to Superior Court for a new trial (trial de novo) on the same terms as other District Court civil cases (§ 10-16-14), which § 9-12-10 sets at 2 days (excluding weekends and holidays) after judgment, with costs paid at filing. A defaulted seller/manufacturer sued by a consumer has no appeal (§ 10-16-14(b)).",
-    "appeal_who": "defendant_only",
-    "appeal_deadline_days": 2,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "District Court uses the Judiciary's electronic filing system (Odyssey File & Serve); self-represented litigants may e-file but are not required to and can file on paper at the clerk's office or by mail.",
-    "fee_waiver_form": "Motion, Affidavit, and Order to Proceed In Forma Pauperis (District Court, DC-66): https://www.courts.ri.gov/Courts/districtcourt/Documents/Motion, Affidavit, and Order to Proceed In Forma Pauperis.pdf",
-    "fee_waiver_threshold": "Judge's discretion based on the affidavit (no fixed income test confirmed).",
-    "service_methods": "Under the current official complaint packet (DC-SC-1, rev. January 2025), the plaintiff takes the packet to the state Sheriff's office (Cranston) or a licensed constable for in-person service. (The older statute text in § 10-16-6 still refers to the clerk mailing notice.) After an answer the court refers the case to mediation.",
-    "self_help_url": "https://courts.ri.gov/Forms/Small%20Claims%20Lawsuit%20-%20Complaint%20(Self-represented%20Litigant%20-%20With%20Instructions).pdf",
-    "citation": "R.I. Gen. Laws §§ 10-16-1 to 10-16-16; § 9-12-10 (appeals); § 8-15-11 (technology surcharge)",
-    "sources": [
-      {
-        "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-1.htm",
-        "what": "limit_individual, limit_business, limit_notes, recent_changes (2021 history)",
-        "type": "statute"
-      },
-      {
-        "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-4.htm",
-        "what": "filing fee $55, plaintiff waiver of appeal",
-        "type": "statute"
-      },
-      {
-        "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-9.htm",
-        "what": "counterclaim cap $2,500",
-        "type": "statute"
-      },
-      {
-        "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-3.1.htm",
-        "what": "corporate representatives",
-        "type": "statute"
-      },
-      {
-        "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-14.htm",
-        "what": "appeal by defendant",
-        "type": "statute"
-      },
-      {
-        "url": "https://webserver.rilegislature.gov/Statutes/TITLE9/9-12/9-12-10.htm",
-        "what": "appeal deadline 2 days, trial on all questions of law and fact in Superior Court",
-        "type": "statute"
-      },
-      {
-        "url": "https://courts.ri.gov/Courts/districtcourt/Pages/Civil-Fees-and-Costs.aspx",
-        "what": "filing fee, processing fee, technology surcharge",
-        "type": "court_site"
-      },
-      {
-        "url": "https://courts.ri.gov/Forms/Small%20Claims%20Lawsuit%20-%20Complaint%20(Self-represented%20Litigant%20-%20With%20Instructions).pdf",
-        "what": "limit $5,000, service by sheriff/constable, corporations over $1M need attorney, notary, mediation",
-        "type": "form"
-      },
-      {
-        "url": "https://www.courts.ri.gov/efiling/Pages/default.aspx",
-        "what": "e-filing optional for self-represented",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.courts.ri.gov/Courts/districtcourt/Documents/Motion, Affidavit, and Order to Proceed In Forma Pauperis.pdf",
-        "what": "fee waiver form",
-        "type": "form"
-      },
-      {
-        "url": "https://webserver.rilegislature.gov/BillText26/SenateText26/S2975.htm",
-        "what": "recent_changes (2026 bill text)",
-        "type": "statute"
-      },
-      {
-        "url": "https://webserver.rilegislature.gov/SVotes/votereport.asp?id=17829",
-        "what": "recent_changes (Senate concurrence vote on H 7643, June 9, 2026; unofficial vote report)",
-        "type": "statute"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "recent_changes",
-      "fee_waiver_threshold",
-      "appeal_deadline_days"
-    ],
-    "notes": "Lead of $2,500 is outdated: official statute says $5,000 since July 2021. Appeal deadline comes from the general District Court statute (§ 9-12-10); the District Court's own Small Claims Rule 7 page could not be loaded (courts.ri.gov reorganized), so confirm the 2-day deadline with the clerk. The 2026 bill (effective 1/1/2027) needs an official enactment check. The live § 10-16-1 limit text was read directly on rilegislature.gov."
-  },
-  {
-    "state": "South Carolina",
-    "abbr": "SC",
-    "court_name": "Magistrates Court (Summary Court), civil side; there is no separate small claims court",
-    "limit_individual": 7500,
-    "limit_business": 7500,
-    "limit_notes": "$7,500 for contract, property damage, personal injury, penalties, recovery of personal property, etc. (S.C. Code § 22-3-10). Landlord-tenant / possession cases have no dollar cap (§ 22-3-10(10), (12)). If a counterclaim would exceed $7,500 the whole case moves to the Court of Common Pleas (§ 22-3-30). Magistrates cannot hear cases where title to real estate is in question or (mostly) where the State is a party (§ 22-3-20).",
-    "recent_changes": "2026 Act No. 155 (H.4813), effective January 1, 2027: summons-and-complaint fee rises from $45 to $65 (§ 8-21-1010(A)(6)) and the filing assessment from $25 to $40 (§ 22-3-340), so the total goes from $70 to $105; execution fee $10 to $20; landlord-tenant proceedings $20 to $40. The $7,500 limit is unchanged in the current code (a 2025-26 bill, S.251, would raise it to $15,000; not enacted as of the current code text).",
-    "filing_fee_min": 70,
-    "filing_fee_max": 70,
-    "filing_fee_notes": "Uniform statewide: $45 summons/complaint fee (§ 8-21-1010(A)(6)) + $25 assessment (§ 22-3-340) = $70 through December 31, 2026; $105 from January 1, 2027. Service costs (sheriff/constable, process server, or certified mail) are extra and vary by county.",
-    "who_can_sue": "Individuals. A business may be represented by a non-lawyer officer, agent, or employee in civil magistrates court if it gives the court written authorization signed by its president, chair, general partner, owner, or CEO (S.C. Rules for Magistrates Court, Rule 21). Assignees/collection agencies not specifically addressed.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Parties may hire attorneys; most self-represent. Jury trial available on written request at least 5 working days before trial (Magistrates Rule 13(c), per the court FAQ).",
-    "appeal": "Either party may move for a new trial within 5 days, or appeal to the Circuit Court in the county by serving a notice of appeal within 30 days after written notice of judgment (or after the judgment is announced in their presence) (S.C. Code § 18-7-20; Magistrates Rule 18). The circuit judge decides on the magistrate's return/record, without a jury; it is not a new trial (§§ 18-7-60, 18-7-170). $150 circuit court filing fee.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 30,
-    "e_filing": "no",
-    "e_filing_notes": "The Judicial Branch e-filing page describes e-filing only for the Court of Common Pleas; nothing found for magistrates court civil cases.",
-    "fee_waiver_form": "Motion for Leave to Proceed In Forma Pauperis with affidavit (Magistrates Rule 5(c)); no statewide form URL found.",
-    "fee_waiver_threshold": "Magistrate's discretion on an affidavit of inability to pay (no fixed income test). If granted, filing fees are waived but other court costs remain (court FAQ); see also § 8-21-1020.",
-    "service_methods": "Sheriff's department; private process server; certified mail, restricted delivery, return receipt requested (plaintiff files a notarized affidavit with the receipt); publication by court order if the others fail (Magistrates Rule 6(c), per the court FAQ). Constables also serve in some counties.",
-    "self_help_url": "https://www.sccourts.org/media/pb2kvc1v/faqmagistrate.pdf",
-    "citation": "S.C. Code §§ 22-3-10 to 22-3-30, 22-3-340, 8-21-1010, 18-7-10 to 18-7-190; S.C. Rules for Magistrates Court (incl. Rules 5, 6, 18, 21)",
-    "sources": [
-      {
-        "url": "https://www.scstatehouse.gov/code/t22c003.php",
-        "what": "limit, limit_notes, assessment (current and 2027), counterclaim transfer",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.scstatehouse.gov/code/t08c021.php",
-        "what": "filing fee $45 and 2027 increase to $65 (2026 Act No. 155)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.scstatehouse.gov/code/t18c007.php",
-        "what": "appeal: circuit court, 30 days, review on the return",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.sccourts.org/courtReg/displayRule.cfm?ruleID=21.0&subRuleID=&ruleType=MAG",
-        "what": "business representation by non-lawyers",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://www.sccourts.org/media/pb2kvc1v/faqmagistrate.pdf",
-        "what": "service methods, IFP motion, appeal process and $150 fee, jury request (2010 FAQ)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.sccourts.org/efiling/",
-        "what": "e-filing limited to Common Pleas",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "e_filing"
-    ],
-    "notes": "The court FAQ is dated 2010; statutes were read directly on scstatehouse.gov and are current. Watch the January 1, 2027 fee increase."
-  },
-  {
-    "state": "South Dakota",
-    "abbr": "SD",
-    "court_name": "Small claims (circuit court or magistrate court; Unified Judicial System)",
-    "limit_individual": 12000,
-    "limit_business": 12000,
-    "limit_notes": "$12,000 not counting allowable costs or attorney fees (SDCL 15-39-45.1). UJS materials cite SDCL 16-12C-13 (clerk magistrate, uncontested) and 16-12B-13 (magistrate judge) for the same $12,000. Venue: county where an individual defendant lives or where the claim arose; business defendants where they do business (15-39-69). Compulsory counterclaim rule does not apply (15-39-66).",
-    "recent_changes": "Small claims fee schedule updated July 12, 2026 (postage components). SDCL 15-39-55 amended effective July 1, 2026 (SL 2026, ch 242): clerk may dismiss without prejudice if plaintiff does not pursue further notice or notice fails after 90 days.",
-    "filing_fee_min": 24.84,
-    "filing_fee_max": 42.84,
-    "filing_fee_notes": "Totals include certified-mail postage: $24.84 (claims up to $100), $30.84 ($100.01-$1,000), $40.84 ($1,000.01-$3,999.99), $42.84 ($4,000-$12,000); add $11.84 per additional defendant. Court portion alone is $13-$31 (filing fee + $3 law library + court automation surcharge). Sheriff service, if needed, is extra.",
-    "who_can_sue": "Parties must be 18 or older (a parent or guardian represents a minor). A corporation may act through an officer, manager, or local manager; an LLC through a member or manager. Assignees may sue, including assignments for collection only, if bona fide and for value; a collection agency may act for a client with a proper assignment (SDCL 15-39-47).",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Either party may be represented by an attorney (UJS guide); not required.",
-    "appeal": "No appeal: a small claims judgment cannot be appealed (SDCL 15-39-57; UJS guide). The plaintiff waives jury and appeal by filing (15-39-56). Instead, the defendant may, at least 5 days before the answer/appearance date, petition to move the case to the regular civil docket with an affidavit of good reasons and a meritorious defense, a $35 fee, and a $250 deposit for the plaintiff's costs (15-39-57); the plaintiff gets the same right if a counterclaim is filed (15-39-66).",
-    "appeal_who": "none",
-    "appeal_deadline_days": null,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "UJS 'Guide and File' (Tyler) lets self-represented parties prepare and file small claims starting and answer documents online; optional.",
-    "fee_waiver_form": null,
-    "fee_waiver_threshold": null,
-    "service_methods": "Clerk sends the notice of claim by certified mail, return receipt (SDCL 15-39-53, -54). If not delivered, the plaintiff may authorize (and pay for) sheriff personal service or other notice ordered by the court (15-39-55). UJS page also lists private process server.",
-    "self_help_url": "https://ujs.sd.gov/Small_Claims/",
-    "citation": "SDCL ch. 15-39 (§§ 15-39-45.1 to 15-39-78); SDCL 16-12B-13, 16-12C-13",
-    "sources": [
-      {
-        "url": "https://sdlegislature.gov/Statutes/15-39-45.1",
-        "what": "limit",
-        "type": "statute"
-      },
-      {
-        "url": "https://sdlegislature.gov/Statutes/15-39-47",
-        "what": "who_can_sue (corporations, LLCs, assignees)",
-        "type": "statute"
-      },
-      {
-        "url": "https://sdlegislature.gov/Statutes/15-39-56",
-        "what": "plaintiff waives jury and appeal",
-        "type": "statute"
-      },
-      {
-        "url": "https://sdlegislature.gov/Statutes/15-39-57",
-        "what": "no appeal; defendant removal, $35 fee, $250 deposit",
-        "type": "statute"
-      },
-      {
-        "url": "https://sdlegislature.gov/Statutes/15-39-55",
-        "what": "service follow-up; 2026 amendment",
-        "type": "statute"
-      },
-      {
-        "url": "https://sdlegislature.gov/Statutes/16-12B-13",
-        "what": "magistrate judge $12,000 jurisdiction",
-        "type": "statute"
-      },
-      {
-        "url": "https://ujs.sd.gov/Small_Claims/",
-        "what": "self help, Guide and File e-filing, service options",
-        "type": "court_site"
-      },
-      {
-        "url": "https://ujs.sd.gov/media/zqnnr2vz/small_claims_filing_fees.pdf",
-        "what": "filing fees (July 12, 2026 schedule)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://ujs.sd.gov/media/0n5pu4xg/small-claims-court.pdf",
-        "what": "age 18, representation, fees, certified mail, no appeal (UJS guide, 7/13/2026)",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "fee_waiver_form",
-      "fee_waiver_threshold"
-    ],
-    "notes": "Statute numbers differ across sources (15-39-45.1 vs 16-12C-13 vs 16-12B-13); all say $12,000. Fee waiver for small claims not found on UJS small claims pages."
-  },
-  {
-    "state": "Tennessee",
-    "abbr": "TN",
-    "court_name": "General Sessions Court (civil); no separate small claims court",
-    "limit_individual": 25000,
-    "limit_business": 25000,
-    "limit_notes": "$25,000 in all civil cases, law and equity (Tenn. Code Ann. § 16-15-501(d)(1)); attorney fees, court costs and discretionary costs are not counted toward the limit (d)(2). No limit for evictions (forcible entry and detainer) or actions to recover personal property. The population brackets in § 16-15-501(b) only give certain counties extra kinds of jurisdiction (e.g., divorce, workers' compensation, domestic relations); they do not change the $25,000 dollar limit. Some courts have added powers under private acts. The Administrative Office of the Courts says General Sessions jurisdiction 'varies from county to county'.",
-    "recent_changes": "SB0572/HB0982 (114th General Assembly) would have raised the limit to $50,000; listed as dead (not enacted) per a bill tracker. The 2025 code still shows $25,000.",
-    "filing_fee_min": null,
-    "filing_fee_max": null,
-    "filing_fee_notes": "Set by each county clerk (statutory clerk fees plus local litigation taxes and service fees); no statewide schedule found. Check the county General Sessions clerk.",
-    "who_can_sue": "Individuals. Corporations generally must appear through a licensed attorney (county clerk guidance; Tennessee Supreme Court case law), not confirmed from a statute or statewide court page.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Attorneys allowed; individuals may represent themselves.",
-    "appeal": "Any party may appeal to the Circuit Court of the county within 10 days; the appeal is heard de novo (new trial). Once one party appeals, other parties need not file separate cross-appeals (Tenn. Code Ann. § 27-5-108).",
-    "appeal_who": "both",
-    "appeal_deadline_days": 10,
-    "e_filing": "some_courts",
-    "e_filing_notes": "Not confirmed; e-filing in General Sessions is county-by-county.",
-    "fee_waiver_form": "Uniform Civil Affidavit of Indigency (Tenn. Sup. Ct. R. 29) / pauper's oath, Tenn. Code Ann. § 20-12-127",
-    "fee_waiver_threshold": "Judge's discretion on the indigency affidavit (not confirmed from primary source).",
-    "service_methods": "Not confirmed from a primary source: typically sheriff or private process server; some counties allow certified mail.",
-    "self_help_url": "https://www.tncourts.gov/programs/self-help-center",
-    "citation": "Tenn. Code Ann. §§ 16-15-501 (jurisdiction), 27-5-108 (appeal)",
-    "sources": [
-      {
-        "url": "https://law.justia.com/codes/tennessee/title-16/chapter-15/part-5/section-16-15-501/",
-        "what": "limit, limit_notes (unofficial reprint of the 2025 Tennessee Code; the official code is published through LexisNexis)",
-        "type": "statute"
-      },
-      {
-        "url": "https://law.justia.com/codes/tennessee/title-27/chapter-5/section-27-5-108/",
-        "what": "appeal: any party, 10 days, de novo in circuit court (unofficial reprint, 2025 code)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.tncourts.gov/courts/general-sessions-courts",
-        "what": "jurisdiction varies by county; court overview",
-        "type": "court_site"
-      },
-      {
-        "url": "https://ctas.tennessee.edu/eli/jurisdiction-general-sessions-court",
-        "what": "$25,000 in all counties (UT County Technical Assistance Service)",
-        "type": "secondary"
-      },
-      {
-        "url": "https://www.billtrack50.com/billdetail/1810864",
-        "what": "recent_changes ($50,000 bill dead)",
-        "type": "secondary"
-      },
-      {
-        "url": "https://seviercountytn.org/government/justice_and_the_law/general_sessions_court.php",
-        "what": "corporations must use an attorney (county clerk page)",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "filing_fee_min",
-      "filing_fee_max",
-      "who_can_sue",
-      "e_filing",
-      "fee_waiver_form",
-      "fee_waiver_threshold",
-      "service_methods",
-      "recent_changes"
-    ],
-    "notes": "Lead confirmed: $25,000 in General Sessions; the limit does not depend on county population (only extra subject-matter jurisdiction does). tncourts.gov blocks automated fetching; statute text read from Justia's 2025 reprint because Tennessee's official code is only on LexisNexis. Fees, service and fee waiver need a county-level/official follow-up."
-  },
-  {
-    "state": "Texas",
-    "abbr": "TX",
-    "court_name": "Justice Court (justice of the peace), small claims case",
-    "limit_individual": 20000,
-    "limit_business": 20000,
-    "limit_notes": "$20,000 excluding statutory interest and court costs but INCLUDING attorney fees (Tex. R. Civ. P. 500.1(a)); justice court jurisdiction $20,000 exclusive of interest (Tex. Gov't Code § 27.031). Debt collection by assignees, debt collectors, financial institutions or lenders is a separate 'debt claim case' with the same $20,000 limit (Rule 500.1(b), Rule 508). Repair-and-remedy cases also $20,000. No suits for divorce, defamation, title to land, or enforcement of a lien on land (§ 27.031(b)).",
-    "recent_changes": "Limit raised from $10,000 to $20,000 for cases filed on or after September 1, 2020 (per Harris County Justice Courts site). Filing fee restructured January 1, 2022 (2021 S.B. 41) into $21 state + $33 local consolidated fees. The current Supreme Court PDF of the rules numbers the case-type definitions as Rule 500.1 and representation as Rule 500.3; many guides use older numbering.",
-    "filing_fee_min": 54,
-    "filing_fee_max": 54,
-    "filing_fee_notes": "$21 state consolidated civil fee (Tex. Loc. Gov't Code § 133.151(a-1)) + $33 local consolidated civil fee (§ 135.103) = $54 statewide. Service by sheriff/constable or process server is extra and set by county.",
-    "who_can_sue": "Individuals (themselves or by attorney; the court may allow an unpaid family member to assist). Corporations and other entities may appear through a non-attorney employee, owner, officer or partner (Rule 500.3; Gov't Code § 27.031(d)). Assignees, debt collectors and lenders must file a debt claim case rather than a small claims case.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Attorneys allowed; rules cannot require representation (Gov't Code § 27.060(d)). Authorized agents (non-employees) allowed only in eviction cases.",
-    "appeal": "Any party may appeal within 21 days after the judgment is signed (or after a motion to reinstate/set aside/new trial is denied) by filing a bond (plaintiff $500; defendant twice the judgment), cash deposit, or a Statement of Inability to Afford Payment of Court Costs (Rule 506.1). The case is tried de novo (new trial) in county court (Rule 506.3).",
-    "appeal_who": "both",
-    "appeal_deadline_days": 21,
-    "e_filing": "some_courts",
-    "e_filing_notes": "Documents may be filed electronically 'if the court allows electronic filing' (Rule 502.1); availability varies by justice court.",
-    "fee_waiver_form": "Statement of Inability to Afford Payment of Court Costs (Supreme Court-approved form; Rule 502.3), available free from the clerk and on the Texas Justice Court Training Center site.",
-    "fee_waiver_threshold": "No fixed income test in the rule: file the sworn Statement; it can be contested and the judge decides (burden on the filer). Receipt of means-tested government benefits limits a contest to the truth of that statement; a legal-aid certificate makes it uncontestable (Rule 502.3).",
-    "service_methods": "Sheriff or constable; process server certified by the Judicial Branch Certification Commission; the clerk by registered or certified mail, restricted delivery, return receipt; or a court-authorized adult. Personal delivery or registered/certified mail. Alternative service by court order. If a Statement of Inability is filed, service must be by sheriff, constable or clerk (Rule 501.2).",
-    "self_help_url": "https://guides.sll.texas.gov/small-claims",
-    "citation": "Tex. Gov't Code §§ 27.031, 27.060; Tex. R. Civ. P. 500-507, 508; Tex. Loc. Gov't Code §§ 133.151, 135.103",
-    "sources": [
-      {
-        "url": "https://statutes.capitol.texas.gov/Docs/GV/htm/GV.27.htm",
-        "what": "jurisdiction $20,000, corporations need not use attorney, small claims rules mandate",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.txcourts.gov/media/1463426/texas-rules-of-civil-procedure.pdf",
-        "what": "Rules 500.1, 500.3, 501.2, 502.1, 502.3, 506.1, 506.3 (limit details, representation, service, e-filing, fee waiver, appeal)",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://statutes.capitol.texas.gov/Docs/LG/htm/LG.133.htm",
-        "what": "$21 state consolidated fee",
-        "type": "statute"
-      },
-      {
-        "url": "https://statutes.capitol.texas.gov/Docs/LG/htm/LG.135.htm",
-        "what": "$33 local consolidated fee",
-        "type": "statute"
-      },
-      {
-        "url": "https://guides.sll.texas.gov/small-claims",
-        "what": "self-help guide (Texas State Law Library)",
-        "type": "court_site"
-      },
-      {
-        "url": "https://jp.hctx.net/suits/about.htm",
-        "what": "limit was $10,000 for cases filed before Sept. 1, 2020",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.tjctc.org/SRL/small-claim-plaintiff.html",
-        "what": "Statement of Inability form, plaintiff forms",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [],
-    "notes": "Lead confirmed ($20,000). Watch the Rule 500 renumbering when citing. Service fees vary by county."
-  },
-  {
-    "state": "Utah",
-    "abbr": "UT",
-    "court_name": "Small claims (justice court, or small claims department of district court)",
-    "limit_individual": 20000,
-    "limit_business": 20000,
-    "limit_notes": "$20,000 including attorney fees but excluding court costs and interest, for claims filed January 1, 2025 through December 31, 2029; rises to $25,000 on January 1, 2030 (Utah Code § 78A-8-102(1)(a)(i)). Money only (and interpleader). Defendant must live, or the debt must have been incurred, within the court's jurisdiction. Courts site: you cannot sue a government agency or evict in small claims. Counterclaims must arise from the same transaction. Clerk/judge may defer all but the first of multiple claims filed by one plaintiff.",
-    "recent_changes": "Limit was $15,000 (May 4, 2022 - December 31, 2024), became $20,000 on January 1, 2025, and is scheduled to become $25,000 on January 1, 2030 (built into § 78A-8-102). Fee page labeled 'Effective May 6, 2026'.",
-    "filing_fee_min": 60,
-    "filing_fee_max": 185,
-    "filing_fee_notes": "$60 (claims $2,000 or less), $100 (over $2,000 and under $7,500), $185 ($7,500 to $20,000) (Utah Code § 78A-2-301(1)(c)). Counter affidavit: $50 / $70 / $120. Trial de novo appeal $240 plus $10 to the justice court. Defendant removal to district court for a jury: jury demand fee $250.",
-    "who_can_sue": "Persons and corporations may litigate for themselves in person or through authorized employees, with or without counsel (§ 78A-8-102(6)). A non-employee non-lawyer may represent a party only with the court's express approval and without pay (Small Claims Rule 13). Assignees not specifically addressed in the sections reviewed.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "A party may be self-represented, represented by a Utah attorney, by an employee, or (with court approval) by an uncompensated other person (URSCP 13).",
-    "appeal": "Any party may appeal within 28 calendar days after entry of judgment (or denial of a motion to set aside) by filing a notice of appeal in the court that issued the judgment; the district court holds a new trial (trial de novo), with a jury if a party meets URCP 38(b) (URSCP 12). Fee waivable by affidavit of impecuniosity.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 28,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "Self-represented parties can e-file in existing small claims cases through MyCase; new cases are started by delivering, mailing, or emailing papers to the court. Online Dispute Resolution (ODR) is used in many courts.",
-    "fee_waiver_form": "Motion to Waive Fees (form 1301GE for general civil cases) and Order: https://www.utcourts.gov/en/self-help/legal-help/procedures/waiver.html",
-    "fee_waiver_threshold": "May qualify if receiving SNAP, Medicaid, SSI or FEP/TANF; represented by a nonprofit legal provider or Utah State Bar pro bono attorney; or household income at or below the court's table (e.g., $1,882.50/month for 1 person, $3,900 for 4); or unable to pay fees and still afford necessities (Utah Code §§ 78A-2-302 to -309).",
-    "service_methods": "As provided in Utah Rule of Civil Procedure 4 (URSCP 3). Non-ODR cases: serve at least 30 days before trial; ODR cases: within 120 days of filing. File proof of service within 10 business days.",
-    "self_help_url": "https://www.utcourts.gov/en/self-help/case-categories/small-claims.html",
-    "citation": "Utah Code §§ 78A-8-101 to -110, 78A-2-301; Utah Rules of Small Claims Procedure",
-    "sources": [
-      {
-        "url": "https://le.utah.gov/xcode/Title78A/Chapter8/78A-8-S102.html",
-        "what": "limit and scheduled increases, representation, counterclaims",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.utcourts.gov/en/self-help/legal-help/procedures/fees.html",
-        "what": "filing fees, counter affidavit fees, appeal fee",
-        "type": "court_site"
-      },
-      {
-        "url": "https://legacy.utcourts.gov/rules/viewall.php?type=srpe",
-        "what": "URSCP 3 (service), 12 (appeals), 13 (representation)",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://www.utcourts.gov/en/self-help/case-categories/small-claims.html",
-        "what": "self help, money only, no government/eviction, appeal 28 days, ODR",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.utcourts.gov/en/self-help/legal-help/procedures/filing.html",
-        "what": "MyCase e-filing for small claims; email filing",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.utcourts.gov/en/self-help/legal-help/procedures/waiver.html",
-        "what": "fee waiver form and criteria",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [],
-    "notes": "Many online charts still show $11,000 or $15,000; current statute is $20,000 (through 2029), then $25,000 from 2030."
-  },
-  {
-    "state": "Vermont",
-    "abbr": "VT",
-    "court_name": "Small claims, Civil Division of the Superior Court",
-    "limit_individual": 10000,
-    "limit_business": 10000,
-    "limit_notes": "$10,000, money damages only; no slander or libel; claims may not be split (12 V.S.A. § 5531(a)-(b)). Collection of consumer credit debt or medical debt is capped at $5,000 (§ 5531(e)). Counterclaims from the same transaction may ask for more but judgment is capped at the limit (§ 5533(c)). If the claim is over $3,500 the defendant may request a Superior judge or appointed attorney to hear it (§ 5531(c)).",
-    "recent_changes": "2023 Act No. 46, § 9, effective June 5, 2023, amended § 5531 (the most recent amendment in the official history); per secondary sources this raised the limit from $5,000 to $10,000 and added the $5,000 cap on consumer-credit and medical-debt collection.",
-    "filing_fee_min": 65,
-    "filing_fee_max": 90,
-    "filing_fee_notes": "$65 for claims of $1,000 or less; $90 for claims over $1,000. Counterclaim $25 ($500 or less) or $35. Jury request $10. Appeal $120. Post-judgment motion $65.",
-    "who_can_sue": "Must be 18 (parent or guardian sues for a minor). Businesses may use small claims. You cannot sue on someone else's behalf; each co-plaintiff must sign and attend. Collection of consumer credit/medical debt capped at $5,000.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Any person, corporation or other entity may be, but need not be, represented by an attorney (12 V.S.A. § 5536).",
-    "appeal": "Any party may appeal to the Civil Division within 30 days of the date the court issued the judgment; a different Superior judge decides on the record (audio recording and evidence), with no new evidence (12 V.S.A. § 5538; court page). No appeal as of right to the Vermont Supreme Court; only by permission.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 30,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "Court page: file in person, by mail, by email, or electronically (e-file) with the Civil Division.",
-    "fee_waiver_form": "Application to Waive Filing Fees and Service Costs (600-00228): https://www.vtcourts.gov/self-help/application-waive-filing-fees-and-service-costs",
-    "fee_waiver_threshold": "Receives any public assistance, OR gross income at or below 150% of federal poverty guidelines, OR the court finds you cannot pay without using resources needed to support you and your dependents.",
-    "service_methods": "Court mails the signed summons and complaint back to the plaintiff; plaintiff sends them to the defendant by first-class mail within 7 days and files a Certificate of Service. If no answer within 30 days, plaintiff must have a sheriff or constable serve; return of service due within 60 days of first mailing. Alternative service or publication by motion.",
-    "self_help_url": "https://www.vtcourts.gov/civil/suing-and-being-sued-small-claims",
-    "citation": "12 V.S.A. §§ 5531-5541; Vermont Rules of Small Claims Procedure",
-    "sources": [
-      {
-        "url": "https://legislature.vermont.gov/statutes/fullchapter/12/187",
-        "what": "limit, debt cap, counterclaims, jury, representation, appeal on record, amendment history",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.vtcourts.gov/fees",
-        "what": "filing, counterclaim, appeal fees",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.vtcourts.gov/civil/suing-and-being-sued-small-claims",
-        "what": "age 18, filing methods incl. e-file, service steps, lawyers",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.vtcourts.gov/civil/small-claims-trials-and-appeals",
-        "what": "appeal: 30 days, on the record, $120",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.vtcourts.gov/self-help/application-waive-filing-fees-and-service-costs",
-        "what": "fee waiver form and criteria",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "recent_changes"
-    ],
-    "notes": "Fee page shows no effective date. The prior $5,000 limit/2023 increase detail comes from secondary sources; the official history only shows that Act 46 (2023) amended § 5531."
-  },
-  {
-    "state": "Virginia",
-    "abbr": "VA",
-    "court_name": "Small Claims Court (small claims division of the General District Court)",
-    "limit_individual": 5000,
-    "limit_business": 5000,
-    "limit_notes": "Small claims division: up to $5,000 exclusive of interest (Va. Code § 16.1-122.2), for money or recovery of personal property; counterclaims also capped at $5,000 (§ 16.1-122.3(F)). The General District Court itself is higher: exclusive jurisdiction up to $4,500 and concurrent with circuit court up to $50,000 (§ 16.1-77), so a plaintiff may instead file on the regular GDC docket (lawyers allowed there). No suits against the Commonwealth under the Tort Claims Act (§ 16.1-122.1). Defendant may remove the case to the regular GDC docket any time before decision (§ 16.1-122.4(B)).",
-    "recent_changes": null,
-    "filing_fee_min": 36,
-    "filing_fee_max": null,
-    "filing_fee_notes": "$36 court services fee per civil warrant (Va. Code § 16.1-69.48:2) plus local add-ons (e.g., courthouse construction fee) that vary by court; sheriff service $12 per defendant (§ 17.1-272). Use the official GDC Civil Filing Fee Calculation tool for the exact total.",
-    "who_can_sue": "Parties represent themselves. A corporation, partnership, LLC or other entity may be represented by an owner, general partner, officer, member, or employee; a party who can't participate may be helped by a non-attorney friend or relative with the judge's OK (§ 16.1-122.4). Assignees not specifically addressed.",
-    "lawyers_allowed": "no",
-    "lawyers_notes": "Attorneys may not represent parties in small claims court; an attorney may appear only for himself, and a defendant may use an attorney to remove the case to the regular General District Court docket (§ 16.1-122.4).",
-    "appeal": "Same as other General District Court cases (§ 16.1-122.7): any party may appeal to circuit court for a new trial (de novo) if the amount in controversy exceeds $20, by noting the appeal within 10 days of judgment (§ 16.1-106) and posting bond and paying the writ tax/costs within 30 days (§ 16.1-107). No bond for a plaintiff where no counterclaim was filed, or for an indigent defendant.",
-    "appeal_who": "both",
-    "appeal_deadline_days": 10,
-    "e_filing": "no",
-    "e_filing_notes": "Virginia's e-filing system (VJEFS) is for attorneys in circuit court only; small claims cases are filed with the GDC clerk.",
-    "fee_waiver_form": "Petition for Proceeding in Civil Case Without Payment of Fees or Costs (form DC-409)",
-    "fee_waiver_threshold": "Presumed unable to pay if receiving state or federal public assistance for the indigent or represented by legal aid; otherwise the court compares available funds to 125% of federal poverty guidelines (Va. Code § 17.1-606).",
-    "service_methods": "Clerk sends the warrant to the sheriff for service, or the plaintiff may use a private process server: personal, substituted (family member 16+ at home), or posting on the door. Plaintiff should also mail a copy first-class at least 10 days before trial and file Certificate of Mailing (DC-413), required before default on posted service.",
-    "self_help_url": "https://www.vacourts.gov/static/resources/small_claims_court_procedures.pdf",
-    "citation": "Va. Code §§ 16.1-122.1 to 16.1-122.7; § 16.1-77; §§ 16.1-106, 16.1-107; § 16.1-69.48:2; § 17.1-606",
-    "sources": [
-      {
-        "url": "https://law.lis.virginia.gov/vacode/16.1-122.2/",
-        "what": "limit $5,000",
-        "type": "statute"
-      },
-      {
-        "url": "https://law.lis.virginia.gov/vacode/16.1-77/",
-        "what": "GDC limits $4,500 exclusive / $50,000 concurrent",
-        "type": "statute"
-      },
-      {
-        "url": "https://law.lis.virginia.gov/vacode/16.1-122.3/",
-        "what": "commencement, counterclaims $5,000",
-        "type": "statute"
-      },
-      {
-        "url": "https://law.lis.virginia.gov/vacode/16.1-122.4/",
-        "what": "representation, no attorneys, removal",
-        "type": "statute"
-      },
-      {
-        "url": "https://law.lis.virginia.gov/vacode/16.1-106/",
-        "what": "appeal 10 days, de novo, > $20",
-        "type": "statute"
-      },
-      {
-        "url": "https://law.lis.virginia.gov/vacode/16.1-107/",
-        "what": "appeal bond 30 days",
-        "type": "statute"
-      },
-      {
-        "url": "https://law.lis.virginia.gov/vacode/16.1-69.48:2/",
-        "what": "$36 fee",
-        "type": "statute"
-      },
-      {
-        "url": "https://law.lis.virginia.gov/vacode/17.1-272/",
-        "what": "$12 sheriff service fee",
-        "type": "statute"
-      },
-      {
-        "url": "https://law.lis.virginia.gov/vacode/17.1-606/",
-        "what": "fee waiver criteria",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.vacourts.gov/static/resources/small_claims_court_procedures.pdf",
-        "what": "procedures, service, mailing, representation",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.vacourts.gov/online/vjefs/home",
-        "what": "e-filing limited to circuit court attorneys",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "filing_fee_max",
-      "fee_waiver_form"
-    ],
-    "notes": "Lead confirmed: small claims division $5,000 vs. General District Court up to $50,000. Total filing cost varies by locality because of local add-on fees. Form number DC-409 is from memory/secondary, not checked on vacourts.gov."
-  },
-  {
-    "state": "Washington",
-    "abbr": "WA",
-    "court_name": "Small Claims Department of the District Court",
-    "limit_individual": 10000,
-    "limit_business": 5000,
-    "limit_notes": "Money only: $10,000 for claims brought by a natural person, $5,000 for all other plaintiffs (businesses, etc.) (RCW 12.40.010). A defendant cannot remove the case by filing an oversized counterclaim; larger counterclaims may be filed separately in superior court (RCW 12.40.027).",
-    "recent_changes": null,
-    "filing_fee_min": 35,
-    "filing_fee_max": 50,
-    "filing_fee_notes": "$35 filing fee (RCW 12.40.020) plus any county dispute-resolution-center surcharge of up to $15 (RCW 7.75.035). Same fee for counterclaims. Service fee and mileage extra (RCW 12.40.040).",
-    "who_can_sue": "The real claimant only: the claim must be verified by the real claimant and NO claim may be filed or prosecuted by an assignee (RCW 12.40.070), so collection agencies/assignees cannot use small claims. Corporations appear through non-lawyer representatives (attorneys barred).",
-    "lawyers_allowed": "limited",
-    "lawyers_notes": "No attorney, legal paraprofessional or other person may appear without the judge's consent; a corporation may not be represented by an attorney (RCW 12.40.080), except where a district court case was transferred into small claims (RCW 12.40.025).",
-    "appeal": "Either party may appeal to superior court within 30 days of judgment by filing a notice of appeal in district court, paying the superior court filing fee, posting a bond (twice the judgment or amount in controversy), and serving all parties (RCW 12.36.020). The appeal is de novo on the record (RCW 12.36.055). No appeal if the amount claimed was under $250, and a party who filed a claim for less than $1,000 cannot appeal (RCW 12.40.120; RCW 12.36.010).",
-    "appeal_who": "both",
-    "appeal_deadline_days": 30,
-    "e_filing": "some_courts",
-    "e_filing_notes": "Not confirmed; e-filing in district courts varies by court.",
-    "fee_waiver_form": "Motion and Declaration for Waiver of Civil Fees and Surcharges (mandatory AOC pattern form under GR 34)",
-    "fee_waiver_threshold": "Indigent if receiving needs-based means-tested assistance (TANF, GA-U/GA-X, SSI, poverty-related veterans benefits, food stamps), OR household income at or below 125% of federal poverty guideline, OR above 125% with basic living expenses that leave no ability to pay, OR other compelling circumstances (GR 34(a)(3)).",
-    "service_methods": "Personal service as for a summons (RCW 4.28.080) or registered/certified mail with a signed return receipt filed with the court; must be complete at least 10 days before the first hearing (RCW 12.40.040).",
-    "self_help_url": "https://www.courts.wa.gov/newsinfo/resources/?fa=newsinfo_jury.scc&altMenu=smal",
-    "citation": "RCW ch. 12.40; RCW ch. 12.36; RCW 7.75.035; GR 34",
-    "sources": [
-      {
-        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=12.40&full=true",
-        "what": "limits, fee, service, assignee bar, lawyer bar, appeal thresholds",
-        "type": "statute"
-      },
-      {
-        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=12.36&full=true",
-        "what": "appeal procedure, 30 days, bond, de novo on record",
-        "type": "statute"
-      },
-      {
-        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=7.75.035",
-        "what": "surcharge up to $15",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.courts.wa.gov/court_rules/pdf/GR/GA_GR_34_00_00.pdf",
-        "what": "fee waiver criteria",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://www.courts.wa.gov/newsinfo/resources/?fa=newsinfo_jury.scc&altMenu=smal",
-        "what": "self-help page and brochure",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "e_filing"
-    ],
-    "notes": "Lead confirmed: lawyers barred without judge consent, assignees barred, and appeal thresholds ($250 overall; $1,000 for the party who brought the claim)."
-  },
-  {
-    "state": "West Virginia",
-    "abbr": "WV",
-    "court_name": "Magistrate Court (civil); no separate small claims court",
-    "limit_individual": 20000,
-    "limit_business": 20000,
-    "limit_notes": "Civil actions up to $20,000 exclusive of interest and costs; evictions/wrongful occupation if title not in dispute (W. Va. Code § 50-2-1). No equity, eminent domain, real estate title, lien foreclosure, false imprisonment, malicious prosecution, or libel/slander cases. Removal to circuit court: for claims of $5,000 or more any party may remove before trial; under $5,000 all parties must agree (§ 50-4-8).",
-    "recent_changes": "Limit raised to $20,000 by Enrolled Committee Substitute for HB 2761 (2025), passed April 8, 2025, in effect July 7, 2025 (previously $10,000 per bill summaries). Many online charts still show $10,000.",
-    "filing_fee_min": 30,
-    "filing_fee_max": 50,
-    "filing_fee_notes": "Tiered by amount sought (§ 50-3-1(a)): $30 ($500 or less), $35 ($500.01-$1,000), $40 ($1,000.01-$2,000), $50 (over $2,000); $30 for non-money relief. § 50-3-1(g) also lists $20 'for filing and trying any civil action'; whether that is charged on top was not confirmed. Sheriff service fee extra; $1 clerk fee for certified mailing (§ 50-3-1(f)).",
-    "who_can_sue": "Any party may appear in person, by agent, or by attorney; appearance by an agent is not unauthorized practice of law (§ 50-4-4a), so businesses can use non-lawyer agents. Commercial creditors must itemize principal, interest, payments and amount due (§ 50-4-1).",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Attorneys allowed (§ 50-4-4a).",
-    "appeal": "Any party may appeal to circuit court within 20 days after judgment (or after a ruling on a motion to set aside), posting bond and paying the circuit court filing fee; the circuit court may allow a late appeal within 90 days for good cause. Bench-trial cases get a new trial (de novo, without jury); jury-trial cases are reviewed on the record (§ 50-5-12). Circuit clerk fee for docketing a civil appeal from magistrate court: $200 (§ 59-1-11).",
-    "appeal_who": "both",
-    "appeal_deadline_days": 20,
-    "e_filing": "no",
-    "e_filing_notes": "The Judiciary's e-filing page lists Supreme Court, Intermediate Court, Circuit/Family Court and Mass Litigation e-filing only; no magistrate court option found.",
-    "fee_waiver_form": "Financial affidavit to proceed without prepayment of fees (adopted by the Supreme Court of Appeals under § 59-2-1); available from the clerk",
-    "fee_waiver_threshold": "Financial guidelines set by the Supreme Court of Appeals; court weighs income, assets, debts, necessary expenses, etc. (§ 59-2-1). Specific income cutoff not confirmed.",
-    "service_methods": "Same manner as in courts of record (§ 50-4-4); the clerk forwards the summons and service fees to the sheriff (§ 50-4-1); certified mail with return receipt is also used (clerk fee in § 50-3-1(f)).",
-    "self_help_url": "https://www.courtswv.gov/lower-courts/magistrate-courts",
-    "citation": "W. Va. Code §§ 50-2-1, 50-3-1, 50-4-1, 50-4-4, 50-4-4a, 50-4-8, 50-5-12, 59-2-1",
-    "sources": [
-      {
-        "url": "https://code.wvlegislature.gov/50-2-1/",
-        "what": "limit $20,000 and exclusions",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.wvlegislature.gov/Bill_Text_HTML/2025_SESSIONS/RS/bills/hb2761%20sub1%20enr.pdf",
-        "what": "recent_changes (HB 2761 effective July 7, 2025)",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.wvlegislature.gov/50-3-1/",
-        "what": "filing fees",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.wvlegislature.gov/50-4-4a/",
-        "what": "appearance by agent or attorney",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.wvlegislature.gov/50-4-8/",
-        "what": "removal to circuit court",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.wvlegislature.gov/50-5-12/",
-        "what": "appeal 20 days, de novo/on record",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.wvlegislature.gov/59-1-11/",
-        "what": "circuit appeal docketing fee $200",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.wvlegislature.gov/59-2-1/",
-        "what": "fee waiver",
-        "type": "statute"
-      },
-      {
-        "url": "https://code.wvlegislature.gov/50-4-4/",
-        "what": "service same as courts of record",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.courtswv.gov/lower-courts/magistrate-courts",
-        "what": "court confirms $20,000",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.courtswv.gov/legal-community/e-filing",
-        "what": "no magistrate e-filing listed",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "filing_fee_max",
-      "e_filing",
-      "fee_waiver_threshold"
-    ],
-    "notes": "Recent increase from $10,000 to $20,000 (July 7, 2025). Ambiguous § 50-3-1(g) $20 fee may make the real filing cost $50-$70; confirm with a magistrate clerk."
-  },
-  {
-    "state": "Wisconsin",
-    "abbr": "WI",
-    "court_name": "Small claims (Circuit Court, Wis. Stat. ch. 799)",
-    "limit_individual": 10000,
-    "limit_business": 10000,
-    "limit_notes": "Money judgments, attachment/garnishment, liens on personal property: $10,000 (rising to $15,000 on January 1, 2027) (Wis. Stat. § 799.01(1)(d)). Personal injury claims, tort claims and third-party complaints: $5,000 (§ 799.01(1)(cr)). Evictions: no limit on rent claimed. Replevin (return of property): $10,000 (rising to $15,000 on January 1, 2027); the courts' page says consumer-credit replevin is allowed where the amount financed is $25,000 or less. Return of earnest money: any amount. Taxing authorities may use small claims up to $10,000.",
-    "recent_changes": "2025 Wis. Act 105, effective January 1, 2027: general limit and replevin limit rise from $10,000 to $15,000 (tort/personal injury stays $5,000 in the current statute display). Circuit court fee chart effective November 1, 2026 raised the small claims filing fee from $94.50 to $124.",
-    "filing_fee_min": 124,
-    "filing_fee_max": 131.5,
-    "filing_fee_notes": "$124 = $39 filing fee + $61 court support services surcharge + $24 justice information surcharge (fee chart effective Nov. 1, 2026; was $94.50 before). Add $7.50 in Milwaukee County. Add $35 per party if e-filed. Service by mail (where allowed) $7 per defendant plus postage; sheriff/process server fees extra.",
-    "who_can_sue": "A person may appear on its own or by a Wisconsin attorney; a business acts 'in its own proper person' through a member, agent, or authorized employee. An assignee (e.g., a debt buyer) may not appear through a full-time employee unless that employee is an attorney (Wis. Stat. § 799.06(2)).",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Attorneys allowed (§ 799.06(2)).",
-    "appeal": "If a court commissioner decides the case, either party may demand a new trial before a judge within 10 days of an oral decision or 15 days after a written decision is mailed (§ 799.207). Judgments are appealed to the Court of Appeals (§ 799.30) within 45 days of entry if written notice of entry was given within 21 days, otherwise 90 days (§ 808.04(1)); 15 days for eviction appeals (§ 808.04(2)).",
-    "appeal_who": "both",
-    "appeal_deadline_days": 45,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "Circuit court eFiling covers small claims (fee chart lists the $35 e-filing fee for small claims cases); the courts' Forms Assistant interview helps self-represented parties prepare forms. Whether self-represented e-filing is optional was not separately confirmed.",
-    "fee_waiver_form": "Petition for Waiver of Fees and Costs (affidavit of indigency), Wis. Stat. § 814.29",
-    "fee_waiver_threshold": "Not confirmed from the statute text; § 814.29 allows waiver for indigency (public assistance, legal-services representation, or court finding of inability to pay).",
-    "service_methods": "Personal or substituted service under ch. 801, or, where a local court rule allows, mail service by the clerk ($7 per defendant; certified mail may be required and is required for evictions); service by mailing and publication if the defendant can't be found (§ 799.12).",
-    "self_help_url": "https://www.wicourts.gov/services/public/selfhelp/smallclaims.htm",
-    "citation": "Wis. Stat. ch. 799 (§§ 799.01-799.45); §§ 808.04, 814.62, 814.29",
-    "sources": [
-      {
-        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799",
-        "what": "limits by case type and Jan. 1, 2027 increase (2025 Wis. Act 105)",
-        "type": "statute"
-      },
-      {
-        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799/06",
-        "what": "representation, assignees",
-        "type": "statute"
-      },
-      {
-        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799/12",
-        "what": "service",
-        "type": "statute"
-      },
-      {
-        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799/207",
-        "what": "demand for trial after commissioner decision",
-        "type": "statute"
-      },
-      {
-        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799/30",
-        "what": "appeal to Court of Appeals",
-        "type": "statute"
-      },
-      {
-        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/808/04",
-        "what": "appeal deadline 45/90 days",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.wicourts.gov/courts/circuit/docs/1126finefeechart.pdf",
-        "what": "small claims fee $124 effective Nov. 1, 2026; e-filing fee; mail service fee",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.wicourts.gov/courts/circuit/docs/0926finefeechart.pdf",
-        "what": "prior fee $94.50",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.wicourts.gov/services/public/selfhelp/smallclaims.htm",
-        "what": "self help; limits by case type",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "fee_waiver_form",
-      "fee_waiver_threshold",
-      "e_filing_notes"
-    ],
-    "notes": "Lead confirmed: different limits by case type ($10,000 general, $5,000 tort/personal injury, evictions unlimited). Two changes inside the next two months: fee rose to $124 on Nov. 1, 2026, and the general limit rises to $15,000 on Jan. 1, 2027. The wicourts self-help page does not yet mention the 2027 increase."
-  },
-  {
-    "state": "Wyoming",
-    "abbr": "WY",
-    "court_name": "Circuit Court (small claims procedure)",
-    "limit_individual": 6000,
-    "limit_business": 6000,
-    "limit_notes": "$6,000 exclusive of costs (Wyo. Stat. § 1-21-201). No prejudgment attachment or garnishment (§ 1-21-205). Venue: county where the defendant has an address or where the claim arose (Small Claims Rule 4, eff. Dec. 1, 2021). The Department of Revenue may consolidate tax claims.",
-    "recent_changes": null,
-    "filing_fee_min": 10,
-    "filing_fee_max": 10,
-    "filing_fee_notes": "$10 filing fee (Rules Governing Small Claims Cases, Rule 3; courts' page). Sheriff or private process server charges a separate fee for each summons served.",
-    "who_can_sue": "The state, governmental entities, natural persons, corporations, partnerships, associations and other organizations may sue, in person or through authorized employees, with or without an attorney (§ 1-21-202). Plaintiff must swear that demand was made and refused. Assignees not specifically addressed.",
-    "lawyers_allowed": "yes",
-    "lawyers_notes": "Lawyers allowed but not required; if one side appears with an attorney, the other side is entitled to a continuance to get one (§ 1-21-202(b)).",
-    "appeal": "Appeal to district court under the Wyoming Rules of Appellate Procedure, on questions of law only, not sufficiency of the evidence (Small Claims Rule 7). Notice of appeal must be filed with the circuit court clerk within 30 days of the judgment (W.R.A.P. 2.01(a)).",
-    "appeal_who": "both",
-    "appeal_deadline_days": 30,
-    "e_filing": "yes_statewide",
-    "e_filing_notes": "Wyoming courts list circuit court eFiling and provide eFile cover sheets for small claims forms SC-01 to SC-06; whether self-represented parties may e-file was not confirmed.",
-    "fee_waiver_form": "Request for Waiver of Fees and Costs (MISC series; order form MISC-12 posted on wyocourts.gov)",
-    "fee_waiver_threshold": null,
-    "service_methods": "Sheriff or private process server in person (courts' page); statute also allows the court to serve an in-state defendant by certified mail, return receipt requested (§ 1-21-203). The appearance date must be 12 to 20 days after service (§ 1-21-204).",
-    "self_help_url": "https://www.wyocourts.gov/legal-help-by-topic/small-claims/",
-    "citation": "Wyo. Stat. §§ 1-21-201 to 1-21-205; Wyoming Rules and Forms Governing Small Claims Cases; W.R.A.P. 2.01",
-    "sources": [
-      {
-        "url": "https://law.justia.com/codes/wyoming/title-1/chapter-21/article-2/",
-        "what": "limit, parties, representation, service, appearance timing (unofficial reprint of 2025 Wyoming Statutes)",
-        "type": "statute"
-      },
-      {
-        "url": "https://www.wyocourts.gov/app/uploads/2025/01/Wyoming-Rules-and-Forms-Governing-Small-Claims-Cases.pdf",
-        "what": "filing fee, venue, appeal on questions of law",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://www.wyocourts.gov/legal-help-by-topic/small-claims/",
-        "what": "self help, fee, service by sheriff/process server, lawyers optional, eFile cover sheets",
-        "type": "court_site"
-      },
-      {
-        "url": "https://www.wyocourts.gov/app/uploads/2025/01/WRAP-eff-Dec-1.pdf",
-        "what": "W.R.A.P. 2.01 30-day notice of appeal",
-        "type": "court_rule"
-      },
-      {
-        "url": "https://www.wyocourts.gov/app/uploads/2025/03/MISC-12-Order-on-Request-for-Waiver-of-Fees-and-Costs-05-25.pdf",
-        "what": "fee waiver order form",
-        "type": "form"
-      },
-      {
-        "url": "https://www.wyocourts.gov/efiling/",
-        "what": "circuit court eFiling listed",
-        "type": "court_site"
-      }
-    ],
-    "date_checked": "2026-11-05",
-    "unverified": [
-      "e_filing",
-      "fee_waiver_form",
-      "fee_waiver_threshold"
-    ],
-    "notes": "The courts' self-help page (as summarized) described the service window as 3-12 days before the court date, while § 1-21-204 sets the appearance date 12-20 days after service; needs a human look. Statute text read from Justia's reprint because wyoleg.gov's statute viewer was not fetchable."
-  }
+ {
+  "state": "Rhode Island",
+  "abbr": "RI",
+  "court_name": "District Court, Small Claims (small claims procedure under R.I. Gen. Laws ch. 10-16)",
+  "limit_individual": 5000,
+  "limit_business": 5000,
+  "limit_notes": "Money only, $5,000 exclusive of interest and costs, for: contract (ex contractu) actions and tax claims; damages from a retail sale of goods or services to a member of the public; and claims on negotiable instruments (§ 10-16-1). The statute does not list ordinary tort claims, so not every kind of case fits. Counterclaims are capped at $2,500 (§ 10-16-9); a larger counterclaim ends the small claims case as a nonsuit and the defendant may sue separately. A corporate plaintiff must file in the District Court division where the defendant lives (§ 10-16-3).",
+  "recent_changes": "Limit raised from $2,500 to $5,000 by P.L. 2021, ch. 143 and ch. 144, effective July 3, 2021 (history note on the official § 10-16-1; many online charts still say $2,500). Pending/likely change: 2026 H 7643 / S 2975 would make the entry fee $75 (inclusive of the processing fee and technology surcharge), raise the counterclaim cap to $5,000, set a $75 appeal fee and let a plaintiff appeal a ruling on a counterclaim, effective January 1, 2027. Senate votes on June 3 and June 9, 2026 are on the legislature's vote-report site; whether it became law (governor action / public-law number) was NOT confirmed from an official source, and the live statute text still shows $55 and $2,500.",
+  "filing_fee_min": 75.75,
+  "filing_fee_max": 75.75,
+  "filing_fee_notes": "Statutory entry fee $55 (§ 10-16-4) plus a one-time $17.50 civil case processing fee and $3.25 technology surcharge, which the District Court fee page says apply to cases e-filed or scanned at the clerk's counter (so $75.75 in practice). 3.25% card fee if paying by credit card. Service by sheriff or constable is paid separately. Small claims execution fee $20.",
+  "who_can_sue": "Individuals. A corporation with under $1 million in assets that is a close or family-held corporation may designate one non-lawyer representative (§ 10-16-3.1); the official complaint packet says a corporation with assets over $1 million must be represented by an attorney. Complaint must be notarized. Assignees/collection agencies not specifically addressed in the statute.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Lawyers may appear (the official complaint form asks for 'your lawyer if you have one'; there is a separate attorney version of the forms). Small corporations may use a designated non-lawyer representative (§ 10-16-3.1).",
+  "appeal": "Plaintiff gives up the right to appeal by filing a written waiver with the claim (§ 10-16-4(b)). Defendant may appeal to Superior Court for a new trial (trial de novo) on the same terms as other District Court civil cases (§ 10-16-14), which § 9-12-10 sets at 2 days (excluding weekends and holidays) after judgment, with costs paid at filing. A defaulted seller/manufacturer sued by a consumer has no appeal (§ 10-16-14(b)).",
+  "appeal_who": "defendant_only",
+  "appeal_deadline_days": 2,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "District Court uses the Judiciary's electronic filing system (Odyssey File & Serve); self-represented litigants may e-file but are not required to and can file on paper at the clerk's office or by mail.",
+  "fee_waiver_form": "Motion, Affidavit, and Order to Proceed In Forma Pauperis (District Court, DC-66): https://www.courts.ri.gov/Courts/districtcourt/Documents/Motion, Affidavit, and Order to Proceed In Forma Pauperis.pdf",
+  "fee_waiver_threshold": "Judge's discretion based on the affidavit (no fixed income test confirmed).",
+  "service_methods": "Under the current official complaint packet (DC-SC-1, rev. January 2025), the plaintiff takes the packet to the state Sheriff's office (Cranston) or a licensed constable for in-person service. (The older statute text in § 10-16-6 still refers to the clerk mailing notice.) After an answer the court refers the case to mediation.",
+  "self_help_url": "https://courts.ri.gov/Forms/Small%20Claims%20Lawsuit%20-%20Complaint%20(Self-represented%20Litigant%20-%20With%20Instructions).pdf",
+  "citation": "R.I. Gen. Laws §§ 10-16-1 to 10-16-16; § 9-12-10 (appeals); § 8-15-11 (technology surcharge)",
+  "sources": [
+   {
+    "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-1.htm",
+    "what": "limit_individual, limit_business, limit_notes, recent_changes (2021 history)",
+    "type": "statute"
+   },
+   {
+    "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-4.htm",
+    "what": "filing fee $55, plaintiff waiver of appeal",
+    "type": "statute"
+   },
+   {
+    "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-9.htm",
+    "what": "counterclaim cap $2,500",
+    "type": "statute"
+   },
+   {
+    "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-3.1.htm",
+    "what": "corporate representatives",
+    "type": "statute"
+   },
+   {
+    "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-16/10-16-14.htm",
+    "what": "appeal by defendant",
+    "type": "statute"
+   },
+   {
+    "url": "https://webserver.rilegislature.gov/Statutes/TITLE9/9-12/9-12-10.htm",
+    "what": "appeal deadline 2 days, trial on all questions of law and fact in Superior Court",
+    "type": "statute"
+   },
+   {
+    "url": "https://courts.ri.gov/Courts/districtcourt/Pages/Civil-Fees-and-Costs.aspx",
+    "what": "filing fee, processing fee, technology surcharge",
+    "type": "court_site"
+   },
+   {
+    "url": "https://courts.ri.gov/Forms/Small%20Claims%20Lawsuit%20-%20Complaint%20(Self-represented%20Litigant%20-%20With%20Instructions).pdf",
+    "what": "limit $5,000, service by sheriff/constable, corporations over $1M need attorney, notary, mediation",
+    "type": "form"
+   },
+   {
+    "url": "https://www.courts.ri.gov/efiling/Pages/default.aspx",
+    "what": "e-filing optional for self-represented",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.courts.ri.gov/Courts/districtcourt/Documents/Motion, Affidavit, and Order to Proceed In Forma Pauperis.pdf",
+    "what": "fee waiver form",
+    "type": "form"
+   },
+   {
+    "url": "https://webserver.rilegislature.gov/BillText26/SenateText26/S2975.htm",
+    "what": "recent_changes (2026 bill text)",
+    "type": "statute"
+   },
+   {
+    "url": "https://webserver.rilegislature.gov/SVotes/votereport.asp?id=17829",
+    "what": "recent_changes (Senate concurrence vote on H 7643, June 9, 2026; unofficial vote report)",
+    "type": "statute"
+   },
+   {
+    "url": "https://courts.ri.gov/Courts/districtcourt/Documents/District_Rules_of_Small_Claims_Procedure.pdf",
+    "what": "District Court Rules of Small Claims Procedure (Feb. 2024) Rule 7.01: defendant may claim an appeal within two days, exclusive of Saturdays, Sundays and legal holidays; plaintiff waives appeal; filed in writing with the clerk with the appeal fee",
+    "type": "court_rule"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "recent_changes",
+   "fee_waiver_threshold"
+  ],
+  "notes": "Lead of $2,500 is outdated: official statute says $5,000 since July 2021. Appeal deadline comes from the general District Court statute (§ 9-12-10); the District Court's own Small Claims Rule 7 page could not be loaded (courts.ri.gov reorganized), so confirm the 2-day deadline with the clerk. The 2026 bill (effective 1/1/2027) needs an official enactment check. The live § 10-16-1 limit text was read directly on rilegislature.gov. [2026-11-07 appeal_deadline_days, verified: Confirmed by the court's own small claims rule (Rule 7.01), not just § 9-12-10. It is 2 business days (weekends and legal holidays excluded). Rule 7.01 also says: by filing a counterclaim the defendant waives appeal on the counterclaim, and the plaintiff may appeal only on the counterclaim. Worth adding to the appeal text.]"
+ },
+ {
+  "state": "South Carolina",
+  "abbr": "SC",
+  "court_name": "Magistrates Court (Summary Court), civil side; there is no separate small claims court",
+  "limit_individual": 7500,
+  "limit_business": 7500,
+  "limit_notes": "$7,500 for contract, property damage, personal injury, penalties, recovery of personal property, etc. (S.C. Code § 22-3-10). Landlord-tenant / possession cases have no dollar cap (§ 22-3-10(10), (12)). If a counterclaim would exceed $7,500 the whole case moves to the Court of Common Pleas (§ 22-3-30). Magistrates cannot hear cases where title to real estate is in question or (mostly) where the State is a party (§ 22-3-20).",
+  "recent_changes": "2026 Act No. 155 (H.4813), effective January 1, 2027: summons-and-complaint fee rises from $45 to $65 (§ 8-21-1010(A)(6)) and the filing assessment from $25 to $40 (§ 22-3-340), so the total goes from $70 to $105; execution fee $10 to $20; landlord-tenant proceedings $20 to $40. The $7,500 limit is unchanged in the current code (a 2025-26 bill, S.251, would raise it to $15,000; not enacted as of the current code text).",
+  "filing_fee_min": 70,
+  "filing_fee_max": 70,
+  "filing_fee_notes": "Uniform statewide: $45 summons/complaint fee (§ 8-21-1010(A)(6)) + $25 assessment (§ 22-3-340) = $70 through December 31, 2026; $105 from January 1, 2027. Service costs (sheriff/constable, process server, or certified mail) are extra and vary by county.",
+  "who_can_sue": "Individuals. A business may be represented by a non-lawyer officer, agent, or employee in civil magistrates court if it gives the court written authorization signed by its president, chair, general partner, owner, or CEO (S.C. Rules for Magistrates Court, Rule 21). Assignees/collection agencies not specifically addressed.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Parties may hire attorneys; most self-represent. Jury trial available on written request at least 5 working days before trial (Magistrates Rule 13(c), per the court FAQ).",
+  "appeal": "Either party may move for a new trial within 5 days, or appeal to the Circuit Court in the county by serving a notice of appeal within 30 days after written notice of judgment (or after the judgment is announced in their presence) (S.C. Code § 18-7-20; Magistrates Rule 18). The circuit judge decides on the magistrate's return/record, without a jury; it is not a new trial (§§ 18-7-60, 18-7-170). $150 circuit court filing fee.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 30,
+  "e_filing": "no",
+  "e_filing_notes": "The Judicial Branch e-filing page describes e-filing only for the Court of Common Pleas; nothing found for magistrates court civil cases.",
+  "fee_waiver_form": "Motion for Leave to Proceed In Forma Pauperis with affidavit (Magistrates Rule 5(c)); no statewide form URL found.",
+  "fee_waiver_threshold": "Magistrate's discretion on an affidavit of inability to pay (no fixed income test). If granted, filing fees are waived but other court costs remain (court FAQ); see also § 8-21-1020.",
+  "service_methods": "Sheriff's department; private process server; certified mail, restricted delivery, return receipt requested (plaintiff files a notarized affidavit with the receipt); publication by court order if the others fail (Magistrates Rule 6(c), per the court FAQ). Constables also serve in some counties.",
+  "self_help_url": "https://www.sccourts.org/media/pb2kvc1v/faqmagistrate.pdf",
+  "citation": "S.C. Code §§ 22-3-10 to 22-3-30, 22-3-340, 8-21-1010, 18-7-10 to 18-7-190; S.C. Rules for Magistrates Court (incl. Rules 5, 6, 18, 21)",
+  "sources": [
+   {
+    "url": "https://www.scstatehouse.gov/code/t22c003.php",
+    "what": "limit, limit_notes, assessment (current and 2027), counterclaim transfer",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.scstatehouse.gov/code/t08c021.php",
+    "what": "filing fee $45 and 2027 increase to $65 (2026 Act No. 155)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.scstatehouse.gov/code/t18c007.php",
+    "what": "appeal: circuit court, 30 days, review on the return",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.sccourts.org/courtReg/displayRule.cfm?ruleID=21.0&subRuleID=&ruleType=MAG",
+    "what": "business representation by non-lawyers",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.sccourts.org/media/pb2kvc1v/faqmagistrate.pdf",
+    "what": "service methods, IFP motion, appeal process and $150 fee, jury request (2010 FAQ)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.sccourts.org/efiling/",
+    "what": "e-filing limited to Common Pleas",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "e_filing"
+  ],
+  "notes": "The court FAQ is dated 2010; statutes were read directly on scstatehouse.gov and are current. Watch the January 1, 2027 fee increase."
+ },
+ {
+  "state": "South Dakota",
+  "abbr": "SD",
+  "court_name": "Small claims (circuit court or magistrate court; Unified Judicial System)",
+  "limit_individual": 12000,
+  "limit_business": 12000,
+  "limit_notes": "$12,000 not counting allowable costs or attorney fees (SDCL 15-39-45.1). UJS materials cite SDCL 16-12C-13 (clerk magistrate, uncontested) and 16-12B-13 (magistrate judge) for the same $12,000. Venue: county where an individual defendant lives or where the claim arose; business defendants where they do business (15-39-69). Compulsory counterclaim rule does not apply (15-39-66).",
+  "recent_changes": "Small claims fee schedule updated July 12, 2026 (postage components). SDCL 15-39-55 amended effective July 1, 2026 (SL 2026, ch 242): clerk may dismiss without prejudice if plaintiff does not pursue further notice or notice fails after 90 days.",
+  "filing_fee_min": 24.84,
+  "filing_fee_max": 42.84,
+  "filing_fee_notes": "Totals include certified-mail postage: $24.84 (claims up to $100), $30.84 ($100.01-$1,000), $40.84 ($1,000.01-$3,999.99), $42.84 ($4,000-$12,000); add $11.84 per additional defendant. Court portion alone is $13-$31 (filing fee + $3 law library + court automation surcharge). Sheriff service, if needed, is extra.",
+  "who_can_sue": "Parties must be 18 or older (a parent or guardian represents a minor). A corporation may act through an officer, manager, or local manager; an LLC through a member or manager. Assignees may sue, including assignments for collection only, if bona fide and for value; a collection agency may act for a client with a proper assignment (SDCL 15-39-47).",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Either party may be represented by an attorney (UJS guide); not required.",
+  "appeal": "No appeal: a small claims judgment cannot be appealed (SDCL 15-39-57; UJS guide). The plaintiff waives jury and appeal by filing (15-39-56). Instead, the defendant may, at least 5 days before the answer/appearance date, petition to move the case to the regular civil docket with an affidavit of good reasons and a meritorious defense, a $35 fee, and a $250 deposit for the plaintiff's costs (15-39-57); the plaintiff gets the same right if a counterclaim is filed (15-39-66).",
+  "appeal_who": "none",
+  "appeal_deadline_days": null,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "UJS 'Guide and File' (Tyler) lets self-represented parties prepare and file small claims starting and answer documents online; optional.",
+  "fee_waiver_form": null,
+  "fee_waiver_threshold": null,
+  "service_methods": "Clerk sends the notice of claim by certified mail, return receipt (SDCL 15-39-53, -54). If not delivered, the plaintiff may authorize (and pay for) sheriff personal service or other notice ordered by the court (15-39-55). UJS page also lists private process server.",
+  "self_help_url": "https://ujs.sd.gov/Small_Claims/",
+  "citation": "SDCL ch. 15-39 (§§ 15-39-45.1 to 15-39-78); SDCL 16-12B-13, 16-12C-13",
+  "sources": [
+   {
+    "url": "https://sdlegislature.gov/Statutes/15-39-45.1",
+    "what": "limit",
+    "type": "statute"
+   },
+   {
+    "url": "https://sdlegislature.gov/Statutes/15-39-47",
+    "what": "who_can_sue (corporations, LLCs, assignees)",
+    "type": "statute"
+   },
+   {
+    "url": "https://sdlegislature.gov/Statutes/15-39-56",
+    "what": "plaintiff waives jury and appeal",
+    "type": "statute"
+   },
+   {
+    "url": "https://sdlegislature.gov/Statutes/15-39-57",
+    "what": "no appeal; defendant removal, $35 fee, $250 deposit",
+    "type": "statute"
+   },
+   {
+    "url": "https://sdlegislature.gov/Statutes/15-39-55",
+    "what": "service follow-up; 2026 amendment",
+    "type": "statute"
+   },
+   {
+    "url": "https://sdlegislature.gov/Statutes/16-12B-13",
+    "what": "magistrate judge $12,000 jurisdiction",
+    "type": "statute"
+   },
+   {
+    "url": "https://ujs.sd.gov/Small_Claims/",
+    "what": "self help, Guide and File e-filing, service options",
+    "type": "court_site"
+   },
+   {
+    "url": "https://ujs.sd.gov/media/zqnnr2vz/small_claims_filing_fees.pdf",
+    "what": "filing fees (July 12, 2026 schedule)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://ujs.sd.gov/media/0n5pu4xg/small-claims-court.pdf",
+    "what": "age 18, representation, fees, certified mail, no appeal (UJS guide, 7/13/2026)",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "fee_waiver_form",
+   "fee_waiver_threshold"
+  ],
+  "notes": "Statute numbers differ across sources (15-39-45.1 vs 16-12C-13 vs 16-12B-13); all say $12,000. Fee waiver for small claims not found on UJS small claims pages."
+ },
+ {
+  "state": "Tennessee",
+  "abbr": "TN",
+  "court_name": "General Sessions Court (civil); no separate small claims court",
+  "limit_individual": 25000,
+  "limit_business": 25000,
+  "limit_notes": "$25,000 in all civil cases, law and equity (Tenn. Code Ann. § 16-15-501(d)(1)); attorney fees, court costs and discretionary costs are not counted toward the limit (d)(2). No limit for evictions (forcible entry and detainer) or actions to recover personal property. The population brackets in § 16-15-501(b) only give certain counties extra kinds of jurisdiction (e.g., divorce, workers' compensation, domestic relations); they do not change the $25,000 dollar limit. Some courts have added powers under private acts. The Administrative Office of the Courts says General Sessions jurisdiction 'varies from county to county'.",
+  "recent_changes": "SB0572/HB0982 (114th General Assembly) would have raised the limit to $50,000; listed as dead (not enacted) per a bill tracker. The 2025 code still shows $25,000.",
+  "filing_fee_min": 132.75,
+  "filing_fee_max": 216.5,
+  "filing_fee_notes": "Set by each county clerk (statutory clerk fees plus local litigation taxes and service fees); no statewide schedule found. Check the county General Sessions clerk.",
+  "who_can_sue": "Individuals. Corporations generally must appear through a licensed attorney (county clerk guidance; Tennessee Supreme Court case law), not confirmed from a statute or statewide court page.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Attorneys allowed; individuals may represent themselves.",
+  "appeal": "Any party may appeal to the Circuit Court of the county within 10 days; the appeal is heard de novo (new trial). Once one party appeals, other parties need not file separate cross-appeals (Tenn. Code Ann. § 27-5-108).",
+  "appeal_who": "both",
+  "appeal_deadline_days": 10,
+  "e_filing": "some_courts",
+  "e_filing_notes": "Not confirmed; e-filing in General Sessions is county-by-county.",
+  "fee_waiver_form": "Uniform Civil Affidavit of Indigency (Tenn. Sup. Ct. R. 29) / pauper's oath, Tenn. Code Ann. § 20-12-127",
+  "fee_waiver_threshold": "Judge's discretion on the indigency affidavit (not confirmed from primary source).",
+  "service_methods": "Not confirmed from a primary source: typically sheriff or private process server; some counties allow certified mail.",
+  "self_help_url": "https://www.tncourts.gov/programs/self-help-center",
+  "citation": "Tenn. Code Ann. §§ 16-15-501 (jurisdiction), 27-5-108 (appeal)",
+  "sources": [
+   {
+    "url": "https://law.justia.com/codes/tennessee/title-16/chapter-15/part-5/section-16-15-501/",
+    "what": "limit, limit_notes (unofficial reprint of the 2025 Tennessee Code; the official code is published through LexisNexis)",
+    "type": "statute"
+   },
+   {
+    "url": "https://law.justia.com/codes/tennessee/title-27/chapter-5/section-27-5-108/",
+    "what": "appeal: any party, 10 days, de novo in circuit court (unofficial reprint, 2025 code)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.tncourts.gov/courts/general-sessions-courts",
+    "what": "jurisdiction varies by county; court overview",
+    "type": "court_site"
+   },
+   {
+    "url": "https://ctas.tennessee.edu/eli/jurisdiction-general-sessions-court",
+    "what": "$25,000 in all counties (UT County Technical Assistance Service)",
+    "type": "secondary"
+   },
+   {
+    "url": "https://www.billtrack50.com/billdetail/1810864",
+    "what": "recent_changes ($50,000 bill dead)",
+    "type": "secondary"
+   },
+   {
+    "url": "https://seviercountytn.org/government/justice_and_the_law/general_sessions_court.php",
+    "what": "corporations must use an attorney (county clerk page)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.capitol.tn.gov/Bills/114/Amend/HA0381.pdf",
+    "what": "HB 487 House Amendment 1 (adopted, enacted as Pub. Ch. 486): new 8-21-401(f) standard General Sessions civil filing fee $50 as of Jan. 1, 2026/2027/2028; litigation taxes and costs added separately",
+    "type": "statute"
+   },
+   {
+    "url": "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx?BillNumber=HB0487&GA=114",
+    "what": "HB 487 enacted as Public Chapter 486, effective Jan. 1, 2026",
+    "type": "statute"
+   },
+   {
+    "url": "https://andersoncountytn.gov/wp-content/uploads/2026/01/2026-GENERAL-SESSIONS-FILING-FEES.pdf",
+    "what": "Anderson County 2026: civil summons $132.75 when served by private process/attorney; $184.75 with in-county sheriff service for one defendant",
+    "type": "court_site"
+   },
+   {
+    "url": "https://rutherfordcountytn.gov/vertical/sites/%7B0DE57B3C-95FA-46CF-BF78-CE4E5703EB9C%7D/uploads/GENERAL_SESSIONS_FEES.pdf",
+    "what": "Rutherford County, as of Jan. 1, 2026: civil warrant clerk $50 + litigation tax $166.50 (= $216.50) + sheriff $52 = $268.50; $52 each additional person",
+    "type": "court_site"
+   },
+   {
+    "url": "https://montgomerytn.gov/storage/departments/circuit/General%20Sessions%20Civil%20Cost%20Sheet%2012-31-25.pdf",
+    "what": "Montgomery County, effective 1/1/2026 (TCA 8-21-401): civil cases $148.50; sheriff service $52 per defendant extra",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "who_can_sue",
+   "e_filing",
+   "fee_waiver_form",
+   "fee_waiver_threshold",
+   "service_methods",
+   "recent_changes"
+  ],
+  "notes": "Lead confirmed: $25,000 in General Sessions; the limit does not depend on county population (only extra subject-matter jurisdiction does). tncourts.gov blocks automated fetching; statute text read from Justia's 2025 reprint because Tennessee's official code is only on LexisNexis. Fees, service and fee waiver need a county-level/official follow-up. [2026-11-07 filing_fee_min, verified: Statewide base: the clerk's standard General Sessions civil filing fee is $50 from Jan. 1, 2026 (T.C.A. 8-21-401(f) as amended by Pub. Ch. 486 of 2025); county and state litigation taxes and service fees are added, so the total varies by county. Lowest total confirmed on a county page: Anderson County $132.75 (no sheriff service). Not every county was checked.] [2026-11-07 filing_fee_max, verified: Highest confirmed: Rutherford County $216.50 before service ($268.50 with sheriff service for one defendant). Confirmed range before service across three counties: $132.75 (Anderson), $148.50 (Montgomery), $216.50 (Rutherford). Sheriff service is $52 per defendant in all three. Davidson County's sheet URL returned 404. Suggested filing_fee_notes: '$50 state clerk fee (2026) plus county litigation taxes; confirmed totals $132.75-$216.50 before service, sheriff service $52 per defendant'.]"
+ },
+ {
+  "state": "Texas",
+  "abbr": "TX",
+  "court_name": "Justice Court (justice of the peace), small claims case",
+  "limit_individual": 20000,
+  "limit_business": 20000,
+  "limit_notes": "$20,000 excluding statutory interest and court costs but INCLUDING attorney fees (Tex. R. Civ. P. 500.1(a)); justice court jurisdiction $20,000 exclusive of interest (Tex. Gov't Code § 27.031). Debt collection by assignees, debt collectors, financial institutions or lenders is a separate 'debt claim case' with the same $20,000 limit (Rule 500.1(b), Rule 508). Repair-and-remedy cases also $20,000. No suits for divorce, defamation, title to land, or enforcement of a lien on land (§ 27.031(b)).",
+  "recent_changes": "Limit raised from $10,000 to $20,000 for cases filed on or after September 1, 2020 (per Harris County Justice Courts site). Filing fee restructured January 1, 2022 (2021 S.B. 41) into $21 state + $33 local consolidated fees. The current Supreme Court PDF of the rules numbers the case-type definitions as Rule 500.1 and representation as Rule 500.3; many guides use older numbering.",
+  "filing_fee_min": 54,
+  "filing_fee_max": 54,
+  "filing_fee_notes": "$21 state consolidated civil fee (Tex. Loc. Gov't Code § 133.151(a-1)) + $33 local consolidated civil fee (§ 135.103) = $54 statewide. Service by sheriff/constable or process server is extra and set by county.",
+  "who_can_sue": "Individuals (themselves or by attorney; the court may allow an unpaid family member to assist). Corporations and other entities may appear through a non-attorney employee, owner, officer or partner (Rule 500.3; Gov't Code § 27.031(d)). Assignees, debt collectors and lenders must file a debt claim case rather than a small claims case.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Attorneys allowed; rules cannot require representation (Gov't Code § 27.060(d)). Authorized agents (non-employees) allowed only in eviction cases.",
+  "appeal": "Any party may appeal within 21 days after the judgment is signed (or after a motion to reinstate/set aside/new trial is denied) by filing a bond (plaintiff $500; defendant twice the judgment), cash deposit, or a Statement of Inability to Afford Payment of Court Costs (Rule 506.1). The case is tried de novo (new trial) in county court (Rule 506.3).",
+  "appeal_who": "both",
+  "appeal_deadline_days": 21,
+  "e_filing": "some_courts",
+  "e_filing_notes": "Documents may be filed electronically 'if the court allows electronic filing' (Rule 502.1); availability varies by justice court.",
+  "fee_waiver_form": "Statement of Inability to Afford Payment of Court Costs (Supreme Court-approved form; Rule 502.3), available free from the clerk and on the Texas Justice Court Training Center site.",
+  "fee_waiver_threshold": "No fixed income test in the rule: file the sworn Statement; it can be contested and the judge decides (burden on the filer). Receipt of means-tested government benefits limits a contest to the truth of that statement; a legal-aid certificate makes it uncontestable (Rule 502.3).",
+  "service_methods": "Sheriff or constable; process server certified by the Judicial Branch Certification Commission; the clerk by registered or certified mail, restricted delivery, return receipt; or a court-authorized adult. Personal delivery or registered/certified mail. Alternative service by court order. If a Statement of Inability is filed, service must be by sheriff, constable or clerk (Rule 501.2).",
+  "self_help_url": "https://guides.sll.texas.gov/small-claims",
+  "citation": "Tex. Gov't Code §§ 27.031, 27.060; Tex. R. Civ. P. 500-507, 508; Tex. Loc. Gov't Code §§ 133.151, 135.103",
+  "sources": [
+   {
+    "url": "https://statutes.capitol.texas.gov/Docs/GV/htm/GV.27.htm",
+    "what": "jurisdiction $20,000, corporations need not use attorney, small claims rules mandate",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.txcourts.gov/media/1463426/texas-rules-of-civil-procedure.pdf",
+    "what": "Rules 500.1, 500.3, 501.2, 502.1, 502.3, 506.1, 506.3 (limit details, representation, service, e-filing, fee waiver, appeal)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://statutes.capitol.texas.gov/Docs/LG/htm/LG.133.htm",
+    "what": "$21 state consolidated fee",
+    "type": "statute"
+   },
+   {
+    "url": "https://statutes.capitol.texas.gov/Docs/LG/htm/LG.135.htm",
+    "what": "$33 local consolidated fee",
+    "type": "statute"
+   },
+   {
+    "url": "https://guides.sll.texas.gov/small-claims",
+    "what": "self-help guide (Texas State Law Library)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://jp.hctx.net/suits/about.htm",
+    "what": "limit was $10,000 for cases filed before Sept. 1, 2020",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.tjctc.org/SRL/small-claim-plaintiff.html",
+    "what": "Statement of Inability form, plaintiff forms",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [],
+  "notes": "Lead confirmed ($20,000). Watch the Rule 500 renumbering when citing. Service fees vary by county."
+ },
+ {
+  "state": "Utah",
+  "abbr": "UT",
+  "court_name": "Small claims (justice court, or small claims department of district court)",
+  "limit_individual": 20000,
+  "limit_business": 20000,
+  "limit_notes": "$20,000 including attorney fees but excluding court costs and interest, for claims filed January 1, 2025 through December 31, 2029; rises to $25,000 on January 1, 2030 (Utah Code § 78A-8-102(1)(a)(i)). Money only (and interpleader). Defendant must live, or the debt must have been incurred, within the court's jurisdiction. Courts site: you cannot sue a government agency or evict in small claims. Counterclaims must arise from the same transaction. Clerk/judge may defer all but the first of multiple claims filed by one plaintiff.",
+  "recent_changes": "Limit was $15,000 (May 4, 2022 - December 31, 2024), became $20,000 on January 1, 2025, and is scheduled to become $25,000 on January 1, 2030 (built into § 78A-8-102). Fee page labeled 'Effective May 6, 2026'.",
+  "filing_fee_min": 60,
+  "filing_fee_max": 185,
+  "filing_fee_notes": "$60 (claims $2,000 or less), $100 (over $2,000 and under $7,500), $185 ($7,500 to $20,000) (Utah Code § 78A-2-301(1)(c)). Counter affidavit: $50 / $70 / $120. Trial de novo appeal $240 plus $10 to the justice court. Defendant removal to district court for a jury: jury demand fee $250.",
+  "who_can_sue": "Persons and corporations may litigate for themselves in person or through authorized employees, with or without counsel (§ 78A-8-102(6)). A non-employee non-lawyer may represent a party only with the court's express approval and without pay (Small Claims Rule 13). Assignees not specifically addressed in the sections reviewed.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "A party may be self-represented, represented by a Utah attorney, by an employee, or (with court approval) by an uncompensated other person (URSCP 13).",
+  "appeal": "Any party may appeal within 28 calendar days after entry of judgment (or denial of a motion to set aside) by filing a notice of appeal in the court that issued the judgment; the district court holds a new trial (trial de novo), with a jury if a party meets URCP 38(b) (URSCP 12). Fee waivable by affidavit of impecuniosity.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 28,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "Self-represented parties can e-file in existing small claims cases through MyCase; new cases are started by delivering, mailing, or emailing papers to the court. Online Dispute Resolution (ODR) is used in many courts.",
+  "fee_waiver_form": "Motion to Waive Fees (form 1301GE for general civil cases) and Order: https://www.utcourts.gov/en/self-help/legal-help/procedures/waiver.html",
+  "fee_waiver_threshold": "May qualify if receiving SNAP, Medicaid, SSI or FEP/TANF; represented by a nonprofit legal provider or Utah State Bar pro bono attorney; or household income at or below the court's table (e.g., $1,882.50/month for 1 person, $3,900 for 4); or unable to pay fees and still afford necessities (Utah Code §§ 78A-2-302 to -309).",
+  "service_methods": "As provided in Utah Rule of Civil Procedure 4 (URSCP 3). Non-ODR cases: serve at least 30 days before trial; ODR cases: within 120 days of filing. File proof of service within 10 business days.",
+  "self_help_url": "https://www.utcourts.gov/en/self-help/case-categories/small-claims.html",
+  "citation": "Utah Code §§ 78A-8-101 to -110, 78A-2-301; Utah Rules of Small Claims Procedure",
+  "sources": [
+   {
+    "url": "https://le.utah.gov/xcode/Title78A/Chapter8/78A-8-S102.html",
+    "what": "limit and scheduled increases, representation, counterclaims",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.utcourts.gov/en/self-help/legal-help/procedures/fees.html",
+    "what": "filing fees, counter affidavit fees, appeal fee",
+    "type": "court_site"
+   },
+   {
+    "url": "https://legacy.utcourts.gov/rules/viewall.php?type=srpe",
+    "what": "URSCP 3 (service), 12 (appeals), 13 (representation)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.utcourts.gov/en/self-help/case-categories/small-claims.html",
+    "what": "self help, money only, no government/eviction, appeal 28 days, ODR",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.utcourts.gov/en/self-help/legal-help/procedures/filing.html",
+    "what": "MyCase e-filing for small claims; email filing",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.utcourts.gov/en/self-help/legal-help/procedures/waiver.html",
+    "what": "fee waiver form and criteria",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [],
+  "notes": "Many online charts still show $11,000 or $15,000; current statute is $20,000 (through 2029), then $25,000 from 2030."
+ },
+ {
+  "state": "Vermont",
+  "abbr": "VT",
+  "court_name": "Small claims, Civil Division of the Superior Court",
+  "limit_individual": 10000,
+  "limit_business": 10000,
+  "limit_notes": "$10,000, money damages only; no slander or libel; claims may not be split (12 V.S.A. § 5531(a)-(b)). Collection of consumer credit debt or medical debt is capped at $5,000 (§ 5531(e)). Counterclaims from the same transaction may ask for more but judgment is capped at the limit (§ 5533(c)). If the claim is over $3,500 the defendant may request a Superior judge or appointed attorney to hear it (§ 5531(c)).",
+  "recent_changes": "2023 Act No. 46, § 9, effective June 5, 2023, amended § 5531 (the most recent amendment in the official history); per secondary sources this raised the limit from $5,000 to $10,000 and added the $5,000 cap on consumer-credit and medical-debt collection.",
+  "filing_fee_min": 65,
+  "filing_fee_max": 90,
+  "filing_fee_notes": "$65 for claims of $1,000 or less; $90 for claims over $1,000. Counterclaim $25 ($500 or less) or $35. Jury request $10. Appeal $120. Post-judgment motion $65.",
+  "who_can_sue": "Must be 18 (parent or guardian sues for a minor). Businesses may use small claims. You cannot sue on someone else's behalf; each co-plaintiff must sign and attend. Collection of consumer credit/medical debt capped at $5,000.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Any person, corporation or other entity may be, but need not be, represented by an attorney (12 V.S.A. § 5536).",
+  "appeal": "Any party may appeal to the Civil Division within 30 days of the date the court issued the judgment; a different Superior judge decides on the record (audio recording and evidence), with no new evidence (12 V.S.A. § 5538; court page). No appeal as of right to the Vermont Supreme Court; only by permission.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 30,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "Court page: file in person, by mail, by email, or electronically (e-file) with the Civil Division.",
+  "fee_waiver_form": "Application to Waive Filing Fees and Service Costs (600-00228): https://www.vtcourts.gov/self-help/application-waive-filing-fees-and-service-costs",
+  "fee_waiver_threshold": "Receives any public assistance, OR gross income at or below 150% of federal poverty guidelines, OR the court finds you cannot pay without using resources needed to support you and your dependents.",
+  "service_methods": "Court mails the signed summons and complaint back to the plaintiff; plaintiff sends them to the defendant by first-class mail within 7 days and files a Certificate of Service. If no answer within 30 days, plaintiff must have a sheriff or constable serve; return of service due within 60 days of first mailing. Alternative service or publication by motion.",
+  "self_help_url": "https://www.vtcourts.gov/civil/suing-and-being-sued-small-claims",
+  "citation": "12 V.S.A. §§ 5531-5541; Vermont Rules of Small Claims Procedure",
+  "sources": [
+   {
+    "url": "https://legislature.vermont.gov/statutes/fullchapter/12/187",
+    "what": "limit, debt cap, counterclaims, jury, representation, appeal on record, amendment history",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.vtcourts.gov/fees",
+    "what": "filing, counterclaim, appeal fees",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.vtcourts.gov/civil/suing-and-being-sued-small-claims",
+    "what": "age 18, filing methods incl. e-file, service steps, lawyers",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.vtcourts.gov/civil/small-claims-trials-and-appeals",
+    "what": "appeal: 30 days, on the record, $120",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.vtcourts.gov/self-help/application-waive-filing-fees-and-service-costs",
+    "what": "fee waiver form and criteria",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "recent_changes"
+  ],
+  "notes": "Fee page shows no effective date. The prior $5,000 limit/2023 increase detail comes from secondary sources; the official history only shows that Act 46 (2023) amended § 5531."
+ },
+ {
+  "state": "Virginia",
+  "abbr": "VA",
+  "court_name": "Small Claims Court (small claims division of the General District Court)",
+  "limit_individual": 5000,
+  "limit_business": 5000,
+  "limit_notes": "Small claims division: up to $5,000 exclusive of interest (Va. Code § 16.1-122.2), for money or recovery of personal property; counterclaims also capped at $5,000 (§ 16.1-122.3(F)). The General District Court itself is higher: exclusive jurisdiction up to $4,500 and concurrent with circuit court up to $50,000 (§ 16.1-77), so a plaintiff may instead file on the regular GDC docket (lawyers allowed there). No suits against the Commonwealth under the Tort Claims Act (§ 16.1-122.1). Defendant may remove the case to the regular GDC docket any time before decision (§ 16.1-122.4(B)).",
+  "recent_changes": null,
+  "filing_fee_min": 46,
+  "filing_fee_max": 55,
+  "filing_fee_notes": "$36 court services fee per civil warrant (Va. Code § 16.1-69.48:2) plus local add-ons (e.g., courthouse construction fee) that vary by court; sheriff service $12 per defendant (§ 17.1-272). Use the official GDC Civil Filing Fee Calculation tool for the exact total.",
+  "who_can_sue": "Parties represent themselves. A corporation, partnership, LLC or other entity may be represented by an owner, general partner, officer, member, or employee; a party who can't participate may be helped by a non-attorney friend or relative with the judge's OK (§ 16.1-122.4). Assignees not specifically addressed.",
+  "lawyers_allowed": "no",
+  "lawyers_notes": "Attorneys may not represent parties in small claims court; an attorney may appear only for himself, and a defendant may use an attorney to remove the case to the regular General District Court docket (§ 16.1-122.4).",
+  "appeal": "Same as other General District Court cases (§ 16.1-122.7): any party may appeal to circuit court for a new trial (de novo) if the amount in controversy exceeds $20, by noting the appeal within 10 days of judgment (§ 16.1-106) and posting bond and paying the writ tax/costs within 30 days (§ 16.1-107). No bond for a plaintiff where no counterclaim was filed, or for an indigent defendant.",
+  "appeal_who": "both",
+  "appeal_deadline_days": 10,
+  "e_filing": "no",
+  "e_filing_notes": "Virginia's e-filing system (VJEFS) is for attorneys in circuit court only; small claims cases are filed with the GDC clerk.",
+  "fee_waiver_form": "Petition for Proceeding in Civil Case Without Payment of Fees or Costs (form DC-409)",
+  "fee_waiver_threshold": "Presumed unable to pay if receiving state or federal public assistance for the indigent or represented by legal aid; otherwise the court compares available funds to 125% of federal poverty guidelines (Va. Code § 17.1-606).",
+  "service_methods": "Clerk sends the warrant to the sheriff for service, or the plaintiff may use a private process server: personal, substituted (family member 16+ at home), or posting on the door. Plaintiff should also mail a copy first-class at least 10 days before trial and file Certificate of Mailing (DC-413), required before default on posted service.",
+  "self_help_url": "https://www.vacourts.gov/static/resources/small_claims_court_procedures.pdf",
+  "citation": "Va. Code §§ 16.1-122.1 to 16.1-122.7; § 16.1-77; §§ 16.1-106, 16.1-107; § 16.1-69.48:2; § 17.1-606",
+  "sources": [
+   {
+    "url": "https://law.lis.virginia.gov/vacode/16.1-122.2/",
+    "what": "limit $5,000",
+    "type": "statute"
+   },
+   {
+    "url": "https://law.lis.virginia.gov/vacode/16.1-77/",
+    "what": "GDC limits $4,500 exclusive / $50,000 concurrent",
+    "type": "statute"
+   },
+   {
+    "url": "https://law.lis.virginia.gov/vacode/16.1-122.3/",
+    "what": "commencement, counterclaims $5,000",
+    "type": "statute"
+   },
+   {
+    "url": "https://law.lis.virginia.gov/vacode/16.1-122.4/",
+    "what": "representation, no attorneys, removal",
+    "type": "statute"
+   },
+   {
+    "url": "https://law.lis.virginia.gov/vacode/16.1-106/",
+    "what": "appeal 10 days, de novo, > $20",
+    "type": "statute"
+   },
+   {
+    "url": "https://law.lis.virginia.gov/vacode/16.1-107/",
+    "what": "appeal bond 30 days",
+    "type": "statute"
+   },
+   {
+    "url": "https://law.lis.virginia.gov/vacode/16.1-69.48:2/",
+    "what": "$36 fee",
+    "type": "statute"
+   },
+   {
+    "url": "https://law.lis.virginia.gov/vacode/17.1-272/",
+    "what": "$12 sheriff service fee",
+    "type": "statute"
+   },
+   {
+    "url": "https://law.lis.virginia.gov/vacode/17.1-606/",
+    "what": "fee waiver criteria",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.vacourts.gov/static/resources/small_claims_court_procedures.pdf",
+    "what": "procedures, service, mailing, representation",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.vacourts.gov/online/vjefs/home",
+    "what": "e-filing limited to circuit court attorneys",
+    "type": "court_site"
+   },
+   {
+    "url": "https://vacourts.gov/gdfees_calc_app",
+    "what": "official GDC Civil Filing Fee Calculation for 'Warrant in Debt - Small Claims', all 127 listed courts queried 2026-11-06: totals without sheriff service $46-$55; with one sheriff service $58-$67",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "fee_waiver_form"
+  ],
+  "notes": "Lead confirmed: small claims division $5,000 vs. General District Court up to $50,000. Total filing cost varies by locality because of local add-on fees. Form number DC-409 is from memory/secondary, not checked on vacourts.gov. [2026-11-07 filing_fee_max, verified: Ran the official calculator for every court listed (small claims warrant in debt, one case). Example breakdown, Richmond City GDC: processing $26 + Courts Technology Fund $10 + legal aid $9 + indigent defense $1 + law library $4 + courthouse maintenance $2 = $52. Local add-ons (law library, courthouse maintenance, courthouse construction fee for claims over $500) explain the spread. Highest: $55 for claims over $500 in courts like Alexandria, Augusta, Bedford, Culpeper, Frederick. Sheriff service adds $12 per defendant (§ 17.1-272).] [2026-11-07 filing_fee_min, verified: Correction: the current $36 is only the statutory base fee (§ 16.1-69.48:2, which already includes $10 for the Courts Technology Fund). Every court adds statutory/local fees (legal aid, indigent defense, and in most courts law library and courthouse maintenance), so the lowest actual total is $46. Also confirmed in passing: the fee waiver petition is form DC-409 'Petition for Proceeding in Civil Case Without Payment of Fees and Costs' (listed on the same vacourts.gov page).]"
+ },
+ {
+  "state": "Washington",
+  "abbr": "WA",
+  "court_name": "Small Claims Department of the District Court",
+  "limit_individual": 10000,
+  "limit_business": 5000,
+  "limit_notes": "Money only: $10,000 for claims brought by a natural person, $5,000 for all other plaintiffs (businesses, etc.) (RCW 12.40.010). A defendant cannot remove the case by filing an oversized counterclaim; larger counterclaims may be filed separately in superior court (RCW 12.40.027).",
+  "recent_changes": null,
+  "filing_fee_min": 35,
+  "filing_fee_max": 50,
+  "filing_fee_notes": "$35 filing fee (RCW 12.40.020) plus any county dispute-resolution-center surcharge of up to $15 (RCW 7.75.035). Same fee for counterclaims. Service fee and mileage extra (RCW 12.40.040).",
+  "who_can_sue": "The real claimant only: the claim must be verified by the real claimant and NO claim may be filed or prosecuted by an assignee (RCW 12.40.070), so collection agencies/assignees cannot use small claims. Corporations appear through non-lawyer representatives (attorneys barred).",
+  "lawyers_allowed": "limited",
+  "lawyers_notes": "No attorney, legal paraprofessional or other person may appear without the judge's consent; a corporation may not be represented by an attorney (RCW 12.40.080), except where a district court case was transferred into small claims (RCW 12.40.025).",
+  "appeal": "Either party may appeal to superior court within 30 days of judgment by filing a notice of appeal in district court, paying the superior court filing fee, posting a bond (twice the judgment or amount in controversy), and serving all parties (RCW 12.36.020). The appeal is de novo on the record (RCW 12.36.055). No appeal if the amount claimed was under $250, and a party who filed a claim for less than $1,000 cannot appeal (RCW 12.40.120; RCW 12.36.010).",
+  "appeal_who": "both",
+  "appeal_deadline_days": 30,
+  "e_filing": "some_courts",
+  "e_filing_notes": "Not confirmed; e-filing in district courts varies by court.",
+  "fee_waiver_form": "Motion and Declaration for Waiver of Civil Fees and Surcharges (mandatory AOC pattern form under GR 34)",
+  "fee_waiver_threshold": "Indigent if receiving needs-based means-tested assistance (TANF, GA-U/GA-X, SSI, poverty-related veterans benefits, food stamps), OR household income at or below 125% of federal poverty guideline, OR above 125% with basic living expenses that leave no ability to pay, OR other compelling circumstances (GR 34(a)(3)).",
+  "service_methods": "Personal service as for a summons (RCW 4.28.080) or registered/certified mail with a signed return receipt filed with the court; must be complete at least 10 days before the first hearing (RCW 12.40.040).",
+  "self_help_url": "https://www.courts.wa.gov/newsinfo/resources/?fa=newsinfo_jury.scc&altMenu=smal",
+  "citation": "RCW ch. 12.40; RCW ch. 12.36; RCW 7.75.035; GR 34",
+  "sources": [
+   {
+    "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=12.40&full=true",
+    "what": "limits, fee, service, assignee bar, lawyer bar, appeal thresholds",
+    "type": "statute"
+   },
+   {
+    "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=12.36&full=true",
+    "what": "appeal procedure, 30 days, bond, de novo on record",
+    "type": "statute"
+   },
+   {
+    "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=7.75.035",
+    "what": "surcharge up to $15",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.courts.wa.gov/court_rules/pdf/GR/GA_GR_34_00_00.pdf",
+    "what": "fee waiver criteria",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.courts.wa.gov/newsinfo/resources/?fa=newsinfo_jury.scc&altMenu=smal",
+    "what": "self-help page and brochure",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "e_filing"
+  ],
+  "notes": "Lead confirmed: lawyers barred without judge consent, assignees barred, and appeal thresholds ($250 overall; $1,000 for the party who brought the claim)."
+ },
+ {
+  "state": "West Virginia",
+  "abbr": "WV",
+  "court_name": "Magistrate Court (civil); no separate small claims court",
+  "limit_individual": 20000,
+  "limit_business": 20000,
+  "limit_notes": "Civil actions up to $20,000 exclusive of interest and costs; evictions/wrongful occupation if title not in dispute (W. Va. Code § 50-2-1). No equity, eminent domain, real estate title, lien foreclosure, false imprisonment, malicious prosecution, or libel/slander cases. Removal to circuit court: for claims of $5,000 or more any party may remove before trial; under $5,000 all parties must agree (§ 50-4-8).",
+  "recent_changes": "Limit raised to $20,000 by Enrolled Committee Substitute for HB 2761 (2025), passed April 8, 2025, in effect July 7, 2025 (previously $10,000 per bill summaries). Many online charts still show $10,000.",
+  "filing_fee_min": 50,
+  "filing_fee_max": 70,
+  "filing_fee_notes": "Tiered by amount sought (§ 50-3-1(a)): $30 ($500 or less), $35 ($500.01-$1,000), $40 ($1,000.01-$2,000), $50 (over $2,000); $30 for non-money relief. § 50-3-1(g) also lists $20 'for filing and trying any civil action'; whether that is charged on top was not confirmed. Sheriff service fee extra; $1 clerk fee for certified mailing (§ 50-3-1(f)).",
+  "who_can_sue": "Any party may appear in person, by agent, or by attorney; appearance by an agent is not unauthorized practice of law (§ 50-4-4a), so businesses can use non-lawyer agents. Commercial creditors must itemize principal, interest, payments and amount due (§ 50-4-1).",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Attorneys allowed (§ 50-4-4a).",
+  "appeal": "Any party may appeal to circuit court within 20 days after judgment (or after a ruling on a motion to set aside), posting bond and paying the circuit court filing fee; the circuit court may allow a late appeal within 90 days for good cause. Bench-trial cases get a new trial (de novo, without jury); jury-trial cases are reviewed on the record (§ 50-5-12). Circuit clerk fee for docketing a civil appeal from magistrate court: $200 (§ 59-1-11).",
+  "appeal_who": "both",
+  "appeal_deadline_days": 20,
+  "e_filing": "no",
+  "e_filing_notes": "The Judiciary's e-filing page lists Supreme Court, Intermediate Court, Circuit/Family Court and Mass Litigation e-filing only; no magistrate court option found.",
+  "fee_waiver_form": "Financial affidavit to proceed without prepayment of fees (adopted by the Supreme Court of Appeals under § 59-2-1); available from the clerk",
+  "fee_waiver_threshold": "Financial guidelines set by the Supreme Court of Appeals; court weighs income, assets, debts, necessary expenses, etc. (§ 59-2-1). Specific income cutoff not confirmed.",
+  "service_methods": "Same manner as in courts of record (§ 50-4-4); the clerk forwards the summons and service fees to the sheriff (§ 50-4-1); certified mail with return receipt is also used (clerk fee in § 50-3-1(f)).",
+  "self_help_url": "https://www.courtswv.gov/lower-courts/magistrate-courts",
+  "citation": "W. Va. Code §§ 50-2-1, 50-3-1, 50-4-1, 50-4-4, 50-4-4a, 50-4-8, 50-5-12, 59-2-1",
+  "sources": [
+   {
+    "url": "https://code.wvlegislature.gov/50-2-1/",
+    "what": "limit $20,000 and exclusions",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.wvlegislature.gov/Bill_Text_HTML/2025_SESSIONS/RS/bills/hb2761%20sub1%20enr.pdf",
+    "what": "recent_changes (HB 2761 effective July 7, 2025)",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.wvlegislature.gov/50-3-1/",
+    "what": "filing fees",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.wvlegislature.gov/50-4-4a/",
+    "what": "appearance by agent or attorney",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.wvlegislature.gov/50-4-8/",
+    "what": "removal to circuit court",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.wvlegislature.gov/50-5-12/",
+    "what": "appeal 20 days, de novo/on record",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.wvlegislature.gov/59-1-11/",
+    "what": "circuit appeal docketing fee $200",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.wvlegislature.gov/59-2-1/",
+    "what": "fee waiver",
+    "type": "statute"
+   },
+   {
+    "url": "https://code.wvlegislature.gov/50-4-4/",
+    "what": "service same as courts of record",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.courtswv.gov/lower-courts/magistrate-courts",
+    "what": "court confirms $20,000",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.courtswv.gov/legal-community/e-filing",
+    "what": "no magistrate e-filing listed",
+    "type": "court_site"
+   },
+   {
+    "url": "https://code.wvlegislature.gov/50-3-4a/",
+    "what": "§ 50-3-4a(b): fees collected under § 50-3-1(g) are paid monthly into the Regional Jail Operations Partial Reimbursement Fund (separate charge)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.wvlegislature.gov/Bill_Text_HTML/2005_SESSIONS/RS/Bills/SB716%20SUB1%20enr.htm",
+    "what": "2005 SB 716 added the (g) $20 cost to fund regional jails ('increasing court costs')",
+    "type": "statute"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "e_filing",
+   "fee_waiver_threshold"
+  ],
+  "notes": "Recent increase from $10,000 to $20,000 (July 7, 2025). Ambiguous § 50-3-1(g) $20 fee may make the real filing cost $50-$70; confirm with a magistrate clerk. [2026-11-07 filing_fee_max, verified: The $20 in § 50-3-1(g) is a separate, additional cost: it was added in 2005 to fund regional jails and is routed to a different fund (§ 50-3-4a(b)) than the tier fee in (a). So the real filing cost is the (a) tier plus $20: $50 (<= $500 or non-money), $55, $60, or $70 (over $2,000). This reading rests on the statutes; no current courtswv.gov fee sheet was found (a Lincoln County page shows outdated pre-2005 amounts). Sheriff service and $1 certified-mail fee are extra.] [2026-11-07 filing_fee_min, verified: Correction from 30 to 50: the lowest tier ($30) plus the separate $20 cost in § 50-3-1(g). See the filing_fee_max note. filing_fee_notes should list the totals $50/$55/$60/$70.]"
+ },
+ {
+  "state": "Wisconsin",
+  "abbr": "WI",
+  "court_name": "Small claims (Circuit Court, Wis. Stat. ch. 799)",
+  "limit_individual": 10000,
+  "limit_business": 10000,
+  "limit_notes": "Money judgments, attachment/garnishment, liens on personal property: $10,000 (rising to $15,000 on January 1, 2027) (Wis. Stat. § 799.01(1)(d)). Personal injury claims, tort claims and third-party complaints: $5,000 (§ 799.01(1)(cr)). Evictions: no limit on rent claimed. Replevin (return of property): $10,000 (rising to $15,000 on January 1, 2027); the courts' page says consumer-credit replevin is allowed where the amount financed is $25,000 or less. Return of earnest money: any amount. Taxing authorities may use small claims up to $10,000.",
+  "recent_changes": "2025 Wis. Act 105, effective January 1, 2027: general limit and replevin limit rise from $10,000 to $15,000 (tort/personal injury stays $5,000 in the current statute display). Circuit court fee chart effective November 1, 2026 raised the small claims filing fee from $94.50 to $124.",
+  "filing_fee_min": 124,
+  "filing_fee_max": 131.5,
+  "filing_fee_notes": "$124 = $39 filing fee + $61 court support services surcharge + $24 justice information surcharge (fee chart effective Nov. 1, 2026; was $94.50 before). Add $7.50 in Milwaukee County. Add $35 per party if e-filed. Service by mail (where allowed) $7 per defendant plus postage; sheriff/process server fees extra.",
+  "who_can_sue": "A person may appear on its own or by a Wisconsin attorney; a business acts 'in its own proper person' through a member, agent, or authorized employee. An assignee (e.g., a debt buyer) may not appear through a full-time employee unless that employee is an attorney (Wis. Stat. § 799.06(2)).",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Attorneys allowed (§ 799.06(2)).",
+  "appeal": "If a court commissioner decides the case, either party may demand a new trial before a judge within 10 days of an oral decision or 15 days after a written decision is mailed (§ 799.207). Judgments are appealed to the Court of Appeals (§ 799.30) within 45 days of entry if written notice of entry was given within 21 days, otherwise 90 days (§ 808.04(1)); 15 days for eviction appeals (§ 808.04(2)).",
+  "appeal_who": "both",
+  "appeal_deadline_days": 45,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "Circuit court eFiling covers small claims (fee chart lists the $35 e-filing fee for small claims cases); the courts' Forms Assistant interview helps self-represented parties prepare forms. Whether self-represented e-filing is optional was not separately confirmed.",
+  "fee_waiver_form": "Petition for Waiver of Fees and Costs (affidavit of indigency), Wis. Stat. § 814.29",
+  "fee_waiver_threshold": "Not confirmed from the statute text; § 814.29 allows waiver for indigency (public assistance, legal-services representation, or court finding of inability to pay).",
+  "service_methods": "Personal or substituted service under ch. 801, or, where a local court rule allows, mail service by the clerk ($7 per defendant; certified mail may be required and is required for evictions); service by mailing and publication if the defendant can't be found (§ 799.12).",
+  "self_help_url": "https://www.wicourts.gov/services/public/selfhelp/smallclaims.htm",
+  "citation": "Wis. Stat. ch. 799 (§§ 799.01-799.45); §§ 808.04, 814.62, 814.29",
+  "sources": [
+   {
+    "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799",
+    "what": "limits by case type and Jan. 1, 2027 increase (2025 Wis. Act 105)",
+    "type": "statute"
+   },
+   {
+    "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799/06",
+    "what": "representation, assignees",
+    "type": "statute"
+   },
+   {
+    "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799/12",
+    "what": "service",
+    "type": "statute"
+   },
+   {
+    "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799/207",
+    "what": "demand for trial after commissioner decision",
+    "type": "statute"
+   },
+   {
+    "url": "https://docs.legis.wisconsin.gov/statutes/statutes/799/30",
+    "what": "appeal to Court of Appeals",
+    "type": "statute"
+   },
+   {
+    "url": "https://docs.legis.wisconsin.gov/statutes/statutes/808/04",
+    "what": "appeal deadline 45/90 days",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.wicourts.gov/courts/circuit/docs/1126finefeechart.pdf",
+    "what": "small claims fee $124 effective Nov. 1, 2026; e-filing fee; mail service fee",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.wicourts.gov/courts/circuit/docs/0926finefeechart.pdf",
+    "what": "prior fee $94.50",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.wicourts.gov/services/public/selfhelp/smallclaims.htm",
+    "what": "self help; limits by case type",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "fee_waiver_form",
+   "fee_waiver_threshold",
+   "e_filing_notes"
+  ],
+  "notes": "Lead confirmed: different limits by case type ($10,000 general, $5,000 tort/personal injury, evictions unlimited). Two changes inside the next two months: fee rose to $124 on Nov. 1, 2026, and the general limit rises to $15,000 on Jan. 1, 2027. The wicourts self-help page does not yet mention the 2027 increase."
+ },
+ {
+  "state": "Wyoming",
+  "abbr": "WY",
+  "court_name": "Circuit Court (small claims procedure)",
+  "limit_individual": 6000,
+  "limit_business": 6000,
+  "limit_notes": "$6,000 exclusive of costs (Wyo. Stat. § 1-21-201). No prejudgment attachment or garnishment (§ 1-21-205). Venue: county where the defendant has an address or where the claim arose (Small Claims Rule 4, eff. Dec. 1, 2021). The Department of Revenue may consolidate tax claims.",
+  "recent_changes": null,
+  "filing_fee_min": 10,
+  "filing_fee_max": 10,
+  "filing_fee_notes": "$10 filing fee (Rules Governing Small Claims Cases, Rule 3; courts' page). Sheriff or private process server charges a separate fee for each summons served.",
+  "who_can_sue": "The state, governmental entities, natural persons, corporations, partnerships, associations and other organizations may sue, in person or through authorized employees, with or without an attorney (§ 1-21-202). Plaintiff must swear that demand was made and refused. Assignees not specifically addressed.",
+  "lawyers_allowed": "yes",
+  "lawyers_notes": "Lawyers allowed but not required; if one side appears with an attorney, the other side is entitled to a continuance to get one (§ 1-21-202(b)).",
+  "appeal": "Appeal to district court under the Wyoming Rules of Appellate Procedure, on questions of law only, not sufficiency of the evidence (Small Claims Rule 7). Notice of appeal must be filed with the circuit court clerk within 30 days of the judgment (W.R.A.P. 2.01(a)).",
+  "appeal_who": "both",
+  "appeal_deadline_days": 30,
+  "e_filing": "yes_statewide",
+  "e_filing_notes": "Wyoming courts list circuit court eFiling and provide eFile cover sheets for small claims forms SC-01 to SC-06; whether self-represented parties may e-file was not confirmed.",
+  "fee_waiver_form": "Request for Waiver of Fees and Costs (MISC series; order form MISC-12 posted on wyocourts.gov)",
+  "fee_waiver_threshold": null,
+  "service_methods": "Sheriff or private process server in person (courts' page); statute also allows the court to serve an in-state defendant by certified mail, return receipt requested (§ 1-21-203). The appearance date must be 12 to 20 days after service (§ 1-21-204).",
+  "self_help_url": "https://www.wyocourts.gov/legal-help-by-topic/small-claims/",
+  "citation": "Wyo. Stat. §§ 1-21-201 to 1-21-205; Wyoming Rules and Forms Governing Small Claims Cases; W.R.A.P. 2.01",
+  "sources": [
+   {
+    "url": "https://law.justia.com/codes/wyoming/title-1/chapter-21/article-2/",
+    "what": "limit, parties, representation, service, appearance timing (unofficial reprint of 2025 Wyoming Statutes)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.wyocourts.gov/app/uploads/2025/01/Wyoming-Rules-and-Forms-Governing-Small-Claims-Cases.pdf",
+    "what": "filing fee, venue, appeal on questions of law",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.wyocourts.gov/legal-help-by-topic/small-claims/",
+    "what": "self help, fee, service by sheriff/process server, lawyers optional, eFile cover sheets",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.wyocourts.gov/app/uploads/2025/01/WRAP-eff-Dec-1.pdf",
+    "what": "W.R.A.P. 2.01 30-day notice of appeal",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.wyocourts.gov/app/uploads/2025/03/MISC-12-Order-on-Request-for-Waiver-of-Fees-and-Costs-05-25.pdf",
+    "what": "fee waiver order form",
+    "type": "form"
+   },
+   {
+    "url": "https://www.wyocourts.gov/efiling/",
+    "what": "circuit court eFiling listed",
+    "type": "court_site"
+   }
+  ],
+  "date_checked": "2026-11-05",
+  "unverified": [
+   "e_filing",
+   "fee_waiver_form",
+   "fee_waiver_threshold"
+  ],
+  "notes": "The courts' self-help page (as summarized) described the service window as 3-12 days before the court date, while § 1-21-204 sets the appearance date 12-20 days after service; needs a human look. Statute text read from Justia's reprint because wyoleg.gov's statute viewer was not fetchable."
+ }
 ]

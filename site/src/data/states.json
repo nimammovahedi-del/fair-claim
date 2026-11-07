@@ -7,8 +7,8 @@
   "limit_business": 6000,
   "limit_notes": "$6,000 exclusive of interest and costs (Ala. Code \u00a7 12-12-31(a)). Unlawful detainer (eviction) cases are not handled under the Small Claims Rules; they go on the regular district court docket (Ala. Sm. Cl. R. A). Attorney fees can only be awarded if the party has a licensed attorney (\u00a7 12-12-31(c)). For claims over $1,500 the docket fee is the same as for regular (non-small-claims) district court cases (\u00a7 12-12-31(f)).",
   "recent_changes": null,
-  "filing_fee_min": 75.5,
-  "filing_fee_max": 248,
+  "filing_fee_min": 52,
+  "filing_fee_max": 255,
   "filing_fee_notes": "Fees are tiered by claim amount (up to $1,500; $1,500.01-$3,000; $3,000.01-$6,000) and differ by county. Cherokee County: $75.50 / $149.50 / $238.50, plus $25 sheriff service per defendant, $10 per additional defendant. Russell County: $85 / $159 / $248, plus $15 sheriff service, $15 per additional defendant. Both list $50 per additional plaintiff (max $500). Certified mail postage is extra. Only two county fee tables were checked, so the statewide range may be wider.",
   "who_can_sue": "Individuals aged 19 or older (Alabama age of majority, per county court pages), partnerships and corporations. Without a lawyer, a partnership must appear through a partner or employee and a corporation through an officer or full-time employee (\u00a7 12-12-31(b)). An assignee of a claim, such as a debt buyer or collection agency, must use a licensed attorney, and non-attorneys may not file on behalf of the original owner (\u00a7 12-12-31(d)). Lawyers whose licenses are revoked or suspended may not file (\u00a7 12-12-31(e)).",
   "lawyers_allowed": "yes",
@@ -78,14 +78,36 @@
     "url": "https://eforms.alacourt.gov/media/na1j0cie/c-10-civil-affidavit-of-substantial-hardship-order-10-2026.pdf",
     "what": "fee_waiver_form",
     "type": "form"
+   },
+   {
+    "url": "https://alison.legislature.state.al.us/code-of-alabama?section=12-19-71",
+    "what": "statutory base small claims docket fees: $35 (<=$1,500), $109 ($1,500.01-$3,000), $198 ($3,000.01+)",
+    "type": "statute"
+   },
+   {
+    "url": "https://elmore.alacourt.gov/small-claims/",
+    "what": "Elmore County $52 / $126 / $215 (lowest observed)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://lawrence.alacourt.gov/small-claims",
+    "what": "Lawrence County $56 / $130 / $219 (page now shows $6,000 limit)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://bullock.alacourt.gov/small-claims/",
+    "what": "Bullock County $77 / $151 / $240, sheriff service $15",
+    "type": "court_site"
+   },
+   {
+    "url": "https://pickens.alacourt.gov/small-claims/",
+    "what": "Pickens County $92 / $166 / $255 (highest observed), $40 per additional defendant",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "filing_fee_min",
-   "filing_fee_max"
-  ],
-  "notes": "Filing fees are not uniform statewide; the range comes from only two official county court pages (Cherokee, Russell). One county page (Lawrence) still shows the pre-2015 $3,000 limit; the statute says $6,000 (Act 2015-224). Some secondary sites list fees from $35 to $294; not used.",
+  "unverified": [],
+  "notes": "Filing fees are not uniform statewide; the range comes from only two official county court pages (Cherokee, Russell). One county page (Lawrence) still shows the pre-2015 $3,000 limit; the statute says $6,000 (Act 2015-224). Some secondary sites list fees from $35 to $294; not used. [2026-11-07 filing_fee_min, verified: Ala. Code 12-19-71(a)(1)-(3) (read on the Legislature's site) sets base fees of $35/$109/$198; county totals are higher because of local add-on court costs. Six official alacourt.gov county pages checked: Elmore $52/$126/$215, Lawrence $56/$130/$219, Cherokee $75.50/$149.50/$238.50, Bullock $77/$151/$240, Russell $85/$159/$248, Pickens $92/$166/$255. Lowest observed lowest-tier fee is $52 (Elmore); other counties may be lower. Pages show no effective dates (copyright footers 2017-2020), so confirm with the clerk.] [2026-11-07 filing_fee_max, verified: Highest observed top-tier ($3,000.01-$6,000) fee among six official county pages is Pickens County $255; Russell $248, Bullock $240, Cherokee $238.50, Lawrence $219, Elmore $215. Statutory base for that tier is $198 plus local add-ons. Service (sheriff or certified mail) and additional-party fees are extra. Not every county checked.]",
   "slug": "al"
  },
  {
@@ -163,7 +185,7 @@
   "limit_notes": "Small claims division: claims not exceeding $5,000 exclusive of interest and costs, including actions to rescind a contract or for equitable relief up to $5,000 (A.R.S. \u00a7 22-503(A)). Excluded: libel/slander, evictions, specific performance, class actions, prejudgment remedies, injunctions, claims against the state or local governments (\u00a7 22-503(B)). Regular Justice Court civil cases go up to $10,000 (\u00a7 22-201(B)); there lawyers, juries and appeals are available. Any party can move a small claims case to regular justice court by objecting at least 10 days before the hearing (\u00a7 22-504). Claims cannot be split. The AZ Supreme Court self-service page says 'less than $5,000' while the statute says 'does not exceed $5,000'.",
   "recent_changes": "SB 1022 (Laws 2025, ch. 94), signed May 2, 2025, raised the small claims limit from $3,500 to $5,000 by amending A.R.S. \u00a7 22-503. Effective on the 2025 general effective date, September 26, 2025.",
   "filing_fee_min": 30,
-  "filing_fee_max": 58,
+  "filing_fee_max": 60,
   "filing_fee_notes": "Statewide base small claims filing fee is $30 (A.R.S. \u00a7 22-281 Class C, as increased by AO 2024-211 effective Dec. 28, 2024); answer $18; small claims service by mail $8. Courts may add local fees: Maricopa County Justice Courts charge $58 to file and $46 to answer. Fees in other counties were not surveyed.",
   "who_can_sue": "Any natural person, corporation, partnership, association, marital community or other organization. Assignees and others not a real party to the original transaction may not sue (except a court-appointed personal representative) (\u00a7 22-512(A)). Individuals represent themselves; corporations appear through a full-time officer or authorized employee; partnerships through an active general partner or authorized full-time employee (\u00a7 22-512(B)).",
   "lawyers_allowed": "limited",
@@ -248,14 +270,18 @@
     "url": "https://www.azcourts.gov/selfservicecenter/Small-Claims",
     "what": "self_help_url, limit wording",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.jp.pima.gov/Forms/JP90A%20-%20Civil%20Unit%20Fee%20Schedule.pdf",
+    "what": "Pima County Consolidated Justice Court schedule eff. 9/21/2026: small claims complaint $60 ($30 statutory + $10 automation + $20 operations); answer $38",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_max",
    "fee_waiver_form"
   ],
-  "notes": "Filing fee max is the highest observed (Maricopa County); local fees in other counties were not checked. The exact title/URL of the statewide fee deferral/waiver form was not confirmed. Several secondary sites and a Mohave County page still show the old $3,500 limit.",
+  "notes": "Filing fee max is the highest observed (Maricopa County); local fees in other counties were not checked. The exact title/URL of the statewide fee deferral/waiver form was not confirmed. Several secondary sites and a Mohave County page still show the old $3,500 limit. [2026-11-07 filing_fee_max, verified: Corrected from $58 to $60. Statewide base is $30 plus court-specific local fees. Pima County's fee schedule effective Sept. 21, 2026 lists $60 ($30 statutory + $10 court automation + $20 court operations fee); Maricopa lists $58. Other counties (e.g. Pinal) not confirmed - Pinal's fee memo could not be opened (403 / file download).]",
   "slug": "az"
  },
  {
@@ -267,7 +293,7 @@
   "limit_notes": "Same amount-in-controversy jurisdiction as district court civil (Admin. Order 18 \u00a7 4): contract claims, recovery of personal property, and damage to personal property up to $5,000 excluding interest and costs (AO 18 \u00a7 3). Personal injury is not among the listed civil matters. State district courts (pilot courts) have $25,000 civil jurisdiction (AO 18 \u00a7 6), but the small claims division is tied to \u00a7 3 ($5,000). Most businesses are barred from filing (see who_can_sue).",
   "recent_changes": null,
   "filing_fee_min": 65,
-  "filing_fee_max": 65,
+  "filing_fee_max": 67.5,
   "filing_fee_notes": "Little Rock District Court charges $65 to file a small claim (civil $80) plus a $2.50 summons fee; service fees (certified mail, sheriff $50 in Pulaski County, or process server) are extra. A $20 electronic filing system fee applies to cases started through e-filing (AO 21). The Attorney General's guide says fees 'typically' range from $30 to $65.",
   "who_can_sue": "Individuals. No action may be brought by a collection agency, collection agent, assignee of a claim, or any business engaged in lending money at interest (AO 18 \u00a7 4(b)). Corporations may sue only if organized in Arkansas with no more than three stockholders, or 85%+ of voting stock held by close relatives, or closely held corporations by unanimous shareholder vote; a corporation must be represented by an officer (AO 18 \u00a7 4(c)).",
   "lawyers_allowed": "no",
@@ -302,16 +328,29 @@
     "url": "https://arkansasag.gov/divisions/public-protection/legal-resources/guide-to-small-claims-court/",
     "what": "self_help_url, filing_fee_notes ($30-$65 range), appeal (30 days)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.fortsmithar.gov/government/departments/district-court/civil-small-claims",
+    "what": "Fort Smith District Court: $65 small claims, $80 civil; 'The State Legislature has elected to increase the filing fees'",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.fourthjudicialdistrictcourt.org/fees",
+    "what": "4th Judicial District Court (Searcy/Boone/Newton): Small Claims $65",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.fultoncountyar.gov/upages.php?id=55",
+    "what": "Fulton County small claims: filing fee $67.50, service fee $50",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
-   "filing_fee_max",
    "fee_waiver_form",
    "fee_waiver_threshold"
   ],
-  "notes": "Filing fee: only the Little Rock District Court schedule ($65) was confirmed; the statute (Ark. Code \u00a7 16-17-705) could not be read on an official site, a secondary copy shows $50, and the AG guide says $30-$65. Needs a human check. The AG page is from the Attorney General (state government), not the judiciary; Arkansas courts have no statewide small claims self-help page that could be found. Fee waiver (ARCP 72) not verified from rule text.",
+  "notes": "Filing fee: only the Little Rock District Court schedule ($65) was confirmed; the statute (Ark. Code \u00a7 16-17-705) could not be read on an official site, a secondary copy shows $50, and the AG guide says $30-$65. Needs a human check. The AG page is from the Attorney General (state government), not the judiciary; Arkansas courts have no statewide small claims self-help page that could be found. Fee waiver (ARCP 72) not verified from rule text. [2026-11-07 filing_fee_min, verified: Three official district court fee pages (Little Rock, Fort Smith, 4th Judicial District) all list $65 for small claims; Fort Smith says the Legislature increased fees to $65 small claims / $80 civil. A secondary copy of Ark. Code 16-17-705 shows a $50 small-claims base (and $65 civil), so the extra $15 appears to come from another statutory fee; the official Arkansas Code (Lexis-hosted) was not read, so the statutory breakdown is unconfirmed. The AG guide's '$30-$65' range looks outdated; no official court page showing less than $65 was found. Service (sheriff typically $50) and $20 e-filing fee (AO 21) are extra.] [2026-11-07 filing_fee_max, verified: Fulton County's official small claims page lists a $67.50 filing fee (plus $50 service, total $117.50), the highest found; Little Rock, Fort Smith and the 4th Judicial District list $65. Not all districts checked. Fulton County page is a county government page, not a court page.]",
   "slug": "ar"
  },
  {
@@ -714,14 +753,23 @@
     "url": "https://coxlawflorida.com/featured/most-county-court-appeals-are-now-directed-to-the-district-court-of-appeal/",
     "what": "appeal (DCA routing since Jan. 1, 2021; 30-day deadline) - lead only",
     "type": "secondary"
+   },
+   {
+    "url": "https://leonclerk.com/?p=1328",
+    "what": "Leon County Clerk: 30 days from rendition to file Notice of Appeal; county civil appeals go to the First DCA",
+    "type": "court_site"
+   },
+   {
+    "url": "https://stjohnsclerk.com/appeals/",
+    "what": "St. Johns County Clerk: notice of appeal within 30 days of rendition of the order",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "appeal_deadline_days",
    "fee_waiver_form"
   ],
-  "notes": "Small claims in Florida is a set of procedural rules in county court, not a separate court. Clerk fees ($55/$80/$175/$300) are $1 higher than the statute's base-plus-$4 ($54/$79/$174/$299); the extra $1 may be another statutory add-on - worth a human check. The Florida Bar appellate rules PDF could not be downloaded, so the 30-day deadline (Fla. R. App. P. 9.110(b)) and DCA routing rely on a secondary lead plus the change to \u00a7 26.012. Fla. Stat. \u00a7 34.017 still refers to judgments 'appealable to the circuit court' (legacy wording). Rules 7.010 and 7.020 were amended effective Jan. 1, 2026 (SC2025-1254) but the $8,000 limit is unchanged in the July 1, 2026 compilation. No statewide judiciary self-help page for small claims was found (flcourts.gov page returned not found); a county clerk page is used.",
+  "notes": "Small claims in Florida is a set of procedural rules in county court, not a separate court. Clerk fees ($55/$80/$175/$300) are $1 higher than the statute's base-plus-$4 ($54/$79/$174/$299); the extra $1 may be another statutory add-on - worth a human check. The Florida Bar appellate rules PDF could not be downloaded, so the 30-day deadline (Fla. R. App. P. 9.110(b)) and DCA routing rely on a secondary lead plus the change to \u00a7 26.012. Fla. Stat. \u00a7 34.017 still refers to judgments 'appealable to the circuit court' (legacy wording). Rules 7.010 and 7.020 were amended effective Jan. 1, 2026 (SC2025-1254) but the $8,000 limit is unchanged in the July 1, 2026 compilation. No statewide judiciary self-help page for small claims was found (flcourts.gov page returned not found); a county clerk page is used. [2026-11-07 appeal_deadline_days, verified: 30 days from rendition confirmed on two Florida clerk of court pages (Leon, St. Johns); Leon also confirms county civil appeals go to the District Court of Appeal. The rule text itself (Fla. R. App. P. 9.110(b)) was not read: the Florida Bar's Sept. 1, 2026 appellate rules PDF returned 403 to fetching. St. Johns' fee table still shows an 'Appeal to Circuit Court' label (legacy).]",
   "slug": "fl"
  },
  {
@@ -731,10 +779,10 @@
   "limit_individual": 15000,
   "limit_business": 15000,
   "limit_notes": "Magistrate courts hear civil claims (including garnishment and attachment) where exclusive jurisdiction is not in superior court and the amount or property value does not exceed $15,000 (O.C.G.A. \u00a7 15-10-2(5)); they also hear dispossessory (eviction) cases. No jury trials (\u00a7 15-10-41(a)). The Civil Practice Act does not apply (\u00a7 15-10-42). Some counties recommend or require mediation. A corporate defendant must be sued in the county of its registered agent.",
-  "recent_changes": null,
-  "filing_fee_min": 45,
-  "filing_fee_max": 60,
-  "filing_fee_notes": "Fees vary by county. The Attorney General's consumer page says the filing fee, which includes service on one defendant, ranges from about $45 to $55, plus about $25-$35 per additional defendant. Gwinnett County Magistrate Court charges $60 filing plus $50 sheriff service per defendant ($110 total for one defendant).",
+  "recent_changes": "Coming Jan. 1, 2027: HB 999 (2026, Act 707, signed May 12, 2026) raises the magistrate court limit from $15,000 to $25,000 for cases filed on or after Jan. 1, 2027. It also rewrote the filing-fee statute (O.C.G.A. \u00a7 15-10-80) effective July 1, 2026.",
+  "filing_fee_min": 107,
+  "filing_fee_max": 120,
+  "filing_fee_notes": "Totals shown include sheriff service on one defendant, because Georgia magistrate courts usually quote it that way, and they vary by county: Douglas $107, Hart $108, Gwinnett $110 ($60 filing + $50 service), Upson $115, Pierce $120 (as of July 2026). Each added defendant costs more. The Attorney General's older $45\u2013$55 figure is out of date.",
   "who_can_sue": "Any person or business may file in their own name, with or without an attorney (AG consumer page). Detailed rules for business representation were not confirmed.",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Parties may appear with or without an attorney (O.C.G.A. \u00a7 15-10-43 notice; AG consumer page).",
@@ -768,17 +816,40 @@
     "url": "https://courts.chathamcountyga.gov/Magistrate",
     "what": "e_filing (Chatham e-filing)",
     "type": "court_site"
+   },
+   {
+    "url": "https://gov.georgia.gov/document/2026-signed-legislation/hb-999/download",
+    "what": "HB 999 (2026, signed; Act 707) rewrote O.C.G.A. 15-10-80 eff. July 1, 2026: filing deposit set by local court rule not to exceed $22 + actual service cost (capped at sheriff fee) + all other sums required by law; also raises magistrate limit to $25,000 for cases filed on/after Jan. 1, 2027",
+    "type": "statute"
+   },
+   {
+    "url": "https://douglascountyga.gov/DocumentCenter/View/13757/Fee-Sheet",
+    "what": "Douglas County Magistrate Court: Statement of Claim $107 (eff. July 1, 2024)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://hartcountyga.gov/magistrate.html",
+    "what": "Hart County: Statement of Claim $108 one defendant, +$50 each additional (eff. July 1, 2024)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://piercecountyga.gov/magistrate-court/",
+    "what": "Pierce County: civil claims $120 effective July 1, 2026",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.upsoncountyga.org/DocumentCenter/View/2430/Magistrate-Court-Fees-2025",
+    "what": "Upson County: Statement of Claim one defendant $115 (eff. July 1, 2025), $10 each additional defendant",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
-   "filing_fee_max",
    "who_can_sue",
    "fee_waiver_form",
    "fee_waiver_threshold"
   ],
-  "notes": "Georgia has no separate small claims court; the Magistrate Court's general civil limit ($15,000) serves that role. Statute text was read from Gwinnett County's official court site (Georgia's official code is hosted by LexisNexis and was not fetched). Fee conflict: the AG page's $45-$55 (including service) is lower than Gwinnett's $60 + $50 service - fees vary by county and the AG range may be outdated. The 30-day appeal deadline comes from the AG page; O.C.G.A. \u00a7 5-3-20 was not read. The AG page is from the state Attorney General, not the judiciary.",
+  "notes": "Georgia has no separate small claims court; the Magistrate Court's general civil limit ($15,000) serves that role. Statute text was read from Gwinnett County's official court site (Georgia's official code is hosted by LexisNexis and was not fetched). Fee conflict: the AG page's $45-$55 (including service) is lower than Gwinnett's $60 + $50 service - fees vary by county and the AG range may be outdated. The 30-day appeal deadline comes from the AG page; O.C.G.A. \u00a7 5-3-20 was not read. The AG page is from the state Attorney General, not the judiciary. [2026-11-07 filing_fee_min, verified: Corrected from $45. Values are the total to file against one defendant including sheriff service, because Georgia magistrate courts quote it that way (service is a separate line in Gwinnett). Official county figures: Douglas $107, Hart $108, Gwinnett $60 filing + $50 sheriff service = $110, Upson $115 (eff. July 1, 2025), Pierce $120 (eff. July 1, 2026). The AG page's $45-$55 is outdated. The statute (HB 999 version of 15-10-80) caps only the base deposit ($22) and lets other statutory add-ons stack, so totals vary by county. IMPORTANT for the row: HB 999 also raises the magistrate court limit from $15,000 to $25,000 for actions filed on or after Jan. 1, 2027 - recent_changes/limit should be updated (outside this task's fields). Signing status (signed May 12, 2026, Act 707) is from the bill's appearance in the Governor's 2026 signed-legislation list and the Legislative Counsel summary; not separately confirmed on the bill status page.] [2026-11-07 filing_fee_max, verified: Highest official figure found: Pierce County $120 (effective July 1, 2026). Pierce's page also shows an older breakdown ($45 + $1 + $50 = $96), so it is internally inconsistent; the $120 is the dated, current figure. Range of five counties checked: $107-$120 including service on one defendant. Corrected from $60 (Gwinnett filing-only amount).]",
   "slug": "ga"
  },
  {
@@ -909,7 +980,7 @@
   "limit_business": 10000,
   "limit_notes": "Ill. S. Ct. Rule 281: tort or contract claims for money up to $10,000, exclusive of interest and costs (limit set in 2006; tax-collection cases removed from small claims effective Jan. 1, 2022). Cook County's Pro Se Small Claims Court (First Municipal District) is a separate branch for claims up to $3,000 where the plaintiff must file without a lawyer.",
   "recent_changes": "Rule 286 (appearance and trial) amended Oct. 16, 2026, effective Jan. 1, 2027: small claims no longer have to be tried on the first appearance date; informal-hearing procedure clarified. Appearance fees for small claims defendants eliminated effective Oct. 1, 2025 (amended M.R. 29741; 705 ILCS 105/27.1b now says no fee may be charged for a small claims defendant's appearance). The $10,000 limit is unchanged.",
-  "filing_fee_min": null,
+  "filing_fee_min": 89,
   "filing_fee_max": 362,
   "filing_fee_notes": "Fees are set county by county within statutory caps (705 ILCS 105/27.1b). Under Supreme Court order M.R. 29741, small claims of $2,500 or less are on Schedule 3 (cap $94 outside Cook County, $270 in Cook) and small claims over $2,500 are on Schedule 2 (cap $266 outside Cook, $362 in Cook). Certified-mail service by the clerk costs $2 plus postage per defendant (Rule 284); sheriff or process-server fees are extra. No appearance fee for defendants since Oct. 1, 2025.",
   "who_can_sue": "Individuals and businesses. A corporation may not appear as plaintiff (claimant), assignee, subrogee or counterclaimant unless represented by a lawyer (Rule 282(b)); a corporate defendant may defend through an officer, director, manager or supervisor. No statewide bar on assignees or collection agencies, but corporate assignees need counsel. In Cook County's Pro Se branch the plaintiff must be self-represented.",
@@ -975,15 +1046,29 @@
     "url": "https://www.cookcountycourtil.gov/district/first-municipal-district-chicago/pro-se-small-claims-court",
     "what": "limit_notes, lawyers_notes (Cook County Pro Se branch, $3,000)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.mchenrycircuitclerk.org/small-claims/",
+    "what": "McHenry County: $89 (<=$2,500), $264 ($2,500.01-$10,000); certified mail +$27.58 per defendant",
+    "type": "court_site"
+   },
+   {
+    "url": "https://woodford-county.org/571/E-filing",
+    "what": "Woodford County: $95 (<=$2,500), $262 (over $2,500), appearance $0",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.circuitclerkofwillcounty.com/civil/small-claims",
+    "what": "Will County: $144 ($.01-$2,500), $314 ($2,500.01-$10,000)",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
    "fee_waiver_threshold",
    "self_help_url"
   ],
-  "notes": "Actual filing fees differ by county (each county board sets its fee under the caps); no single statewide amount. The Cook County Pro Se branch details came from a search summary of the Cook County court page, not a full read. ilcourthelp.gov (Illinois Court Help, run by the judiciary) blocked automated fetching, so the URL was not opened.",
+  "notes": "Actual filing fees differ by county (each county board sets its fee under the caps); no single statewide amount. The Cook County Pro Se branch details came from a search summary of the Cook County court page, not a full read. ilcourthelp.gov (Illinois Court Help, run by the judiciary) blocked automated fetching, so the URL was not opened. [2026-11-07 filing_fee_min, verified: Fees are set by each county within the 705 ILCS 105/27.1b caps. Lowest confirmed: McHenry County $89 for claims of $2,500 or less; Woodford $95, Will $144. Smaller counties may charge less; not all 102 counties checked. Pages show no effective dates (2026 copyright).]",
   "slug": "il"
  },
  {
@@ -995,8 +1080,8 @@
   "limit_notes": "Small claims jurisdiction is $10,000 since July 1, 2021 (HEA 1110, P.L. 125-2021). The lead that Marion County's township small claims courts have a different limit appears out of date: they were at $8,000 (since 2015), and HEA 1110 reportedly raised IC 33-34-3-2 to $10,000 as well. Small Claims Rules apply in all courts including the Marion County Small Claims Courts.",
   "recent_changes": "HEA 1110 (P.L. 125-2021), effective July 1, 2021, set the small claims limit at $10,000. 2025 SB 327 (Marion County small claims jurisdiction, venue and fees) passed the Senate but its final fate is unclear; some fee provisions may have been enacted through another bill (reported as P.L. 224-2025). 2026 SB 125 (Marion County small claims jurisdiction) was in committee as of Dec. 2025.",
   "filing_fee_min": 87,
-  "filing_fee_max": 97,
-  "filing_fee_notes": "Example (Clark County clerk): $97 paper filing, $87 e-filed, plus $10 for each additional defendant on paper filings; sheriff service $28 extra. Fee is built from statutory pieces (IC 33-37-4-6: $35 small claims costs fee + $10 service fee per defendant + other statewide fees), so most counties charge about the same. Marion County township courts charge differently (Warren Township lists $89 to file + $15 service).",
+  "filing_fee_max": 130,
+  "filing_fee_notes": "Outside the Marion County township small claims courts the fee is set by statute and is the same statewide: $97 total ($35 small claims filing fee + $10 service fee per named defendant under IC 33-37-4-6, plus $5 document storage, $20 automated record keeping, $5 public defense administration, $1 judicial insurance adjustment, $15 judicial salaries, $1 pro bono and $5 court administration fees). If e-filed, the total is $87 because the $10 per-defendant service fee may not be charged on e-filed cases; on paper filings add $10 for each additional defendant. Sheriff service adds $28. Marion County township small claims courts charge $130 (includes $15 service of process and a $26 small claims service fee required since July 1, 2025 by IC 33-37-5-35).",
   "who_can_sue": "Individuals and businesses. Any assigned or purchased claim, or debt acquired by a third party, can only be presented by that third party through a lawyer (Small Claims Rule 8(C)). Corporations, LLCs, partnerships, sole proprietorships and trusts may appear through a designated full-time employee (with a filed certificate and resolution), but by doing so waive any amount above the small claims limit.",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Lawyers allowed; required for debt buyers/assignees. Businesses may instead use a designated full-time employee under Small Claims Rule 8(C).",
@@ -1045,17 +1130,21 @@
     "url": "https://times.courts.in.gov/2016/12/15/reforms-to-the-marion-county-small-claims-courts/",
     "what": "limit_notes (Marion County limit was $8,000 from July 1, 2015)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.in.gov/courts/iocs/files/courtmgmt-pubs-trial-court-fee-manual.pdf",
+    "what": "Indiana Trial Court Fee Manual (Indiana Office of Court Services, current through 2026 session): small claims fee table $97/$87 e-filed; Marion County township courts $130",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
    "limit_notes",
-   "filing_fee_notes",
    "fee_waiver_form",
    "fee_waiver_threshold",
    "e_filing"
   ],
-  "notes": "Marion County $10,000: the Indiana Code site (iga.in.gov) could not be read by our tools, and the HEA 1110 enrolled text was only seen through a search summary saying Section 4 changed IC 33-34-3-2 from $8,000 to $10,000. The court's own summary says 'a small claims court has jurisdiction over claims that do not exceed $10,000' without naming Marion County. Human should confirm IC 33-34-3-2 text. Marion County fee figures came from a township trustee page via search, not a full read.",
+  "notes": "Marion County $10,000: the Indiana Code site (iga.in.gov) could not be read by our tools, and the HEA 1110 enrolled text was only seen through a search summary saying Section 4 changed IC 33-34-3-2 from $8,000 to $10,000. The court's own summary says 'a small claims court has jurisdiction over claims that do not exceed $10,000' without naming Marion County. Human should confirm IC 33-34-3-2 text. Marion County fee figures came from a township trustee page via search, not a full read. [2026-11-07 filing_fee_notes, verified: Confirmed from the Indiana Supreme Court's Office of Court Services fee manual (current through the 2026 legislative session), which itemizes each statutory component. The earlier note's Warren Township figure ($89 + $15) is outdated: the manual gives $130 total for Marion County township courts. filing_fee_max should therefore be 130 (separate entry).] [2026-11-07 filing_fee_max, verified: Corrected from $97. Statewide courts: $97 paper / $87 e-filed; Marion County township small claims courts: $130 per the state fee manual. Sheriff service ($28) outside Marion County is extra and not included.]",
   "slug": "in"
  },
  {
@@ -1115,9 +1204,9 @@
   "limit_business": 10000,
   "limit_notes": "$10,000 exclusive of interest, costs and bad-check damages (K.S.A. 61-2703). Max 20 small claims per person in the same court per calendar year (K.S.A. 61-2704); filing over the cap gets the case dismissed with prejudice and is a Consumer Protection Act violation (61-2714).",
   "recent_changes": "Limit raised from $4,000 to $10,000 effective July 1, 2024 (2024 HB 2604, L. 2024 ch. 22, amending K.S.A. 61-2703 and 61-2706).",
-  "filing_fee_min": 35,
+  "filing_fee_min": 47.5,
   "filing_fee_max": 69,
-  "filing_fee_notes": "Statutory docket fee is $35 for claims up to $500 and $55 above $500, the only costs required (K.S.A. 61-2704(b)); the statute let the Supreme Court add up to $12.50 through June 30, 2025. Johnson County's 2024 packet shows $49 (up to $500) and $69 ($500.01-$10,000), plus $15 sheriff service in Kansas. Current totals after the surcharge sunset not confirmed.",
+  "filing_fee_notes": "Statutory docket fee is $35 for claims up to $500 and $55 above $500 (K.S.A. 61-2704(b)), plus a Judicial Branch surcharge of $12.50 that the Supreme Court may impose (K.S.A. 61-2704(c); extended by 2025 SB 125 to June 30, 2027 and by 2026 HB 2393 through June 30, 2030), so most courts charge $47.50 / $67.50. Some counties add a law library fee (Johnson County: $1.50, for $49 / $69). Sheriff service is extra.",
   "who_can_sue": "Individuals, partnerships, LLCs, corporations, organizations. Assigned claims, claims owed to someone else (unless filer is a full-time employee or officer of the creditor) and subrogated claims are NOT small claims (K.S.A. 61-2703), so collection agencies and debt buyers cannot use it. Max 20 filings per court per calendar year.",
   "lawyers_allowed": "limited",
   "lawyers_notes": "No party may be represented by a lawyer before judgment; entities appear through a full-time employee or officer who is not a lawyer (K.S.A. 61-2707). If a party's representative is or was a lawyer (or a lawyer represents himself), the other side may then use a lawyer and get a continuance (61-2714). Lawyers may handle appeals.",
@@ -1166,17 +1255,40 @@
     "url": "https://courts.jocogov.org/forms/Small%20Claims/Small%20Claims%20New%20Case%20Packet%202024.PDF",
     "what": "filing_fee_max, service_methods (Johnson County example)",
     "type": "form"
+   },
+   {
+    "url": "https://courts.jocogov.org/dc_SmallClaims.aspx",
+    "what": "Johnson County District Court (eff. July 1, 2024): $36.50 + $12.50 surcharge = $49 (<=$500); $56.50 + $12.50 = $69 ($500.01-$10,000); fee includes $1.50 law library fee under K.S.A. 20-3129(b)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.kslegislature.gov/li/b2025_26/measures/documents/hb2393_enrolled.pdf",
+    "what": "HB 2393 enrolled: amends K.S.A. 61-2704(c) so the Supreme Court may impose up to $12.50 per docket fee from July 1, 2026 through June 30, 2030",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.cowleycountyks.gov/175/Court-Costs-Filing-Fees-Online-Payment",
+    "what": "Cowley County: small claims <=$500 $35 + $12.50 surcharge = $47.50; over $500 $55 + $12.50 = $67.50",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.kslegislature.gov/li/b2025_26/measures/documents/supp_note_hb2393_01_0000.pdf",
+    "what": "Supplemental note: 2025 SB 125 extended surcharge sunset to June 30, 2027; HB 2393 extends through June 30, 2030",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.kslegislature.gov/li/b2025_26/measures/hb2393/",
+    "what": "HB 2393 bill page: signed by Governor; effective on publication in the statute book",
+    "type": "statute"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_max",
-   "filing_fee_notes",
    "e_filing",
    "fee_waiver_form",
    "service_methods"
   ],
-  "notes": "kscourts.gov and the Kansas Judicial Council site blocked automated fetching, so the statewide self-help page was not read. Fees: statute vs Johnson County packet differ ($35/$55 vs $49/$69) because of surcharges/local fees; whether the $12.50 surcharge continued after June 30, 2025 is unconfirmed.",
+  "notes": "kscourts.gov and the Kansas Judicial Council site blocked automated fetching, so the statewide self-help page was not read. Fees: statute vs Johnson County packet differ ($35/$55 vs $49/$69) because of surcharges/local fees; whether the $12.50 surcharge continued after June 30, 2025 is unconfirmed. [2026-11-07 filing_fee_max, verified: Max $69 confirmed (Johnson County, which adds a $1.50 law library fee). The $12.50 surcharge did NOT lapse: 2025 SB 125 extended it to June 30, 2027 (per the Legislative Research Dept. supplemental note on HB 2393), and 2026 HB 2393 (shown as signed by the Governor on the Legislature's bill page) extends it through June 30, 2030.] [2026-11-07 filing_fee_min, verified: Corrected from $35: because the $12.50 Judicial Branch surcharge is still in force (extended by 2025 SB 125 and 2026 HB 2393), the lowest real cost is $47.50 (Cowley County, claims up to $500). Cowley's page is undated and still labels the upper tier '<$4,000'.] [2026-11-07 filing_fee_notes, verified: The ksrevisor.gov text still shows the old 'through June 30, 2025' sunset because it has not been updated for the 2025-2026 bills. Sheriff service amount was not reconfirmed.]",
   "slug": "ks"
  },
  {
@@ -1187,8 +1299,8 @@
   "limit_business": 2500,
   "limit_notes": "$2,500 exclusive of interest and costs (KRS 24A.230). Max 25 claims per calendar year for an individual; businesses get 25 per established location in the district (KRS 24A.250); limits don't apply to city/county/urban-county governments. No libel/slander, malicious prosecution, abuse of process.",
   "recent_changes": "Filing fee rule CR 3.03 amended by Supreme Court Order 2026-15 (entered May 14, 2026), effective July 1, 2026: small claims fee $38. 2024 HB 353 (raise limit to $5,000) did not pass.",
-  "filing_fee_min": 58,
-  "filing_fee_max": null,
+  "filing_fee_min": 68,
+  "filing_fee_max": 83.5,
   "filing_fee_notes": "CR 3.03(1)(a): $38 for small claims, plus a $20 court technology fee and other required fees (KRS 453.060, KRS 27A.630, local facility/library fees), so at least $58. Certified mail service fee set by administrative order; sheriff service fee paid directly to the sheriff. No fee for a counterclaim of $2,500 or less.",
   "who_can_sue": "Any person, business or corporation, EXCEPT: anyone in the business of lending money at interest, collection agencies or collection agents, and anyone with an assigned claim; no class actions. Filing cap of 25 per year (per location for businesses). Corporations/partnerships must appear through an officer, managerial employee or attorney.",
   "lawyers_allowed": "yes",
@@ -1218,15 +1330,29 @@
     "url": "https://apps.legislature.ky.gov/record/24rs/hb353.html",
     "what": "recent_changes (HB 353 2024 not enacted)",
     "type": "statute"
+   },
+   {
+    "url": "https://www.kycourts.gov/Courts/County-Information/Documents/CCCAcctManual.pdf",
+    "what": "AOC Circuit Court Clerks' Accounting Manual: small claims = $38 civil filing fee (eff. 7/1/2026) + $20 court technology + $10 access to justice; plus if applicable library fee, $10 court facilities fee, $2.50 attorney tax fee; facilities fee max $10 for small claims (KRS 23A.220, 24A.185, 64.091)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=43828",
+    "what": "KRS 172.180: county law library fee on civil actions max $1, or $3 in counties with first-class cities, urban-county governments or cities of 20,000+",
+    "type": "statute"
+   },
+   {
+    "url": "https://codelibrary.amlegal.com/codes/barrencounty/latest/barrencounty_ky/0-0-0-1666",
+    "what": "Barren County Ord. 35.08: additional $10 on all small claims filing fees (example of local facilities fee)",
+    "type": "statute"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
    "fee_waiver_form",
-   "fee_waiver_threshold",
-   "filing_fee_max"
+   "fee_waiver_threshold"
   ],
-  "notes": "Lead confirmed: $2,500 (KRS 24A.230) per the AOC/Attorney General handbook (2025 edition). The KRS text itself was not read on the legislature site (search could not locate the statute page IDs); facts rely on the official court handbook. The $38 fee is new as of July 1, 2026; earlier charts will show older amounts.",
+  "notes": "Lead confirmed: $2,500 (KRS 24A.230) per the AOC/Attorney General handbook (2025 edition). The KRS text itself was not read on the legislature site (search could not locate the statute page IDs); facts rely on the official court handbook. The $38 fee is new as of July 1, 2026; earlier charts will show older amounts. [2026-11-07 filing_fee_max, verified: $38 fee confirmed in the order. Maximum is computed from official components, not seen as a single posted total: $38 + $20 technology + $10 access to justice + up to $10 local court facilities fee + $2.50 attorney tax fee (if applicable) + up to $3 law library fee = $83.50. Most filers pay $68-$81. No county clerk page showing a post-July-2026 total was found.] [2026-11-07 filing_fee_min, verified: Corrected from $58: the AOC accounting manual lists a $10 Access to Justice Fee on every small claims filing in addition to the $38 fee and $20 technology fee, so the lowest total is $68. filing_fee_notes should mention the $10 access to justice fee, the up-to-$10 county facilities fee, $2.50 attorney tax fee and up-to-$3 library fee.]",
   "slug": "ky"
  },
  {
@@ -1237,8 +1363,8 @@
   "limit_business": 5000,
   "limit_notes": "City court small claims divisions: $5,000, exclusive of interest, costs, attorney fees and penalties; max 10 plaintiffs, no class actions; each court may set mass-filing limits by rule (La. R.S. 13:5202). City Court of East St. Tammany uses the justice-of-the-peace limit instead. Justice of the peace courts: concurrent with district court up to $5,000 (La. C.C.P. art. 4911). Limits for parish courts and other city-court divisions not researched.",
   "recent_changes": "2026 bills to raise the justice of the peace limit (HB 1004 to $10,000; HB 1147 to $8,000 in small parishes) did not pass; art. 4911 history shows no amendment after 2008. R.S. 13:5202 last amended 2020 (Act 205).",
-  "filing_fee_min": null,
-  "filing_fee_max": null,
+  "filing_fee_min": 65,
+  "filing_fee_max": 130,
   "filing_fee_notes": "City court small claims: statute sets $35 per defendant (R.S. 13:5205), plus any costs under R.S. 13:10.3 and up to $20 per extra service or subpoena; actual totals vary by court. Justice of the peace court fees vary by court.",
   "who_can_sue": "No statewide bar on businesses, assignees or collection agencies found (courts may limit mass filings by local rule). Max 10 plaintiffs per action; no class actions.",
   "lawyers_allowed": "yes",
@@ -1288,19 +1414,36 @@
     "url": "https://www.brla.gov/2118/Small-Claims",
     "what": "lawyers_notes, service_methods (East Baton Rouge JP courts example)",
     "type": "court_site"
+   },
+   {
+    "url": "https://bossiercity.org/m/faq?cat=24",
+    "what": "Bossier City Court small claims filing deposit $65 per defendant, $20 each additional defendant",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.brla.gov/m/faq?cat=27",
+    "what": "Baton Rouge City Court civil division: small claims $85.50 for one defendant, $35 each additional",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77379",
+    "what": "R.S. 13:2590(A) (as amended by Acts 2023, No. 61): justice of the peace may demand up to $130 for a new suit, $20 per additional defendant; service $20-$30 extra",
+    "type": "statute"
+   },
+   {
+    "url": "https://static1.squarespace.com/static/6026ae91e9901c22e746e32a/t/6532dbe4cbf294723a76286c/1697831908828/Instruction%2Bon%2Bhow%2Bto%2Bfile%2Ba%2BSmall%2BClaims%2BSuit+FC.pdf",
+    "what": "First City Court of New Orleans small claims instructions (linked from orleanscivildistrictcourt.org/s/InstructiononhowtofileaSmallClaimsSuit-FC.pdf): 'You can represent yourself... However, either party may hire an attorney if they choose.'",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
-   "filing_fee_max",
    "who_can_sue",
-   "lawyers_allowed",
    "e_filing",
    "service_methods",
    "self_help_url"
   ],
-  "notes": "Multiple court systems: city court small claims divisions (no appeal), JP courts (de novo appeal in 15 days), and parish courts (not researched). No statewide official small claims self-help page found. The 15-day appeal deadline is for JP courts only.",
+  "notes": "Multiple court systems: city court small claims divisions (no appeal), JP courts (de novo appeal in 15 days), and parish courts (not researched). No statewide official small claims self-help page found. The 15-day appeal deadline is for JP courts only. [2026-11-07 filing_fee_min, verified: Fees are set court by court. Statutory base for city court small claims divisions is $35 per defendant (R.S. 13:5205) plus R.S. 13:10.3 costs, so no court actually charges just $35. Lowest confirmed total on an official court page: $65 (Bossier City Court). Baton Rouge City Court: $85.50. New Orleans First City Court's instructions don't list the amount (says call the clerk) and add a $20 constable service fee. Range is what was confirmed, not a guaranteed statewide floor.] [2026-11-07 filing_fee_max, verified: JP court new-suit fee is capped by statute at $130 (+$20 per additional defendant, plus service/constable fees). City court small claims totals confirmed: $65 (Bossier City), $85.50 (Baton Rouge). Some city courts not checked could charge more; $130 is the highest confirmed amount, for one defendant before service. Suggested filing_fee_notes: 'Varies by court. City court small claims: $35 per defendant by statute plus local costs (e.g., Bossier City $65, Baton Rouge $85.50). Justice of the peace courts: up to $130 plus $20 per extra defendant (R.S. 13:2590). Service fees extra.'] [2026-11-07 lawyers_allowed, verified: Confirmed on a city court's official instructions: either party may hire an attorney. No statutory bar found in R.S. 13:5200 et seq.]",
   "slug": "la"
  },
  {
@@ -1405,17 +1548,21 @@
     "url": "https://www.mdcourts.gov/legalhelp/smallclaims",
     "what": "lawyers_notes, service_methods, appeal (retried in circuit court), e_filing_notes",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.mdcourts.gov/courthelp/aftertrialdistrictcourt",
+    "what": "Md. Judiciary 'Appeals and Motions After Trial in the District Court': most civil cases 30 days after judgment; small claims ($5,000 or less) appeal is de novo; total appeal fee $175 ($10 District Court + $165 circuit court)",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "appeal_deadline_days",
    "e_filing",
    "fee_waiver_form",
    "fee_waiver_threshold",
    "who_can_sue"
   ],
-  "notes": "No pending bill to raise the $5,000 limit found. 30-day deadline is from Md. Rule 7-104 (not re-read this round).",
+  "notes": "No pending bill to raise the $5,000 limit found. 30-day deadline is from Md. Rule 7-104 (not re-read this round). [2026-11-07 appeal_deadline_days, verified: Confirmed on the Judiciary's own page (matches Md. Rule 7-104(a), whose text on govt.westlaw.com couldn't be fetched). A timely motion for new trial/alter or amend restarts the clock from the ruling on the motion. Landlord-tenant cases have shorter deadlines (10 days; 4 days for failure to pay rent). New detail for the appeal field: fee $175 for a small claim appeal.]",
   "slug": "md"
  },
  {
@@ -1472,19 +1619,27 @@
     "url": "https://www.mass.gov/info-details/housing-court-filing-fees",
     "what": "filing_fee_min ($30 + $10 surcharge = $40)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.mass.gov/info-details/boston-municipal-court-and-district-court-filing-fees",
+    "what": "Trial Court fee table: small claim $500 or less $30+$10 = $40; $501-$2,000 $40+$10 = $50; $2,001-$5,000 $90+$10 = $100; $5,001-$7,000 $140+$10 = $150 (G.L. c. 218, s. 22)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.mass.gov/info-details/small-claims-court",
+    "what": "Small Claims Court guide (offered by the Office of Consumer Affairs and Business Regulation, District Court and Boston Municipal Court): 'you do not need an attorney... though you are permitted to retain an attorney if you wish'",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_max",
-   "lawyers_allowed",
    "who_can_sue",
    "e_filing",
    "service_methods",
    "fee_waiver_threshold",
    "self_help_url"
   ],
-  "notes": "mass.gov blocked automated fetching, so the Trial Court's own small claims guide and fee table were not read. The malegislature.gov page for c. 218 \u00a7 22 shows two fee schedules (older $20/$30 and current $30/$40/$90/$140); totals above assume the current one plus $10 surcharge, which matches the $40 figure seen in a mass.gov search snippet. H.1860 status from bill trackers; c. 261 \u00a7 27A criteria from a search summary of the statute page.",
+  "notes": "mass.gov blocked automated fetching, so the Trial Court's own small claims guide and fee table were not read. The malegislature.gov page for c. 218 \u00a7 22 shows two fee schedules (older $20/$30 and current $30/$40/$90/$140); totals above assume the current one plus $10 surcharge, which matches the $40 figure seen in a mass.gov search snippet. H.1860 status from bill trackers; c. 261 \u00a7 27A criteria from a search summary of the statute page. [2026-11-07 filing_fee_max, verified: Read the official BMC/District Court fee page in a browser (mass.gov loads there). Values match the current row. Top tier is labeled $5,001-$7,000 (the limit), so 'over $5,000' in the notes is fine. A search summary of mass.gov also mentions a $7 service fee if you eFile, which wasn't checked on the page itself.] [2026-11-07 lawyers_allowed, verified: Confirmed on a mass.gov page co-offered by the District Court and BMC.]",
   "slug": "ma"
  },
  {
@@ -1565,7 +1720,7 @@
   "limit_notes": "$20,000 generally; $4,000 for claims involving a consumer credit transaction (claimant is the original seller or lender) (Minn. Stat. \u00a7 491A.01, subd. 3a).",
   "recent_changes": "Limit raised from $15,000 to $20,000 by 2024 Minn. Laws ch. 123, art. 15, \u00a7 6 (no special effective date in the section, so the general Aug. 1, 2024 date applies). Gen. R. Prac. 512 and 521 amended effective July 1, 2026 (in-person appearance requirement removed).",
   "filing_fee_min": 65,
-  "filing_fee_max": null,
+  "filing_fee_max": 80,
   "filing_fee_notes": "$65 filing fee (Minn. Stat. \u00a7 357.022) plus any county law library fee; charged to each plaintiff and each defendant when that party files its first paper. Removal to district court costs the regular civil filing fee.",
   "who_can_sue": "Individuals and entities. Businesses may appear through an officer, manager, partner, or an authorized employee/commercial property manager with proof of authority. Consumer-credit claims capped at $4,000 and only by the original seller/lender.",
   "lawyers_allowed": "yes",
@@ -1615,15 +1770,19 @@
     "url": "https://www.revisor.mn.gov/statutes/cite/563.01",
     "what": "fee_waiver_threshold",
     "type": "statute"
+   },
+   {
+    "url": "https://mncourts.gov/help-topics/court-fees/district-court-fees",
+    "what": "Minnesota Judicial Branch fee calculator, Conciliation category, checked for all 87 counties: first-paper fee is the $65 base plus the county law library fee (0 to $15)",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_max",
    "e_filing",
    "fee_waiver_form"
   ],
-  "notes": "mncourts.gov blocked automated fetching; Aug. 1, 2024 effective date inferred from the absence of a section-specific date in ch. 123.",
+  "notes": "mncourts.gov blocked automated fetching; Aug. 1, 2024 effective date inferred from the absence of a section-specific date in ch. 123. [2026-11-07 filing_fee_max, verified: Checked every county on the official fee calculator. Range is $65 to $80. $65 (no law library fee): Chippewa, Freeborn, Grant, Houston, Lac qui Parle, Steele, Wabasha, Waseca, Wilkin, Yellow Medicine. $80 ($15 library fee): Anoka, Benton, Carver, Dakota, Jackson, Kandiyohi, Kittson, Koochiching, Lake of the Woods, Meeker, Olmsted, Ramsey, Rice, St. Louis, Swift, Traverse, Wadena, Washington. Others are $70, $75, $77, $78 or $79 (e.g., Hennepin $70, Stearns $79). Same fee applies to a defendant's first paper. Removal to district court is $310 base plus library fee ($322 in Hennepin).]",
   "slug": "mn"
  },
  {
@@ -1634,15 +1793,15 @@
   "limit_business": 3500,
   "limit_notes": "Justice court judges hear actions for debts, damages or personal property up to $3,500 (Miss. Code \u00a7 9-11-9). County courts have higher limits but are not small claims courts.",
   "recent_changes": "Bills to raise the limit to $5,000 failed in 2025 and 2026 (e.g., 2026 HB 876 died in committee Feb. 3, 2026).",
-  "filing_fee_min": null,
-  "filing_fee_max": null,
+  "filing_fee_min": 75,
+  "filing_fee_max": 85,
   "filing_fee_notes": "Statute sets a uniform civil fee of $25 plus $5 per extra defendant for service (Miss. Code \u00a7 25-7-25), but counties add state assessments, so actual totals vary; check the county justice court cost sheet.",
   "who_can_sue": "No statewide bar on businesses, assignees or collection agencies found; consumer debt and landlord-tenant cases are the main civil caseload.",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Lawyers allowed; some courts (e.g., DeSoto County) have self-represented parties sign a waiver of counsel form.",
   "appeal": "Either party may appeal to county court (or circuit court if no county court) for a new trial; statute requires demand and bond (double the judgment, at least $100) within 10 days after judgment, with a poverty affidavit option for defendants (Miss. Code \u00a7 11-51-85). Court rules (URCCC) say justice court appeals are tried de novo; DeSoto County's justice court says appeals may be filed within 30 days.",
   "appeal_who": "both",
-  "appeal_deadline_days": 10,
+  "appeal_deadline_days": 30,
   "e_filing": null,
   "e_filing_notes": "Not confirmed.",
   "fee_waiver_form": "Pauper's affidavit (form not confirmed)",
@@ -1670,13 +1829,30 @@
     "url": "https://desotocountyms.gov/m/faq?cat=16",
     "what": "lawyers_notes, appeal (30-day statement)",
     "type": "court_site"
+   },
+   {
+    "url": "https://courts.ms.gov/research/rules/msrulesofcourt/Rules%20of%20Justice%20Court.pdf",
+    "what": "Rules of Justice Court, Rule 27(a): civil appeals from justice court are governed by Rules 5.01, 5.04, 5.07, 5.08 and 5.09 of the Uniform Civil Rules of Circuit and County Court",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://courts.ms.gov/research/rules/msrulesofcourt/UCRCCC%20Post-070117.pdf",
+    "what": "UCRCCC 5.01 (direct appeals from justice court are by trial de novo); 5.04 (notice of appeal and payment of costs filed with the circuit court clerk within thirty (30) days of entry of the judgment); 5.08 (supersedeas bond 125% of money judgment); 5.09 (cost bond)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.rankincounty.org/topic/index.php?topicid=52",
+    "what": "Rankin County Justice Court civil suit filing fees: 1 defendant $75, 2 $85, 3 $95, 4 $105 ($10 per extra defendant)",
+    "type": "court_site"
+   },
+   {
+    "url": "https://desotocountyms.gov/147/Civil-Division",
+    "what": "DeSoto County Justice Court civil: $85 one defendant served in DeSoto County, $100 two defendants at the same address",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "appeal_deadline_days",
-   "filing_fee_min",
-   "filing_fee_max",
    "who_can_sue",
    "e_filing",
    "fee_waiver_form",
@@ -1684,7 +1860,7 @@
    "service_methods",
    "self_help_url"
   ],
-  "notes": "CONFLICT: Miss. Code \u00a7 11-51-85 says 10 days (2023 HB 870 to change it to 30 days died), but DeSoto County's justice court FAQ says 30 days, likely reflecting URCCC Rule 5 (30-day notice of appeal). Needs human check. courts.ms.gov returned server errors during this check, so the AOC justice court page and Rules of Justice Court PDF could not be read. Statute text taken from official bill texts on the legislature's site, which reproduce current law.",
+  "notes": "CONFLICT: Miss. Code \u00a7 11-51-85 says 10 days (2023 HB 870 to change it to 30 days died), but DeSoto County's justice court FAQ says 30 days, likely reflecting URCCC Rule 5 (30-day notice of appeal). Needs human check. courts.ms.gov returned server errors during this check, so the AOC justice court page and Rules of Justice Court PDF could not be read. Statute text taken from official bill texts on the legislature's site, which reproduce current law. [2026-11-07 appeal_deadline_days, verified: Resolved the conflict: the Mississippi Supreme Court's Rules of Justice Court (Rule 27) send civil appeals through UCRCCC 5.04, which sets 30 days, filed with the circuit court clerk with costs paid. Miss. Code s. 11-51-85 still says 10 days, but the court rules govern procedure, and DeSoto County's 30-day statement matches them. Suggested appeal text: either party may appeal to circuit court for a new trial (de novo) by filing a notice of appeal and paying costs with the circuit clerk within 30 days of judgment; collection is stayed only by a supersedeas bond of 125% of the judgment. Mention that the statute still says 10 days and to file early if unsure.] [2026-11-07 filing_fee_min, verified: Statute (s. 25-7-25) sets a $25 uniform civil fee, but county totals include state assessments and service. Confirmed one-defendant totals: Rankin $75, DeSoto $85. Hinds County's page (snippet showed $85, eff. 7/1/2022) returned 503, and Holmes County's page ($74 in a snippet) has an untrusted certificate, so neither was read. 2026 fee bill died, so no change pending.] [2026-11-07 filing_fee_max, verified: Highest confirmed one-defendant total is $85 (DeSoto). Extra defendants cost more ($10-$15 each). Suggested filing_fee_notes: 'Varies by county: about $75-$85 for one defendant (Rankin $75, DeSoto $85), more for each extra defendant; statute sets the $25 base (Miss. Code s. 25-7-25) and counties add assessments and service.']",
   "slug": "ms"
  },
  {
@@ -1695,9 +1871,9 @@
   "limit_business": 5000,
   "limit_notes": "$5,000 exclusive of interest or costs (RSMo 482.305). Max 12 other small claims filed in Missouri in the current calendar year; assignees barred (RSMo 482.330). Money only; no evictions.",
   "recent_changes": null,
-  "filing_fee_min": null,
-  "filing_fee_max": null,
-  "filing_fee_notes": "Varies by county; filing fee plus certified-mail or sheriff/process-server cost. Examples seen in search results from county court pages: Jackson County $27 + service, Greene County $35.50, Webster County $38.50.",
+  "filing_fee_min": 35.5,
+  "filing_fee_max": 100,
+  "filing_fee_notes": "Varies by county. State law sets a small base fee that the Missouri Supreme Court adjusts, and counties add surcharges (RSMo 488.012). Confirmed examples: Greene County $35.50, Webster County $38.50, Morgan County $100. Service is extra: certified mail about $10 per defendant, or sheriff/process server (Greene County sheriff $55 per defendant). Check your county circuit clerk's fee list.",
   "who_can_sue": "Any person or business owed money. Assignees (anyone who bought or acquired the claim) may not file, and no one may file after 12 other small claims that calendar year; plaintiff signs a statement certifying both (RSMo 482.330).",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Parties may proceed without a lawyer or bring one. Filing an application for trial de novo has been held to be the practice of law (Palmore v. City of Pacific, 2013).",
@@ -1731,18 +1907,35 @@
     "url": "https://www.courts.mo.gov/hosted/circuit13/forms/Civil/CIVIL_SmallClaimsCourtHandbook.pdf",
     "what": "service_methods, fee_waiver_threshold, lawyers_notes, who_can_sue (Missouri Bar handbook rev. April 2021, hosted by 13th Circuit)",
     "type": "court_site"
+   },
+   {
+    "url": "https://revisor.mo.gov/main/OneSection.aspx?section=488.012",
+    "what": "RSMo 488.012.3(7): small claims fee $5 (under $100) / $10 (other) before adjustment by the Supreme Court; Supreme Court sets court costs by rule",
+    "type": "statute"
+   },
+   {
+    "url": "https://greenecounty31.squarespace.com/small-claims",
+    "what": "Greene County Circuit Clerk: small claims filing fee $35.50; certified mail $10 per defendant; Greene County sheriff $55 per defendant",
+    "type": "court_site"
+   },
+   {
+    "url": "https://webstercountymo.gov/circuit-clerks-office/small-claims/",
+    "what": "Webster County Circuit Clerk: small claims filing fee $38.50 plus sheriff service fees",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.morgancountymo.gov/small-claims-and-fees",
+    "what": "Morgan County Circuit Clerk small claims page: '$100.00 filing fee plus any additional costs for summons service' by the sheriff",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
-   "filing_fee_max",
-   "filing_fee_notes",
    "e_filing",
    "fee_waiver_form",
    "self_help_url"
   ],
-  "notes": "courts.mo.gov main pages blocked automated fetching; handbook is from 2021 (Missouri Bar, court-hosted). Statutory limits and appeal rules checked on revisor.mo.gov.",
+  "notes": "courts.mo.gov main pages blocked automated fetching; handbook is from 2021 (Missouri Bar, court-hosted). Statutory limits and appeal rules checked on revisor.mo.gov. [2026-11-07 filing_fee_min, verified: No single statewide amount: the statutory $10 base is adjusted by Supreme Court rule and surcharges/local fees are added, so totals differ by county. Lowest confirmed on an official clerk page: $35.50 (Greene County). A search snippet showed Butler County at $35.50 (eff. 1/1/2024) but it wasn't opened.] [2026-11-07 filing_fee_max, verified: Highest confirmed: Morgan County's circuit clerk page says $100, much higher than other counties ($35.50-$38.50). It may include service or be out of date; the page gives no date. Treat $100 as the top of the confirmed range, not a statewide cap.] [2026-11-07 filing_fee_notes, verified: Replaces the earlier snippet-based examples (Jackson County $27 wasn't confirmed and is dropped). courts.mo.gov wasn't needed.]",
   "slug": "mo"
  },
  {
@@ -1814,15 +2007,28 @@
     "url": "https://dojmt.gov/wp-content/uploads/2025/02/Small-Claims-Court-Brochure_OCP-2.pdf",
     "what": "self-help overview (limit, attorneys, appeal not a new trial)",
     "type": "court_site"
+   },
+   {
+    "url": "https://mca.legmt.gov/bills/mca/title_0030/chapter_0010/part_0030/section_0170/0030-0010-0030-0170.html",
+    "what": "MCA 3-1-317: $10 user surcharge (court technology) at the start of each civil action in all courts of original jurisdiction; $10 per appearing defendant",
+    "type": "statute"
+   },
+   {
+    "url": "https://bighorncountymt.gov/172/Justice-Court",
+    "what": "Big Horn County Justice Court: small claims filing fee $30",
+    "type": "court_site"
+   },
+   {
+    "url": "https://carbonmt.gov/departments/justice-court",
+    "what": "Carbon County Justice Court: small claims filing fee $30 (civil suit $50)",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "e_filing",
-   "filing_fee_min",
-   "filing_fee_max"
+   "e_filing"
   ],
-  "notes": "Filing fee: statute says $20; the $30 amount in practice comes from a county justice court page (Park County), and the extra $10 is the statewide court technology surcharge (MCA 3-1-317), which I did not open. Park County gives the appeal deadline as 10 business days; the statute just says 10 days. The DOJ consumer-protection page returned 403 to the fetch tool, but its 2025 brochure PDF was readable. The self-help URL is a state agency (DOJ Office of Consumer Protection) page, not a court page.",
+  "notes": "Filing fee: statute says $20; the $30 amount in practice comes from a county justice court page (Park County), and the extra $10 is the statewide court technology surcharge (MCA 3-1-317), which I did not open. Park County gives the appeal deadline as 10 business days; the statute just says 10 days. The DOJ consumer-protection page returned 403 to the fetch tool, but its 2025 brochure PDF was readable. The self-help URL is a state agency (DOJ Office of Consumer Protection) page, not a court page. [2026-11-07 filing_fee_min, verified: $20 statutory fee + $10 technology surcharge (MCA 3-1-317, now read) = $30, confirmed on three county justice court pages. Defendant fees vary in practice (Big Horn lists $20 appearance in its table and $30 in its FAQ). Optional district-court small claims courts (MCA 3-12-) weren't checked.] [2026-11-07 filing_fee_max, verified: Same as min: $30 to file, plus service by sheriff/process server.]",
   "slug": "mt"
  },
  {
@@ -1913,7 +2119,7 @@
   "who_can_sue": "Plaintiff must be 18+ (per North Las Vegas Justice Court). Corporations, partnerships, business trusts, estates, trusts, associations and other non-government entities may be represented by a director, officer or employee (NRS 73.012). No statutory bar on assignees found in NRS 73.",
   "lawyers_allowed": "yes",
   "lawyers_notes": "No prohibition; most parties represent themselves. Attorney fees generally not recoverable (NRS 73.040), except a district court may award up to $15 on appeal (NRS 73.050).",
-  "appeal": "Either party may appeal to district court; notice of appeal is filed in justice court within 7 calendar days from service of the judgment (JCRCP 98). Requires an appeal bond: a judgment debtor posts the judgment plus interest, plus $100 for costs and $15 for attorney fees; a plaintiff appellant posts $100 + $15 (JCRCP 100). The district court reviews on the record (not a new trial) according to secondary sources; not confirmed in the rules.",
+  "appeal": "Either party may appeal to district court by filing a notice of appeal in the justice court within 7 calendar days from service of the judgment (JCRCP 98), with a brief statement of the basis for the appeal (JCRCP 99) and an appeal bond: a losing defendant posts the judgment plus interest, plus $100 for costs and $15 for attorney fees; a plaintiff posts $100 + $15 (JCRCP 100). Court fees also apply (e.g., Sparks Justice Court: $50 appeal fee, $115 cost bond, $211 district court fee). The district court does not hold a new trial: it decides the appeal on the justice court record and short written briefs, and you can't add documents that weren't given to the justice court (Clark County: EDCR 9.06-9.08; Washoe County: WDCR 19(4)).",
   "appeal_who": "both",
   "appeal_deadline_days": 7,
   "e_filing": "some_courts",
@@ -1953,16 +2159,34 @@
     "url": "https://www.clarkcountynv.gov/government/departments/justice_courts/jurisdictions/north_las_vegas/divisions/small_claims/",
     "what": "age 18+, service methods, demand letter, limit",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.leg.state.nv.us/CourtRules/EighthDCR.html",
+    "what": "EDCR Part IX (eff. June 25, 2024): justice court appeals decided on the record (papers, minutes, orders; transcripts for non-small-claims civil appeals) and 10-page briefs; briefs may not include documents not provided to the justice court; no oral argument unless ordered",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.leg.state.nv.us/CourtRules/SecondDCR.html",
+    "what": "WDCR 19(4): in civil appeals from justice court, appellant files a brief stating the errors committed in the justice court",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.washoecounty.gov/sjc/files/Small Claims Appeal/1. How to Appeal.Small Claims Packet.pdf",
+    "what": "Sparks Justice Court packet (10/31/2024): 7 calendar days (JCRCP 98); fees $50 + $115 cost bond + $211 district court filing fee",
+    "type": "court_site"
+   },
+   {
+    "url": "https://humboldtcountynv.gov/187/Plaintiff-Information",
+    "what": "Humboldt County justice court plaintiff information: small claims filing fee $46 up to $1,000; $66 to $2,500; $86 to $5,000; $126 to $7,500; $176 to $10,000",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "appeal",
    "e_filing",
-   "self_help_url",
-   "filing_fee_min"
+   "self_help_url"
   ],
-  "notes": "Fees vary by township and county because of optional add-ons; the $46 minimum is calculated, not published. The scope of district court review (on the record vs. new trial) isn't stated in JCRCP 98-100; secondary sources conflict, so mark the appeal scope for human review. The trialcourts.nvcourts.gov self-help article returned 403 to the fetch tool, so its content is unconfirmed.",
+  "notes": "Fees vary by township and county because of optional add-ons; the $46 minimum is calculated, not published. The scope of district court review (on the record vs. new trial) isn't stated in JCRCP 98-100; secondary sources conflict, so mark the appeal scope for human review. The trialcourts.nvcourts.gov self-help article returned 403 to the fetch tool, so its content is unconfirmed. [2026-11-07 appeal, verified: No statewide rule now says in words that small claims appeals aren't tried anew (old JCRCP 76A said so; the Oct. 2024 rewrite left 76A reserved). But the district court rules for Clark County (EDCR Part IX) and Washoe County (WDCR 19) handle these as appeals on the record and briefs reviewing errors, not new trials. Rural districts' local rules weren't checked. The Reno Justice Court web page still says '5 judicial days', which is out of date. appeal_who 'both' and appeal_deadline_days 7 are unchanged.] [2026-11-07 filing_fee_min, verified: The calculated $46 minimum ($45 base + $1) now matches a published county schedule (Humboldt County). Other courts add optional fees (Las Vegas $66, Sparks $71 for the lowest tier).]",
   "slug": "nv"
  },
  {
@@ -2009,18 +2233,20 @@
     "url": "https://www.courts.nh.gov/sites/g/files/ehbemt471/files/documents/2021-07/scefilinginfo.pdf",
     "what": "$125 / $180 totals (search excerpt; page returned 403)",
     "type": "form"
+   },
+   {
+    "url": "https://www.courts.nh.gov/rules-circuit-court-state-new-hampshire-district-division/rule-128-court-fees",
+    "what": "District Division Rule 1.28: small claims entry/counterclaim $5,000 or less $105; $5,001-$10,000 $160; transfer fee $145; (III)(B) $20 e-filing surcharge added to each small claims filing fee except the transfer fee",
+    "type": "court_rule"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
-   "filing_fee_max",
-   "e_filing",
    "fee_waiver_form",
    "fee_waiver_threshold",
    "recent_changes"
   ],
-  "notes": "courts.nh.gov blocks automated fetching (403), so fees, the e-filing requirement and the fee waiver standard come from official-domain search excerpts only. Secondary sites give conflicting fees ($90/$145, $105/$160). A 2025 rules memo proposed lower fees, and it's unclear whether that was adopted. A human should check the current Rule 3.3 fee schedule in a browser.",
+  "notes": "courts.nh.gov blocks automated fetching (403), so fees, the e-filing requirement and the fee waiver standard come from official-domain search excerpts only. Secondary sites give conflicting fees ($90/$145, $105/$160). A 2025 rules memo proposed lower fees, and it's unclear whether that was adopted. A human should check the current Rule 3.3 fee schedule in a browser. [2026-11-07 filing_fee_min, verified: Read Rule 1.28 on courts.nh.gov in a browser: $105 + $20 surcharge = $125. Rule 4.1 still cites 'District Division Rule 3.3' for fees, but the live fee rule is 1.28; cite 1.28. Card/e-payment service charges are extra. The 2025 memo about lower fees wasn't adopted in the posted rule.] [2026-11-07 filing_fee_max, verified: $160 + $20 = $180 for claims of $5,001-$10,000.] [2026-11-07 e_filing, verified: Confirmed on the rule page: e-filing is mandatory unless an exemption is granted. Rule 4.1(a)(3) also says the small claims fee is waived only for extraordinary circumstances (useful for fee_waiver_threshold).]",
   "slug": "nh"
  },
  {
@@ -2096,7 +2322,7 @@
   "who_can_sue": "A person 18+ (or a parent, guardian, next friend, trustee or executor), or a business entity. The court pamphlet warns a corporation or LLC 'may be required by law to hire an attorney'.",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Lawyers are allowed but not required. Entities may need a lawyer (see who_can_sue).",
-  "appeal": "Magistrate court: either party may appeal to district court by filing a notice of appeal in district court within 15 days after the judgment is filed; the case is tried de novo (new trial) under Rule 1-072 NMRA and NMSA 35-13-2. Metropolitan Court: the same 15-day deadline and Rule 1-072 apply to de novo cases, but most non-landlord-tenant civil cases there are reviewed on the record, because Metro Court is a court of record (NMSA 34-8A-6). District court appeal fee is about $132.",
+  "appeal": "Magistrate court (all counties except Bernalillo): either party may appeal to the district court of the county by filing a notice of appeal in district court within 15 days after the judgment is filed; the case is tried de novo (new trial) under Rule 1-072 NMRA. Bernalillo County Metropolitan Court: for ordinary civil cases (everything except landlord-tenant cases under the Uniform Owner-Resident Relations Act) Metro Court is a court of record, so the appeal goes to the New Mexico Court of Appeals on the record, by a notice of appeal filed in Metro Court within 30 days after the final order (Rule 3-706(C), effective for cases filed on or after Dec. 31, 2025; NMSA 34-8A-6(B)). Landlord-tenant (Owner-Resident Relations Act) judgments from Metro Court are appealed de novo to district court within 15 days (34-8A-6(C); Rule 3-706(B); Rule 1-072).",
   "appeal_who": "both",
   "appeal_deadline_days": 15,
   "e_filing": "some_courts",
@@ -2136,6 +2362,21 @@
     "url": "https://thirddistrict.nmcourts.gov/wp-content/uploads/sites/22/2023/11/Civil-Appeal-in-District-Court-from-Magistrate-Court-Judgment-10-13-23.pdf",
     "what": "appeal fee $132, Form 4-222 fee waiver (seen in search excerpt)",
     "type": "court_site"
+   },
+   {
+    "url": "https://supremecourt.nmcourts.gov/wp-content/uploads/sites/2/2025/10/Rule-3-706-NMRA.pdf",
+    "what": "Metro Court civil appeals: de novo to district court in 15 days (B); on-record to Court of Appeals, notice filed in Metro Court within 30 days (C); effective for cases filed on/after Dec. 31, 2025",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://nmlegis.gov/Sessions/19%20Regular/final/HB0279.PDF",
+    "what": "NMSA 34-8A-6 as amended 2019: Metro Court is a court of record for civil actions other than Uniform Owner-Resident Relations Act cases; appeals go to the Court of Appeals; UORRA cases not of record",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.nmlegis.gov/Legislation/Legislation?chamber=H&legType=B&legNo=20&year=20",
+    "what": "2020 HB 20 (to put UORRA cases back on record) died, so the 2019 text stands",
+    "type": "statute"
    }
   ],
   "date_checked": "2026-11-05",
@@ -2143,10 +2384,9 @@
    "fee_waiver_form",
    "fee_waiver_threshold",
    "e_filing",
-   "appeal",
    "who_can_sue"
   ],
-  "notes": "No 'small claims court' by name: magistrate courts fill that role statewide, and Metro Court does in Bernalillo County. Couldn't open NMSA text (Justia 403; NMOneSource not tried successfully), so statute citations come from court pages and search excerpts. Metro Court civil appeals (on record vs. de novo, and district court vs. Court of Appeals) need a human check against current NMSA 34-8A-6 and Rules 1-073/1-074. The fee-waiver form number comes from a search excerpt of a district court appeal guide.",
+  "notes": "No 'small claims court' by name: magistrate courts fill that role statewide, and Metro Court does in Bernalillo County. Couldn't open NMSA text (Justia 403; NMOneSource not tried successfully), so statute citations come from court pages and search excerpts. Metro Court civil appeals (on record vs. de novo, and district court vs. Court of Appeals) need a human check against current NMSA 34-8A-6 and Rules 1-073/1-074. The fee-waiver form number comes from a search excerpt of a district court appeal guide. [2026-11-07 appeal, verified: Corrects the current row: Metro Court on-record civil appeals no longer go to district court; since the 2019 amendment of NMSA 34-8A-6 they go to the Court of Appeals, and amended Rule 3-706 (Rule 1-073 withdrawn) sets a 30-day notice filed in Metro Court. Statute text read from the enrolled 2019 HB 279 on nmlegis.gov (NMOneSource current compilation not opened); no later amendment found. appeal_deadline_days 15 stays correct for magistrate courts and Metro landlord-tenant cases; mention the 30-day Metro on-record exception.]",
   "slug": "nm"
  },
  {
@@ -2163,7 +2403,7 @@
   "who_can_sue": "Individuals, including the self-employed suing in their own name. Corporations, partnerships, associations, assignees and insurers may NOT start small claims, except municipal and public benefit corporations and school districts (CCA 1809). Businesses with a principal office in NY use commercial claims (max 5 per month; consumer-transaction claims need a demand letter 10-180 days before filing and a sworn certification). A corporation defending a claim may appear through an attorney or an authorized officer, director or employee. Minors sue through a parent or guardian.",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Attorneys are allowed but not required.",
-  "appeal": "Either party may appeal, but only on the ground that substantial justice was not done between the parties under substantive law (CCA 1807; the claimant otherwise waives appeal). Time to appeal is 30 days after service of the judgment with notice of entry (CPLR 5513(a)). Appeals go to the Appellate Term (NYC, and the 2nd Department generally) or to County Court (city and town courts elsewhere). Judgments of arbitrators chosen instead of a judge cannot be appealed.",
+  "appeal": "A claimant who starts a small claims case gives up the right to appeal, except that either party may appeal on the sole ground that substantial justice was not done between the parties under the rules of substantive law (CCA/UCCA/UDCA/UJCA 1807). Review is on the record (transcript or recording), not a new trial. Deadline: 30 days after service of the judgment with notice of entry (CPLR 5513(a)); in NYC Civil Court, 30 days from the earliest service of the judgment by the court or a party, plus 5 days if served by mail (CCA 1703(b)). Court: NYC Civil Court appeals go to the Appellate Term (CCA 1701); City, District and Town/Village Court appeals go to County Court unless the Appellate Division has directed them to the Appellate Term (UCCA, UDCA, UJCA 1701). A decision by a volunteer arbitrator (chosen instead of a judge) cannot be appealed, and a default judgment must first be challenged by a motion to vacate.",
   "appeal_who": "both",
   "appeal_deadline_days": 30,
   "e_filing": "some_courts",
@@ -2233,15 +2473,49 @@
     "url": "https://www.nycourts.gov/town-and-village-justice-courts/town-and-village-courts-frequently-asked-questions-faqs",
     "what": "Town/Village limit and fees, no commercial claims there (search excerpt)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.nysenate.gov/legislation/laws/CCA/1703",
+    "what": "NYC small/commercial claims appeal: 30 days from earliest service of judgment, +5 days by mail",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.nysenate.gov/legislation/laws/CCA/1701",
+    "what": "NYC Civil Court appeals to Appellate Term (as directed by Appellate Division)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.nysenate.gov/legislation/laws/UCT/1701",
+    "what": "City Court civil appeals to County Court unless Appellate Term directed",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.nysenate.gov/legislation/laws/UDC/1701",
+    "what": "District Court civil appeals to County Court unless Appellate Term directed",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.nysenate.gov/legislation/laws/UJC/1701",
+    "what": "Town/Village Court civil appeals to County Court unless Appellate Term directed",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.nycourts.gov/new-york-city-small-claims-court/appearing-nyc-small-claims-court",
+    "what": "arbitrator's decision cannot be appealed; judge's decision can",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.nycourts.gov/courts/oneida-city-court/oneida-city-court-small-claims-appeals",
+    "what": "example: either party may appeal to County Court within 30 days; review limited to substantial justice on the record; defaults cannot be appealed",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
    "e_filing",
-   "fee_waiver_form",
-   "appeal"
+   "fee_waiver_form"
   ],
-  "notes": "nycourts.gov (including the 2026-08 small claims guide PDF) returned 403, so everything here rests on the statutes on nysenate.gov. Appeal-court routing (Appellate Term vs. County Court) is from general knowledge of NY court structure and wasn't checked against a page. UCCA 1801 shows a revision dated 2024-01-05 and CCA 1801 one dated 2023-07-07; the limits shown are current, but I didn't confirm what those revisions changed.",
+  "notes": "nycourts.gov (including the 2026-08 small claims guide PDF) returned 403, so everything here rests on the statutes on nysenate.gov. Appeal-court routing (Appellate Term vs. County Court) is from general knowledge of NY court structure and wasn't checked against a page. UCCA 1801 shows a revision dated 2024-01-05 and CCA 1801 one dated 2023-07-07; the limits shown are current, but I didn't confirm what those revisions changed. [2026-11-07 appeal, verified: Routing now checked against the statutes (nysenate.gov) and nycourts.gov pages (read in the browser; WebFetch gets 403). The 'Appellate Term (2nd Department generally)' wording in the current row is imprecise: Appellate Term is used where the Appellate Division has set one up (NYC, Long Island, and 2nd Dept. counties); elsewhere County Court. appeal_deadline_days 30 confirmed.]",
   "slug": "ny"
  },
  {
@@ -2378,15 +2652,15 @@
   "limit_business": 6000,
   "limit_notes": "Recovery of money or taxes up to $6,000 excluding interest and costs (R.C. 1925.02(A)(1)). Excluded: libel, slander, replevin, malicious prosecution, abuse of process, punitive damages, and claims by an assignee or agent (with exceptions for tax claims and certain holders of retail installment contracts). Counterclaims over $6,000 move the case to the regular docket.",
   "recent_changes": "R.C. 1925.02 amended by S.B. 237 (135th G.A.), effective April 9, 2025, adjusting the assignee exceptions for holders of security agreements and retail installment contracts. The $6,000 limit is unchanged since H.B. 387 (2016).",
-  "filing_fee_min": null,
-  "filing_fee_max": null,
+  "filing_fee_min": 49,
+  "filing_fee_max": 124,
   "filing_fee_notes": "Each court sets its own fee (R.C. 1925.04). Examples: Sandusky Municipal Court $105 (one or two defendants, +$10 each additional), personal service $35. Franklin County Municipal Court announced a $6 small claims cost increase in June 2026; bailiff service $25 per defendant. Certified mail service is usually included or billed by the clerk.",
   "who_can_sue": "Individuals and businesses. Assignees and agents generally cannot sue (no collection agencies). A corporation may sue through an attorney, or through a bona fide officer or salaried employee on claims where it was the original party. Non-attorney corporate representatives may not cross-examine or argue (R.C. 1925.17).",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Attorneys may appear for any party. Non-attorney corporate representatives are limited (see who_can_sue).",
-  "appeal": "Cases are usually heard by a magistrate. Either party may file written objections to the magistrate's decision within 14 days (Civ.R. 53); the judge then enters judgment. Appeal from the final judgment goes to the court of appeals within 30 days (App.R. 4), on the record.",
+  "appeal": "Small claims cases are usually heard by a magistrate. Either party may file written objections to the magistrate's decision within 14 days of its filing (another party may then object within 10 days after the first objections); objecting to findings of fact requires a transcript (Civ.R. 53(D)(3)(b)). The judge then rules and enters judgment. Either party may appeal the final judgment to the district court of appeals by filing a notice of appeal within 30 days of entry of the judgment (App.R. 4(A)); review is on the record, not a new trial. Failing to object to the magistrate's decision generally limits what can be raised on appeal.",
   "appeal_who": "both",
-  "appeal_deadline_days": 14,
+  "appeal_deadline_days": 30,
   "e_filing": "some_courts",
   "e_filing_notes": "Varies by municipal or county court; not confirmed statewide.",
   "fee_waiver_form": "Poverty affidavit / affidavit of indigency (form varies by court)",
@@ -2424,20 +2698,36 @@
     "url": "https://www.fcmcclerk.com/documents/announcements/Court and Clerk Press Release increase in cost of civil filings June 2026.pdf",
     "what": "Franklin County small claims cost increase June 2026 (search excerpt)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/civil/CivilProcedure.pdf",
+    "what": "Civ.R. 53(D)(3)(b)(i): objections within 14 days, others within 10 days after first objections",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.supremecourt.ohio.gov/docs/LegalResources/Rules/appellate/AppellateProcedure.pdf",
+    "what": "App.R. 4(A)(1): notice of appeal within 30 days of entry of a final order; 4(A)(3) clock starts when clerk completes service if late",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://courtclerk.org/self-help-resources/file-a-claim-in-small-claims-court/",
+    "what": "Hamilton County Municipal Court: minimum $49 (one defendant, certified mail); bailiff service $69 minimum; +$10 per extra defendant by certified mail",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.willoughbycourt.com/wp-content/uploads/2026/01/Small-Claims-Filing-Instructions-2026.pdf",
+    "what": "Willoughby Municipal Court 2026: $124 for one defendant plus $25 each additional",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
-   "filing_fee_max",
-   "appeal",
-   "appeal_deadline_days",
    "e_filing",
    "fee_waiver_form",
    "fee_waiver_threshold",
    "self_help_url"
   ],
-  "notes": "There is no statewide filing fee; a per-court fee table would be needed. The 14-day objection and 30-day appeal deadlines come from court pages and search excerpts (Civ.R. 53 / App.R. 4); the rule text wasn't fetched. appeal_deadline_days shows the 14-day objection step. No statewide official small claims self-help page was confirmed, so the URL points to Franklin County Municipal Court as an example.",
+  "notes": "There is no statewide filing fee; a per-court fee table would be needed. The 14-day objection and 30-day appeal deadlines come from court pages and search excerpts (Civ.R. 53 / App.R. 4); the rule text wasn't fetched. appeal_deadline_days shows the 14-day objection step. No statewide official small claims self-help page was confirmed, so the URL points to Franklin County Municipal Court as an example. [2026-11-07 appeal, verified: Rule text read from the Supreme Court of Ohio's official rule PDFs.] [2026-11-07 appeal_deadline_days, verified: Corrected from 14 to 30. The 14 days is the deadline to object to a magistrate's decision within the same court, not an appeal; the actual appeal to the court of appeals is 30 days from the judge's final judgment (App.R. 4(A)). Keep the 14-day objection step in the appeal text.] [2026-11-07 filing_fee_min, verified: No statewide fee (R.C. 1925.04). Lowest confirmed on an official court/clerk page: Hamilton County Municipal Court (Cincinnati) $49 for one defendant served by certified mail. Other courts may be lower; this is the confirmed range from three courts checked (Hamilton $49, Sandusky $105, Willoughby $124).] [2026-11-07 filing_fee_max, verified: Highest confirmed: Willoughby Municipal Court $124 (2026 instructions). Range $49-$124 across three official court pages (Hamilton, Sandusky, Willoughby); some courts may charge more. Mason Municipal Court's page contradicts itself ($75 vs $100), so it is not used. Fees usually include certified-mail service; personal/bailiff service costs extra.]",
   "slug": "oh"
  },
  {
@@ -2504,17 +2794,21 @@
     "url": "https://www.oklahomacounty.org/elected-offices/court-clerk",
     "what": "self-help forms and instructions (Oklahoma County)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=94295",
+    "what": "12 O.S. 990A(A): petition in error filed with Supreme Court Clerk within 30 days from filing of the judgment (or from service if not served within 3 days); last amended 2017",
+    "type": "statute"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "appeal_deadline_days",
    "e_filing",
    "fee_waiver_form",
    "fee_waiver_threshold",
    "self_help_url"
   ],
-  "notes": "12 O.S. 1763 doesn't state a deadline; the 30 days comes from the general civil appeal rule (12 O.S. 990A / Sup. Ct. R. 1.21), which I didn't fetch. No statewide small claims self-help page was found; the URL is the Oklahoma County Court Clerk.",
+  "notes": "12 O.S. 1763 doesn't state a deadline; the 30 days comes from the general civil appeal rule (12 O.S. 990A / Sup. Ct. R. 1.21), which I didn't fetch. No statewide small claims self-help page was found; the URL is the Oklahoma County Court Clerk. [2026-11-07 appeal_deadline_days, verified: Confirmed on OSCN (the judiciary's official statute site). The 30 days run from the date the judgment is filed with the trial court clerk; if the appellant did not prepare the judgment and was not served within 3 days (excluding weekends/holidays), from the earliest service date shown.]",
   "slug": "ok"
  },
  {
@@ -2590,7 +2884,7 @@
   "who_can_sue": "Individuals and businesses. In Philadelphia, a non-lawyer representative must file an Appointment of Authorized Representative form. Business representation by non-attorneys before MDJs (Pa.R.Civ.P.M.D.J. 207) was not confirmed on an official page.",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Parties may use lawyers; not required. In Philadelphia, a lawyer needn't file the authorized-representative form.",
-  "appeal": "Either party may appeal to the Court of Common Pleas within 30 days of the judgment by filing a notice of appeal with the county prothonotary and paying its fees. The case gets a new trial (de novo). Philadelphia Municipal Court judgments are also appealed to Common Pleas (Notice of Appeal form).",
+  "appeal": "Either party aggrieved by a magisterial district judge's money judgment may appeal within 30 days after the date of entry of the judgment by filing a notice of appeal (with a copy of the Notice of Judgment) with the prothonotary of the county Court of Common Pleas; late appeals only with leave of court for good cause (Pa.R.Civ.P.M.D.J. 1002(A)). The appeal is a new trial (de novo) under the ordinary Common Pleas rules (Rule 1007(A)). Philadelphia Municipal Court money judgments are likewise appealed to the Court of Common Pleas within 30 days of entry on the docket, de novo (Phila. Civ. R. *1001 et seq.).",
   "appeal_who": "both",
   "appeal_deadline_days": 30,
   "e_filing": "some_courts",
@@ -2630,19 +2924,41 @@
     "url": "https://www.lyco.org/Portals/1/Courts/Documents/How%20To%20File%20A%20Civil%20Complaint%20With%20A%20Magisterial%20Judge%20Self%20Help%20Kit_092025.pdf",
     "what": "MDJ $12,000 jurisdiction, appeal to Common Pleas (county court self-help kit, search excerpt)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=42&div=0&chapter=15&section=15&subsctn=0",
+    "what": "42 Pa.C.S. 1515(a)(3): MDJ civil claims up to $12,000 exclusive of interest and costs; plaintiff may waive excess",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=42&div=0&chapter=11&section=23&subsctn=0",
+    "what": "42 Pa.C.S. 1123(a)(4): Philadelphia Municipal Court civil actions up to $12,000",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/246/chapter1000/s1002.html",
+    "what": "Rule 1002(A): 30 days from entry of judgment, notice of appeal to prothonotary",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/246/chapter1000/s1007.html",
+    "what": "Rule 1007(A): appeal conducted de novo",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.courts.phila.gov/pdf/regs/2023/04-of-2023-PJ-GCR.pdf",
+    "what": "Philadelphia Civil Rules *1001 et seq.: Municipal Court money judgments appealed to Common Pleas within 30 days, de novo",
+    "type": "court_rule"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "limit_individual",
-   "appeal",
-   "appeal_deadline_days",
    "who_can_sue",
    "service_methods",
    "e_filing",
    "self_help_url"
   ],
-  "notes": "PA legislature sites (legis.state.pa.us, palegis.us) returned 403, so I couldn't read 42 Pa.C.S. 1515 and 1123. The $12,000 limit is consistent across the 2026 cost regulation (top tier $4,001-$12,000), the Philadelphia Municipal Court site, and a county self-help kit. The appeal rule (Pa.R.Civ.P.M.D.J. 1002) text wasn't fetched; 30 days de novo comes from county court materials. The self-help URL is Philadelphia-only; I found no statewide MDJ small claims self-help page.",
+  "notes": "PA legislature sites (legis.state.pa.us, palegis.us) returned 403, so I couldn't read 42 Pa.C.S. 1515 and 1123. The $12,000 limit is consistent across the 2026 cost regulation (top tier $4,001-$12,000), the Philadelphia Municipal Court site, and a county self-help kit. The appeal rule (Pa.R.Civ.P.M.D.J. 1002) text wasn't fetched; 30 days de novo comes from county court materials. The self-help URL is Philadelphia-only; I found no statewide MDJ small claims self-help page. [2026-11-07 limit_individual, verified: Read on palegis.us in the browser (the statute text loads in an iframe). Both limits are $12,000 exclusive of interest and costs; claims against Commonwealth parties excluded; a plaintiff may waive the excess to fit the limit (waiver revoked if the defendant appeals).] [2026-11-07 appeal, verified: Rule texts read on the official Pennsylvania Code site and the Philadelphia courts' general court regulation.] [2026-11-07 appeal_deadline_days, verified: 30 days from the date of entry of judgment, for both MDJ and Philadelphia Municipal Court money judgments.]",
   "slug": "pa"
  },
  {
@@ -2729,15 +3045,19 @@
     "url": "https://webserver.rilegislature.gov/SVotes/votereport.asp?id=17829",
     "what": "recent_changes (Senate concurrence vote on H 7643, June 9, 2026; unofficial vote report)",
     "type": "statute"
+   },
+   {
+    "url": "https://courts.ri.gov/Courts/districtcourt/Documents/District_Rules_of_Small_Claims_Procedure.pdf",
+    "what": "District Court Rules of Small Claims Procedure (Feb. 2024) Rule 7.01: defendant may claim an appeal within two days, exclusive of Saturdays, Sundays and legal holidays; plaintiff waives appeal; filed in writing with the clerk with the appeal fee",
+    "type": "court_rule"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
    "recent_changes",
-   "fee_waiver_threshold",
-   "appeal_deadline_days"
+   "fee_waiver_threshold"
   ],
-  "notes": "Lead of $2,500 is outdated: official statute says $5,000 since July 2021. Appeal deadline comes from the general District Court statute (\u00a7 9-12-10); the District Court's own Small Claims Rule 7 page could not be loaded (courts.ri.gov reorganized), so confirm the 2-day deadline with the clerk. The 2026 bill (effective 1/1/2027) needs an official enactment check. The live \u00a7 10-16-1 limit text was read directly on rilegislature.gov.",
+  "notes": "Lead of $2,500 is outdated: official statute says $5,000 since July 2021. Appeal deadline comes from the general District Court statute (\u00a7 9-12-10); the District Court's own Small Claims Rule 7 page could not be loaded (courts.ri.gov reorganized), so confirm the 2-day deadline with the clerk. The 2026 bill (effective 1/1/2027) needs an official enactment check. The live \u00a7 10-16-1 limit text was read directly on rilegislature.gov. [2026-11-07 appeal_deadline_days, verified: Confirmed by the court's own small claims rule (Rule 7.01), not just \u00a7 9-12-10. It is 2 business days (weekends and legal holidays excluded). Rule 7.01 also says: by filing a counterclaim the defendant waives appeal on the counterclaim, and the plaintiff may appeal only on the counterclaim. Worth adding to the appeal text.]",
   "slug": "ri"
  },
  {
@@ -2890,8 +3210,8 @@
   "limit_business": 25000,
   "limit_notes": "$25,000 in all civil cases, law and equity (Tenn. Code Ann. \u00a7 16-15-501(d)(1)); attorney fees, court costs and discretionary costs are not counted toward the limit (d)(2). No limit for evictions (forcible entry and detainer) or actions to recover personal property. The population brackets in \u00a7 16-15-501(b) only give certain counties extra kinds of jurisdiction (e.g., divorce, workers' compensation, domestic relations); they do not change the $25,000 dollar limit. Some courts have added powers under private acts. The Administrative Office of the Courts says General Sessions jurisdiction 'varies from county to county'.",
   "recent_changes": "SB0572/HB0982 (114th General Assembly) would have raised the limit to $50,000; listed as dead (not enacted) per a bill tracker. The 2025 code still shows $25,000.",
-  "filing_fee_min": null,
-  "filing_fee_max": null,
+  "filing_fee_min": 132.75,
+  "filing_fee_max": 216.5,
   "filing_fee_notes": "Set by each county clerk (statutory clerk fees plus local litigation taxes and service fees); no statewide schedule found. Check the county General Sessions clerk.",
   "who_can_sue": "Individuals. Corporations generally must appear through a licensed attorney (county clerk guidance; Tennessee Supreme Court case law), not confirmed from a statute or statewide court page.",
   "lawyers_allowed": "yes",
@@ -2936,12 +3256,35 @@
     "url": "https://seviercountytn.org/government/justice_and_the_law/general_sessions_court.php",
     "what": "corporations must use an attorney (county clerk page)",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.capitol.tn.gov/Bills/114/Amend/HA0381.pdf",
+    "what": "HB 487 House Amendment 1 (adopted, enacted as Pub. Ch. 486): new 8-21-401(f) standard General Sessions civil filing fee $50 as of Jan. 1, 2026/2027/2028; litigation taxes and costs added separately",
+    "type": "statute"
+   },
+   {
+    "url": "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx?BillNumber=HB0487&GA=114",
+    "what": "HB 487 enacted as Public Chapter 486, effective Jan. 1, 2026",
+    "type": "statute"
+   },
+   {
+    "url": "https://andersoncountytn.gov/wp-content/uploads/2026/01/2026-GENERAL-SESSIONS-FILING-FEES.pdf",
+    "what": "Anderson County 2026: civil summons $132.75 when served by private process/attorney; $184.75 with in-county sheriff service for one defendant",
+    "type": "court_site"
+   },
+   {
+    "url": "https://rutherfordcountytn.gov/vertical/sites/%7B0DE57B3C-95FA-46CF-BF78-CE4E5703EB9C%7D/uploads/GENERAL_SESSIONS_FEES.pdf",
+    "what": "Rutherford County, as of Jan. 1, 2026: civil warrant clerk $50 + litigation tax $166.50 (= $216.50) + sheriff $52 = $268.50; $52 each additional person",
+    "type": "court_site"
+   },
+   {
+    "url": "https://montgomerytn.gov/storage/departments/circuit/General%20Sessions%20Civil%20Cost%20Sheet%2012-31-25.pdf",
+    "what": "Montgomery County, effective 1/1/2026 (TCA 8-21-401): civil cases $148.50; sheriff service $52 per defendant extra",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_min",
-   "filing_fee_max",
    "who_can_sue",
    "e_filing",
    "fee_waiver_form",
@@ -2949,7 +3292,7 @@
    "service_methods",
    "recent_changes"
   ],
-  "notes": "Lead confirmed: $25,000 in General Sessions; the limit does not depend on county population (only extra subject-matter jurisdiction does). tncourts.gov blocks automated fetching; statute text read from Justia's 2025 reprint because Tennessee's official code is only on LexisNexis. Fees, service and fee waiver need a county-level/official follow-up.",
+  "notes": "Lead confirmed: $25,000 in General Sessions; the limit does not depend on county population (only extra subject-matter jurisdiction does). tncourts.gov blocks automated fetching; statute text read from Justia's 2025 reprint because Tennessee's official code is only on LexisNexis. Fees, service and fee waiver need a county-level/official follow-up. [2026-11-07 filing_fee_min, verified: Statewide base: the clerk's standard General Sessions civil filing fee is $50 from Jan. 1, 2026 (T.C.A. 8-21-401(f) as amended by Pub. Ch. 486 of 2025); county and state litigation taxes and service fees are added, so the total varies by county. Lowest total confirmed on a county page: Anderson County $132.75 (no sheriff service). Not every county was checked.] [2026-11-07 filing_fee_max, verified: Highest confirmed: Rutherford County $216.50 before service ($268.50 with sheriff service for one defendant). Confirmed range before service across three counties: $132.75 (Anderson), $148.50 (Montgomery), $216.50 (Rutherford). Sheriff service is $52 per defendant in all three. Davidson County's sheet URL returned 404. Suggested filing_fee_notes: '$50 state clerk fee (2026) plus county litigation taxes; confirmed totals $132.75-$216.50 before service, sheriff service $52 per defendant'.]",
   "slug": "tn"
  },
  {
@@ -3145,8 +3488,8 @@
   "limit_business": 5000,
   "limit_notes": "Small claims division: up to $5,000 exclusive of interest (Va. Code \u00a7 16.1-122.2), for money or recovery of personal property; counterclaims also capped at $5,000 (\u00a7 16.1-122.3(F)). The General District Court itself is higher: exclusive jurisdiction up to $4,500 and concurrent with circuit court up to $50,000 (\u00a7 16.1-77), so a plaintiff may instead file on the regular GDC docket (lawyers allowed there). No suits against the Commonwealth under the Tort Claims Act (\u00a7 16.1-122.1). Defendant may remove the case to the regular GDC docket any time before decision (\u00a7 16.1-122.4(B)).",
   "recent_changes": null,
-  "filing_fee_min": 36,
-  "filing_fee_max": null,
+  "filing_fee_min": 46,
+  "filing_fee_max": 55,
   "filing_fee_notes": "$36 court services fee per civil warrant (Va. Code \u00a7 16.1-69.48:2) plus local add-ons (e.g., courthouse construction fee) that vary by court; sheriff service $12 per defendant (\u00a7 17.1-272). Use the official GDC Civil Filing Fee Calculation tool for the exact total.",
   "who_can_sue": "Parties represent themselves. A corporation, partnership, LLC or other entity may be represented by an owner, general partner, officer, member, or employee; a party who can't participate may be helped by a non-attorney friend or relative with the judge's OK (\u00a7 16.1-122.4). Assignees not specifically addressed.",
   "lawyers_allowed": "no",
@@ -3216,14 +3559,18 @@
     "url": "https://www.vacourts.gov/online/vjefs/home",
     "what": "e-filing limited to circuit court attorneys",
     "type": "court_site"
+   },
+   {
+    "url": "https://vacourts.gov/gdfees_calc_app",
+    "what": "official GDC Civil Filing Fee Calculation for 'Warrant in Debt - Small Claims', all 127 listed courts queried 2026-11-06: totals without sheriff service $46-$55; with one sheriff service $58-$67",
+    "type": "court_site"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_max",
    "fee_waiver_form"
   ],
-  "notes": "Lead confirmed: small claims division $5,000 vs. General District Court up to $50,000. Total filing cost varies by locality because of local add-on fees. Form number DC-409 is from memory/secondary, not checked on vacourts.gov.",
+  "notes": "Lead confirmed: small claims division $5,000 vs. General District Court up to $50,000. Total filing cost varies by locality because of local add-on fees. Form number DC-409 is from memory/secondary, not checked on vacourts.gov. [2026-11-07 filing_fee_max, verified: Ran the official calculator for every court listed (small claims warrant in debt, one case). Example breakdown, Richmond City GDC: processing $26 + Courts Technology Fund $10 + legal aid $9 + indigent defense $1 + law library $4 + courthouse maintenance $2 = $52. Local add-ons (law library, courthouse maintenance, courthouse construction fee for claims over $500) explain the spread. Highest: $55 for claims over $500 in courts like Alexandria, Augusta, Bedford, Culpeper, Frederick. Sheriff service adds $12 per defendant (\u00a7 17.1-272).] [2026-11-07 filing_fee_min, verified: Correction: the current $36 is only the statutory base fee (\u00a7 16.1-69.48:2, which already includes $10 for the Courts Technology Fund). Every court adds statutory/local fees (legal aid, indigent defense, and in most courts law library and courthouse maintenance), so the lowest actual total is $46. Also confirmed in passing: the fee waiver petition is form DC-409 'Petition for Proceeding in Civil Case Without Payment of Fees and Costs' (listed on the same vacourts.gov page).]",
   "slug": "va"
  },
  {
@@ -3292,8 +3639,8 @@
   "limit_business": 20000,
   "limit_notes": "Civil actions up to $20,000 exclusive of interest and costs; evictions/wrongful occupation if title not in dispute (W. Va. Code \u00a7 50-2-1). No equity, eminent domain, real estate title, lien foreclosure, false imprisonment, malicious prosecution, or libel/slander cases. Removal to circuit court: for claims of $5,000 or more any party may remove before trial; under $5,000 all parties must agree (\u00a7 50-4-8).",
   "recent_changes": "Limit raised to $20,000 by Enrolled Committee Substitute for HB 2761 (2025), passed April 8, 2025, in effect July 7, 2025 (previously $10,000 per bill summaries). Many online charts still show $10,000.",
-  "filing_fee_min": 30,
-  "filing_fee_max": 50,
+  "filing_fee_min": 50,
+  "filing_fee_max": 70,
   "filing_fee_notes": "Tiered by amount sought (\u00a7 50-3-1(a)): $30 ($500 or less), $35 ($500.01-$1,000), $40 ($1,000.01-$2,000), $50 (over $2,000); $30 for non-money relief. \u00a7 50-3-1(g) also lists $20 'for filing and trying any civil action'; whether that is charged on top was not confirmed. Sheriff service fee extra; $1 clerk fee for certified mailing (\u00a7 50-3-1(f)).",
   "who_can_sue": "Any party may appear in person, by agent, or by attorney; appearance by an agent is not unauthorized practice of law (\u00a7 50-4-4a), so businesses can use non-lawyer agents. Commercial creditors must itemize principal, interest, payments and amount due (\u00a7 50-4-1).",
   "lawyers_allowed": "yes",
@@ -3363,15 +3710,24 @@
     "url": "https://www.courtswv.gov/legal-community/e-filing",
     "what": "no magistrate e-filing listed",
     "type": "court_site"
+   },
+   {
+    "url": "https://code.wvlegislature.gov/50-3-4a/",
+    "what": "\u00a7 50-3-4a(b): fees collected under \u00a7 50-3-1(g) are paid monthly into the Regional Jail Operations Partial Reimbursement Fund (separate charge)",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.wvlegislature.gov/Bill_Text_HTML/2005_SESSIONS/RS/Bills/SB716%20SUB1%20enr.htm",
+    "what": "2005 SB 716 added the (g) $20 cost to fund regional jails ('increasing court costs')",
+    "type": "statute"
    }
   ],
   "date_checked": "2026-11-05",
   "unverified": [
-   "filing_fee_max",
    "e_filing",
    "fee_waiver_threshold"
   ],
-  "notes": "Recent increase from $10,000 to $20,000 (July 7, 2025). Ambiguous \u00a7 50-3-1(g) $20 fee may make the real filing cost $50-$70; confirm with a magistrate clerk.",
+  "notes": "Recent increase from $10,000 to $20,000 (July 7, 2025). Ambiguous \u00a7 50-3-1(g) $20 fee may make the real filing cost $50-$70; confirm with a magistrate clerk. [2026-11-07 filing_fee_max, verified: The $20 in \u00a7 50-3-1(g) is a separate, additional cost: it was added in 2005 to fund regional jails and is routed to a different fund (\u00a7 50-3-4a(b)) than the tier fee in (a). So the real filing cost is the (a) tier plus $20: $50 (<= $500 or non-money), $55, $60, or $70 (over $2,000). This reading rests on the statutes; no current courtswv.gov fee sheet was found (a Lincoln County page shows outdated pre-2005 amounts). Sheriff service and $1 certified-mail fee are extra.] [2026-11-07 filing_fee_min, verified: Correction from 30 to 50: the lowest tier ($30) plus the separate $20 cost in \u00a7 50-3-1(g). See the filing_fee_max note. filing_fee_notes should list the totals $50/$55/$60/$70.]",
   "slug": "wv"
  },
  {
