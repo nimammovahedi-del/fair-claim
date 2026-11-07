@@ -33,6 +33,10 @@ const nav = [
   { href: "/glossary/", label: "Glossary", match: ["/glossary/"], c: "c-glossary" },
   { href: "/about/", label: "About", match: ["/about/"], c: "c-about" },
 ];
+// Launch switch: PUBLIC_INDEXABLE=true opens the site to search engines and drops the preview line.
+const indexable = import.meta.env.PUBLIC_INDEXABLE === "true";
+const canonical = new URL(path, Astro.site).href;
+const fullTitle = title === "Fair Claim" ? title : `${title} · Fair Claim`;
 const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
 ---
 <!doctype html>
@@ -40,9 +44,18 @@ const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{title === "Fair Claim" ? title : `${title} · Fair Claim`}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="noindex" />
+    {!indexable && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fair Claim" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL("/og.png", Astro.site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="color-scheme" content="light dark" />
     <!-- Browser chrome color = the page background. The script below (and ThemeSwitch) pins both to the chosen theme. -->
     <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)" />
@@ -75,7 +88,7 @@ const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="proto-line no-print">
       <div class="wrap">
-        <p>Prototype for review · not published</p>
+        <p>{indexable ? "Free and neutral" : "Early preview · rules checked November 2026"}</p>
         <p class="pl-extra">Legal information, not legal advice</p>
       </div>
     </div>

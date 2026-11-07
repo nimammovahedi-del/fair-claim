@@ -19,11 +19,23 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATE = "2026-11-07"
+APPLIED = ROOT / "research" / "verification" / "applied.json"  # files already merged (so reruns don't double-apply)
+
+
+def applied() -> set:
+    return set(json.loads(APPLIED.read_text())) if APPLIED.exists() else set()
+
+
+def mark_applied(names) -> None:
+    APPLIED.write_text(json.dumps(sorted(applied() | set(names)), indent=1))
 
 
 def main(dry: bool) -> None:
-    corrections = []
+    corrections, new_files = [], []
     for f in sorted(glob.glob(str(ROOT / "research" / "verification" / "round*.json"))):
+        if Path(f).name in applied():
+            continue
+        new_files.append(Path(f).name)
         corrections += [dict(c, _file=Path(f).name) for c in json.loads(Path(f).read_text())]
 
     files = {}
@@ -60,7 +72,8 @@ def main(dry: bool) -> None:
             r["notes"] = ((r.get("notes") or "") + f" [{DATE} {field}, {tag}: {c['note']}]").strip()
         # date_checked covers the whole row, so it isn't changed here; the dated note records this check.
 
-    print(f"confirmed {len(confirmed)}, changed values {len(changed)}, still unverified {len(still)}")
+    apply_counties(dry)
+    print(f"states: confirmed {len(confirmed)}, changed values {len(changed)}, still unverified {len(still)}")
     for line in changed:
         print("  changed", line)
     if still:
@@ -68,7 +81,57 @@ def main(dry: bool) -> None:
     if not dry:
         for f, data in files.items():
             Path(f).write_text(json.dumps(data, indent=1, ensure_ascii=False))
-        print("written")
+        mark_applied(new_files)
+        print("written:", ", ".join(new_files) or "nothing new")
+
+
+def apply_counties(dry: bool) -> None:
+    """Same idea for California counties: research/verification/counties-round*.json -> research/california/counties-*.json.
+    A verified top-level field also clears its sub-field entries (e.g. "small_claims_advisor.phone")."""
+    corrections, new_files = [], []
+    for f in sorted(glob.glob(str(ROOT / "research" / "verification" / "counties-round*.json"))):
+        if Path(f).name in applied():
+            continue
+        new_files.append(Path(f).name)
+        corrections += json.loads(Path(f).read_text())
+    if not corrections:
+        return
+    files, rows = {}, {}
+    for f in sorted(glob.glob(str(ROOT / "research" / "california" / "counties-*.json"))):
+        data = json.loads(Path(f).read_text())
+        files[f] = data
+        for r in data:
+            rows[r["county"].replace(" County", "").strip().lower()] = r
+    ok_n, changed, still = 0, 0, []
+    for c in corrections:
+        r = rows.get(c["county"].replace(" County", "").strip().lower())
+        if r is None:
+            print(f"!! unknown county {c['county']}")
+            continue
+        field = c["field"]
+        if "value" in c and c["value"] is not None and r.get(field) != c["value"]:
+            r[field] = c["value"]
+            changed += 1
+        if c.get("verified"):
+            r["unverified"] = [u for u in r.get("unverified", []) if u != field and not u.startswith(field + ".")]
+            ok_n += 1
+        else:
+            still.append(f"{c['county']}.{field}")
+        have = {s.get("url") for s in r.get("sources", [])}
+        for s in c.get("sources", []):
+            if s.get("url") and s["url"] not in have:
+                r.setdefault("sources", []).append(s)
+                have.add(s["url"])
+        if c.get("note"):
+            tag = "verified" if c.get("verified") else "still unverified"
+            r["notes"] = ((r.get("notes") or "") + f" [{DATE} {field}, {tag}: {c['note']}]").strip()
+    print(f"counties: confirmed {ok_n}, changed values {changed}, still unverified {len(still)}")
+    if still:
+        print("  still unverified:", ", ".join(still))
+    if not dry:
+        for f, data in files.items():
+            Path(f).write_text(json.dumps(data, indent=1, ensure_ascii=False))
+        mark_applied(new_files)
 
 
 if __name__ == "__main__":
