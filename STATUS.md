@@ -126,3 +126,24 @@ Fair Claim will use Nima's **fedmoney Cloudflare account**, the same one as the 
   - **New:** Georgia's limit rises to $25,000 on 2027-01-01 (HB 999). Update the limit on that date.
 - **Still unverified** (45 rows, none of them limits, fees, appeals or lawyer rules): fee-waiver forms and thresholds, e-filing, who can sue, self-help links, service methods. Yellow cells in the spreadsheet.
 - **Upcoming date-driven updates:** GA $25,000 (2027-01-01), WI $15,000 (2027-01-01), SC fee $105 (2027-01-01), UT $25,000 (2030-01-01).
+
+## Verification round 3 (2026-11-07)
+Agents checked every remaining state detail plus the California county gaps. Corrections are in `research/verification/round3-*.json` and `counties-round3.json`, merged by `scripts/apply_verification.py`; `applied.json` records which files are merged, so reruns don't apply them twice.
+- **States:** 119 facts confirmed, 100 values corrected or made more specific. **12 fields in 6 states are still open** because official sites were blocked or silent:
+  - LA: e-filing, self-help URL
+  - MS: who can sue, fee-waiver form and threshold
+  - MO: e-filing, fee-waiver form, self-help URL (courts.mo.gov bot check)
+  - NM: e-filing, who can sue
+  - TN: service methods
+  - WY: fee-waiver form
+- **Notable state corrections:**
+  - NC e-filing is statewide since Oct 2025.
+  - KS self-represented people can't e-file.
+  - PA small claims courts have no e-filing.
+  - Ohio's fee-waiver income test is 187.5% of the poverty guidelines.
+  - West Virginia's is 150%.
+  - Kentucky added a sliding-scale route.
+  - Two dead self-help links were replaced (MA, OH).
+- **CA counties:** 25 confirmed, 25 corrected (advisors in Butte, Shasta, Napa, Humboldt and others). **42 details in 31 counties are still open**, mostly whether small counties allow small-claims e-filing or remote hearings; their court sites don't say. Advisors are still unconfirmed in Del Norte, San Francisco, Sierra, Tehama, Yolo and Yuba.
+- **New dated change:** Rhode Island's fee goes from $55 to $75 and its counterclaim cap to $5,000 on 2027-01-01 (P.L. 2026 ch. 323).
+- **Launch prep** is done; see `docs/publish.md`. Hosting is the fedmoney Cloudflare account.

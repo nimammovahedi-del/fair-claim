@@ -1,0 +1,828 @@
+[
+  {
+    "abbr": "AZ",
+    "field": "fee_waiver_form",
+    "value": "Application for Deferral or Waiver of Court Fees or Costs and Consent to Entry of Judgment (Arizona Supreme Court form AOCDFGF1F; add AOCDFGF3F to defer/waive service fees). Justice courts may use their own version (e.g., Maricopa County Justice Courts). Forms: https://www.azcourts.gov/courtfilingfees/Fee-Waivers-and-Deferrals/Fee-Waiver-and-Deferral-Forms",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.azcourts.gov/courtfilingfees/Fee-Waivers-and-Deferrals/Fee-Waiver-and-Deferral-Forms",
+        "what": "statewide fee deferral/waiver form titles and numbers",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.justicecourts.maricopa.gov/media/3e2kbvvs/howto-fwd.pdf",
+        "what": "justice court fee deferral/waiver how-to and application form (small claims included)",
+        "type": "form"
+      }
+    ],
+    "note": "Corrected title. The azcourts.gov fee waiver forms page lists the statewide trial-court form 'Application for Deferral or Waiver of Court Fees or Costs and Consent to Entry of Judgment' (AOCDFGF1F) plus AOCDFGF3F for service fees, and says courts may have preferred local versions. Maricopa County Justice Courts' how-to (rev. 8/15/22) and its own form (WD 8150-901.1, rev. 1/27/26) cover small claims; proof of government assistance can be attached."
+  },
+  {
+    "abbr": "AR",
+    "field": "fee_waiver_form",
+    "value": "Petition to proceed in forma pauperis with the 'Affidavit in Support of Request to Proceed In Forma Pauperis' (Ark. R. Civ. P. 72(e); Judiciary form, 2026 version) and a copy of the complaint: https://www.arcourts.gov/sites/default/files/formatted-files/In-Forma-Pauperis-Affidavit-see-Rule-72-2026-1.pdf",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://opinions.arcourts.gov/ark/supremecourt/en/294159/1/document.do",
+        "what": "Ark. R. Civ. P. 72 text as amended by In re Rules of Civ. P. 3 & 72, 2012 Ark. 84 (per curiam)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.arcourts.gov/sites/default/files/formatted-files/In-Forma-Pauperis-Affidavit-see-Rule-72-2026-1.pdf",
+        "what": "current Judiciary affidavit form (2026 version)",
+        "type": "form"
+      }
+    ],
+    "note": "Rule 72(b) requires a petition with a verified affidavit in the Rule 72(e) form and a copy of the complaint; the Judiciary posts the 2026 'Affidavit in Support of Request to Proceed In Forma Pauperis'. Rule text read from the 2012 per curiam on opinions.arcourts.gov; a 2018 amendment (eff. 2019) removed 'against another' from (a); a reported 2024 amendment was not checked. Rule 72 refers to 'the court in which the action is pending', and the form caption is generic (any court)."
+  },
+  {
+    "abbr": "AR",
+    "field": "fee_waiver_threshold",
+    "value": "Judge's discretion: the court makes an indigency finding from the sworn affidavit (income, assets, dependents) and may consider the current federal poverty guidelines; it must also find a colorable cause of action. Not available for slander, libel or malicious prosecution claims (Ark. R. Civ. P. 72(c)-(d)).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://opinions.arcourts.gov/ark/supremecourt/en/294159/1/document.do",
+        "what": "Ark. R. Civ. P. 72 text as amended by In re Rules of Civ. P. 3 & 72, 2012 Ark. 84 (per curiam)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.arcourts.gov/sites/default/files/formatted-files/In-Forma-Pauperis-Affidavit-see-Rule-72-2026-1.pdf",
+        "what": "current Judiciary affidavit form (2026 version)",
+        "type": "form"
+      }
+    ],
+    "note": "Rule 72(c): court makes a finding of indigency based on the affidavit and 'may consider' the federal poverty guidelines; if satisfied the petitioner has a colorable cause of action it may allow the suit without filing and clerk fees. Rule 72(d) excludes slander, libel and malicious prosecution."
+  },
+  {
+    "abbr": "CA",
+    "field": "recent_changes",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://leginfo.legislature.ca.gov/faces/billStatusClient.xhtml?bill_id=202320240SB71",
+        "what": "SB 71 chaptered Ch. 861, Stats. 2023",
+        "type": "statute"
+      },
+      {
+        "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202320240SB71",
+        "what": "SB 71 digest: $10,000 to $12,500",
+        "type": "statute"
+      },
+      {
+        "url": "https://leginfo.legislature.ca.gov/faces/billStatusClient.xhtml?bill_id=202520260AB1827",
+        "what": "AB 1827 status: held under submission 8/13/26",
+        "type": "statute"
+      },
+      {
+        "url": "https://leginfo.legislature.ca.gov/faces/billVotesClient.xhtml?bill_id=202520260AB1827",
+        "what": "AB 1827 Assembly floor vote 77-0",
+        "type": "statute"
+      }
+    ],
+    "note": "Confirmed on leginfo.legislature.ca.gov: SB 71 (Umberg) approved by the Governor and chaptered Oct. 13, 2023 (Ch. 861, Stats. 2023); digest raises the natural-person limit from $10,000 to $12,500 and other small claims amounts (Jan. 1, 2024 is the standard effective date for a non-urgency 2023 statute). AB 1827 (Chen, 2025-26) would set $15,000 in CCP 116.220 and allow 3 filings/year over $2,500; Assembly floor 77-0 (May 26, 2026), Senate Judiciary 13-0, placed on Senate Appropriations suspense Aug. 3, and 'In committee: Held under submission' Aug. 13, 2026. COVID rental-debt item is from the official self-help page already cited in the row. Value unchanged."
+  },
+  {
+    "abbr": "DE",
+    "field": "e_filing",
+    "value": "yes_statewide",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.delaware.gov/jpcourt/efiling.aspx",
+        "what": "JP Court e-filing page (eFlex, Rule 79.1, Policy Directive 08-232)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://courts.delaware.gov/forms/download.aspx?id=114668",
+        "what": "Policy Directive 08-232 (1st Supp.), July 8, 2019: who must e-file; others may",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Policy Directive 08-232 applies to 'all Justice of the Peace Court civil actions' statewide. Parties not in the mandatory categories 'may, but are not required to' e-file, so self-represented individuals can use it optionally. Directive is dated 2019 but is the one linked from the current e-filing page."
+  },
+  {
+    "abbr": "DE",
+    "field": "e_filing_notes",
+    "value": "JP Court eFlex e-filing (JP Ct. Civ. R. 79.1; Policy Directive 08-232, 1st Supp. 2019). Mandatory for attorneys; entities appearing through a Form 50 agent that filed 5 or more civil actions in the prior 12 months; any other party that filed more than 10 civil actions in the prior 12 months; and state agencies. Everyone else, including self-represented individuals, may e-file but is not required to and can file in person or by mail. E-filing requires completing the court's online eFlex training and paying by credit card or court account.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.delaware.gov/jpcourt/efiling.aspx",
+        "what": "JP Court e-filing page (eFlex, Rule 79.1, Policy Directive 08-232)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://courts.delaware.gov/forms/download.aspx?id=114668",
+        "what": "Policy Directive 08-232 (1st Supp.), July 8, 2019: who must e-file; others may",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Corrected the mandatory-filer description from the directive itself."
+  },
+  {
+    "abbr": "DC",
+    "field": "fee_waiver_form",
+    "value": "Application to Waive Court Costs and Fees (D.C. Superior Court courtwide form, Rev. Jan. 16, 2026): https://www.dccourts.gov/sites/default/files/2026-02/DCSC_Courtwide_Fee_Waiver%20Application.pdf",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.dccourts.gov/sites/default/files/2026-02/DCSC_Courtwide_Fee_Waiver%20Application.pdf",
+        "what": "Superior Court courtwide 'Application to Waive Court Costs and Fees', Rev. Jan. 16, 2026",
+        "type": "form"
+      },
+      {
+        "url": "https://www.dccourts.gov/sites/default/files/pdf-forms/Small-Claims-Branch-Application-to-Proceed-Without-Prepayment-of-Costs.pdf",
+        "what": "older Small Claims Branch Form 106A-SCB",
+        "type": "form"
+      }
+    ],
+    "note": "Corrected title. The current Superior Court courtwide form is 'Application to Waive Court Costs and Fees' (Rev. Jan. 16, 2026). It lists public-benefit programs (receipt = skip to declaration), free representation by a legal services org or DC law school clinic, and an income test of 200% of the 2026 federal poverty guidelines (useful for fee_waiver_threshold). An older Small Claims and Conciliation Branch form, 'Form 106A-SCB, Application to Proceed Without Prepayment of Costs, Fees, or Security' (undated, cites D.C. Code 15-712), is still posted; the courtwide form appears to be the current one but the court page (dccourts.gov/services/fee-waiver-application) returned 403/404 to fetching."
+  },
+  {
+    "abbr": "FL",
+    "field": "fee_waiver_form",
+    "value": "Application for Determination of Civil Indigent Status (statewide form developed by the Florida Clerks of Court Operations Corporation under Fla. Stat. § 57.082), filed with the county clerk; if approved, filing and summons fees are waived. Example: https://www.lakecountyclerkfl.gov/wp-content/uploads/ApplicationForCivilIndigence.pdf",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.lakecountyclerkfl.gov/wp-content/uploads/ApplicationForCivilIndigence.pdf",
+        "what": "Application for Determination of Civil Indigent Status (clerk copy)",
+        "type": "form"
+      },
+      {
+        "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0000-0099/0057/Sections/0057.082.html",
+        "what": "statutory basis for the form",
+        "type": "statute"
+      }
+    ],
+    "note": "Confirmed on county clerk/court copies (Lake County Clerk; Fifth Circuit/Citrus). The form notice says filing and summons fees are waived if found indigent; other costs are not. The clerk decides; applicants found not indigent may ask a judge to review. Fla. Stat. 57.082 (already cited) requires the form developed by the Florida Clerks of Court Operations Corporation with Supreme Court approval."
+  },
+  {
+    "abbr": "GA",
+    "field": "who_can_sue",
+    "value": "Any person or business may file, with or without a lawyer. A corporation, LLC, partnership, sole proprietorship or unincorporated association may appear through an officer or full-time employee it designates as agent (O.C.G.A. § 15-10-43(i); Uniform Magistrate Court Rule 31; courts use a sworn 'Designation of Agent for Business Entity'). No statewide bar on assignees or collection agencies found.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://dekalbgastatecourt.gov/wp-content/uploads/2025/10/MAGISTRATE-CIVIL-DESIGNATION-OF-AGENCY-fillable.pdf",
+        "what": "Designation of Agent for Business Entity form citing O.C.G.A. 15-10-43(i) and Unif. Mag. Ct. R. 31",
+        "type": "form"
+      },
+      {
+        "url": "https://consumer.georgia.gov/consumer-topics/magistrate-court",
+        "what": "any person or business may file with or without an attorney",
+        "type": "court_site"
+      }
+    ],
+    "note": "Business representation confirmed on an official magistrate court form (DeKalb) that cites O.C.G.A. 15-10-43(i) and Uniform Magistrate Court Rule 31; the official Lexis-hosted code and rule text were not opened directly (rule wording also seen on secondary sites). No statewide bar on assignees/collection agencies found."
+  },
+  {
+    "abbr": "GA",
+    "field": "fee_waiver_form",
+    "value": "Affidavit of indigence (pauper's affidavit) under O.C.G.A. § 9-15-2; forms vary by county magistrate court. A generic 'Affidavit of Eligibility to Proceed in Forma Pauperis' and order are posted on georgiacourts.gov: https://assets.georgiacourts.gov/2/wp-content/uploads/2024/10/19110427/Paupers-Affidavit.pdf",
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://assets.georgiacourts.gov/2/wp-content/uploads/2024/10/19110427/Paupers-Affidavit.pdf",
+        "what": "generic 'Affidavit of Eligibility to Proceed in Forma Pauperis' on georgiacourts.gov",
+        "type": "form"
+      },
+      {
+        "url": "https://assets.georgiacourts.gov/2/wp-content/uploads/2024/10/19110427/Order-on-Paupers-Affidavit.pdf",
+        "what": "order form: O.C.G.A. 9-15-2; 125% of HHS poverty guidelines; hearing before denial",
+        "type": "form"
+      },
+      {
+        "url": "https://cherokeecountyga.gov/Magistrate-Court/_resources//Magistrate-Paupers-Affidavit.pdf",
+        "what": "county magistrate court's own pauper's affidavit (example of local variation; not opened - returned HTML)",
+        "type": "form"
+      }
+    ],
+    "note": "No single mandatory statewide form found; magistrate courts post their own pauper's affidavits (Cherokee, Lee). A generic affidavit and order are hosted on georgiacourts.gov (the order references a Statement of Claim, sheriff's service and fi fa, i.e., magistrate-court use)."
+  },
+  {
+    "abbr": "GA",
+    "field": "fee_waiver_threshold",
+    "value": "Judge decides on the sworn affidavit that the person cannot pay because of indigence (O.C.G.A. § 9-15-2); if the affidavit is questioned, the court holds a hearing. The standard order form on georgiacourts.gov uses income at or below 125% of the federal poverty guidelines for the household size. Practice may vary by county.",
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://assets.georgiacourts.gov/2/wp-content/uploads/2024/10/19110427/Paupers-Affidavit.pdf",
+        "what": "generic 'Affidavit of Eligibility to Proceed in Forma Pauperis' on georgiacourts.gov",
+        "type": "form"
+      },
+      {
+        "url": "https://assets.georgiacourts.gov/2/wp-content/uploads/2024/10/19110427/Order-on-Paupers-Affidavit.pdf",
+        "what": "order form: O.C.G.A. 9-15-2; 125% of HHS poverty guidelines; hearing before denial",
+        "type": "form"
+      },
+      {
+        "url": "https://cherokeecountyga.gov/Magistrate-Court/_resources//Magistrate-Paupers-Affidavit.pdf",
+        "what": "county magistrate court's own pauper's affidavit (example of local variation; not opened - returned HTML)",
+        "type": "form"
+      }
+    ],
+    "note": "Corrected from bare 'Judge's discretion'. The georgiacourts.gov order form grants relief after 'considering the Poverty Guidelines ... at 125% or less of the poverty level' by family size, and denial follows a hearing with sworn testimony. O.C.G.A. 9-15-2 text itself was not read (official code is Lexis-hosted); the 125% figure is the court form's guideline, so local practice may differ."
+  },
+  {
+    "abbr": "HI",
+    "field": "who_can_sue",
+    "value": "Individuals and businesses. The clerk will help an individual prepare the papers, but not a corporation, partnership, association or sole proprietorship (HRS § 633-28(a)). With the court's approval, any person may appear on behalf of another, without pay (HRS § 633-28(b)); lawyers may not appear for another party in residential security-deposit cases. No statewide bar on assignees found in ch. 633.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0028.htm",
+        "what": "HRS 633-28: clerk help for individuals only; any person may appear for another with court approval",
+        "type": "statute"
+      },
+      {
+        "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0027.htm",
+        "what": "HRS 633-27 jurisdiction",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.courts.state.hi.us/self-help/small_claims_info",
+        "what": "attorneys allowed except in security deposit cases",
+        "type": "court_site"
+      }
+    ],
+    "note": "Read HRS 633-27 and 633-28 on data.capitol.hawaii.gov (works where capitol.hawaii.gov blocked). Statute presumes businesses may sue (clerk services not available to them). No assignee/collection-agency bar found in ch. 633; the Rules of the Small Claims Division were not read."
+  },
+  {
+    "abbr": "HI",
+    "field": "fee_waiver_form",
+    "value": "Request for Relief from Court Filing Fees; Declaration; Order (Form 1DC13, District Court of the First Circuit, Rev. 01/01/2026): https://www.courts.state.hi.us/docs/form/oahu/1DC13.pdf. Other circuits may have their own version.",
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://www.courts.state.hi.us/docs/form/oahu/1DC13.pdf",
+        "what": "Form 1DC13 Request for Relief from Court Filing Fees (Rev. 01/01/2026), under HRS 607-3",
+        "type": "form"
+      },
+      {
+        "url": "https://www.courts.state.hi.us/self-help/courts/forms/oahu/district_court_forms",
+        "what": "Oahu district court forms list",
+        "type": "court_site"
+      }
+    ],
+    "note": "Found on the Judiciary's Oahu district court forms page ('Cost Relief From Filing Fees'). Form cites HRS 607-3 and 607-4(b). Other circuits' district courts may use their own numbered versions (not checked)."
+  },
+  {
+    "abbr": "HI",
+    "field": "fee_waiver_threshold",
+    "value": "Judge's discretion: the judge may waive prepaid or accruing costs on the plaintiff's sworn statement or other satisfactory evidence of inability to pay (HRS § 633-29). The Oahu form asks whether the filer can pay and still provide for necessities of life. No fixed income cutoff.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0029.htm",
+        "what": "HRS 633-29: judge may waive costs on sworn statement of inability to pay",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.courts.state.hi.us/docs/form/oahu/1DC13.pdf",
+        "what": "Form 1DC13 Request for Relief from Court Filing Fees (Rev. 01/01/2026), under HRS 607-3",
+        "type": "form"
+      }
+    ],
+    "note": "HRS 633-29 (small claims): 'The judge may waive the prepayment of costs or the payment of costs accruing during the action upon the sworn statement of the plaintiff or upon other satisfactory evidence of the plaintiff's inability to pay the costs.' Form 1DC13 asks about employment, housing, bank accounts, vehicles and benefits."
+  },
+  {
+    "abbr": "HI",
+    "field": "citation",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0028.htm",
+        "what": "HRS 633-28: clerk help for individuals only; any person may appear for another with court approval",
+        "type": "statute"
+      },
+      {
+        "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0029.htm",
+        "what": "HRS 633-29: judge may waive costs on sworn statement of inability to pay",
+        "type": "statute"
+      },
+      {
+        "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0036.htm",
+        "what": "HRS 633-36 (end of range)",
+        "type": "statute"
+      }
+    ],
+    "note": "HRS 633-27 through 633-36 all read on data.capitol.hawaii.gov (small claims division provisions; 633-36 is forms/public information). Statute annotations cite the Rules of the Small Claims Division of the District Courts ('RSCD'). Value unchanged."
+  },
+  {
+    "abbr": "ID",
+    "field": "e_filing",
+    "value": "yes_statewide",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://isc.idaho.gov/IREFS4",
+        "what": "Idaho Rules for Electronic Filing and Service, Rule 4 (amended Sept. 11, 2024)",
+        "type": "court_rule"
+      }
+    ],
+    "note": "IREFS Rule 4(a) makes e-filing mandatory for attorneys and for 'business entities filing in small claims actions' with no county carve-out, which only works if the system is statewide; Rule 4(b)-(c) make it optional for self-represented individuals. The CAO instruction's 'where e-filing is available' wording appears outdated (statewide iCourt rollout finished in 2018 per the iCourt FAQ, a lead not re-read)."
+  },
+  {
+    "abbr": "ID",
+    "field": "e_filing_notes",
+    "value": "Idaho courts e-file through File and Serve or the free Guide & File interview (guideandfile.idaho.gov). Mandatory for attorneys and for business entities filing small claims (IREFS Rule 4(a)); businesses may use Guide & File for Court Assistance Office forms. Self-represented individuals may e-file but are not required to; if they choose File and Serve they must keep e-filing in that case unless the court lets them withdraw. Guide & File users need not e-file later documents.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://isc.idaho.gov/IREFS4",
+        "what": "Idaho Rules for Electronic Filing and Service, Rule 4 (amended Sept. 11, 2024)",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Updated from the rule text."
+  },
+  {
+    "abbr": "ID",
+    "field": "fee_waiver_form",
+    "value": "Motion and Affidavit for Fee Waiver (CAO FW 1-9) plus a proposed Order Re: Fee Waiver, from the Idaho Court Assistance Office, under Idaho Code § 31-3220: https://courtselfhelp.idaho.gov/docs/forms/CAO_FW_1-9.pdf",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courtselfhelp.idaho.gov/docs/forms/CAO_FW_1-9.pdf",
+        "what": "Motion and Affidavit for Fee Waiver, CAO FW 1-9 (07/01/2016), cites Idaho Code 31-3220",
+        "type": "form"
+      },
+      {
+        "url": "https://courtselfhelp.idaho.gov/docs/forms/CAO_FW_Instr_1.pdf",
+        "what": "CAO FW Instruction 1: also file Order Re: Fee Waiver; judge decides if 'truly unable to afford' fees",
+        "type": "form"
+      }
+    ],
+    "note": "Corrected to the specific form. Official CAO form and instructions (both dated 07/01/2016, still the posted version). The judge may rule without a hearing."
+  },
+  {
+    "abbr": "IL",
+    "field": "fee_waiver_threshold",
+    "value": "Full waiver if the applicant receives SSI, AABD, TANF, SNAP, General Assistance, Transitional Assistance or State Children and Family Assistance; or has available income at or below 125% of the federal poverty level (unless non-exempt assets let them pay); or the court finds paying would cause substantial hardship. Partial waivers: 75% of fees waived at 125-150% of poverty, 50% at 150-175%, 25% at 175-200% (735 ILCS 5/5-105).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://ilga.gov/Documents/legislation/ilcs/documents/073500050K5-105.htm",
+        "what": "735 ILCS 5/5-105 definitions of indigent person and partial-waiver tiers",
+        "type": "statute"
+      }
+    ],
+    "note": "Read 735 ILCS 5/5-105 on ilga.gov. P.A. 104-598 (eff. Jan. 1, 2027) only changes wording ('Aid to the Aged, Blind and Persons with Disabilities'); tiers unchanged."
+  },
+  {
+    "abbr": "IL",
+    "field": "self_help_url",
+    "value": "https://www.illinoiscourts.gov/documents-and-forms/approved-forms/circuit-court-standardized-forms-suites/small-claims-complaint/",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.illinoiscourts.gov/documents-and-forms/approved-forms/circuit-court-standardized-forms-suites/small-claims-complaint/",
+        "what": "official small claims forms and instructions page",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.ilcourthelp.gov/hc/en-us/search?query=small+claims",
+        "what": "no small-claims pages on Illinois Court Help",
+        "type": "court_site"
+      }
+    ],
+    "note": "Corrected. ilcourthelp.gov loads (Supreme Court of Illinois help line/chat, (833) 411-1121) but has no small claims content (site search for 'small claims' returns only its terms and privacy pages). The Supreme Court's approved statewide Small Claims Complaint forms page is live, says all Illinois courts must accept the forms (claims of $10,000 or less), and links a 'Getting Started' guide and 'How to File & Serve' instructions."
+  },
+  {
+    "abbr": "IN",
+    "field": "limit_notes",
+    "value": "Small claims jurisdiction is $10,000 (since July 1, 2021, HEA 1110 / P.L. 125-2021). The Marion County Small Claims (township) Courts also have a $10,000 limit for contract and tort claims and for possessory landlord-tenant actions (IC 33-34-3-2, 33-34-3-3). Small Claims Rules apply in all courts, including the Marion County Small Claims Courts.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://iga.in.gov/laws/2026/ic/titles/33#33-34-3-2",
+        "what": "IC 33-34-3-2 and 33-34-3-3: $10,000 (P.L.125-2021)",
+        "type": "statute"
+      }
+    ],
+    "note": "Read IC 33-34-3-2 and 33-34-3-3 on iga.in.gov (2026 code, via browser): Marion County small claims courts have jurisdiction up to $10,000 in contract/tort and possessory landlord-tenant actions; amended by P.L. 125-2021. Resolves the earlier open question."
+  },
+  {
+    "abbr": "IN",
+    "field": "fee_waiver_form",
+    "value": "Verified motion for fee waiver (affidavit of indigency) under IC 33-37-3-2; no single statewide form. County courts post their own, e.g., Wayne County's 'Verified Motion for Waiver of Filing Fee and Court Costs' (each plaintiff files one).",
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://waynecounty.in.gov/clerk/forms/smallclaims/MotionForFilingFeeWaiver2026_fillable.pdf",
+        "what": "Wayne County small claims fee waiver motion and order (2026)",
+        "type": "form"
+      },
+      {
+        "url": "https://secure.in.gov/counties/clarkcountyclerkofcourts/files/forms/General-Fee-Waiver-Motion-and-Order.pdf",
+        "what": "Clark County verified motion for fee waiver (lead; not opened)",
+        "type": "form"
+      }
+    ],
+    "note": "No statewide form found; county courts post their own verified motions (Wayne Superior Court 3 small claims form 2026: 'Verified Motion for Waiver of Filing Fee and Court Costs', each plaintiff must file one; Clark County 'Verified Motion for Fee Waiver')."
+  },
+  {
+    "abbr": "IN",
+    "field": "fee_waiver_threshold",
+    "value": "Judge's discretion; no fixed income test. A person may sue without paying fees by filing a sworn written statement that they cannot pay because of indigency, that they believe they are entitled to redress, and describing the claim (IC 33-37-3-2(a)). If represented by Indiana Legal Services, another civil legal aid program, or a qualifying pro bono attorney, the clerk waives fees without court approval (IC 33-37-3-2(b)).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://iga.in.gov/laws/2026/ic/titles/33#33-37-3-2",
+        "what": "IC 33-37-3-2 indigent persons; waiver of fees",
+        "type": "statute"
+      }
+    ],
+    "note": "Read IC 33-37-3-2 on iga.in.gov (amended P.L. 89-2009). No income test in the statute."
+  },
+  {
+    "abbr": "IN",
+    "field": "e_filing",
+    "value": "yes_statewide",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://rules.incourts.gov/Content/trial/rule87/current.htm",
+        "what": "Trial Rule 87 (eff. Aug. 1, 2026): (B)(3) unrepresented litigants not required but encouraged to use IEFS",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.in.gov/courts/iocs/files/pubs-trial-court-filing.pdf",
+        "what": "IOCS guide (updated 7/1/2026): statewide E-filing System",
+        "type": "court_site"
+      }
+    ],
+    "note": "Statewide IEFS confirmed; optional for self-represented filers."
+  },
+  {
+    "abbr": "IN",
+    "field": "e_filing_notes",
+    "value": "Indiana E-filing System (IEFS) is statewide (efile.incourts.gov); township small claims courts link to it for new claims. Required for attorneys; under Trial Rule 87(B)(3) unrepresented litigants are not required but are encouraged to e-file. Clark County charges $10 less for e-filed small claims.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://rules.incourts.gov/Content/trial/rule87/current.htm",
+        "what": "Trial Rule 87 (eff. Aug. 1, 2026): (B)(3) unrepresented litigants not required but encouraged to use IEFS",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.in.gov/courts/iocs/files/pubs-trial-court-filing.pdf",
+        "what": "IOCS guide (updated 7/1/2026): statewide E-filing System",
+        "type": "court_site"
+      }
+    ],
+    "note": "Added rule citation and the self-represented status."
+  },
+  {
+    "abbr": "IA",
+    "field": "fee_waiver_form",
+    "value": "Application to Defer Costs with supporting affidavit (Iowa Code § 610.1), filed with the clerk; can be prepared with the free Iowa Interactive Court Forms linked from https://www.iowacourts.gov/for-the-public/representing-yourself/civil-court-fees/",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.legis.iowa.gov/docs/code/2026/610.1.pdf",
+        "what": "Iowa Code 610.1 (2026)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.iowacourts.gov/for-the-public/representing-yourself/civil-court-fees/",
+        "what": "Application to Defer Costs; interactive court form",
+        "type": "court_site"
+      }
+    ],
+    "note": "The Judicial Branch civil fees page calls it a written 'Application to Defer Costs' filed with the clerk and offers an Iowa Interactive Court Form to prepare it. Form number for small claims not confirmed (Iowa self-representation forms use 'Application and Affidavit to Defer Payment of Costs' titles, e.g., Form 109/209 - lead only)."
+  },
+  {
+    "abbr": "IA",
+    "field": "fee_waiver_threshold",
+    "value": "Court decides, possibly without a hearing, whether the person has shown they are unable to pay, based on an affidavit with a brief financial statement (Iowa Code § 610.1). No fixed income cutoff. Iowa defers (postpones) fees rather than waiving them outright; the court may assess costs when the case ends.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.legis.iowa.gov/docs/code/2026/610.1.pdf",
+        "what": "Iowa Code 610.1 (2026)",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.iowacourts.gov/for-the-public/representing-yourself/civil-court-fees/",
+        "what": "Application to Defer Costs; interactive court form",
+        "type": "court_site"
+      }
+    ],
+    "note": "610.1(1): court 'shall authorize' proceeding without prepayment 'upon a showing that the person is unable to pay'; affidavit with nature of suit, belief in redress, brief financial statement; may be decided without hearing; filing tolls the limitations period. Court page: judge decides whether to postpone; costs may be assessed at the end."
+  },
+  {
+    "abbr": "KS",
+    "field": "e_filing",
+    "value": "no",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://kscourts.gov/eCourt/Kansas-Courts-eFiling/Register",
+        "what": "'Self-represented parties file paper documents, so they should not register'",
+        "type": "court_site"
+      },
+      {
+        "url": "https://kscourts.gov/Rules-Orders/Rules/Temporary-Rule-for-Filing-in-a-District-Court-by-a",
+        "what": "Temporary Rule for filing by self-represented litigants: in person, mail, fax, drop box; small claims by fax allowed",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Kansas Courts eFiling exists statewide but only for attorneys and approved Rule 122A government/justice partners; the Judicial Branch says self-represented parties file on paper. Attorneys generally can't represent parties in small claims before judgment (K.S.A. 61-2707), so small claims filers can't e-file. Johnson County has its own separate system (not checked for small claims)."
+  },
+  {
+    "abbr": "KS",
+    "field": "e_filing_notes",
+    "value": "No e-filing for self-represented small claims filers: Kansas Courts eFiling is for attorneys and approved government/justice partners, and the Judicial Branch says self-represented parties file paper. Under the Supreme Court's Temporary Rule for Filing by a Self-Represented Litigant, small claims can be filed in person, by mail, by fax in every district court, or in a court drop box where available.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://kscourts.gov/eCourt/Kansas-Courts-eFiling/Register",
+        "what": "'Self-represented parties file paper documents, so they should not register'",
+        "type": "court_site"
+      },
+      {
+        "url": "https://kscourts.gov/Rules-Orders/Rules/Temporary-Rule-for-Filing-in-a-District-Court-by-a",
+        "what": "Temporary Rule for filing by self-represented litigants: in person, mail, fax, drop box; small claims by fax allowed",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Replaced the unconfirmed note."
+  },
+  {
+    "abbr": "KS",
+    "field": "fee_waiver_form",
+    "value": "Poverty Affidavit and Order Regarding Waiver of Filing Fee (Kansas Judicial Council forms: https://www.kjc.ks.gov/legal-forms/poverty-affidavit). In small claims the judge may waive the docket fee for good cause (K.S.A. 61-2704(b)).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.kjc.ks.gov/legal-forms/poverty-affidavit",
+        "what": "Judicial Council poverty affidavit and order forms",
+        "type": "form"
+      },
+      {
+        "url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_027_0004.html",
+        "what": "K.S.A. 61-2704(b) judge may waive docket fee for good cause",
+        "type": "statute"
+      }
+    ],
+    "note": "Kansas Judicial Council 'Poverty Affidavit / Waiver of Filing Fee' page lists Poverty Affidavit, Poverty Affidavit Inmate, and Order Regarding Waiver of Filing Fee (fetched via browser). K.S.A. 61-2704(b) (read on ksrevisor.gov): docket fee required 'unless for good cause shown the judge waives the fee'. Whether K.S.A. 60-2001(b) applies to small claims (a chapter 61 limited action) was not confirmed; 61-2704(b) is the small-claims-specific authority."
+  },
+  {
+    "abbr": "KS",
+    "field": "service_methods",
+    "value": "The sheriff serves unless the plaintiff tells the clerk they will handle service (K.S.A. 61-3003(b)). Methods: return receipt delivery (certified mail, priority mail, commercial courier or overnight delivery) by the sheriff or the party; personal or residence service by the sheriff, an attorney, a licensed private detective, or a court-appointed process server; if return receipt delivery is refused, first-class mail. Johnson County sheriff: $15 for in-state defendants.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_030_0003.html",
+        "what": "K.S.A. 61-3003 methods of service",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.ksrevisor.gov/statutes/chapters/ch61/061_027_0002.html",
+        "what": "K.S.A. 61-2702 limited-actions code applies to small claims",
+        "type": "statute"
+      }
+    ],
+    "note": "Corrected/expanded. K.S.A. 61-2702 makes the code of civil procedure for limited actions apply to small claims; K.S.A. 61-3003 sets the methods. The $15 Johnson County sheriff fee is from the county packet and was not re-checked."
+  },
+  {
+    "abbr": "KY",
+    "field": "fee_waiver_form",
+    "value": "Motion for Waiver of Costs and Fees and to Proceed In Forma Pauperis; Affidavit; Financial Statement; and Order (AOC-026, Rev. 10-22; KRS 453.190, CR 5.05(4)): https://www.kycourts.gov/Legal-Forms/Legal%20Forms/026.pdf",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.kycourts.gov/Legal-Forms/Legal%20Forms/026.pdf",
+        "what": "AOC-026 (Rev. 10-22): motion, affidavit, financial statement and order; KRS 453.190(2) standards",
+        "type": "form"
+      }
+    ],
+    "note": "Official AOC form number confirmed."
+  },
+  {
+    "abbr": "KY",
+    "field": "fee_waiver_threshold",
+    "value": "Court decides whether the person is a 'poor person' under KRS 453.190(2): either unable to pay without depriving themselves or dependents of necessities of life (food, shelter, clothing), or income at or below 100% on the Kentucky Supreme Court's sliding scale of indigency. If denied, the person has 30 days to pay.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.kycourts.gov/Legal-Forms/Legal%20Forms/026.pdf",
+        "what": "AOC-026 (Rev. 10-22): motion, affidavit, financial statement and order; KRS 453.190(2) standards",
+        "type": "form"
+      }
+    ],
+    "note": "Corrected: the official order on AOC-026 gives two alternative grounds for being a 'poor person' under KRS 453.190(2), including an income test (100% on the Supreme Court's sliding scale). KRS 453.190 itself not re-read on the legislature site (id lookup failed)."
+  },
+  {
+    "abbr": "LA",
+    "field": "who_can_sue",
+    "value": "Individuals and businesses; no bar on assignees or collection agencies found in R.S. 13:5200-5212. No more than 10 plaintiffs joined in one action and no class actions (R.S. 13:5202(A)-(B)); each court may limit mass filings by rule (13:5202(D)). The small claims procedure does not apply to state agencies (13:5210).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77961",
+        "what": "R.S. 13:5202: 10 plaintiffs max, no class actions, mass-filing limits by court rule",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77970",
+        "what": "R.S. 13:5210: Part does not apply to state agencies",
+        "type": "statute"
+      }
+    ],
+    "note": "Read R.S. 13:5200-5212 on legis.la.gov (city court small claims divisions). Added the state-agency exclusion. JP court rules (C.C.P. art. 4911 ff.) were not re-checked for party limits."
+  },
+  {
+    "abbr": "LA",
+    "field": "e_filing",
+    "verified": false,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77959",
+        "what": "R.S. 13:5200(B): ODR pilot for small claims in City Court of East St. Tammany",
+        "type": "statute"
+      },
+      {
+        "url": "https://static1.squarespace.com/static/6026ae91e9901c22e746e32a/t/6532dbe4cbf294723a76286c/1697831908828/Instruction%2Bon%2Bhow%2Bto%2Bfile%2Ba%2BSmall%2BClaims%2BSuit+FC.pdf",
+        "what": "First City Court (New Orleans) filing instructions: in person/mail",
+        "type": "court_site"
+      }
+    ],
+    "note": "Not verified. No statewide e-filing for city court small claims divisions or JP courts was found. The only statewide-law reference to online small claims is the Supreme Court's Online Dispute Resolution pilot covering all small claims in the City Court of East St. Tammany from Jan. 1, 2022 (R.S. 13:5200(B), 13:5213); that is ODR, not general e-filing, and its current status was not confirmed on a court site. New Orleans First City Court and Baton Rouge instructions describe in-person/mail filing. 'some_courts' could not be tied to an official page showing small claims e-filing in a named court."
+  },
+  {
+    "abbr": "LA",
+    "field": "service_methods",
+    "value": "City court small claims divisions: certified mail, return receipt requested, is the default (R.S. 13:5204(A)); the clerk sends it or uses the marshal, constable or sheriff (13:5211). If the receipt isn't returned, if the filer asks and pays the charge, or if local rule requires, service follows the Code of Civil Procedure (marshal/constable/sheriff). A receipt signed by the defendant counts as personal service; signed by someone else, or refused/unclaimed, counts as domiciliary service (13:5204(C)). Justice of the peace courts: constable (not re-checked).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77963",
+        "what": "R.S. 13:5204 service by certified mail; CCP service if receipt not returned, on request, or by local rule",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.legis.la.gov/Legis/LawPrint.aspx?d=77971",
+        "what": "R.S. 13:5211 clerk sends by certified mail or through marshal/constable/sheriff",
+        "type": "statute"
+      }
+    ],
+    "note": "Corrected: statute makes certified mail the default in city court small claims divisions, not marshal/constable."
+  },
+  {
+    "abbr": "LA",
+    "field": "self_help_url",
+    "verified": false,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://lasc.libguides.com/srl",
+        "what": "Law Library of Louisiana self-represented litigant guide (general)",
+        "type": "court_site"
+      }
+    ],
+    "note": "No official statewide small claims self-help page found (Louisiana Supreme Court/lasc.org searches turned up nothing small-claims-specific). Closest official options: the Law Library of Louisiana's general guide for self-represented litigants (https://lasc.libguides.com/srl, run by the Supreme Court's law library, not small-claims-specific) or a court's own page such as Baton Rouge City Court's (https://www.brla.gov/2118/Small-Claims). Left unset; editor's choice."
+  },
+  {
+    "abbr": "ME",
+    "field": "fee_waiver_threshold",
+    "value": "Judge decides on the Application to Proceed Without Payment of Fees (CV-067) and Financial Affidavit (CV-191) under M.R. Civ. P. 91: the court must find the applicant is acting in good faith and is without sufficient funds. No fixed income cutoff. The applicant agrees to repay waived fees if later able, or out of a settlement or award of costs.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://mjbportal.courts.maine.gov/CourtForms/FormsLists/DownloadForm?strFormNumber=CV-067",
+        "what": "CV-067 Application to Proceed Without Payment of Fees (Rev. 06/20), M.R. Civ. P. 91; order language",
+        "type": "form"
+      },
+      {
+        "url": "https://www.courts.maine.gov/help/guides/sc-guide-2026.pdf",
+        "what": "small claims guide: use CV-067; CV-191 financial affidavit",
+        "type": "court_site"
+      }
+    ],
+    "note": "Read CV-067 (Rev. 06/20, current on the Judicial Branch forms portal) and the 2026 small claims guide (Jan. 2026), which says to use CV-067. Note: courts.maine.gov's forms list still shows an older Rev. 03/13 CV-067."
+  },
+  {
+    "abbr": "MD",
+    "field": "e_filing",
+    "value": "yes_statewide",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.mdcourts.gov/mdec/efilingpublic",
+        "what": "E-filing for self-represented litigants: not mandatory; available in all Maryland jurisdictions; Rule 20-106(a)(3)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Judiciary page states 'E-filing is available in all Maryland jurisdictions' and is not mandatory without an attorney."
+  },
+  {
+    "abbr": "MD",
+    "field": "e_filing_notes",
+    "value": "MDEC e-filing (Odyssey File & Serve or certified vendors) is available in all Maryland jurisdictions. Optional for people without a lawyer; once you e-file in a case you must keep e-filing in that case (Md. Rule 20-106(a)(3)). Needs an email address and a credit card. A Guide & File interview can prepare small and large claims.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.mdcourts.gov/mdec/efilingpublic",
+        "what": "E-filing for self-represented litigants: not mandatory; available in all Maryland jurisdictions; Rule 20-106(a)(3)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Expanded from the Judiciary's self-represented e-filing page."
+  },
+  {
+    "abbr": "MD",
+    "field": "fee_waiver_form",
+    "value": "Request for Waiver of Costs (CC-DC-089), filed with a Notice Regarding Restricted Information (MDJ-008); at the end of the case, Request for Final Waiver of Open Costs (CC-DC-090). See https://www.mdcourts.gov/legalhelp/filingfeewaivers",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.mdcourts.gov/legalhelp/filingfeewaivers",
+        "what": "Judiciary fee waiver page (updated Jan. 2025): forms CC-DC-089/090, MLSC guidelines, 10 days to pay if denied",
+        "type": "court_site"
+      }
+    ],
+    "note": "Corrected form name and number."
+  },
+  {
+    "abbr": "MD",
+    "field": "fee_waiver_threshold",
+    "value": "Judge decides. The court considers the Maryland Legal Services Corporation (MLSC) Client Income Eligibility Guidelines and may consider other factors (Md. Rule 1-325). A different procedure applies to people represented by a civil legal aid organization. If denied, the filer has 10 days to pay or the case is treated as withdrawn.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.mdcourts.gov/legalhelp/filingfeewaivers",
+        "what": "Judiciary fee waiver page (updated Jan. 2025): forms CC-DC-089/090, MLSC guidelines, 10 days to pay if denied",
+        "type": "court_site"
+      }
+    ],
+    "note": "From the Judiciary page; Md. Rule 1-325 text itself not re-read (govt.westlaw.com blocked earlier)."
+  },
+  {
+    "abbr": "MD",
+    "field": "who_can_sue",
+    "value": "Individuals and businesses. A corporation, partnership, LLC or sole proprietorship may appear in District Court through an officer, partner, member or designated employee if the claim is within the small claim limit and is not based on a claim assigned to it by someone else; a designated employee needs a sworn power of attorney and can't be assigned full-time to court appearances, and the business can't hire another company to appear (Md. Code, Bus. Occ. & Prof. § 10-206(b)(4)). So a business suing on an assigned debt (e.g., a debt buyer) must use a lawyer.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gbo&section=10-206&enactments=false",
+        "what": "BOP 10-206(b)(4): non-lawyer business representation in District Court small claims",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.mdcourts.gov/legalhelp/smallclaims",
+        "what": "suing individuals (18+) and companies",
+        "type": "court_site"
+      }
+    ],
+    "note": "Read Bus. Occ. & Prof. 10-206(b)(4) on mgaleg.maryland.gov. Defendant age-18 point from the Judiciary small claims page."
+  }
+]

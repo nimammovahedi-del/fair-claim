@@ -193,7 +193,7 @@
   "appeal_deadline_days": null,
   "e_filing": "some_courts",
   "e_filing_notes": "eFiling for justice court civil, eviction and small claims cases is live in all justice courts except Maricopa County justice courts and the Pima County Consolidated Justice Court (AZ Supreme Court page last updated March 31, 2026). Self-represented filers may, but need not, e-file (eFileAZ). Maricopa's site says eFiling is 'coming soon'.",
-  "fee_waiver_form": "Application for deferral or waiver of court fees (Arizona Supreme Court standard form, available from each justice court and through eFileAZ)",
+  "fee_waiver_form": "Application for Deferral or Waiver of Court Fees or Costs and Consent to Entry of Judgment (Arizona Supreme Court form AOCDFGF1F; add AOCDFGF3F to defer/waive service fees). Justice courts may use their own version (e.g., Maricopa County Justice Courts). Forms: https://www.azcourts.gov/courtfilingfees/Fee-Waivers-and-Deferrals/Fee-Waiver-and-Deferral-Forms",
   "fee_waiver_threshold": "Deferral must be granted if the applicant receives TANF, SNAP (food stamps) or SSI, or has income insufficient for daily essentials; gross monthly income at or below 150% of federal poverty guidelines is evidence of this (A.R.S. § 12-302(C)). Full waiver if permanently unable to pay (§ 12-302(D)).",
   "service_methods": "Plaintiff may serve by registered or certified mail (complete on delivery date on the return receipt); the clerk may serve by certified restricted mail (statutory $8 fee). If mail fails, personal service by a process server, constable/sheriff or other authorized officer, with an affidavit of service (A.R.S. § 22-513).",
   "self_help_url": "https://www.azcourts.gov/selfservicecenter/Small-Claims",
@@ -273,13 +273,21 @@
     "url": "https://www.jp.pima.gov/Forms/JP90A%20-%20Civil%20Unit%20Fee%20Schedule.pdf",
     "what": "Pima County Consolidated Justice Court schedule eff. 9/21/2026: small claims complaint $60 ($30 statutory + $10 automation + $20 operations); answer $38",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.azcourts.gov/courtfilingfees/Fee-Waivers-and-Deferrals/Fee-Waiver-and-Deferral-Forms",
+    "what": "statewide fee deferral/waiver form titles and numbers",
+    "type": "court_site"
+   },
+   {
+    "url": "https://www.justicecourts.maricopa.gov/media/3e2kbvvs/howto-fwd.pdf",
+    "what": "justice court fee deferral/waiver how-to and application form (small claims included)",
+    "type": "form"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "fee_waiver_form"
-  ],
-  "notes": "Filing fee max is the highest observed (Maricopa County); local fees in other counties were not checked. The exact title/URL of the statewide fee deferral/waiver form was not confirmed. Several secondary sites and a Mohave County page still show the old $3,500 limit. [2026-11-07 filing_fee_max, verified: Corrected from $58 to $60. Statewide base is $30 plus court-specific local fees. Pima County's fee schedule effective Sept. 21, 2026 lists $60 ($30 statutory + $10 court automation + $20 court operations fee); Maricopa lists $58. Other counties (e.g. Pinal) not confirmed - Pinal's fee memo could not be opened (403 / file download).]"
+  "unverified": [],
+  "notes": "Filing fee max is the highest observed (Maricopa County); local fees in other counties were not checked. The exact title/URL of the statewide fee deferral/waiver form was not confirmed. Several secondary sites and a Mohave County page still show the old $3,500 limit. [2026-11-07 filing_fee_max, verified: Corrected from $58 to $60. Statewide base is $30 plus court-specific local fees. Pima County's fee schedule effective Sept. 21, 2026 lists $60 ($30 statutory + $10 court automation + $20 court operations fee); Maricopa lists $58. Other counties (e.g. Pinal) not confirmed - Pinal's fee memo could not be opened (403 / file download).] [2026-11-07 fee_waiver_form, verified: Corrected title. The azcourts.gov fee waiver forms page lists the statewide trial-court form 'Application for Deferral or Waiver of Court Fees or Costs and Consent to Entry of Judgment' (AOCDFGF1F) plus AOCDFGF3F for service fees, and says courts may have preferred local versions. Maricopa County Justice Courts' how-to (rev. 8/15/22) and its own form (WD 8150-901.1, rev. 1/27/26) cover small claims; proof of government assistance can be attached.]"
  },
  {
   "state": "Arkansas",
@@ -300,8 +308,8 @@
   "appeal_deadline_days": 30,
   "e_filing": "some_courts",
   "e_filing_notes": "Each district court's judges decide whether to adopt the AOC electronic filing system (AO 21). Pro se parties may always file on paper. $20 e-filing system fee for starting a small claims case electronically.",
-  "fee_waiver_form": "Petition to proceed in forma pauperis (Ark. R. Civ. P. 72)",
-  "fee_waiver_threshold": "Judge's discretion under Ark. R. Civ. P. 72 (in forma pauperis)",
+  "fee_waiver_form": "Petition to proceed in forma pauperis with the 'Affidavit in Support of Request to Proceed In Forma Pauperis' (Ark. R. Civ. P. 72(e); Judiciary form, 2026 version) and a copy of the complaint: https://www.arcourts.gov/sites/default/files/formatted-files/In-Forma-Pauperis-Affidavit-see-Rule-72-2026-1.pdf",
+  "fee_waiver_threshold": "Judge's discretion: the court makes an indigency finding from the sworn affidavit (income, assets, dependents) and may consider the current federal poverty guidelines; it must also find a colorable cause of action. Not available for slander, libel or malicious prosecution claims (Ark. R. Civ. P. 72(c)-(d)).",
   "service_methods": "Unless the plaintiff asks for the sheriff or another authorized person, the clerk serves the defendant by certified mail, return receipt requested, addressee only; service otherwise follows Ark. R. Civ. P. 4 (Dist. Ct. R. 10(a)(3)). Defendant has 30 days to answer.",
   "self_help_url": "https://arkansasag.gov/divisions/public-protection/legal-resources/guide-to-small-claims-court/",
   "citation": "Ark. Sup. Ct. Admin. Order No. 18 §§ 3-4; Ark. Dist. Ct. R. 2, 9, 10; Ark. Sup. Ct. Admin. Order No. 21",
@@ -340,14 +348,21 @@
     "url": "https://www.fultoncountyar.gov/upages.php?id=55",
     "what": "Fulton County small claims: filing fee $67.50, service fee $50",
     "type": "court_site"
+   },
+   {
+    "url": "https://opinions.arcourts.gov/ark/supremecourt/en/294159/1/document.do",
+    "what": "Ark. R. Civ. P. 72 text as amended by In re Rules of Civ. P. 3 & 72, 2012 Ark. 84 (per curiam)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://www.arcourts.gov/sites/default/files/formatted-files/In-Forma-Pauperis-Affidavit-see-Rule-72-2026-1.pdf",
+    "what": "current Judiciary affidavit form (2026 version)",
+    "type": "form"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "fee_waiver_form",
-   "fee_waiver_threshold"
-  ],
-  "notes": "Filing fee: only the Little Rock District Court schedule ($65) was confirmed; the statute (Ark. Code § 16-17-705) could not be read on an official site, a secondary copy shows $50, and the AG guide says $30-$65. Needs a human check. The AG page is from the Attorney General (state government), not the judiciary; Arkansas courts have no statewide small claims self-help page that could be found. Fee waiver (ARCP 72) not verified from rule text. [2026-11-07 filing_fee_min, verified: Three official district court fee pages (Little Rock, Fort Smith, 4th Judicial District) all list $65 for small claims; Fort Smith says the Legislature increased fees to $65 small claims / $80 civil. A secondary copy of Ark. Code 16-17-705 shows a $50 small-claims base (and $65 civil), so the extra $15 appears to come from another statutory fee; the official Arkansas Code (Lexis-hosted) was not read, so the statutory breakdown is unconfirmed. The AG guide's '$30-$65' range looks outdated; no official court page showing less than $65 was found. Service (sheriff typically $50) and $20 e-filing fee (AO 21) are extra.] [2026-11-07 filing_fee_max, verified: Fulton County's official small claims page lists a $67.50 filing fee (plus $50 service, total $117.50), the highest found; Little Rock, Fort Smith and the 4th Judicial District list $65. Not all districts checked. Fulton County page is a county government page, not a court page.]"
+  "unverified": [],
+  "notes": "Filing fee: only the Little Rock District Court schedule ($65) was confirmed; the statute (Ark. Code § 16-17-705) could not be read on an official site, a secondary copy shows $50, and the AG guide says $30-$65. Needs a human check. The AG page is from the Attorney General (state government), not the judiciary; Arkansas courts have no statewide small claims self-help page that could be found. Fee waiver (ARCP 72) not verified from rule text. [2026-11-07 filing_fee_min, verified: Three official district court fee pages (Little Rock, Fort Smith, 4th Judicial District) all list $65 for small claims; Fort Smith says the Legislature increased fees to $65 small claims / $80 civil. A secondary copy of Ark. Code 16-17-705 shows a $50 small-claims base (and $65 civil), so the extra $15 appears to come from another statutory fee; the official Arkansas Code (Lexis-hosted) was not read, so the statutory breakdown is unconfirmed. The AG guide's '$30-$65' range looks outdated; no official court page showing less than $65 was found. Service (sheriff typically $50) and $20 e-filing fee (AO 21) are extra.] [2026-11-07 filing_fee_max, verified: Fulton County's official small claims page lists a $67.50 filing fee (plus $50 service, total $117.50), the highest found; Little Rock, Fort Smith and the 4th Judicial District list $65. Not all districts checked. Fulton County page is a county government page, not a court page.] [2026-11-07 fee_waiver_form, verified: Rule 72(b) requires a petition with a verified affidavit in the Rule 72(e) form and a copy of the complaint; the Judiciary posts the 2026 'Affidavit in Support of Request to Proceed In Forma Pauperis'. Rule text read from the 2012 per curiam on opinions.arcourts.gov; a 2018 amendment (eff. 2019) removed 'against another' from (a); a reported 2024 amendment was not checked. Rule 72 refers to 'the court in which the action is pending', and the form caption is generic (any court).] [2026-11-07 fee_waiver_threshold, verified: Rule 72(c): court makes a finding of indigency based on the affidavit and 'may consider' the federal poverty guidelines; if satisfied the petitioner has a colorable cause of action it may allow the suit without filing and clerk fees. Rule 72(d) excludes slander, libel and malicious prosecution.]"
  },
  {
   "state": "California",
@@ -428,13 +443,31 @@
     "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=68632",
     "what": "fee_waiver_threshold: 200% FPG (SB 54, eff. 2026-01-01), per research/california/statewide.json",
     "type": "statute"
+   },
+   {
+    "url": "https://leginfo.legislature.ca.gov/faces/billStatusClient.xhtml?bill_id=202320240SB71",
+    "what": "SB 71 chaptered Ch. 861, Stats. 2023",
+    "type": "statute"
+   },
+   {
+    "url": "https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202320240SB71",
+    "what": "SB 71 digest: $10,000 to $12,500",
+    "type": "statute"
+   },
+   {
+    "url": "https://leginfo.legislature.ca.gov/faces/billStatusClient.xhtml?bill_id=202520260AB1827",
+    "what": "AB 1827 status: held under submission 8/13/26",
+    "type": "statute"
+   },
+   {
+    "url": "https://leginfo.legislature.ca.gov/faces/billVotesClient.xhtml?bill_id=202520260AB1827",
+    "what": "AB 1827 Assembly floor vote 77-0",
+    "type": "statute"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "recent_changes"
-  ],
-  "notes": "Leads confirmed: $12,500 / $6,250 per Judicial Council forms and self-help site. The Legislature's statute site (leginfo.legislature.ca.gov) blocks automated access (Cloudflare challenge), so the statute text itself was not read; facts are from mandatory Judicial Council forms and the official self-help guide. recent_changes is listed as unverified because SB 71's date and AB 1827's status come from a legislative analysis lead and a secondary bill tracker. The 125% figure for fee waivers is from Gov. Code § 68632(b), which could not be fetched; the FW-001 income table itself was confirmed. Statewide rules only; county details are researched separately. Fee-waiver threshold corrected 2026-11-06 from 125% to 200% to match the statute research (statewide.json)."
+  "unverified": [],
+  "notes": "Leads confirmed: $12,500 / $6,250 per Judicial Council forms and self-help site. The Legislature's statute site (leginfo.legislature.ca.gov) blocks automated access (Cloudflare challenge), so the statute text itself was not read; facts are from mandatory Judicial Council forms and the official self-help guide. recent_changes is listed as unverified because SB 71's date and AB 1827's status come from a legislative analysis lead and a secondary bill tracker. The 125% figure for fee waivers is from Gov. Code § 68632(b), which could not be fetched; the FW-001 income table itself was confirmed. Statewide rules only; county details are researched separately. Fee-waiver threshold corrected 2026-11-06 from 125% to 200% to match the statute research (statewide.json). [2026-11-07 recent_changes, verified: Confirmed on leginfo.legislature.ca.gov: SB 71 (Umberg) approved by the Governor and chaptered Oct. 13, 2023 (Ch. 861, Stats. 2023); digest raises the natural-person limit from $10,000 to $12,500 and other small claims amounts (Jan. 1, 2024 is the standard effective date for a non-urgency 2023 statute). AB 1827 (Chen, 2025-26) would set $15,000 in CCP 116.220 and allow 3 filings/year over $2,500; Assembly floor 77-0 (May 26, 2026), Senate Judiciary 13-0, placed on Senate Appropriations suspense Aug. 3, and 'In committee: Held under submission' Aug. 13, 2026. COVID rental-debt item is from the official self-help page already cited in the row. Value unchanged.]"
  },
  {
   "state": "Colorado",
@@ -569,7 +602,7 @@
   "appeal_who": "both",
   "appeal_deadline_days": 15,
   "e_filing": "yes_statewide",
-  "e_filing_notes": "The JP Court uses eFlex e-filing (JP Ct. Civ. R. 79.1; Policy Directive 08-232). E-filing is required for those covered by the directive, including businesses filing five or more cases per year; individuals can file in person or by mail.",
+  "e_filing_notes": "JP Court eFlex e-filing (JP Ct. Civ. R. 79.1; Policy Directive 08-232, 1st Supp. 2019). Mandatory for attorneys; entities appearing through a Form 50 agent that filed 5 or more civil actions in the prior 12 months; any other party that filed more than 10 civil actions in the prior 12 months; and state agencies. Everyone else, including self-represented individuals, may e-file but is not required to and can file in person or by mail. E-filing requires completing the court's online eFlex training and paying by credit card or court account.",
   "fee_waiver_form": "Application and Affidavit to Proceed in Forma Pauperis (JP Court Civil Form 49)",
   "fee_waiver_threshold": "The court applies its published 'Income Level for Individuals Eligible for Assistance' guidelines: applicants with income and assets at or below the guidelines are generally approved; above them, the court considers unusual necessary expenses.",
   "service_methods": "After filing, the court serves the defendant (cost included in the filing fee) unless the plaintiff hires a court-approved special process server. Special procedures and fees apply to out-of-state defendants (the court does not serve them), corporations, insurance companies and the State.",
@@ -605,13 +638,16 @@
     "url": "https://courts.delaware.gov/jpcourt/efiling.aspx",
     "what": "e_filing, e_filing_notes",
     "type": "court_site"
+   },
+   {
+    "url": "https://courts.delaware.gov/forms/download.aspx?id=114668",
+    "what": "Policy Directive 08-232 (1st Supp.), July 8, 2019: who must e-file; others may",
+    "type": "court_rule"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "e_filing"
-  ],
-  "notes": "Lead confirmed: $25,000 in the Justice of the Peace Court. Delaware has no court called 'small claims'; the JP Court is a general limited-jurisdiction civil court. Whether self-represented individuals may (optionally) e-file through eFlex was not confirmed; 'yes_statewide' reflects that the system covers JP civil cases statewide. Fee page last updated 2021; a second JP fee URL returned 'page not found'."
+  "unverified": [],
+  "notes": "Lead confirmed: $25,000 in the Justice of the Peace Court. Delaware has no court called 'small claims'; the JP Court is a general limited-jurisdiction civil court. Whether self-represented individuals may (optionally) e-file through eFlex was not confirmed; 'yes_statewide' reflects that the system covers JP civil cases statewide. Fee page last updated 2021; a second JP fee URL returned 'page not found'. [2026-11-07 e_filing, verified: Policy Directive 08-232 applies to 'all Justice of the Peace Court civil actions' statewide. Parties not in the mandatory categories 'may, but are not required to' e-file, so self-represented individuals can use it optionally. Directive is dated 2019 but is the one linked from the current e-filing page.] [2026-11-07 e_filing_notes, verified: Corrected the mandatory-filer description from the directive itself.]"
  },
  {
   "state": "District of Columbia",
@@ -632,7 +668,7 @@
   "appeal_deadline_days": 3,
   "e_filing": "yes_statewide",
   "e_filing_notes": "eFileDC (efiledcsuperiorcourt.gov, Tyler Technologies) accepts small claims filings; the court encourages self-represented people to e-file. Paper filing in person, by mail, or by drop box also available.",
-  "fee_waiver_form": "Fee Waiver Application (D.C. Superior Court), filed with the statement of claim; available from the Small Claims Clerk's Office or dccourts.gov",
+  "fee_waiver_form": "Application to Waive Court Costs and Fees (D.C. Superior Court courtwide form, Rev. Jan. 16, 2026): https://www.dccourts.gov/sites/default/files/2026-02/DCSC_Courtwide_Fee_Waiver%20Application.pdf",
   "fee_waiver_threshold": "Full waiver required if the litigant receives listed D.C. or federal benefits (e.g., SNAP, SSI, TANF, Medicaid/Alliance, WIC) or monthly income is at or below 200% of federal poverty guidelines; otherwise full or partial waiver on showing of substantial hardship (D.C. Code § 15-712).",
   "service_methods": "Clerk mails by registered or certified mail (plaintiff pays postage); or service by a private individual with an affidavit of service; or by the marshal (D.C. Code § 16-3902).",
   "self_help_url": "https://www.dccourts.gov/superior-court/superior-court-divisions/civil-division/small-claims",
@@ -677,13 +713,21 @@
     "url": "https://www.dccourts.gov/superior-court/superior-court-divisions/civil-division/small-claims",
     "what": "lawyers (business must have lawyer), e_filing, fee_waiver_form, jury, self_help_url",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.dccourts.gov/sites/default/files/2026-02/DCSC_Courtwide_Fee_Waiver%20Application.pdf",
+    "what": "Superior Court courtwide 'Application to Waive Court Costs and Fees', Rev. Jan. 16, 2026",
+    "type": "form"
+   },
+   {
+    "url": "https://www.dccourts.gov/sites/default/files/pdf-forms/Small-Claims-Branch-Application-to-Proceed-Without-Prepayment-of-Costs.pdf",
+    "what": "older Small Claims Branch Form 106A-SCB",
+    "type": "form"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "fee_waiver_form"
-  ],
-  "notes": "The 3-day statutory deadline for an application for allowance of appeal is very short; check D.C. Court of Appeals rules for any computation details. The exact title/URL of the Superior Court fee waiver form was not confirmed. The business-must-have-a-lawyer rule comes from the court's page; the underlying Small Claims Rule was not read."
+  "unverified": [],
+  "notes": "The 3-day statutory deadline for an application for allowance of appeal is very short; check D.C. Court of Appeals rules for any computation details. The exact title/URL of the Superior Court fee waiver form was not confirmed. The business-must-have-a-lawyer rule comes from the court's page; the underlying Small Claims Rule was not read. [2026-11-07 fee_waiver_form, verified: Corrected title. The current Superior Court courtwide form is 'Application to Waive Court Costs and Fees' (Rev. Jan. 16, 2026). It lists public-benefit programs (receipt = skip to declaration), free representation by a legal services org or DC law school clinic, and an income test of 200% of the 2026 federal poverty guidelines (useful for fee_waiver_threshold). An older Small Claims and Conciliation Branch form, 'Form 106A-SCB, Application to Proceed Without Prepayment of Costs, Fees, or Security' (undated, cites D.C. Code 15-712), is still posted; the courtwide form appears to be the current one but the court page (dccourts.gov/services/fee-waiver-application) returned 403/404 to fetching.]"
  },
  {
   "state": "Florida",
@@ -704,7 +748,7 @@
   "appeal_deadline_days": 30,
   "e_filing": "yes_statewide",
   "e_filing_notes": "The Florida Courts E-Filing Portal (myflcourtaccess.com) is statewide and open to registered self-represented litigants.",
-  "fee_waiver_form": "Application for Determination of Civil Indigent Status (Florida Clerks of Court Operations Corporation form, filed with the clerk)",
+  "fee_waiver_form": "Application for Determination of Civil Indigent Status (statewide form developed by the Florida Clerks of Court Operations Corporation under Fla. Stat. § 57.082), filed with the county clerk; if approved, filing and summons fees are waived. Example: https://www.lakecountyclerkfl.gov/wp-content/uploads/ApplicationForCivilIndigence.pdf",
   "fee_waiver_threshold": "Clerk finds the applicant indigent if income is at or below 200% of federal poverty guidelines (Fla. Stat. § 57.082(2)(a)), subject to other statutory factors.",
   "service_methods": "As provided by law and Fla. R. Civ. P. 1.070 (sheriff or certified process server), or for Florida residents only, certified mail with return receipt signed by the defendant or someone authorized at the residence or business, mailed by the clerk or attorney (cost extra) (Fla. Sm. Cl. R. 7.070).",
   "self_help_url": "https://www.miamidade.gov/clerk/small-claims.page",
@@ -754,13 +798,16 @@
     "url": "https://stjohnsclerk.com/appeals/",
     "what": "St. Johns County Clerk: notice of appeal within 30 days of rendition of the order",
     "type": "court_site"
+   },
+   {
+    "url": "https://www.lakecountyclerkfl.gov/wp-content/uploads/ApplicationForCivilIndigence.pdf",
+    "what": "Application for Determination of Civil Indigent Status (clerk copy)",
+    "type": "form"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "fee_waiver_form"
-  ],
-  "notes": "Small claims in Florida is a set of procedural rules in county court, not a separate court. Clerk fees ($55/$80/$175/$300) are $1 higher than the statute's base-plus-$4 ($54/$79/$174/$299); the extra $1 may be another statutory add-on - worth a human check. The Florida Bar appellate rules PDF could not be downloaded, so the 30-day deadline (Fla. R. App. P. 9.110(b)) and DCA routing rely on a secondary lead plus the change to § 26.012. Fla. Stat. § 34.017 still refers to judgments 'appealable to the circuit court' (legacy wording). Rules 7.010 and 7.020 were amended effective Jan. 1, 2026 (SC2025-1254) but the $8,000 limit is unchanged in the July 1, 2026 compilation. No statewide judiciary self-help page for small claims was found (flcourts.gov page returned not found); a county clerk page is used. [2026-11-07 appeal_deadline_days, verified: 30 days from rendition confirmed on two Florida clerk of court pages (Leon, St. Johns); Leon also confirms county civil appeals go to the District Court of Appeal. The rule text itself (Fla. R. App. P. 9.110(b)) was not read: the Florida Bar's Sept. 1, 2026 appellate rules PDF returned 403 to fetching. St. Johns' fee table still shows an 'Appeal to Circuit Court' label (legacy).]"
+  "unverified": [],
+  "notes": "Small claims in Florida is a set of procedural rules in county court, not a separate court. Clerk fees ($55/$80/$175/$300) are $1 higher than the statute's base-plus-$4 ($54/$79/$174/$299); the extra $1 may be another statutory add-on - worth a human check. The Florida Bar appellate rules PDF could not be downloaded, so the 30-day deadline (Fla. R. App. P. 9.110(b)) and DCA routing rely on a secondary lead plus the change to § 26.012. Fla. Stat. § 34.017 still refers to judgments 'appealable to the circuit court' (legacy wording). Rules 7.010 and 7.020 were amended effective Jan. 1, 2026 (SC2025-1254) but the $8,000 limit is unchanged in the July 1, 2026 compilation. No statewide judiciary self-help page for small claims was found (flcourts.gov page returned not found); a county clerk page is used. [2026-11-07 appeal_deadline_days, verified: 30 days from rendition confirmed on two Florida clerk of court pages (Leon, St. Johns); Leon also confirms county civil appeals go to the District Court of Appeal. The rule text itself (Fla. R. App. P. 9.110(b)) was not read: the Florida Bar's Sept. 1, 2026 appellate rules PDF returned 403 to fetching. St. Johns' fee table still shows an 'Appeal to Circuit Court' label (legacy).] [2026-11-07 fee_waiver_form, verified: Confirmed on county clerk/court copies (Lake County Clerk; Fifth Circuit/Citrus). The form notice says filing and summons fees are waived if found indigent; other costs are not. The clerk decides; applicants found not indigent may ask a judge to review. Fla. Stat. 57.082 (already cited) requires the form developed by the Florida Clerks of Court Operations Corporation with Supreme Court approval.]"
  },
  {
   "state": "Georgia",
@@ -773,7 +820,7 @@
   "filing_fee_min": 107,
   "filing_fee_max": 120,
   "filing_fee_notes": "Totals shown include sheriff service on one defendant, because Georgia magistrate courts usually quote it that way, and they vary by county: Douglas $107, Hart $108, Gwinnett $110 ($60 filing + $50 service), Upson $115, Pierce $120 (as of July 2026). Each added defendant costs more. The Attorney General's older $45–$55 figure is out of date.",
-  "who_can_sue": "Any person or business may file in their own name, with or without an attorney (AG consumer page). Detailed rules for business representation were not confirmed.",
+  "who_can_sue": "Any person or business may file, with or without a lawyer. A corporation, LLC, partnership, sole proprietorship or unincorporated association may appear through an officer or full-time employee it designates as agent (O.C.G.A. § 15-10-43(i); Uniform Magistrate Court Rule 31; courts use a sworn 'Designation of Agent for Business Entity'). No statewide bar on assignees or collection agencies found.",
   "lawyers_allowed": "yes",
   "lawyers_notes": "Parties may appear with or without an attorney (O.C.G.A. § 15-10-43 notice; AG consumer page).",
   "appeal": "Either party may appeal to the state court or superior court of the county for a new trial (de novo), where a jury may be requested (O.C.G.A. § 15-10-41(b)). Appeals must be filed within 30 days of the decision; the appellate court charges a filing fee and accrued magistrate costs must be paid. No appeal from a default judgment; review of those is by certiorari.",
@@ -781,8 +828,8 @@
   "appeal_deadline_days": 30,
   "e_filing": "some_courts",
   "e_filing_notes": "Many county magistrate courts accept e-filing (e.g., Gwinnett via eFileGA, Chatham); there is no single statewide system for magistrate courts.",
-  "fee_waiver_form": "Affidavit of indigence (pauper's affidavit), available from the county magistrate court",
-  "fee_waiver_threshold": "Judge's discretion",
+  "fee_waiver_form": "Affidavit of indigence (pauper's affidavit) under O.C.G.A. § 9-15-2; forms vary by county magistrate court. A generic 'Affidavit of Eligibility to Proceed in Forma Pauperis' and order are posted on georgiacourts.gov: https://assets.georgiacourts.gov/2/wp-content/uploads/2024/10/19110427/Paupers-Affidavit.pdf",
+  "fee_waiver_threshold": "Judge decides on the sworn affidavit that the person cannot pay because of indigence (O.C.G.A. § 9-15-2); if the affidavit is questioned, the court holds a hearing. The standard order form on georgiacourts.gov uses income at or below 125% of the federal poverty guidelines for the household size. Practice may vary by county.",
   "service_methods": "Personal service, leaving a copy at the defendant's home with a resident of suitable age and discretion, or delivery to an authorized agent, by any official or person authorized to serve process in superior court, a constable, or a person specially appointed; service outside the county by second original (O.C.G.A. § 15-10-43(b)). Defendant has 30 days to answer, plus 15 days to open default by paying costs.",
   "self_help_url": "https://consumer.georgia.gov/consumer-topics/magistrate-court",
   "citation": "O.C.G.A. §§ 15-10-2(5), 15-10-40 to 15-10-54 (esp. 15-10-41, 15-10-43); O.C.G.A. § 5-3-20",
@@ -831,15 +878,31 @@
     "url": "https://www.upsoncountyga.org/DocumentCenter/View/2430/Magistrate-Court-Fees-2025",
     "what": "Upson County: Statement of Claim one defendant $115 (eff. July 1, 2025), $10 each additional defendant",
     "type": "court_site"
+   },
+   {
+    "url": "https://dekalbgastatecourt.gov/wp-content/uploads/2025/10/MAGISTRATE-CIVIL-DESIGNATION-OF-AGENCY-fillable.pdf",
+    "what": "Designation of Agent for Business Entity form citing O.C.G.A. 15-10-43(i) and Unif. Mag. Ct. R. 31",
+    "type": "form"
+   },
+   {
+    "url": "https://assets.georgiacourts.gov/2/wp-content/uploads/2024/10/19110427/Paupers-Affidavit.pdf",
+    "what": "generic 'Affidavit of Eligibility to Proceed in Forma Pauperis' on georgiacourts.gov",
+    "type": "form"
+   },
+   {
+    "url": "https://assets.georgiacourts.gov/2/wp-content/uploads/2024/10/19110427/Order-on-Paupers-Affidavit.pdf",
+    "what": "order form: O.C.G.A. 9-15-2; 125% of HHS poverty guidelines; hearing before denial",
+    "type": "form"
+   },
+   {
+    "url": "https://cherokeecountyga.gov/Magistrate-Court/_resources//Magistrate-Paupers-Affidavit.pdf",
+    "what": "county magistrate court's own pauper's affidavit (example of local variation; not opened - returned HTML)",
+    "type": "form"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "who_can_sue",
-   "fee_waiver_form",
-   "fee_waiver_threshold"
-  ],
-  "notes": "Georgia has no separate small claims court; the Magistrate Court's general civil limit ($15,000) serves that role. Statute text was read from Gwinnett County's official court site (Georgia's official code is hosted by LexisNexis and was not fetched). Fee conflict: the AG page's $45-$55 (including service) is lower than Gwinnett's $60 + $50 service - fees vary by county and the AG range may be outdated. The 30-day appeal deadline comes from the AG page; O.C.G.A. § 5-3-20 was not read. The AG page is from the state Attorney General, not the judiciary. [2026-11-07 filing_fee_min, verified: Corrected from $45. Values are the total to file against one defendant including sheriff service, because Georgia magistrate courts quote it that way (service is a separate line in Gwinnett). Official county figures: Douglas $107, Hart $108, Gwinnett $60 filing + $50 sheriff service = $110, Upson $115 (eff. July 1, 2025), Pierce $120 (eff. July 1, 2026). The AG page's $45-$55 is outdated. The statute (HB 999 version of 15-10-80) caps only the base deposit ($22) and lets other statutory add-ons stack, so totals vary by county. IMPORTANT for the row: HB 999 also raises the magistrate court limit from $15,000 to $25,000 for actions filed on or after Jan. 1, 2027 - recent_changes/limit should be updated (outside this task's fields). Signing status (signed May 12, 2026, Act 707) is from the bill's appearance in the Governor's 2026 signed-legislation list and the Legislative Counsel summary; not separately confirmed on the bill status page.] [2026-11-07 filing_fee_max, verified: Highest official figure found: Pierce County $120 (effective July 1, 2026). Pierce's page also shows an older breakdown ($45 + $1 + $50 = $96), so it is internally inconsistent; the $120 is the dated, current figure. Range of five counties checked: $107-$120 including service on one defendant. Corrected from $60 (Gwinnett filing-only amount).]"
+  "unverified": [],
+  "notes": "Georgia has no separate small claims court; the Magistrate Court's general civil limit ($15,000) serves that role. Statute text was read from Gwinnett County's official court site (Georgia's official code is hosted by LexisNexis and was not fetched). Fee conflict: the AG page's $45-$55 (including service) is lower than Gwinnett's $60 + $50 service - fees vary by county and the AG range may be outdated. The 30-day appeal deadline comes from the AG page; O.C.G.A. § 5-3-20 was not read. The AG page is from the state Attorney General, not the judiciary. [2026-11-07 filing_fee_min, verified: Corrected from $45. Values are the total to file against one defendant including sheriff service, because Georgia magistrate courts quote it that way (service is a separate line in Gwinnett). Official county figures: Douglas $107, Hart $108, Gwinnett $60 filing + $50 sheriff service = $110, Upson $115 (eff. July 1, 2025), Pierce $120 (eff. July 1, 2026). The AG page's $45-$55 is outdated. The statute (HB 999 version of 15-10-80) caps only the base deposit ($22) and lets other statutory add-ons stack, so totals vary by county. IMPORTANT for the row: HB 999 also raises the magistrate court limit from $15,000 to $25,000 for actions filed on or after Jan. 1, 2027 - recent_changes/limit should be updated (outside this task's fields). Signing status (signed May 12, 2026, Act 707) is from the bill's appearance in the Governor's 2026 signed-legislation list and the Legislative Counsel summary; not separately confirmed on the bill status page.] [2026-11-07 filing_fee_max, verified: Highest official figure found: Pierce County $120 (effective July 1, 2026). Pierce's page also shows an older breakdown ($45 + $1 + $50 = $96), so it is internally inconsistent; the $120 is the dated, current figure. Range of five counties checked: $107-$120 including service on one defendant. Corrected from $60 (Gwinnett filing-only amount).] [2026-11-07 who_can_sue, verified: Business representation confirmed on an official magistrate court form (DeKalb) that cites O.C.G.A. 15-10-43(i) and Uniform Magistrate Court Rule 31; the official Lexis-hosted code and rule text were not opened directly (rule wording also seen on secondary sites). No statewide bar on assignees/collection agencies found.] [2026-11-07 fee_waiver_form, verified: No single mandatory statewide form found; magistrate courts post their own pauper's affidavits (Cherokee, Lee). A generic affidavit and order are hosted on georgiacourts.gov (the order references a Statement of Claim, sheriff's service and fi fa, i.e., magistrate-court use).] [2026-11-07 fee_waiver_threshold, verified: Corrected from bare 'Judge's discretion'. The georgiacourts.gov order form grants relief after 'considering the Poverty Guidelines ... at 125% or less of the poverty level' by family size, and denial follows a hearing with sworn testimony. O.C.G.A. 9-15-2 text itself was not read (official code is Lexis-hosted); the 125% figure is the court form's guideline, so local practice may differ.]"
  },
  {
   "state": "Hawaii",
@@ -852,7 +915,7 @@
   "filing_fee_min": 35,
   "filing_fee_max": 35,
   "filing_fee_notes": "$35 filing fee; service costs extra. Fee, service costs and out-of-pocket costs may be added to the judgment.",
-  "who_can_sue": null,
+  "who_can_sue": "Individuals and businesses. The clerk will help an individual prepare the papers, but not a corporation, partnership, association or sole proprietorship (HRS § 633-28(a)). With the court's approval, any person may appear on behalf of another, without pay (HRS § 633-28(b)); lawyers may not appear for another party in residential security-deposit cases. No statewide bar on assignees found in ch. 633.",
   "lawyers_allowed": "limited",
   "lawyers_notes": "A party may be represented by an attorney, but attorney's fees generally cannot be awarded. Attorneys cannot appear for the landlord or tenant in security deposit disputes unless the attorney is the landlord or tenant representing themselves.",
   "appeal": "No right to appeal a small claims decision; the judge decides at the end of the trial.",
@@ -860,8 +923,8 @@
   "appeal_deadline_days": null,
   "e_filing": "no",
   "e_filing_notes": "Cases must be filed in person at the District Court Legal Documents Branch on the island.",
-  "fee_waiver_form": null,
-  "fee_waiver_threshold": null,
+  "fee_waiver_form": "Request for Relief from Court Filing Fees; Declaration; Order (Form 1DC13, District Court of the First Circuit, Rev. 01/01/2026): https://www.courts.state.hi.us/docs/form/oahu/1DC13.pdf. Other circuits may have their own version.",
+  "fee_waiver_threshold": "Judge's discretion: the judge may waive prepaid or accruing costs on the plaintiff's sworn statement or other satisfactory evidence of inability to pay (HRS § 633-29). The Oahu form asks whether the filer can pay and still provide for necessities of life. No fixed income cutoff.",
   "service_methods": "Plaintiff serves by certified mail restricted delivery, or by in-person delivery to the defendant or a resident of the defendant's home, by a civil process server, by any non-party over age 17, or by the plaintiff with a witness.",
   "self_help_url": "https://www.courts.state.hi.us/self-help/small_claims_info",
   "citation": "Haw. Rev. Stat. §§ 633-27 to 633-36; Rules of the Small Claims Division of the District Courts",
@@ -875,16 +938,41 @@
     "url": "https://www.courts.state.hi.us/small_claims",
     "what": "limit_notes (leased property, $40,000 counterclaims)",
     "type": "court_site"
+   },
+   {
+    "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0028.htm",
+    "what": "HRS 633-28: clerk help for individuals only; any person may appear for another with court approval",
+    "type": "statute"
+   },
+   {
+    "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0027.htm",
+    "what": "HRS 633-27 jurisdiction",
+    "type": "statute"
+   },
+   {
+    "url": "https://www.courts.state.hi.us/docs/form/oahu/1DC13.pdf",
+    "what": "Form 1DC13 Request for Relief from Court Filing Fees (Rev. 01/01/2026), under HRS 607-3",
+    "type": "form"
+   },
+   {
+    "url": "https://www.courts.state.hi.us/self-help/courts/forms/oahu/district_court_forms",
+    "what": "Oahu district court forms list",
+    "type": "court_site"
+   },
+   {
+    "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0029.htm",
+    "what": "HRS 633-29: judge may waive costs on sworn statement of inability to pay",
+    "type": "statute"
+   },
+   {
+    "url": "https://data.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0633/HRS_0633-0036.htm",
+    "what": "HRS 633-36 (end of range)",
+    "type": "statute"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "who_can_sue",
-   "fee_waiver_form",
-   "fee_waiver_threshold",
-   "citation"
-  ],
-  "notes": "The Hawaii Legislature's statute site (capitol.hawaii.gov) blocked automated access, so HRS ch. 633 text was not read; facts come from the Judiciary's self-help pages. A 2022 bill (HB2223) to raise the limit to $10,000 apparently did not pass; the Judiciary still states $5,000. Some secondary sites wrongly say attorneys are banned outright. Fee waiver (in forma pauperis) procedure for small claims not found on official pages."
+  "unverified": [],
+  "notes": "The Hawaii Legislature's statute site (capitol.hawaii.gov) blocked automated access, so HRS ch. 633 text was not read; facts come from the Judiciary's self-help pages. A 2022 bill (HB2223) to raise the limit to $10,000 apparently did not pass; the Judiciary still states $5,000. Some secondary sites wrongly say attorneys are banned outright. Fee waiver (in forma pauperis) procedure for small claims not found on official pages. [2026-11-07 who_can_sue, verified: Read HRS 633-27 and 633-28 on data.capitol.hawaii.gov (works where capitol.hawaii.gov blocked). Statute presumes businesses may sue (clerk services not available to them). No assignee/collection-agency bar found in ch. 633; the Rules of the Small Claims Division were not read.] [2026-11-07 fee_waiver_form, verified: Found on the Judiciary's Oahu district court forms page ('Cost Relief From Filing Fees'). Form cites HRS 607-3 and 607-4(b). Other circuits' district courts may use their own numbered versions (not checked).] [2026-11-07 fee_waiver_threshold, verified: HRS 633-29 (small claims): 'The judge may waive the prepayment of costs or the payment of costs accruing during the action upon the sworn statement of the plaintiff or upon other satisfactory evidence of the plaintiff's inability to pay the costs.' Form 1DC13 asks about employment, housing, bank accounts, vehicles and benefits.] [2026-11-07 citation, verified: HRS 633-27 through 633-36 all read on data.capitol.hawaii.gov (small claims division provisions; 633-36 is forms/public information). Statute annotations cite the Rules of the Small Claims Division of the District Courts ('RSCD'). Value unchanged.]"
  },
  {
   "state": "Idaho",
@@ -904,8 +992,8 @@
   "appeal_who": "both",
   "appeal_deadline_days": 30,
   "e_filing": "yes_statewide",
-  "e_filing_notes": "Forms can be prepared and e-filed through Guide & File (guideandfile.idaho.gov). Court instructions say businesses must e-file 'in a county where e-filing is available'.",
-  "fee_waiver_form": "Fee waiver forms from the Idaho Court Assistance Office (courtselfhelp.idaho.gov)",
+  "e_filing_notes": "Idaho courts e-file through File and Serve or the free Guide & File interview (guideandfile.idaho.gov). Mandatory for attorneys and for business entities filing small claims (IREFS Rule 4(a)); businesses may use Guide & File for Court Assistance Office forms. Self-represented individuals may e-file but are not required to; if they choose File and Serve they must keep e-filing in that case unless the court lets them withdraw. Guide & File users need not e-file later documents.",
+  "fee_waiver_form": "Motion and Affidavit for Fee Waiver (CAO FW 1-9) plus a proposed Order Re: Fee Waiver, from the Idaho Court Assistance Office, under Idaho Code § 31-3220: https://courtselfhelp.idaho.gov/docs/forms/CAO_FW_1-9.pdf",
   "fee_waiver_threshold": "Court finds the person indigent after an informal inquiry based on an affidavit of income, assets and expenses; no fixed income test in statute (Idaho Code § 31-3220).",
   "service_methods": "Someone 18+ who is not a party must serve: clerk by certified or registered mail, return receipt requested, signed by the defendant (on plaintiff's request and fee); sheriff; professional process server; or any adult non-party. Affidavit of service usually due within 30 days (Idaho Code § 1-2304; CAO SC 1-1b).",
   "self_help_url": "https://courtselfhelp.idaho.gov/docs/instructions/CAO_SC_Instr_1-1.pdf",
@@ -950,13 +1038,25 @@
     "url": "https://courtselfhelp.idaho.gov/docs/instructions/CAO_SC_Instr_1-1.pdf",
     "what": "filing_fee_min, filing_fee_max ($69), appeal fee $81, service_methods, e_filing, self_help_url (instructions dated 07/01/2026)",
     "type": "form"
+   },
+   {
+    "url": "https://isc.idaho.gov/IREFS4",
+    "what": "Idaho Rules for Electronic Filing and Service, Rule 4 (amended Sept. 11, 2024)",
+    "type": "court_rule"
+   },
+   {
+    "url": "https://courtselfhelp.idaho.gov/docs/forms/CAO_FW_1-9.pdf",
+    "what": "Motion and Affidavit for Fee Waiver, CAO FW 1-9 (07/01/2016), cites Idaho Code 31-3220",
+    "type": "form"
+   },
+   {
+    "url": "https://courtselfhelp.idaho.gov/docs/forms/CAO_FW_Instr_1.pdf",
+    "what": "CAO FW Instruction 1: also file Order Re: Fee Waiver; judge decides if 'truly unable to afford' fees",
+    "type": "form"
    }
   ],
   "date_checked": "2026-11-05",
-  "unverified": [
-   "e_filing",
-   "fee_waiver_form"
-  ],
-  "notes": "Lead confirmed: SB 1330 raised the limit to $15,000 effective July 1, 2026; that is the current limit as of this check. Many secondary sites still show $5,000. Idaho's e-filing (iCourt/Guide & File) is believed to be statewide, but the court instructions still say 'where e-filing is available', so 'yes_statewide' is unconfirmed. The breakdown of the $69 filing fee beyond the $33 in § 1-2303 was not checked."
+  "unverified": [],
+  "notes": "Lead confirmed: SB 1330 raised the limit to $15,000 effective July 1, 2026; that is the current limit as of this check. Many secondary sites still show $5,000. Idaho's e-filing (iCourt/Guide & File) is believed to be statewide, but the court instructions still say 'where e-filing is available', so 'yes_statewide' is unconfirmed. The breakdown of the $69 filing fee beyond the $33 in § 1-2303 was not checked. [2026-11-07 e_filing, verified: IREFS Rule 4(a) makes e-filing mandatory for attorneys and for 'business entities filing in small claims actions' with no county carve-out, which only works if the system is statewide; Rule 4(b)-(c) make it optional for self-represented individuals. The CAO instruction's 'where e-filing is available' wording appears outdated (statewide iCourt rollout finished in 2018 per the iCourt FAQ, a lead not re-read).] [2026-11-07 e_filing_notes, verified: Updated from the rule text.] [2026-11-07 fee_waiver_form, verified: Corrected to the specific form. Official CAO form and instructions (both dated 07/01/2016, still the posted version). The judge may rule without a hearing.]"
  }
 ]

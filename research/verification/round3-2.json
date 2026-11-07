@@ -1,0 +1,970 @@
+[
+  {
+    "abbr": "MA",
+    "field": "who_can_sue",
+    "value": "Individuals, sole proprietors (d/b/a), corporations and trusts may sue or be sued. Businesses and assignees of debt (including debt buyers) may file, but a claim arising from trade or commerce, or for assigned debt, must list the original creditor, the last 4 digits of the account number and the last payment, and include a Verification of Defendant's Address form; without it a default judgment can be refused and the claim dismissed.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.mass.gov/how-to/file-a-small-claim-in-the-boston-municipal-court-district-court-or-housing-court",
+        "what": "Plaintiff/defendant can be a person, a person doing business under a trade name (d/b/a), a corporation, or a trust",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.mass.gov/info-details/special-requirements-for-filing-a-small-claim-for-money-owed-to-your-trade-or-business",
+        "what": "Claims arising from trade/commerce and claims for assigned debt allowed, with extra requirements: original creditor's name, last 4 digits of the account number, last payment, and a Verification of Defendant's Address form",
+        "type": "court_site"
+      }
+    ],
+    "note": "Confirmed on the District/BMC/Housing Court pages (mass.gov, read in a browser). No minimum-age statement found on these pages."
+  },
+  {
+    "abbr": "MA",
+    "field": "e_filing",
+    "value": "yes_statewide",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.mass.gov/how-to/file-a-small-claim-in-the-boston-municipal-court-district-court-or-housing-court",
+        "what": "'The easiest way to file a small claim is to file online using guide and file'; completed forms can be electronically filed in the proper court; $7 eFiling service fee",
+        "type": "court_site"
+      }
+    ],
+    "note": "Online filing (Guide & File interview plus e-filing) is offered for small claims in the District Court, BMC and Housing Court, and is designed for self-represented filers."
+  },
+  {
+    "abbr": "MA",
+    "field": "e_filing_notes",
+    "value": "Self-represented plaintiffs can file online through the court's Guide & File interview, which builds the Statement of Small Claim and e-files it in the right District Court, BMC or Housing Court ($7 e-filing fee). Filing in person or by mail is still allowed.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.mass.gov/how-to/file-a-small-claim-in-the-boston-municipal-court-district-court-or-housing-court",
+        "what": "File online, in person, or by mail; $7 eFiling fee",
+        "type": "court_site"
+      }
+    ],
+    "note": "Replaces 'Not confirmed (mass.gov blocked automated fetching).'"
+  },
+  {
+    "abbr": "MA",
+    "field": "service_methods",
+    "value": "The clerk mails the claim to the defendant by first-class mail; this is enough unless it comes back undelivered (Uniform Small Claims Rule 3(a)). The plaintiff may instead pay a deputy sheriff or constable to serve it. Out-of-state defendants must be served under the long-arm statute (G.L. c. 223A), e.g. certified mail with a signed receipt. The court can order other methods in individual cases.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.mass.gov/trial-court-rules/uniform-small-claims-rule-3-notice-to-defendant-answer-to-claim",
+        "what": "Rule 3(a): clerk mails the Statement of Claim and Notice by first-class mail; sufficient unless returned undelivered; out-of-state defendants served under G.L. c. 223A; court may order other means",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.mass.gov/info-details/small-claims-standards-403-how-notice-served",
+        "what": "Standard 4:03: plaintiff may instead use a deputy sheriff or constable at plaintiff's expense",
+        "type": "court_site"
+      }
+    ],
+    "note": "Rule 3 (amended after St. 2004, c. 149, § 199) makes first-class mail by the clerk sufficient. Standard 4:03 (written for the 2002 rules) still recommends certified mail plus first-class mail; the rule text controls. Out-of-state mail service is valid only with a signed certified-mail receipt (Rule 3 commentary)."
+  },
+  {
+    "abbr": "MA",
+    "field": "fee_waiver_threshold",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleVI/Chapter261/Section27A",
+        "what": "G.L. c. 261, § 27A definition of 'indigent': (a) public assistance (TAFDC/AFDC, EAEDC, veterans' benefits, SSI, Medicaid); (b) income after taxes at or below 125% of the federal poverty threshold; (c) unable to pay without depriving self/family of necessities",
+        "type": "statute"
+      }
+    ],
+    "note": "Confirmed on malegislature.gov (note the correct path is Title VI, not Title IV). Current row value matches. H.4372/H.1768 (2025-26) would rewrite the public-assistance list; status not confirmed."
+  },
+  {
+    "abbr": "MA",
+    "field": "self_help_url",
+    "value": "https://www.mass.gov/how-to/file-a-small-claim-in-the-boston-municipal-court-district-court-or-housing-court",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.mass.gov/how-to/file-a-small-claim-in-the-boston-municipal-court-district-court-or-housing-court",
+        "what": "Live official page offered by BMC, District Court and Housing Court (checked 2026-11-07)",
+        "type": "court_site"
+      }
+    ],
+    "note": "CORRECTION: the current URL (mass.gov/guides/a-guide-to-small-claims-court) returns 404."
+  },
+  {
+    "abbr": "MI",
+    "field": "fee_waiver_threshold",
+    "value": "Automatic (clerk must waive) if you receive any means-tested public assistance (Food Assistance, Medicaid, FIP, WIC, SSI or similar) or are represented by a qualifying legal services program or law school clinic (MCR 2.002(C)-(D)). Otherwise a judge must waive fees if household gross income is under 125% of the federal poverty guidelines, and may waive them above that if paying would be a financial hardship (MCR 2.002(F)).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.courts.michigan.gov/4a1fb0/siteassets/rules-instructions-administrative-orders/michigan-court-rules/court-rules-book-ch-2-responsive-html5.zip/Court_Rules_Book_Ch_2/Court_Rules_Chapter_2/Court_Rules_Chapter_2.htm",
+        "what": "MCR 2.002(C): clerk must waive if receiving means-tested public assistance (Food Assistance, Medicaid, FIP, WIC, SSI, other); (D) legal services representation; (F) court must waive if household gross income under 125% of federal poverty guidelines, and may waive above that for financial hardship",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Read in the official Michigan Court Rules (Chapter 2) on courts.michigan.gov."
+  },
+  {
+    "abbr": "MI",
+    "field": "self_help_url",
+    "value": "https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/small-claims",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.courts.michigan.gov/resources-for/the-public/self-represented-litigants/",
+        "what": "Michigan Courts' self-represented page calls Michigan Legal Help 'our state's own self-help legal resource'",
+        "type": "court_site"
+      },
+      {
+        "url": "https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/small-claims",
+        "what": "Live small claims topic page (michiganlegalhelp.org/smallclaims redirects here)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Michigan Legal Help is run with the state court system's endorsement (the judiciary links to it as the state's self-help resource; SCAO forms link to the small claims page). The short URL redirects; using the final URL."
+  },
+  {
+    "abbr": "MN",
+    "field": "e_filing",
+    "value": "yes_statewide",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://mncourts.gov/file-a-case/file-in-a-district-trial-court",
+        "what": "eFS mandatory for attorneys in all 87 counties; self-represented litigants may choose eFS in all counties, then must keep using it in that case",
+        "type": "court_site"
+      },
+      {
+        "url": "https://mncourts.gov/help-topics/conciliation-court/forms",
+        "what": "Conciliation Court forms can be created in Guide & File and may be eFiled through Guide & File",
+        "type": "court_site"
+      }
+    ],
+    "note": "Confirmed in a browser on mncourts.gov."
+  },
+  {
+    "abbr": "MN",
+    "field": "e_filing_notes",
+    "value": "Minnesota eFile and eServe (eFS) works in all 87 counties. Self-represented people may e-file but don't have to; once you e-file in a case you must keep e-filing in that case. Conciliation Court claims can be prepared and e-filed through the court's Guide & File interview. Paper filing in person or by mail is still allowed.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://mncourts.gov/file-a-case/file-in-a-district-trial-court",
+        "what": "Voluntary eFS for self-represented filers statewide",
+        "type": "court_site"
+      },
+      {
+        "url": "https://mncourts.gov/help-topics/conciliation-court/forms",
+        "what": "Guide & File eFiling for conciliation claims",
+        "type": "court_site"
+      }
+    ],
+    "note": "Replaces 'not re-checked for self-represented conciliation filers'."
+  },
+  {
+    "abbr": "MN",
+    "field": "fee_waiver_form",
+    "value": "Affidavit of Inability to Pay Conciliation Court Filing Fee (form CCT104): https://mncourts.gov/getforms/conciliation-small-claims-court/form-cct104-affidavit-of-inability-to-pay-conciliation-court-filing-fee",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://mncourts.gov/help-topics/conciliation-court/forms",
+        "what": "'Fee Waiver Form - Affidavit of Inability to Pay Conciliation Court Filing Fee' (CCT104)",
+        "type": "form"
+      },
+      {
+        "url": "https://mncourts.gov/getforms/conciliation-small-claims-court/form-cct104-affidavit-of-inability-to-pay-conciliation-court-filing-fee",
+        "what": "Form page CCT104",
+        "type": "form"
+      }
+    ],
+    "note": "CORRECTION: conciliation court uses its own form, not the general in forma pauperis affidavit."
+  },
+  {
+    "abbr": "MS",
+    "field": "who_can_sue",
+    "verified": false,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.ms.gov/research/rules/msrulesofcourt/Rules%20of%20Justice%20Court.pdf",
+        "what": "Rules of Justice Court (amended 2017, 2020): no provision on who may sue or on non-lawyer representation of businesses; Rule 14 refers to defendants that are 'entities'",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Still open. The Rules of Justice Court say nothing on business representation or assignees; no official Mississippi page found on whether a corporation/LLC may appear through a non-lawyer in justice court. Keep the current cautious wording."
+  },
+  {
+    "abbr": "MS",
+    "field": "e_filing",
+    "value": "no",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.ms.gov/mec/mec.php",
+        "what": "MEC court directory lists Supreme Court/Court of Appeals, youth courts, and every chancery, circuit and county court; no justice courts listed (checked 2026-11-07)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://courts.ms.gov/research/rules/msrulesofcourt/Rules%20of%20Justice%20Court.pdf",
+        "what": "RJC 15(d): pleadings 'may be filed and stored by computer or electronic means pursuant to rules and policies established by the Mississippi Supreme Court and' the AOC",
+        "type": "court_rule"
+      }
+    ],
+    "note": "No justice court appears in the statewide MEC e-filing directory, and no AOC policy enabling justice court e-filing was found."
+  },
+  {
+    "abbr": "MS",
+    "field": "e_filing_notes",
+    "value": "Mississippi Electronic Courts (MEC) covers chancery, circuit, county, youth and appellate courts but no justice courts. File the complaint on paper with the justice court clerk in the county.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.ms.gov/mec/mec.php",
+        "what": "MEC directory has no justice courts",
+        "type": "court_site"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "abbr": "MS",
+    "field": "service_methods",
+    "value": "The clerk sends the summons and complaint to the county constable, who serves the defendant in person; if that fails, by leaving it with a family member 16 or older at home plus first-class mail, or by posting it on the door plus mail (Rules of Justice Court 14). If the constable doesn't return service, the clerk may send it to the sheriff, or the plaintiff may ask to use a process server (18+, not a party). Out-of-state defendants can be served by certified mail, return receipt requested. Service must be made within 120 days.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.ms.gov/research/rules/msrulesofcourt/Rules%20of%20Justice%20Court.pdf",
+        "what": "RJC 14(c)-(h): clerk gives summons and complaint to the constable; personal service, then family member 16+ plus first-class mail, then posting plus mail; if constable doesn't return it, clerk may direct the sheriff, or plaintiff may request a process server (18+, not a party); certified mail (restricted delivery) only for out-of-state defendants; 120-day limit",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Rule text read from the official courts.ms.gov PDF (amended 2017 and 2020)."
+  },
+  {
+    "abbr": "MS",
+    "field": "fee_waiver_form",
+    "verified": false,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.ms.gov/research/rules/msrulesofcourt/Rules%20of%20Justice%20Court.pdf",
+        "what": "Rules of Justice Court contain no pauper/fee-waiver provision",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Still open. Miss. Code § 11-53-17 (pauper's affidavit, 'any court') is only reachable via Justia/Lexis, not an official free site. The AOC 'Pauper's Affidavit 2020' on courts.ms.gov is captioned for chancery court; courts.ms.gov PDFs returned HTTP 500 to the fetch tool. The AOC sample justice court civil forms (7-2-2024) include no plaintiff fee-waiver form (only a defendant's Affidavit of Substantial Financial Hardship for post-judgment use)."
+  },
+  {
+    "abbr": "MS",
+    "field": "fee_waiver_threshold",
+    "verified": false,
+    "varies": false,
+    "sources": [],
+    "note": "Still open for the same reason as fee_waiver_form. Secondary sources describe § 11-53-17 as a sworn statement that 'because of my poverty' the person can't pay costs, with the court able to examine the affiant; no income test. Not confirmed on an official site."
+  },
+  {
+    "abbr": "MS",
+    "field": "self_help_url",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.ms.gov/trialcourts/justicecourt/justicecourt.php",
+        "what": "Live official Judiciary page: justice courts hear small claims of $3,500 or less (checked 2026-11-07)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Live and official, but it's a short description, not a how-to guide. No statewide official small claims self-help guide found for Mississippi."
+  },
+  {
+    "abbr": "MO",
+    "field": "e_filing",
+    "verified": false,
+    "varies": false,
+    "sources": [],
+    "note": "Blocked: www.courts.mo.gov (Missouri eFiling FAQ, Rule 103 pages, small claims pages) shows a Cloudflare bot check ('Performing security verification') in the browser and 403 to the fetch tool; www2.courts.mo.gov has a bad certificate. Search excerpts of the courts' eFiling FAQ say self-represented filings are mostly paper and e-filing 'shall not be required' for them, but that wasn't read on the page. Needs a human check."
+  },
+  {
+    "abbr": "MO",
+    "field": "fee_waiver_form",
+    "verified": false,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=514.040",
+        "what": "RSMo 514.040.1: court may let a 'poor person' unable to pay costs sue without paying them, as the court determines",
+        "type": "statute"
+      }
+    ],
+    "note": "Statute confirmed; the statewide form name (search excerpts: 'Motion and Affidavit in Support of Request to Proceed as a Poor Person') is on courts.mo.gov, which is behind a bot check. Suggested value once checked: 'Motion and Affidavit in Support of Request to Proceed as a Poor Person (RSMo 514.040)'."
+  },
+  {
+    "abbr": "MO",
+    "field": "self_help_url",
+    "verified": false,
+    "varies": false,
+    "sources": [],
+    "note": "Blocked: https://www.courts.mo.gov/page.jsp?id=704 shows a Cloudflare bot check; couldn't confirm it's live or that it's the small claims page."
+  },
+  {
+    "abbr": "MT",
+    "field": "e_filing",
+    "value": "no",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.mt.gov/courts/EFile/",
+        "what": "'E-filing is not available to self-represented litigants at this time'; bulletin lists justice courts enabled for CV cases (e.g., Golden Valley 03/05/2026, Lake 04/14/2026, Powell 05/26/2026)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Some justice courts accept civil e-filing from attorneys, but not from self-represented people."
+  },
+  {
+    "abbr": "MT",
+    "field": "e_filing_notes",
+    "value": "Montana's e-filing system is not open to self-represented litigants. A growing list of justice courts accept civil e-filing from attorneys, but a person suing on their own files on paper with the justice court clerk.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://courts.mt.gov/courts/EFile/",
+        "what": "Self-represented litigants can't e-file; list of enabled courts",
+        "type": "court_site"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "abbr": "NE",
+    "field": "fee_waiver_form",
+    "value": "Affidavit and Application to Proceed In Forma Pauperis (Request to Proceed Without Payment of Fees), form DC 6:7.1 (rev. 03/2025), signed before a notary; instructions DC 6:7.1a; order DC 6:7.2. https://nebraskajudicial.gov/sites/default/files/DC-6-7-1.pdf",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://nebraskajudicial.gov/sites/default/files/DC-6-7-1.pdf",
+        "what": "Nebraska State Court Form DC 6:7.1 (Rev. 03/2025) 'Affidavit and Application to Proceed In Forma Pauperis (Request to Proceed Without Payment of Fees)', Neb. Rev. Stat. §§ 25-2301 to 25-2310; must be notarized",
+        "type": "form"
+      },
+      {
+        "url": "https://nebraskajudicial.gov/sites/default/files/DC-6-4-20-G1.pdf",
+        "what": "DC 6:4.20.G1 (5/2026) is a guide that points to DC 6:7.1 (instructions DC 6:7.1a) and the order DC 6:7.2",
+        "type": "court_site"
+      }
+    ],
+    "note": "CORRECTION: DC 6:4.20.G1 is an instruction guide, not a separate request form; drop it and the CC 6:1 mention from the value."
+  },
+  {
+    "abbr": "NE",
+    "field": "fee_waiver_threshold",
+    "value": "No fixed income test. The judge decides from a sworn affidavit showing income, household size, assets and expenses, where the applicant states they can't pay the costs and that living expenses use up their income (Neb. Rev. Stat. §§ 25-2301 to 25-2310).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://nebraskajudicial.gov/sites/default/files/DC-6-7-1.pdf",
+        "what": "Applicant swears they can't pay costs, lists monthly net income, household size, assets and expenses, and that 'living expenses wholly absorb my income'; no income cutoff on the form",
+        "type": "form"
+      }
+    ],
+    "note": "No fixed income test on the official form; the judge decides from the sworn financial details."
+  },
+  {
+    "abbr": "NV",
+    "field": "e_filing",
+    "value": "some_courts",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://lasvegasjusticecourt.us/divisions/civil_division/small_claims/",
+        "what": "Las Vegas Justice Court small claims page: 'To begin e-filing click the following link: efilenv.com'",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.clarkcountynv.gov/government/departments/justice_courts/jurisdictions/north_las_vegas/efile-new-version",
+        "what": "North Las Vegas Justice Court: a filing can be initiated electronically for a Small Claims case; self-registration accounts",
+        "type": "court_site"
+      }
+    ],
+    "note": "Confirmed for two Clark County justice courts; rural justice courts not checked."
+  },
+  {
+    "abbr": "NV",
+    "field": "e_filing_notes",
+    "value": "Some justice courts take small claims online: Las Vegas Justice Court (through efilenv.com) and North Las Vegas Justice Court (its own eFile site, open to anyone who self-registers). Other justice courts may require filing in person or by mail; check with the local court.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://lasvegasjusticecourt.us/divisions/civil_division/small_claims/",
+        "what": "efilenv.com for small claims",
+        "type": "court_site"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "abbr": "NV",
+    "field": "self_help_url",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://trialcourts.nvcourts.gov/Articles/Details/how-to-file-small-claims-case",
+        "what": "Live Nevada Judicial Branch trial-courts page 'How to File a Small Claims Case' (dated Dec. 16, 2025; read in a browser 2026-11-07)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Live and official (nvcourts.gov). Caution: its fee table ($55 / $95 / $145) and 'have someone over 18 deliver the papers' don't match the row's statutory fee notes; don't copy fees from it. The State Self-Help Center (selfhelp.nvcourts.gov) has no small claims content."
+  },
+  {
+    "abbr": "NH",
+    "field": "fee_waiver_form",
+    "value": "For e-filed small claims: the Motion to Waive Filing Fees built into the TurboCourt e-filing interview (with its built-in financial statement); the Motion to Reduce or Eliminate Filing Fees and/or Costs can be added as an attachment. Paper filings: Motion to Reduce or Eliminate Filing Fees and/or Costs with an Affidavit of Assets and Liabilities. https://www.courts.nh.gov/resources/forms-and-fees/how-request-pay-lower-fee-or-file-free",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.courts.nh.gov/resources/forms-and-fees/how-request-pay-lower-fee-or-file-free",
+        "what": "Table: Circuit Court - District Division, Civil incl. Small Claims, Electronic: 'Motion to Waive Filing Fees Built into TurboCourt Guided Interview; Motion to Reduce or Eliminate Filing Fees and/or Costs available to Add as Attachment'; financial statement built into e-filing",
+        "type": "court_site"
+      }
+    ],
+    "note": "Read in a browser on courts.nh.gov."
+  },
+  {
+    "abbr": "NH",
+    "field": "fee_waiver_threshold",
+    "value": "Strict: the small claims filing fee is waived only if you show facts proving 'extraordinary circumstances' (Dist. Div. Rule 4.1(a)(3)); a motion with a financial statement is required.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.courts.nh.gov/rules-circuit-court-state-new-hampshire-district-division/small-claims-actions/rule-41-filing-small",
+        "what": "Rule 4.1(a)(3): 'The small claims filing fee shall not be waived except upon presentation of facts which demonstrate extraordinary circumstances.'",
+        "type": "court_rule"
+      }
+    ],
+    "note": "Confirmed on the live rule page."
+  },
+  {
+    "abbr": "NH",
+    "field": "recent_changes",
+    "value": "No change to small claims fees has been adopted. A June 2025 memo to the Supreme Court Advisory Committee on Rules proposed cutting small claims fees to $80 and $135 and lowering the e-filing surcharge, but as of Nov. 2026 the court's Rule 1.28 and fee schedule (effective 07/01/2025) still show $125 and $180 in total. An Aug. 2025 order added a card-payment service charge.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.courts.nh.gov/rules-circuit-court-state-new-hampshire-district-division/rule-128-court-fees",
+        "what": "Live Rule 1.28: small claims entry $105 (<= $5,000) / $160 ($5,001-$10,000) plus $20 e-filing surcharge",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.courts.nh.gov/sites/g/files/ehbemt471/files/documents/2021-06/filing_fees.pdf",
+        "what": "Circuit Court Filing Fees schedule dated 07/01/2025 (file modified Aug. 26, 2025): small claims total $125 / $180",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.courts.nh.gov/sites/g/files/ehbemt471/files/documents/2025-08/8-27-25-order-adopting-amendments-to-court-rules.pdf",
+        "what": "Aug. 27, 2025 order amending Rule 1.28 (card-payment service charge)",
+        "type": "court_rule"
+      }
+    ],
+    "note": "The June 2025 memo (#2025-009) proposing $80/$135 was not adopted as of 2026-11-07: the live Rule 1.28 and the 07/01/2025 fee schedule still show $125/$180. The July 30, 2026 Advisory Committee report doesn't address small claims fees."
+  },
+  {
+    "abbr": "NJ",
+    "field": "recent_changes",
+    "value": "Effective July 1, 2022, the NJ Supreme Court raised the small claims limit from $3,000 to $5,000 and the Special Civil Part limit from $15,000 to $20,000 (Notice and Order of May 11, 2022, amending R. 6:1-1 and 6:1-2). Security deposit claims, which already had a $5,000 small claims limit, can now be filed in either docket. A broader rewrite of the Part VI rules was proposed in 2026; adoption not confirmed.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.njcourts.gov/sites/default/files/notices/2022/05/n220511d.pdf",
+        "what": "Notice and Order (May 11, 2022): Special Civil limit $15,000 -> $20,000 and Small Claims $3,000 -> $5,000, effective July 1, 2022; security deposit claims may be filed in either docket; deletes the separate $5,000 security-deposit sentence from R. 6:1-2(a)(2)",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://www.njcourts.gov/sites/default/files/sccr/reports/civil-comm-rpt24.pdf",
+        "what": "Civil Practice Committee materials; a 2024-26 cycle proposal to revise Part VI was pending (Legal Services of NJ comment, April 2026)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Primary source now read (the notice PDF, text extracted). Also noted: a proposed rewrite of Part VI (Special Civil Part rules) was under public comment in 2026; adoption not confirmed."
+  },
+  {
+    "abbr": "NJ",
+    "field": "who_can_sue",
+    "value": "Plaintiffs must be 18+ (a parent or guardian files for a minor). Businesses may sue. A corporation, partnership or LLC may be represented by an officer, trustee, director, agent or employee in small claims ($5,000 or less); above $5,000 it needs an attorney. (Unconfirmed on an official site: R. 6:11 reportedly limits non-lawyer representation to claims that originated with the business, not assigned claims.)",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.njcourts.gov/sites/default/files/forms/11482_small_claims_faq.pdf",
+        "what": "Small Claims FAQ (CN 11482, rev. 05/2025): must be 18+; under 18, a parent or guardian files",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.njcourts.gov/sites/default/files/forms/10281_spc_guide_court.pdf",
+        "what": "Special Civil Guide (CN 10281, May 2025): corporation/partnership/LLC must have an attorney when the claim is over $5,000; an officer, trustee, director, agent or employee may present or defend a claim of $5,000 or less",
+        "type": "court_site"
+      }
+    ],
+    "note": "Age and business-representation rules confirmed on official Judiciary publications. The 'only claims originating with the business, not assigned claims' limit in R. 6:11 is still from secondary summaries; the R. 6:11 text wasn't reached on njcourts.gov. Moved that point out of the value."
+  },
+  {
+    "abbr": "NM",
+    "field": "fee_waiver_form",
+    "value": "Application for Free Process and Affidavit of Indigency (Form 4-222 NMRA, under Supreme Court General Rule 23-114); order on Form 4-223.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://nmcourts.gov/forms-files/affidavits/",
+        "what": "Statewide forms page lists 4-222 'Application for free process and affidavit of indigency' (used to waive court fees)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://selfrepresentation.nmcourts.gov/wp-content/uploads/sites/24/2024/03/Application-and-Order-for-Free-Process-Fillable.pdf",
+        "what": "Form 4-222 marked 'For use with Supreme Court General Rule 23-114 NMRA'; asks about public assistance, income, assets, expenses",
+        "type": "form"
+      }
+    ],
+    "note": "Form 4-222 is tied to General Rule 23-114 NMRA (a Supreme Court general rule). The copies found carry a district court caption; whether magistrate/Metro courts use the same form or a local version wasn't confirmed."
+  },
+  {
+    "abbr": "NM",
+    "field": "fee_waiver_threshold",
+    "value": "Free process if you receive public assistance (e.g., TANF, SNAP, Medicaid, SSI), or if your gross income is at or below the federal poverty guideline percentage set in Rule 23-114 NMRA, or, above that, if the judge finds you aren't reasonably able to pay (Rule 23-114(B)(2) NMRA). Exact percentage not confirmed.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://selfrepresentation.nmcourts.gov/wp-content/uploads/sites/24/2024/03/Application-and-Order-for-Free-Process-Fillable.pdf",
+        "what": "Order form 4-223 findings: entitled to free process if the applicant receives public assistance; or annual gross income does not exceed a stated percent of the federal poverty guidelines; or income is above that but the applicant is not reasonably able to pay fees or costs",
+        "type": "form"
+      }
+    ],
+    "note": "Criteria from the official order form under Rule 23-114(B)(2). The exact poverty percentage is left blank on the form and the rule text wasn't reached (NMOneSource search failed)."
+  },
+  {
+    "abbr": "NM",
+    "field": "e_filing",
+    "verified": false,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://nmcourts.gov/self-help/guide-file",
+        "what": "Guide & File covers only divorce and protection order filings (no civil complaint)",
+        "type": "court_site"
+      },
+      {
+        "url": "https://nmcourts.gov/e-filing/",
+        "what": "Judiciary e-filing page written for attorneys; doesn't say self-represented people can e-file",
+        "type": "court_site"
+      }
+    ],
+    "note": "Not fully confirmed. Secondary/news sources (quoting the AOC) say attorneys can e-file civil cases in all magistrate courts and Metro Court, and the district court rule (1-005.2) bars self-represented e-filing; the magistrate court rule wasn't read. Likely answer: attorneys only, so 'no' for a self-represented person. Keep under review."
+  },
+  {
+    "abbr": "NM",
+    "field": "who_can_sue",
+    "verified": false,
+    "varies": false,
+    "sources": [],
+    "note": "Still open: magistrate court rules on non-lawyer representation of corporations/LLCs weren't reached (NMOneSource search failed). The court pamphlet's warning that a corporation or LLC 'may be required by law to hire an attorney' remains the best official wording found."
+  },
+  {
+    "abbr": "NY",
+    "field": "e_filing",
+    "value": "no",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.nycourts.gov/new-york-city-small-claims-court/starting-case-nyc-small-claims-court",
+        "what": "'The court system does not provide electronic filing for Small Claims matters at this time.' Outside services may e-file for you",
+        "type": "court_site"
+      }
+    ],
+    "note": "Confirmed for NYC Civil Court small claims. City, district, town and village courts were not checked one by one, but the statement is from the Unified Court System's small claims page."
+  },
+  {
+    "abbr": "NY",
+    "field": "e_filing_notes",
+    "value": "New York's courts do not offer e-filing for small claims. File the Statement of Claim in person (or by mail where the local court allows) at the small claims clerk. The NYC page notes that some outside services will prepare and file a claim for you.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.nycourts.gov/new-york-city-small-claims-court/starting-case-nyc-small-claims-court",
+        "what": "No court e-filing for small claims",
+        "type": "court_site"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "abbr": "NY",
+    "field": "fee_waiver_form",
+    "value": "NYC: Fee Waiver Form (CIV-GP-15), an affidavit asking for poor person relief under CPLR Article 11: https://www.nycourts.gov/legacyPDFs/courts/nyc/civil/forms/FeeWaiver.pdf. Courts outside NYC: poor person application under CPLR Article 11 (local form).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.nycourts.gov/new-york-city-small-claims-court/nyc-small-claims-forms",
+        "what": "NYC Small Claims Forms page lists 'Fee Waiver Form (CIV-GP-15)' under Starting a Case (links to legacyPDFs/courts/nyc/civil/forms/FeeWaiver.pdf)",
+        "type": "form"
+      }
+    ],
+    "note": "NYC Civil Court form confirmed. Courts outside NYC use CPLR art. 11 poor person motions with their own forms."
+  },
+  {
+    "abbr": "NC",
+    "field": "who_can_sue",
+    "value": "Individuals and organizations may sue. A business may be represented in small claims by a non-lawyer authorized agent, such as an owner or employee.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.nccourts.gov/help-topics/lawsuits-and-small-claims/small-claims",
+        "what": "FAQ: 'a business can be represented by a non-attorney authorized agent, such as an owner or employee, in small claims court'; plaintiff can be a person or organization",
+        "type": "court_site"
+      }
+    ],
+    "note": "Confirmed on the live NC Judicial Branch small claims page."
+  },
+  {
+    "abbr": "NC",
+    "field": "e_filing",
+    "value": "yes_statewide",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.nccourts.gov/ecourts",
+        "what": "'North Carolina fully implemented the eCourts conversion in all 100 counties as of October 13, 2025.'",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.nccourts.gov/services/file-serve-training-and-resources",
+        "what": "File & Serve lets attorneys and self-represented litigants submit documents online; required for attorneys",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.nccourts.gov/help-topics/lawsuits-and-small-claims/small-claims",
+        "what": "Guide & File now available for Small Claims: Money Owed, Repossession of Personal Property",
+        "type": "court_site"
+      }
+    ],
+    "note": "CORRECTION: eCourts now covers all 100 counties (since Oct. 13, 2025)."
+  },
+  {
+    "abbr": "NC",
+    "field": "e_filing_notes",
+    "value": "eCourts runs in all 100 counties (since Oct. 13, 2025). Self-represented people can e-file through File & Serve (optional for them) or use the free Guide & File interview for small claims money-owed and personal-property cases. Paper filing at the clerk of superior court is still allowed.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.nccourts.gov/ecourts",
+        "what": "Statewide since 10/13/2025",
+        "type": "court_site"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "abbr": "NC",
+    "field": "fee_waiver_form",
+    "value": "Petition to Proceed as an Indigent (AOC-G-106): https://www.nccourts.gov/documents/forms/petition-to-proceed-as-an-indigent",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.nccourts.gov/documents/forms/petition-to-proceed-as-an-indigent",
+        "what": "AOC-G-106 'Petition To Proceed As An Indigent', G.S. 1-110, 7A-228, last modified Nov. 19, 2024; linked from the small claims page",
+        "type": "form"
+      }
+    ],
+    "note": "Confirmed; the official title is now 'Petition To Proceed As An Indigent'."
+  },
+  {
+    "abbr": "NC",
+    "field": "self_help_url",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.nccourts.gov/help-topics/lawsuits-and-small-claims/small-claims",
+        "what": "Live NC Judicial Branch small claims help topic (checked 2026-11-07)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Current URL confirmed live."
+  },
+  {
+    "abbr": "ND",
+    "field": "e_filing",
+    "value": "yes_statewide",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.ndcourts.gov/legal-resources/rules/ndrct/3-5",
+        "what": "N.D.R.Ct. 3.5(a)(3): self-represented litigants are exempt from mandatory e-filing and may file on paper; those who want to e-file must use the Odyssey system",
+        "type": "court_rule"
+      }
+    ],
+    "note": "CORRECTION: e-filing (Odyssey) is statewide in district court and open to self-represented filers by choice. Rule 3.5 doesn't name small claims, but small claims cases are district court cases."
+  },
+  {
+    "abbr": "ND",
+    "field": "e_filing_notes",
+    "value": "District courts use the Odyssey e-filing system statewide. Self-represented people don't have to e-file (paper in person, by mail or by carrier is fine) but may choose to e-file through Odyssey (N.D.R.Ct. 3.5). Rule 3.5 doesn't mention small claims specifically.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.ndcourts.gov/legal-resources/rules/ndrct/3-5",
+        "what": "Rule 3.5",
+        "type": "court_rule"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "abbr": "ND",
+    "field": "fee_waiver_form",
+    "value": "Petition for Waiver of Filing Fees (Form 1) plus Financial Declaration in Support (Form 2), from the ND Legal Self Help Center, usable for small claims (N.D.C.C. § 27-01-07): https://www.ndcourts.gov/Media/Default/Legal%20Resources/Legal%20Self%20Help/Other%20Forms/Fee%20Waiver/All%20Petition%20for%20Fee%20Waiver%20Instructions%20%20Forms.pdf",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.ndcourts.gov/legal-self-help/fee-waiver",
+        "what": "ND Legal Self Help Center fee waiver page",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.ndcourts.gov/Media/Default/Legal%20Resources/Legal%20Self%20Help/Other%20Forms/Fee%20Waiver/All%20Petition%20for%20Fee%20Waiver%20Instructions%20%20Forms.pdf",
+        "what": "Packet (rev. Aug 2026) 'for Civil Actions ... and Small Claims Court Cases': Petition for Waiver of Filing Fees (Form 1, under N.D.C.C. § 27-01-07) and Financial Declaration (Form 2)",
+        "type": "form"
+      }
+    ],
+    "note": "The court's self-help forms say they 'aren't official court forms' and courts aren't required to accept them."
+  },
+  {
+    "abbr": "ND",
+    "field": "fee_waiver_threshold",
+    "value": "No fixed income test. The judge or judicial referee decides based on a financial declaration (public assistance received, income, expenses, assets). The waiver covers the filing fee only, not service, copy or transcript costs.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.ndcourts.gov/Media/Default/Legal%20Resources/Legal%20Self%20Help/Other%20Forms/Fee%20Waiver/All%20Petition%20for%20Fee%20Waiver%20Instructions%20%20Forms.pdf",
+        "what": "'The judge or judicial referee decides whether you qualify'; Financial Declaration asks about public assistance (e.g., SNAP), income, expenses; no income cutoff",
+        "type": "form"
+      }
+    ],
+    "note": "No fixed income test found in the official packet."
+  },
+  {
+    "abbr": "OH",
+    "field": "e_filing",
+    "value": "some_courts",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.findlayohio.gov/government/municipal-court/e-filing-self-represented",
+        "what": "Findlay Municipal Court: e-filing terms of use for self-represented litigants",
+        "type": "court_site"
+      },
+      {
+        "url": "https://www.franklincountymunicourt.org/Courts/Small-Claims",
+        "what": "Franklin County Municipal Court: complaints are filed with the Clerk's Civil Division (in person)",
+        "type": "court_site"
+      }
+    ],
+    "note": "Each municipal/county court sets its own e-filing; no statewide trial-court system."
+  },
+  {
+    "abbr": "OH",
+    "field": "e_filing_notes",
+    "value": "Ohio has no statewide trial-court e-filing. Some municipal courts let self-represented people e-file (e.g., Findlay Municipal Court); others, such as Franklin County Municipal Court, take small claims at the clerk's office. Check the local court.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.findlayohio.gov/government/municipal-court/e-filing-self-represented",
+        "what": "Pro se e-filing in Findlay",
+        "type": "court_site"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "abbr": "OH",
+    "field": "fee_waiver_form",
+    "value": "Affidavit of indigency in the Supreme Court-approved form (R.C. 2323.311): Form 20, Civil Fee Waiver Affidavit and Order, https://www.supremecourt.ohio.gov/docs/JCS/courtSvcs/justiceAccess/resources/CivilFeeWaiver.pdf. Many courts post their own copy.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-2323.311",
+        "what": "R.C. 2323.311(B)(1): file an affidavit of indigency 'in a form approved by the supreme court'",
+        "type": "statute"
+      },
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-1901.26",
+        "what": "R.C. 1901.26: municipal courts must waive advance deposit/filing fees for a party the court determines is an indigent litigant under 2323.311",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.supremecourt.ohio.gov/docs/JCS/courtSvcs/justiceAccess/resources/CivilFeeWaiver.pdf",
+        "what": "Supreme Court of Ohio hosts 'Form 20, Civil Fee Waiver Affidavit and Order'",
+        "type": "form"
+      }
+    ],
+    "note": "Form 20 seen via search excerpt of the supremecourt.ohio.gov PDF; local courts post their own copies."
+  },
+  {
+    "abbr": "OH",
+    "field": "fee_waiver_threshold",
+    "value": "Approved if household gross income is at or below 187.5% of the federal poverty guidelines and monthly expenses are at least equal to liquid assets; a judge may also approve someone above these limits (R.C. 2323.311, applied to municipal courts by R.C. 1901.26).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-2323.311",
+        "what": "R.C. 2323.311(B): approve if gross income does not exceed 187.5% of federal poverty guidelines and monthly expenses equal or exceed liquid assets (O.A.C. 120-1-03); judge may approve above the thresholds",
+        "type": "statute"
+      },
+      {
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-1901.26",
+        "what": "Applies to municipal court filing fees",
+        "type": "statute"
+      }
+    ],
+    "note": "CORRECTION: not just 'judge's discretion' — there is a statutory test."
+  },
+  {
+    "abbr": "OH",
+    "field": "self_help_url",
+    "value": "https://www.franklincountymunicourt.org/Courts/Small-Claims",
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://www.franklincountymunicourt.org/Courts/Small-Claims",
+        "what": "Live Franklin County Municipal Court small claims page (checked 2026-11-07)",
+        "type": "court_site"
+      }
+    ],
+    "note": "CORRECTION: the current URL (municipalcourt.franklincountyohio.gov/smallclaims) now redirects to the court's home page. No statewide judiciary small claims page found (the Ohio Judicial Conference guide page moved). This is a local court page; small claims info varies by court."
+  },
+  {
+    "abbr": "OK",
+    "field": "e_filing",
+    "value": "some_courts",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=466069",
+        "what": "Oklahoma Rules for E-Filing (2012 order): apply in pilot courts, then county by county as OUCMS is implemented; Rule 10(a): pro se litigants may e-file only after registering, and only in their own cases",
+        "type": "court_rule"
+      },
+      {
+        "url": "https://efile.oscn.net/",
+        "what": "OSCN e-filing portal with new-user registration",
+        "type": "court_site"
+      }
+    ],
+    "note": "Rules don't mention small claims specifically."
+  },
+  {
+    "abbr": "OK",
+    "field": "e_filing_notes",
+    "value": "E-filing through OSCN (OUCMS) works in district courts county by county as the system is rolled out. Self-represented people may e-file in their own case after registering on efile.oscn.net but don't have to (Okla. E-Filing Rules 1, 10). Small claims aren't mentioned separately; paper filing with the court clerk is still available.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=466069",
+        "what": "Rules 1(b), 2(q)(3), 10(a)",
+        "type": "court_rule"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "abbr": "OK",
+    "field": "fee_waiver_form",
+    "value": "Affidavit in forma pauperis (pauper's affidavit), sworn before a notary or other officer (28 O.S. § 152(H); statutory form at 12 O.S. § 922). No statewide court-published form.",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=440165",
+        "what": "28 O.S. § 152(H) (as amended by Laws 2025, SB 600, eff. Nov. 1, 2025): file an affidavit in forma pauperis sworn before an officer authorized to give oaths",
+        "type": "statute"
+      },
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=94209",
+        "what": "12 O.S. § 922: statutory form of the affidavit (cause of action is just; because of poverty can't give security for costs)",
+        "type": "statute"
+      }
+    ],
+    "note": "No statewide official court form found; the affidavit form is set by statute."
+  },
+  {
+    "abbr": "OK",
+    "field": "fee_waiver_threshold",
+    "value": "No income test. The court holds a hearing and decides whether, because of poverty, you can't pay the fees and costs; the other side can contest it with its own affidavit. Until the court rules, the clerk must let the case go forward without fees (28 O.S. § 152(H)).",
+    "verified": true,
+    "varies": false,
+    "sources": [
+      {
+        "url": "https://www.oscn.net/applications/oscn/DeliverDocument.asp?CiteID=440165",
+        "what": "28 O.S. § 152(H): court sets a hearing; litigant must show that by reason of poverty they can't pay fees and costs and can't employ counsel; other side may file a counter-affidavit; clerk lets the case proceed until a final ineligibility order",
+        "type": "statute"
+      }
+    ],
+    "note": "No income cutoff in the statute."
+  },
+  {
+    "abbr": "OK",
+    "field": "self_help_url",
+    "verified": true,
+    "varies": true,
+    "sources": [
+      {
+        "url": "https://www.oklahomacounty.org/elected-offices/court-clerk",
+        "what": "Oklahoma County Court Clerk page with a Small Claims section, fee table, FAQs and forms",
+        "type": "court_site"
+      }
+    ],
+    "note": "Live official county court clerk page, but only for Oklahoma County. OSCN's only statewide self-help link goes to the legal aid site oklaw.org (not a court). No statewide judiciary small claims page found."
+  }
+]
