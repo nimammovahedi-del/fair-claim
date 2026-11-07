@@ -6,7 +6,6 @@
 // - The choice is saved in localStorage as "fc-theme" (light | dark | auto). If storage is blocked, the choice
 //   still applies to this page view. The inline script in Site.astro applies it before first paint.
 // - A ?theme=light|dark URL parameter overrides it for that page view only (handy for screenshots). Not saved.
-// - Any element with [data-open-display-settings] (older markup) moves focus to this switch.
 const options = [
   { value: "light", label: "Light" },
   { value: "dark", label: "Dark" },
@@ -49,6 +48,10 @@ const options = [
     root.classList.add("theme-switching");
     root.setAttribute("data-theme", dark ? "dark" : "light");
     root.setAttribute("data-theme-pref", pref);
+    // Status bar / browser chrome follows the page background (both media variants, so the choice wins).
+    document
+      .querySelectorAll('meta[name="theme-color"]')
+      .forEach((m) => m.setAttribute("content", dark ? "#0b0b0c" : "#f3f2ee"));
     void root.offsetHeight;
     setTimeout(() => root.classList.remove("theme-switching"), 0);
   }
@@ -73,14 +76,4 @@ const options = [
   media?.addEventListener("change", () => {
     if ((root.getAttribute("data-theme-pref") || "auto") === "auto") apply("auto");
   });
-
-  // Older "Display settings" buttons: open the menu on phones, then focus the switch.
-  document.querySelectorAll<HTMLElement>("[data-open-display-settings]").forEach((btn) =>
-    btn.addEventListener("click", () => {
-      const menuBtn = document.querySelector<HTMLButtonElement>("[data-menu-btn]");
-      if (menuBtn && getComputedStyle(menuBtn).display !== "none" && menuBtn.getAttribute("aria-expanded") !== "true") menuBtn.click();
-      const checked = document.querySelector<HTMLInputElement>('[data-theme-switch] input:checked');
-      checked?.focus();
-    }),
-  );
 </script>

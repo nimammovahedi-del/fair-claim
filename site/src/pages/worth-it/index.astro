@@ -845,7 +845,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
   }
   .r-compare {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 48px;
     margin-top: 56px;
   }
@@ -958,7 +958,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
   }
   .r-keep ol {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 14px 48px;
     margin: 16px 0 0;
   }
@@ -981,11 +981,11 @@ const pad = (n: number) => String(n).padStart(2, "0");
   @media (max-width: 700px) {
     .r-compare,
     .r-keep ol {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 28px;
     }
     .r-break {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 4px;
     }
     .r-actions .btn {

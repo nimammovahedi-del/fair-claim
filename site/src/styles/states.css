@@ -287,11 +287,15 @@
   min-height: 176px;
   cursor: default;
 }
-.methods .tile:hover {
-  background: var(--panel);
+@media (hover: hover) and (pointer: fine) {
+  .methods .tile:hover {
+    background: var(--panel);
+  }
 }
-.methods .tile.fill:hover {
-  background: var(--t);
+@media (hover: hover) and (pointer: fine) {
+  .methods .tile.fill:hover {
+    background: var(--t);
+  }
 }
 .m-cost {
   font-family: var(--f-display);

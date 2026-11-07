@@ -5,14 +5,17 @@ device by default. Nima approved mockup Option A (`/mockups/a/`) with three chan
 "warm + cool" palette, much less text, and theme by device with a Light / Dark / Auto switch.
 
 - **Styles:** `site/src/styles/global.css` (tokens first, then components, numbered by section).
-  `features.css` holds charts, the tile map, stat tiles, the glossary popover and checklists, on the same tokens.
-  `legacy.css` holds old page blocks (see "Rebuild status" below); delete rules from it as pages are rebuilt.
+  `features.css` holds charts, the tile map, stat tiles, the glossary and checklists, on the same tokens.
+  `states.css` holds the state-rules pages (`/states/`, state pages, CA counties, `/sources/`, 404); those pages
+  import it. `components/ToolFlow.css` holds the guided tool flow. The old `legacy.css` is gone (2026-11-06):
+  every page is on Option A.
 - **Layout:** `site/src/layouts/Site.astro`: prototype line, header + nav + mobile menu, theme switch, footer,
   theme script, tabs script. Props: `title`, `description`, `bleed` (page manages its own `.wrap`s),
   `color` (a color slot for the section, e.g. `c-states`).
 - **Components:** `site/src/components/`: `ThemeSwitch`, `ToolNotice`, `Breadcrumb`, `SideMenu`, `Cite`,
-  `TableFilter`, `UnverifiedNote`, `Term`, `StatTile`, `ChartFrame` (+ `Chart*`, `TileMapLimits`).
-  `DisplaySettings` is deprecated and renders nothing.
+  `TableFilter`, `UnverifiedNote`, `Term`, `StatTile`, `ChartFrame` (+ `Chart*`, `TileMapLimits`), `ToolFlow`
+  (`.ts` + `.css`), `ToolStatePicker`, `CaliforniaDetail`, `Checklist*`. (`DisplaySettings` and the old
+  `design/Samples` were deleted; the `/design/` gallery uses `design/GallerySamples`.)
 - **Mockups** stay at `/mockups/a/…` and `/mockups/b/…` for reference (self-contained CSS, untouched).
 
 ## Palette
@@ -60,6 +63,7 @@ order is the fixed landing order (cobalt, tomato, sage).
 | `--ink` | `#111112` | `#f2f1ec` | Text: 17.6:1 / 18.1:1 on bg |
 | `--ink-2` | `#3c3c38` | `#bdbdb7` | Secondary: 9.9:1 / 10.4:1 |
 | `--ink-3` | `#55554f` | `#96968f` | Labels, hints, cites: 6.7 / 6.6 on bg; ≥5.1 on `--panel-hover` |
+| `--ink-4` | `#6b6b64` | `#7c7c76` | Quietest text (upcoming tool questions): 4.8 / 4.7 on bg |
 | `--line` / `--line-2` | 11% / 22% ink | 9% / 18% white | Dividers (decorative) |
 | `--line-strong` | `#76766f` | `#6a6a65` | Plain input borders: ≥3.3:1 (non-text) |
 | `--sel-bg` / `--sel-ink` | ink / bg | ink / bg | Primary button, neutral selected tile |
@@ -141,6 +145,17 @@ with a class loses bullets and padding.
 - **Forms** `.fields` grid > `.field` input panel: label inside (`label` / `.f-label`, `.f-req`), big value, `.f-hint`,
   `.f-error`; error state `.field.has-error` or `aria-invalid="true"`. `.field.wide`, `.field.compact`, `.affix`
   (e.g. `$`), `.f-ok`. Plain inputs outside a panel get a bordered style. `.choice` rows, `legend`.
+- **Tool flow** (`ToolFlow.ts` + `ToolFlow.css`, used by `/worth-it/` and `/demand-letter/`): one question at a
+  time inside `.fl`. Each `section.fl-q[data-q]` has `data-state` `now` / `done` / `next` / `later`; answered
+  questions stay open and editable, upcoming ones show only their heading (`next` in `--ink-3`, `later` in
+  `--ink-4`, both ≥4.5:1). Parts: `.fl-q-head` (`.fl-q-n` "01 / 06", `.fl-q-title`), `.fl-q-body`, `.fl-q-foot`
+  (Continue + Enter hint), side rail `.fl-rail` (`.fl-index` > `.fl-jump`, `.fl-mini` result), `.fl-dock` (sticky
+  phone summary, pads for the home indicator), `.fl-toggles` (switch rows), `.fl-out` (read-only looked-up
+  number). `createFlow({ root, total, validate, onStep })` wires Continue, Enter, letter keys (A = first tile) and
+  auto-advance on pointer taps in `[data-auto]` groups. `announcer()` is a debounced polite live region.
+- **ToolStatePicker** (`ToolStatePicker.astro` + `initStatePicker()` in `ToolFlow.ts`): featured states as lettered
+  radio tiles, then "Another state", which opens `.fl-pick`, a searchable list of all 50 states + DC (Enter picks
+  the first match).
 - **Tables** `.table-scroll` > `table` (mono column heads, hairlines, `.num` right-aligned). Add `.table-stack` +
   `data-label` on each `td` to stack rows under 720px. `.facts` > `.fact` (dt mono / dd).
 - **Stat strip** `.stats` > `.stat.c-*` (`.s-bar`, `.num` / `.num.word`, `.s-label`, `.s-sub`, `.cite`). `StatTile.astro`
@@ -152,28 +167,61 @@ with a class loses bullets and padding.
 
 ## Motion
 
-Short fades and color changes only: `--t-fast` 160ms, `--t-med` 240ms, `--ease` `cubic-bezier(0.2, 0, 0, 1)`.
-No bounce, no overshoot, no springs, no scroll-triggered movement, no transforms on hover except the arrow
-line lengthening on `.go`. Dialogs and the mobile menu fade in. Theme changes switch in one step (transitions
-paused). `prefers-reduced-motion` turns everything off.
+Rules from Emil Kowalski's design-engineering skills (github.com/emilkowalski/skills: `emil-design-eng`,
+`improve-animations`, `remove-animations`, `find-animation-opportunities`, `animate`, `choreograph`), applied
+in the 2026-11-06 polish pass. Nima doesn't want bouncy or overshooting motion, so none is used anywhere.
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--ease` (= `--ease-out`) | `cubic-bezier(0.23, 1, 0.32, 1)` | Everything. A strong ease-out: moves at once, settles softly, never overshoots |
+| `--t-press` | 120ms | `:active` press feedback |
+| `--t-fast` | 160ms | Hovers, color changes, the mobile menu, the "Another state" list, pointer tab switches, `.go` arrow |
+| `--t-med` | 200ms | A tool question's body appearing, dialogs, the result bars, the dimmed tool |
+
+- **Only `opacity`, `transform` and colors animate.** Never `width`/`height`/`top`/`margin`, never `transition: all`.
+- **Transitions, not keyframes**, for anything that can be re-triggered (mobile menu uses `@starting-style`);
+  only the modal dialog fade is a keyframe.
+- **Press feedback:** `.btn:active` scale 0.97, link/button/label `.tile:active` 0.98, `.door:active` 0.99 (big
+  surfaces need less), `.card-link:active` a color step. Fires on press, so taps feel immediate.
+- **Hover is color only** and every `:hover` rule sits inside `@media (hover: hover) and (pointer: fine)`, so
+  touch screens never get stuck hover states. Table rows change instantly (no fade: people sweep across them).
+  The one hover movement is the `.go` arrow line, now a `scaleX` from the left instead of a width change.
+- **Keyboard actions never animate.** Arrow-key tab switches swap instantly (`.tabs-fade` is set only for pointer
+  clicks); a keyboard "Continue" or Enter in the tools opens the next question with no fade (`.fl-instant`) and
+  jumps focus without smooth scrolling. Pointer hand-off: the next question scrolls into view (smooth) while its
+  body fades in, one motion, no stagger.
+- **No stagger, no scroll reveals, no count-ups, no chart draw-ins.** The calculator's two result bars move
+  (`scaleX`, `--t-med`) only when the numbers change.
+- **Theme changes** switch in one step (transitions paused by `.theme-switching`).
+- **`prefers-reduced-motion: reduce`** turns all of it off: durations go to ~0, smooth scroll is off, and the
+  press scale is removed.
+
+## Mobile
+
+From Emil Kowalski's `mobile-native` skill. Verified in device emulation; sticky hover, tap delay and safe areas
+still need a check on a real phone.
+- `viewport-fit=cover`; `.wrap` pads with `max(--pad, env(safe-area-inset-left/right))` so landscape content
+  clears the notch; the header pads `env(safe-area-inset-top)`, the footer and the tools' `.fl-dock`
+  `env(safe-area-inset-bottom)`. Zoom is never disabled.
+- `-webkit-tap-highlight-color: transparent` on `html` (every control has its own `:active`/focus state).
+- `touch-action: manipulation` on links, buttons, labels, summaries, tabs and tiles (no double-tap delay).
+- `user-select: none` on controls only (buttons, summaries, tabs, tiles, `.btn`, chips), never on content.
+- Every input, select and textarea is ≥16px, so iOS doesn't zoom on focus. Number fields use `inputmode`.
+- `theme-color`: `#f3f2ee` (light) / `#0b0b0c` (dark), one meta per color scheme; the head script and
+  `ThemeSwitch` pin both to the chosen theme so the browser chrome matches the page.
+- `[hidden]` always wins (`display: none !important`), so filtered rows and closed panels stay hidden even
+  where a component sets `display`.
+- Long text: 1fr grid tracks are `minmax(0, 1fr)` so long words wrap instead of widening the page; `.cite` links
+  break anywhere; chips wrap inside their pill. Stress-tested at 320px with long names, 67-character terms,
+  $9,999,999.99 amounts and long letter text.
 
 ## Print
 
 Header, footer, prototype line, buttons, dialogs and the theme switch are hidden. The palette is forced to black on
 white, tiles and panels get a gray outline, and closed `<details>` print their contents.
 
-## Rebuild status (for the page agents)
+## Rebuild status
 
-Done in the new system: `Site.astro`, `global.css`, `features.css` (tokens + chart frame, stat tile, term popover),
-`/` (`pages/index.astro`), `/tools/` (`pages/tools/index.astro`), and the shared components listed above.
-
-Still on old markup (render, but look partly unstyled; rebuild on Option A, then delete their rules from `legacy.css`):
-- `pages/steps/index.astro` (How it works, `.c-learn`)
-- `pages/states/index.astro` (State rules, `.c-states`). **Add a compact state picker here**: it moved off the home page.
-- `pages/states/[slug]/index.astro`, `components/CaliforniaDetail.astro`, `pages/states/ca/counties/index.astro`,
-  `pages/states/ca/counties/[county].astro`
-- `pages/worth-it/index.astro` (`.c-calculator`), `pages/demand-letter/index.astro` (`.c-letter`)
-- `pages/checklists/index.astro`, `general.astro`, `[slug].astro`, `components/ChecklistDoc.astro`, `ChecklistForms.astro` (`.c-checklists`)
-- `pages/glossary/index.astro` (`.c-glossary`), `pages/about/index.astro` (`.c-about`; holds all the charts),
-  `pages/sources/index.astro`, `pages/404.astro`
-- `pages/design/index.astro` + `components/design/Samples.astro` (gallery still shows the old components)
+All pages are on Option A (2026-11-06). `legacy.css` was emptied and deleted; its last live bits moved into
+`global.css` (`[hidden]`) and the demand-letter page (the letter's Georgia face, `pre-wrap`, paper border).
+The `/design/` gallery still shows some older component states.

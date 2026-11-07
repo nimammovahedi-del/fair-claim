@@ -107,3 +107,6 @@ These changes were made at Nima's request. Three agents worked in order: design 
 ## Notes
 - Shared with the letter-decoder project: `site/src/lib/core/` (see its README). There's a hand-over note in the shared session-notes folder.
 - No AI API anywhere. Re-research happens in Claude Code sessions.
+
+## Hosting decision (2026-11-06)
+Fair Claim will use Nima's **fedmoney Cloudflare account**, the same one as the federal-money-map site. Deploy it the same way: a private GitHub repo with Cloudflare Pages' Git integration, connected by Nima in the dashboard. This Mac is never signed into that account. Not deployed yet. Before publishing: finish the polish round, have Nima review it, and close the unverified limits and fees.

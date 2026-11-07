@@ -97,10 +97,17 @@ export function createFlow(o: FlowOptions): Flow {
     }
   }
 
+  // Keyboard moves are instant: skip the body fade for this frame.
+  function instant() {
+    root.classList.add("fl-instant");
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove("fl-instant")));
+  }
+
   function goTo(k: number, how: How = "silent") {
     k = Math.max(1, Math.min(last, k));
     at = k;
     max = Math.max(max, Math.min(k, total));
+    if (how !== "pointer") instant();
     paint();
     const s = byNum(k);
     if (s) reveal(s, how);

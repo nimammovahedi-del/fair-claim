@@ -1,0 +1,45 @@
+---
+// Review gallery: final screenshots of every major page (copies in public/final-shots, git-ignored).
+import "@fontsource/geist-sans/400.css";
+const pages = [
+    { key: "01-landing", label: "Landing" },
+    { key: "02-states", label: "States" },
+    { key: "03-states-ca", label: "States ca" },
+    { key: "04-county-los-angeles", label: "County los angeles" },
+    { key: "05-steps", label: "Steps" },
+    { key: "06-worth-it-midflow", label: "Worth it midflow" },
+    { key: "07-worth-it-results", label: "Worth it results" },
+    { key: "08-demand-letter-filled", label: "Demand letter filled" },
+    { key: "09-glossary", label: "Glossary" },
+    { key: "10-checklists-ca", label: "Checklists ca" },
+    { key: "11-about", label: "About" },
+    { key: "12-tools", label: "Tools" },
+];
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex" /><title>Final review · Fair Claim</title>
+<style>
+body{margin:0;background:#111112;color:#f2f2ef;font:16px/1.5 "Geist Sans",system-ui,sans-serif}
+.wrap{max-width:1500px;margin:0 auto;padding:0 24px}
+h1{font-weight:400;font-size:clamp(2rem,4vw,3.4rem);letter-spacing:-.03em;margin:40px 0 8px}
+p{color:#a3a3a0;max-width:70ch}
+section{padding:32px 0;border-top:1px solid #2c2c30}
+h2{font-weight:400;font-size:1.6rem;margin:0 0 14px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+@media (max-width:900px){.pair{grid-template-columns:1fr}}
+.shot{max-height:900px;overflow:auto;border:1px solid #2c2c30;border-radius:8px;background:#1b1b1e}
+.shot img{display:block;width:100%;height:auto}
+.cap{font-size:13px;color:#a3a3a0;margin:0 0 6px}
+</style></head>
+<body><div class="wrap">
+<h1>Fair Claim: final screenshots</h1>
+<p>Every major page after the Option A rebuild and the polish pass, in dark (left) and light (right), at 1440px wide. Each frame scrolls. The live site is at <a style="color:#c7b8f2" href="/">/</a>.</p>
+{pages.map((p) => (
+  <section>
+    <h2>{p.label}</h2>
+    <div class="pair">
+      {["dark","light"].map((t) => <div><p class="cap">{t}</p><div class="shot"><img loading="lazy" src={`/final-shots/${p.key}-${t}.png`} alt={`${p.label}, ${t} theme`} /></div></div>)}
+    </div>
+  </section>
+))}
+</div></body></html>

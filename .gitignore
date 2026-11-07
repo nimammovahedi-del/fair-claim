@@ -6,3 +6,4 @@ __pycache__/
 .DS_Store
 .env
 site/public/mockup-shots/
+site/public/final-shots/

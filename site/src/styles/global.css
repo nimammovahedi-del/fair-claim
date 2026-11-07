@@ -3,10 +3,11 @@
  * Full documentation: docs/design-system.md
  *
  * Multi-color tiles on a near-black (dark) or warm off-white (light) page. Inter Tight for display,
- * Geist Sans for body, Geist Mono for labels and citations. Motion: short fades and color changes only.
+ * Geist Sans for body, Geist Mono for labels and citations. Motion: short ease-out fades, color changes and a
+ * slight press; no bounce or overshoot (see docs/design-system.md, "Motion").
  *
  * Sections
- *   1. Fonts + legacy page blocks          9. Tiles, doors, color slots
+ *   1. Fonts                               9. Tiles, doors, color slots
  *   2. Tokens (theme-independent)         10. Cards, notice, callouts, paper
  *   3. Tokens (light, dark)               11. Buttons, chips, tags, badges, cite
  *   4. Base                               12. Accordions, tabs, progress
@@ -16,14 +17,12 @@
  *   8. Footer                             16. Print, reduced motion
  */
 
-/* ------------------------------------------------------------------ 1. Fonts (self-hosted) + legacy */
+/* ------------------------------------------------------------------ 1. Fonts (self-hosted) */
 @import "@fontsource-variable/inter-tight/wght.css";
 @import "@fontsource/geist-sans/400.css";
 @import "@fontsource/geist-sans/500.css";
 @import "@fontsource/geist-mono/400.css";
 @import "@fontsource/geist-mono/500.css";
-/* Old page blocks, loaded first so every rule below wins. Delete as pages are rebuilt. */
-@import "./legacy.css";
 
 /* ------------------------------------------------------------------ 2. Tokens — theme-independent */
 :root {
@@ -86,10 +85,13 @@
   --r-pill: 999px; /* buttons, chips, nav */
   --bar-width: 4px;
 
-  /* Motion: fades and color changes only. No bounce, no overshoot, no scroll-triggered movement. */
-  --ease: cubic-bezier(0.2, 0, 0, 1);
-  --t-fast: 160ms;
-  --t-med: 240ms;
+  /* Motion (Emil Kowalski's rules): short, ease-out, interruptible (transitions, not keyframes, wherever
+     something can be re-triggered). Fades, color changes and a slight press only. No bounce, no overshoot,
+     no scroll-triggered movement. prefers-reduced-motion turns it all off (section 16). */
+  --ease: cubic-bezier(0.23, 1, 0.32, 1); /* strong ease-out: starts at once, settles softly */
+  --t-press: 120ms; /* :active press feedback */
+  --t-fast: 160ms; /* hovers, color changes, small popovers, menus */
+  --t-med: 200ms; /* panels that appear: question bodies, dialogs, tab panels */
 
   --hdr-h: 72px;
 
@@ -153,6 +155,7 @@
   --ink: #111112; /* 17.6:1 on bg */
   --ink-2: #3c3c38; /* 9.9:1 on bg */
   --ink-3: #55554f; /* 6.7:1 on bg, 5.2:1 on panel-hover */
+  --ink-4: #6b6b64; /* quietest text (upcoming tool questions): 4.8:1 on bg */
   --sel-bg: #111112; /* primary button, selected tile without a color */
   --sel-ink: #f3f2ee;
   --word: #e6e5df; /* footer wordmark (decorative) */
@@ -226,6 +229,7 @@
   --ink: #f2f1ec; /* 18.1:1 on bg */
   --ink-2: #bdbdb7; /* 10.4:1 on bg */
   --ink-3: #96968f; /* 6.6:1 on bg, 5.1:1 on panel-hover */
+  --ink-4: #7c7c76; /* quietest text (upcoming tool questions): 4.7:1 on bg */
   --sel-bg: #f2f1ec;
   --sel-ink: #0b0b0c;
   --word: #161618;
@@ -257,6 +261,7 @@
     --ink: #f2f1ec;
     --ink-2: #bdbdb7;
     --ink-3: #96968f;
+    --ink-4: #7c7c76;
     --sel-bg: #f2f1ec;
     --sel-ink: #0b0b0c;
     --word: #161618;
@@ -282,7 +287,20 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent; /* every control has its own :active / focus state instead */
   scroll-padding-top: calc(var(--hdr-h) + 16px);
+}
+/* `hidden` always wins, even over components that set display (filtered table rows, the table filter). */
+[hidden]:not([hidden="until-found"]) {
+  display: none !important;
+}
+/* Touch: no double-tap-zoom delay on controls; control labels don't get selected by a long press. */
+:where(a, button, summary, label, [role="tab"], [role="button"], .tile) {
+  touch-action: manipulation;
+}
+:where(button, summary, [role="tab"], .tile, .btn, .chip, .tag) {
+  -webkit-user-select: none;
+  user-select: none;
 }
 body {
   margin: 0;
@@ -343,8 +361,10 @@ a {
   text-decoration-color: var(--line-2);
   transition: text-decoration-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
 }
-a:hover {
-  text-decoration-color: currentColor;
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    text-decoration-color: currentColor;
+  }
 }
 :focus-visible {
   outline: 2px solid var(--focus);
@@ -536,11 +556,14 @@ samp,
   width: 18px;
   height: 1px;
   background: currentColor;
-  transition: width var(--t-med) var(--ease);
+  transform-origin: left center;
+  transition: transform var(--t-fast) var(--ease);
 }
-.go:hover::after,
-.link-arrow:hover::after {
-  width: 30px;
+@media (hover: hover) and (pointer: fine) {
+  .go:hover::after,
+  .link-arrow:hover::after {
+    transform: scaleX(1.667);
+  }
 }
 
 /* ------------------------------------------------------------------ 6. Layout + page scaffolding */
@@ -548,6 +571,9 @@ samp,
   max-width: var(--container);
   margin: 0 auto;
   padding-inline: var(--pad);
+  /* Phones in landscape: keep content clear of the notch (viewport-fit=cover is set in Site.astro). */
+  padding-left: max(var(--pad), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--pad), env(safe-area-inset-right, 0px));
 }
 main {
   display: block;
@@ -677,6 +703,7 @@ main:focus {
   backdrop-filter: saturate(140%) blur(12px);
   -webkit-backdrop-filter: saturate(140%) blur(12px);
   border-bottom: 1px solid var(--line);
+  padding-top: env(safe-area-inset-top, 0px); /* only non-zero when installed full screen */
 }
 .hdr-in {
   display: flex;
@@ -727,9 +754,11 @@ main:focus {
   color: var(--ink-2);
   transition: color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
 }
-.nav a:hover {
-  color: var(--ink);
-  background: var(--panel);
+@media (hover: hover) and (pointer: fine) {
+  .nav a:hover {
+    color: var(--ink);
+    background: var(--panel);
+  }
 }
 .nav a[aria-current="page"] {
   color: var(--ink);
@@ -773,8 +802,10 @@ main:focus {
   color: var(--ink-3);
   transition: color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
 }
-.theme-switch label:hover {
-  color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .theme-switch label:hover {
+    color: var(--ink);
+  }
 }
 .theme-switch input {
   position: absolute;
@@ -823,7 +854,7 @@ main:focus {
     color: var(--ink);
     transition: border-color var(--t-fast) var(--ease);
   }
-  .js .menu-btn:hover {
+  .js .menu-btn:active {
     border-color: var(--ink);
   }
   .menu-icon {
@@ -839,21 +870,17 @@ main:focus {
     width: 14px;
     height: 1.5px;
     background: currentColor;
-    transition: transform var(--t-fast) var(--ease), top var(--t-fast) var(--ease);
-  }
-  .menu-icon::before {
     top: 0;
+    transition: transform var(--t-fast) var(--ease);
   }
   .menu-icon::after {
-    top: 6.5px;
+    transform: translateY(6.5px);
   }
   .menu-btn[aria-expanded="true"] .menu-icon::before {
-    top: 3.25px;
-    transform: rotate(45deg);
+    transform: translateY(3.25px) rotate(45deg);
   }
   .menu-btn[aria-expanded="true"] .menu-icon::after {
-    top: 3.25px;
-    transform: rotate(-45deg);
+    transform: translateY(3.25px) rotate(-45deg);
   }
 
   .no-js .hdr-in {
@@ -885,9 +912,16 @@ main:focus {
     max-height: calc(100dvh - var(--hdr-h));
     overflow-y: auto;
   }
+  /* Opens with a short fade (a transition, so a quick re-tap retargets instead of restarting). Closes at once. */
   .js .hdr-menu.is-open {
     display: flex;
-    animation: fc-fade var(--t-fast) var(--ease);
+    opacity: 1;
+    transition: opacity var(--t-fast) var(--ease);
+  }
+  @starting-style {
+    .js .hdr-menu.is-open {
+      opacity: 0;
+    }
   }
   .js .nav ul {
     flex-direction: column;
@@ -910,6 +944,8 @@ main:focus {
   }
   .js .nav a:hover {
     background: none;
+  }
+  .js .nav a:active {
     color: var(--ink-2);
   }
   .js .nav a[aria-current="page"]::after {
@@ -941,6 +977,7 @@ main:focus {
   margin-top: clamp(96px, 12vw, 160px);
   border-top: 1px solid var(--line);
   padding-top: 64px;
+  padding-bottom: env(safe-area-inset-bottom, 0px); /* clear of the home indicator */
   overflow: hidden;
 }
 .ftr-grid {
@@ -980,8 +1017,10 @@ main:focus {
   text-decoration: none;
   transition: color var(--t-fast) var(--ease);
 }
-.ftr-links a:hover {
-  color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .ftr-links a:hover {
+    color: var(--ink);
+  }
 }
 .ftr-base {
   display: flex;
@@ -1008,7 +1047,7 @@ main:focus {
 }
 @media (max-width: 860px) {
   .ftr-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .ftr-about {
     grid-column: 1 / -1;
@@ -1080,10 +1119,21 @@ main:focus {
   text-align: left;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
+    transform var(--t-press) var(--ease);
 }
-.tile:hover {
-  background: var(--panel-hover);
+/* Press feedback: a slight give the moment a finger or button goes down. Only on things that act
+   (links, buttons, choice tiles); a static .tile.fill used as a label doesn't move. */
+:is(a, button, label).tile:active {
+  transform: scale(0.98);
+}
+.door:active {
+  transform: scale(0.99); /* doors are big: the same give in pixels needs less scale */
+}
+@media (hover: hover) and (pointer: fine) {
+  .tile:hover {
+    background: var(--panel-hover);
+  }
 }
 .key {
   display: inline-grid;
@@ -1155,8 +1205,10 @@ main:focus {
 .tile:is([aria-pressed="true"], [aria-checked="true"], .is-on, :has(> input:checked)) .check {
   opacity: 1;
 }
-.tile.fill:hover {
-  background: color-mix(in srgb, var(--t) 88%, var(--bg));
+@media (hover: hover) and (pointer: fine) {
+  .tile.fill:hover {
+    background: color-mix(in srgb, var(--t) 88%, var(--bg));
+  }
 }
 /* Radio/checkbox inside a tile (a <label class="tile">): input covers the tile, focus ring on the tile */
 .tile > input {
@@ -1232,7 +1284,7 @@ main:focus {
 }
 @media (max-width: 560px) {
   .tiles {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .tile {
     min-height: 112px;
@@ -1275,8 +1327,13 @@ main:focus {
   padding-bottom: 64px;
   transition: background-color var(--t-fast) var(--ease);
 }
-.card-link:hover {
-  background: var(--panel-hover);
+.card-link:active {
+  background: var(--panel-2);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card-link:hover {
+    background: var(--panel-hover);
+  }
 }
 .card-link :where(h2, h3) a {
   color: inherit;
@@ -1357,7 +1414,7 @@ main:focus {
 .notice ol {
   counter-reset: n;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 14px 40px;
   margin: 20px 0 0;
   padding: 0;
@@ -1406,12 +1463,12 @@ main:focus {
 }
 @media (max-width: 860px) {
   .notice {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding: 24px;
   }
   .n-list,
   .notice ol {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .n-actions {
     grid-column: 1;
@@ -1510,13 +1567,17 @@ main:focus {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
   transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
-    box-shadow var(--t-fast) var(--ease);
+    box-shadow var(--t-fast) var(--ease), transform var(--t-press) var(--ease);
 }
-.btn:hover {
-  background: color-mix(in srgb, var(--sel-bg) 84%, var(--bg));
-  color: var(--sel-ink);
+.btn:active:not([disabled], [aria-disabled="true"]) {
+  transform: scale(0.97);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    background: color-mix(in srgb, var(--sel-bg) 84%, var(--bg));
+    color: var(--sel-ink);
+  }
 }
 .btn.ghost,
 .btn.secondary,
@@ -1525,19 +1586,23 @@ main:focus {
   color: var(--ink);
   box-shadow: inset 0 0 0 1px var(--line-2);
 }
-.btn.ghost:hover,
-.btn.secondary:hover,
-.btn.tertiary:hover {
-  background: transparent;
-  box-shadow: inset 0 0 0 1px var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .btn.ghost:hover,
+  .btn.secondary:hover,
+  .btn.tertiary:hover {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--ink);
+  }
 }
 .btn.color {
   background: var(--t);
   color: var(--on);
   box-shadow: var(--edge, none);
 }
-.btn.color:hover {
-  background: color-mix(in srgb, var(--t) 88%, var(--bg));
+@media (hover: hover) and (pointer: fine) {
+  .btn.color:hover {
+    background: color-mix(in srgb, var(--t) 88%, var(--bg));
+  }
 }
 .btn.sm,
 .btn.small {
@@ -1566,8 +1631,10 @@ main:focus {
   text-underline-offset: 0.22em;
   cursor: pointer;
 }
-.link-button:hover {
-  text-decoration-color: currentColor;
+@media (hover: hover) and (pointer: fine) {
+  .link-button:hover {
+    text-decoration-color: currentColor;
+  }
 }
 .kbd {
   display: inline-grid;
@@ -1599,7 +1666,8 @@ main:focus {
   font-weight: 400;
   color: var(--ink-2);
   text-decoration: none;
-  white-space: nowrap;
+  max-width: 100%; /* a long term wraps inside its pill instead of running out of the card */
+  padding-block: 4px;
   transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
     background-color var(--t-fast) var(--ease);
 }
@@ -1607,10 +1675,12 @@ main:focus {
 :is(a, button).tag {
   cursor: pointer;
 }
-:is(a, button).chip:hover,
-:is(a, button).tag:hover {
-  border-color: var(--ink);
-  color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  :is(a, button).chip:hover,
+  :is(a, button).tag:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
 }
 .chip[aria-pressed="true"],
 .tag[aria-pressed="true"] {
@@ -1687,6 +1757,12 @@ main:focus {
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--ink-3);
+  max-width: 100%;
+}
+/* Source links are bare domains and URLs: let them break in narrow columns instead of spilling out. */
+.cite > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 p.cite,
 div.cite {
@@ -1698,8 +1774,10 @@ div.cite {
   text-decoration-color: var(--line-2);
   text-underline-offset: 3px;
 }
-.cite a:hover {
-  color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .cite a:hover {
+    color: var(--ink);
+  }
 }
 .cite .badge {
   align-self: center;
@@ -1747,14 +1825,16 @@ div.cite {
   background:
     linear-gradient(currentColor, currentColor) center / 14px 1px no-repeat,
     linear-gradient(currentColor, currentColor) center / 1px 14px no-repeat;
-  transition: background-size var(--t-med) var(--ease);
+  transition: background-size var(--t-fast) var(--ease);
 }
 :is(.acc, .accordion)[open] > summary:not(:has(.pm))::after,
 :is(.acc, .accordion)[open] > summary .pm {
   background-size: 14px 1px, 1px 0;
 }
-:is(.acc, .accordion) > summary:hover {
-  color: var(--ink-2);
+@media (hover: hover) and (pointer: fine) {
+  :is(.acc, .accordion) > summary:hover {
+    color: var(--ink-2);
+  }
 }
 :is(.acc, .accordion) > summary:focus-visible {
   outline-offset: 2px;
@@ -1790,6 +1870,15 @@ div.cite {
 }
 .tab-panel:focus-visible {
   outline-offset: 2px;
+}
+/* Pointer tab switches fade the new panel in; keyboard switches are instant (Site.astro sets .tabs-fade). */
+.tabs-fade .tab-panel {
+  transition: opacity var(--t-fast) var(--ease);
+}
+@starting-style {
+  .tabs-fade .tab-panel {
+    opacity: 0;
+  }
 }
 
 /* Segmented progress bar: <div class="progress" role="img" aria-label="Question 4 of 6"><span class="seg done"></span>…</div> */
@@ -1837,8 +1926,10 @@ div.cite {
   box-shadow: inset 0 0 0 1px transparent;
   transition: box-shadow var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
 }
-.field:hover {
-  background: var(--panel-hover);
+@media (hover: hover) and (pointer: fine) {
+  .field:hover {
+    background: var(--panel-hover);
+  }
 }
 .field:focus-within {
   background: var(--panel);
@@ -1978,8 +2069,10 @@ div.cite {
   line-height: 1.4;
   transition: border-color var(--t-fast) var(--ease);
 }
-:where(input, select, textarea):hover {
-  border-color: var(--ink-2);
+@media (hover: hover) and (pointer: fine) {
+  :where(input, select, textarea):hover {
+    border-color: var(--ink-2);
+  }
 }
 :where(input, select, textarea):focus-visible {
   outline: 2px solid var(--focus);
@@ -2106,11 +2199,11 @@ td.mono {
   white-space: nowrap;
   color: var(--ink-2);
 }
-tbody tr {
-  transition: background-color var(--t-fast) var(--ease);
-}
-tbody tr:hover {
-  background: color-mix(in srgb, var(--panel) 50%, transparent);
+/* Row hover is instant: people sweep the pointer across tables, a fade there only reads as lag. */
+@media (hover: hover) and (pointer: fine) {
+  tbody tr:hover {
+    background: color-mix(in srgb, var(--panel) 50%, transparent);
+  }
 }
 /* Responsive stacking: <table class="table-stack">, data-label="Column" on each <td>. Under 720px each row
    becomes a block of "Label  value" lines; the first cell is the row's title. */
@@ -2256,7 +2349,7 @@ tbody tr:hover {
 }
 @media (max-width: 1080px) {
   .stats {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .stat:nth-child(2n) {
     border-right: 0;
@@ -2270,7 +2363,7 @@ tbody tr:hover {
 }
 @media (max-width: 560px) {
   .stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .stat {
     padding-left: 0 !important;
@@ -2347,7 +2440,7 @@ dialog.tool-notice {
   grid-row: span 4;
 }
 .tool-notice .n-list {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   margin: 16px 0 20px;
 }
@@ -2364,7 +2457,7 @@ dialog.tool-notice {
     padding: 24px 22px 8px;
   }
   .tool-notice .modal-body {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .tool-notice .n-icon {
     grid-row: auto;
@@ -2440,8 +2533,10 @@ dialog.tool-notice {
   color: var(--ink-3);
   text-decoration: none;
 }
-.breadcrumb a:hover {
-  color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .breadcrumb a:hover {
+    color: var(--ink);
+  }
 }
 .breadcrumb [aria-current="page"] {
   color: var(--ink);
@@ -2484,8 +2579,10 @@ dialog.tool-notice {
   text-decoration: none;
   transition: color var(--t-fast) var(--ease);
 }
-.sidemenu a:hover {
-  color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .sidemenu a:hover {
+    color: var(--ink);
+  }
 }
 .sidemenu a[aria-current] {
   color: var(--ink);
@@ -2647,5 +2744,9 @@ dialog.tool-notice {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  /* No press "give" either: the color change on selection is the feedback. */
+  :is(.tile, .btn, .door):active {
+    transform: none !important;
   }
 }

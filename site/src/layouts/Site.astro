@@ -39,11 +39,14 @@ const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
 <html lang="en" class="no-js">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title === "Fair Claim" ? title : `${title} · Fair Claim`}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="noindex" />
     <meta name="color-scheme" content="light dark" />
+    <!-- Browser chrome color = the page background. The script below (and ThemeSwitch) pins both to the chosen theme. -->
+    <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
     <script is:inline>
       // Before first paint: pick the theme. Order: ?theme= (this view only) > saved choice > device (Auto).
       (function () {
@@ -63,6 +66,8 @@ const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
         var dark = pref === "dark" || (pref === "auto" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
         d.setAttribute("data-theme", dark ? "dark" : "light");
         d.setAttribute("data-theme-pref", pref);
+        var tc = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < tc.length; i++) tc[i].setAttribute("content", dark ? "#0b0b0c" : "#f3f2ee");
       })();
     </script>
   </head>
@@ -189,8 +194,13 @@ const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
           if (focus) tab.focus();
         };
         tabs.forEach((t, i) => {
-          t.addEventListener("click", () => select(t));
+          // A pointer tap fades the new panel in (--t-fast); arrow keys swap it instantly.
+          t.addEventListener("click", (e) => {
+            box.classList.toggle("tabs-fade", e.detail > 0);
+            select(t);
+          });
           t.addEventListener("keydown", (e) => {
+            box.classList.remove("tabs-fade");
             const k = e.key;
             let n = -1;
             if (k === "ArrowRight" || k === "ArrowDown") n = (i + 1) % tabs.length;

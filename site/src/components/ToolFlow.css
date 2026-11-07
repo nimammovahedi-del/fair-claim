@@ -1,6 +1,8 @@
 /* Tool flow (Option A): one question at a time, lettered tiles, input panels, segmented progress.
    Shared by /worth-it/ and /demand-letter/. Everything is scoped under .fl so nothing leaks.
    Motion: color and opacity only (--t-fast / --t-med, --ease). Global CSS turns it off for reduced motion.
+   Pointer hand-off: the next question's body fades in (--t-med) while it scrolls into view. Keyboard hand-off
+   is instant (ToolFlow.ts adds .fl-instant for that frame), because keyboard actions never animate.
 
    States on each question (set by ToolFlow.ts, rendered server-side for the first paint):
      data-state="now"   the question being answered
@@ -13,35 +15,12 @@
   --fl-num: 92px;
 }
 
-/* ---------------------------------------------------------------- Touch: native feel */
-.fl :is(.tile, .btn, .chip, .fl-jump, .fl-pick button, .link-button) {
-  -webkit-tap-highlight-color: transparent;
+/* Touch: tap highlight, touch-action, user-select and the :active press on tiles and buttons all come from
+   global.css (sections 4, 9 and 11), and every :hover there is gated to mouse pointers. */
+.fl :is(.fl-jump, .fl-pick button) {
   touch-action: manipulation;
-}
-.fl :is(.tile, .btn, .chip, .fl-jump, .fl-pick button) {
   -webkit-user-select: none;
   user-select: none;
-}
-/* Press feedback: a slight give, on press only (not hover). */
-.fl .tile,
-.fl .btn {
-  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
-    box-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
-}
-.fl .tile:active {
-  transform: scale(0.985);
-}
-.fl .btn:active {
-  transform: scale(0.97);
-}
-/* Touch screens fake :hover on tap and leave it stuck: undo the hover fill there. */
-@media (hover: none) {
-  .fl .tile:not(:has(> input:checked)):hover {
-    background: var(--panel);
-  }
-  .fl .field:not(:focus-within):hover {
-    background: var(--panel);
-  }
 }
 
 /* ---------------------------------------------------------------- Page layout */
@@ -293,7 +272,7 @@
 /* A question that opens fades its body in; nothing moves. Only after the first paint (.fl-ready),
    so nothing fades on page load. */
 @starting-style {
-  .fl-ready .fl-q-body {
+  .fl-ready:not(.fl-instant) .fl-q-body {
     opacity: 0;
   }
 }
@@ -309,7 +288,8 @@
   align-items: center;
   gap: 8px;
 }
-/* Collapsed (upcoming) questions: heading only, in quieter ink. Large text keeps ≥3:1 in both themes. */
+/* Collapsed (upcoming) questions: heading only, in quieter ink. Even the quietest (--ink-4) keeps ≥4.5:1
+   in both themes, well above the 3:1 large-text minimum. */
 .js .fl-q:is([data-state="next"], [data-state="later"]) {
   padding-block: 36px;
   cursor: pointer;
@@ -321,7 +301,7 @@
   color: var(--ink-3);
 }
 .js .fl-q[data-state="later"] .fl-q-title {
-  color: var(--line-strong);
+  color: var(--ink-4);
 }
 @media (hover: hover) and (pointer: fine) {
   .js .fl-q:is([data-state="next"], [data-state="later"]):hover .fl-q-title {
@@ -432,10 +412,12 @@
   background: transparent;
   box-shadow: inset 0 0 0 1px var(--line-2);
 }
-.fl-out:hover,
-.fl-out:focus-within {
-  background: transparent;
-  box-shadow: inset 0 0 0 1px var(--line-2);
+@media (hover: hover) and (pointer: fine) {
+  .fl-out:hover,
+  .fl-out:focus-within {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--line-2);
+  }
 }
 .fl-out .o-n {
   font-family: var(--f-display);
@@ -511,6 +493,16 @@
 }
 .fl-pick[hidden] {
   display: none;
+}
+/* "Another state" opens the list with a short fade (pointer or keyboard alike: it's one opacity step, and the
+   search box has focus at once). */
+.fl-pick {
+  transition: opacity var(--t-fast) var(--ease);
+}
+@starting-style {
+  .fl-pick {
+    opacity: 0;
+  }
 }
 .fl-pick .field {
   background: var(--panel);

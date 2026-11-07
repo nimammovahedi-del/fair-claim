@@ -919,6 +919,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
     color: inherit;
   }
   .dl-paper {
+    /* A letter, so a letter face. pre-wrap keeps the line breaks people type; long words and URLs wrap. */
+    font-family: Georgia, "Times New Roman", serif;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    min-height: 30rem;
+    border: 1px solid var(--paper-border);
     padding: 40px 40px 32px;
     max-height: calc(100dvh - var(--hdr-h) - 150px);
     overflow-y: auto;
@@ -996,7 +1002,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
   @media (max-width: 1080px) {
     .dl-top {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 20px;
     }
     .dl-side-in {
@@ -1010,6 +1016,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
   @media (max-width: 860px) {
     .dl-paper {
       padding: 28px 22px;
+      min-height: 0;
     }
     .dl-clear {
       margin-left: 0;
