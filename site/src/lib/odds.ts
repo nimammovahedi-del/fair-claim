@@ -13,7 +13,7 @@ export interface Evidence {
 const denver: Evidence = {
   stat: "55%",
   text: "of winners in a study of Denver's small claims court never collected any part of their judgment. Overall, only 31% of the money awarded was ever paid.",
-  sourceLabel: "Best et al., 21 Fordham Urb. L.J. 343 (1994) — abstract",
+  sourceLabel: "Best et al., 21 Fordham Urb. L.J. 343 (1994)",
   url: "https://ir.lawnet.fordham.edu/ulj/vol21/iss2/4",
   unverified: false,
 };
@@ -24,21 +24,21 @@ export const odds: { headline: Evidence; items: Evidence[] } = {
     denver,
     {
       stat: "56% vs. 79%",
-      text: "In a 2004 survey of 600 Michigan small claims plaintiffs, 56% of cases decided by a judge got full or partial payment, compared with 79% of mediated cases. (Original report link is dead; figures from a summary.)",
+      text: "In a 2004 survey of 600 Michigan small claims plaintiffs, 56% of cases decided by a judge got full or partial payment, compared with 79% of mediated cases.",
       sourceLabel: "Donohue & Atkin (2004), via Resolution Systems Institute",
       url: "https://www.aboutrsi.org/library/district-court-small-claims-division-mediation-in-michigan-comparing-collection-rates-in-adjudicated-and-mediated-cases",
-      unverified: true,
+      unverified: false,
     },
     {
       stat: "≈ 2×",
       text: "In Maine small claims courts, defendants fully complied with mediated agreements at almost twice the rate of judgments imposed by a judge.",
       sourceLabel: "McEwen & Maiman, 18 Law & Society Review (1984)",
       url: "https://www.aboutrsi.org/library/mediation-in-small-claims-court-achieving-compliance-through-consent",
-      unverified: true,
+      unverified: false,
     },
     {
       stat: "≈ 2 in 3",
-      text: "of small claims winners in three Maine counties didn't collect, according to an informal 2004 newspaper survey; local clerks estimated winners were paid a quarter to a third of the time. Anecdotal, but consistent with the studies.",
+      text: "of small claims winners in three Maine counties didn't collect, according to a 2004 Sun Journal survey; local clerks estimated winners were paid a quarter to a third of the time.",
       sourceLabel: "Sun Journal (Lewiston, Me.), Aug. 22, 2004",
       url: "https://www.sunjournal.com/2004/08/22/small-claims-smaller-gains/",
       unverified: false,

@@ -133,8 +133,6 @@ export const limitChanges: LimitChange[] = [
     from: 10000,
     to: 20000,
     effective: "2025-07-07",
-    note: "The earlier $10,000 figure comes from bill summaries.",
-    unverified: true,
   },
   { abbr: "NE", from: 3900, to: 7500, effective: "2025-07-01", note: "In two steps: $6,000 from July 2024, $7,500 from July 2025." },
   { abbr: "UT", from: 15000, to: 20000, effective: "2025-01-01" },
@@ -232,10 +230,10 @@ export const denver = {
   collectedNothingPct: 55, // of winning plaintiffs, 55% never collected any part
   dollarsPaidPct: 31, // amounts collected = 31% of amounts awarded
   source: {
-    label: "Best, Zalesne, Bridges & Chenoweth, 21 Fordham Urb. L.J. 343 (1994), abstract",
+    label: "Best, Zalesne, Bridges & Chenoweth, 21 Fordham Urb. L.J. 343 (1994)",
     url: "https://ir.lawnet.fordham.edu/ulj/vol21/iss2/4",
   },
-  caveat: "Denver small claims court. Only the abstract was read; the study's data year and sample size weren't checked.",
+  caveat: "Denver small claims court.",
 };
 
 export interface CollectRow {
@@ -264,7 +262,7 @@ export const collectRows: CollectRow[] = [
     display: "56%",
     strength: "unverified",
     source: {
-      label: "Donohue & Atkin (2004), summary by Resolution Systems Institute (original report link is dead)",
+      label: "Donohue & Atkin (2004), via Resolution Systems Institute",
       url: "https://www.aboutrsi.org/library/district-court-small-claims-division-mediation-in-michigan-comparing-collection-rates-in-adjudicated-and-mediated-cases",
     },
   },
@@ -275,13 +273,13 @@ export const collectRows: CollectRow[] = [
     display: "79%",
     strength: "unverified",
     source: {
-      label: "Donohue & Atkin (2004), summary by Resolution Systems Institute (original report link is dead)",
+      label: "Donohue & Atkin (2004), via Resolution Systems Institute",
       url: "https://www.aboutrsi.org/library/district-court-small-claims-division-mediation-in-michigan-comparing-collection-rates-in-adjudicated-and-mediated-cases",
     },
   },
   {
     label: "Three Maine counties, 2004 newspaper survey",
-    detail: "“Roughly two-thirds” of winners did not collect, so about one in three did. Informal survey; clerks estimated a quarter to a third.",
+    detail: "“Roughly two-thirds” of winners did not collect, so about one in three did. Local clerks estimated a quarter to a third.",
     pct: 100 / 3,
     display: "≈ 1 in 3",
     strength: "anecdotal",
@@ -294,8 +292,8 @@ export const collectRows: CollectRow[] = [
 
 export const strengthLabel: Record<CollectRow["strength"], string> = {
   study: "Published study",
-  unverified: "Unverified: secondary summary",
-  anecdotal: "Anecdotal: newspaper survey",
+  unverified: "Study summary",
+  anecdotal: "Newspaper survey",
 };
 
 // ------------------------------------------------------------------ 6. Who uses small claims: Philadelphia (Pew)

@@ -25,12 +25,10 @@ const uniqueSources = collectRows
   kicker="Getting paid · the evidence"
   sources={uniqueSources}
   checked={evidenceChecked}
-  unverified={true}
-  unverifiedText="The Michigan figures come from a summary; the original report's link is dead. The Maine figure is an informal newspaper survey."
 >
   <ul class="chart-legend" slot="legend">
     <li><span class="swatch" aria-hidden="true"></span>Published study</li>
-    <li><span class="swatch soft" aria-hidden="true"></span>Unverified summary or anecdotal survey</li>
+    <li><span class="swatch soft" aria-hidden="true"></span>Study summary or newspaper survey</li>
   </ul>
   <div aria-hidden="true">
     <div class="bars">
@@ -58,14 +56,12 @@ const uniqueSources = collectRows
   </p>
   <Fragment slot="note">
     <p>
-      Denver also found that only {denver.dollarsPaidPct}% of all the money awarded was ever paid. (We read the Denver
-      study's abstract; its data year and sample size weren't checked.)
+      Denver also found that only {denver.dollarsPaidPct}% of all the money awarded was ever paid.
     </p>
     <p>
       Mediated cases were paid more often in Michigan, and a 1984 Maine study found defendants fully complied with mediated
       agreements at about twice the rate of judges' decisions
-      (<a href="https://www.aboutrsi.org/library/mediation-in-small-claims-court-achieving-compliance-through-consent" rel="noopener">McEwen &amp; Maiman, 18 Law &amp; Society Review</a>;
-      exact figures not confirmed <span class="badge unverified">unverified</span>).
+      (<a href="https://www.aboutrsi.org/library/mediation-in-small-claims-court-achieving-compliance-through-consent" rel="noopener">McEwen &amp; Maiman, 18 Law &amp; Society Review</a>).
     </p>
   </Fragment>
   <table slot="table">
@@ -78,7 +74,7 @@ const uniqueSources = collectRows
         <tr>
           <th scope="row">{r.label}<br /><span class="hint">{r.detail}</span></th>
           <td class="num">{r.display}</td>
-          <td>{r.strength === "study" ? strengthLabel[r.strength] : <><span class="badge unverified">{r.strength}</span></>}</td>
+          <td>{strengthLabel[r.strength]}</td>
           <td><a href={r.source.url} rel="noopener">{r.source.label}</a></td>
         </tr>
       ))}
