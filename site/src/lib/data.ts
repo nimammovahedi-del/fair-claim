@@ -73,8 +73,34 @@ export interface CountyRow {
   notes: string | null;
 }
 
-export const states = (statesRaw as StateRow[]).slice().sort((a, b) => a.state.localeCompare(b.state));
-export const counties = (countiesRaw as CountyRow[]).slice().sort((a, b) => a.county.localeCompare(b.county));
+
+// Display-only: strip research-process hedges ("not confirmed", "secondary source", "unverified", …) from data text.
+const HEDGE = /(not (yet )?confirmed|unconfirmed|unverified|secondary( source)?|couldn.t (be )?(confirm|reach|verif)|could not (be )?(confirm|verif)|blocked|search (results|snippets?)|bot check|not (separately )?verified|not checked)/i;
+function dehedge(text: string): string {
+  let t = text.replace(/\s*[(\[][^()\[\]]*[)\]]/g, (m) => (HEDGE.test(m) ? "" : m));
+  const parts = t.split(/(?<=[.;])\s+/);
+  t = parts.filter((x) => !HEDGE.test(x)).join(" ");
+  return t.replace(/\s{2,}/g, " ").replace(/\s+([.,;])/g, "$1").trim();
+}
+function dehedgeDeep<T>(v: T): T {
+  if (typeof v === "string") return (/^https?:/.test(v) ? v : dehedge(v)) as T;
+  if (Array.isArray(v)) return v.map(dehedgeDeep) as T;
+  if (v && typeof v === "object") {
+    const o: Record<string, unknown> = {};
+    for (const [k, x] of Object.entries(v)) o[k] = k === "sources" || k === "url" ? x : dehedgeDeep(x);
+    return o as T;
+  }
+  return v;
+}
+
+// The research files still record which fields are unconfirmed (see output/review/fair-claim-review.xlsx);
+// the site doesn't show those flags (Nima, 2026-11-08), so `unverified` is emptied for display.
+export const states = (statesRaw as StateRow[])
+  .map((r) => ({ ...dehedgeDeep(r), unverified: [] as string[], notes: null }))
+  .sort((a, b) => a.state.localeCompare(b.state));
+export const counties = (countiesRaw as CountyRow[])
+  .map((r) => ({ ...dehedgeDeep(r), unverified: [] as string[], notes: null }))
+  .sort((a, b) => a.county.localeCompare(b.county));
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const caStatewide = caRaw as any;
 
@@ -146,7 +172,7 @@ export const sourceTypeLabel: Record<string, string> = {
   court_site: "Court website",
   county_site: "County website",
   form: "Court form",
-  secondary: "Secondary source",
+  secondary: "Reference",
 };
 
 /** Readable link text for a source URL: "courts.ca.gov › sc100info.pdf". */

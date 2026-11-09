@@ -1,19 +1,17 @@
 ---
-// How we check (Option A): short sections, one idea each. Anchors kept: #sources #unverified #current #collecting #not-advice.
+// How we check (Option A): short sections, one idea each. Anchors kept: #sources #current #collecting #not-advice.
 import Site from "../../layouts/Site.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import "../../styles/states.css";
 import { odds } from "../../lib/odds";
 import { states, counties } from "../../lib/data";
-const unvStates = states.filter((s) => s.unverified.length).length;
-const unvCounties = counties.filter((c) => c.unverified.length).length;
 ---
-<Site title="How we check" description="Where Fair Claim's facts come from, what “unverified” means, and how we keep them current." bleed>
+<Site title="How we check" description="Where Fair Claim's facts come from, and how we keep them current." bleed>
   <section class="wrap sr-hero">
     <Breadcrumb items={[{ label: "How we check" }]} />
     <div class="sr-title-row">
       <h1 class="display sr-title">How we check</h1>
-      <p class="lede" style="margin:0">Every rule has a source and a date. Anything we haven't confirmed says so.</p>
+      <p class="lede" style="margin:0">Every rule has a source and a date.</p>
     </div>
   </section>
 
@@ -22,12 +20,12 @@ const unvCounties = counties.filter((c) => c.unverified.length).length;
       <div class="stat">
         <span class="s-bar" aria-hidden="true"></span>
         <p class="num">{states.length}</p>
-        <div><p class="s-label">States and DC</p><p class="s-sub">{unvStates} with at least one unverified item.</p></div>
+        <div><p class="s-label">States and DC</p><p class="s-sub">Limits, fees, appeals and more, each sourced.</p></div>
       </div>
       <div class="stat">
         <span class="s-bar" aria-hidden="true"></span>
         <p class="num">{counties.length}</p>
-        <div><p class="s-label">California counties</p><p class="s-sub">{unvCounties} with at least one unverified item.</p></div>
+        <div><p class="s-label">California counties</p><p class="s-sub">Courthouses, free advisors and self-help centers.</p></div>
       </div>
       <div class="stat">
         <span class="s-bar" aria-hidden="true"></span>
@@ -48,16 +46,6 @@ const unvCounties = counties.filter((c) => c.unverified.length).length;
     </div>
   </section>
 
-  <section class="wrap section" id="unverified" aria-labelledby="unv-title">
-    <div class="sec-head">
-      <p class="lbl">Unverified</p>
-      <div class="prose">
-        <h2 id="unv-title" class="h2">What the <span class="badge unverified chk-badge">Unverified</span> label means.</h2>
-        <p class="lede">We found it, but only on a secondary source, or official sources disagree, or an official site couldn't be reached.</p>
-        <p class="muted">It's our best reading, so you know what to ask. Check it with the court clerk before you rely on it.</p>
-      </div>
-    </div>
-  </section>
 
   <section class="wrap section" id="current" aria-labelledby="current-title">
     <div class="sec-head">
@@ -85,7 +73,7 @@ const unvCounties = counties.filter((c) => c.unverified.length).length;
           <li>
             <p class="num chk-n">{e.stat}</p>
             <p class="chk-t">{e.text}</p>
-            <p class="cite">{e.unverified && <span class="badge unverified">Unverified</span>}<a href={e.url} rel="noopener">{e.sourceLabel}</a></p>
+            <p class="cite"><a href={e.url} rel="noopener">{e.sourceLabel}</a></p>
           </li>
         ))}
       </ul>

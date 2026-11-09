@@ -191,3 +191,8 @@ Three agents reviewed every page: firm text trim, compact phone layouts, less cl
 - **Global:** about 20% tighter section spacing. The big footer wordmark is removed, and the footer is compact on phones.
 - **Checklists:** folded sections open automatically when printing (tested).
 - **Light-mode color options:** Nima kept the current warm off-white (2026-11-08). The options sheet is `output/colors/palette-comparison-sheet.png`. The dev-only `?palette=` preview stays dev-only.
+- **2026-11-08, hedges removed from the site (Nima's call):**
+  - The "unverified" badges, notes, the "Still open" list, the How we check "Unverified" section and per-page "Research note" sections are no longer shown.
+  - `site/src/lib/data.ts` empties the `unverified` lists for display and strips hedge phrases from fact text (display-only `dehedge`).
+  - Source type "secondary" now displays as "Reference".
+  - **The research files and review spreadsheet still record what's unconfirmed.** Use them for upkeep: 12 state and 42 county details remain open.

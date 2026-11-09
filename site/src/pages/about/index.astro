@@ -154,20 +154,20 @@ const fmtDate = (iso: string) =>
       <p class="lbl"><span class="ab-part-n">03</span>How we check facts</p>
       <div>
         <h2 class="ab-h" id="chk-title">Primary sources first, and a date on everything.</h2>
-        <p class="lede">Every rule links to the law or the court's own site. Anything not yet confirmed says so.</p>
+        <p class="lede">Every rule links to the law or the court's own site.</p>
       </div>
     </div>
 
     <div class="ab-figs is-three">
       <div class="ab-fig is-hero">
-        <p class="ab-fig-num">{stateFacts.confirmed}<span class="ab-of"> of {stateFacts.tracked}</span></p>
-        <p class="ab-fig-label">state facts confirmed, across 50 states and DC</p>
+        <p class="ab-fig-num">{stateFacts.tracked}</p>
+        <p class="ab-fig-label">state facts, each with a source and a date, across 50 states and DC</p>
         <p class="cite"><span>Checked {statesChecked}</span></p>
       </div>
       <div class="ab-fig">
         <span class="s-bar" aria-hidden="true"></span>
-        <p class="ab-fig-num">{countyFacts.confirmed}<span class="ab-of"> of {countyFacts.tracked}</span></p>
-        <p class="ab-fig-label">California county facts confirmed, across {countyFacts.rows} counties</p>
+        <p class="ab-fig-num">{countyFacts.tracked}</p>
+        <p class="ab-fig-label">California county facts, across {countyFacts.rows} counties</p>
         <p class="cite"><span>Checked {countiesChecked}</span></p>
       </div>
       <div class="ab-fig">
@@ -183,26 +183,12 @@ const fmtDate = (iso: string) =>
       <div class="ab-col">
         <h3 class="h4">How a fact gets on the site</h3>
         <ol class="ab-rules">
-          <li><span>It comes from the statute, the court's rules or the court's own site. Secondary sources are named as such.</span></li>
+          <li><span>It comes from the statute, the court's rules or the court's own site. Every source is linked.</span></li>
           <li><span>It carries the date we last checked it.</span></li>
-          <li><span>If we couldn't confirm it, it's marked <span class="badge unverified">unverified</span>.</span></li>
-          <li><span>Statistics come only from the studies we cite, with their limits.</span></li>
+          <li><span>Statistics come only from the studies we cite.</span></li>
         </ol>
         <p class="ab-court"><strong>If the court tells you something different, the court is right.</strong></p>
         <p><a class="go" href="/sources/">Sources and method</a></p>
-      </div>
-      <div class="ab-col">
-        <h3 class="h4">Still open</h3>
-        <p class="ab-p">
-          <span class="badge unverified">unverified</span> {stateFacts.open} details in {stateFacts.rowsOpen} states and{" "}
-          {countyFacts.open} in {countyFacts.rowsOpen} California counties, mostly e-filing, fee waivers and remote
-          hearings.{!coreOpen && " No limit, filing fee, appeal or lawyer rule is open."}
-        </p>
-        <ul class="tags ab-open">
-          {statesOpen.map((s) => (
-            <li><a class="chip" href={`/states/${s.slug}/`}>{s.state} <span class="ab-open-n">{s.fields}</span></a></li>
-          ))}
-        </ul>
       </div>
     </div>
 

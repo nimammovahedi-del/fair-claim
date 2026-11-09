@@ -16,7 +16,7 @@ const checked = ca.date_checked as string;
 const leg = (sec: string, code = "CCP") =>
   `https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=${code}&sectionNum=${sec}`;
 // Unverified notes in the research are free text that starts with the field path ("fees.sheriff_service_fee — …").
-const caUnverified = ((ca.unverified ?? []) as string[]).map((x) => x.split(" ")[0]);
+const caUnverified: string[] = []; // flags not shown on the site (Nima, 2026-11-08)
 const isU = (path: string) => caUnverified.some((x) => x.startsWith(path));
 
 // ---- Filing
