@@ -30,20 +30,30 @@ const ways = [
 
 <style>
   .nf {
-    padding-top: clamp(56px, 9vw, 144px);
+    padding-top: clamp(32px, 7vw, 120px);
   }
   .nf > .lbl {
-    margin: 0 0 28px;
+    margin: 0 0 clamp(16px, 2vw, 28px);
   }
   .nf-title {
     margin: 0;
     max-width: 14ch;
   }
   .nf .lede {
-    margin: 28px 0 0;
+    margin: clamp(16px, 2vw, 28px) 0 0;
   }
   .nf-doors {
-    margin-top: clamp(48px, 6vw, 88px);
+    margin-top: clamp(28px, 5vw, 72px);
+  }
+  /* Three ways forward, short enough to see together on a phone. */
+  .nf-doors .door {
+    min-height: clamp(150px, 22vw, 300px);
+    gap: 16px;
+  }
+  @media (max-width: 560px) {
+    .nf-doors .door-title {
+      font-size: 26px;
+    }
   }
   .nf-home {
     margin: 32px 0 0;

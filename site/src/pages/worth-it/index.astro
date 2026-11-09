@@ -68,7 +68,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
         id="worth-it"
         target="worth-it-tool"
         toolName="the cost calculator"
-        extraPoints={["The result is arithmetic on your own guesses. It can't tell you whether you'll win or get paid, or whether you should sue."]}
+        extraPoints={["The result is arithmetic on your own guesses. It can't say whether you'll win, get paid, or should sue."]}
       />
     </div>
 
@@ -77,7 +77,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
         <div class="fl-rail-in">
           <Breadcrumb items={[{ href: "/tools/", label: "Tools" }, { label: "Cost calculator" }]} />
           <h1 class="fl-title">Small claims cost calculator</h1>
-          <p class="fl-intro">Puts what you'd spend, your time and the chance of being paid side by side. It doesn't say whether to sue.</p>
+          <p class="fl-intro">Your costs and your chance of being paid, side by side.</p>
           <div class="progress" aria-hidden="true">
             {qs.map((_, i) => <span class={i === 0 ? "seg now" : "seg"} data-seg={i + 1}></span>)}
           </div>
@@ -112,7 +112,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
       <div class="fl-main">
         <p class="note-strip fl-strip">
           <span class="lbl">Please note</span>
-          <span>Arithmetic on your own estimates. It can't predict what a judge will decide or whether you'll be paid. Not sure court is the right route? <a href="/steps/#before-you-decide">See other options</a>.</span>
+          <span>Arithmetic on your own estimates, not a prediction. <a href="/steps/#before-you-decide">Options besides court</a></span>
         </p>
 
         <form id="calc" novalidate autocomplete="off">
@@ -129,7 +129,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
             </div>
             <div class="fl-q-foot">
               <button class="btn" type="button" data-next>Continue</button>
-              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter · letter keys pick an answer</span>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter · letter keys pick</span>
             </div>
           </section>
 
@@ -159,7 +159,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
             </div>
             <div class="fl-q-foot">
               <button class="btn" type="button" data-next>Continue</button>
-              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
             </div>
           </section>
 
@@ -168,12 +168,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
             <div class="fl-q-head">
               <span class="fl-q-n">{pad(3)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
               <h2 class="fl-q-title" id="q3-t" tabindex="-1">How much are you owed?</h2>
-              <p class="fl-q-help" id="q3-help">Only what you can back up with papers: receipts, a contract, an invoice.</p>
+              <p class="fl-q-help" id="q3-help">Only what papers back up: receipts, a contract, an invoice.</p>
             </div>
             <div class="fl-q-body">
-              <div class="fields fl-fields-2">
+              <div class="fields fl-fields-2 fl-pair">
                 <div class="field">
-                  <label for="amount">Amount you're owed <span class="f-req">Required</span></label>
+                  <label for="amount">Amount owed <span class="f-req">Required</span></label>
                   <div class="affix"><span aria-hidden="true">$</span><input id="amount" type="text" inputmode="decimal" enterkeyhint="next" value="2,400" required aria-required="true" aria-describedby="q3-help" data-money /></div>
                 </div>
                 <div class="field fl-out" id="limit-box">
@@ -186,7 +186,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
             </div>
             <div class="fl-q-foot">
               <button class="btn" type="button" data-next>Continue</button>
-              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
             </div>
           </section>
 
@@ -195,7 +195,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
             <div class="fl-q-head">
               <span class="fl-q-n">{pad(4)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
               <h2 class="fl-q-title" id="q4-t" tabindex="-1">What would you spend up front?</h2>
-              <p class="fl-q-help">We filled in a starting value for each. Change anything you know better.</p>
+              <p class="fl-q-help">Starting values are filled in. Change any you know better.</p>
             </div>
             <div class="fl-q-body">
               <div class="fields fl-fields-3">
@@ -213,7 +213,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
                 <div class="field">
                   <label for="other">Other costs</label>
                   <div class="affix"><span aria-hidden="true">$</span><input id="other" type="text" inputmode="decimal" enterkeyhint="next" value="0" aria-describedby="other-hint" data-money /></div>
-                  <span class="f-hint" id="other-hint">Parking, copies, postage, later collection fees.</span>
+                  <span class="f-hint" id="other-hint">Parking, copies, postage, collection fees.</span>
                 </div>
               </div>
               <fieldset class="fl-group" data-keys aria-describedby="recover-hint">
@@ -230,12 +230,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
                     <span><span class="t-label">No, or not sure</span><span class="t-sub">Leave them out of the math</span></span>
                   </label>
                 </div>
-                <p class="fl-note" id="recover-hint">Your state's rules page says whether costs are added.</p>
+                <p class="fl-note" id="recover-hint">Your state's rules page says whether they are.</p>
               </fieldset>
             </div>
             <div class="fl-q-foot">
               <button class="btn" type="button" data-next>Continue</button>
-              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
             </div>
           </section>
 
@@ -244,25 +244,25 @@ const pad = (n: number) => String(n).padStart(2, "0");
             <div class="fl-q-head">
               <span class="fl-q-n">{pad(5)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
               <h2 class="fl-q-title" id="q5-t" tabindex="-1">How much time would it take?</h2>
-              <p class="fl-q-help">Preparing, getting to court, waiting, and collecting afterward.</p>
+              <p class="fl-q-help">Preparing, going to court, waiting and collecting.</p>
             </div>
             <div class="fl-q-body">
-              <div class="fields fl-fields-2">
+              <div class="fields fl-fields-2 fl-pair">
                 <div class="field">
-                  <label for="hours">Hours you'd spend</label>
+                  <label for="hours">Hours</label>
                   <div class="affix"><input id="hours" type="text" inputmode="decimal" enterkeyhint="next" value="12" aria-describedby="hours-hint" /><span aria-hidden="true">h</span></div>
-                  <span class="f-hint" id="hours-hint">Your own guess. Include waiting time.</span>
+                  <span class="f-hint" id="hours-hint">Include waiting time.</span>
                 </div>
                 <div class="field">
-                  <label for="rate">What an hour is worth to you</label>
+                  <label for="rate">What an hour is worth</label>
                   <div class="affix"><span aria-hidden="true">$</span><input id="rate" type="text" inputmode="decimal" enterkeyhint="next" value="0" aria-describedby="rate-hint" data-money /></div>
-                  <span class="f-hint" id="rate-hint">0 leaves time out. Use your hourly pay if you'd lose work.</span>
+                  <span class="f-hint" id="rate-hint">0 leaves time out. Use your pay if you'd lose work.</span>
                 </div>
               </div>
             </div>
             <div class="fl-q-foot">
               <button class="btn" type="button" data-next>Continue</button>
-              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
             </div>
           </section>
 
@@ -312,13 +312,13 @@ const pad = (n: number) => String(n).padStart(2, "0");
               </fieldset>
               <p class="sr-only" id="own-hint">A whole number from 0 to 100.</p>
               <p class="fl-note" id="odds-note">
-                These are rough guides, not findings. Studies found about half of winners collected something.{" "}
-                <a href="/sources/#collecting">What studies found about getting paid</a>
+                Rough guides, not findings. Studies found about half of winners collected something.{" "}
+                <a href="/sources/#collecting">The studies</a>
               </p>
             </div>
             <div class="fl-q-foot">
               <button class="btn" type="button" data-next>See the numbers</button>
-              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+              <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
             </div>
           </section>
         </form>
@@ -327,7 +327,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
         <section class="wi-result" id="result" data-q={TOTAL + 1} aria-labelledby="r-title">
           <div class="r-top">
             <h2 class="lbl lbl-ink r-title" id="r-title" tabindex="-1">What the numbers show</h2>
-            <p class="lbl">Updates as you answer</p>
+            <p class="lbl r-live">Updates as you answer</p>
           </div>
           <p class="r-outcome" id="r-outcome">—</p>
           <p class="r-summary" id="r-summary"></p>
@@ -340,15 +340,15 @@ const pad = (n: number) => String(n).padStart(2, "0");
               <p class="rc-sub">Amount × chance of winning × chance of collecting</p>
             </div>
             <div class="rc">
-              <p class="lbl">Costs, including your time</p>
+              <p class="lbl">Total costs</p>
               <p class="num rc-n" id="r-cost">—</p>
               <div class="rc-track" aria-hidden="true"><span class="rc-bar rc-cost" id="bar-cost"></span></div>
               <p class="rc-sub">Money up front plus hours × hourly value</p>
             </div>
           </div>
 
-          <div class="r-block">
-            <h3 class="r-h">How it adds up, line by line</h3>
+          <details class="r-block" id="r-ledger" open>
+            <summary class="r-h">How it adds up, line by line</summary>
             <table class="r-ledger">
               <caption class="sr-only">How the expected net is worked out</caption>
               <tbody>
@@ -362,7 +362,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
                 <tr class="sub"><th scope="row">Expected net</th><td id="l-net">—</td></tr>
               </tbody>
             </table>
-          </div>
+          </details>
 
           <div class="r-break">
             <h3 class="r-h">Break-even</h3>
@@ -373,8 +373,14 @@ const pad = (n: number) => String(n).padStart(2, "0");
           <div class="r-keep">
             <h3 class="r-h">Keep in mind</h3>
             <ol>
-              {WORTH_IT_CAVEATS.map((c, i) => <li><span class="lbl" aria-hidden="true">{pad(i + 1)}</span><span>{c}</span></li>)}
+              {WORTH_IT_CAVEATS.slice(0, 1).map((c, i) => <li><span class="lbl" aria-hidden="true">{pad(i + 1)}</span><span>{c}</span></li>)}
             </ol>
+            <details class="r-more">
+              <summary>{WORTH_IT_CAVEATS.length - 1} more things to keep in mind</summary>
+              <ol start="2">
+                {WORTH_IT_CAVEATS.slice(1).map((c, i) => <li><span class="lbl" aria-hidden="true">{pad(i + 2)}</span><span>{c}</span></li>)}
+              </ol>
+            </details>
           </div>
           <div class="r-actions no-print">
             <a class="btn" href="/steps/#before-you-decide">Options besides court</a>
@@ -757,6 +763,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
     input("fee").focus();
   });
 
+  // Phones: the line-by-line ledger starts closed (the two totals above already say it); it stays open on wider screens.
+  if (window.matchMedia("(max-width: 700px)").matches) ($("r-ledger") as HTMLDetailsElement).open = false;
+
   // ?state=xx preselects and opens the next question.
   const params = new URLSearchParams(location.search);
   const qs = params.get("state")?.toLowerCase();
@@ -785,8 +794,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
   /* Result */
   .wi-result {
     position: relative;
-    margin-top: 24px;
-    padding: clamp(28px, 4vw, 56px);
+    margin-top: 16px;
+    padding: clamp(20px, 3.2vw, 44px);
     border-radius: var(--r-lg);
     background: var(--bg-2);
     box-shadow: inset 0 0 0 1px var(--line);
@@ -805,7 +814,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 8px 24px;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
   }
   .r-top p {
     margin: 0;
@@ -830,7 +839,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
     transition: color var(--t-med) var(--ease);
   }
   .r-summary {
-    margin: 24px 0 0;
+    margin: 16px 0 0;
     max-width: 48ch;
     font-size: var(--fs-lede);
     line-height: 1.45;
@@ -847,12 +856,13 @@ const pad = (n: number) => String(n).padStart(2, "0");
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 48px;
-    margin-top: 56px;
+    margin-top: 36px;
   }
   .rc {
     display: grid;
-    gap: 14px;
-    padding-top: 20px;
+    align-content: start;
+    gap: 10px;
+    padding-top: 16px;
     border-top: 1px solid var(--line-2);
   }
   .rc p {
@@ -889,7 +899,45 @@ const pad = (n: number) => String(n).padStart(2, "0");
     background: var(--c-tomato);
   }
   .r-block {
-    margin-top: 56px;
+    margin-top: 36px;
+  }
+  /* Ledger and the extra caveats are disclosures: mono label with a +/- mark, color change only. */
+  .r-block > summary,
+  .r-more > summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    min-height: 32px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .r-block > summary::-webkit-details-marker,
+  .r-more > summary::-webkit-details-marker {
+    display: none;
+  }
+  .r-block > summary::after,
+  .r-more > summary::after {
+    content: "+";
+    font-family: var(--f-mono);
+    font-size: 14px;
+    line-height: 1;
+    color: var(--ink-3);
+  }
+  .r-block[open] > summary::after,
+  .r-more[open] > summary::after {
+    content: "\2212";
+  }
+  .r-block > summary:focus-visible,
+  .r-more > summary:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .r-block > summary:hover,
+    .r-more > summary:hover {
+      color: var(--ink);
+    }
   }
   .r-h {
     margin: 0 0 12px;
@@ -907,7 +955,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
     border-collapse: collapse;
   }
   .r-ledger :is(th, td) {
-    padding: 11px 0;
+    padding: 9px 0;
     border-bottom: 1px solid var(--line);
     font-family: var(--f-body);
     font-size: 17px;
@@ -936,7 +984,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
     grid-template-columns: 140px minmax(0, 1fr);
     gap: 16px;
     align-items: baseline;
-    margin-top: 36px;
+    margin-top: 28px;
     max-width: 76ch;
   }
   .r-break .r-h {
@@ -952,15 +1000,24 @@ const pad = (n: number) => String(n).padStart(2, "0");
     margin: 16px 0 0;
   }
   .r-keep {
-    margin-top: 48px;
-    padding-top: 20px;
+    margin-top: 32px;
+    padding-top: 16px;
     border-top: 1px solid var(--line);
   }
   .r-keep ol {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 14px 48px;
-    margin: 16px 0 0;
+    gap: 12px 48px;
+    margin: 10px 0 0;
+    padding: 0;
+  }
+  .r-keep > ol {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .r-more > summary {
+    margin-top: 8px;
+    font-size: 15px;
+    color: var(--ink-2);
   }
   .r-keep li {
     display: grid;
@@ -976,13 +1033,63 @@ const pad = (n: number) => String(n).padStart(2, "0");
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 48px;
+    margin-top: 28px;
   }
   @media (max-width: 700px) {
-    .r-compare,
+    .r-live {
+      display: none;
+    }
+    .r-outcome {
+      font-size: clamp(30px, 8.6vw, 38px);
+    }
+    .r-summary {
+      font-size: 16.5px;
+      line-height: 1.5;
+    }
+    /* The two totals sit side by side even on phones: they are the answer. */
+    .r-compare {
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .rc-n {
+      font-size: clamp(32px, 10vw, 44px);
+    }
+    .rc-sub {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .r-block {
+      margin-top: 22px;
+    }
+    .r-block > summary {
+      margin: 0;
+    }
+    .r-break {
+      margin-top: 18px;
+    }
+    .r-break p {
+      font-size: 15.5px;
+    }
+    .r-ledger :is(th, td) {
+      padding: 7px 0;
+      font-size: 15px;
+    }
+    .r-ledger td {
+      font-size: 17px;
+    }
+    .r-keep {
+      margin-top: 24px;
+    }
     .r-keep ol {
       grid-template-columns: minmax(0, 1fr);
-      gap: 28px;
+      gap: 10px;
+    }
+    .r-keep li {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .r-actions {
+      margin-top: 22px;
     }
     .r-break {
       grid-template-columns: minmax(0, 1fr);
@@ -998,7 +1105,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
       box-shadow: none;
     }
     .wi-result::before,
-    .rc-track {
+    .rc-track,
+    .r-block > summary::after,
+    .r-more > summary::after {
       display: none;
     }
   }

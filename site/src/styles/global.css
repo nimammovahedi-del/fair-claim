@@ -77,12 +77,13 @@
   --gap: 24px; /* grid gap between columns */
   --pad: clamp(20px, 4vw, 56px); /* page side padding */
   /* Vertical rhythm (round 5: about 25% tighter than round 3, still airy). Use these, not raw clamps. */
-  --sp-page: clamp(32px, 4vw, 56px); /* top of a non-bleed page */
-  --sp-hero-top: clamp(40px, 6vw, 96px); /* above a page title */
-  --sp-hero-bottom: clamp(32px, 4vw, 56px); /* below a page hero */
-  --sp-section: clamp(48px, 6vw, 96px); /* between sections */
-  --sp-head: 36px; /* section head to its content */
-  --sp-footer: clamp(72px, 9vw, 120px); /* last section to the footer */
+  /* UX pass (2026-11-08): another ~20% off, mostly on phones, where the old values cost a screen per page. */
+  --sp-page: clamp(24px, 3.4vw, 48px); /* top of a non-bleed page */
+  --sp-hero-top: clamp(28px, 5vw, 80px); /* above a page title */
+  --sp-hero-bottom: clamp(24px, 3.4vw, 48px); /* below a page hero */
+  --sp-section: clamp(40px, 5vw, 80px); /* between sections */
+  --sp-head: clamp(20px, 2.4vw, 32px); /* section head to its content */
+  --sp-footer: clamp(48px, 6vw, 96px); /* last section to the footer */
   --container: 1440px;
   --measure: 66ch;
 
@@ -601,10 +602,10 @@ main:focus {
 }
 .page-hero .lbl,
 .page-hero .crumb {
-  margin-bottom: 28px;
+  margin-bottom: clamp(16px, 2vw, 28px);
 }
 .page-hero .lede {
-  margin-top: 28px;
+  margin-top: clamp(16px, 2vw, 28px);
 }
 .section {
   padding-top: var(--sp-section);
@@ -959,28 +960,30 @@ main:focus {
 }
 
 /* ------------------------------------------------------------------ 8. Footer */
+/* UX pass (2026-11-08): the big "Fair Claim" wordmark is gone (a screen of decoration on phones); the about
+   column is one line + one note; on phones the three link groups sit in three short columns. */
 .ftr {
   margin-top: var(--sp-footer);
   border-top: 1px solid var(--line);
-  padding-top: 48px;
-  padding-bottom: env(safe-area-inset-bottom, 0px); /* clear of the home indicator */
+  padding-top: clamp(28px, 3.4vw, 48px);
+  padding-bottom: calc(clamp(20px, 2.4vw, 32px) + env(safe-area-inset-bottom, 0px)); /* clear of the home indicator */
   overflow: hidden;
 }
 .ftr-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px var(--gap);
+  gap: 28px var(--gap);
 }
 .ftr-lead {
   font-family: var(--f-display);
-  font-size: 26px;
+  font-size: clamp(20px, 1.8vw, 24px);
   line-height: 1.25;
   letter-spacing: -0.02em;
-  max-width: 22ch;
+  max-width: 24ch;
   margin: 0;
 }
 .ftr-small {
-  margin: 16px 0 0;
+  margin: 12px 0 0;
   font-size: 15px;
   line-height: 1.55;
   color: var(--ink-2);
@@ -990,9 +993,9 @@ main:focus {
   color: var(--ink);
 }
 .ftr-links {
-  margin-top: 14px;
+  margin-top: 10px;
   display: grid;
-  gap: 4px;
+  gap: 2px;
 }
 .ftr-links a {
   display: inline-flex;
@@ -1011,32 +1014,36 @@ main:focus {
 .ftr-base {
   display: flex;
   justify-content: space-between;
-  gap: 8px 16px;
+  gap: 6px 16px;
   flex-wrap: wrap;
-  margin-top: 72px;
-  padding-top: 20px;
+  margin-top: clamp(28px, 3.4vw, 48px);
+  padding-top: 16px;
   border-top: 1px solid var(--line);
 }
 .ftr-base p {
   margin: 0;
 }
+/* Kept for old markup (mockups have their own copy): the wordmark no longer renders. */
 .ftr-word {
-  font-family: var(--f-display);
-  font-weight: 400;
-  letter-spacing: -0.06em;
-  line-height: 0.8;
-  font-size: clamp(80px, 18.5vw, 280px);
-  color: var(--word);
-  margin: 32px 0 -0.12em;
-  white-space: nowrap;
-  user-select: none;
+  display: none;
 }
 @media (max-width: 860px) {
   .ftr-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 12px;
   }
   .ftr-about {
     grid-column: 1 / -1;
+  }
+}
+@media (max-width: 560px) {
+  .ftr-links a {
+    min-height: 32px;
+    font-size: 14.5px;
+    line-height: 1.25;
+  }
+  .ftr-small {
+    font-size: 14px;
   }
 }
 

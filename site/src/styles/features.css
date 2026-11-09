@@ -174,6 +174,35 @@
   margin-left: 6px;
 }
 
+/* Phones: a chart fits the screen width with less frame around it. */
+@media (max-width: 560px) {
+  .chart {
+    padding: 16px 14px 4px;
+    gap: 16px;
+  }
+  .chart-head {
+    gap: 6px;
+  }
+  .chart-title {
+    font-size: 21px;
+  }
+  .chart-sub {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .chart-foot {
+    padding-top: 12px;
+    font-size: 13px;
+  }
+  .chart-more .acc > summary {
+    min-height: 44px;
+    padding: 10px 0;
+  }
+  .chart-more > .acc:last-child {
+    border-bottom: 0;
+  }
+}
+
 /* Legend: swatch + text. Text is ink, never the data color. */
 .chart-legend {
   display: flex;
@@ -653,6 +682,22 @@
   }
 }
 
+/* Narrow charts (phones): smaller middle value, tighter legend rows. */
+@container (max-width: 30rem) {
+  .tilemap-hero {
+    margin-bottom: 12px;
+  }
+  .tilemap-hero .num {
+    font-size: 40px;
+  }
+  .tile-legend li {
+    padding: 5px 0;
+  }
+  .tile-legend .n {
+    font-size: 17px;
+  }
+}
+
 /* ------------------------------------------------------------------ 5. Stat tiles */
 /* <ul class="stat-tiles"><StatTile …/></ul>. A slot class (c-tomato …) on a tile colors its bar. */
 .stat-tiles {
@@ -936,7 +981,7 @@ a.az-l:active {
   justify-content: space-between;
   align-items: baseline;
   gap: 8px 24px;
-  margin: 48px 0 0;
+  margin: 32px 0 0;
   padding-top: 16px;
   border-top: 1px solid var(--line);
 }
@@ -1080,7 +1125,7 @@ html.js .gl-list.is-search .gl-letter .num {
   color: var(--ink-2);
 }
 .gl-foot {
-  margin-top: 56px;
+  margin-top: 32px;
 }
 @media (max-width: 1080px) {
   .gl-top {
@@ -1116,21 +1161,84 @@ html.js .gl-list.is-search .gl-letter .num {
     margin-top: 32px;
   }
 }
+/* Phones: search and "All" share a row, the letter grid is 9 across (3 rows), cards are tighter. */
 @media (max-width: 560px) {
   .gl-tools {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .gl-tools .field {
+    min-height: 0;
+    padding: 10px 14px;
   }
   .gl-all {
-    flex-direction: row;
-    align-items: center;
-    min-height: 48px;
-    padding: 0 16px;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 14px;
+  }
+  .gl-all .lbl {
+    font-size: 10px;
   }
   .gl-all .az-L {
     font-size: 20px;
   }
+  .az {
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 3px;
+  }
+  .az-l {
+    height: 44px;
+    padding: 4px 5px;
+    align-items: flex-end;
+  }
+  .az-L {
+    font-size: 21px;
+  }
+  .az-c {
+    top: 4px;
+    right: 5px;
+    font-size: 9.5px;
+  }
+  .gl-status {
+    margin-top: 20px;
+    padding-top: 12px;
+  }
+  .gl-list {
+    margin-top: 16px;
+  }
+  .gl-group {
+    gap: 12px;
+    padding-bottom: 28px;
+  }
+  .gl-letter {
+    gap: 10px;
+  }
+  .gl-letter .num {
+    font-size: 40px;
+  }
+  .gl-cards {
+    gap: 6px;
+  }
   .gl-card {
-    padding: 18px 18px 20px;
+    gap: 10px;
+    padding: 14px 16px 12px;
+  }
+  .gl-card h3 {
+    font-size: 20px;
+  }
+  .gl-def {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .gl-ca > summary {
+    padding-top: 4px;
+  }
+  .gl-rel .chip {
+    min-height: 30px;
+  }
+  .gl-foot {
+    margin-top: 20px;
   }
 }
 
@@ -1478,15 +1586,49 @@ html.js .gl-list.is-search .gl-letter .num {
   }
 }
 @media (max-width: 560px) {
-  .ab-figs,
+  .ab-figs {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 6px;
+  }
   .ab-figs.is-two {
     grid-template-columns: minmax(0, 1fr);
   }
-  .ab-fig {
+  .ab-fig,
+  #paid .ab-fig {
     min-height: 0;
+    gap: 8px;
+    padding: 14px 14px 16px;
   }
   .ab-fig .s-bar {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+  }
+  .ab-fig-num {
+    font-size: 40px;
+  }
+  .ab-fig.is-hero .ab-fig-num {
+    font-size: 72px;
+  }
+  .ab-fig-label,
+  .ab-fig.is-hero .ab-fig-label {
+    font-size: 14.5px;
+    line-height: 1.4;
+  }
+  .ab-head .lede {
+    margin-top: 12px;
+  }
+  .ab-col {
+    padding: 16px 16px 18px;
+    gap: 10px;
+  }
+  .ab-col .h4 {
+    font-size: 20px;
+  }
+  .ab-rules li {
+    font-size: 15px;
+  }
+  .ab-index a {
+    padding: 8px 0;
+    font-size: 16px;
   }
   .ab-dates li {
     grid-template-columns: minmax(0, 1fr);
@@ -1697,17 +1839,59 @@ html.js .gl-list.is-search .gl-letter .num {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+/* Phones (UX pass 2026-11-08): two-up principles and audiences, smaller cards, tighter parts. */
 @media (max-width: 560px) {
   .principles,
   .ab-who {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 6px;
+  }
+  .ab-who {
+    gap: 16px 12px;
+  }
+  .ab-who li {
+    padding-top: 10px;
+  }
+  .ab-who strong {
+    font-size: 18px;
+  }
+  .ab-who span,
+  .pr p:not(.lbl, .cite) {
+    font-size: 14px;
+    line-height: 1.45;
   }
   .pr {
     min-height: 0;
+    gap: 6px;
+    padding: 12px 14px 16px;
   }
   .pr .t-top {
-    padding-bottom: 16px;
+    margin-bottom: 0;
+    padding-bottom: 6px;
   }
+  .pr h3 {
+    font-size: 20px;
+  }
+  .ab-def > div {
+    padding: 16px 18px 18px;
+  }
+  .ab-def .h4 {
+    font-size: 20px;
+  }
+  .help-head {
+    margin: 28px 0 12px;
+  }
+  .help .card {
+    padding: 16px 18px;
+  }
+}
+/* The dated lists in part 03 sit in one accordion. */
+.ab-more {
+  margin-top: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.ab-more > .acc-body .ab-check-grid {
+  margin-top: 0;
 }
 
 /* ------------------------------------------------------------------ 9. Checklists (screen) */

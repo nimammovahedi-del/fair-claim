@@ -115,10 +115,9 @@ const srcMore = c.sources.length > 6 ? c.sources.slice(5) : [];
       <p class="lbl">Courthouses</p>
       <div>
         <h2 id="where" class="h2">
-          Where cases are heard.
+          Where cases are heard
           {u("small_claims_locations") && <span class="badge unverified">Unverified</span>}
         </h2>
-        <p class="lede">{locs.length === 1 ? "One location." : `${locs.length} locations.`}</p>
       </div>
     </div>
     {locs.length ? (
@@ -248,7 +247,7 @@ const srcMore = c.sources.length > 6 ? c.sources.slice(5) : [];
   .help-main {
     background: var(--t);
     color: var(--on);
-    min-height: 360px;
+    min-height: 280px;
   }
   .help-main .lbl,
   .help-main a,
@@ -317,7 +316,7 @@ const srcMore = c.sources.length > 6 ? c.sources.slice(5) : [];
     display: flex;
     flex-direction: column;
     gap: 10px;
-    min-height: 168px;
+    min-height: 140px;
   }
   :where(.loc-card > *) {
     margin: 0;
@@ -346,6 +345,38 @@ const srcMore = c.sources.length > 6 ? c.sources.slice(5) : [];
     }
     .loc-card {
       min-height: 0;
+    }
+  }
+  @media (max-width: 640px) {
+    /* Phones: courthouses as a hairline list, not cards */
+    .locs {
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .loc-card {
+      gap: 2px;
+      padding: 12px 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .loc-card .h4 {
+      font-size: 19px;
+    }
+    .loc-addr {
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--ink-2);
+    }
+    .loc-card .key {
+      display: none;
+    }
+    .loc-card .h4 {
+      margin-top: 0;
+    }
+    .help-main .help-k {
+      padding-bottom: 8px;
     }
   }
 </style>

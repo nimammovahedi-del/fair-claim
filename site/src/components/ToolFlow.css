@@ -28,8 +28,8 @@
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
   gap: 64px;
-  padding-top: clamp(32px, 4vw, 56px);
-  padding-bottom: clamp(64px, 8vw, 120px);
+  padding-top: clamp(24px, 3vw, 40px);
+  padding-bottom: clamp(48px, 6vw, 96px);
   align-items: start;
 }
 .fl-layout.fl-split {
@@ -42,7 +42,7 @@
   position: sticky;
   top: calc(var(--hdr-h) + 32px);
   display: grid;
-  gap: 22px;
+  gap: 18px;
 }
 .fl-title {
   margin: 0;
@@ -191,7 +191,7 @@
 
 /* ---------------------------------------------------------------- Questions */
 .fl-q {
-  padding-block: 56px;
+  padding-block: 44px;
   border-top: 1px solid var(--line);
   scroll-margin-top: calc(var(--hdr-h) + 16px);
 }
@@ -259,14 +259,14 @@
 }
 .fl-q-help {
   grid-column: 2;
-  margin: 14px 0 0;
+  margin: 10px 0 0;
   max-width: 54ch;
   font-size: 17px;
   line-height: 1.55;
   color: var(--ink-2);
 }
 .fl-q-body {
-  margin: 32px 0 0 calc(var(--fl-num) + var(--gap));
+  margin: 26px 0 0 calc(var(--fl-num) + var(--gap));
   transition: opacity var(--t-med) var(--ease);
 }
 /* A question that opens fades its body in; nothing moves. Only after the first paint (.fl-ready),
@@ -281,17 +281,23 @@
   flex-wrap: wrap;
   gap: 12px 18px;
   align-items: center;
-  margin: 32px 0 0 calc(var(--fl-num) + var(--gap));
+  margin: 26px 0 0 calc(var(--fl-num) + var(--gap));
 }
 .fl-q-foot .hint {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
+/* Keyboard hints mean nothing on a touch screen: drop them there. */
+@media (pointer: coarse) {
+  .fl-q-foot .hint {
+    display: none;
+  }
+}
 /* Collapsed (upcoming) questions: heading only, in quieter ink. Even the quietest (--ink-4) keeps ≥4.5:1
    in both themes, well above the 3:1 large-text minimum. */
 .js .fl-q:is([data-state="next"], [data-state="later"]) {
-  padding-block: 36px;
+  padding-block: 26px;
   cursor: pointer;
 }
 .js .fl-q:is([data-state="next"], [data-state="later"]) :is(.fl-q-body, .fl-q-help) {
@@ -315,7 +321,7 @@
 
 /* Sub-question inside a question */
 .fl-sub {
-  margin: 40px 0 14px;
+  margin: 28px 0 12px;
   font-size: 19px;
   line-height: 1.4;
   color: var(--ink);
@@ -327,7 +333,7 @@
   min-width: 0;
 }
 .fl-group > legend {
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   padding: 0;
   font-family: var(--f-body);
   font-size: 19px;
@@ -337,7 +343,7 @@
 .fl-group + .fl-group,
 .fl-group + .fields,
 .fields + .fl-group {
-  margin-top: 40px;
+  margin-top: 28px;
 }
 
 /* ---------------------------------------------------------------- Tiles */
@@ -357,7 +363,7 @@
   grid-template-columns: repeat(2, minmax(0, 280px));
 }
 .fl .tile {
-  min-height: 124px;
+  min-height: 112px;
 }
 .fl .tile .t-pct {
   font-family: var(--f-display);
@@ -386,7 +392,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .fl .field {
-  min-height: 116px;
+  min-height: 104px;
 }
 .fl .field.compact {
   min-height: 0;
@@ -451,7 +457,31 @@
   margin-top: 8px;
 }
 .fl-own .field {
-  flex: 0 1 260px;
+  flex: 0 1 320px;
+}
+/* "Or your own number": one slim row, label left, number right. */
+.fl .fl-own .field {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 8px 14px;
+}
+.fl .fl-own .field > label {
+  flex: 1 1 auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+.fl-own .field .affix {
+  flex: 0 0 5.5rem;
+}
+.fl-own .field .affix input {
+  text-align: right;
+}
+.fl-own .field > .f-error {
+  flex-basis: 100%;
 }
 .fl-reset {
   font-size: 14px;
@@ -461,7 +491,7 @@
   margin: 16px 0 0;
 }
 .fl-note {
-  margin: 18px 0 0;
+  margin: 14px 0 0;
   max-width: 70ch;
   font-size: 15px;
   line-height: 1.55;
@@ -640,7 +670,10 @@
     display: none;
   }
   .fl-rail-in {
-    gap: 16px;
+    gap: 12px;
+  }
+  .fl-private {
+    display: none;
   }
   .fl .fl-tiles-5 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -651,11 +684,11 @@
     --fl-num: 0px;
   }
   .fl-q {
-    padding-block: 44px;
+    padding-block: 28px;
   }
   .fl-q-head {
     grid-template-columns: minmax(0, 1fr);
-    gap: 10px;
+    gap: 6px;
   }
   .fl-q-help {
     grid-column: 1;
@@ -663,13 +696,35 @@
   }
   .fl-q-body {
     margin-left: 0;
-    margin-top: 24px;
+    margin-top: 18px;
   }
   .fl-q-foot {
     margin-left: 0;
+    margin-top: 20px;
   }
   .js .fl-q:is([data-state="next"], [data-state="later"]) {
-    padding-block: 28px;
+    padding-block: 16px;
+  }
+  /* Upcoming questions: one quiet line each (number + title), not a stack of big headings. */
+  .js .fl-q:is([data-state="next"], [data-state="later"]) .fl-q-head {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px;
+  }
+  .js .fl-q:is([data-state="next"], [data-state="later"]) .fl-q-title {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .fl-q-title {
+    font-size: clamp(26px, 7vw, 32px);
+  }
+  .fl-q-help {
+    margin-top: 2px;
+    font-size: 15.5px;
+    line-height: 1.5;
+  }
+  .fl-sub,
+  .fl-group > legend {
+    font-size: 17px;
   }
   .fl-dock {
     position: sticky;
@@ -685,11 +740,16 @@
     -webkit-backdrop-filter: saturate(140%) blur(12px);
     backdrop-filter: saturate(140%) blur(12px);
     border-top: 1px solid var(--line);
-    transition: opacity var(--t-fast) var(--ease), visibility var(--t-fast);
+    transition: opacity var(--t-fast) var(--ease);
   }
+  /* Off = out of the layout too, so it leaves no empty band under the result. It fades in when it returns. */
   .fl-dock[data-off] {
-    opacity: 0;
-    visibility: hidden;
+    display: none;
+  }
+  @starting-style {
+    .fl-dock {
+      opacity: 0;
+    }
   }
   .fl-dock .btn {
     flex: none;
@@ -719,24 +779,124 @@
   .fl .fl-fields-3 {
     grid-template-columns: minmax(0, 1fr);
   }
+  /* Two short numbers side by side stay paired on phones (amount + limit, hours + rate, amount + date). */
+  .fl .fl-fields-2.fl-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 @media (max-width: 560px) {
   .fl .fl-tiles-5,
   .fl .fl-tiles-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  /* Phones: compact tiles and input panels, so a question fits on one screen. */
   .fl .tile {
-    min-height: 108px;
-    gap: 18px;
+    min-height: 0;
+    gap: 10px;
+    padding: 12px 14px 13px;
+  }
+  .fl .tile .t-sub {
+    margin-top: 2px;
+    font-size: 13.5px;
+    line-height: 1.35;
   }
   .fl .field {
-    min-height: 100px;
+    min-height: 0;
+    gap: 4px;
+    padding: 12px 14px;
+  }
+  .fl .field > label,
+  .fl .field .f-label {
+    padding-bottom: 4px;
+    font-size: 14.5px;
+  }
+  .fl .field :is(input:not([type="checkbox"], [type="radio"]), select) {
+    font-size: 24px;
+  }
+  .fl .field input[type="date"],
+  .fl .field :is(input[type="text"]:not([inputmode]), input[type="email"], input[type="tel"]) {
+    font-size: 20px;
+  }
+  .fl .field .affix > span {
+    font-size: 24px;
+  }
+  .fl .field.compact .affix > span {
+    font-size: 20px;
+  }
+  .fl-toggle {
+    padding: 12px 0;
+    font-size: 16px;
+  }
+  .fl .field textarea {
+    min-height: 0;
+    font-size: 17px;
+  }
+  .fl .field.compact :is(input:not([type="checkbox"], [type="radio"]), select) {
+    font-size: 20px;
+  }
+  .fl .f-hint {
+    font-size: 13.5px;
+  }
+  .fl-out .o-n {
+    font-size: 24px;
+  }
+  .fl-out .o-tag {
+    font-size: 13.5px;
+  }
+  /* Three money boxes become rows: label and hint on the left, the number on the right. */
+  .fl .fl-fields-3 .field {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 7.5rem;
+    column-gap: 12px;
+    align-items: center;
+  }
+  .fl .fl-fields-3 .field > label {
+    grid-column: 1;
+    margin: 0;
+    padding: 0;
+  }
+  .fl .fl-fields-3 .field .affix {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+  .fl .fl-fields-3 .field > :not(label, .affix) {
+    grid-column: 1;
+  }
+  .fl .fl-fields-3 .field > .f-error {
+    grid-column: 1 / -1;
+  }
+  .fl-group + .fl-group,
+  .fl-group + .fields,
+  .fields + .fl-group {
+    margin-top: 22px;
+  }
+  .fl-own {
+    margin-top: 6px;
+  }
+  .fl-own .field {
+    flex: 1 1 100%;
   }
   .fl-pick {
     padding: 12px;
   }
   .fl-pick ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Touch phones: the letter keys only help a keyboard, so the circled letters go and the check mark floats in the
+   corner. A tile is then just its label. */
+@media (pointer: coarse) and (max-width: 560px) {
+  .fl .tile .key {
+    display: none;
+  }
+  .fl .tile .t-top:not(:has(.t-pct)) {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .fl .tile .t-top:not(:has(.t-pct)) + span {
+    padding-right: 20px;
   }
 }
 

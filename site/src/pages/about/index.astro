@@ -61,7 +61,7 @@ const fmtDate = (iso: string) =>
     <Breadcrumb items={[{ label: "About" }]} />
     <h1 class="display ab-title">Small claims court, by the numbers we can source.</h1>
     <div class="ab-intro">
-      <p class="lede">Small claims court can settle a money dispute without a lawyer. It can also cost more than it returns, and winning doesn't mean being paid.</p>
+      <p class="lede">It can settle a money dispute without a lawyer. It can also cost more than it returns, and winning doesn't mean being paid.</p>
       <nav aria-label="On this page">
         <ol class="ab-index">
           {parts.map((p) => (
@@ -121,7 +121,7 @@ const fmtDate = (iso: string) =>
       <p class="lbl"><span class="ab-part-n">02</span>Who uses small claims</p>
       <div>
         <h2 class="ab-h" id="who-title">In one big city, most cases were debt collection, and most judgments came by default.</h2>
-        <p class="lede">Pew studied {pew2022.casesTotal} small claims cases in Philadelphia's Municipal Court, {pew2022.years}. One city's data: other courts may differ.</p>
+        <p class="lede">Pew studied {pew2022.casesTotal} cases in Philadelphia's Municipal Court, {pew2022.years}. Other courts may differ.</p>
       </div>
     </div>
 
@@ -177,7 +177,7 @@ const fmtDate = (iso: string) =>
         <p class="cite"><span>{recheckRounds.when}</span></p>
       </div>
     </div>
-    <p class="hint ab-count-note">A fact is one filled-in field, such as a state's limit, fee, appeal deadline or self-help link. Counted from our data files.</p>
+    <p class="hint ab-count-note">A fact is one filled-in field, such as a limit, fee or appeal deadline. Counted from our data files.</p>
 
     <div class="ab-check-grid">
       <div class="ab-col">
@@ -195,8 +195,8 @@ const fmtDate = (iso: string) =>
         <h3 class="h4">Still open</h3>
         <p class="ab-p">
           <span class="badge unverified">unverified</span> {stateFacts.open} details in {stateFacts.rowsOpen} states and{" "}
-          {countyFacts.open} in {countyFacts.rowsOpen} California counties. Mostly e-filing, fee waivers and remote
-          hearings, where official sites were blocked or silent.{!coreOpen && " No limit, filing fee, appeal or lawyer rule is open."}
+          {countyFacts.open} in {countyFacts.rowsOpen} California counties, mostly e-filing, fee waivers and remote
+          hearings.{!coreOpen && " No limit, filing fee, appeal or lawyer rule is open."}
         </p>
         <ul class="tags ab-open">
           {statesOpen.map((s) => (
@@ -206,6 +206,9 @@ const fmtDate = (iso: string) =>
       </div>
     </div>
 
+    <details class="acc ab-more">
+      <summary>Dates: {upcomingChanges.length} changes on the calendar, and the yearly upkeep<span class="pm" aria-hidden="true"></span></summary>
+      <div class="acc-body">
     <div class="ab-check-grid">
       <div class="ab-col">
         <h3 class="h4">Changes already on the calendar</h3>
@@ -229,6 +232,8 @@ const fmtDate = (iso: string) =>
         </ul>
       </div>
     </div>
+      </div>
+    </details>
 
     <div id="data" class="ab-rules-charts">
       <h3 class="lbl ab-sub">What the checked rules show</h3>
@@ -246,8 +251,7 @@ const fmtDate = (iso: string) =>
       <p class="lbl"><span class="ab-part-n">04</span>Why this site exists</p>
       <div>
         <h2 class="ab-h" id="mission-title">Information about small claims court that isn't trying to <span class="soft">talk you into anything.</span></h2>
-        <p class="lede">Fair Claim sets out both sides: your state's rules, the steps, the costs, the evidence on collecting, and other routes. You decide.</p>
-        <p class="ab-p ab-indep">It's an independent project, not a court, a government agency or a law firm.</p>
+        <p class="lede">The rules, the costs and the odds of being paid, side by side. You decide.</p>
       </div>
     </div>
     <ul class="principles">
@@ -313,10 +317,6 @@ const fmtDate = (iso: string) =>
             </div>
           </li>
         </ul>
-        <p class="note-strip" style="margin-top:24px">
-          <span class="lbl">Before you act</span>
-          <span>Check the current rule with your court. Laws, fees and deadlines change.</span>
-        </p>
         </div>
       </div>
     </div>

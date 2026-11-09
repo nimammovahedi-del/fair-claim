@@ -60,11 +60,10 @@ const strip = steps.map((s) => ({ slug: s.slug, word: stepWords[s.slug] ?? s.tit
   <section class="wrap" aria-labelledby="doors-title">
     <h2 id="doors-title" class="sr-only">Where to start</h2>
     <div class="doors land-doors">
-      {doors.map((d, i) => (
+      {doors.map((d) => (
         <a class={`tile fill door ${d.c}`} href={d.href}>
           <span class="t-top">
             <span class="key" aria-hidden="true">{d.key}</span>
-            <span class="lbl door-idx" aria-hidden="true">0{i + 1}</span>
           </span>
           <span class="door-body">
             <span class="door-title">{d.title}</span>
@@ -103,7 +102,7 @@ const strip = steps.map((s) => ({ slug: s.slug, word: stepWords[s.slug] ?? s.tit
         <span class="num land-key-num">{denver.collectedNothingPct}%</span>
         <span class="land-key-label">of winners in a study of Denver's small claims court never collected anything.</span>
       </p>
-      <p class="cite"><span>Source</span><a href={denver.source.url} rel="noopener">Best et al., Fordham Urb. L.J. (1994)</a><span>Checked {evidenceChecked}</span></p>
+      <p class="cite"><a href={denver.source.url} rel="noopener">Best et al., Fordham Urb. L.J. (1994)</a><span>Checked {evidenceChecked}</span></p>
       <a class="go" href="/about/#paid">Winning isn't getting paid</a>
     </div>
     <TileMapLimits compact headingLevel={2} id="home-limits" />
@@ -112,7 +111,7 @@ const strip = steps.map((s) => ({ slug: s.slug, word: stepWords[s.slug] ?? s.tit
   <section class="wrap land-soon" aria-labelledby="soon-title">
     <div class="land-soon-head">
       <h2 id="soon-title" class="lbl">Rules changing soon</h2>
-      <p class="land-soon-sub">Laws already passed that take effect later. We update each state's page on the day.</p>
+      <p class="land-soon-sub">Already passed, not yet in effect. State pages update on the day.</p>
     </div>
     <ol class="land-soon-list">
       {upcomingRows.map((c) => {
@@ -258,9 +257,6 @@ const strip = steps.map((s) => ({ slug: s.slug, word: stepWords[s.slug] ?? s.tit
   }
   .land-search {
     padding-bottom: 4px;
-  }
-  .door-idx {
-    color: inherit;
   }
   /* Home doors: the same tiles as /tools/, a size down so the core of the page fits about one screen. */
   .land-doors :global(.door) {

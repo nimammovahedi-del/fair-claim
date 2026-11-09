@@ -24,7 +24,7 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
     <div class="pick-row">
       <div>
         <h1 class="display sr-title">Which state?</h1>
-        <p class="lede pick-lede">Limits, fees and appeal rules for all 50 states and DC. Each one has a source and a date.</p>
+        <p class="lede pick-lede">Limits, fees and appeal rules for all 50 states and DC, each with a source and a date.</p>
       </div>
       <div class="pick">
         <LocationSearch label="Your ZIP code, city, county or state" stateHref="#all-states" />
@@ -36,7 +36,7 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
     <div class="tbl-head">
       <div class="tbl-title">
         <h2 id="table-title" class="h2">All 50 states and DC, side by side.</h2>
-        <p class="tbl-lede">Open a state for the details and the sources. Where a state has more than one kind of court, this shows the main limit.</p>
+        <p class="tbl-lede">Open a state for details and sources. Where a state has more than one kind of court, this shows the main limit.</p>
       </div>
       {states.length > 0 && (
         <div class="tbl-filter">
@@ -53,7 +53,7 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
           <span class="tbl-note-date">All checked {latest}</span>
           {withUnverified > 0 && (
             <span>
-              <span class="badge unverified">Unverified</span> {withUnverified} states have a value we haven't confirmed in the law or on the court's site yet. Check with the court.{" "}
+              <span class="badge unverified">Unverified</span> {withUnverified} states have a value not yet confirmed in the law or on the court's site. Check with the court.{" "}
               <a href="/sources/#unverified">How we check</a>
             </span>
           )}
@@ -66,7 +66,6 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
               <tr>
                 <th scope="col">State</th>
                 <th scope="col" class="num">Limit</th>
-                <th scope="col" class="num">Business limit</th>
                 <th scope="col">Filing fee</th>
                 <th scope="col">Lawyers</th>
                 <th scope="col">Who can appeal</th>
@@ -80,27 +79,26 @@ const latest = states.map((s) => s.date_checked).filter(Boolean).sort().at(-1);
                     <a href={`/states/${s.slug}/`}>{s.state}</a>
                     {s.slug === "ca" && <a class="row-extra" href="/states/ca/counties/">By county</a>}
                   </th>
-                  <td class="num lim" data-label="Limit">
+                  <td class="num lim c-lim" data-label="Limit">
                     {money(s.limit_individual)}
                     {unv(s, "limit_individual") && <span class="badge unverified">Unverified</span>}
+                    {s.limit_business != null && (s.limit_business !== s.limit_individual || unv(s, "limit_business")) && (
+                      <span class="lim-biz">Businesses {money(s.limit_business)}{unv(s, "limit_business") && <span class="badge unverified">Unverified</span>}</span>
+                    )}
                   </td>
-                  <td class:list={["num", { quiet: !(s.limit_business != null && s.limit_business !== s.limit_individual) }]} data-label="Business limit">
-                    {s.limit_business != null && s.limit_business !== s.limit_individual ? money(s.limit_business) : "Same"}
-                    {unv(s, "limit_business") && <span class="badge unverified">Unverified</span>}
-                  </td>
-                  <td data-label="Filing fee">
+                  <td class="c-fee" data-label="Fee">
                     {feeRange(s)}
                     {unv(s, "filing_fee_min", "filing_fee_max") && <span class="badge unverified">Unverified</span>}
                   </td>
-                  <td data-label="Lawyers">
+                  <td class="c-law" data-label="Lawyers">
                     {lawyersLabel[s.lawyers_allowed ?? ""] ?? s.lawyers_allowed ?? "—"}
                     {unv(s, "lawyers_allowed") && <span class="badge unverified">Unverified</span>}
                   </td>
-                  <td data-label="Who can appeal">
+                  <td class="c-app" data-label="Appeal">
                     {appealLabel[s.appeal_who ?? ""] ?? s.appeal_who ?? "—"}
                     {unv(s, "appeal_who") && <span class="badge unverified">Unverified</span>}
                   </td>
-                  <td data-label="File online">
+                  <td class="c-ef" data-label="File online">
                     {efileLabel[s.e_filing ?? ""] ?? s.e_filing ?? "Not found"}
                     {unv(s, "e_filing") && <span class="badge unverified">Unverified</span>}
                   </td>

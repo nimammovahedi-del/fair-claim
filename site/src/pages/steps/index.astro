@@ -52,7 +52,7 @@ const stepTerms: Record<string, string[]> = {
     <div class="hw-top">
       <h1 class="display hw-title">Five steps, from asking to getting paid.</h1>
       <div class="hw-aside">
-        <p class="hw-aside-text">Most cases follow the same path. Each step costs time, and some cost money. The last one, collecting, is the one people most often underestimate.</p>
+        <p class="hw-aside-text">Each step costs time, and some cost money. The last, collecting, is the one people most often underestimate.</p>
         <a class="go" href="#before-you-decide">Court is one option. See the others</a>
       </div>
     </div>
@@ -85,7 +85,6 @@ const stepTerms: Record<string, string[]> = {
               <span class="num">{pad(s.n)}</span>
             </div>
             <div class="hw-body">
-              <p class="lbl">Step {s.n} of {steps.length}</p>
               <h3 class="hw-step-title" id={`${s.slug}-title`}>{s.title}</h3>
               <p class="lede hw-short">{s.short}</p>
               <dl class="hw-meta">
@@ -132,7 +131,7 @@ const stepTerms: Record<string, string[]> = {
       <p class="lbl">Before you decide</p>
       <div>
         <h2 id="decide-title" class="h2">Court is one option among several.</h2>
-        <p class="lede">These can come first. They're often quicker and cheaper, and some end the dispute for good.</p>
+        <p class="lede">Often quicker and cheaper, and some end the dispute for good.</p>
       </div>
     </div>
     <ul class="hw-alts">
@@ -207,7 +206,7 @@ const stepTerms: Record<string, string[]> = {
 
   /* Step overview: five segments that link down the page */
   .hw-nav {
-    margin-top: clamp(48px, 6vw, 80px);
+    margin-top: clamp(32px, 5vw, 72px);
   }
   .hw-nav ol {
     display: grid;
@@ -250,10 +249,10 @@ const stepTerms: Record<string, string[]> = {
 
   /* Steps */
   .hw-steps {
-    margin-top: clamp(40px, 5vw, 72px);
+    margin-top: clamp(24px, 4vw, 56px);
   }
   .hw-step {
-    padding: 28px 0 clamp(40px, 5vw, 76px);
+    padding: 28px 0 clamp(32px, 4vw, 64px);
     scroll-margin-top: calc(var(--hdr-h) + 16px);
   }
   .hw-prog {
@@ -263,7 +262,7 @@ const stepTerms: Record<string, string[]> = {
     display: grid;
     grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
     gap: 32px clamp(32px, 5vw, 72px);
-    margin-top: 40px;
+    margin-top: 32px;
   }
   .hw-num {
     display: grid;
@@ -285,7 +284,7 @@ const stepTerms: Record<string, string[]> = {
     margin: 0;
   }
   .hw-step-title {
-    margin: 16px 0 0;
+    margin: 0;
     font-size: clamp(38px, 4.4vw, 68px);
     line-height: 1.02;
     letter-spacing: -0.035em;
@@ -298,7 +297,7 @@ const stepTerms: Record<string, string[]> = {
   .hw-meta {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: 40px;
+    margin-top: 28px;
     border-top: 1px solid var(--line);
   }
   .hw-meta > div {
@@ -385,7 +384,7 @@ const stepTerms: Record<string, string[]> = {
     display: grid;
     gap: 14px;
     align-content: start;
-    min-height: 260px;
+    min-height: 220px;
     padding: 16px 24px 28px;
     border-radius: var(--r);
     background: var(--panel);
@@ -394,7 +393,7 @@ const stepTerms: Record<string, string[]> = {
     margin: 0;
   }
   .hw-alt .t-top {
-    margin-bottom: 32px;
+    margin-bottom: 20px;
   }
   .hw-alt .key {
     color: var(--ink-2);
@@ -411,7 +410,7 @@ const stepTerms: Record<string, string[]> = {
     color: var(--ink-2);
   }
   .hw-costs {
-    margin-top: var(--sp-section);
+    margin-top: clamp(40px, 5vw, 80px);
   }
   .hw-costs ul {
     display: grid;
@@ -438,7 +437,7 @@ const stepTerms: Record<string, string[]> = {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
-    margin-top: var(--sp-section);
+    margin-top: clamp(40px, 5vw, 80px);
   }
   .hw-pair-item {
     display: grid;
@@ -495,12 +494,16 @@ const stepTerms: Record<string, string[]> = {
       align-items: end;
       gap: 16px;
     }
+    .hw-grid {
+      gap: 16px;
+      margin-top: 20px;
+    }
     .hw-num .num {
-      font-size: 96px;
+      font-size: 72px;
     }
     .hw-sq {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
     }
   }
   @media (max-width: 640px) {
@@ -512,11 +515,30 @@ const stepTerms: Record<string, string[]> = {
     }
     .hw-meta {
       grid-template-columns: minmax(0, 1fr);
+      margin-top: 20px;
+    }
+    .hw-meta > div {
+      grid-template-columns: 3.5rem minmax(0, 1fr);
+      align-items: baseline;
+      gap: 12px;
+      padding: 10px 0;
     }
     .hw-meta > div + div {
       padding-left: 0;
       border-left: 0;
       border-top: 1px solid var(--line);
+    }
+    .hw-meta dd {
+      font-size: 16px;
+    }
+    .hw-short {
+      margin-top: 12px;
+    }
+    .hw-terms {
+      margin-top: 20px;
+    }
+    .hw-step {
+      padding-top: 20px;
     }
     .hw-alts,
     .hw-costs ul {

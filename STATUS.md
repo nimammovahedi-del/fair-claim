@@ -179,3 +179,15 @@ Nima wants the short address **https://fairclaim.pages.dev**. Pages projects can
 - **Logo: "Balance"** (a scale with cobalt and tomato tiles). It's in the header, the favicon (follows light/dark), apple-touch-icon, icon-512 and a new og.png share image. The 10 logo options are in `output/logos/`.
 - **Rhode Island:** the 2027 fee change now reads "$75.75 total today becomes a flat $75".
 - Home: added "Rules changing soon" (GA, RI, SC, WI on 2027-01-01; UT on 2030-01-01), built from `upcomingRows` in stats.ts. **Update these on the day.** Georgia was added to the limit-change chart as scheduled.
+
+## UX pass (2026-11-08)
+Three agents reviewed every page: firm text trim, compact phone layouts, less clutter and white space. All facts, sources, dates and unverified badges are kept.
+- **Phone layouts:**
+  - The 51-state table is 2-line cards (about 8 per screen).
+  - CA counties are compact cards.
+  - Each tool question fits about one screen.
+  - The letter preview collapses, and the checklists use compact rows.
+- **Phone page heights:** /states/ −62%, CA counties −43%, calculator −51%, letter −38%, About −28%, glossary −30%.
+- **Global:** about 20% tighter section spacing. The big footer wordmark is removed, and the footer is compact on phones.
+- **Checklists:** folded sections open automatically when printing (tested).
+- **Light-mode color options:** Nima kept the current warm off-white (2026-11-08). The options sheet is `output/colors/palette-comparison-sheet.png`. The dev-only `?palette=` preview stays dev-only.

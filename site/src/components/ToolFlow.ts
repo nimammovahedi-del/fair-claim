@@ -305,6 +305,8 @@ export function initStatePicker(
       if (!r.checked) return;
       if (r.value === "other") {
         showPicker(true);
+        // The list is only useful with the search box, so it gets focus straight away (as the CSS notes promise).
+        search?.focus({ preventScroll: true });
         const featured = radios.some((x) => x.value === current);
         if (featured || !current) {
           // Nothing picked from the list yet: keep the last state until they choose.

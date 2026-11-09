@@ -89,6 +89,29 @@ const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
         for (var i = 0; i < tc.length; i++) tc[i].setAttribute("content", dark ? "#0b0b0c" : "#f3f2ee");
       })();
     </script>
+    {import.meta.env.DEV && (
+      <script is:inline>
+        // Dev only (never in the build): ?palette=crisp|cool|cream previews a light-theme background/surface option
+        // for the palette comparison in output/colors/. The live palette is the tokens in global.css.
+        (function () {
+          var P = {
+            crisp: { bg: "#ffffff", bg2: "#f7f8f9", panel: "#eef0f2", panel2: "#e4e7ea", hover: "#dde1e5", ls: "#737780" },
+            cool: { bg: "#eceef0", bg2: "#f8f9fa", panel: "#dfe3e7", panel2: "#d6dadf", hover: "#cfd4da", ls: "#6c7179" },
+            cream: { bg: "#f2ebdd", bg2: "#fbf7ef", panel: "#e7decb", panel2: "#ded3bd", hover: "#d7cbb3", ls: "#736d5e" },
+          };
+          var k = new URLSearchParams(location.search).get("palette");
+          var p = P[k];
+          if (!p) return;
+          var css =
+            ':root[data-theme="light"]{--bg:' + p.bg + ";--bg-2:" + p.bg2 + ";--panel:" + p.panel + ";--panel-2:" + p.panel2 +
+            ";--panel-hover:" + p.hover + ";--line-strong:" + p.ls + ";--sel-ink:" + p.bg + ";--word:" + p.panel + "}";
+          var st = document.createElement("style");
+          st.setAttribute("data-palette", k);
+          st.textContent = css;
+          document.head.appendChild(st);
+        })();
+      </script>
+    )}
   </head>
   <body class={color}>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -137,9 +160,8 @@ const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
             <p class="ftr-lead">Free, neutral information about small claims court in all 50 states and DC.</p>
             <p class="ftr-small">
               <strong>Legal information, not legal advice.</strong> If the court tells you something different, the
-              court is right.
+              court is right. No ads, no accounts, no tracking: nothing you type is stored or sent.
             </p>
-            <p class="ftr-small">No ads, no accounts, no tracking. Nothing you type is stored or sent.</p>
           </div>
           <div>
             <p class="lbl">Learn</p>
@@ -170,7 +192,6 @@ const isCurrent = (m: string[]) => m.some((p) => path.startsWith(p));
           <p class="lbl">Rules checked {statesChecked}</p>
           <p class="lbl">Independent · not a court, agency or law firm</p>
         </div>
-        <p class="ftr-word" aria-hidden="true">Fair Claim</p>
       </div>
     </footer>
 

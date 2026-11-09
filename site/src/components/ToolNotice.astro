@@ -32,19 +32,20 @@ const {
   target,
   toolName,
   title = "Before you start",
-  intro = `Please read this before you use ${toolName}.`,
+  intro,
   points = [
-    "This is legal information, not legal advice. It can't tell you what to do in your case.",
+    "Legal information, not legal advice. It can't tell you what to do in your case.",
     "Nothing you type is stored or sent. It's gone when you close the tab.",
-    "Numbers are estimates from the sources we cite. Laws and fees change.",
-    "Before you act, check with the court, a free small claims advisor, or legal aid.",
+    "Estimates come from the sources we cite. Laws and fees change.",
+    "Before you act, check with the court, a free small claims advisor or legal aid.",
   ],
   extraPoints = [],
   mode = "onload",
   readMoreHref = "/about/#not-advice",
-  readMoreLabel = "Read more about what Fair Claim can and can't do",
-  kicker = "Please read · 30 seconds",
+  readMoreLabel = "What Fair Claim can and can't do",
+  kicker = "Please read",
 } = Astro.props;
+const all = [...points, ...extraPoints];
 const titleId = `notice-${id}-title`;
 const descId = `notice-${id}-desc`;
 ---
@@ -58,9 +59,9 @@ const descId = `notice-${id}-desc`;
     <span class="n-icon" aria-hidden="true">i</span>
     <p class="lbl tn-kicker">{kicker}</p>
     <h2 class="modal-title" id={titleId} tabindex="-1">{title}</h2>
-    <p class="modal-intro" id={descId}>{intro}</p>
-    <ol class="n-list">
-      {[...points, ...extraPoints].map((p) => <li>{p}</li>)}
+    {intro && <p class="modal-intro" id={descId}>{intro}</p>}
+    <ol class="n-list" id={intro ? undefined : descId}>
+      {all.map((p) => <li>{p}</li>)}
     </ol>
     <p class="modal-more"><a href={readMoreHref} target="_blank" rel="noopener">{readMoreLabel}<span class="sr-only"> (opens in a new tab)</span></a></p>
   </div>

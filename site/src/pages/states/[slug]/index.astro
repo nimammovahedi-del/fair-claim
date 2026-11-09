@@ -130,7 +130,7 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
         <p class="num">{money(s.limit_individual)}</p>
         <div>
           <p class="s-label">Most you can claim</p>
-          <p class="s-sub">{bizDiffers ? `${money(s.limit_business)} for businesses.` : s.limit_business != null ? "Same for businesses." : ""}</p>
+          {s.limit_business != null && <p class="s-sub">{bizDiffers ? `${money(s.limit_business)} for businesses.` : "Same for businesses."}</p>}
         </div>
         {u("limit_individual", "limit_business") && <span class="badge unverified">Unverified</span>}
         <Cite sources={srcLimit} />
@@ -140,7 +140,7 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
         <p class:list={["num", { word: fee.length > 6 }]}>{fee === "—" ? "Not found" : fee}</p>
         <div>
           <p class="s-label"><Term slug="filing-fee">Filing fee</Term></p>
-          <p class="s-sub">{isCA ? "Set by claim size. Can be waived." : fee.includes("–") ? "Depends on the claim or the court." : ""}</p>
+          {(isCA || fee.includes("–")) && <p class="s-sub">{isCA ? "Set by claim size. Can be waived." : "Depends on the claim or the court."}</p>}
         </div>
         {u("filing_fee_min", "filing_fee_max") && <span class="badge unverified">Unverified</span>}
         <Cite sources={srcFee} />
@@ -221,7 +221,6 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
   <section class="wrap sr-topics" aria-labelledby="topics-title">
     <div class="sr-topics-top">
       <h2 id="topics-title" class="lbl lbl-ink">The rules, by topic</h2>
-      <p class="lbl">{tabs.length} topics</p>
     </div>
     {unvCount > 0 && (
       <UnverifiedNote compact count={unvCount} of={unvCount === 1 ? "item on this page is unverified" : "items on this page are unverified"} />
@@ -248,12 +247,11 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
       <div class="tab-panel" role="tabpanel" id="panel-filing" aria-labelledby="tab-filing" tabindex="0">
         <div class="pn-grid">
           <div class="pn-side">
-            <p class="lbl">A · Filing</p>
             <h3 class="h2">Filing the claim</h3>
             {isCA ? (
               <p class="pn-intro">Use form SC-100. File it with the clerk in person, by mail, or online where your court allows it. There are no formal pleadings and no pre-trial discovery.</p>
             ) : (
-              <p class="pn-intro">File with the {s.court_name ?? "small claims court"}. The limit, the fee and who can sue are below.</p>
+              <p class="pn-intro">File with the {s.court_name ?? "small claims court"}. The limit and fee are above; the details are here.</p>
             )}
             {isCA ? (
               <p class="cite"><a href={caLeg("116.320")} rel="noopener">CCP 116.320, 116.310</a><span>Checked {checked}</span></p>
@@ -266,20 +264,6 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
               <CaliforniaDetail part="filing" />
             ) : (
               <>
-                <div class="fx3" style="margin-top:0">
-                  <div class="fx">
-                    <p class="num fx-n">{money(s.limit_individual)}</p>
-                    <p class="fx-t">most an individual can ask for. <Term slug="small-claims-limit">About limits</Term></p>
-                  </div>
-                  <div class="fx">
-                    <p class:list={["num", "fx-n", { word: !bizDiffers }]}>{bizDiffers ? money(s.limit_business) : s.limit_business == null ? "Not found" : "Same"}</p>
-                    <p class="fx-t">for a business.</p>
-                  </div>
-                  <div class="fx">
-                    <p class:list={["num", "fx-n", { word: fee.length > 9 }]}>{fee === "—" ? "Not found" : fee}</p>
-                    <p class="fx-t">to file. You can ask for a <Term slug="fee-waiver" />.</p>
-                  </div>
-                </div>
                 <div class="accs">
                   {filingAccs.map((a) => (
                     <details class="acc">
@@ -295,6 +279,7 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
                     </details>
                   ))}
                 </div>
+                <p class="hint pn-words">Words to know: <Term slug="small-claims-limit" /> · <Term slug="fee-waiver" /></p>
               </>
             )}
           </div>
@@ -305,12 +290,11 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
       <div class="tab-panel" role="tabpanel" id="panel-serving" aria-labelledby="tab-serving" tabindex="0" hidden>
         <div class="pn-grid">
           <div class="pn-side">
-            <p class="lbl">B · Serving</p>
             <h3 class="h2">Serving the papers</h3>
             {isCA ? (
               <p class="pn-intro">The other side has to be officially given the claim. In California, <strong>you can't serve it yourself</strong>. There are three ways it can be done.</p>
             ) : (
-              <p class="pn-intro">The other side has to be officially told about the case before the hearing. This is called <Term slug="service-of-process">service</Term>.</p>
+              <p class="pn-intro">The other side must be officially told about the case before the hearing: <Term slug="service-of-process">service</Term>.</p>
             )}
             {isCA ? (
               <p class="cite"><a href={caLeg("116.340")} rel="noopener">CCP 116.340; CCP 415.20</a><span>Checked {checked}</span></p>
@@ -338,12 +322,11 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
       <div class="tab-panel" role="tabpanel" id="panel-hearing" aria-labelledby="tab-hearing" tabindex="0" hidden>
         <div class="pn-grid">
           <div class="pn-side">
-            <p class="lbl">C · Hearing</p>
             <h3 class="h2">At the hearing</h3>
             {isCA ? (
               <p class="pn-intro">Each side speaks for itself. Lawyers can advise you before and after, but can't represent you at the hearing. If the other side doesn't come, you still have to prove your claim.</p>
             ) : (
-              <p class="pn-intro">Small claims hearings are short and informal. Here is whether lawyers can take part.</p>
+              <p class="pn-intro">Hearings are short and informal. Here is whether lawyers can take part.</p>
             )}
             {isCA ? (
               <p class="cite"><a href={caLeg("116.530")} rel="noopener">CCP 116.530, 116.520(b), 116.570</a><span>Checked {checked}</span></p>
@@ -374,12 +357,11 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
       <div class="tab-panel" role="tabpanel" id="panel-appeals" aria-labelledby="tab-appeals" tabindex="0" hidden>
         <div class="pn-grid">
           <div class="pn-side">
-            <p class="lbl">D · Appeals</p>
             <h3 class="h2">Appeals</h3>
             {isCA ? (
               <p class="pn-intro">Only the side ordered to pay can appeal. The appeal is a brand-new hearing in superior court in front of a different judge, and lawyers may take part.</p>
             ) : (
-              <p class="pn-intro">Who can ask a higher court to look at the decision, and how long they have.</p>
+              <p class="pn-intro">Who can ask a higher court to review the decision, and how long they have.</p>
             )}
             {isCA ? (
               <p class="cite"><a href={caLeg("116.710")} rel="noopener">CCP 116.710, 116.750, 116.770</a><span>Checked {checked}</span></p>
@@ -392,6 +374,7 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
               <CaliforniaDetail part="appeals" />
             ) : (
               <>
+                {!appealShown && (
                 <div class="fx3 two" style="margin-top:0">
                   <div class="fx">
                     <p class="num fx-n word">{appealLabel[s.appeal_who ?? ""] ?? "Not found"}{u("appeal_who") && <> <span class="badge unverified">Unverified</span></>}</p>
@@ -404,14 +387,12 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
                     </div>
                   )}
                 </div>
+                )}
                 {s.appeal && (
-                  <details class="acc" style="margin-top:40px">
-                    <summary>How an appeal works here{u("appeal") && <span class="badge unverified">Unverified</span>}<span class="pm" aria-hidden="true"></span></summary>
-                    <div class="acc-body">
-                      <p>{s.appeal}</p>
-                      <Cite sources={srcAppeal} checked={checked} />
-                    </div>
-                  </details>
+                  <div style={appealShown ? undefined : "margin-top:32px"}>
+                    <p class="lbl pn-sub">How an appeal works here{u("appeal") && <> <span class="badge unverified">Unverified</span></>}</p>
+                    <p class="pn-text">{s.appeal}</p>
+                  </div>
                 )}
               </>
             )}
@@ -424,7 +405,6 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
           <div class="tab-panel" role="tabpanel" id="panel-collecting" aria-labelledby="tab-collecting" tabindex="0" hidden>
             <div class="pn-grid">
               <div class="pn-side">
-                <p class="lbl">E · Collecting</p>
                 <h3 class="h2">After a judgment</h3>
                 <p class="pn-intro">The court doesn't collect for you. Collection waits 30 days, for the appeal period. In a Denver study, {denver.collectedNothingPct}% of winners never collected anything.</p>
                 <p class="cite"><a href={caLeg("116.810")} rel="noopener">CCP 116.810</a><a href={denver.source.url} rel="noopener">Fordham Urb. L.J. (1994)</a><span>Checked {evidenceChecked}</span></p>
@@ -435,7 +415,6 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
           <div class="tab-panel" role="tabpanel" id="panel-deadlines" aria-labelledby="tab-deadlines" tabindex="0" hidden>
             <div class="pn-grid">
               <div class="pn-side">
-                <p class="lbl">F · Deadlines</p>
                 <h3 class="h2">How long you have to sue</h3>
                 <p class="pn-intro">Each type of claim has a time limit, called a <Term slug="statute-of-limitations" />. Once it passes, the claim can be thrown out.</p>
                 <p class="cite"><a href={ca.self_help_url} rel="noopener">selfhelp.courts.ca.gov</a><span>Checked {checked}</span></p>
@@ -446,7 +425,6 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
           <div class="tab-panel" role="tabpanel" id="panel-forms" aria-labelledby="tab-forms" tabindex="0" hidden>
             <div class="pn-grid">
               <div class="pn-side">
-                <p class="lbl">G · Forms</p>
                 <h3 class="h2">Official forms</h3>
                 <p class="pn-intro">Judicial Council forms, grouped by step. Titles and revision dates were read from the PDFs.</p>
                 <p class="cite"><span>courts.ca.gov</span><span>Checked {checked}</span></p>
@@ -457,7 +435,6 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
           <div class="tab-panel" role="tabpanel" id="panel-counties" aria-labelledby="tab-counties" tabindex="0" hidden>
             <div class="pn-grid">
               <div class="pn-side">
-                <p class="lbl">H · Counties</p>
                 <h3 class="h2">County by county</h3>
                 <p class="pn-intro">Free help, courthouses and online options in all {counties.length} counties.</p>
                 <a class="go" href="/states/ca/counties/">Compare all counties</a>
@@ -474,8 +451,9 @@ const srcMore = s.sources.length > 6 ? s.sources.slice(5) : [];
     <div class="sec-head">
       <p class="lbl">Sources</p>
       <div>
-        <h2 id="src-title" class="h3">Where these rules come from. Laws change, so the link is the place to confirm.</h2>
-        <ul class="src-list" style="margin-top:32px">
+        <h2 id="src-title" class="h3">Where these rules come from</h2>
+        <p class="hint src-sub">Laws change, so the link is the place to confirm.</p>
+        <ul class="src-list">
           {srcMain.map((x) => (
             <li>
               <span class="lbl">{sourceTypeLabel[x.type ?? ""] ?? "Source"}</span>

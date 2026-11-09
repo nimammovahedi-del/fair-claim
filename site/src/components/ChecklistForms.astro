@@ -1,5 +1,6 @@
 ---
 // Key California court forms for one checklist step: number, title and the official PDF link.
+// Closed by default on screen (a short "California forms (4)" line); ChecklistDoc opens every one before printing.
 // <ChecklistForms forms={[{ form: "SC-100", title: "…", url: "https://www.courts.ca.gov/documents/sc100.pdf" }]} />
 interface Form {
   form: string;
@@ -8,17 +9,22 @@ interface Form {
 }
 interface Props {
   forms: Form[];
+  /** Summary line. Default "California forms for this step". */
+  label?: string;
 }
-const { forms } = Astro.props;
+const { forms, label = "California forms for this step" } = Astro.props;
 ---
-<div class="table-scroll">
-  <table class="checklist-forms">
-    <caption>California forms for this step</caption>
-    <thead><tr><th scope="col">Form</th><th scope="col">What it is</th></tr></thead>
-    <tbody>
-      {forms.map((f) => (
-        <tr><td><a href={f.url} rel="noopener">{f.form}</a></td><td>{f.title}</td></tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+<details class="cl-more">
+  <summary><span>{label}</span><span class="cl-more-n">{forms.length}</span></summary>
+  <div class="table-scroll">
+    <table class="checklist-forms">
+      <caption class="sr-only">{label}</caption>
+      <thead><tr><th scope="col">Form</th><th scope="col">What it is</th></tr></thead>
+      <tbody>
+        {forms.map((f) => (
+          <tr><td><a href={f.url} rel="noopener">{f.form}</a></td><td>{f.title}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</details>

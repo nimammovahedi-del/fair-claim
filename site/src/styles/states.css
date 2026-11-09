@@ -490,6 +490,22 @@
 .sr-table td {
   padding: 13px 20px 13px 0;
 }
+.sr-big th,
+.sr-big td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.sr-big td.c-lim {
+  padding-right: 48px;
+}
+/* Business limit, only where it differs: a quiet second line under the limit */
+.sr-table .lim-biz {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
 .sr-table thead th {
   padding-top: 0;
   padding-bottom: 12px;
@@ -550,6 +566,84 @@
   .sr-table caption {
     display: block;
     width: 100%;
+  }
+
+  /* All-states table on phones: compact cards, two lines each (name + limit, then fee + who can appeal).
+     The whole card opens the state page; lawyers and online filing are on the state page. */
+  .sr-big tr {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 2px 12px;
+    padding: 12px 0;
+  }
+  .sr-big tr:has(th a:active) {
+    background: var(--panel);
+  }
+  .sr-big th[scope="row"],
+  .sr-big td {
+    width: auto;
+    padding: 0 !important;
+  }
+  .sr-big th[scope="row"] a:not(.row-extra) {
+    min-height: 0;
+    font-size: 22px;
+    -webkit-touch-callout: none;
+  }
+  .sr-big th[scope="row"] a:not(.row-extra)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .sr-big th[scope="row"] .row-extra {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 8px 0;
+    margin: -8px 0 -8px 8px;
+    border-bottom: 0;
+    text-decoration: underline;
+    text-decoration-color: var(--line-2);
+    text-underline-offset: 4px;
+  }
+  .sr-big td.c-lim {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+    font-family: var(--f-display);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .sr-big td.c-lim .lim-biz {
+    font-family: var(--f-body);
+    font-size: 13px;
+    letter-spacing: 0;
+  }
+  .sr-big td.c-lim::before,
+  .sr-big td.c-law,
+  .sr-big td.c-ef {
+    display: none;
+  }
+  .sr-big td.c-fee,
+  .sr-big td.c-app {
+    grid-row: 2;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .sr-big td.c-app {
+    grid-column: 2;
+    text-align: right;
+  }
+  .sr-big td.c-fee::before,
+  .sr-big td.c-app::before {
+    min-width: 0;
+    margin-right: 6px;
+    font-size: 11px;
+  }
+  .sr-big td .badge {
+    margin-left: 4px;
   }
 }
 
@@ -641,3 +735,150 @@ body.c-states main .unverified-note.compact {
 .sr-sec .sec-head {
   margin-bottom: clamp(20px, 2.5vw, 32px);
 }
+
+/* ------------------------------------------------------------------ Compact pass (2026-11-08)
+   Less dead space between blocks; on phones, number rows, fact trios, sources and forms become tight lists. */
+.pn-words {
+  margin-top: 20px;
+}
+.sr-next .card-link {
+  min-height: 132px;
+}
+@media (max-width: 960px) {
+  .pn-grid {
+    gap: 20px;
+  }
+  .pn-side {
+    gap: 12px;
+  }
+}
+@media (max-width: 720px) {
+  .fx3 {
+    gap: 0;
+    margin-top: 24px;
+  }
+  .fx {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: 2px 14px;
+    padding: 12px 0;
+  }
+  .fx > :not(.fx-n) {
+    grid-column: 2;
+  }
+  .fx-n {
+    font-size: 28px;
+  }
+  .fx-n.word {
+    font-size: 22px;
+  }
+  .fx-t {
+    font-size: 15px;
+  }
+  .accs {
+    margin-top: 24px;
+  }
+}
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 2px 14px;
+    padding: 10px 0;
+  }
+  .row-n {
+    font-size: 24px;
+  }
+  .row-l {
+    font-size: 16px;
+  }
+  .row .cite {
+    font-size: 12px !important;
+  }
+  .src-list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 10px;
+    padding: 10px 0;
+  }
+  .src-list li .lbl {
+    font-size: 11px !important;
+  }
+  .src-list .src-what {
+    flex-basis: 100%;
+    font-size: 14px;
+  }
+  .forms a {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    padding: 9px 0;
+    font-size: 15px;
+  }
+  .forms-cols {
+    gap: 24px;
+  }
+  .county-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+  }
+  .county-grid a {
+    padding: 9px 0;
+    font-size: 16px;
+  }
+  .sr-next .card-link {
+    min-height: 0;
+  }
+}
+.src-sub {
+  margin: 6px 0 16px;
+}
+
+/* California counties table on phones: compact cards (name, advisor, then three short facts on one line).
+   The whole card opens the county page. */
+@media (max-width: 720px) {
+  .sr-cty tr {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 16px;
+    padding: 12px 0;
+  }
+  .sr-cty tr:has(th a:active) {
+    background: var(--panel);
+  }
+  .sr-cty th[scope="row"],
+  .sr-cty td.adv-cell {
+    flex: 1 0 100%;
+    width: auto;
+    padding: 0 !important;
+  }
+  .sr-cty th[scope="row"] a {
+    font-size: 22px !important;
+    min-height: 0 !important;
+    -webkit-touch-callout: none;
+  }
+  .sr-cty th[scope="row"] a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .sr-cty td.adv-cell {
+    max-width: none;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .sr-cty td.adv-cell::before {
+    display: none;
+  }
+  .sr-cty td.c-n {
+    width: auto;
+    padding: 2px 0 0 !important;
+    font-size: 15px;
+  }
+  .sr-cty td.c-n::before {
+    min-width: 0;
+    margin-right: 6px;
+    font-size: 11px;
+  }
+}
+

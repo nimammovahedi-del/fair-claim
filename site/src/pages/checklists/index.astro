@@ -23,7 +23,7 @@ const lists = [
     <Breadcrumb items={[{ href: "/tools/", label: "Tools" }, { label: "Checklists" }]} />
     <div class="cl-top">
       <h1 class="display">Printable checklists</h1>
-      <p class="lede">What to gather and do at each step. Pick a state to fill in its limit, fees and deadlines.</p>
+      <p class="lede">What to gather and do at each step, ready to print.</p>
     </div>
   </section>
 
@@ -32,7 +32,7 @@ const lists = [
     <div>
       <div class="cl-q-head">
         <h2 class="h2" id="cq-state">Which state are you in?</h2>
-        <p>Opens all six lists with that state's limit, fees and deadlines filled in.</p>
+        <p>All six lists, with its limit, fees and deadlines filled in.</p>
       </div>
       <LocationSearch label="Your ZIP code, city, county or state" target="checklists" stateHref="#all-checklists" />
     </div>
@@ -43,7 +43,7 @@ const lists = [
     <div>
       <div class="cl-q-head">
         <h2 class="h2" id="cq-step">Which step do you need?</h2>
-        <p>Six lists, general version. Tick boxes on screen or print them; ticks aren't saved.</p>
+        <p>General version, for any state. Ticks aren't saved.</p>
       </div>
       <ul class="cl-cards">
         {lists.map((l) => (
@@ -53,14 +53,14 @@ const lists = [
               <span class="clc-top"><span class="clc-n" aria-hidden="true">{l.n}</span><span class="lbl">{l.items} items</span></span>
               <span class="clc-t">{l.title}</span>
               <span class="clc-d">{l.text}</span>
-              <span class="clc-go"><span>General version</span><span class="door-arrow" aria-hidden="true"></span></span>
+              <span class="door-arrow clc-arrow" aria-hidden="true"></span>
             </a>
           </li>
         ))}
       </ul>
       <div class="cl-open">
         <a class="btn" href="/checklists/general/">Open all six</a>
-        <p class="hint">Rules checked {statesChecked}. Printing leaves out the menus and adds that date at the foot.</p>
+        <p class="hint">Rules checked {statesChecked}.</p>
       </div>
     </div>
   </section>
@@ -78,7 +78,7 @@ const lists = [
       </details>
       <p class="note-strip cl-note">
         <span class="lbl">Please note</span>
-        <span>General information, not legal advice, and not every situation is covered. Confirm deadlines and fees with your court. <a href="/about/#not-advice">Where to get free help</a>.</span>
+        <span>General information, not legal advice. Confirm deadlines and fees with your court. <a href="/about/#not-advice">Free help</a></span>
       </p>
     </div>
   </section>
@@ -93,3 +93,68 @@ const lists = [
   openList();
   window.addEventListener("hashchange", openList);
 </script>
+
+<style>
+  /* Step cards size to their text: number, title, one line of detail, an arrow. */
+  .cl-cards .clc {
+    min-height: 0;
+    gap: 8px;
+    padding-bottom: 18px;
+  }
+  .cl-cards .clc-n {
+    font-size: 36px;
+  }
+  .cl-cards .clc-t {
+    font-size: 22px;
+  }
+  .cl-cards .clc-arrow {
+    position: absolute;
+    right: 20px;
+    bottom: 18px;
+    width: 18px;
+    height: 18px;
+  }
+  .cl-cards .clc-d {
+    padding-right: 28px;
+  }
+  @media (max-width: 560px) {
+    /* Phones: each card becomes a row (number, title, detail), the color band on the left edge. */
+    .cl-cards .clc {
+      display: grid;
+      grid-template-columns: 2.2rem minmax(0, 1fr);
+      gap: 2px 12px;
+      padding: 14px 40px 14px 18px;
+    }
+    .cl-cards .clc-band {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      height: auto;
+      margin: 0;
+    }
+    .cl-cards .clc-top {
+      grid-row: 1 / span 2;
+      align-self: start;
+    }
+    .cl-cards .clc-top .lbl {
+      display: none;
+    }
+    .cl-cards .clc-n {
+      font-size: 24px;
+    }
+    .cl-cards .clc-t {
+      font-size: 19px;
+    }
+    .cl-cards .clc-d {
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .cl-cards .clc-arrow {
+      top: 50%;
+      right: 14px;
+      bottom: auto;
+      margin-top: -9px;
+    }
+  }
+</style>

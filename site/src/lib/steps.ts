@@ -139,7 +139,7 @@ export const alternatives: Option[] = [
   },
   {
     title: "A complaint to a regulator",
-    text: "If the other side needs a state license for their work, the agency that issues it may take complaints. Your state attorney general's consumer protection office also takes complaints about businesses. They don't always get your money back, but some businesses respond to them.",
+    text: "If their work needs a state license, the licensing agency may take complaints, and so does your state attorney general's consumer protection office. They don't always get your money back, but some businesses respond.",
   },
   {
     title: "Insurance or a card dispute",

@@ -37,7 +37,7 @@ const tools = [
     <p class="lede">Free. Nothing you type is stored or sent.</p>
   </section>
   <section class="wrap" aria-label="Tools">
-    <div class="doors">
+    <div class="doors tool-doors">
       {tools.map((t) => (
         <a class={`tile fill door ${t.c}`} href={t.href}>
           <span class="t-top">
@@ -53,3 +53,16 @@ const tools = [
     </div>
   </section>
 </Site>
+
+<style>
+  /* Phones: the three doors stay colored blocks but size to their text, so all three fit on about one screen. */
+  @media (max-width: 560px) {
+    .tool-doors .door {
+      min-height: 0;
+      gap: 18px;
+    }
+    .tool-doors .door :global(.door-title) {
+      font-size: 30px;
+    }
+  }
+</style>

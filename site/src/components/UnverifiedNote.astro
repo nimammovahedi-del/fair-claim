@@ -15,8 +15,14 @@ const show = count == null || count > 0;
     <p>
       <span class="badge unverified">Unverified</span>
       {count != null && count > 0 && <strong> {count} {of}.</strong>}
-      {" "}We found this information but haven't yet confirmed it in the law itself or on the court's own website.
-      Check it with the court before you rely on it.
+      {compact ? (
+        <>{" "}Not yet confirmed in the law or on the court's own site. Check with the court.</>
+      ) : (
+        <>
+          {" "}We found this information but haven't yet confirmed it in the law itself or on the court's own website.
+          Check it with the court before you rely on it.
+        </>
+      )}
       {" "}<a href="/sources/#unverified">How we check facts</a>
     </p>
   </div>

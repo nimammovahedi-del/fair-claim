@@ -26,31 +26,26 @@ const advisorSrc = "https://leginfo.legislature.ca.gov/faces/codes_displaySectio
       <h1 class="display sr-title is-long">California, county by county</h1>
       <div class="sr-meta">
         <p class="small muted">Rules and fees are the same statewide. Free help and courthouses differ.</p>
-        <p class="cite"><span>Checked {latest}</span><a href="/states/ca/">Statewide rules</a></p>
+        <p class="cite"><span>Checked {latest}</span><a href="/states/ca/">Statewide rules</a><a href="/sources/">How we check</a></p>
       </div>
     </div>
   </section>
 
   <section class="wrap" aria-labelledby="help-title">
-    <div class="stats sr-stats-lite">
+    <div class="stats sr-stats-lite sr-stats">
       <div class="stat c-states">
         <span class="s-bar" aria-hidden="true"></span>
         <p class="num word">Free</p>
         <div>
           <p class="s-label" id="help-title">Help from a <Term slug="small-claims-advisor" /></p>
-          <p class="s-sub">Every court must offer it. Very small courts may run a reduced program.</p>
+          <p class="s-sub">Every court must offer it; very small courts may run a reduced program.</p>
         </div>
         <p class="cite"><a href={advisorSrc} rel="noopener">CCP 116.940(c)</a></p>
-      </div>
-      <div class="stat c-sand">
-        <span class="s-bar" aria-hidden="true"></span>
-        <p class="num">{counties.length}</p>
-        <div><p class="s-label">Counties, each with its own court</p></div>
       </div>
       <div class="stat c-sage">
         <span class="s-bar" aria-hidden="true"></span>
         <p class="num">{efileYes}</p>
-        <div><p class="s-label">Counties where you can file online</p><p class="s-sub">From each court's website.</p></div>
+        <div><p class="s-label">of {counties.length} counties take filings online</p><p class="s-sub">From each court's website.</p></div>
       </div>
     </div>
   </section>
@@ -60,7 +55,6 @@ const advisorSrc = "https://leginfo.legislature.ca.gov/faces/codes_displaySectio
       <p class="lbl">All counties</p>
       <div>
         <h2 id="table-title" class="h2">Find your county.</h2>
-        <p class="lede">Each county page lists the free advisor first, then where cases are heard.</p>
       </div>
     </div>
     <div class="tbl-tools">
@@ -68,8 +62,8 @@ const advisorSrc = "https://leginfo.legislature.ca.gov/faces/codes_displaySectio
       <UnverifiedNote compact count={withUnverified} of="counties have an unverified detail" />
     </div>
     <div class="table-scroll">
-      <table class="table-stack sr-table" id="counties-table">
-        <caption>Free help and court access in {counties.length} California counties</caption>
+      <table class="table-stack sr-table sr-cty" id="counties-table">
+        <caption class="sr-only">Free help and court access in {counties.length} California counties</caption>
         <thead>
           <tr>
             <th scope="col">County</th>
@@ -87,15 +81,15 @@ const advisorSrc = "https://leginfo.legislature.ca.gov/faces/codes_displaySectio
                 {c.small_claims_advisor?.provider ?? "Not found yet"}
                 {uv(c, "small_claims_advisor") && <span class="badge unverified">Unverified</span>}
               </td>
-              <td class="num" data-label="Courthouses">
+              <td class="num c-n" data-label="Courts">
                 {c.small_claims_locations.length || "—"}
                 {uv(c, "small_claims_locations") && <span class="badge unverified">Unverified</span>}
               </td>
-              <td data-label="File online">
+              <td class="c-n" data-label="File online">
                 {yesNoLabel[c.e_filing ?? ""] ?? c.e_filing ?? "—"}
                 {uv(c, "e_filing") && <span class="badge unverified">Unverified</span>}
               </td>
-              <td data-label="Remote hearings">
+              <td class="c-n" data-label="Remote">
                 {yesNoLabel[c.remote_hearings ?? ""] ?? c.remote_hearings ?? "—"}
                 {uv(c, "remote_hearings") && <span class="badge unverified">Unverified</span>}
               </td>
@@ -105,7 +99,6 @@ const advisorSrc = "https://leginfo.legislature.ca.gov/faces/codes_displaySectio
       </table>
     </div>
     <p class="callout" data-filter-empty="counties-table" hidden>No county matches that. Check the spelling, or clear the box to see all 58.</p>
-    <p class="cite" style="margin-top:16px"><span>All county details checked {latest}</span><a href="/sources/">How we check</a></p>
   </section>
 </Site>
 
@@ -123,23 +116,22 @@ const advisorSrc = "https://leginfo.legislature.ca.gov/faces/codes_displaySectio
     max-width: 36ch;
     color: var(--ink-2);
   }
-  /* Three stats here, not four */
+  /* Two stats here, not four */
   .stats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   @media (max-width: 860px) {
     .tbl-tools {
       grid-template-columns: minmax(0, 1fr);
     }
   }
-  @media (max-width: 1080px) {
-    .stats {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    .stats :global(.stat) {
-      padding-left: 0 !important;
-      border-right: 0;
-      border-top: 1px solid var(--line);
+  @media (max-width: 720px) {
+    .adv-cell {
+      display: -webkit-box !important;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      overflow: hidden;
     }
   }
 </style>

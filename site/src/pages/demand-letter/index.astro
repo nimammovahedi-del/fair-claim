@@ -42,9 +42,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
     <section class="wrap page-hero dl-hero no-print">
       <Breadcrumb items={[{ href: "/tools/", label: "Tools" }, { label: "Demand letter" }]} />
       <div class="dl-top">
-        <h1 class="display">Write a demand letter</h1>
+        <h1 class="fl-title dl-title">Write a demand letter</h1>
         <div class="dl-aside">
-          <p>A written request for money you believe you're owed. Many people try one before court, or instead of it. Sending one doesn't commit you to suing.</p>
+          <p>A written request to be paid. Many people try one before court. Sending one doesn't commit you to suing.</p>
           {preFiling?.citation && (
             <p class="cite">
               California expects you to ask before you file:{" "}
@@ -61,12 +61,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
         target="letter-tool"
         toolName="the demand-letter tool"
         points={[
-          "This is general legal information, not legal advice. The tool fills in a plain template; it can't judge your case.",
-          "Nothing you type is stored or sent anywhere. The PDF is made on your device, and everything is gone when you close the page.",
-          "State-law notes are based on the sources we cite. Laws can change, so check them before you rely on them.",
-          "You're responsible for the letter. Read it, edit anything that isn't exactly right, and make sure every fact, date and amount is accurate.",
-          "Keep it factual and calm. Don't add threats (for example, of criminal charges or public posts). The letter can say you may file in small claims court, and you can leave that out.",
-          "If you're unsure, check with the court's self-help center, a free small claims advisor, or legal aid.",
+          "Legal information, not legal advice. The tool fills in a plain template; it can't judge your case.",
+          "Nothing you type is stored or sent. The PDF is made on your device.",
+          "State-law notes come from the sources we cite. Laws change.",
+          "You review the letter: check every fact, date and amount.",
+          "Keep it calm. No threats (of criminal charges or public posts, for example).",
+          "Unsure? Ask the court's self-help center, a free small claims advisor or legal aid.",
         ]}
       />
 
@@ -102,7 +102,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
               </div>
               <div class="fl-q-foot">
                 <button class="btn" type="button" data-next>Continue</button>
-                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter · letter keys pick an answer</span>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter · letter keys pick</span>
               </div>
             </section>
 
@@ -123,7 +123,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
               </div>
               <div class="fl-q-foot">
                 <button class="btn" type="button" data-next>Continue</button>
-                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
               </div>
             </section>
 
@@ -132,35 +132,33 @@ const pad = (n: number) => String(n).padStart(2, "0");
               <div class="fl-q-head">
                 <span class="fl-q-n">{pad(3)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
                 <h2 class="fl-q-title" id="l3-t" tabindex="-1">The details</h2>
-                <p class="fl-q-help">Only what you can show. Short and factual.</p>
+                <p class="fl-q-help">Short and factual. Only what you can show.</p>
               </div>
               <div class="fl-q-body">
-                <div class="fields fl-fields-2">
+                <div class="fields fl-fields-2 fl-pair">
                   <div class="field">
                     <label for="amount">Amount <span class="f-req">Required</span></label>
-                    <div class="affix"><span aria-hidden="true">$</span><input id="amount" type="text" inputmode="decimal" enterkeyhint="next" placeholder="1,850.00" aria-required="true" aria-describedby="amount-hint" /></div>
-                    <span class="f-hint" id="amount-hint">What you're asking for, and no more than you can show.</span>
+                    <div class="affix"><span aria-hidden="true">$</span><input id="amount" type="text" inputmode="decimal" enterkeyhint="next" placeholder="1,850.00" aria-required="true" /></div>
                   </div>
                   <div class="field">
-                    <label for="eventDate" id="eventDateLabel">Move-out date</label>
-                    <input id="eventDate" type="date" aria-describedby="eventDate-hint" />
-                    <span class="f-hint" id="eventDate-hint">Optional.</span>
+                    <label for="eventDate"><span id="eventDateLabel">Move-out date</span> <span class="f-req">Optional</span></label>
+                    <input id="eventDate" type="date" />
                   </div>
                   <div class="field wide">
                     <label for="detail"><span id="detailLabel">Rental address</span> <span class="f-req">Required</span></label>
                     <input id="detail" type="text" enterkeyhint="next" placeholder="123 Main St, Apt 4, Oakland, CA" aria-required="true" aria-describedby="detail-hint" />
-                    <span class="f-hint" id="detail-hint">Goes in the subject line, so keep it short.</span>
+                    <span class="f-hint" id="detail-hint">Goes in the subject line. Keep it short.</span>
                   </div>
                   <div class="field wide">
-                    <label for="facts">What happened, in your words</label>
-                    <textarea id="facts" rows="4" aria-describedby="facts-hint" placeholder="I paid a $2,000 deposit when I moved in. I left the unit clean and returned the keys on June 30. I received $150 back with no itemized list of deductions."></textarea>
-                    <span class="f-hint" id="facts-hint">Recommended. Dates, amounts and what you did.</span>
+                    <label for="facts">What happened <span class="f-req">Recommended</span></label>
+                    <textarea id="facts" rows="3" aria-describedby="facts-hint" placeholder="I paid a $2,000 deposit when I moved in. I left the unit clean and returned the keys on June 30. I received $150 back with no itemized list of deductions."></textarea>
+                    <span class="f-hint" id="facts-hint">In your words: dates, amounts, what you did.</span>
                   </div>
                 </div>
               </div>
               <div class="fl-q-foot">
                 <button class="btn" type="button" data-next>Continue</button>
-                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
               </div>
             </section>
 
@@ -180,23 +178,21 @@ const pad = (n: number) => String(n).padStart(2, "0");
                   <div class="field wide">
                     <label for="sAddr">Your mailing address <span class="f-req">Required</span></label>
                     <textarea id="sAddr" rows="2" autocomplete="street-address" aria-required="true" aria-describedby="sAddr-hint"></textarea>
-                    <span class="f-hint" id="sAddr-hint">Street on the first line, then city, state and ZIP.</span>
+                    <span class="f-hint" id="sAddr-hint">Street, then city, state and ZIP.</span>
                   </div>
                   <div class="field">
-                    <label for="sPhone">Phone</label>
-                    <input id="sPhone" type="tel" autocomplete="tel" enterkeyhint="next" aria-describedby="sPhone-hint" />
-                    <span class="f-hint" id="sPhone-hint">Optional.</span>
+                    <label for="sPhone">Phone <span class="f-req">Optional</span></label>
+                    <input id="sPhone" type="tel" autocomplete="tel" enterkeyhint="next" />
                   </div>
                   <div class="field">
-                    <label for="sEmail">Email</label>
-                    <input id="sEmail" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" enterkeyhint="next" aria-describedby="sEmail-hint" />
-                    <span class="f-hint" id="sEmail-hint">Optional.</span>
+                    <label for="sEmail">Email <span class="f-req">Optional</span></label>
+                    <input id="sEmail" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" enterkeyhint="next" />
                   </div>
                 </div>
               </div>
               <div class="fl-q-foot">
                 <button class="btn" type="button" data-next>Continue</button>
-                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
               </div>
             </section>
 
@@ -212,18 +208,18 @@ const pad = (n: number) => String(n).padStart(2, "0");
                   <div class="field wide">
                     <label for="rName">Their name or business name <span class="f-req">Required</span></label>
                     <input id="rName" type="text" enterkeyhint="next" aria-required="true" aria-describedby="rName-hint" />
-                    <span class="f-hint" id="rName-hint">For a business, its legal name. Your Secretary of State's business search shows it.</span>
+                    <span class="f-hint" id="rName-hint">For a business, its legal name (your Secretary of State's business search shows it).</span>
                   </div>
                   <div class="field wide">
                     <label for="rAddr">Their mailing address <span class="f-req">Required</span></label>
                     <textarea id="rAddr" rows="2" aria-required="true" aria-describedby="rAddr-hint"></textarea>
-                    <span class="f-hint" id="rAddr-hint">One line per row, like an envelope.</span>
+                    <span class="f-hint" id="rAddr-hint">Like an envelope, one line per row.</span>
                   </div>
                 </div>
               </div>
               <div class="fl-q-foot">
                 <button class="btn" type="button" data-next>Continue</button>
-                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
               </div>
             </section>
 
@@ -232,12 +228,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
               <div class="fl-q-head">
                 <span class="fl-q-n">{pad(6)} / {pad(TOTAL)}<span class="q-ok" aria-hidden="true"></span></span>
                 <h2 class="fl-q-title" id="l6-t" tabindex="-1">How long will you give them?</h2>
-                <p class="fl-q-help" id="l6-help">Many people allow 10 to 14 days. The deadline is printed in the letter.</p>
+                <p class="fl-q-help" id="l6-help">Many people allow 10 to 14 days. The date goes in the letter.</p>
               </div>
               <div class="fl-q-body">
                 <fieldset class="fl-group" data-keys aria-describedby="l6-help">
                   <legend class="sr-only">Days to respond</legend>
-                  <div class="tiles fl-tiles-4">
+                  <div class="tiles fl-tiles-4 dl-days">
                     {days.map((d, i) => (
                       <label class={`tile ${colors[i]}`}>
                         <input type="radio" name="days" value={d} checked={d === 14} />
@@ -253,9 +249,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
                     <input id="date" type="date" aria-required="true" />
                   </div>
                   <div class="field">
-                    <label for="pay">How they can pay</label>
-                    <input id="pay" type="text" enterkeyhint="next" placeholder="a check mailed to the address above" aria-describedby="pay-hint" />
-                    <span class="f-hint" id="pay-hint">Optional.</span>
+                    <label for="pay">How they can pay <span class="f-req">Optional</span></label>
+                    <input id="pay" type="text" enterkeyhint="next" placeholder="a check mailed to the address above" />
                   </div>
                 </div>
                 <fieldset class="fl-group dl-gap">
@@ -267,15 +262,15 @@ const pad = (n: number) => String(n).padStart(2, "0");
                 </fieldset>
                 <div class="fields dl-gap" id="court-field">
                   <div class="field wide compact">
-                    <label for="court">Court to name</label>
+                    <label for="court">Court to name <span class="f-req">Optional</span></label>
                     <input id="court" type="text" enterkeyhint="done" placeholder="small claims court in Alameda County" aria-describedby="court-hint" />
-                    <span class="f-hint" id="court-hint">Optional. Blank says “small claims court”.</span>
+                    <span class="f-hint" id="court-hint">Blank says “small claims court”.</span>
                   </div>
                 </div>
               </div>
               <div class="fl-q-foot">
                 <button class="btn" type="button" data-next>Review the letter</button>
-                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or press Enter</span>
+                <span class="hint"><span class="kbd" aria-hidden="true">↵</span> or Enter</span>
               </div>
             </section>
 
@@ -298,11 +293,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
                   <button class="btn ghost" type="button" data-action="copy">Copy text</button>
                   <button class="btn ghost dl-clear" type="button" data-action="clear">Clear everything</button>
                 </div>
-                <div class="callout info">
-                  <p class="callout-title">Before you send it</p>
-                  <p>Send it in a way you can prove, like certified mail, or email plus regular mail. Keep a copy.</p>
-                </div>
-                <p class="fl-note">Other options, like mediation or a complaint to a regulator: <a href="/steps/#before-you-decide">Before you decide</a>.</p>
+                <p class="fl-note dl-send"><strong>Before you send it:</strong> use a way you can prove, like certified mail, or email plus regular mail. Keep a copy. <a href="/steps/#before-you-decide">Other options</a></p>
               </div>
             </section>
           </form>
@@ -314,6 +305,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
               <h2 class="lbl lbl-ink" id="preview-title" tabindex="-1">Preview</h2>
               <p class="lbl">Live · <mark class="dl-ph-key">[brackets]</mark> still need an answer</p>
             </div>
+            <div class="dl-paper-wrap" id="paper-wrap" data-clip>
             <article class="paper dl-paper" id="preview" tabindex="0" role="region" aria-label="Letter preview">
               <div class="lp-head" id="lp-from"></div>
               <p class="lp-date" id="lp-date"></p>
@@ -324,6 +316,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
               <div class="lp-close"><p>Sincerely,</p><p class="lp-sig" id="lp-sig"></p></div>
               <p class="lp-foot" id="print-note">{PRINT_NOTE}</p>
             </article>
+            </div>
+            <button type="button" class="btn sm ghost dl-expand no-print" id="paper-toggle" aria-controls="preview" aria-expanded="false" hidden>Show the whole letter</button>
             <div class="dl-actions dl-side-actions no-print">
               <button class="btn sm" type="button" data-action="pdf">Download PDF</button>
               <button class="btn sm ghost" type="button" data-action="print">Print</button>
@@ -622,7 +616,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
     const date = val("date");
     document.querySelectorAll<HTMLElement>("[data-by]").forEach((el) => {
       const n = Number(el.dataset.by);
-      el.textContent = date ? `days · by ${formatLongDate(addCalendarDays(date, n)).replace(/, \d{4}$/, "")}` : "days";
+      el.textContent = date ? `days · by ${formatLongDate(addCalendarDays(date, n)).replace(/, \d{4}$/, "").replace(/^([A-Z][a-z]{2})[a-z]+/, "$1")}` : "days";
     });
 
     const L = current(true);
@@ -778,6 +772,25 @@ const pad = (n: number) => String(n).padStart(2, "0");
     $("preview-title").scrollIntoView({ block: "start" });
     $("preview-title").focus({ preventScroll: true });
   });
+  // Phones and tablets: the preview starts as a short window onto the letter, with a button to open it fully.
+  const narrow = window.matchMedia("(max-width: 1080px)");
+  const toggle = $<HTMLButtonElement>("paper-toggle");
+  const wrap = $("paper-wrap");
+  function setClip(open: boolean) {
+    wrap.toggleAttribute("data-clip", !open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.textContent = open ? "Show less" : "Show the whole letter";
+  }
+  toggle.hidden = false;
+  setClip(false);
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    setClip(open);
+    if (!open) $("preview-title").scrollIntoView({ block: "start", behavior: "auto" });
+  });
+  // Opening the preview from the dock shows all of it.
+  $("dock-go").addEventListener("click", () => narrow.matches && setClip(true));
+
   // Phone dock: hide while the preview is on screen.
   new IntersectionObserver(([e]) => $("dock").toggleAttribute("data-off", e.isIntersecting)).observe($("preview"));
 
@@ -805,17 +818,22 @@ const pad = (n: number) => String(n).padStart(2, "0");
 </script>
 
 <style>
+  /* A tool page: a compact header, like the calculator's rail, so the first question is on the first screen. */
   .dl-hero {
-    padding-bottom: clamp(32px, 4vw, 56px);
+    padding-top: clamp(20px, 3vw, 40px);
+    padding-bottom: 0;
   }
   .dl-hero :global(.breadcrumb) {
-    margin-bottom: 28px;
+    margin-bottom: 16px;
+  }
+  .dl-hero .dl-title {
+    font-size: clamp(32px, 3.4vw, 52px);
   }
   .dl-top {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 48px;
-    align-items: end;
+    gap: 16px 48px;
+    align-items: start;
   }
   .dl-top h1 {
     margin: 0;
@@ -823,12 +841,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
   .dl-aside p {
     margin: 0;
     max-width: 44ch;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.55;
     color: var(--ink-2);
   }
   .dl-aside .cite {
-    margin-top: 12px;
+    margin-top: 8px;
     font-size: 12px;
   }
   .dl-layout {
@@ -845,13 +863,20 @@ const pad = (n: number) => String(n).padStart(2, "0");
     margin: 0;
   }
   .dl-flow :global(.fl-q:first-of-type) {
-    padding-top: 40px;
+    padding-top: 28px;
   }
   .dl-gap {
-    margin-top: 32px;
+    margin-top: 24px;
   }
   .dl-notes {
-    margin-top: 24px;
+    margin-top: 16px;
+  }
+  .dl-send {
+    margin-top: 18px;
+  }
+  .dl-send strong {
+    font-weight: 500;
+    color: var(--ink);
   }
   .dl-notes :global(.dl-note-cite) {
     margin: -6px 0 0 52px;
@@ -879,7 +904,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
     color: var(--ink);
   }
   .dl-ready {
-    margin: 0 0 16px;
+    margin: 0 0 12px;
     font-size: 17px;
     color: var(--ink-2);
   }
@@ -999,6 +1024,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
   .dl-layout > :global(.fl-dock) {
     grid-column: 1 / -1;
   }
+  .dl-expand {
+    display: none;
+  }
 
   @media (max-width: 1080px) {
     .dl-top {
@@ -1012,11 +1040,45 @@ const pad = (n: number) => String(n).padStart(2, "0");
       max-height: none;
       overflow: visible;
     }
+    /* The preview starts as a window onto the letter's opening; the button opens all of it. */
+    .dl-paper-wrap[data-clip] .dl-paper {
+      max-height: 24rem;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent);
+      mask-image: linear-gradient(to bottom, #000 72%, transparent);
+    }
+    .dl-expand {
+      display: inline-flex;
+      justify-self: start;
+    }
+    /* Step 7 already has the same buttons just above the preview. */
+    .dl-side-actions {
+      display: none;
+    }
   }
   @media (max-width: 860px) {
     .dl-paper {
-      padding: 28px 22px;
+      padding: 22px 18px;
       min-height: 0;
+      font-size: 13px;
+    }
+    .dl-aside p {
+      font-size: 15.5px;
+      line-height: 1.5;
+    }
+    /* Days: four across, the deadline under each number. */
+    .fl .tiles.dl-days {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .fl .dl-days :global(.tile) {
+      padding: 10px 10px 11px;
+    }
+    .fl .dl-days :global(.tile .t-big) {
+      font-size: 34px;
+    }
+    .fl .dl-days :global(.tile .t-sub) {
+      font-size: 12.5px;
     }
     .dl-clear {
       margin-left: 0;
@@ -1036,12 +1098,15 @@ const pad = (n: number) => String(n).padStart(2, "0");
       position: static;
       display: block;
     }
-    .dl-paper {
+    .dl-paper,
+    .dl-paper-wrap[data-clip] .dl-paper {
       max-height: none;
       overflow: visible;
       padding: 0;
       font-size: 11.5pt;
       box-shadow: none;
+      -webkit-mask-image: none;
+      mask-image: none;
     }
     .dl-paper :global(mark.ph) {
       background: none;

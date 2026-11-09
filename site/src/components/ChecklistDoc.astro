@@ -63,7 +63,7 @@ const sec = Object.fromEntries(sections.map((x) => [x.id, x]));
     <div class="cl-actions">
       <button class="btn" type="button" data-print data-js-only>Print or save as PDF</button>
       <label class="choice" data-js-only><input type="checkbox" data-one-per-page /> Start each list on a new page</label>
-      <p class="hint">Your ticks stay on this page. They aren't saved or sent anywhere.</p>
+      <p class="hint">Ticks aren't saved or sent.</p>
     </div>
   </aside>
   <div class="cl-main">
@@ -174,15 +174,18 @@ const sec = Object.fromEntries(sections.map((x) => [x.id, x]));
       </div>
     )}
     {isCA && (
-      <div class="table-scroll"><table class="checklist-forms">
-        <caption>California filing fees (CCP 116.230)</caption>
-        <thead><tr><th scope="col">Claim amount</th><th scope="col" class="num">Fee</th></tr></thead>
-        <tbody>
-          {ca.fees.filing_fee_tiers.map((t: { applies_to: string; fee: number; citation: string }) => (
-            <tr><td style="font-family:inherit;white-space:normal">{t.applies_to}</td><td class="num">{money(t.fee)}</td></tr>
-          ))}
-        </tbody>
-      </table></div>
+      <details class="cl-more">
+        <summary><span>California filing fee by claim amount (CCP 116.230)</span><span class="cl-more-n">{ca.fees.filing_fee_tiers.length}</span></summary>
+        <div class="table-scroll"><table class="checklist-forms">
+          <caption class="sr-only">California filing fees (CCP 116.230)</caption>
+          <thead><tr><th scope="col">Claim amount</th><th scope="col" class="num">Fee</th></tr></thead>
+          <tbody>
+            {ca.fees.filing_fee_tiers.map((t: { applies_to: string; fee: number; citation: string }) => (
+              <tr><td style="font-family:inherit;white-space:normal">{t.applies_to}</td><td class="num">{money(t.fee)}</td></tr>
+            ))}
+          </tbody>
+        </table></div>
+      </details>
     )}
     <ul class="checklist">
       <li><label class="choice"><input type="checkbox" /><span>Get {s ? `${s.state}'s` : "your state's"} small claims form from the court or its self-help site{isCA ? " (SC-100)" : ""}.</span></label></li>
@@ -319,5 +322,177 @@ const sec = Object.fromEntries(sections.map((x) => [x.id, x]));
     doc.querySelector("[data-print]")?.addEventListener("click", () => window.print());
     const onePer = doc.querySelector<HTMLInputElement>("[data-one-per-page]");
     onePer?.addEventListener("change", () => doc.classList.toggle("one-per-page", onePer.checked));
+    // Print shows everything: open the closed form and fee tables for the printout, then put them back.
+    let opened: HTMLDetailsElement[] = [];
+    window.addEventListener("beforeprint", () => {
+      opened = Array.from(doc.querySelectorAll<HTMLDetailsElement>("details.cl-more:not([open])"));
+      opened.forEach((d) => (d.open = true));
+    });
+    window.addEventListener("afterprint", () => {
+      opened.forEach((d) => (d.open = false));
+      opened = [];
+    });
   });
 </script>
+
+<style is:global>
+  /* Screen-only tightening for the checklist pages (features.css section 9 holds the base look). Print is
+     untouched: everything here sits inside @media screen. */
+  @media screen {
+    .cl-doc-layout .checklist-section {
+      margin-bottom: 6px;
+    }
+    .cl-doc-layout .cl-sec-head {
+      padding-bottom: 10px;
+    }
+    .cl-doc-layout .checklist .choice {
+      padding: 11px 0;
+    }
+    /* Closed extras: form lists and the California fee table. */
+    .cl-doc-layout .cl-more {
+      margin: 12px 0 0;
+      border-top: 1px solid var(--line);
+    }
+    .cl-doc-layout .cl-more > summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 10px 0 0;
+      list-style: none;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--ink-2);
+    }
+    .cl-doc-layout .cl-more > summary::-webkit-details-marker {
+      display: none;
+    }
+    .cl-doc-layout .cl-more > summary::after {
+      content: "+";
+      margin-left: auto;
+      font-family: var(--f-mono);
+      font-size: 15px;
+      color: var(--ink-3);
+    }
+    .cl-doc-layout .cl-more[open] > summary::after {
+      content: "\2212";
+    }
+    .cl-doc-layout .cl-more > summary:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+    .cl-doc-layout .cl-more-n {
+      font-family: var(--f-mono);
+      font-size: 12px;
+      color: var(--ink-3);
+    }
+    .cl-doc-layout .cl-more .table-scroll {
+      margin: 8px 0 0;
+    }
+  }
+  /* Print: the opened extras read like the old table captions (no marker, no count). */
+  @media print {
+    .cl-doc-layout .cl-more > summary {
+      display: block;
+      margin: 8pt 0 2pt;
+      list-style: none;
+      font-size: 9pt;
+      font-weight: 600;
+    }
+    .cl-doc-layout .cl-more > summary::-webkit-details-marker {
+      display: none;
+    }
+    .cl-doc-layout .cl-more-n {
+      display: none;
+    }
+  }
+  @media screen and (hover: hover) and (pointer: fine) {
+    .cl-doc-layout .cl-more > summary:hover {
+      color: var(--ink);
+    }
+  }
+  @media screen and (max-width: 860px) {
+    /* Step menu: one row of pills that scrolls sideways instead of five wrapped rows. */
+    .cl-doc-layout .cl-side {
+      gap: 14px;
+    }
+    .cl-doc-layout .cl-steps {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      margin: 0 calc(-1 * var(--pad));
+      padding: 0 var(--pad);
+      scroll-padding-inline: var(--pad);
+    }
+    .cl-doc-layout .cl-steps::-webkit-scrollbar {
+      display: none;
+    }
+    .cl-doc-layout .cl-steps li {
+      flex: none;
+    }
+    .cl-doc-layout .cl-steps a {
+      white-space: nowrap;
+    }
+    .cl-doc-layout .cl-actions {
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 10px 16px;
+    }
+    .cl-doc-layout .cl-actions .hint {
+      grid-column: 1 / -1;
+    }
+  }
+  @media screen and (max-width: 560px) {
+    .cl-doc-layout .checklist-section {
+      padding: 16px 14px 8px;
+      border-radius: var(--r);
+    }
+    .cl-doc-layout .cl-sec-head {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 2px 12px;
+    }
+    .cl-doc-layout .cl-sec-head::before {
+      margin-bottom: 10px;
+    }
+    .cl-doc-layout .cl-sec-n {
+      font-size: 26px;
+    }
+    .cl-doc-layout .checklist-section h2 {
+      font-size: 23px;
+    }
+    .cl-doc-layout .cl-sec-head .lbl {
+      grid-row: 2;
+      grid-column: 3;
+    }
+    .cl-doc-layout .checklist .choice {
+      gap: 12px;
+      padding: 10px 0;
+      font-size: 15.5px;
+      line-height: 1.5;
+    }
+    .cl-doc-layout .checklist-rules {
+      padding: 12px 14px 10px;
+    }
+    .cl-doc-layout .checklist-rules h3 {
+      margin-bottom: 6px;
+    }
+    .cl-doc-layout .checklist-rules dl {
+      margin-bottom: 8px;
+      font-size: 14.5px;
+      line-height: 1.5;
+    }
+    .cl-doc-layout .checklist-rules dt {
+      padding: 8px 0 0;
+      font-weight: 500;
+    }
+    .cl-doc-layout .checklist-rules dd {
+      padding: 0 0 8px;
+    }
+    .cl-doc-layout .cl-links {
+      padding-top: 12px;
+    }
+  }
+</style>
+
